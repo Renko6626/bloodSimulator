@@ -1,0 +1,17 @@
+# Rust build output; retain Cargo.lock when the workspace exists.
+/target/
+
+# Godot generated cache; retain source assets and import configuration.
+.godot/
+
+# Local environment and editor files.
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Generated distribution output.
+/dist/
