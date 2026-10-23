@@ -1,0 +1,11 @@
+{
+  "utc": "2026-10-23T06:02:17.155355+00:00",
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)",
+  "cpu": 2,
+  "blocks": 30,
+  "exclusive": false,
+  "compile_flags": [
+    "-O"
+  ],
+  "sha256": "fd6ca2e9cb1a1193ed7fda0c6deb25d5eb5a2708087971c2ee874a1786cad9be"
+}

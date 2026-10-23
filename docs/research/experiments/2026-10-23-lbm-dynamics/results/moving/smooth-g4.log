@@ -1,0 +1,1 @@
+case=smooth gamma=4 steps=8192 elapsed_ms=1035.104 minrho=0.997899635 maxrho=1.002071069 maxspeed=0.340000723 max_mass_drift=2.274e-13 max_exchange_error=5.963e-19 max_kernel_weight_error=4.441e-16 grid_crossings=152 seam_crossings=0 max_force_jump_cross=1.122e-2 max_force_jump_elsewhere=2.011e-1 max_unforced_jump_cross=1.116e-2 max_unforced_jump_elsewhere=2.011e-1

@@ -1,0 +1,1004 @@
+{
+  "runs": {
+    "reversal-1-baseline": {
+      "frames": 360,
+      "duration_s": 6.0,
+      "lb_steps": 12288,
+      "max_abs_clock_error_s": 0.000455729,
+      "max_exchange_impulse_mismatch": 3.5e-11,
+      "rho_min": 0.999984067,
+      "rho_max": 1.000015741,
+      "total_mass_min": 1.0,
+      "total_mass_max": 1.0,
+      "min_area": 0.067499951,
+      "max_area_relative_error": 8.83e-07,
+      "max_node_speed": 0.072656326,
+      "max_node_jump": 0.001213789,
+      "max_solver_contacts_per_substep": 0,
+      "frames_with_solver_contact": 0,
+      "timing_excluding_first_30_frames": {
+        "prepare_ms": {
+          "mean_ms": 5.795454545454545e-05,
+          "p95_ms": 9.8e-05
+        },
+        "fluid_ms": {
+          "mean_ms": 3.529671290909091,
+          "p95_ms": 5.432082
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.0022794636363636365,
+          "p95_ms": 0.003573
+        },
+        "rapier_ms": {
+          "mean_ms": 0.05449320303030303,
+          "p95_ms": 0.098041
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.03536145757575757,
+          "p95_ms": 0.052768
+        },
+        "whole_ms": {
+          "mean_ms": 3.6231308636363635,
+          "p95_ms": 5.587854
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 3.529729245454546,
+          "p95_ms": 5.432178
+        }
+      }
+    },
+    "reversal-1-cached": {
+      "frames": 360,
+      "duration_s": 6.0,
+      "lb_steps": 12288,
+      "max_abs_clock_error_s": 0.000455729,
+      "max_exchange_impulse_mismatch": 3.5e-11,
+      "rho_min": 0.999984067,
+      "rho_max": 1.000015741,
+      "total_mass_min": 1.0,
+      "total_mass_max": 1.0,
+      "min_area": 0.067499951,
+      "max_area_relative_error": 8.83e-07,
+      "max_node_speed": 0.072656326,
+      "max_node_jump": 0.001213789,
+      "max_solver_contacts_per_substep": 0,
+      "frames_with_solver_contact": 0,
+      "timing_excluding_first_30_frames": {
+        "prepare_ms": {
+          "mean_ms": 0.002011481818181818,
+          "p95_ms": 0.00308
+        },
+        "fluid_ms": {
+          "mean_ms": 3.220959936363636,
+          "p95_ms": 4.150637
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.002336118181818182,
+          "p95_ms": 0.003043
+        },
+        "rapier_ms": {
+          "mean_ms": 0.05347686060606061,
+          "p95_ms": 0.077351
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.03302449393939394,
+          "p95_ms": 0.040584
+        },
+        "whole_ms": {
+          "mean_ms": 3.313144063636363,
+          "p95_ms": 4.277568
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 3.222971418181818,
+          "p95_ms": 4.153699
+        }
+      }
+    },
+    "squeeze-1-baseline": {
+      "frames": 360,
+      "duration_s": 6.0,
+      "lb_steps": 12288,
+      "max_abs_clock_error_s": 0.000455729,
+      "max_exchange_impulse_mismatch": 3e-11,
+      "rho_min": 0.999983576,
+      "rho_max": 1.000017342,
+      "total_mass_min": 1.0,
+      "total_mass_max": 1.0,
+      "min_area": 0.065109152,
+      "max_area_relative_error": 0.03542011,
+      "max_node_speed": 0.262462407,
+      "max_node_jump": 0.004376531,
+      "max_solver_contacts_per_substep": 14,
+      "frames_with_solver_contact": 89,
+      "timing_excluding_first_30_frames": {
+        "prepare_ms": {
+          "mean_ms": 4.794545454545454e-05,
+          "p95_ms": 4.9e-05
+        },
+        "fluid_ms": {
+          "mean_ms": 2.9866518606060604,
+          "p95_ms": 3.065965
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.0018735818181818181,
+          "p95_ms": 0.002063
+        },
+        "rapier_ms": {
+          "mean_ms": 0.05901794242424242,
+          "p95_ms": 0.106161
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.029662,
+          "p95_ms": 0.034759
+        },
+        "whole_ms": {
+          "mean_ms": 3.078644142424243,
+          "p95_ms": 3.166189
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 2.986699806060606,
+          "p95_ms": 3.066013
+        }
+      }
+    },
+    "squeeze-1-cached": {
+      "frames": 360,
+      "duration_s": 6.0,
+      "lb_steps": 12288,
+      "max_abs_clock_error_s": 0.000455729,
+      "max_exchange_impulse_mismatch": 3e-11,
+      "rho_min": 0.999983576,
+      "rho_max": 1.000017342,
+      "total_mass_min": 1.0,
+      "total_mass_max": 1.0,
+      "min_area": 0.065109152,
+      "max_area_relative_error": 0.03542011,
+      "max_node_speed": 0.262462407,
+      "max_node_jump": 0.004376531,
+      "max_solver_contacts_per_substep": 14,
+      "frames_with_solver_contact": 89,
+      "timing_excluding_first_30_frames": {
+        "prepare_ms": {
+          "mean_ms": 0.0019841060606060603,
+          "p95_ms": 0.003072
+        },
+        "fluid_ms": {
+          "mean_ms": 3.191031103030303,
+          "p95_ms": 4.143033
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.0019935909090909093,
+          "p95_ms": 0.002679
+        },
+        "rapier_ms": {
+          "mean_ms": 0.06967722424242424,
+          "p95_ms": 0.11984
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.03226754545454545,
+          "p95_ms": 0.04089
+        },
+        "whole_ms": {
+          "mean_ms": 3.298734354545455,
+          "p95_ms": 4.277784
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 3.193015209090909,
+          "p95_ms": 4.146071
+        }
+      }
+    },
+    "scale-1-baseline": {
+      "frames": 360,
+      "duration_s": 6.0,
+      "lb_steps": 12288,
+      "max_abs_clock_error_s": 0.000455729,
+      "max_exchange_impulse_mismatch": 3.1e-11,
+      "rho_min": 0.99998301,
+      "rho_max": 1.000017013,
+      "total_mass_min": 1.0,
+      "total_mass_max": 1.0,
+      "min_area": 0.016874939,
+      "max_area_relative_error": 3.091e-06,
+      "max_node_speed": 0.049413722,
+      "max_node_jump": 0.000829607,
+      "max_solver_contacts_per_substep": 0,
+      "frames_with_solver_contact": 0,
+      "timing_excluding_first_30_frames": {
+        "prepare_ms": {
+          "mean_ms": 4.9469696969696966e-05,
+          "p95_ms": 6.5e-05
+        },
+        "fluid_ms": {
+          "mean_ms": 3.0499267727272725,
+          "p95_ms": 3.530869
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.0019745060606060605,
+          "p95_ms": 0.00264
+        },
+        "rapier_ms": {
+          "mean_ms": 0.04552147575757576,
+          "p95_ms": 0.062779
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.030652757575757576,
+          "p95_ms": 0.040147
+        },
+        "whole_ms": {
+          "mean_ms": 3.1291968333333333,
+          "p95_ms": 3.621386
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 3.0499762424242425,
+          "p95_ms": 3.530935
+        }
+      }
+    },
+    "scale-1-cached": {
+      "frames": 360,
+      "duration_s": 6.0,
+      "lb_steps": 12288,
+      "max_abs_clock_error_s": 0.000455729,
+      "max_exchange_impulse_mismatch": 3.1e-11,
+      "rho_min": 0.99998301,
+      "rho_max": 1.000017013,
+      "total_mass_min": 1.0,
+      "total_mass_max": 1.0,
+      "min_area": 0.016874939,
+      "max_area_relative_error": 3.091e-06,
+      "max_node_speed": 0.049413722,
+      "max_node_jump": 0.000829607,
+      "max_solver_contacts_per_substep": 0,
+      "frames_with_solver_contact": 0,
+      "timing_excluding_first_30_frames": {
+        "prepare_ms": {
+          "mean_ms": 0.0017508363636363638,
+          "p95_ms": 0.001794
+        },
+        "fluid_ms": {
+          "mean_ms": 3.005717457575758,
+          "p95_ms": 3.070141
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.00203729696969697,
+          "p95_ms": 0.002163
+        },
+        "rapier_ms": {
+          "mean_ms": 0.04702591515151515,
+          "p95_ms": 0.050943
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.03109619393939394,
+          "p95_ms": 0.034145
+        },
+        "whole_ms": {
+          "mean_ms": 3.0888843060606055,
+          "p95_ms": 3.153465
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 3.007468293939394,
+          "p95_ms": 3.071904
+        }
+      }
+    },
+    "scale-4-baseline": {
+      "frames": 360,
+      "duration_s": 6.0,
+      "lb_steps": 12288,
+      "max_abs_clock_error_s": 0.000455729,
+      "max_exchange_impulse_mismatch": 2.03e-10,
+      "rho_min": 0.999976896,
+      "rho_max": 1.000023162,
+      "total_mass_min": 1.0,
+      "total_mass_max": 1.0,
+      "min_area": 0.01687488,
+      "max_area_relative_error": 5.298e-06,
+      "max_node_speed": 0.049413137,
+      "max_node_jump": 0.000829637,
+      "max_solver_contacts_per_substep": 0,
+      "frames_with_solver_contact": 0,
+      "timing_excluding_first_30_frames": {
+        "prepare_ms": {
+          "mean_ms": 5.274242424242424e-05,
+          "p95_ms": 7.5e-05
+        },
+        "fluid_ms": {
+          "mean_ms": 3.422719003030303,
+          "p95_ms": 4.494509
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.005470990909090909,
+          "p95_ms": 0.006812
+        },
+        "rapier_ms": {
+          "mean_ms": 0.14857498484848486,
+          "p95_ms": 0.224342
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.03458950909090909,
+          "p95_ms": 0.044567
+        },
+        "whole_ms": {
+          "mean_ms": 3.6128097272727273,
+          "p95_ms": 4.772622
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 3.4227717454545457,
+          "p95_ms": 4.494582
+        }
+      }
+    },
+    "scale-4-cached": {
+      "frames": 360,
+      "duration_s": 6.0,
+      "lb_steps": 12288,
+      "max_abs_clock_error_s": 0.000455729,
+      "max_exchange_impulse_mismatch": 2.03e-10,
+      "rho_min": 0.999976896,
+      "rho_max": 1.000023162,
+      "total_mass_min": 1.0,
+      "total_mass_max": 1.0,
+      "min_area": 0.01687488,
+      "max_area_relative_error": 5.298e-06,
+      "max_node_speed": 0.049413137,
+      "max_node_jump": 0.000829637,
+      "max_solver_contacts_per_substep": 0,
+      "frames_with_solver_contact": 0,
+      "timing_excluding_first_30_frames": {
+        "prepare_ms": {
+          "mean_ms": 0.007935921212121212,
+          "p95_ms": 0.012609
+        },
+        "fluid_ms": {
+          "mean_ms": 3.248720924242424,
+          "p95_ms": 4.274421
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.005440418181818182,
+          "p95_ms": 0.006697
+        },
+        "rapier_ms": {
+          "mean_ms": 0.1512864818181818,
+          "p95_ms": 0.226672
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.03390264848484849,
+          "p95_ms": 0.044367
+        },
+        "whole_ms": {
+          "mean_ms": 3.4494665999999996,
+          "p95_ms": 4.567466
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 3.256656845454546,
+          "p95_ms": 4.2867500000000005
+        }
+      }
+    },
+    "scale-16-baseline": {
+      "frames": 360,
+      "duration_s": 6.0,
+      "lb_steps": 12288,
+      "max_abs_clock_error_s": 0.000455729,
+      "max_exchange_impulse_mismatch": 1.301e-09,
+      "rho_min": 0.999978519,
+      "rho_max": 1.000021499,
+      "total_mass_min": 1.0,
+      "total_mass_max": 1.0,
+      "min_area": 0.016874865,
+      "max_area_relative_error": 7.947e-06,
+      "max_node_speed": 0.049416918,
+      "max_node_jump": 0.000829697,
+      "max_solver_contacts_per_substep": 0,
+      "frames_with_solver_contact": 0,
+      "timing_excluding_first_30_frames": {
+        "prepare_ms": {
+          "mean_ms": 4.94969696969697e-05,
+          "p95_ms": 7.3e-05
+        },
+        "fluid_ms": {
+          "mean_ms": 4.0237780333333335,
+          "p95_ms": 5.634726
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.019064024242424243,
+          "p95_ms": 0.02255
+        },
+        "rapier_ms": {
+          "mean_ms": 0.5200532151515153,
+          "p95_ms": 0.817752
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.0749906818181818,
+          "p95_ms": 0.104703
+        },
+        "whole_ms": {
+          "mean_ms": 4.640234796969697,
+          "p95_ms": 6.589107
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 4.02382753030303,
+          "p95_ms": 5.634799999999999
+        }
+      }
+    },
+    "scale-16-cached": {
+      "frames": 360,
+      "duration_s": 6.0,
+      "lb_steps": 12288,
+      "max_abs_clock_error_s": 0.000455729,
+      "max_exchange_impulse_mismatch": 1.301e-09,
+      "rho_min": 0.999978519,
+      "rho_max": 1.000021499,
+      "total_mass_min": 1.0,
+      "total_mass_max": 1.0,
+      "min_area": 0.016874865,
+      "max_area_relative_error": 7.947e-06,
+      "max_node_speed": 0.049416918,
+      "max_node_jump": 0.000829697,
+      "max_solver_contacts_per_substep": 0,
+      "frames_with_solver_contact": 0,
+      "timing_excluding_first_30_frames": {
+        "prepare_ms": {
+          "mean_ms": 0.03468983030303031,
+          "p95_ms": 0.048141
+        },
+        "fluid_ms": {
+          "mean_ms": 3.9115197818181815,
+          "p95_ms": 4.877659
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.020230142424242425,
+          "p95_ms": 0.02317
+        },
+        "rapier_ms": {
+          "mean_ms": 0.6268463090909091,
+          "p95_ms": 0.845991
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.08467961818181818,
+          "p95_ms": 0.107214
+        },
+        "whole_ms": {
+          "mean_ms": 4.683666436363636,
+          "p95_ms": 5.904508
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 3.9462096121212116,
+          "p95_ms": 4.927923
+        }
+      }
+    },
+    "counterflow-16-cached": {
+      "frames": 360,
+      "duration_s": 6.0,
+      "lb_steps": 12288,
+      "max_abs_clock_error_s": 0.000455729,
+      "max_exchange_impulse_mismatch": 1.05e-10,
+      "rho_min": 0.999974582,
+      "rho_max": 1.000031746,
+      "total_mass_min": 1.0,
+      "total_mass_max": 1.0,
+      "min_area": 0.016867667,
+      "max_area_relative_error": 0.000434452,
+      "max_node_speed": 0.049411315,
+      "max_node_jump": 0.000829607,
+      "max_solver_contacts_per_substep": 48,
+      "frames_with_solver_contact": 136,
+      "timing_excluding_first_30_frames": {
+        "prepare_ms": {
+          "mean_ms": 0.027669557575757578,
+          "p95_ms": 0.048783
+        },
+        "fluid_ms": {
+          "mean_ms": 3.518015863636364,
+          "p95_ms": 4.73179
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.018930975757575758,
+          "p95_ms": 0.022562
+        },
+        "rapier_ms": {
+          "mean_ms": 0.6004313848484849,
+          "p95_ms": 1.008047
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.07534031515151515,
+          "p95_ms": 0.10507
+        },
+        "whole_ms": {
+          "mean_ms": 4.245291048484849,
+          "p95_ms": 5.924462
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 3.545685421212121,
+          "p95_ms": 4.781089000000001
+        }
+      }
+    }
+  },
+  "mode_comparisons": {
+    "reversal-1": {
+      "frames": {
+        "rows": 360,
+        "all_nontiming_columns_identical": true
+      },
+      "outlines": {
+        "rows": 720,
+        "all_nontiming_columns_identical": true
+      }
+    },
+    "squeeze-1": {
+      "frames": {
+        "rows": 360,
+        "all_nontiming_columns_identical": true
+      },
+      "outlines": {
+        "rows": 720,
+        "all_nontiming_columns_identical": true
+      }
+    },
+    "scale-1": {
+      "frames": {
+        "rows": 360,
+        "all_nontiming_columns_identical": true
+      },
+      "outlines": {
+        "rows": 720,
+        "all_nontiming_columns_identical": true
+      }
+    },
+    "scale-4": {
+      "frames": {
+        "rows": 360,
+        "all_nontiming_columns_identical": true
+      },
+      "outlines": {
+        "rows": 2880,
+        "all_nontiming_columns_identical": true
+      }
+    },
+    "scale-16": {
+      "frames": {
+        "rows": 360,
+        "all_nontiming_columns_identical": true
+      },
+      "outlines": {
+        "rows": 11520,
+        "all_nontiming_columns_identical": true
+      }
+    }
+  },
+  "reference_archive_comparison": {
+    "reversal": {
+      "physical_columns_checked": [
+        "frame",
+        "t",
+        "center_x",
+        "center_y",
+        "velocity_x",
+        "velocity_y",
+        "accel_x",
+        "accel_y",
+        "max_node_speed",
+        "max_node_jump",
+        "area",
+        "area_rel_error",
+        "min_rho",
+        "max_rho",
+        "max_fluid_speed",
+        "fluid_steps",
+        "fluid_time_mismatch",
+        "exchange_impulse_mismatch",
+        "drive_force_x",
+        "plate_half_gap"
+      ],
+      "maximum_absolute_differences": {
+        "frame": 0.0,
+        "t": 0.0,
+        "center_x": 0.0,
+        "center_y": 0.0,
+        "velocity_x": 0.0,
+        "velocity_y": 0.0,
+        "accel_x": 0.0,
+        "accel_y": 0.0,
+        "max_node_speed": 0.0,
+        "max_node_jump": 0.0,
+        "area": 0.0,
+        "area_rel_error": 0.0,
+        "min_rho": 0.0,
+        "max_rho": 0.0,
+        "max_fluid_speed": 0.0,
+        "fluid_steps": 0.0,
+        "fluid_time_mismatch": 0.0,
+        "exchange_impulse_mismatch": 0.0,
+        "drive_force_x": 0.0,
+        "plate_half_gap": 0.0
+      },
+      "exact_to_csv_precision": true,
+      "comparison": "descriptive cross-harness comparison; not a pass/fail tolerance",
+      "known_input_difference": "new f32 (0.15 * 0.1) contact radius bits 0x3c75c290 vs old literal 0.015 bits 0x3c75c28f"
+    },
+    "squeeze": {
+      "physical_columns_checked": [
+        "frame",
+        "t",
+        "center_x",
+        "center_y",
+        "velocity_x",
+        "velocity_y",
+        "accel_x",
+        "accel_y",
+        "max_node_speed",
+        "max_node_jump",
+        "area",
+        "area_rel_error",
+        "min_rho",
+        "max_rho",
+        "max_fluid_speed",
+        "fluid_steps",
+        "fluid_time_mismatch",
+        "exchange_impulse_mismatch",
+        "drive_force_x",
+        "plate_half_gap"
+      ],
+      "maximum_absolute_differences": {
+        "frame": 0.0,
+        "t": 0.0,
+        "center_x": 2.0859999999567336e-06,
+        "center_y": 2.6819999999760924e-06,
+        "velocity_x": 4.6114999999999995e-05,
+        "velocity_y": 4.716200000000001e-05,
+        "accel_x": 0.002135115,
+        "accel_y": 0.0044147100000000005,
+        "max_node_speed": 0.00044680900000000114,
+        "max_node_jump": 6.143000000000012e-06,
+        "area": 1.1359999999988046e-06,
+        "area_rel_error": 1.683300000000082e-05,
+        "min_rho": 2.60000000418259e-08,
+        "max_rho": 4.8000000196779524e-08,
+        "max_fluid_speed": 2.7949999999999995e-06,
+        "fluid_steps": 0.0,
+        "fluid_time_mismatch": 0.0,
+        "exchange_impulse_mismatch": 2.5e-11,
+        "drive_force_x": 0.0,
+        "plate_half_gap": 0.0
+      },
+      "exact_to_csv_precision": false,
+      "comparison": "descriptive cross-harness comparison; not a pass/fail tolerance",
+      "known_input_difference": "new f32 (0.15 * 0.1) contact radius bits 0x3c75c290 vs old literal 0.015 bits 0x3c75c28f"
+    }
+  },
+  "repeat16": {
+    "order": {
+      "cpu": 2,
+      "seconds": 6.0,
+      "order": [
+        [
+          "reverse",
+          "cached"
+        ],
+        [
+          "reverse",
+          "baseline"
+        ],
+        [
+          "forward",
+          "baseline"
+        ],
+        [
+          "forward",
+          "cached"
+        ]
+      ],
+      "exclusive": false
+    },
+    "warmup_frames_excluded_per_run": 30,
+    "samples_per_mode": 990,
+    "repeated_physics_exactly_matches_initial": true,
+    "per_run": {
+      "initial-baseline": {
+        "prepare_ms": {
+          "mean_ms": 4.94969696969697e-05,
+          "p95_ms": 7.3e-05
+        },
+        "fluid_ms": {
+          "mean_ms": 4.0237780333333335,
+          "p95_ms": 5.634726
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.019064024242424243,
+          "p95_ms": 0.02255
+        },
+        "rapier_ms": {
+          "mean_ms": 0.5200532151515153,
+          "p95_ms": 0.817752
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.0749906818181818,
+          "p95_ms": 0.104703
+        },
+        "whole_ms": {
+          "mean_ms": 4.640234796969697,
+          "p95_ms": 6.589107
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 4.02382753030303,
+          "p95_ms": 5.634799999999999
+        }
+      },
+      "reverse-baseline": {
+        "prepare_ms": {
+          "mean_ms": 5.835757575757576e-05,
+          "p95_ms": 8.6e-05
+        },
+        "fluid_ms": {
+          "mean_ms": 4.537296266666667,
+          "p95_ms": 5.60799
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.021619833333333335,
+          "p95_ms": 0.02524
+        },
+        "rapier_ms": {
+          "mean_ms": 0.597113609090909,
+          "p95_ms": 0.822072
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.08519234545454546,
+          "p95_ms": 0.105103
+        },
+        "whole_ms": {
+          "mean_ms": 5.243992524242424,
+          "p95_ms": 6.559874
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 4.537354624242424,
+          "p95_ms": 5.608065
+        }
+      },
+      "forward-baseline": {
+        "prepare_ms": {
+          "mean_ms": 5.264848484848485e-05,
+          "p95_ms": 7.5e-05
+        },
+        "fluid_ms": {
+          "mean_ms": 4.1877972272727275,
+          "p95_ms": 5.602317
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.019829536363636362,
+          "p95_ms": 0.023068
+        },
+        "rapier_ms": {
+          "mean_ms": 0.5524854212121212,
+          "p95_ms": 0.823372
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.07833416363636363,
+          "p95_ms": 0.105202
+        },
+        "whole_ms": {
+          "mean_ms": 4.840928069696971,
+          "p95_ms": 6.55809
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 4.187849875757576,
+          "p95_ms": 5.602392
+        }
+      },
+      "initial-cached": {
+        "prepare_ms": {
+          "mean_ms": 0.03468983030303031,
+          "p95_ms": 0.048141
+        },
+        "fluid_ms": {
+          "mean_ms": 3.9115197818181815,
+          "p95_ms": 4.877659
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.020230142424242425,
+          "p95_ms": 0.02317
+        },
+        "rapier_ms": {
+          "mean_ms": 0.6268463090909091,
+          "p95_ms": 0.845991
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.08467961818181818,
+          "p95_ms": 0.107214
+        },
+        "whole_ms": {
+          "mean_ms": 4.683666436363636,
+          "p95_ms": 5.904508
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 3.9462096121212116,
+          "p95_ms": 4.927923
+        }
+      },
+      "reverse-cached": {
+        "prepare_ms": {
+          "mean_ms": 0.03679589393939394,
+          "p95_ms": 0.06214
+        },
+        "fluid_ms": {
+          "mean_ms": 4.696221769696971,
+          "p95_ms": 6.162353
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.025058633333333333,
+          "p95_ms": 0.029478
+        },
+        "rapier_ms": {
+          "mean_ms": 0.7151759575757576,
+          "p95_ms": 1.089572
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.10094814848484848,
+          "p95_ms": 0.136413
+        },
+        "whole_ms": {
+          "mean_ms": 5.581254475757576,
+          "p95_ms": 7.492299
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 4.733017663636364,
+          "p95_ms": 6.224459
+        }
+      },
+      "forward-cached": {
+        "prepare_ms": {
+          "mean_ms": 0.028920218181818183,
+          "p95_ms": 0.047913
+        },
+        "fluid_ms": {
+          "mean_ms": 3.635266681818182,
+          "p95_ms": 4.74482
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.019312327272727272,
+          "p95_ms": 0.022606
+        },
+        "rapier_ms": {
+          "mean_ms": 0.5639940606060606,
+          "p95_ms": 0.843122
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.0770821,
+          "p95_ms": 0.104919
+        },
+        "whole_ms": {
+          "mean_ms": 4.329948696969697,
+          "p95_ms": 5.766728
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 3.6641869000000002,
+          "p95_ms": 4.792705
+        }
+      }
+    },
+    "pooled": {
+      "baseline": {
+        "prepare_ms": {
+          "mean_ms": 5.35010101010101e-05,
+          "p95_ms": 7.5e-05
+        },
+        "fluid_ms": {
+          "mean_ms": 4.249623842424242,
+          "p95_ms": 5.608681
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.02017113131313131,
+          "p95_ms": 0.024639
+        },
+        "rapier_ms": {
+          "mean_ms": 0.5565507484848484,
+          "p95_ms": 0.821933
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.07950573030303032,
+          "p95_ms": 0.105107
+        },
+        "whole_ms": {
+          "mean_ms": 4.90838513030303,
+          "p95_ms": 6.563866
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 4.249677343434344,
+          "p95_ms": 5.6087549999999995
+        }
+      },
+      "cached": {
+        "prepare_ms": {
+          "mean_ms": 0.033468647474747475,
+          "p95_ms": 0.050396
+        },
+        "fluid_ms": {
+          "mean_ms": 4.081002744444444,
+          "p95_ms": 4.883587
+        },
+        "node_transfer_ms": {
+          "mean_ms": 0.02153370101010101,
+          "p95_ms": 0.025218
+        },
+        "rapier_ms": {
+          "mean_ms": 0.6353387757575758,
+          "p95_ms": 0.849029
+        },
+        "diagnostics_ms": {
+          "mean_ms": 0.08756995555555555,
+          "p95_ms": 0.110209
+        },
+        "whole_ms": {
+          "mean_ms": 4.8649565363636365,
+          "p95_ms": 5.910829
+        },
+        "prepare_plus_fluid_ms": {
+          "mean_ms": 4.114471391919192,
+          "p95_ms": 4.93161
+        }
+      }
+    },
+    "pooled_whole_ratio_baseline_over_cached": 1.0089268205408992
+  },
+  "scale_speedups": {
+    "1": {
+      "prepare_plus_fluid_ms": {
+        "baseline_mean_ms": 3.0499762424242425,
+        "cached_mean_ms": 3.007468293939394,
+        "ratio_baseline_over_cached": 1.0141341302152744
+      },
+      "whole_ms": {
+        "baseline_mean_ms": 3.1291968333333333,
+        "cached_mean_ms": 3.0888843060606055,
+        "ratio_baseline_over_cached": 1.0130508375446863
+      }
+    },
+    "4": {
+      "prepare_plus_fluid_ms": {
+        "baseline_mean_ms": 3.4227717454545457,
+        "cached_mean_ms": 3.256656845454546,
+        "ratio_baseline_over_cached": 1.0510077996801699
+      },
+      "whole_ms": {
+        "baseline_mean_ms": 3.6128097272727273,
+        "cached_mean_ms": 3.4494665999999996,
+        "ratio_baseline_over_cached": 1.0473531552016557
+      }
+    },
+    "16": {
+      "prepare_plus_fluid_ms": {
+        "baseline_mean_ms": 4.02382753030303,
+        "cached_mean_ms": 3.9462096121212116,
+        "ratio_baseline_over_cached": 1.0196689800621352
+      },
+      "whole_ms": {
+        "baseline_mean_ms": 4.640234796969697,
+        "cached_mean_ms": 4.683666436363636,
+        "ratio_baseline_over_cached": 0.9907269998869391
+      }
+    }
+  },
+  "counterflow_contact": {
+    "first_full_world_solver_contact_frame": 25,
+    "frames_with_full_world_solver_contact": 136,
+    "minimum_node_to_node_distance": 0.014999628,
+    "minimum_saved_outline_to_outline_distance": 0.014999627999999987,
+    "minimum_saved_outline_distance_frame": 48,
+    "saved_outline_interval_frames": 6
+  },
+  "interpretation_limits": [
+    "Scale 1/4/16 uses one unit domain, n=32 and radius=0.075; reference single-cell scenes use radius=0.15.",
+    "Solver contacts are full-world counters, possibly including self or plate contact; they are not cell-cell counts.",
+    "A one-cell intercell distance is undefined (CSV infinity), not an instability.",
+    "Timing excludes 30 warmup frames; p95 is nearest-rank and phase p95 values are not additive.",
+    "Baseline marker preparation is inside fluid_ms. Compare prepare_ms+fluid_ms or whole_ms.",
+    "whole_ms includes research O(N^2) node-pair distance diagnostics and excludes CSV writing.",
+    "Runs were sequential and nonexclusive; measured speedups are observations, not stable performance guarantees.",
+    "The 16-cell chart point pools three runs per mode; 1- and 4-cell points use one run per mode.",
+    "Outline distances are computed from six-frame snapshots and ignore collision-skin thickness."
+  ],
+  "source": "results/*/{frames,outlines}.csv; prior 2026-10-23-lbm-dynamics/results/rapier/{reversal,squeeze}.csv"
+}

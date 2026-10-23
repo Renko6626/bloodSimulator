@@ -1,0 +1,429 @@
+{
+  "scope": "periodic-x/no-slip-y regular channel; no cell, irregular wall, wall IB, Rapier, or game step",
+  "sources": [
+    "results/summary.csv",
+    "results/cg-samples.csv",
+    "results/separable-samples.csv",
+    "results/fields/localized_64_cells.csv"
+  ],
+  "aggregation": "arithmetic mean; p95 = sorted[ceil((N-1)*0.95)]",
+  "sample_checks": {
+    "cg/poiseuille/32": {
+      "counts": {
+        "cold": 50,
+        "warm": 0
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 0.59304314,
+          "p95": 0.626629,
+          "min": 0.581273,
+          "max": 0.664057
+        }
+      }
+    },
+    "cg/poiseuille/64": {
+      "counts": {
+        "cold": 50,
+        "warm": 0
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 4.62139652,
+          "p95": 4.654051,
+          "min": 4.590001,
+          "max": 4.846982
+        }
+      }
+    },
+    "cg/poiseuille/128": {
+      "counts": {
+        "cold": 50,
+        "warm": 0
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 38.36198492,
+          "p95": 55.531849,
+          "min": 36.378519,
+          "max": 55.927206
+        }
+      }
+    },
+    "cg/manufactured/32": {
+      "counts": {
+        "cold": 50,
+        "warm": 49
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 3.3291504400000003,
+          "p95": 3.460569,
+          "min": 3.237579,
+          "max": 3.537471
+        },
+        "warm": {
+          "mean": 4.301751591836735,
+          "p95": 4.472287,
+          "min": 4.167124,
+          "max": 4.622164
+        }
+      }
+    },
+    "cg/manufactured/64": {
+      "counts": {
+        "cold": 50,
+        "warm": 49
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 29.21297816,
+          "p95": 40.768817,
+          "min": 26.184622,
+          "max": 41.026332
+        },
+        "warm": {
+          "mean": 36.93494132653061,
+          "p95": 51.5554,
+          "min": 33.034838,
+          "max": 53.631512
+        }
+      }
+    },
+    "cg/manufactured/128": {
+      "counts": {
+        "cold": 50,
+        "warm": 49
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 219.19913168,
+          "p95": 292.664437,
+          "min": 208.276514,
+          "max": 299.287642
+        },
+        "warm": {
+          "mean": 276.37317891836733,
+          "p95": 357.224932,
+          "min": 262.592145,
+          "max": 362.346667
+        }
+      }
+    },
+    "cg/localized/32": {
+      "counts": {
+        "cold": 50,
+        "warm": 0
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 16.396507879999998,
+          "p95": 22.796145,
+          "min": 14.389627,
+          "max": 22.809642
+        }
+      }
+    },
+    "cg/localized/64": {
+      "counts": {
+        "cold": 50,
+        "warm": 0
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 114.7362751,
+          "p95": 156.719298,
+          "min": 105.435217,
+          "max": 163.774484
+        }
+      }
+    },
+    "cg/localized/128": {
+      "counts": {
+        "cold": 50,
+        "warm": 0
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 912.86732812,
+          "p95": 971.385406,
+          "min": 867.665109,
+          "max": 987.216981
+        }
+      }
+    },
+    "separable/poiseuille/32": {
+      "counts": {
+        "cold": 50,
+        "warm": 0
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 0.16039574,
+          "p95": 0.168035,
+          "min": 0.153937,
+          "max": 0.226241
+        }
+      }
+    },
+    "separable/poiseuille/64": {
+      "counts": {
+        "cold": 50,
+        "warm": 0
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 0.7442801,
+          "p95": 0.853245,
+          "min": 0.696487,
+          "max": 0.942952
+        }
+      }
+    },
+    "separable/poiseuille/128": {
+      "counts": {
+        "cold": 50,
+        "warm": 0
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 3.46733986,
+          "p95": 4.287766,
+          "min": 3.29281,
+          "max": 4.481329
+        }
+      }
+    },
+    "separable/manufactured/32": {
+      "counts": {
+        "cold": 50,
+        "warm": 49
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 0.34581642,
+          "p95": 0.447723,
+          "min": 0.323795,
+          "max": 0.596414
+        },
+        "warm": {
+          "mean": 0.426594306122449,
+          "p95": 0.507663,
+          "min": 0.401288,
+          "max": 0.701
+        }
+      }
+    },
+    "separable/manufactured/64": {
+      "counts": {
+        "cold": 50,
+        "warm": 49
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 1.4857964799999999,
+          "p95": 1.566738,
+          "min": 1.438166,
+          "max": 1.715896
+        },
+        "warm": {
+          "mean": 1.837002244897959,
+          "p95": 1.929158,
+          "min": 1.794414,
+          "max": 2.078097
+        }
+      }
+    },
+    "separable/manufactured/128": {
+      "counts": {
+        "cold": 50,
+        "warm": 49
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 7.00016842,
+          "p95": 7.562226,
+          "min": 6.445599,
+          "max": 8.563798
+        },
+        "warm": {
+          "mean": 8.818634387755102,
+          "p95": 9.339065,
+          "min": 8.140739,
+          "max": 9.548392
+        }
+      }
+    },
+    "separable/localized/32": {
+      "counts": {
+        "cold": 50,
+        "warm": 0
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 0.68263958,
+          "p95": 0.698313,
+          "min": 0.669459,
+          "max": 0.756316
+        }
+      }
+    },
+    "separable/localized/64": {
+      "counts": {
+        "cold": 50,
+        "warm": 0
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 2.63164652,
+          "p95": 2.710647,
+          "min": 2.577646,
+          "max": 2.903491
+        }
+      }
+    },
+    "separable/localized/128": {
+      "counts": {
+        "cold": 50,
+        "warm": 0
+      },
+      "timing_ms": {
+        "cold": {
+          "mean": 12.43200386,
+          "p95": 13.112601,
+          "min": 11.708658,
+          "max": 14.890102
+        }
+      }
+    }
+  },
+  "manufactured_accuracy": {
+    "cg": {
+      "velocity_l2": {
+        "32": 0.007187367722,
+        "64": 0.001787178302,
+        "128": 0.0004457572326
+      },
+      "pressure_l2": {
+        "32": 0.000589601432,
+        "64": 0.0001470937256,
+        "128": 3.675400024e-05
+      },
+      "velocity_refinement_ratios": [
+        4.02162879549105,
+        4.009308590633062
+      ],
+      "pressure_refinement_ratios": [
+        4.008338422288218,
+        4.002114726002406
+      ],
+      "velocity_orders": [
+        2.007779924104991,
+        2.0033534638948356
+      ],
+      "pressure_orders": [
+        2.003004319796945,
+        2.000762524630551
+      ]
+    },
+    "separable": {
+      "velocity_l2": {
+        "32": 0.007187367722,
+        "64": 0.001787178302,
+        "128": 0.0004457572327
+      },
+      "pressure_l2": {
+        "32": 0.000589601432,
+        "64": 0.0001470937256,
+        "128": 3.675400025e-05
+      },
+      "velocity_refinement_ratios": [
+        4.02162879549105,
+        4.0093085897336245
+      ],
+      "pressure_refinement_ratios": [
+        4.008338422288218,
+        4.002114724913515
+      ],
+      "velocity_orders": [
+        2.007779924104991,
+        2.003353463571185
+      ],
+      "pressure_orders": [
+        2.003004319796945,
+        2.0007625242380236
+      ]
+    }
+  },
+  "true_residual_rms": {
+    "cg": {
+      "cold_divergence_rms_range": [
+        0.0,
+        1.11558061e-11
+      ],
+      "cold_momentum_rms_range": [
+        0.0,
+        2.768866371e-10
+      ],
+      "manufactured_warm_divergence_rms_max": 1.384131859e-12,
+      "manufactured_warm_momentum_rms_max": 2.950197565e-10
+    },
+    "separable": {
+      "cold_divergence_rms_range": [
+        0.0,
+        1.115546856e-11
+      ],
+      "cold_momentum_rms_range": [
+        3.984780237e-16,
+        2.332876308e-11
+      ],
+      "manufactured_warm_divergence_rms_max": 8.792284683e-14,
+      "manufactured_warm_momentum_rms_max": 2.364730319e-11
+    }
+  },
+  "localized_cold_ms": {
+    "32": {
+      "cg": {
+        "mean": 16.396507879999998,
+        "p95": 22.796145,
+        "min": 14.389627,
+        "max": 22.809642
+      },
+      "separable": {
+        "mean": 0.68263958,
+        "p95": 0.698313,
+        "min": 0.669459,
+        "max": 0.756316
+      }
+    },
+    "64": {
+      "cg": {
+        "mean": 114.7362751,
+        "p95": 156.719298,
+        "min": 105.435217,
+        "max": 163.774484
+      },
+      "separable": {
+        "mean": 2.63164652,
+        "p95": 2.710647,
+        "min": 2.577646,
+        "max": 2.903491
+      }
+    },
+    "128": {
+      "cg": {
+        "mean": 912.86732812,
+        "p95": 971.385406,
+        "min": 867.665109,
+        "max": 987.216981
+      },
+      "separable": {
+        "mean": 12.43200386,
+        "p95": 13.112601,
+        "min": 11.708658,
+        "max": 14.890102
+      }
+    }
+  },
+  "timing_excludes": "backend initialization, grid/RHS initialization, export, cells, wall IB, Rapier, rendering"
+}

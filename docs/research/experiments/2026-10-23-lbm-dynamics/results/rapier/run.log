@@ -1,0 +1,3 @@
+relax frames=360 max_area_error=0.000001 max_node_speed=0.098821 max_center_accel=0.073996 max_node_jump=0.001659 rho=[0.999977,1.000023] max_fluid_speed=0.005463 clock_error=0.000455729 impulse_error=0.000000000060
+reversal frames=360 max_area_error=0.000001 max_node_speed=0.072656 max_center_accel=0.132355 max_node_jump=0.001214 rho=[0.999984,1.000016] max_fluid_speed=0.004675 clock_error=0.000455729 impulse_error=0.000000000035
+squeeze frames=360 max_area_error=0.035420 max_node_speed=0.262464 max_center_accel=0.008614 max_node_jump=0.004377 rho=[0.999984,1.000017] max_fluid_speed=0.001362 clock_error=0.000455729 impulse_error=0.000000000038

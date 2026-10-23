@@ -1,0 +1,14 @@
+{
+  "utc": "2026-10-23T06:44:59.986874+00:00",
+  "cpu": 2,
+  "seconds": 6.0,
+  "exclusive": false,
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)",
+  "sha256": {
+    "shared/fluid_f32.rs": "d15b9bc2bea59dc70853fbd65b472b8a7a07da302691f327be5cbf0339653435",
+    "rapier/src/main.rs": "9f932d8753e7ba9101ebc0ba3fa9a592935666c1fe11558e9c03ee41b958c646",
+    "rapier/Cargo.toml": "9a3448596bfc364b60f0dc2f25559b7a88894a2674d27904e51d1fdb23742806",
+    "rapier/Cargo.lock": "e0f092f3c800c9c8f37f916d477794a8974563f05fd70703ffcbce665e295a5b"
+  },
+  "change": "Only the fluid module import is replaced; Rapier/scenarios/checks are identical."
+}

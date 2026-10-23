@@ -1,0 +1,4 @@
+backend,scene,n,runs,warm_runs,backend_init_ms,init_ms_mean,cold_ms_mean,cold_ms_p95,warm_ms_mean,warm_ms_p95,cold_outer_mean,cold_inner_mean,cold_inverse_calls_mean,warm_outer_mean,warm_inner_mean,warm_inverse_calls_mean,warm_u_diff_max,warm_p_diff_max,warm_div_rms_max,warm_momentum_rms_max,u_l2,p_l2,div_rms,momentum_rms,mass_flux
+separable,poiseuille,64,1,0,0.142653,0.033735,0.939028,0.939028,NaN,NaN,0.000,0.000,2.000,NaN,NaN,NaN,NaN,NaN,NaN,NaN,2.166397728e-5,0.000000000e0,0.000000000e0,6.543442280e-14,8.337402344e-2
+separable,manufactured,64,1,0,0.073646,0.126719,1.783681,1.783681,NaN,NaN,2.000,0.000,4.000,NaN,NaN,NaN,NaN,NaN,NaN,NaN,1.787178302e-3,1.470937256e-4,3.646540072e-14,5.149636801e-12,-7.065819736e-17
+separable,localized,64,1,0,0.073851,0.154209,3.159287,3.159287,NaN,NaN,5.000,0.000,7.000,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,2.338493557e-12,1.530565392e-15,6.122045995e-4

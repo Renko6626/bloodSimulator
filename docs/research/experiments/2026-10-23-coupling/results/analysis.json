@@ -1,0 +1,1053 @@
+{
+  "method": "20 runs per case; p95 is sorted samples at ceil((N-1)*0.95), index 19 for N=20",
+  "timing_scope": "self cold total includes mobility assembly; lagged warm update reuses setup, so timings are not a production speedup ratio",
+  "audit": {
+    "volume_cases": [
+      {
+        "case": {
+          "scene": "channel",
+          "n": "32",
+          "kappa": "2.560000000e2"
+        },
+        "runs": 20,
+        "times_ms": {
+          "solve_ms": {
+            "mean": 27.75857055,
+            "p95": 27.878009
+          }
+        }
+      },
+      {
+        "case": {
+          "scene": "channel",
+          "n": "32",
+          "kappa": "1.024000000e3"
+        },
+        "runs": 20,
+        "times_ms": {
+          "solve_ms": {
+            "mean": 53.997372150000004,
+            "p95": 60.622742
+          }
+        }
+      },
+      {
+        "case": {
+          "scene": "channel",
+          "n": "32",
+          "kappa": "4.096000000e3"
+        },
+        "runs": 20,
+        "times_ms": {
+          "solve_ms": {
+            "mean": 115.20713735,
+            "p95": 116.749056
+          }
+        }
+      },
+      {
+        "case": {
+          "scene": "disk-static",
+          "n": "32",
+          "kappa": "2.560000000e2"
+        },
+        "runs": 20,
+        "times_ms": {
+          "solve_ms": {
+            "mean": 10.70101835,
+            "p95": 10.754469
+          }
+        }
+      },
+      {
+        "case": {
+          "scene": "disk-static",
+          "n": "32",
+          "kappa": "1.024000000e3"
+        },
+        "runs": 20,
+        "times_ms": {
+          "solve_ms": {
+            "mean": 19.4182741,
+            "p95": 19.877109
+          }
+        }
+      },
+      {
+        "case": {
+          "scene": "disk-static",
+          "n": "32",
+          "kappa": "4.096000000e3"
+        },
+        "runs": 20,
+        "times_ms": {
+          "solve_ms": {
+            "mean": 38.26377115,
+            "p95": 38.547598
+          }
+        }
+      },
+      {
+        "case": {
+          "scene": "disk-moving",
+          "n": "32",
+          "kappa": "2.560000000e2"
+        },
+        "runs": 20,
+        "times_ms": {
+          "solve_ms": {
+            "mean": 10.4512574,
+            "p95": 10.613397
+          }
+        }
+      },
+      {
+        "case": {
+          "scene": "disk-moving",
+          "n": "32",
+          "kappa": "1.024000000e3"
+        },
+        "runs": 20,
+        "times_ms": {
+          "solve_ms": {
+            "mean": 19.0706411,
+            "p95": 19.623391
+          }
+        }
+      },
+      {
+        "case": {
+          "scene": "disk-moving",
+          "n": "32",
+          "kappa": "4.096000000e3"
+        },
+        "runs": 20,
+        "times_ms": {
+          "solve_ms": {
+            "mean": 37.0769212,
+            "p95": 37.447627
+          }
+        }
+      },
+      {
+        "case": {
+          "scene": "channel",
+          "n": "64",
+          "kappa": "1.024000000e3"
+        },
+        "runs": 20,
+        "times_ms": {
+          "solve_ms": {
+            "mean": 231.29228605,
+            "p95": 232.599734
+          }
+        }
+      },
+      {
+        "case": {
+          "scene": "disk-static",
+          "n": "64",
+          "kappa": "1.024000000e3"
+        },
+        "runs": 20,
+        "times_ms": {
+          "solve_ms": {
+            "mean": 96.58796215,
+            "p95": 97.096135
+          }
+        }
+      },
+      {
+        "case": {
+          "scene": "disk-moving",
+          "n": "64",
+          "kappa": "1.024000000e3"
+        },
+        "runs": 20,
+        "times_ms": {
+          "solve_ms": {
+            "mean": 94.78463405,
+            "p95": 95.609017
+          }
+        }
+      }
+    ],
+    "marker_cases": [
+      {
+        "case": {
+          "kind": "self",
+          "shape": "blob",
+          "n": "32",
+          "m": "1",
+          "parameter_kind": "gamma_total",
+          "parameter": "0.25"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 1.7212281,
+            "p95": 1.884064
+          },
+          "factor_ms": {
+            "mean": 0.00122725,
+            "p95": 0.001415
+          },
+          "final_fluid_ms": {
+            "mean": 0.8197419,
+            "p95": 1.065353
+          },
+          "total_ms": {
+            "mean": 2.60025935,
+            "p95": 2.80352
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "lagged",
+          "shape": "blob",
+          "n": "32",
+          "m": "1",
+          "parameter_kind": "gamma_total",
+          "parameter": "0.25"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "factor_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "final_fluid_ms": {
+            "mean": 0.83368395,
+            "p95": 1.037147
+          },
+          "total_ms": {
+            "mean": 0.83368395,
+            "p95": 1.037147
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "self",
+          "shape": "blob",
+          "n": "32",
+          "m": "1",
+          "parameter_kind": "gamma_total",
+          "parameter": "1"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 1.73941515,
+            "p95": 1.993512
+          },
+          "factor_ms": {
+            "mean": 0.00117365,
+            "p95": 0.001315
+          },
+          "final_fluid_ms": {
+            "mean": 0.8025023,
+            "p95": 0.848774
+          },
+          "total_ms": {
+            "mean": 2.6065871,
+            "p95": 2.834508
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "lagged",
+          "shape": "blob",
+          "n": "32",
+          "m": "1",
+          "parameter_kind": "gamma_total",
+          "parameter": "1"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "factor_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "final_fluid_ms": {
+            "mean": 0.8427138,
+            "p95": 1.075362
+          },
+          "total_ms": {
+            "mean": 0.8427138,
+            "p95": 1.075362
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "self",
+          "shape": "blob",
+          "n": "32",
+          "m": "1",
+          "parameter_kind": "gamma_total",
+          "parameter": "4"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 1.7096125,
+            "p95": 1.812979
+          },
+          "factor_ms": {
+            "mean": 0.0011169,
+            "p95": 0.001254
+          },
+          "final_fluid_ms": {
+            "mean": 0.80001545,
+            "p95": 0.940568
+          },
+          "total_ms": {
+            "mean": 2.5615835,
+            "p95": 2.668143
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "lagged",
+          "shape": "blob",
+          "n": "32",
+          "m": "1",
+          "parameter_kind": "gamma_total",
+          "parameter": "4"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "factor_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "final_fluid_ms": {
+            "mean": 0.82981965,
+            "p95": 0.945371
+          },
+          "total_ms": {
+            "mean": 0.82981965,
+            "p95": 0.945371
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "self",
+          "shape": "blob",
+          "n": "32",
+          "m": "1",
+          "parameter_kind": "gamma_total",
+          "parameter": "16"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 1.7165161,
+            "p95": 1.824411
+          },
+          "factor_ms": {
+            "mean": 0.0011709,
+            "p95": 0.001315
+          },
+          "final_fluid_ms": {
+            "mean": 0.7948858,
+            "p95": 0.831386
+          },
+          "total_ms": {
+            "mean": 2.5622678,
+            "p95": 2.688351
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "lagged",
+          "shape": "blob",
+          "n": "32",
+          "m": "1",
+          "parameter_kind": "gamma_total",
+          "parameter": "16"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "factor_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "final_fluid_ms": {
+            "mean": 0.82532195,
+            "p95": 0.857747
+          },
+          "total_ms": {
+            "mean": 0.82532195,
+            "p95": 0.857747
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "self",
+          "shape": "blob",
+          "n": "32",
+          "m": "4",
+          "parameter_kind": "gamma_total",
+          "parameter": "0.25"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 6.9853487,
+            "p95": 7.084558
+          },
+          "factor_ms": {
+            "mean": 0.0025078,
+            "p95": 0.002686
+          },
+          "final_fluid_ms": {
+            "mean": 0.8046029,
+            "p95": 0.860913
+          },
+          "total_ms": {
+            "mean": 7.8448302,
+            "p95": 7.962902
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "lagged",
+          "shape": "blob",
+          "n": "32",
+          "m": "4",
+          "parameter_kind": "gamma_total",
+          "parameter": "0.25"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "factor_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "final_fluid_ms": {
+            "mean": 0.81526745,
+            "p95": 0.852341
+          },
+          "total_ms": {
+            "mean": 0.81526745,
+            "p95": 0.852341
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "self",
+          "shape": "blob",
+          "n": "32",
+          "m": "4",
+          "parameter_kind": "gamma_total",
+          "parameter": "1"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 7.03403155,
+            "p95": 7.776736
+          },
+          "factor_ms": {
+            "mean": 0.0024952999999999998,
+            "p95": 0.002751
+          },
+          "final_fluid_ms": {
+            "mean": 0.80873355,
+            "p95": 1.000375
+          },
+          "total_ms": {
+            "mean": 7.89787325,
+            "p95": 8.623979
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "lagged",
+          "shape": "blob",
+          "n": "32",
+          "m": "4",
+          "parameter_kind": "gamma_total",
+          "parameter": "1"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "factor_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "final_fluid_ms": {
+            "mean": 0.81728475,
+            "p95": 0.853549
+          },
+          "total_ms": {
+            "mean": 0.81728475,
+            "p95": 0.853549
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "self",
+          "shape": "blob",
+          "n": "32",
+          "m": "4",
+          "parameter_kind": "gamma_total",
+          "parameter": "4"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 7.04312835,
+            "p95": 7.28222
+          },
+          "factor_ms": {
+            "mean": 0.0024822,
+            "p95": 0.002744
+          },
+          "final_fluid_ms": {
+            "mean": 0.8020811,
+            "p95": 0.836454
+          },
+          "total_ms": {
+            "mean": 7.91975105,
+            "p95": 8.39657
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "lagged",
+          "shape": "blob",
+          "n": "32",
+          "m": "4",
+          "parameter_kind": "gamma_total",
+          "parameter": "4"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "factor_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "final_fluid_ms": {
+            "mean": 0.81941895,
+            "p95": 0.929438
+          },
+          "total_ms": {
+            "mean": 0.81941895,
+            "p95": 0.929438
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "self",
+          "shape": "blob",
+          "n": "32",
+          "m": "4",
+          "parameter_kind": "gamma_total",
+          "parameter": "16"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 5.63453765,
+            "p95": 7.00656
+          },
+          "factor_ms": {
+            "mean": 0.00199955,
+            "p95": 0.002606
+          },
+          "final_fluid_ms": {
+            "mean": 0.65492005,
+            "p95": 0.864419
+          },
+          "total_ms": {
+            "mean": 6.3364478,
+            "p95": 7.858973
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "lagged",
+          "shape": "blob",
+          "n": "32",
+          "m": "4",
+          "parameter_kind": "gamma_total",
+          "parameter": "16"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "factor_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "final_fluid_ms": {
+            "mean": 0.6603104,
+            "p95": 0.863984
+          },
+          "total_ms": {
+            "mean": 0.6603104,
+            "p95": 0.863984
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "self",
+          "shape": "blob",
+          "n": "64",
+          "m": "4",
+          "parameter_kind": "gamma_total",
+          "parameter": "4"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 21.91894345,
+            "p95": 22.625402
+          },
+          "factor_ms": {
+            "mean": 0.00204085,
+            "p95": 0.002169
+          },
+          "final_fluid_ms": {
+            "mean": 2.68561465,
+            "p95": 2.950698
+          },
+          "total_ms": {
+            "mean": 24.74609335,
+            "p95": 25.50567
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "lagged",
+          "shape": "blob",
+          "n": "64",
+          "m": "4",
+          "parameter_kind": "gamma_total",
+          "parameter": "4"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "factor_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "final_fluid_ms": {
+            "mean": 2.63825155,
+            "p95": 2.755429
+          },
+          "total_ms": {
+            "mean": 2.63825155,
+            "p95": 2.755429
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "self",
+          "shape": "circle",
+          "n": "32",
+          "m": "12",
+          "parameter_kind": "kappa_per_length",
+          "parameter": "32"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 21.52396995,
+            "p95": 53.614938
+          },
+          "factor_ms": {
+            "mean": 0.00832585,
+            "p95": 0.011414
+          },
+          "final_fluid_ms": {
+            "mean": 0.69690025,
+            "p95": 0.968488
+          },
+          "total_ms": {
+            "mean": 22.28436545,
+            "p95": 54.65743
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "lagged",
+          "shape": "circle",
+          "n": "32",
+          "m": "12",
+          "parameter_kind": "kappa_per_length",
+          "parameter": "32"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "factor_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "final_fluid_ms": {
+            "mean": 0.70537595,
+            "p95": 0.969018
+          },
+          "total_ms": {
+            "mean": 0.70537595,
+            "p95": 0.969018
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "self",
+          "shape": "circle",
+          "n": "32",
+          "m": "24",
+          "parameter_kind": "kappa_per_length",
+          "parameter": "32"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 33.04686005,
+            "p95": 33.32539
+          },
+          "factor_ms": {
+            "mean": 0.032478,
+            "p95": 0.033233
+          },
+          "final_fluid_ms": {
+            "mean": 0.61919815,
+            "p95": 0.813572
+          },
+          "total_ms": {
+            "mean": 33.7697575,
+            "p95": 34.048742
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "lagged",
+          "shape": "circle",
+          "n": "32",
+          "m": "24",
+          "parameter_kind": "kappa_per_length",
+          "parameter": "32"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "factor_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "final_fluid_ms": {
+            "mean": 0.6151604,
+            "p95": 0.65014
+          },
+          "total_ms": {
+            "mean": 0.6151604,
+            "p95": 0.65014
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "self",
+          "shape": "circle",
+          "n": "32",
+          "m": "48",
+          "parameter_kind": "kappa_per_length",
+          "parameter": "32"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 66.59415105,
+            "p95": 68.88047
+          },
+          "factor_ms": {
+            "mean": 0.21302315,
+            "p95": 0.220129
+          },
+          "final_fluid_ms": {
+            "mean": 0.61294915,
+            "p95": 0.641198
+          },
+          "total_ms": {
+            "mean": 67.5251755,
+            "p95": 69.825933
+          }
+        }
+      },
+      {
+        "case": {
+          "kind": "lagged",
+          "shape": "circle",
+          "n": "32",
+          "m": "48",
+          "parameter_kind": "kappa_per_length",
+          "parameter": "32"
+        },
+        "runs": 20,
+        "times_ms": {
+          "assemble_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "factor_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "final_fluid_ms": {
+            "mean": 0.61374725,
+            "p95": 0.622896
+          },
+          "total_ms": {
+            "mean": 0.61374725,
+            "p95": 0.622896
+          }
+        }
+      }
+    ]
+  },
+  "max_observed_residuals": {
+    "volume_momentum_rms": 3.158416469e-10,
+    "volume_divergence_rms": 1.422224591e-10,
+    "marker_self_force_law_rms_velocity": 2.400047747e-13,
+    "marker_divergence_rms": 2.408049245e-10,
+    "marker_momentum_rms": 1.414323989e-13,
+    "marker_force_balance_abs": 3.552713679e-15
+  },
+  "blob_n32": [
+    {
+      "markers": 1,
+      "gamma_total": 0.25,
+      "self_law_rms_velocity": 9.813114706e-18,
+      "lagged_law_rms_velocity": 0.005864514574,
+      "lagged_law_rms_over_target_speed": 0.058645145739999995,
+      "self_max_sampled_speed_over_target": 0.07658504495,
+      "lagged_max_sampled_speed_over_target": 0.08293676048,
+      "self_reaction_x": -0.02308537388,
+      "lagged_reaction_x": -0.025,
+      "self_cold_total_ms_mean": 2.60025935,
+      "self_cold_total_ms_p95": 2.80352,
+      "lagged_warm_update_ms_mean": 0.83368395,
+      "lagged_warm_update_ms_p95": 1.037147
+    },
+    {
+      "markers": 1,
+      "gamma_total": 1,
+      "self_law_rms_velocity": 3.925242161e-17,
+      "lagged_law_rms_velocity": 0.0234580583,
+      "lagged_law_rms_over_target_speed": 0.234580583,
+      "self_max_sampled_speed_over_target": 0.2491066482,
+      "lagged_max_sampled_speed_over_target": 0.3317470419,
+      "self_reaction_x": -0.07508933518,
+      "lagged_reaction_x": -0.1,
+      "self_cold_total_ms_mean": 2.6065871,
+      "self_cold_total_ms_p95": 2.834508,
+      "lagged_warm_update_ms_mean": 0.8427138,
+      "lagged_warm_update_ms_p95": 1.075362
+    },
+    {
+      "markers": 1,
+      "gamma_total": 4,
+      "self_law_rms_velocity": 9.813881439e-18,
+      "lagged_law_rms_velocity": 0.09383223319,
+      "lagged_law_rms_over_target_speed": 0.9383223319,
+      "self_max_sampled_speed_over_target": 0.5702599549,
+      "lagged_max_sampled_speed_over_target": 1.326988168,
+      "self_reaction_x": -0.171896018,
+      "lagged_reaction_x": -0.4,
+      "self_cold_total_ms_mean": 2.5615835,
+      "self_cold_total_ms_p95": 2.668143,
+      "lagged_warm_update_ms_mean": 0.82981965,
+      "lagged_warm_update_ms_p95": 0.945371
+    },
+    {
+      "markers": 1,
+      "gamma_total": 16,
+      "self_law_rms_velocity": 2.945317816e-17,
+      "lagged_law_rms_velocity": 0.3753289328,
+      "lagged_law_rms_over_target_speed": 3.753289328,
+      "self_max_sampled_speed_over_target": 0.8414699583,
+      "lagged_max_sampled_speed_over_target": 5.30795267,
+      "self_reaction_x": -0.2536480667,
+      "lagged_reaction_x": -1.6,
+      "self_cold_total_ms_mean": 2.5622678,
+      "self_cold_total_ms_p95": 2.688351,
+      "lagged_warm_update_ms_mean": 0.82532195,
+      "lagged_warm_update_ms_p95": 0.857747
+    },
+    {
+      "markers": 4,
+      "gamma_total": 0.25,
+      "self_law_rms_velocity": 1.073758804e-15,
+      "lagged_law_rms_velocity": 0.004483011489,
+      "lagged_law_rms_over_target_speed": 0.044830114889999995,
+      "self_max_sampled_speed_over_target": 0.06208795447,
+      "lagged_max_sampled_speed_over_target": 0.06603873823,
+      "self_reaction_x": -0.02351094083,
+      "lagged_reaction_x": -0.025,
+      "self_cold_total_ms_mean": 7.8448302,
+      "self_cold_total_ms_p95": 7.962902,
+      "lagged_warm_update_ms_mean": 0.81526745,
+      "lagged_warm_update_ms_p95": 0.852341
+    },
+    {
+      "markers": 4,
+      "gamma_total": 1,
+      "self_law_rms_velocity": 3.687168543e-15,
+      "lagged_law_rms_velocity": 0.01793204596,
+      "lagged_law_rms_over_target_speed": 0.17932045959999998,
+      "self_max_sampled_speed_over_target": 0.2105425975,
+      "lagged_max_sampled_speed_over_target": 0.2641549529,
+      "self_reaction_x": -0.07979231948,
+      "lagged_reaction_x": -0.1,
+      "self_cold_total_ms_mean": 7.89787325,
+      "self_cold_total_ms_p95": 8.623979,
+      "lagged_warm_update_ms_mean": 0.81728475,
+      "lagged_warm_update_ms_p95": 0.853549
+    },
+    {
+      "markers": 4,
+      "gamma_total": 4,
+      "self_law_rms_velocity": 9.363215298e-15,
+      "lagged_law_rms_velocity": 0.07172818382,
+      "lagged_law_rms_over_target_speed": 0.7172818381999999,
+      "self_max_sampled_speed_over_target": 0.5230192444,
+      "lagged_max_sampled_speed_over_target": 1.056619812,
+      "self_reaction_x": -0.1988341882,
+      "lagged_reaction_x": -0.4,
+      "self_cold_total_ms_mean": 7.91975105,
+      "self_cold_total_ms_p95": 8.39657,
+      "lagged_warm_update_ms_mean": 0.81941895,
+      "lagged_warm_update_ms_p95": 0.929438
+    },
+    {
+      "markers": 4,
+      "gamma_total": 16,
+      "self_law_rms_velocity": 1.580316223e-14,
+      "lagged_law_rms_velocity": 0.2869127353,
+      "lagged_law_rms_over_target_speed": 2.8691273529999997,
+      "self_max_sampled_speed_over_target": 0.8282807348,
+      "lagged_max_sampled_speed_over_target": 4.226479247,
+      "self_reaction_x": -0.3180673201,
+      "lagged_reaction_x": -1.6,
+      "self_cold_total_ms_mean": 6.3364478,
+      "self_cold_total_ms_p95": 7.858973,
+      "lagged_warm_update_ms_mean": 0.6603104,
+      "lagged_warm_update_ms_p95": 0.863984
+    }
+  ],
+  "channel_n32": [
+    {
+      "kappa": 256.0,
+      "normal_rms": 0.004988711715,
+      "solve_ms_mean": 27.75857055,
+      "solve_ms_p95": 27.878009
+    },
+    {
+      "kappa": 1024.0,
+      "normal_rms": 0.001823449692,
+      "solve_ms_mean": 53.997372150000004,
+      "solve_ms_p95": 60.622742
+    },
+    {
+      "kappa": 4096.0,
+      "normal_rms": 0.0008014532528,
+      "solve_ms_mean": 115.20713735,
+      "solve_ms_p95": 116.749056
+    }
+  ],
+  "channel_fixed_kappa_1024": [
+    {
+      "n": 32,
+      "normal_rms": 0.001823449692,
+      "solve_ms_mean": 53.997372150000004
+    },
+    {
+      "n": 64,
+      "normal_rms": 0.001593878446,
+      "solve_ms_mean": 231.29228605
+    }
+  ],
+  "circle_n32_kappa32": [
+    {
+      "m": 12,
+      "normal_abs_integral": 0.007818024619,
+      "slip_rms": 0.01030307641
+    },
+    {
+      "m": 24,
+      "normal_abs_integral": 0.007804449955,
+      "slip_rms": 0.01030224886
+    },
+    {
+      "m": 48,
+      "normal_abs_integral": 0.007805001049,
+      "slip_rms": 0.01030175999
+    }
+  ]
+}

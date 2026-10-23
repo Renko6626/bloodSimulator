@@ -1,0 +1,1 @@
+case=frozen gamma=0.25 steps=3190 elapsed_ms=458.074 minrho=0.999974639 maxrho=1.000025361 maxspeed=0.006611360 max_mass_drift=8.860e-14 max_exchange_error=9.317e-21 max_kernel_weight_error=1.110e-16 grid_crossings=0 seam_crossings=0 max_force_jump_cross=0.000e0 max_force_jump_elsewhere=1.250e-4 max_unforced_jump_cross=0.000e0 max_unforced_jump_elsewhere=1.250e-4
