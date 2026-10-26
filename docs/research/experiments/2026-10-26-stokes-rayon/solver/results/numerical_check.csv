@@ -1,0 +1,10 @@
+n,threads,max_grid_delta,max_pressure_delta,max_force_delta,max_sampled_delta,arrays_bitwise_equal,serial_divergence_rms,parallel_divergence_rms,serial_momentum_rms,parallel_momentum_rms,serial_force_law_rms,parallel_force_law_rms,serial_fluid_calls,parallel_fluid_calls,serial_coupling_iterations,parallel_coupling_iterations,serial_pressure_iterations,parallel_pressure_iterations
+32,1,0.000e0,0.000e0,0.000e0,0.000e0,true,9.613e-12,9.613e-12,2.027e-14,2.027e-14,1.516e-11,1.516e-11,8,8,6,6,44,44
+32,2,0.000e0,0.000e0,0.000e0,0.000e0,true,9.613e-12,9.613e-12,2.027e-14,2.027e-14,1.516e-11,1.516e-11,8,8,6,6,44,44
+32,4,0.000e0,0.000e0,0.000e0,0.000e0,true,9.613e-12,9.613e-12,2.027e-14,2.027e-14,1.516e-11,1.516e-11,8,8,6,6,44,44
+64,1,0.000e0,0.000e0,0.000e0,0.000e0,true,5.059e-12,5.059e-12,8.944e-14,8.944e-14,1.567e-11,1.567e-11,8,8,6,6,43,43
+64,2,0.000e0,0.000e0,0.000e0,0.000e0,true,5.059e-12,5.059e-12,8.944e-14,8.944e-14,1.567e-11,1.567e-11,8,8,6,6,43,43
+64,4,0.000e0,0.000e0,0.000e0,0.000e0,true,5.059e-12,5.059e-12,8.944e-14,8.944e-14,1.567e-11,1.567e-11,8,8,6,6,43,43
+128,1,0.000e0,0.000e0,0.000e0,0.000e0,true,3.054e-11,3.054e-11,3.795e-13,3.795e-13,1.573e-11,1.573e-11,8,8,6,6,37,37
+128,2,0.000e0,0.000e0,0.000e0,0.000e0,true,3.054e-11,3.054e-11,3.795e-13,3.795e-13,1.573e-11,1.573e-11,8,8,6,6,37,37
+128,4,0.000e0,0.000e0,0.000e0,0.000e0,true,3.054e-11,3.054e-11,3.795e-13,3.795e-13,1.573e-11,1.573e-11,8,8,6,6,37,37

@@ -11,6 +11,8 @@
 器官目前是位置与视觉样板，战斗、治疗关卡和远处区域演化尚未实现。原跑道形单回路实验场仍可单独启动。
 
 - [2026-10-23 进展存档](docs/superpowers/plans/2026-10-23-progress-checkpoint.md)：可运行功能、研究结论、已确认方向和后续未决事项。
+- [有限阻力 Stokes 反馈实验](docs/research/2026-10-26-stokes-feedback.md)：真实软体与 LBM 对照；16 细胞、32² 一次更新方案整步均值 2.26 ms、p95 3.25 ms，64² 仍超预算，尚未接入正式游戏。
+- [Rayon 并行更新实验](docs/research/2026-10-26-stokes-rayon.md)：四线程在 64²/16 细胞下净加速约 1.14 倍，均值 5.61 ms、p95 7.22 ms；数值与串行一致，但仍超预算并出现更大尖峰。
 - [性能诊断与粒子数对照](docs/superpowers/plans/2026-10-22-performance-audit.md)：耗时归属、20/16/12 粒子测量与流速优化候选。
 - [低雷诺数流体路线调研](docs/research/2026-10-22-low-re-flow.md)：Stokes、LBM、边界积分与 Rapier 耦合的取舍；推荐原型及待决事项。
 - [MAC + Stokes 专项实验](docs/research/2026-10-22-mac-stokes-experiment.md)：真实速度—压力求解、精度收敛、两种解法的耗时及流固耦合接口核查；尚未接入游戏。

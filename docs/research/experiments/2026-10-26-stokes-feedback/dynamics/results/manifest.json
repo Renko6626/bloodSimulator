@@ -1,0 +1,26 @@
+{
+  "source_sha256": "349fc0008798031af8f4195dbeba74650f0e51e286e6dd863952209b5d10ffc9",
+  "measured_source_sha256": "349fc0008798031af8f4195dbeba74650f0e51e286e6dd863952209b5d10ffc9",
+  "final_formatted_source_sha256": "578e044e2f576646ea6592dd31fe4e46560c5b2ef7bca08c2fbcbdf09517a48b",
+  "source_format_note": "After the 360-frame runs, rustfmt changed only dynamics/src/main.rs formatting; numerical logic and measured binary were not rerun.",
+  "solver_sha256": "6445acd1a6398381294ebf23a63e4e577005ba4b312ed077f0b6433c3cfc4ac0",
+  "solver_inverse_sha256": "3b9bffec7da4216da41d9670f0d0ddd44f229c5ea1e129ede481914b5fe21a00",
+  "lbm_sha256": "d36cb6b2ec83f6f70a407e5f49224282597a306d4a9c0c004deea64f33af4c57",
+  "lock_sha256": "8c4de80418650842f93e7963ea03d49dd4bc77b344779ff884792e8ede476b20",
+  "python": "3.13.2",
+  "machine": "Linux-6.8.0-111-generic-x86_64-with-glibc2.35",
+  "frames": 360,
+  "cpu": 2,
+  "frame_hz": 60,
+  "rapier_substeps": 2,
+  "count": [
+    16,
+    32
+  ],
+  "radius": 0.045,
+  "mass_per_cell": 1.0,
+  "drag_total_per_cell": 0.25,
+  "drive_force_per_driven_cell": 0.18,
+  "drive_until_seconds": 0.5,
+  "timing": "release; flock shared lock; taskset CPU 2; first 30 frames excluded in analysis"
+}

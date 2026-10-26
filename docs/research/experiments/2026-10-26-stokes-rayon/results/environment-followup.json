@@ -1,0 +1,13 @@
+{
+  "note": "Read after the benchmark; cumulative counters do not establish throttling during a particular run.",
+  "cgroup_files": {
+    "/sys/fs/cgroup/cpu,cpuacct/cpu.cfs_quota_us": "-1",
+    "/sys/fs/cgroup/cpu,cpuacct/cpu.cfs_period_us": "100000",
+    "/sys/fs/cgroup/cpu,cpuacct/cpu.stat": "nr_periods 0\nnr_throttled 0\nthrottled_time 0\nnr_bursts 0\nburst_time 0",
+    "/sys/fs/cgroup/cpu,cpuacct/cpu.shares": "1024",
+    "/sys/fs/cgroup/cpu,cpuacct/user.slice/cpu.cfs_quota_us": "-1",
+    "/sys/fs/cgroup/cpu,cpuacct/user.slice/cpu.cfs_period_us": "100000",
+    "/sys/fs/cgroup/cpu,cpuacct/user.slice/cpu.stat": "nr_periods 0\nnr_throttled 0\nthrottled_time 0\nnr_bursts 0\nburst_time 0",
+    "/sys/fs/cgroup/cpu,cpuacct/user.slice/cpu.shares": "1024"
+  }
+}

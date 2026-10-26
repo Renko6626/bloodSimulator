@@ -1,0 +1,13 @@
+Date: 2026-10-26 Asia/Shanghai
+OS: Linux 6.8.0-111-generic x86_64
+CPU: Intel Xeon Gold 6330 @ 2.00 GHz; 112 logical CPUs, 2 threads/core; non-exclusive host
+Compiler: rustc 1.98.1 (48a229cea 2026-09-01)
+Build: Cargo release, offline, single-threaded program; target directory /tmp/blood-stokes-feedback-solver-target
+Timing: flock /tmp/blood-stokes-feedback-bench.lock taskset -c 2 /tmp/blood-stokes-feedback-solver-target/release/static_probe docs/research/experiments/2026-10-26-stokes-feedback/solver/results
+Reference: rustc -O docs/research/experiments/2026-10-23-coupling/markers/main.rs -o /tmp/blood-stokes-dense-reference
+Reference run: flock /tmp/blood-stokes-feedback-bench.lock taskset -c 2 /tmp/blood-stokes-dense-reference 32 4 docs/research/experiments/2026-10-26-stokes-feedback/solver/results/legacy-dense-fields --shape blob --drag 0.25
+SHA-256 (source after rustfmt; format-only change after timed build):
+  fluid.rs 6445acd1a6398381294ebf23a63e4e577005ba4b312ed077f0b6433c3cfc4ac0
+  separable.rs 3b9bffec7da4216da41d9670f0d0ddd44f229c5ea1e129ede481914b5fe21a00
+  probe.rs 97802fbdc61a79db142a6abe89eea5142bf0783ac6e99217db930927d08505e0
+  legacy main.rs 596b2391ba7cb140c872b18c46e74d438e1e99688a4cf0e19935bf6632a895b3

@@ -1,0 +1,2 @@
+force_x,force_y,flux,force_law_rms,divergence_rms,momentum_rms,fluid_calls,coupling_iterations
+0.023510940832189,0.000000000000000,0.002902561280667,9.372e-20,3.552e-12,1.077e-15,4,2

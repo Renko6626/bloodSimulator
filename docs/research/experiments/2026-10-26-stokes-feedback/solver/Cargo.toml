@@ -1,0 +1,13 @@
+[package]
+name = "stokes_feedback_solver"
+version = "0.0.0"
+edition = "2021"
+
+[lib]
+path = "lib.rs"
+
+[workspace]
+
+[[bin]]
+name = "static_probe"
+path = "probe.rs"

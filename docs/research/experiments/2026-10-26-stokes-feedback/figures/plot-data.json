@@ -1,0 +1,54 @@
+{
+  "cost": [
+    {
+      "backend": "stokes",
+      "n": 32,
+      "mean_ms": 9.189794518181817,
+      "p95_ms": 14.359408,
+      "samples": 330,
+      "source": "dynamics/results/stokes32-16/frames.csv"
+    },
+    {
+      "backend": "lagged",
+      "n": 32,
+      "mean_ms": 2.2620238818181817,
+      "p95_ms": 3.254885,
+      "samples": 330,
+      "source": "dynamics/results/lagged32-16/frames.csv"
+    },
+    {
+      "backend": "lbm",
+      "n": 32,
+      "mean_ms": 4.320094263636364,
+      "p95_ms": 5.842751,
+      "samples": 330,
+      "source": "dynamics/results/lbm32-16/frames.csv"
+    },
+    {
+      "backend": "stokes",
+      "n": 64,
+      "mean_ms": 36.53049933939394,
+      "p95_ms": 52.343917,
+      "samples": 330,
+      "source": "dynamics/results/stokes64-16/frames.csv"
+    },
+    {
+      "backend": "lagged",
+      "n": 64,
+      "mean_ms": 6.145594203030303,
+      "p95_ms": 9.986504,
+      "samples": 330,
+      "source": "dynamics/results/lagged64-16/frames.csv"
+    },
+    {
+      "backend": "lbm",
+      "n": 64,
+      "mean_ms": 51.82127319999999,
+      "p95_ms": 69.467107,
+      "samples": 330,
+      "source": "dynamics/results/lbm64-16/frames.csv"
+    }
+  ],
+  "field_frame": 30,
+  "field_speed_max": 0.006458874366032636
+}

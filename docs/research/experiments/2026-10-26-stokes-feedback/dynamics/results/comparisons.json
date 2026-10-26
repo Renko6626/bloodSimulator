@@ -1,0 +1,27 @@
+{
+  "stokes32-16_vs_lagged32-16": {
+    "max_cell_center_distance": 5.984053475663164e-06,
+    "max_cell_velocity_distance": 2.2920537384625847e-05,
+    "mean_cell_center_distance": 1.989638889848119e-06
+  },
+  "stokes32-16_vs_lbm32-16": {
+    "max_cell_center_distance": 0.0001342347731551083,
+    "max_cell_velocity_distance": 0.0006198178764322629,
+    "mean_cell_center_distance": 3.223037765592939e-05
+  },
+  "stokes32-16_vs_control32-16": {
+    "max_cell_center_distance": 0.03509527566062664,
+    "max_cell_velocity_distance": 0.02321731622240626,
+    "mean_cell_center_distance": 0.0036893418142426885
+  },
+  "stokes64-16_vs_lagged64-16": {
+    "max_cell_center_distance": 6.450492849356261e-06,
+    "max_cell_velocity_distance": 8.256387587799492e-06,
+    "mean_cell_center_distance": 1.9635189736346645e-06
+  },
+  "stokes64-16_vs_lbm64-16": {
+    "max_cell_center_distance": 6.830846256497814e-05,
+    "max_cell_velocity_distance": 8.818494695241368e-05,
+    "mean_cell_center_distance": 2.4227399908368424e-05
+  }
+}
