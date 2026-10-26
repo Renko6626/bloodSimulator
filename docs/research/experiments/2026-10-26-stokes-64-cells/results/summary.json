@@ -1,0 +1,63 @@
+{
+  "backend": "lagged",
+  "runs": {
+    "optimized-t4-r1": {
+      "completed": false,
+      "exit_code": 1,
+      "written_frames": 15,
+      "last_model_time": 0.25,
+      "log": "Error: \"frame 16 exchange mismatch 0.0000027010929870365083\"",
+      "first_solver_contact_frame": 1,
+      "max_area_rel_error": 0.00038142,
+      "max_node_jump": 0.006463945,
+      "max_fluid_speed": 1235.148084008104,
+      "exchange_mismatch": 3.67462e-07,
+      "stokes_force_law_rms": 1013.542273897779,
+      "solver_contacts_max": 364.0
+    },
+    "optimized-t0-r1": {
+      "completed": false,
+      "exit_code": 1,
+      "written_frames": 15,
+      "last_model_time": 0.25,
+      "log": "Error: \"frame 16 exchange mismatch 0.0000027010929870365083\"",
+      "first_solver_contact_frame": 1,
+      "max_area_rel_error": 0.00038142,
+      "max_node_jump": 0.006463945,
+      "max_fluid_speed": 1235.148084008104,
+      "exchange_mismatch": 3.67462e-07,
+      "stokes_force_law_rms": 1013.542273897779,
+      "solver_contacts_max": 364.0
+    },
+    "baseline-t4-r1": {
+      "completed": false,
+      "exit_code": 1,
+      "written_frames": 15,
+      "last_model_time": 0.25,
+      "log": "Error: \"frame 16 exchange mismatch 0.0000027010929870365083\"",
+      "first_solver_contact_frame": 1,
+      "max_area_rel_error": 0.00038142,
+      "max_node_jump": 0.006463945,
+      "max_fluid_speed": 1235.148084008104,
+      "exchange_mismatch": 3.67462e-07,
+      "stokes_force_law_rms": 1013.542273897779,
+      "solver_contacts_max": 364.0
+    },
+    "baseline-t0-r1": {
+      "completed": false,
+      "exit_code": 1,
+      "written_frames": 15,
+      "last_model_time": 0.25,
+      "log": "Error: \"frame 16 exchange mismatch 0.0000027010929870365083\"",
+      "first_solver_contact_frame": 1,
+      "max_area_rel_error": 0.00038142,
+      "max_node_jump": 0.006463945,
+      "max_fluid_speed": 1235.148084008104,
+      "exchange_mismatch": 3.67462e-07,
+      "stokes_force_law_rms": 1013.542273897779,
+      "solver_contacts_max": 364.0
+    }
+  },
+  "pooled_successful_whole_ms": {},
+  "non_timing_outputs_identical_across_runs": true
+}

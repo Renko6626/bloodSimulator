@@ -1,0 +1,29 @@
+[package]
+name = "stokes_hotpath_solver"
+version = "0.0.0"
+edition = "2021"
+
+[dependencies]
+rayon = "=1.12.0"
+baseline_stokes_solver = { path = "../baseline", optional = true }
+
+[features]
+comparison = ["dep:baseline_stokes_solver"]
+
+[lib]
+path = "lib.rs"
+
+[workspace]
+
+[[bin]]
+name = "static_probe"
+path = "probe.rs"
+
+[[bin]]
+name = "numerical_check"
+path = "numerical_check.rs"
+
+[[bin]]
+name = "compare_baseline"
+path = "compare_baseline.rs"
+required-features = ["comparison"]

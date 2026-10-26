@@ -1,0 +1,193 @@
+{
+  "platform": "Linux-6.8.0-111-generic-x86_64-with-glibc2.35",
+  "cpu_topology": [
+    {
+      "cpu": 2,
+      "core": 2,
+      "socket": 0
+    },
+    {
+      "cpu": 3,
+      "core": 3,
+      "socket": 0
+    },
+    {
+      "cpu": 4,
+      "core": 4,
+      "socket": 0
+    },
+    {
+      "cpu": 5,
+      "core": 5,
+      "socket": 0
+    }
+  ],
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)",
+  "count": 64,
+  "n": 64,
+  "radius": 0.045,
+  "layout": "8x8 centers from 0.11 to 0.89 inclusive on each axis",
+  "driven_cells": [
+    27,
+    35
+  ],
+  "drive_force": 0.18,
+  "drive_until_seconds": 0.5,
+  "backend": "lagged",
+  "profile": false,
+  "sources": {
+    "../2026-10-23-lbm-many/shared/fluid.rs": "d36cb6b2ec83f6f70a407e5f49224282597a306d4a9c0c004deea64f33af4c57",
+    "dynamics/Cargo.lock": "c02c9695538a1e7ec81c78aafa5d454cbdeb59917eefee2275908f219eb90930",
+    "dynamics/Cargo.toml": "03f63a57dcd11558c8157f5ce19229107449f860d461b23f760e6dbbbc6fd481",
+    "dynamics/src/main.rs": "fa019590146130e22dd71bdd37d282ed6b3f0272274eed98aa535b37d933e6a9",
+    "../2026-10-26-stokes-hotpaths/baseline/Cargo.lock": "f6bbd299a28dcb520a099e8c94593699f9601cb1c1ceeb652c8e0f3c21cb656f",
+    "../2026-10-26-stokes-hotpaths/baseline/Cargo.toml": "33e5d616451b8a318d5f3b56ba57956eebc8a53d0f1107cade4bccaf8504da38",
+    "../2026-10-26-stokes-hotpaths/baseline/fluid.rs": "a45b76483fac9f86c7bafc0f62eae9bf97071b42e6388bd6ecdb0cc998e71a85",
+    "../2026-10-26-stokes-hotpaths/baseline/lib.rs": "c08688c1d7b7ebf6b058ba19e1e2763a3cc7e25690fb015d7b6e6fc71513bb3f",
+    "../2026-10-26-stokes-hotpaths/baseline/numerical_check.rs": "82afed0d1e941143195be8a323fc4bd9a5da88ef0ce087bc1ac6da3189cb0167",
+    "../2026-10-26-stokes-hotpaths/baseline/probe.rs": "217947773165f8bf254baa88f32d0d804f1e703511088b0ce756a99827b7bd8d",
+    "../2026-10-26-stokes-hotpaths/baseline/separable.rs": "adf8e9a02b1262e5fc727267597f2ed1f011beace9e4ee6821fd2c1dd2a88d73",
+    "../2026-10-26-stokes-hotpaths/solver/Cargo.lock": "3928f8afe80d0c5d4c13a03c00ae785936153a798dbc6713b67c2581a6f0048c",
+    "../2026-10-26-stokes-hotpaths/solver/Cargo.toml": "8af58278a078fb025c9172b4cd5beaea860e4af83bc15e6e1925a9b3bc661ae6",
+    "../2026-10-26-stokes-hotpaths/solver/compare_baseline.rs": "e2b77581df72449066ad1028d1186cccf3d4d27a84af2f06fdcacdf1d6974a1f",
+    "../2026-10-26-stokes-hotpaths/solver/fluid.rs": "7995dfc499257c70418f7ecf5e122dc36750afdc2d9479179289f1038705bdb0",
+    "../2026-10-26-stokes-hotpaths/solver/lib.rs": "c08688c1d7b7ebf6b058ba19e1e2763a3cc7e25690fb015d7b6e6fc71513bb3f",
+    "../2026-10-26-stokes-hotpaths/solver/numerical_check.rs": "429bc3d1290c35670c529b1cde7217e93f0f0ccd7405266020c579d172b7001f",
+    "../2026-10-26-stokes-hotpaths/solver/probe.rs": "4551b3f8483ac9b79b7c00a4bc3949f10e5712be1a455a28c77945af645ee431",
+    "../2026-10-26-stokes-hotpaths/solver/separable.rs": "392ffabd1c3b11fa6f13228cd4c2829e1963e8b82213c5db153382a9ddd163ad"
+  },
+  "binaries": {
+    "baseline": "2e9bd1b2405792e9fec0688cdbffb334dd675a8387808210f83c939d3cee7395",
+    "optimized": "9ecda4fca48d4673dad091f7ac98f4820b774fa671b3b8df5a3bae775f8f5c82"
+  },
+  "runs": [
+    {
+      "name": "optimized-t4-r1",
+      "variant": "optimized",
+      "threads": 4,
+      "repeat": 1,
+      "requested_frames": 360,
+      "exit_code": 1,
+      "command": [
+        "flock",
+        "/tmp/blood-stokes-feedback-bench.lock",
+        "taskset",
+        "-c",
+        "2-5",
+        "/tmp/sunyunbo/stokes-64-cells-binaries/optimized",
+        "--backend",
+        "lagged",
+        "--n",
+        "64",
+        "--count",
+        "64",
+        "--threads",
+        "4",
+        "--frames",
+        "360",
+        "--profile",
+        "0",
+        "--outdir",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-26-stokes-64-cells/results/optimized-t4-r1"
+      ],
+      "process_wall_seconds": 0.2173896860331297,
+      "process_cpu_seconds": 0.3114570000000003
+    },
+    {
+      "name": "optimized-t0-r1",
+      "variant": "optimized",
+      "threads": 0,
+      "repeat": 1,
+      "requested_frames": 360,
+      "exit_code": 1,
+      "command": [
+        "flock",
+        "/tmp/blood-stokes-feedback-bench.lock",
+        "taskset",
+        "-c",
+        "2",
+        "/tmp/sunyunbo/stokes-64-cells-binaries/optimized",
+        "--backend",
+        "lagged",
+        "--n",
+        "64",
+        "--count",
+        "64",
+        "--threads",
+        "0",
+        "--frames",
+        "360",
+        "--profile",
+        "0",
+        "--outdir",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-26-stokes-64-cells/results/optimized-t0-r1"
+      ],
+      "process_wall_seconds": 1.3083680160343647,
+      "process_cpu_seconds": 0.1967989999999994
+    },
+    {
+      "name": "baseline-t4-r1",
+      "variant": "baseline",
+      "threads": 4,
+      "repeat": 1,
+      "requested_frames": 360,
+      "exit_code": 1,
+      "command": [
+        "flock",
+        "/tmp/blood-stokes-feedback-bench.lock",
+        "taskset",
+        "-c",
+        "2-5",
+        "/tmp/sunyunbo/stokes-64-cells-binaries/baseline",
+        "--backend",
+        "lagged",
+        "--n",
+        "64",
+        "--count",
+        "64",
+        "--threads",
+        "4",
+        "--frames",
+        "360",
+        "--profile",
+        "0",
+        "--outdir",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-26-stokes-64-cells/results/baseline-t4-r1"
+      ],
+      "process_wall_seconds": 0.24517378583550453,
+      "process_cpu_seconds": 0.35837499999999944
+    },
+    {
+      "name": "baseline-t0-r1",
+      "variant": "baseline",
+      "threads": 0,
+      "repeat": 1,
+      "requested_frames": 360,
+      "exit_code": 1,
+      "command": [
+        "flock",
+        "/tmp/blood-stokes-feedback-bench.lock",
+        "taskset",
+        "-c",
+        "2",
+        "/tmp/sunyunbo/stokes-64-cells-binaries/baseline",
+        "--backend",
+        "lagged",
+        "--n",
+        "64",
+        "--count",
+        "64",
+        "--threads",
+        "0",
+        "--frames",
+        "360",
+        "--profile",
+        "0",
+        "--outdir",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-26-stokes-64-cells/results/baseline-t0-r1"
+      ],
+      "process_wall_seconds": 1.4343922659754753,
+      "process_cpu_seconds": 0.19983499999999987
+    }
+  ]
+}

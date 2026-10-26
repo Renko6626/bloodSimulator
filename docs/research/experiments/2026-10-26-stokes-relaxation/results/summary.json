@@ -1,0 +1,387 @@
+{
+  "omega05-16": {
+    "completed": true,
+    "exit_code": 0,
+    "written_frames": 360,
+    "requested_frames": 360,
+    "negative_control": false,
+    "last_model_time": 6.0,
+    "run_log": "relaxed omega=0.5 64^2 16 cells 360 frames complete",
+    "allframe_max_max_area_rel_error": 9.9341e-05,
+    "allframe_max_max_node_jump": 0.001254499,
+    "allframe_max_max_fluid_speed": 0.006730104171,
+    "allframe_max_exchange_mismatch": 2e-11,
+    "allframe_max_stokes_force_law_rms": 0.000384626605,
+    "allframe_max_stokes_force_law_max_component_abs": 0.002142102912,
+    "allframe_max_solver_contacts_max": 20.0,
+    "allframe_max_non_driven_max_abs_vx": 0.007999933325,
+    "allframe_max_whole_ms": 76.92639,
+    "allframe_max_fluid_ms": 75.860677,
+    "allframe_max_rapier_ms": 1.385878,
+    "total_full_stokes_calls": 721,
+    "flow_calls_by_frame": {
+      "first": 3,
+      "subsequent_unique": [
+        2
+      ]
+    },
+    "positive_exchange_power_frames": 0,
+    "max_positive_exchange_power_mean": 0.0,
+    "first_solver_contact_frame": 104,
+    "min_driven_nondriven_gap": -1.42e-07,
+    "after_release_max_force_law_rms": 0.000384626605,
+    "whole_ms": {
+      "mean": 5.4854554969696965,
+      "p95": 6.639845,
+      "max": 76.92639
+    },
+    "fluid_ms": {
+      "mean": 4.658430736363636,
+      "p95": 5.6293,
+      "max": 75.860677
+    },
+    "rapier_ms": {
+      "mean": 0.7320425848484848,
+      "p95": 0.966633,
+      "max": 1.085237
+    },
+    "diagnostic_ms": {
+      "mean": 0.09003639696969697,
+      "p95": 0.118591,
+      "max": 0.150214
+    },
+    "point_force_update_ms": {
+      "mean": 0.0010805757575757576,
+      "p95": 0.001999,
+      "max": 0.003274
+    },
+    "self_consistent_comparison": {
+      "reference": "2026-10-26-stokes-feedback/dynamics/results/stokes64-16/cells.csv",
+      "max_center_distance": 7.373186912722978e-05,
+      "max_center_distance_in_diameters": 0.0008192429903025532,
+      "mean_center_distance": 8.633840194198845e-06,
+      "max_center_distance_after_release": 7.373186912722978e-05,
+      "max_velocity_distance": 0.0001288552932013269,
+      "max_area_rel_error_difference": 2.4529e-05,
+      "note": "Center distance normalized by fixed cell diameter 0.09, not tiny reference displacement."
+    }
+  },
+  "omega05-64-r1": {
+    "completed": true,
+    "exit_code": 0,
+    "written_frames": 360,
+    "requested_frames": 360,
+    "negative_control": false,
+    "last_model_time": 6.0,
+    "run_log": "relaxed omega=0.5 64^2 64 cells 360 frames complete",
+    "allframe_max_max_area_rel_error": 0.001486434,
+    "allframe_max_max_node_jump": 0.0012815,
+    "allframe_max_max_fluid_speed": 0.005151725748,
+    "allframe_max_exchange_mismatch": 1.3e-11,
+    "allframe_max_stokes_force_law_rms": 0.000713498518,
+    "allframe_max_stokes_force_law_max_component_abs": 0.008327402767,
+    "allframe_max_solver_contacts_max": 284.0,
+    "allframe_max_non_driven_max_abs_vx": 0.043456271291,
+    "allframe_max_whole_ms": 14.867615,
+    "allframe_max_fluid_ms": 7.922582,
+    "allframe_max_rapier_ms": 8.395028,
+    "total_full_stokes_calls": 721,
+    "flow_calls_by_frame": {
+      "first": 3,
+      "subsequent_unique": [
+        2
+      ]
+    },
+    "positive_exchange_power_frames": 0,
+    "max_positive_exchange_power_mean": 0.0,
+    "first_solver_contact_frame": 1,
+    "min_driven_nondriven_gap": -4.14e-07,
+    "after_release_max_force_law_rms": 0.000585168045,
+    "whole_ms": {
+      "mean": 9.874888242424243,
+      "p95": 12.845899,
+      "max": 14.687057
+    },
+    "fluid_ms": {
+      "mean": 5.562204290909091,
+      "p95": 6.710789,
+      "max": 7.922582
+    },
+    "rapier_ms": {
+      "mean": 4.1750193424242426,
+      "p95": 7.01233,
+      "max": 7.570573
+    },
+    "diagnostic_ms": {
+      "mean": 0.12647364242424244,
+      "p95": 0.188289,
+      "max": 0.707539
+    },
+    "point_force_update_ms": {
+      "mean": 0.0044961,
+      "p95": 0.008884,
+      "max": 0.012172
+    },
+    "self_consistent_comparison": {
+      "reference": "2026-10-26-stokes-64-cells/reference-results/optimized-t4-r1/cells.csv",
+      "max_center_distance": 4.5610623027899506e-05,
+      "max_center_distance_in_diameters": 0.0005067847003099945,
+      "mean_center_distance": 2.697125597568783e-06,
+      "max_center_distance_after_release": 4.5610623027899506e-05,
+      "max_velocity_distance": 0.0005098260518804425,
+      "max_area_rel_error_difference": 3.434e-05,
+      "note": "Center distance normalized by fixed cell diameter 0.09, not tiny reference displacement."
+    },
+    "repeat_max_center_difference": 0.0
+  },
+  "omega03-64-r1": {
+    "completed": true,
+    "exit_code": 0,
+    "written_frames": 360,
+    "requested_frames": 360,
+    "negative_control": false,
+    "last_model_time": 6.0,
+    "run_log": "relaxed omega=0.3 64^2 64 cells 360 frames complete",
+    "allframe_max_max_area_rel_error": 0.001485208,
+    "allframe_max_max_node_jump": 0.001284093,
+    "allframe_max_max_fluid_speed": 0.005142157399,
+    "allframe_max_exchange_mismatch": 1.8e-11,
+    "allframe_max_stokes_force_law_rms": 0.000966240394,
+    "allframe_max_stokes_force_law_max_component_abs": 0.011692105296,
+    "allframe_max_solver_contacts_max": 284.0,
+    "allframe_max_non_driven_max_abs_vx": 0.04358561337,
+    "allframe_max_whole_ms": 81.753583,
+    "allframe_max_fluid_ms": 75.041436,
+    "allframe_max_rapier_ms": 14.933033,
+    "total_full_stokes_calls": 721,
+    "flow_calls_by_frame": {
+      "first": 3,
+      "subsequent_unique": [
+        2
+      ]
+    },
+    "positive_exchange_power_frames": 0,
+    "max_positive_exchange_power_mean": 0.0,
+    "first_solver_contact_frame": 1,
+    "min_driven_nondriven_gap": -4.14e-07,
+    "after_release_max_force_law_rms": 0.000839743548,
+    "whole_ms": {
+      "mean": 10.623676842424242,
+      "p95": 14.079621,
+      "max": 81.753583
+    },
+    "fluid_ms": {
+      "mean": 6.078823336363636,
+      "p95": 7.636168,
+      "max": 75.041436
+    },
+    "rapier_ms": {
+      "mean": 4.402101972727273,
+      "p95": 7.377366,
+      "max": 9.020283
+    },
+    "diagnostic_ms": {
+      "mean": 0.1315392696969697,
+      "p95": 0.189263,
+      "max": 0.710304
+    },
+    "point_force_update_ms": {
+      "mean": 0.003957757575757575,
+      "p95": 0.007325,
+      "max": 0.010967
+    },
+    "self_consistent_comparison": {
+      "reference": "2026-10-26-stokes-64-cells/reference-results/optimized-t4-r1/cells.csv",
+      "max_center_distance": 0.0001120112715444047,
+      "max_center_distance_in_diameters": 0.001244569683826719,
+      "mean_center_distance": 5.822301614408361e-06,
+      "max_center_distance_after_release": 0.0001120112715444047,
+      "max_velocity_distance": 0.0006210391406706991,
+      "max_area_rel_error_difference": 3.4341000000000016e-05,
+      "note": "Center distance normalized by fixed cell diameter 0.09, not tiny reference displacement."
+    },
+    "repeat_max_center_difference": 0.0
+  },
+  "omega03-64-r2": {
+    "completed": true,
+    "exit_code": 0,
+    "written_frames": 360,
+    "requested_frames": 360,
+    "negative_control": false,
+    "last_model_time": 6.0,
+    "run_log": "relaxed omega=0.3 64^2 64 cells 360 frames complete",
+    "allframe_max_max_area_rel_error": 0.001485208,
+    "allframe_max_max_node_jump": 0.001284093,
+    "allframe_max_max_fluid_speed": 0.005142157399,
+    "allframe_max_exchange_mismatch": 1.8e-11,
+    "allframe_max_stokes_force_law_rms": 0.000966240394,
+    "allframe_max_stokes_force_law_max_component_abs": 0.011692105296,
+    "allframe_max_solver_contacts_max": 284.0,
+    "allframe_max_non_driven_max_abs_vx": 0.04358561337,
+    "allframe_max_whole_ms": 52.255629,
+    "allframe_max_fluid_ms": 43.12744,
+    "allframe_max_rapier_ms": 11.932957,
+    "total_full_stokes_calls": 721,
+    "flow_calls_by_frame": {
+      "first": 3,
+      "subsequent_unique": [
+        2
+      ]
+    },
+    "positive_exchange_power_frames": 0,
+    "max_positive_exchange_power_mean": 0.0,
+    "first_solver_contact_frame": 1,
+    "min_driven_nondriven_gap": -4.14e-07,
+    "after_release_max_force_law_rms": 0.000839743548,
+    "whole_ms": {
+      "mean": 10.554842915151514,
+      "p95": 14.634253,
+      "max": 52.255629
+    },
+    "fluid_ms": {
+      "mean": 6.2577343787878785,
+      "p95": 7.954056,
+      "max": 43.12744
+    },
+    "rapier_ms": {
+      "mean": 4.142191324242424,
+      "p95": 6.741815,
+      "max": 11.932957
+    },
+    "diagnostic_ms": {
+      "mean": 0.14277541515151515,
+      "p95": 0.186751,
+      "max": 6.183841
+    },
+    "point_force_update_ms": {
+      "mean": 0.004225342424242424,
+      "p95": 0.007588,
+      "max": 0.014819
+    },
+    "self_consistent_comparison": {
+      "reference": "2026-10-26-stokes-64-cells/reference-results/optimized-t4-r1/cells.csv",
+      "max_center_distance": 0.0001120112715444047,
+      "max_center_distance_in_diameters": 0.001244569683826719,
+      "mean_center_distance": 5.822301614408361e-06,
+      "max_center_distance_after_release": 0.0001120112715444047,
+      "max_velocity_distance": 0.0006210391406706991,
+      "max_area_rel_error_difference": 3.4341000000000016e-05,
+      "note": "Center distance normalized by fixed cell diameter 0.09, not tiny reference displacement."
+    }
+  },
+  "omega05-64-r2": {
+    "completed": true,
+    "exit_code": 0,
+    "written_frames": 360,
+    "requested_frames": 360,
+    "negative_control": false,
+    "last_model_time": 6.0,
+    "run_log": "relaxed omega=0.5 64^2 64 cells 360 frames complete",
+    "allframe_max_max_area_rel_error": 0.001486434,
+    "allframe_max_max_node_jump": 0.0012815,
+    "allframe_max_max_fluid_speed": 0.005151725748,
+    "allframe_max_exchange_mismatch": 1.3e-11,
+    "allframe_max_stokes_force_law_rms": 0.000713498518,
+    "allframe_max_stokes_force_law_max_component_abs": 0.008327402767,
+    "allframe_max_solver_contacts_max": 284.0,
+    "allframe_max_non_driven_max_abs_vx": 0.043456271291,
+    "allframe_max_whole_ms": 118.956605,
+    "allframe_max_fluid_ms": 111.539936,
+    "allframe_max_rapier_ms": 12.048857,
+    "total_full_stokes_calls": 721,
+    "flow_calls_by_frame": {
+      "first": 3,
+      "subsequent_unique": [
+        2
+      ]
+    },
+    "positive_exchange_power_frames": 0,
+    "max_positive_exchange_power_mean": 0.0,
+    "first_solver_contact_frame": 1,
+    "min_driven_nondriven_gap": -4.14e-07,
+    "after_release_max_force_law_rms": 0.000585168045,
+    "whole_ms": {
+      "mean": 10.539460803030304,
+      "p95": 16.953187,
+      "max": 118.956605
+    },
+    "fluid_ms": {
+      "mean": 6.268135003030303,
+      "p95": 10.34294,
+      "max": 111.539936
+    },
+    "rapier_ms": {
+      "mean": 4.132439196969697,
+      "p95": 6.897126,
+      "max": 12.048857
+    },
+    "diagnostic_ms": {
+      "mean": 0.12815525454545457,
+      "p95": 0.18702,
+      "max": 2.081383
+    },
+    "point_force_update_ms": {
+      "mean": 0.003855657575757576,
+      "p95": 0.007302,
+      "max": 0.013301
+    },
+    "self_consistent_comparison": {
+      "reference": "2026-10-26-stokes-64-cells/reference-results/optimized-t4-r1/cells.csv",
+      "max_center_distance": 4.5610623027899506e-05,
+      "max_center_distance_in_diameters": 0.0005067847003099945,
+      "mean_center_distance": 2.697125597568783e-06,
+      "max_center_distance_after_release": 4.5610623027899506e-05,
+      "max_velocity_distance": 0.0005098260518804425,
+      "max_area_rel_error_difference": 3.434e-05,
+      "note": "Center distance normalized by fixed cell diameter 0.09, not tiny reference displacement."
+    }
+  },
+  "omega1-64-negative": {
+    "completed": false,
+    "exit_code": 1,
+    "written_frames": 15,
+    "requested_frames": 32,
+    "negative_control": true,
+    "last_model_time": 0.25,
+    "run_log": "Error: \"frame 16 exchange mismatch 0.0000027010929870365083\"",
+    "allframe_max_max_area_rel_error": 0.00038142,
+    "allframe_max_max_node_jump": 0.006463945,
+    "allframe_max_max_fluid_speed": 1235.148084008104,
+    "allframe_max_exchange_mismatch": 3.67462e-07,
+    "allframe_max_stokes_force_law_rms": 1013.542273897779,
+    "allframe_max_stokes_force_law_max_component_abs": 1909.601801797678,
+    "allframe_max_solver_contacts_max": 364.0,
+    "allframe_max_non_driven_max_abs_vx": 0.899219572544,
+    "allframe_max_whole_ms": 15.391454,
+    "allframe_max_fluid_ms": 7.816662,
+    "allframe_max_rapier_ms": 8.744749,
+    "total_full_stokes_calls": 31,
+    "flow_calls_by_frame": {
+      "first": 3,
+      "subsequent_unique": [
+        2
+      ]
+    },
+    "positive_exchange_power_frames": 11,
+    "max_positive_exchange_power_mean": 4894872.203153554,
+    "first_solver_contact_frame": 1,
+    "min_driven_nondriven_gap": 0.006589892,
+    "after_release_max_force_law_rms": null,
+    "old_lagged_common_field_check": {
+      "frames.csv": {
+        "compared_rows": 15,
+        "common_non_timing_fields": 23,
+        "row_count_available": true,
+        "all_common_values_identical": true,
+        "first_mismatch": null
+      },
+      "cells.csv": {
+        "compared_rows": 960,
+        "common_non_timing_fields": 12,
+        "row_count_available": true,
+        "all_common_values_identical": true,
+        "first_mismatch": null
+      }
+    }
+  }
+}

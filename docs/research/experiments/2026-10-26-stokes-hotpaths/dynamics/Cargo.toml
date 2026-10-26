@@ -1,0 +1,14 @@
+[package]
+name = "stokes-hotpaths-dynamics"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+[dependencies]
+rapier2d = "=0.36.1"
+baseline_stokes_solver = { path = "../baseline" }
+stokes_hotpath_solver = { path = "../solver" }
+
+[features]
+optimized = []

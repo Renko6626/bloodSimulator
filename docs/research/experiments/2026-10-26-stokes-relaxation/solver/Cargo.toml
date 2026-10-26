@@ -1,0 +1,24 @@
+[package]
+name = "stokes_relaxation_solver"
+version = "0.0.0"
+edition = "2021"
+
+[dependencies]
+rayon = "=1.12.0"
+
+[lib]
+path = "lib.rs"
+
+[workspace]
+
+[[bin]]
+name = "static_probe"
+path = "probe.rs"
+
+[[bin]]
+name = "numerical_check"
+path = "numerical_check.rs"
+
+[[bin]]
+name = "frozen_probe"
+path = "frozen_probe.rs"

@@ -1,0 +1,10 @@
+[package]
+name = "stokes-relaxation-dynamics"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+[dependencies]
+rapier2d = "=0.36.1"
+stokes_relaxation_solver = { path = "../solver" }

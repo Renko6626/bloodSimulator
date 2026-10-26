@@ -10,24 +10,13 @@
 
 器官目前是位置与视觉样板，战斗、治疗关卡和远处区域演化尚未实现。原跑道形单回路实验场仍可单独启动。
 
-- [2026-10-23 进展存档](docs/superpowers/plans/2026-10-23-progress-checkpoint.md)：可运行功能、研究结论、已确认方向和后续未决事项。
-- [有限阻力 Stokes 反馈实验](docs/research/2026-10-26-stokes-feedback.md)：真实软体与 LBM 对照；16 细胞、32² 一次更新方案整步均值 2.26 ms、p95 3.25 ms，64² 仍超预算，尚未接入正式游戏。
-- [Rayon 并行更新实验](docs/research/2026-10-26-stokes-rayon.md)：四线程在 64²/16 细胞下净加速约 1.14 倍，均值 5.61 ms、p95 7.22 ms；数值与串行一致，但仍超预算并出现更大尖峰。
-- [性能诊断与粒子数对照](docs/superpowers/plans/2026-10-22-performance-audit.md)：耗时归属、20/16/12 粒子测量与流速优化候选。
-- [低雷诺数流体路线调研](docs/research/2026-10-22-low-re-flow.md)：Stokes、LBM、边界积分与 Rapier 耦合的取舍；推荐原型及待决事项。
-- [MAC + Stokes 专项实验](docs/research/2026-10-22-mac-stokes-experiment.md)：真实速度—压力求解、精度收敛、两种解法的耗时及流固耦合接口核查；尚未接入游戏。
-- [简化细胞耦合与不规则边界实验](docs/research/2026-10-23-coupling-experiment.md)：少量阻力点、圆膜参照及体积惩罚的误差和成本；优先局部带流与受阻近似。
-- [LBM 与少量阻力点对照](docs/research/2026-10-23-lbm-experiment.md)：直管、曲墙、逐格步反馈及固定传播索引优化；32² 小域候选，整步 5 ms 尚未验证。
-- [LBM 单细胞动态实验](docs/research/2026-10-23-lbm-dynamics.md)：移动核、周期跨界、Rapier 挤压恢复及 f32 对照；单细胞 p95 仍在 5 ms 附近。
-- [LBM 核复用与 4 / 16 细胞实验](docs/research/2026-10-23-lbm-scale.md)：优化前后轨迹一致，16 细胞平均约 4.87 ms、p95 约 5.91 ms；主要耗时仍在流体阶段。
-- [16–128 细胞规模与分级模拟](docs/research/2026-10-23-many-cells-and-lod.md)：等密度扩展与固定小网格两组实测，区分流体覆盖和活跃细胞成本；建议先采用近处详细、远处区域指标两层。
-- [世界小地图设计](docs/superpowers/specs/2026-10-22-world-small-map-design.md)：已确认的地图、循环、流速与镜头方案。
-- [本轮实施计划与结果](docs/superpowers/plans/2026-10-22-world-small-map.md)：接口、分工、性能测量和限制。
-- [整体架构](docs/superpowers/specs/2026-10-21-world-architecture-design.md)：大地图、区域与抽象指标的长期结构，以及当前原型的实际落地。
-- [小型体循环计划与实施记录](docs/superpowers/plans/2026-10-22-small-circulation-prototype.md)：此前单回路原型的参数与软体实验结果。
-- [设计草案](docs/superpowers/specs/2026-10-19-blood-simulator-design.md)：已确认的玩法、模拟范围、技术边界及待决事项。
-- [首轮工程计划](docs/superpowers/plans/2026-10-19-engine-foundation.md)：工程接通、软体实验场和网络驱动的实施顺序。
-- [实施记录](docs/superpowers/plans/2026-10-20-implementation-log.md)：实际版本、接口、验证结果和限制。
+流体研究目前以点力欠松弛 Stokes 为候选：64² 网格、64 细胞的六秒实验已完成，整步均值约 10 ms，仍未达到 5 ms 目标；尚未接入正式游戏。
+
+- [当前状态与待办](docs/STATUS.md)：统一维护阶段结论、下一步优先级与待确认事项。
+- [流体研究索引](docs/research/README.md)：最新欠松弛结果，以及 Stokes、Rayon、LBM 等历史实验与原始数据。
+- [世界小地图设计](docs/superpowers/specs/2026-10-22-world-small-map-design.md)与[实施记录](docs/superpowers/plans/2026-10-22-world-small-map.md)：已确认的地图、流速、镜头与实现限制。
+- [整体架构](docs/superpowers/specs/2026-10-21-world-architecture-design.md)与[玩法设计草案](docs/superpowers/specs/2026-10-19-blood-simulator-design.md)。
+- [正式原型性能诊断](docs/superpowers/plans/2026-10-22-performance-audit.md)：72 个细胞的节点数对照与流速查询开销。
 
 ![世界小地图全景](docs/images/world-12-particles-overview.png)
 

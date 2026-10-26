@@ -1,0 +1,10 @@
+{
+  "16": {
+    "final_norm_ratio": 0.4787408996344,
+    "zero_velocity_self_consistent_control": "asserted exactly zero by Rust probe"
+  },
+  "64": {
+    "final_norm_ratio": 1.820525449251,
+    "zero_velocity_self_consistent_control": "asserted exactly zero by Rust probe"
+  }
+}

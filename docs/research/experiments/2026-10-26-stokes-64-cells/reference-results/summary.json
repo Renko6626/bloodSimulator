@@ -1,0 +1,47 @@
+{
+  "backend": "stokes",
+  "runs": {
+    "optimized-t4-r1": {
+      "completed": true,
+      "exit_code": 0,
+      "written_frames": 360,
+      "last_model_time": 6.0,
+      "log": "stokes 64^2 64 cells 360 frames complete",
+      "first_solver_contact_frame": 1,
+      "max_area_rel_error": 0.001483982,
+      "max_node_jump": 0.001279712,
+      "max_fluid_speed": 0.005162110311,
+      "exchange_mismatch": 1.3e-11,
+      "stokes_force_law_rms": 7e-12,
+      "solver_contacts_max": 284.0,
+      "diagnostic_ms": {
+        "mean": 0.11518862121212121,
+        "p95": 0.176155,
+        "max": 0.285101
+      },
+      "fluid_ms": {
+        "mean": 36.984803254545454,
+        "p95": 43.152354,
+        "max": 181.372816
+      },
+      "rapier_ms": {
+        "mean": 3.812085521212121,
+        "p95": 5.825937,
+        "max": 8.861187
+      },
+      "whole_ms": {
+        "mean": 40.922156851515155,
+        "p95": 48.913904,
+        "max": 190.537341
+      }
+    }
+  },
+  "pooled_successful_whole_ms": {
+    "optimized-t4": {
+      "mean": 40.922156851515155,
+      "p95": 48.913904,
+      "max": 190.537341
+    }
+  },
+  "non_timing_outputs_identical_across_runs": true
+}

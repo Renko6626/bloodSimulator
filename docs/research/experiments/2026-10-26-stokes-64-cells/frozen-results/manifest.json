@@ -1,0 +1,32 @@
+{
+  "note": "Frozen frame-1 geometry; all marker velocities zero; background force removed after seeding. Not a timing benchmark.",
+  "source_sha256": "b95db1acc7f771ab8cf7cf4a482cb619454f1120516928c460817ac3c9c69dd0",
+  "runs": [
+    {
+      "count": 16,
+      "command": [
+        "flock",
+        "/tmp/blood-stokes-feedback-bench.lock",
+        "taskset",
+        "-c",
+        "2-5",
+        "/tmp/sunyunbo/blood-stokes-rayon-target/release/frozen_feedback",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-26-stokes-hotpaths/results/optimized-n64-t4-r1/outlines.csv"
+      ],
+      "input_sha256": "cf2bd410e9e5ad774c79785702c4b2c131356bcde378c43deaae7fe494c9213c"
+    },
+    {
+      "count": 64,
+      "command": [
+        "flock",
+        "/tmp/blood-stokes-feedback-bench.lock",
+        "taskset",
+        "-c",
+        "2-5",
+        "/tmp/sunyunbo/blood-stokes-rayon-target/release/frozen_feedback",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-26-stokes-64-cells/results/optimized-t4-r1/outlines.csv"
+      ],
+      "input_sha256": "8931f77accab6f49edb169c9028cdf7af16c029afdf8ba1b1e35384373d156cb"
+    }
+  ]
+}

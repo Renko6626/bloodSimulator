@@ -1,0 +1,14 @@
+[package]
+name = "stokes-64-cells-dynamics"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+[dependencies]
+rapier2d = "=0.36.1"
+baseline_stokes_solver = { path = "../../2026-10-26-stokes-hotpaths/baseline" }
+stokes_hotpath_solver = { path = "../../2026-10-26-stokes-hotpaths/solver" }
+
+[features]
+optimized = []
