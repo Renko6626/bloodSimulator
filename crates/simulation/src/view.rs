@@ -21,4 +21,5 @@ pub struct Snapshot {
     pub flow: Flow,
     /// Per-edge flow rates in a world map; empty in the original loop lab.
     pub branch_flows: Vec<f32>,
+    pub fluid: Option<crate::FluidStats>,
 }

@@ -1,0 +1,36 @@
+{
+  "control": "16x16 / 32\u00b2 / h=0.5; original centers; zero timesteps",
+  "sources_sha256": {
+    "diagnose.py": "bfc464ff9ea6ac8f7d828685f305e5a795afed1b966e69c4280955ba734d00ff",
+    "driver_audit.rs": "5afe5990ea6c49e75c380875eb7b875ed57e8d6db107b5168aaa694ae5bb7f9b",
+    "run.py": "3e89878c61fb9ffd2b7d75e8424b4de1cb474e80a49688ba38097ab2ec18a123"
+  },
+  "temporary_workspace": "/tmp/sunyunbo/blood-window-driver-audit-ejj1lgwk/control",
+  "exit_code": 0,
+  "build_command": [
+    "cargo",
+    "build",
+    "--release",
+    "--offline",
+    "--locked",
+    "--manifest-path",
+    "/tmp/sunyunbo/blood-window-driver-audit-ejj1lgwk/control/Cargo.toml",
+    "-p",
+    "simulation",
+    "--example",
+    "driver_audit",
+    "--target-dir",
+    "/tmp/sunyunbo/blood-stokes-rayon-target",
+    "-j",
+    "4"
+  ],
+  "binary_sha256": "4170f2e01386aeda1483353371fe8a4bba48c4af6607d266a6a6d23f52e78ffc",
+  "run_command": [
+    "flock",
+    "/tmp/blood-stokes-feedback-bench.lock",
+    "taskset",
+    "-c",
+    "2-5",
+    "/tmp/sunyunbo/blood-stokes-rayon-target/release/examples/driver_audit"
+  ]
+}

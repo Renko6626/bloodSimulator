@@ -1,0 +1,10 @@
+   Compiling simulation v0.1.0 (/tmp/sunyunbo/blood-six-sample-wfshxmx1/twelve/crates/simulation)
+    Finished `release` profile [optimized] target(s) in 1.76s
+     Running unittests src/lib.rs (/tmp/sunyunbo/blood-stokes-rayon-target/release/deps/simulation-fce3c7a07e510660)
+
+running 2 tests
+test cell::uniform_drag_check::uniform_flow_keeps_full_ring_response ... ok
+test cell::tests::compressed_cell_preserves_area_and_recovers_after_release ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.05s
+

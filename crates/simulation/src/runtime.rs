@@ -4,6 +4,7 @@ use crate::{
         self, Flow, Network,
         graph::{self, GraphFlow, GraphNetwork},
     },
+    fluid::{self, LocalRegions},
     map::{MapDefinition, MapGeometry},
     robot,
     vessel::Vessel,
@@ -92,6 +93,7 @@ pub struct Simulation {
     steps: u64,
     paused: bool,
     solve_ms: f64,
+    local_fluid: Option<LocalRegions>,
 }
 
 impl Default for Simulation {
@@ -130,6 +132,27 @@ impl Simulation {
                 flow,
             },
         )
+    }
+
+    /// Two precomputed 64² Stokes regions covering the first fork and upper arm.
+    pub fn new_local_world(config: Config) -> Self {
+        let mut sim = Self::new_world(config);
+        let Environment::World { map, network, .. } = &sim.environment else {
+            unreachable!()
+        };
+        let mut fluid = LocalRegions::new(
+            map,
+            &network.solve(1.0),
+            sim.config.viscosity,
+            sim.cells.len(),
+        )
+        .expect("construct local Stokes regions");
+        fluid.prepare_pressure(sim.config.pressure);
+        sim.physics
+            .integration_parameters
+            .normalized_prediction_distance = 0.0311;
+        sim.local_fluid = Some(fluid);
+        sim
     }
 
     fn build(config: Config, environment: Environment) -> Self {
@@ -188,6 +211,7 @@ impl Simulation {
             steps: 0,
             paused: false,
             solve_ms: 0.0,
+            local_fluid: None,
         }
     }
 
@@ -237,8 +261,10 @@ impl Simulation {
 
     pub fn reset(&mut self) {
         let paused = self.paused;
+        let local = self.local_fluid.is_some();
         *self = match self.environment {
             Environment::Loop { .. } => Self::new(self.config.clone()),
+            Environment::World { .. } if local => Self::new_local_world(self.config.clone()),
             Environment::World { .. } => Self::new_world(self.config.clone()),
         };
         self.paused = paused;
@@ -246,16 +272,41 @@ impl Simulation {
 
     fn step(&mut self, input: MoveInput) {
         let started = Instant::now();
+        crate::threading::install(|| self.step_inner(input));
+        self.solve_ms = started.elapsed().as_secs_f64() * 1000.0;
+    }
+
+    fn step_inner(&mut self, input: MoveInput) {
         let time = self.steps as f32 * self.config.dt;
         let pressure = self.config.pressure
             * (1.0 + 0.15 * (std::f32::consts::TAU * self.config.pulse_hz * time).sin());
         self.environment.update(pressure);
+        if let Some(fluid) = &mut self.local_fluid {
+            fluid.begin_frame();
+            fluid.prepare_pressure(pressure);
+        }
         let dt = self.config.dt / self.config.substeps as f32;
         self.physics.integration_parameters.dt = dt;
         for _ in 0..self.config.substeps {
-            let flow_velocity = self
+            if let Some(fluid) = &mut self.local_fluid {
+                fluid
+                    .prepare_step(
+                        &self.physics,
+                        &self.cells,
+                        self.robot,
+                        self.config.cell_drag,
+                        self.config.cell_radius,
+                    )
+                    .expect("prepare local Stokes region");
+            }
+            let mut flow_velocity = self
                 .environment
                 .velocity_at(self.physics.bodies[self.robot].translation());
+            if let Some(fluid) = &self.local_fluid {
+                let position = self.physics.bodies[self.robot].translation();
+                let weight = fluid.weight(position, 0.85);
+                flow_velocity = flow_velocity * (1.0 - weight) + fluid.sample(position) * weight;
+            }
             robot::drive(
                 &mut self.physics.bodies[self.robot],
                 input,
@@ -263,17 +314,34 @@ impl Simulation {
                 &self.config,
             );
             for &handle in &self.cells {
+                let local_weight = self.local_fluid.as_ref().map_or(0.0, |local| {
+                    local.weight(
+                        fluid::center(&self.physics.soft_bodies[handle]),
+                        self.config.cell_radius,
+                    )
+                });
                 cell::advect(
                     &mut self.physics.soft_bodies[handle],
-                    self.config.cell_drag,
+                    self.config.cell_drag * (1.0 - local_weight),
                     dt,
                     |position| self.environment.velocity_at(position),
                 );
             }
+            if let Some(fluid) = &mut self.local_fluid {
+                fluid
+                    .advance(
+                        &mut self.physics,
+                        &self.cells,
+                        self.robot,
+                        dt,
+                        self.config.cell_drag,
+                        self.config.cell_radius,
+                    )
+                    .expect("local Stokes step");
+            }
             self.physics.step();
         }
         self.steps += 1;
-        self.solve_ms = started.elapsed().as_secs_f64() * 1000.0;
     }
 
     pub fn snapshot(&self) -> Snapshot {
@@ -289,6 +357,20 @@ impl Simulation {
                         .count()
             })
             .sum();
+        let mut arrows = self.environment.arrows();
+        if let Some(fluid) = &self.local_fluid {
+            arrows.extend(fluid.positions().map(|position| FlowArrow {
+                position: position.to_array(),
+                velocity: [0.0; 2],
+            }));
+            for arrow in &mut arrows {
+                let position = Vector::from_array(arrow.position);
+                let weight = fluid.weight(position, 0.7);
+                let velocity = self.environment.velocity_at(position) * (1.0 - weight)
+                    + fluid.sample(position) * weight;
+                arrow.velocity = velocity.to_array();
+            }
+        }
         Snapshot {
             robot: self.physics.bodies[self.robot].translation().to_array(),
             cells: self
@@ -301,7 +383,7 @@ impl Simulation {
                         .collect()
                 })
                 .collect(),
-            arrows: self.environment.arrows(),
+            arrows,
             steps: self.steps,
             time: self.steps as f32 * self.config.dt,
             paused: self.paused,
@@ -312,6 +394,7 @@ impl Simulation {
                 Environment::World { flow, .. } => flow.rates.clone(),
                 Environment::Loop { .. } => Vec::new(),
             },
+            fluid: self.local_fluid.as_ref().map(|f| f.stats().clone()),
         }
     }
 }
@@ -351,4 +434,72 @@ fn world_cell_centers(map: &MapDefinition, config: &Config) -> Vec<Vector> {
     (0..config.cell_count)
         .map(|i| candidates[i * candidates.len() / config.cell_count])
         .collect()
+}
+
+#[cfg(test)]
+mod region_tests {
+    use super::*;
+
+    #[test]
+    fn region_handoff_reuses_bodies_and_preparation_applies_no_impulse() {
+        let mut sim = Simulation::new_local_world(Config::default());
+        for _ in 0..8 {
+            sim.tick(MoveInput::default());
+        }
+        let handles = sim.cells.clone();
+        let map = sim.world_map().unwrap().clone();
+        let initial_bounds = sim.snapshot().fluid.unwrap().bounds;
+        let upper = map.edge_point(1, map.edge_length(1) * 0.5, 0.0);
+        for position in [upper, Vector::new(-16.0, 0.0)] {
+            sim.physics.bodies[sim.robot].set_translation(position, true);
+            let before: Vec<_> = handles
+                .iter()
+                .flat_map(|&h| {
+                    sim.physics.soft_bodies[h]
+                        .particle_positions()
+                        .zip(sim.physics.soft_bodies[h].particle_velocities())
+                })
+                .collect();
+            let robot_velocity = sim.physics.bodies[sim.robot].linvel();
+            sim.local_fluid
+                .as_mut()
+                .unwrap()
+                .prepare_step(
+                    &sim.physics,
+                    &sim.cells,
+                    sim.robot,
+                    sim.config.cell_drag,
+                    sim.config.cell_radius,
+                )
+                .unwrap();
+            let after: Vec<_> = handles
+                .iter()
+                .flat_map(|&h| {
+                    sim.physics.soft_bodies[h]
+                        .particle_positions()
+                        .zip(sim.physics.soft_bodies[h].particle_velocities())
+                })
+                .collect();
+            assert_eq!(
+                before, after,
+                "field preparation must not move or impulse cells"
+            );
+            assert_eq!(robot_velocity, sim.physics.bodies[sim.robot].linvel());
+            assert_eq!(handles, sim.cells);
+            let fluid = sim.local_fluid.as_ref().unwrap();
+            assert!(fluid.weight(position, 0.85) > 0.99);
+            if position == upper {
+                assert_ne!(fluid.stats().bounds, initial_bounds);
+            } else {
+                assert_eq!(fluid.stats().bounds, initial_bounds);
+            }
+            let selected = fluid.stats().bounds;
+            sim.tick(MoveInput::default());
+            let stats = sim.snapshot().fluid.unwrap();
+            assert_eq!(stats.bounds, selected);
+            assert!(stats.divergence_rms < 1e-8);
+            assert!(stats.momentum_rms < 1e-8);
+            assert!(stats.exchange_error < 1e-7);
+        }
+    }
 }

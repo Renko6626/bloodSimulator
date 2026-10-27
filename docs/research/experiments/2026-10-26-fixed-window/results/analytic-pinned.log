@@ -1,0 +1,17 @@
+world nodes=11, edges=12, wall segments=3346, floor triangles=102110, init=153.4ms
+cells=72, simulated=1.0s, wall_time=0.67s
+distance min/median/max=1.022/2.648/2.925
+edge 0 downstream crossings: []
+edge 1 downstream crossings: [(2, 1)]
+edge 2 downstream crossings: []
+edge 3 downstream crossings: []
+edge 4 downstream crossings: []
+edge 5 downstream crossings: []
+edge 6 downstream crossings: []
+edge 7 downstream crossings: [(8, 1)]
+edge 8 downstream crossings: [(9, 1)]
+edge 9 downstream crossings: []
+edge 10 downstream crossings: []
+edge 11 downstream crossings: []
+soft-contact steps=0/60, max area error=1.20%, max bbox aspect=1.616, max wall overshoot=0.0000
+solve mean/p95/max=8.376/9.414/10.698 ms

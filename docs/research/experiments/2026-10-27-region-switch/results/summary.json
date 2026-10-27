@@ -1,0 +1,149 @@
+{
+  "frames": 1200,
+  "switches": 6.0,
+  "initialization_ms": 353.427,
+  "max_process_rss_kib": 38168,
+  "whole_ms": {
+    "mean": 8.418646156666666,
+    "p95": 11.284855,
+    "max": 25.906393
+  },
+  "fluid_ms": {
+    "mean": 2.7849495341666666,
+    "p95": 4.659769,
+    "max": 9.805935
+  },
+  "switch_frame_whole_ms": {
+    "mean": 11.330253666666668,
+    "p95": 16.234327,
+    "max": 16.234327
+  },
+  "handoff_ms": {
+    "mean": 3.002448333333333,
+    "p95": 4.513153,
+    "max": 4.513153
+  },
+  "handoff_local_velocity_delta": {
+    "mean": 0.14399086933333333,
+    "p95": 0.178900674,
+    "max": 0.178900674
+  },
+  "max_frame_diagnostics": {
+    "divergence": 3.349060876229754e-14,
+    "momentum": 3.2953509306536984e-14,
+    "exchange": 8.059971104439886e-10,
+    "area_error": 0.019968262,
+    "wall_overshoot": 0.0
+  },
+  "switch_events": [
+    {
+      "frame": 184.0,
+      "whole_ms": 9.949522,
+      "fluid_ms": 5.377541,
+      "robot_x": -9.439020157,
+      "robot_y": -4.54117775,
+      "target": 2.0,
+      "min_x": -18.0,
+      "min_y": -16.0,
+      "switches": 1.0,
+      "handoff_ms": 3.423623,
+      "velocity_delta": 0.088576555,
+      "divergence": 2.555985487313658e-14,
+      "momentum": 2.524418205634055e-14,
+      "exchange": 9.189864529606856e-11,
+      "area_error": 0.002660074,
+      "wall_overshoot": 0.0
+    },
+    {
+      "frame": 351.0,
+      "whole_ms": 9.389214,
+      "fluid_ms": 4.359369,
+      "robot_x": -11.034090996,
+      "robot_y": -3.47580719,
+      "target": 4.0,
+      "min_x": -22.0,
+      "min_y": -8.0,
+      "switches": 1.0,
+      "handoff_ms": 1.734189,
+      "velocity_delta": 0.158906311,
+      "divergence": 2.4132892531659456e-14,
+      "momentum": 2.6536684693294317e-14,
+      "exchange": 8.546918607571936e-11,
+      "area_error": 0.00368082,
+      "wall_overshoot": 0.0
+    },
+    {
+      "frame": 558.0,
+      "whole_ms": 11.958192,
+      "fluid_ms": 6.402173,
+      "robot_x": -9.441262245,
+      "robot_y": -4.541318893,
+      "target": 2.0,
+      "min_x": -18.0,
+      "min_y": -16.0,
+      "switches": 1.0,
+      "handoff_ms": 4.12,
+      "velocity_delta": 0.164055586,
+      "divergence": 3.245120691155821e-14,
+      "momentum": 3.172624243459408e-14,
+      "exchange": 3.448512413106099e-11,
+      "area_error": 0.002134444,
+      "wall_overshoot": 0.0
+    },
+    {
+      "frame": 726.0,
+      "whole_ms": 16.234327,
+      "fluid_ms": 9.31078,
+      "robot_x": -11.08391571,
+      "robot_y": -3.446563959,
+      "target": 4.0,
+      "min_x": -22.0,
+      "min_y": -8.0,
+      "switches": 1.0,
+      "handoff_ms": 4.513153,
+      "velocity_delta": 0.178900674,
+      "divergence": 2.4188523794520812e-14,
+      "momentum": 2.62994809262533e-14,
+      "exchange": 2.53302896226318e-10,
+      "area_error": 0.006657983,
+      "wall_overshoot": 0.0
+    },
+    {
+      "frame": 932.0,
+      "whole_ms": 8.113173,
+      "fluid_ms": 3.011119,
+      "robot_x": -9.435018539,
+      "robot_y": -4.548904896,
+      "target": 2.0,
+      "min_x": -18.0,
+      "min_y": -16.0,
+      "switches": 1.0,
+      "handoff_ms": 1.020772,
+      "velocity_delta": 0.107743189,
+      "divergence": 2.6125903840306804e-14,
+      "momentum": 2.5731870824087886e-14,
+      "exchange": 1.6784569229988486e-10,
+      "area_error": 0.002129004,
+      "wall_overshoot": 0.0
+    },
+    {
+      "frame": 1099.0,
+      "whole_ms": 12.337094,
+      "fluid_ms": 6.263024,
+      "robot_x": -11.032973289,
+      "robot_y": -3.477147341,
+      "target": 4.0,
+      "min_x": -22.0,
+      "min_y": -8.0,
+      "switches": 1.0,
+      "handoff_ms": 3.202953,
+      "velocity_delta": 0.165762901,
+      "divergence": 2.3409972712522113e-14,
+      "momentum": 2.5281444954155985e-14,
+      "exchange": 1.3530713822008196e-10,
+      "area_error": 0.004508485,
+      "wall_overshoot": 0.0
+    }
+  ],
+  "current_sources_match": true
+}

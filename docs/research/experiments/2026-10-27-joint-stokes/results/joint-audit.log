@@ -1,0 +1,36 @@
+   Compiling simulation v0.1.0 (/tmp/sunyunbo/blood-joint-stokes-lgb39su4/joint/crates/simulation)
+    Finished `release` profile [optimized] target(s) in 5.03s
+     Running unittests src/lib.rs (/tmp/sunyunbo/blood-stokes-rayon-target/release/deps/simulation-55fc4373fa76af32)
+
+running 5 tests
+FACTOR,1,56,298,4768,291184
+FACTOR,0,72,422,6752,478322
+FACTOR,1,240,1976,31616,1236887
+JOINT_FACTOR,192,1056,383630,607707,1029407,1599
+JOINT_SETUP_NS,1097826
+FACTOR,0,272,2323,37168,1536772
+test fluid::tests::equal_open_pressures_rest_and_closed_component_is_rejected ... ok
+JOINT_FACTOR,768,4416,889971,3887071,4858612,6207
+JOINT_SETUP_NS,5036229
+test fluid::tests::open_channel_matches_poiseuille_and_preserves_pressure_reference ... ok
+FACTOR,1,2458,31247,499952,30158130
+FACTOR,1,2458,31247,499952,30713963
+FACTOR,0,2458,30507,488112,32017102
+FACTOR,0,2458,30507,488112,32068474
+FACTOR,0,2458,30507,488112,24330808
+FACTOR,1,2458,31247,499952,26373518
+JOINT_FACTOR,7400,43502,7198302,104059921,112905292,59263
+JOINT_SETUP_NS,113878276
+fork init=146.729503ms solve=1.370629ms CG=0 div=0.0000000000000017243676235080996 momentum=0.0000000000000022788796402502497 net=-0.0000000000000034257834967355985
+JOINT_FACTOR,7400,43502,8684673,105003993,115816484,59263
+JOINT_SETUP_NS,116788786
+test fluid::tests::real_fork_conserves_opening_flux_and_solves_true_stokes_residuals ... ok
+JOINT_FACTOR,7400,43502,6644220,88509512,96182755,59263
+JOINT_SETUP_NS,98760399
+COMPARE velocity_max_abs=1.52655665885959024e-15 matrix_residual_max_abs=6.74460487459782598e-15
+test fluid::grid::inverse_comparison::fork_speed_inverse_matches_band_and_original_matrix ... ok
+JOINT_AUDIT roundtrip_max_abs=5.34017274844700296e-14 cg_velocity_max_abs=2.61562406282667137e-10 cg_pressure_max_abs=1.50503513818289747e-9 divergence_rms_max=3.48619032895959915e-16 momentum_rms_max=5.66732634021110352e-16
+test fluid::grid::joint_audit::joint_matches_original_block_operator_and_strict_cg ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.19s
+

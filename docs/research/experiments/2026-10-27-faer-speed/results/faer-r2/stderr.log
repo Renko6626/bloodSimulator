@@ -1,0 +1,6 @@
+FAER_KERNEL,"simplicial",numeric_entries=28785,solve_scratch_bytes=19775
+FACTOR,1,2458,28785,230280,4292972
+FAER_KERNEL,"simplicial",numeric_entries=28646,solve_scratch_bytes=19775
+FACTOR,0,2458,28646,229168,4935043
+INIT_NS,181463489
+MAX_RSS_KIB,15876

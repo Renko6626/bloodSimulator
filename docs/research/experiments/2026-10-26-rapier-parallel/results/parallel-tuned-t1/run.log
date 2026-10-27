@@ -1,0 +1,2 @@
+rapier_parallel=true rapier_threads=1 prediction=0.002
+relaxed omega=0.5 64^2 64 cells 360 frames complete

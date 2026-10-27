@@ -1,0 +1,60 @@
+    Checking simulation v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/simulation)
+    Checking godot_bridge v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/godot_bridge)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.41s
+   Compiling simulation v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/simulation)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.17s
+     Running unittests src/lib.rs (target/debug/deps/simulation-cae6b4a1adf893e3)
+
+running 7 tests
+test circulation::graph::tests::series_parallel_loop_obeys_pressures_conservation_and_scaling ... ok
+test circulation::graph::tests::velocity_is_static_without_head_and_smooth_near_junction ... ok
+test fluid::tests::equal_open_pressures_rest_and_closed_component_is_rejected ... ok
+test fluid::tests::open_channel_matches_poiseuille_and_preserves_pressure_reference ... ok
+test fluid::tests::real_fork_conserves_opening_flux_and_solves_true_stokes_residuals ... ok
+test cell::tests::compressed_cell_preserves_area_and_recovers_after_release ... ok
+test map::tests::fork_has_open_shared_floor_and_boundary ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.14s
+
+     Running tests/experiment.rs (target/debug/deps/experiment-9a30171d0a1b849f)
+
+running 5 tests
+test closed_loop_uses_total_resistance_and_poiseuille_profile ... ok
+test robot_has_no_coasting_and_can_easily_move_against_flow ... ok
+test pause_single_step_and_reset_use_the_same_clock ... ok
+test world_cells_pass_both_branches_and_rejoin ... ok
+test crowded_cells_advect_without_losing_area_or_crossing_walls ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.35s
+
+   Doc-tests simulation
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Compiling godot_bridge v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/godot_bridge)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.62s
+Initialize godot-rust (API v4.7.stable.official, runtime v4.7.1.stable.official, safeguards strict)
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+Initialize godot-rust (API v4.7.stable.official, runtime v4.7.1.stable.official, safeguards strict)
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+Initialize godot-rust (API v4.7.stable.official, runtime v4.7.1.stable.official, safeguards strict)
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+

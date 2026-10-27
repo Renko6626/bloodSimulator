@@ -1,0 +1,38 @@
+{
+  "completed_successfully": true,
+  "cpu_only": true,
+  "hardware_tests_run": false,
+  "runs": [
+    {
+      "name": "small64-region-0-cpu",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-1-cpu",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-cpu",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-1-cpu",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-cpu",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-1-cpu",
+      "exit_code": 0,
+      "accepted": true
+    }
+  ],
+  "notes": "Nonconvergence is a retained negative result, not a successful GPU speedup. CPU LU is f64; GPU GMRES is f32. Timings exclude Rapier/rendering."
+}

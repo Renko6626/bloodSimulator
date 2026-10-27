@@ -1,0 +1,11 @@
+{
+  "accepted": false,
+  "command": [
+    "/tmp/sunyunbo/blood-gpu-lab-target/debug/blood-gpu-stokes-lab",
+    "probe",
+    "--out",
+    "/tmp/sunyunbo/blood-gpu-probe-v1.json"
+  ],
+  "error": "software adapter rejected: llvmpipe (LLVM 15.0.7, 256 bits); use --allow-software only for functional checks",
+  "schema_version": 1
+}

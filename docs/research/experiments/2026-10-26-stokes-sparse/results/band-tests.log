@@ -1,0 +1,22 @@
+   Compiling simulation v0.1.0 (/tmp/sunyunbo/blood-stokes-sparse-_s_af8x4/band/crates/simulation)
+    Finished `release` profile [optimized] target(s) in 1.96s
+     Running unittests src/lib.rs (/tmp/sunyunbo/blood-stokes-rayon-target/release/deps/simulation-fce3c7a07e510660)
+
+running 4 tests
+FACTOR,1,56,504,4032,9604
+FACTOR,0,72,720,5760,29604
+FACTOR,1,240,4080,32640,63593
+FACTOR,0,272,4896test fluid::tests::equal_open_pressures_rest_and_closed_component_is_rejected ... ,ok39168
+,253562
+test fluid::tests::open_channel_matches_poiseuille_and_preserves_pressure_reference ... ok
+FACTOR,1,2458,142564,1140512,6929304
+FACTOR,0,2458,145022,1160176,7096783
+FACTOR,1,2458,142564,1140512,5258803
+FACTOR,0,2458,145022,1160176,7146329
+fork init=7.874835ms solve=14.64698ms CG=23 div=0.00000000024534611517086237 momentum=0.0000000000000018014462890442548 net=0.000000003220029034494499
+test fluid::tests::real_fork_conserves_opening_flux_and_solves_true_stokes_residuals ... ok
+COMPARE velocity_max_abs=0.00000000000000000e0 matrix_residual_max_abs=5.57540125178945800e-15
+test fluid::grid::inverse_comparison::fork_speed_inverse_matches_band_and_original_matrix ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.03s
+

@@ -1,0 +1,2 @@
+n,threads,omega,solver_init_ms,rapier_parallel,rapier_threads,prediction
+64,4,0.500000,0.512234000,true,4,0.002

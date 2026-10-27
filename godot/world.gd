@@ -23,7 +23,10 @@ var font := ThemeDB.fallback_font
 
 func _ready() -> void:
 	hud = $HUDLayer/HUD
-	simulation.use_world()
+	if OS.get_cmdline_user_args().has("--local-stokes"):
+		simulation.use_local_world()
+	else:
+		simulation.use_world()
 	var geometry: Dictionary = simulation.world_geometry()
 	landmarks = geometry.get("landmarks", [])
 	_build_walls(geometry.get("walls", []))

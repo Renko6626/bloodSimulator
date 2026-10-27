@@ -120,9 +120,11 @@ fn pause_single_step_and_reset_use_the_same_clock() {
     for mut sim in [
         Simulation::default(),
         Simulation::new_world(simulation::Config::default()),
+        Simulation::new_local_world(simulation::Config::default()),
     ] {
         let initial = sim.snapshot();
         let was_world = sim.world_map().is_some();
+        let had_fluid = initial.fluid.is_some();
         sim.set_paused(true);
         sim.tick(MoveInput::default());
         assert_eq!(sim.snapshot().robot, initial.robot);
@@ -130,6 +132,12 @@ fn pause_single_step_and_reset_use_the_same_clock() {
         sim.single_step(MoveInput { x: 1.0, y: 0.0 });
         assert_eq!(sim.snapshot().steps, 1);
         assert!(sim.snapshot().robot[0] > initial.robot[0]);
+        if let Some(fluid) = sim.snapshot().fluid {
+            assert!(fluid.active_cells > 0);
+            assert!(fluid.exchange_error < 1e-7);
+            assert!(fluid.divergence_rms < 1e-7);
+            assert!(fluid.momentum_rms < 1e-7);
+        }
         sim.tick(MoveInput::default());
         assert_eq!(sim.snapshot().steps, 1);
         sim.reset();
@@ -138,6 +146,7 @@ fn pause_single_step_and_reset_use_the_same_clock() {
         assert_eq!(sim.snapshot().steps, 0);
         assert!(sim.snapshot().paused);
         assert_eq!(sim.world_map().is_some(), was_world);
+        assert_eq!(sim.snapshot().fluid.is_some(), had_fluid);
         assert_eq!(sim.snapshot().branch_flows, initial.branch_flows);
     }
 }

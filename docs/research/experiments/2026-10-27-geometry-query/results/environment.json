@@ -1,0 +1,26 @@
+{
+  "cpu_model": "Intel(R) Xeon(R) Gold 6330 CPU @ 2.00GHz",
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)",
+  "cpus": [
+    {
+      "cpu": 2,
+      "core": 2,
+      "socket": 0
+    },
+    {
+      "cpu": 3,
+      "core": 3,
+      "socket": 0
+    },
+    {
+      "cpu": 4,
+      "core": 4,
+      "socket": 0
+    },
+    {
+      "cpu": 5,
+      "core": 5,
+      "socket": 0
+    }
+  ]
+}

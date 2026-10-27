@@ -1,0 +1,380 @@
+{
+  "cases": {
+    "baseline-r1": {
+      "rapier_ms": {
+        "mean": 2.313176027272727,
+        "p95": 2.788553,
+        "max": 3.953104
+      },
+      "fluid_ms": {
+        "mean": 4.713695793939394,
+        "p95": 6.396792,
+        "max": 9.928328
+      },
+      "diagnostic_ms": {
+        "mean": 0.13151588181818183,
+        "p95": 0.157514,
+        "max": 0.241574
+      },
+      "whole_ms": {
+        "mean": 7.16983393030303,
+        "p95": 9.254161,
+        "max": 13.49748
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 6.524242424242424,
+      "mean_pressure_iterations": 9.860606060606061,
+      "max_divergence_rms": 3.1e-11,
+      "max_momentum_rms": 0.0,
+      "max_force_law_rms": 0.000713498518,
+      "max_force_law_component": 0.008327402767,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_baseline": {
+        "max_center_distance": 0.0,
+        "max_center_percent_diameter": 0.0,
+        "max_velocity_distance": 0.0,
+        "max_area_error_difference": 0.0,
+        "recorded_cell_rows_equal": true
+      },
+      "recorded_outlines_equal": true,
+      "recorded_fields_equal": true
+    },
+    "warm-r1": {
+      "rapier_ms": {
+        "mean": 2.0017966424242424,
+        "p95": 2.189424,
+        "max": 3.580973
+      },
+      "fluid_ms": {
+        "mean": 3.714811206060606,
+        "p95": 4.087639,
+        "max": 6.311378
+      },
+      "diagnostic_ms": {
+        "mean": 0.1106095696969697,
+        "p95": 0.115463,
+        "max": 0.185217
+      },
+      "whole_ms": {
+        "mean": 5.836448275757576,
+        "p95": 6.363023,
+        "max": 8.895853
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 6.524242424242424,
+      "mean_pressure_iterations": 7.0212121212121215,
+      "max_divergence_rms": 3.1e-11,
+      "max_momentum_rms": 0.0,
+      "max_force_law_rms": 0.000713498518,
+      "max_force_law_component": 0.008327402767,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_baseline": {
+        "max_center_distance": 1.1364902111728955e-06,
+        "max_center_percent_diameter": 0.0012627669013032172,
+        "max_velocity_distance": 1.578836596991782e-06,
+        "max_area_error_difference": 2.6982000000000004e-05,
+        "recorded_cell_rows_equal": false
+      },
+      "recorded_outlines_equal": false,
+      "recorded_fields_equal": false
+    },
+    "optimized-r1": {
+      "rapier_ms": {
+        "mean": 2.2295568454545456,
+        "p95": 2.708353,
+        "max": 18.766665
+      },
+      "fluid_ms": {
+        "mean": 3.5635637545454544,
+        "p95": 4.897199,
+        "max": 12.571138
+      },
+      "diagnostic_ms": {
+        "mean": 0.11648204848484849,
+        "p95": 0.176672,
+        "max": 0.24219
+      },
+      "whole_ms": {
+        "mean": 5.920283263636364,
+        "p95": 7.972995,
+        "max": 23.859564
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 6.524242424242424,
+      "mean_pressure_iterations": 7.0212121212121215,
+      "max_divergence_rms": 3.1e-11,
+      "max_momentum_rms": 0.0,
+      "max_force_law_rms": 0.000713498518,
+      "max_force_law_component": 0.008327402767,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_baseline": {
+        "max_center_distance": 1.1364902111728955e-06,
+        "max_center_percent_diameter": 0.0012627669013032172,
+        "max_velocity_distance": 1.578836596991782e-06,
+        "max_area_error_difference": 2.6982000000000004e-05,
+        "recorded_cell_rows_equal": false
+      },
+      "recorded_outlines_equal": false,
+      "recorded_fields_equal": false
+    },
+    "optimized-r2": {
+      "rapier_ms": {
+        "mean": 2.27848993030303,
+        "p95": 2.392472,
+        "max": 26.924973
+      },
+      "fluid_ms": {
+        "mean": 3.6609576363636362,
+        "p95": 4.47577,
+        "max": 26.534327
+      },
+      "diagnostic_ms": {
+        "mean": 0.1139827303030303,
+        "p95": 0.17603,
+        "max": 0.261869
+      },
+      "whole_ms": {
+        "mean": 6.063896206060606,
+        "p95": 6.818219,
+        "max": 53.578037
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 6.524242424242424,
+      "mean_pressure_iterations": 7.0212121212121215,
+      "max_divergence_rms": 3.1e-11,
+      "max_momentum_rms": 0.0,
+      "max_force_law_rms": 0.000713498518,
+      "max_force_law_component": 0.008327402767,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_baseline": {
+        "max_center_distance": 1.1364902111728955e-06,
+        "max_center_percent_diameter": 0.0012627669013032172,
+        "max_velocity_distance": 1.578836596991782e-06,
+        "max_area_error_difference": 2.6982000000000004e-05,
+        "recorded_cell_rows_equal": false
+      },
+      "recorded_outlines_equal": false,
+      "recorded_fields_equal": false
+    },
+    "warm-r2": {
+      "rapier_ms": {
+        "mean": 2.2426689545454543,
+        "p95": 3.115869,
+        "max": 31.968946
+      },
+      "fluid_ms": {
+        "mean": 3.9552209606060607,
+        "p95": 5.6059,
+        "max": 31.714359
+      },
+      "diagnostic_ms": {
+        "mean": 0.1168188606060606,
+        "p95": 0.176615,
+        "max": 0.199361
+      },
+      "whole_ms": {
+        "mean": 6.324699887878788,
+        "p95": 9.234754,
+        "max": 45.830976
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 6.524242424242424,
+      "mean_pressure_iterations": 7.0212121212121215,
+      "max_divergence_rms": 3.1e-11,
+      "max_momentum_rms": 0.0,
+      "max_force_law_rms": 0.000713498518,
+      "max_force_law_component": 0.008327402767,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_baseline": {
+        "max_center_distance": 1.1364902111728955e-06,
+        "max_center_percent_diameter": 0.0012627669013032172,
+        "max_velocity_distance": 1.578836596991782e-06,
+        "max_area_error_difference": 2.6982000000000004e-05,
+        "recorded_cell_rows_equal": false
+      },
+      "recorded_outlines_equal": false,
+      "recorded_fields_equal": false
+    },
+    "baseline-r2": {
+      "rapier_ms": {
+        "mean": 2.1949217272727273,
+        "p95": 2.762729,
+        "max": 3.184308
+      },
+      "fluid_ms": {
+        "mean": 4.301715518181818,
+        "p95": 5.240565,
+        "max": 6.612432
+      },
+      "diagnostic_ms": {
+        "mean": 0.12783514848484848,
+        "p95": 0.182107,
+        "max": 0.215485
+      },
+      "whole_ms": {
+        "mean": 6.634207909090909,
+        "p95": 8.352937,
+        "max": 9.952779
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 6.524242424242424,
+      "mean_pressure_iterations": 9.860606060606061,
+      "max_divergence_rms": 3.1e-11,
+      "max_momentum_rms": 0.0,
+      "max_force_law_rms": 0.000713498518,
+      "max_force_law_component": 0.008327402767,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_baseline": {
+        "max_center_distance": 0.0,
+        "max_center_percent_diameter": 0.0,
+        "max_velocity_distance": 0.0,
+        "max_area_error_difference": 0.0,
+        "recorded_cell_rows_equal": true
+      },
+      "recorded_outlines_equal": true,
+      "recorded_fields_equal": true
+    },
+    "profile-baseline": {
+      "rapier_ms": {
+        "mean": 2.0204475222222222,
+        "p95": 2.210055,
+        "max": 2.323352
+      },
+      "fluid_ms": {
+        "mean": 4.47838,
+        "p95": 4.61242,
+        "max": 5.687319
+      },
+      "diagnostic_ms": {
+        "mean": 0.11117136666666666,
+        "p95": 0.118231,
+        "max": 0.158263
+      },
+      "whole_ms": {
+        "mean": 6.619084233333333,
+        "p95": 6.903128,
+        "max": 8.12723
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 5.933333333333334,
+      "mean_pressure_iterations": 11.955555555555556,
+      "max_divergence_rms": 3.1e-11,
+      "max_momentum_rms": 0.0,
+      "max_force_law_rms": 0.000713498518,
+      "max_force_law_component": 0.008327402767,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_baseline": {
+        "max_center_distance": 0.0,
+        "max_center_percent_diameter": 0.0,
+        "max_velocity_distance": 0.0,
+        "max_area_error_difference": 0.0,
+        "recorded_cell_rows_equal": true
+      },
+      "recorded_outlines_equal": true,
+      "recorded_fields_equal": true,
+      "profile_means": {
+        "inverse_calls": 15.955555555555556,
+        "inverse_ms": 2.9550262,
+        "copy_ms": 0.16145747777777777,
+        "forward_fft_ms": 0.7816992222222222,
+        "modes_ms": 1.2929100333333334,
+        "inverse_fft_ms": 0.7129458,
+        "pressure_stencil_ms": 0.34324305555555557,
+        "kernel_ms": 0.21291206666666668,
+        "coupled_ms": 3.9807681333333336,
+        "diagnostics_ms": 0.21614943333333334
+      }
+    },
+    "profile-optimized": {
+      "rapier_ms": {
+        "mean": 2.270889911111111,
+        "p95": 2.731527,
+        "max": 16.686414
+      },
+      "fluid_ms": {
+        "mean": 3.7737730555555555,
+        "p95": 5.102276,
+        "max": 5.354804
+      },
+      "diagnostic_ms": {
+        "mean": 0.12173253333333334,
+        "p95": 0.177052,
+        "max": 0.232526
+      },
+      "whole_ms": {
+        "mean": 6.178082311111111,
+        "p95": 8.002254,
+        "max": 21.977049
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 5.933333333333334,
+      "mean_pressure_iterations": 8.0,
+      "max_divergence_rms": 2.8e-11,
+      "max_momentum_rms": 0.0,
+      "max_force_law_rms": 0.000713498518,
+      "max_force_law_component": 0.008327402767,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_baseline": {
+        "max_center_distance": 1.236931688245941e-07,
+        "max_center_percent_diameter": 0.00013743685424954898,
+        "max_velocity_distance": 8.40747286644815e-07,
+        "max_area_error_difference": 1.2264999999999992e-05,
+        "recorded_cell_rows_equal": false
+      },
+      "recorded_outlines_equal": false,
+      "recorded_fields_equal": false,
+      "profile_means": {
+        "inverse_calls": 14.0,
+        "inverse_ms": 2.3569836,
+        "copy_ms": 0.14020727777777778,
+        "forward_fft_ms": 0.6513546444444445,
+        "modes_ms": 0.9744753777777778,
+        "inverse_fft_ms": 0.5855937666666666,
+        "pressure_stencil_ms": 0.3211965888888889,
+        "kernel_ms": 0.2352755888888889,
+        "coupled_ms": 3.240245211111111,
+        "diagnostics_ms": 0.22712663333333333
+      }
+    }
+  },
+  "repeat_trajectories": {
+    "baseline": {
+      "max_center_distance": 0.0,
+      "max_center_percent_diameter": 0.0,
+      "max_velocity_distance": 0.0,
+      "max_area_error_difference": 0.0,
+      "recorded_cell_rows_equal": true
+    },
+    "warm": {
+      "max_center_distance": 0.0,
+      "max_center_percent_diameter": 0.0,
+      "max_velocity_distance": 0.0,
+      "max_area_error_difference": 0.0,
+      "recorded_cell_rows_equal": true
+    },
+    "optimized": {
+      "max_center_distance": 0.0,
+      "max_center_percent_diameter": 0.0,
+      "max_velocity_distance": 0.0,
+      "max_area_error_difference": 0.0,
+      "recorded_cell_rows_equal": true
+    }
+  },
+  "baseline_matches_archive": true
+}

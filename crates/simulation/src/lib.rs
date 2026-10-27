@@ -4,12 +4,15 @@
 mod cell;
 pub mod circulation;
 mod config;
+mod fluid;
 pub mod map;
 mod robot;
 mod runtime;
+mod threading;
 pub mod vessel;
 mod view;
 
 pub use config::Config;
+pub use fluid::FluidStats;
 pub use runtime::{MoveInput, Simulation};
 pub use view::{FlowArrow, Snapshot};

@@ -1,0 +1,48 @@
+{
+  "accepted": true,
+  "adapter": {
+    "backend": "Vulkan",
+    "device": 0,
+    "device_type": "Cpu",
+    "driver": "llvmpipe",
+    "driver_info": "Mesa 23.2.1-1ubuntu3.1~22.04.4 (LLVM 15.0.7)",
+    "name": "llvmpipe (LLVM 15.0.7, 256 bits)",
+    "software": true,
+    "vendor": 65541
+  },
+  "command": [
+    "/tmp/sunyunbo/blood-gpu-lab-target/release/blood-gpu-stokes-lab",
+    "smoke",
+    "--allow-software",
+    "--out",
+    "/tmp/sunyunbo/blood-gpu-smoke-v2.json"
+  ],
+  "hardware_measurement": false,
+  "max_error": 2.384185791015625e-7,
+  "mode": "smoke",
+  "multi_chunk_max_error": 1.1920928955078125e-7,
+  "multi_chunk_outcome": {
+    "cycles": 1,
+    "iterations": 2,
+    "scaled_relative_residual": 5.960464484880767e-8,
+    "status": "converged_scaled"
+  },
+  "outcome": {
+    "cycles": 1,
+    "iterations": 3,
+    "scaled_relative_residual": 1.2930063069085707e-7,
+    "status": "converged_scaled"
+  },
+  "schema_version": 1,
+  "solution": [
+    1.000000238418579,
+    1.0,
+    2.0
+  ],
+  "zero_rhs": {
+    "cycles": 0,
+    "iterations": 0,
+    "scaled_relative_residual": 0.0,
+    "status": "converged_scaled"
+  }
+}

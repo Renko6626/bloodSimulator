@@ -1,0 +1,200 @@
+{
+  "strict-r1": {
+    "tolerance": 2e-09,
+    "whole_ms": {
+      "mean": 24.712836916666667,
+      "p95": 30.603845,
+      "max": 32.95622
+    },
+    "fluid_ms": {
+      "mean": 14.334793,
+      "p95": 17.993977,
+      "max": 18.573405
+    },
+    "iterations": {
+      "mean": 37.333333333333336,
+      "p95": 38.0,
+      "max": 44.0
+    },
+    "inverse_calls_per_frame": 43.333333333333336,
+    "max_frame_diagnostics": {
+      "divergence": 3.3898700710012162e-09,
+      "momentum": 1.434544093896992e-14,
+      "exchange": 3.8500851128680443e-10,
+      "net_flux": 4.4632415285586736e-08
+    },
+    "max_substep_relative_flux_imbalance": 3.4406632330376865e-09,
+    "max_incoming_flow_relative_change_vs_strict": 0.0,
+    "max_center_distance_vs_strict": 0.0,
+    "max_center_percent_diameter_vs_strict": 0.0,
+    "max_area_relative_change_vs_strict": 0.0,
+    "max_arrow_velocity_distance_vs_strict": 0.0,
+    "max_strict_arrow_speed": 3.6439138098612505,
+    "max_arrow_error_over_max_speed": 0.0
+  },
+  "medium-r1": {
+    "tolerance": 1e-06,
+    "whole_ms": {
+      "mean": 19.5290901,
+      "p95": 23.660186,
+      "max": 24.338602
+    },
+    "fluid_ms": {
+      "mean": 10.0360554,
+      "p95": 12.675865,
+      "max": 13.176597
+    },
+    "iterations": {
+      "mean": 24.533333333333335,
+      "p95": 26.0,
+      "max": 32.0
+    },
+    "inverse_calls_per_frame": 30.533333333333335,
+    "max_frame_diagnostics": {
+      "divergence": 1.713674371787141e-06,
+      "momentum": 1.4809735641452033e-14,
+      "exchange": 3.303159401718646e-10,
+      "net_flux": 2.0417309516091018e-05
+    },
+    "max_substep_relative_flux_imbalance": 1.5816743203659475e-06,
+    "max_incoming_flow_relative_change_vs_strict": 4.932524351186629e-07,
+    "max_center_distance_vs_strict": 4.3504798929450925e-05,
+    "max_center_percent_diameter_vs_strict": 0.0031074856378179236,
+    "max_area_relative_change_vs_strict": 1.167767768750494e-05,
+    "max_arrow_velocity_distance_vs_strict": 5.851850797888384e-06,
+    "max_strict_arrow_speed": 3.6439138098612505,
+    "max_arrow_error_over_max_speed": 1.605924591863825e-06
+  },
+  "loose-r1": {
+    "tolerance": 0.0001,
+    "whole_ms": {
+      "mean": 18.6244562,
+      "p95": 21.278799,
+      "max": 23.215712
+    },
+    "fluid_ms": {
+      "mean": 7.838931683333334,
+      "p95": 9.566926,
+      "max": 10.020621
+    },
+    "iterations": {
+      "mean": 15.0,
+      "p95": 16.0,
+      "max": 23.0
+    },
+    "inverse_calls_per_frame": 21.0,
+    "max_frame_diagnostics": {
+      "divergence": 0.0002043725401423031,
+      "momentum": 1.4640867034127328e-14,
+      "exchange": 3.591464237400682e-10,
+      "net_flux": 0.00056526277987753
+    },
+    "max_substep_relative_flux_imbalance": 5.956365691445135e-05,
+    "max_incoming_flow_relative_change_vs_strict": 2.4714024270622303e-05,
+    "max_center_distance_vs_strict": 4.3578372858137935e-05,
+    "max_center_percent_diameter_vs_strict": 0.003112740918438424,
+    "max_area_relative_change_vs_strict": 1.16775261720381e-05,
+    "max_arrow_velocity_distance_vs_strict": 0.0006486473687250732,
+    "max_strict_arrow_speed": 3.6439138098612505,
+    "max_arrow_error_over_max_speed": 0.00017800842790784114
+  },
+  "loose-r2": {
+    "tolerance": 0.0001,
+    "whole_ms": {
+      "mean": 17.409006916666666,
+      "p95": 20.046306,
+      "max": 28.52858
+    },
+    "fluid_ms": {
+      "mean": 7.413503066666666,
+      "p95": 9.21413,
+      "max": 13.910362
+    },
+    "iterations": {
+      "mean": 15.0,
+      "p95": 16.0,
+      "max": 23.0
+    },
+    "inverse_calls_per_frame": 21.0,
+    "max_frame_diagnostics": {
+      "divergence": 0.0002043725401423031,
+      "momentum": 1.4640867034127328e-14,
+      "exchange": 3.591464237400682e-10,
+      "net_flux": 0.00056526277987753
+    },
+    "max_substep_relative_flux_imbalance": 5.956365691445135e-05,
+    "max_incoming_flow_relative_change_vs_strict": 2.4714024270622303e-05,
+    "max_center_distance_vs_strict": 4.3578372858137935e-05,
+    "max_center_percent_diameter_vs_strict": 0.003112740918438424,
+    "max_area_relative_change_vs_strict": 1.16775261720381e-05,
+    "max_arrow_velocity_distance_vs_strict": 0.0006486473687250732,
+    "max_strict_arrow_speed": 3.6439138098612505,
+    "max_arrow_error_over_max_speed": 0.00017800842790784114
+  },
+  "medium-r2": {
+    "tolerance": 1e-06,
+    "whole_ms": {
+      "mean": 22.63799745,
+      "p95": 25.271093,
+      "max": 27.077838
+    },
+    "fluid_ms": {
+      "mean": 11.306440483333333,
+      "p95": 12.90643,
+      "max": 13.288292
+    },
+    "iterations": {
+      "mean": 24.533333333333335,
+      "p95": 26.0,
+      "max": 32.0
+    },
+    "inverse_calls_per_frame": 30.533333333333335,
+    "max_frame_diagnostics": {
+      "divergence": 1.713674371787141e-06,
+      "momentum": 1.4809735641452033e-14,
+      "exchange": 3.303159401718646e-10,
+      "net_flux": 2.0417309516091018e-05
+    },
+    "max_substep_relative_flux_imbalance": 1.5816743203659475e-06,
+    "max_incoming_flow_relative_change_vs_strict": 4.932524351186629e-07,
+    "max_center_distance_vs_strict": 4.3504798929450925e-05,
+    "max_center_percent_diameter_vs_strict": 0.0031074856378179236,
+    "max_area_relative_change_vs_strict": 1.167767768750494e-05,
+    "max_arrow_velocity_distance_vs_strict": 5.851850797888384e-06,
+    "max_strict_arrow_speed": 3.6439138098612505,
+    "max_arrow_error_over_max_speed": 1.605924591863825e-06
+  },
+  "strict-r2": {
+    "tolerance": 2e-09,
+    "whole_ms": {
+      "mean": 26.230504783333334,
+      "p95": 29.346381,
+      "max": 30.112656
+    },
+    "fluid_ms": {
+      "mean": 15.407937033333333,
+      "p95": 17.837644,
+      "max": 18.093699
+    },
+    "iterations": {
+      "mean": 37.333333333333336,
+      "p95": 38.0,
+      "max": 44.0
+    },
+    "inverse_calls_per_frame": 43.333333333333336,
+    "max_frame_diagnostics": {
+      "divergence": 3.3898700710012162e-09,
+      "momentum": 1.434544093896992e-14,
+      "exchange": 3.8500851128680443e-10,
+      "net_flux": 4.4632415285586736e-08
+    },
+    "max_substep_relative_flux_imbalance": 3.4406632330376865e-09,
+    "max_incoming_flow_relative_change_vs_strict": 0.0,
+    "max_center_distance_vs_strict": 0.0,
+    "max_center_percent_diameter_vs_strict": 0.0,
+    "max_area_relative_change_vs_strict": 0.0,
+    "max_arrow_velocity_distance_vs_strict": 0.0,
+    "max_strict_arrow_speed": 3.6439138098612505,
+    "max_arrow_error_over_max_speed": 0.0
+  }
+}

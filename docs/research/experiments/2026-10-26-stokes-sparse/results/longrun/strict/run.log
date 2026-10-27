@@ -1,0 +1,12 @@
+progress frame=600/7200 time=10.0 active=9 grid_speed=2.3300 area_error=0.1787%
+progress frame=1200/7200 time=20.0 active=14 grid_speed=2.2230 area_error=0.2060%
+progress frame=1800/7200 time=30.0 active=20 grid_speed=2.2141 area_error=0.2176%
+progress frame=2400/7200 time=40.0 active=21 grid_speed=2.2460 area_error=0.2473%
+progress frame=3000/7200 time=50.0 active=17 grid_speed=2.2806 area_error=0.3056%
+progress frame=3600/7200 time=60.0 active=14 grid_speed=2.3622 area_error=0.4069%
+progress frame=4200/7200 time=70.0 active=15 grid_speed=2.2480 area_error=1.3292%
+progress frame=4800/7200 time=80.0 active=15 grid_speed=2.3090 area_error=1.3733%
+progress frame=5400/7200 time=90.0 active=14 grid_speed=2.3147 area_error=0.6020%
+progress frame=6000/7200 time=100.0 active=11 grid_speed=2.3807 area_error=0.3827%
+progress frame=6600/7200 time=110.0 active=8 grid_speed=2.4513 area_error=0.3494%
+progress frame=7200/7200 time=120.0 active=7 grid_speed=2.4394 area_error=0.2914%

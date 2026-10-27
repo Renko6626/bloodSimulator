@@ -1,0 +1,10 @@
+   Compiling simulation v0.1.0 (/tmp/sunyunbo/blood-geometry-query-c7cpm5kj/before/crates/simulation)
+    Finished `release` profile [optimized] target(s) in 2.18s
+     Running unittests src/lib.rs (/tmp/sunyunbo/blood-stokes-rayon-target/release/deps/simulation-fce3c7a07e510660)
+
+running 1 test
+GEOMETRY_AUDIT queries=54495 max_velocity_error=0.00000000000000000e0
+test circulation::geometry_query_audit::existing_velocity_field_is_preserved_across_world_and_boundaries ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 10 filtered out; finished in 0.27s
+

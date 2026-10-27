@@ -1,0 +1,147 @@
+{
+  "accepted": true,
+  "case": "/tmp/sunyunbo/blood-gpu-data-v1/wide192/region-0",
+  "command": [
+    "/tmp/sunyunbo/blood-gpu-lab-target/release/blood-gpu-stokes-lab",
+    "cpu",
+    "--case",
+    "/tmp/sunyunbo/blood-gpu-data-v1/wide192/region-0",
+    "--limit",
+    "8",
+    "--rtol",
+    "0.0001",
+    "--repeats",
+    "10",
+    "--out",
+    "/tmp/sunyunbo/blood-gpu-cpu-validation-v1/wide192-region-0-cpu.json"
+  ],
+  "factorization_ms": 626.803668,
+  "known_model_issue": "wide domains omit internal pump; algebra correctness does not establish physical correctness",
+  "mode": "cpu_lu_f64",
+  "rows": 33192,
+  "samples": [
+    {
+      "audit": {
+        "constraint_rms": 1.0284510434364977e-14,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 5.173372395771961e-15,
+        "momentum_rms": 1.1127007108655831e-14,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 6.198687312943894e-15,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 4.8441699,
+      "repeats": 10,
+      "sample": "000"
+    },
+    {
+      "audit": {
+        "constraint_rms": 1.1559358403399775e-15,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 1.879765428147601e-15,
+        "momentum_rms": 1.879765428147601e-15,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 3.212142567010299e-14,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 4.789774599999999,
+      "repeats": 10,
+      "sample": "001"
+    },
+    {
+      "audit": {
+        "constraint_rms": 1.8569835508470727e-15,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.189801733645056e-15,
+        "momentum_rms": 3.189801733645056e-15,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 3.2184459681067607e-14,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 4.7813172999999995,
+      "repeats": 10,
+      "sample": "003"
+    },
+    {
+      "audit": {
+        "constraint_rms": 2.172642624441014e-15,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.4963017265309003e-15,
+        "momentum_rms": 3.4963017265309003e-15,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 3.1577764748007176e-14,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 4.779028599999999,
+      "repeats": 10,
+      "sample": "007"
+    },
+    {
+      "audit": {
+        "constraint_rms": 2.347612621905163e-15,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.743746708329499e-15,
+        "momentum_rms": 3.743746708329499e-15,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 3.230297291356648e-14,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 4.7676229,
+      "repeats": 10,
+      "sample": "015"
+    },
+    {
+      "audit": {
+        "constraint_rms": 2.437582962363218e-15,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.729267611096408e-15,
+        "momentum_rms": 3.729267611096408e-15,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 3.212161349004391e-14,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 4.7473614,
+      "repeats": 10,
+      "sample": "031"
+    },
+    {
+      "audit": {
+        "constraint_rms": 1.7013803990628456e-15,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 2.8167464597595596e-15,
+        "momentum_rms": 2.8167464597595596e-15,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 3.152961727833322e-14,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 4.9072558,
+      "repeats": 10,
+      "sample": "063"
+    },
+    {
+      "audit": {
+        "constraint_rms": 2.6826668433565346e-15,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 4.004199983283563e-15,
+        "momentum_rms": 4.004199983283563e-15,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 3.354072564635567e-14,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 4.8254359000000004,
+      "repeats": 10,
+      "sample": "127"
+    }
+  ],
+  "schema_version": 1,
+  "source": "production StokesFactor; sequential faer sparse LU",
+  "tolerance": 0.0001
+}

@@ -1,0 +1,109 @@
+{
+  "sources_sha256": {
+    "run.py": "a39cac81b48566cecd5044b3bbe4743c20a7201b15c0475a8894019d86bfc0cc",
+    "sparse.rs": "ff8ce5a7622e60af8b338633230390e4cd20a4b62ec6f69ee5c3f67b377c0345",
+    "compare.rs": "a604f1b3da71ed51397cad92511ef97789c7c3af61a0b23394527f557660c834",
+    "longrun.py": "e104c95753ad322332c7dfcfea9f22eed93bb328fcc1b4d8c0f73da8da3f7d78",
+    "longrun.rs": "6fce7aa9184f4b42fa82c911f1425d24a440ffbca9ed7b8e66b3ba1cc7282b2d",
+    "baseline/Cargo.lock": "342197ef935464f24f596ec5df89ead86ed1d1b23bfffc91313b79d2a1bacb15",
+    "baseline/Cargo.toml": "db0f226a6687f7813047b6b7baaa1e29e1f146d5d9f076bf7a3ed5c2c773486b",
+    "baseline/crates/godot_bridge/Cargo.toml": "688bcaf9ff374a29b15b53542daf3e27666b2bd35a0c605f3a9ea8924bb5097d",
+    "baseline/crates/simulation/Cargo.toml": "f591af441f6bf07fa828c9f94284435f6ae4df382cac83b7d8e4cec910f32ecf",
+    "baseline/crates/simulation/src/view.rs": "9ead0b5acad5e2504a4b48a48e1c207f31bc721e5e0cb3c45c5940af7e6fbe1e",
+    "baseline/crates/simulation/src/cell.rs": "b94a98f6aecc15b3305bb2c943fe13305d17a12de023849eb350a776f24da70b",
+    "baseline/crates/simulation/src/circulation.rs": "98051a6ea87ac45dab237c1d13c5d80cb2ca1b9b0bae1db98524e595233f98e1",
+    "baseline/crates/simulation/src/map.rs": "39ff5a79ba39913b6991a01bd2fa011da6f8e6191c55fd3a40d3e91aa28670d1",
+    "baseline/crates/simulation/src/vessel.rs": "89806837b670a7f7f25c5fd3d80fb1e63f7acc01963fd995537891bbeb671b1b",
+    "baseline/crates/simulation/src/robot.rs": "abd85a82b52bc3cadb7b7b727a95daff17eb699f37544b5529c35eccdee7ddd6",
+    "baseline/crates/simulation/src/config.rs": "8da31b6101d995cab83746f4aefa396c6f7b875b79df2261a49573b6eb1f7839",
+    "baseline/crates/simulation/src/lib.rs": "db993324c14efb1766746b0e8787ac08821dac2680b1624314a39d303b8a2559",
+    "baseline/crates/simulation/src/runtime.rs": "77d128c3128bb97cb40cc297a7602f77794453806a6cced4ddacc888ae295d1b",
+    "baseline/crates/simulation/src/threading.rs": "c874aa764322e65aa721297c93e8603b444d91fbaa357234ee431247a6ddcbea",
+    "baseline/crates/simulation/tests/experiment.rs": "d45c12fe68c561d35db3469d1bbc09efdb7f82aae47f4481a063da990af5b809",
+    "baseline/crates/simulation/examples/circulation_probe.rs": "35097f916d272d27d58fb960dbab4dc597fbbfc0927c124cd7ff03259d6c57ef",
+    "baseline/crates/simulation/src/map/geometry.rs": "b525f0940dfd06bb1f5b70f6a55a41ed53dcd646f3dab77a8c79466e09ff76aa",
+    "baseline/crates/simulation/src/circulation/graph.rs": "2af4dc32bd259e63801bee6abed82f0bbf152ff215649acf8c57bdb6766873a1",
+    "baseline/crates/simulation/src/fluid/grid.rs": "cdcf8b4087c726725bba6022f5b1d4f11a6545cf0ee21a3aead7622f7b407304",
+    "baseline/crates/simulation/src/fluid/tests.rs": "18e0525c2cd912fdc1d4d61b04d2057027442541bdadd663bf7bfcd99ac2847d",
+    "baseline/crates/simulation/src/fluid/mod.rs": "01b21badb36b4351dd8fb0665cb1b6ab10d071beca7ec2c7f012667381d3155d",
+    "baseline/crates/simulation/src/fluid/linear.rs": "523d35bc6767af0d6d31cc7e856b0755680eee9b16d466f25f17627d133b48b3",
+    "baseline/crates/godot_bridge/src/lib.rs": "f8e3733300edfdfb17f7b71762505304f7aafaf3375171f10041ee1c5d17fa17"
+  },
+  "seconds": 120,
+  "cpus": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "temporary_workspaces": "/tmp/sunyunbo/blood-stokes-longrun-k0sbh37u",
+  "scene": "72 cells; fixed fork; default pulse; no input; 2 substeps; per-frame diagnostics, one-second samples",
+  "commands": [
+    [
+      "cargo",
+      "build",
+      "--release",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "/tmp/sunyunbo/blood-stokes-longrun-k0sbh37u/strict/Cargo.toml",
+      "-p",
+      "simulation",
+      "--example",
+      "longrun",
+      "--target-dir",
+      "/tmp/sunyunbo/blood-stokes-rayon-target"
+    ],
+    [
+      "cargo",
+      "build",
+      "--release",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "/tmp/sunyunbo/blood-stokes-longrun-k0sbh37u/loose/Cargo.toml",
+      "-p",
+      "simulation",
+      "--example",
+      "longrun",
+      "--target-dir",
+      "/tmp/sunyunbo/blood-stokes-rayon-target"
+    ]
+  ],
+  "runs": [
+    {
+      "name": "loose",
+      "tolerance": 0.0001,
+      "command": [
+        "flock",
+        "/tmp/blood-stokes-feedback-bench.lock",
+        "taskset",
+        "-c",
+        "2-5",
+        "/tmp/sunyunbo/blood-stokes-longrun-k0sbh37u/loose-longrun",
+        "120",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-26-stokes-sparse/results/longrun/loose"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "strict",
+      "tolerance": 2e-09,
+      "command": [
+        "flock",
+        "/tmp/blood-stokes-feedback-bench.lock",
+        "taskset",
+        "-c",
+        "2-5",
+        "/tmp/sunyunbo/blood-stokes-longrun-k0sbh37u/strict-longrun",
+        "120",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-26-stokes-sparse/results/longrun/strict"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "binary_sha256": {
+    "strict": "527e4298a8569407657b36fb1d071f7d250bdeaf09bfc4d69a10684c927f6e35",
+    "loose": "543252ac8cc242375a0a6705e4c18d8229a404f49673e2975bf969afd836106a"
+  }
+}

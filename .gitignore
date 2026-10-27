@@ -1,6 +1,10 @@
 # Rust build output; retain Cargo.lock when the workspace exists.
 /target/
 
+# Python experiment caches.
+__pycache__/
+*.pyc
+
 # Godot generated cache; retain source assets and import configuration.
 .godot/
 

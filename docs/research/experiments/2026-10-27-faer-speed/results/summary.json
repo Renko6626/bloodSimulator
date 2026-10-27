@@ -1,0 +1,672 @@
+{
+  "cases": {
+    "custom-r1": {
+      "whole_ms": {
+        "mean": 11.972552084444445,
+        "p95": 15.333599,
+        "max": 101.426492
+      },
+      "fluid_ms": {
+        "mean": 6.768673835,
+        "p95": 9.317104,
+        "max": 62.961049
+      },
+      "iterations": {
+        "mean": 15.71111111111111,
+        "p95": 18.0,
+        "max": 23.0
+      },
+      "stages": {
+        "network_ms": {
+          "mean": 0.0006235994444444444,
+          "p95": 0.000907,
+          "max": 0.005651
+        },
+        "prepare_ms": {
+          "mean": 0.0051558,
+          "p95": 0.006904,
+          "max": 0.015578
+        },
+        "robot_ms": {
+          "mean": 0.009972387222222222,
+          "p95": 0.013103,
+          "max": 0.021803
+        },
+        "advection_ms": {
+          "mean": 1.81896851,
+          "p95": 2.444794,
+          "max": 2.718994
+        },
+        "fluid_ms": {
+          "mean": 6.788437433333334,
+          "p95": 9.339177,
+          "max": 62.976417
+        },
+        "rapier_ms": {
+          "mean": 3.312254717777778,
+          "p95": 4.072757,
+          "max": 34.869241
+        }
+      },
+      "active_cells": [
+        3.0,
+        21.0
+      ],
+      "max_diagnostics": {
+        "divergence_peak": 0.00020466972885572075,
+        "momentum_peak": 1.4863144048459058e-14,
+        "exchange": 1.0756262155611105e-09,
+        "max_area_error": 0.0336172868175334,
+        "max_wall_overshoot": 0.0,
+        "grid_speed_peak": 2.7919510854843512,
+        "force_peak": 0.25564348397016656,
+        "flux_relative_peak": 7.805169969935369e-05
+      },
+      "incoming_volume": 329.4657040956623,
+      "absolute_net_volume": 0.01519388287434567,
+      "upper_outlet_fraction": 0.49288407923564226,
+      "fork_crossings": [
+        9,
+        3
+      ],
+      "mean_cell_distance": 65.31654701516516,
+      "initialization_ms": 189.285093,
+      "max_process_rss_kib": 14044,
+      "factors": [
+        {
+          "axis": 0,
+          "size": 2458,
+          "entries": 30507,
+          "reported_payload_bytes": 488112,
+          "setup_ms": 26.656382
+        },
+        {
+          "axis": 1,
+          "size": 2458,
+          "entries": 31247,
+          "reported_payload_bytes": 499952,
+          "setup_ms": 29.244712
+        }
+      ],
+      "factor_byte_scope": "factor numeric+index array payload; Vec headers/capacity excluded",
+      "same_backend_replay_matches": true
+    },
+    "faer-r1": {
+      "whole_ms": {
+        "mean": 10.98613592,
+        "p95": 14.611006,
+        "max": 53.532288
+      },
+      "fluid_ms": {
+        "mean": 5.908494925555556,
+        "p95": 8.242112,
+        "max": 42.815952
+      },
+      "iterations": {
+        "mean": 15.71111111111111,
+        "p95": 18.0,
+        "max": 23.0
+      },
+      "stages": {
+        "network_ms": {
+          "mean": 0.0006226955555555556,
+          "p95": 0.000935,
+          "max": 0.007584
+        },
+        "prepare_ms": {
+          "mean": 0.005071552777777778,
+          "p95": 0.006907,
+          "max": 0.024939
+        },
+        "robot_ms": {
+          "mean": 0.00994111,
+          "p95": 0.012925,
+          "max": 0.021451
+        },
+        "advection_ms": {
+          "mean": 1.7696371944444445,
+          "p95": 2.481186,
+          "max": 3.148958
+        },
+        "fluid_ms": {
+          "mean": 5.920148295555555,
+          "p95": 8.259159,
+          "max": 42.83059
+        },
+        "rapier_ms": {
+          "mean": 3.233290766666667,
+          "p95": 4.081468,
+          "max": 34.120159
+        }
+      },
+      "active_cells": [
+        3.0,
+        21.0
+      ],
+      "max_diagnostics": {
+        "divergence_peak": 0.00020466972885576143,
+        "momentum_peak": 1.456611195122096e-14,
+        "exchange": 1.0756260280829728e-09,
+        "max_area_error": 0.0336172868175334,
+        "max_wall_overshoot": 0.0,
+        "grid_speed_peak": 2.79195108548436,
+        "force_peak": 0.2556434839701668,
+        "flux_relative_peak": 7.805169969494185e-05
+      },
+      "incoming_volume": 329.4657040956633,
+      "absolute_net_volume": 0.015193882873085077,
+      "upper_outlet_fraction": 0.4928840792356423,
+      "fork_crossings": [
+        9,
+        3
+      ],
+      "mean_cell_distance": 65.31654701516516,
+      "initialization_ms": 166.939815,
+      "max_process_rss_kib": 15880,
+      "factors": [
+        {
+          "axis": 0,
+          "size": 2458,
+          "entries": 28646,
+          "reported_payload_bytes": 229168,
+          "setup_ms": 3.436825
+        },
+        {
+          "axis": 1,
+          "size": 2458,
+          "entries": 28785,
+          "reported_payload_bytes": 230280,
+          "setup_ms": 3.95519
+        }
+      ],
+      "factor_byte_scope": "numeric only; symbolic metadata excluded",
+      "same_backend_replay_matches": true
+    },
+    "faer-r2": {
+      "whole_ms": {
+        "mean": 10.769260515,
+        "p95": 13.905406,
+        "max": 31.66992
+      },
+      "fluid_ms": {
+        "mean": 5.902665251111111,
+        "p95": 8.008568,
+        "max": 25.112494
+      },
+      "iterations": {
+        "mean": 15.71111111111111,
+        "p95": 18.0,
+        "max": 23.0
+      },
+      "stages": {
+        "network_ms": {
+          "mean": 0.0005752255555555555,
+          "p95": 0.000812,
+          "max": 0.005706
+        },
+        "prepare_ms": {
+          "mean": 0.005046638888888889,
+          "p95": 0.006639,
+          "max": 0.034854
+        },
+        "robot_ms": {
+          "mean": 0.009544901666666666,
+          "p95": 0.012633,
+          "max": 0.026396
+        },
+        "advection_ms": {
+          "mean": 1.6989657994444445,
+          "p95": 2.350592,
+          "max": 3.374158
+        },
+        "fluid_ms": {
+          "mean": 5.913980872222222,
+          "p95": 8.022091,
+          "max": 25.123318
+        },
+        "rapier_ms": {
+          "mean": 3.0996920766666665,
+          "p95": 3.919696,
+          "max": 7.496203
+        }
+      },
+      "active_cells": [
+        3.0,
+        21.0
+      ],
+      "max_diagnostics": {
+        "divergence_peak": 0.00020466972885576143,
+        "momentum_peak": 1.456611195122096e-14,
+        "exchange": 1.0756260280829728e-09,
+        "max_area_error": 0.0336172868175334,
+        "max_wall_overshoot": 0.0,
+        "grid_speed_peak": 2.79195108548436,
+        "force_peak": 0.2556434839701668,
+        "flux_relative_peak": 7.805169969494185e-05
+      },
+      "incoming_volume": 329.4657040956633,
+      "absolute_net_volume": 0.015193882873085077,
+      "upper_outlet_fraction": 0.4928840792356423,
+      "fork_crossings": [
+        9,
+        3
+      ],
+      "mean_cell_distance": 65.31654701516516,
+      "initialization_ms": 181.463489,
+      "max_process_rss_kib": 15876,
+      "factors": [
+        {
+          "axis": 0,
+          "size": 2458,
+          "entries": 28646,
+          "reported_payload_bytes": 229168,
+          "setup_ms": 4.935043
+        },
+        {
+          "axis": 1,
+          "size": 2458,
+          "entries": 28785,
+          "reported_payload_bytes": 230280,
+          "setup_ms": 4.292972
+        }
+      ],
+      "factor_byte_scope": "numeric only; symbolic metadata excluded",
+      "same_backend_replay_matches": true
+    },
+    "custom-r2": {
+      "whole_ms": {
+        "mean": 11.057230781666666,
+        "p95": 15.179264,
+        "max": 78.626251
+      },
+      "fluid_ms": {
+        "mean": 6.257485523333333,
+        "p95": 9.212365,
+        "max": 21.308956
+      },
+      "iterations": {
+        "mean": 15.71111111111111,
+        "p95": 18.0,
+        "max": 23.0
+      },
+      "stages": {
+        "network_ms": {
+          "mean": 0.0005421211111111111,
+          "p95": 0.000759,
+          "max": 0.003561
+        },
+        "prepare_ms": {
+          "mean": 0.004886878888888889,
+          "p95": 0.006403,
+          "max": 0.01545
+        },
+        "robot_ms": {
+          "mean": 0.008907819444444444,
+          "p95": 0.012037,
+          "max": 0.021807
+        },
+        "advection_ms": {
+          "mean": 1.664554625,
+          "p95": 2.240631,
+          "max": 2.683434
+        },
+        "fluid_ms": {
+          "mean": 6.267889573888889,
+          "p95": 9.224551,
+          "max": 21.322076
+        },
+        "rapier_ms": {
+          "mean": 3.0779700105555556,
+          "p95": 3.973971,
+          "max": 58.54172
+        }
+      },
+      "active_cells": [
+        3.0,
+        21.0
+      ],
+      "max_diagnostics": {
+        "divergence_peak": 0.00020466972885572075,
+        "momentum_peak": 1.4863144048459058e-14,
+        "exchange": 1.0756262155611105e-09,
+        "max_area_error": 0.0336172868175334,
+        "max_wall_overshoot": 0.0,
+        "grid_speed_peak": 2.7919510854843512,
+        "force_peak": 0.25564348397016656,
+        "flux_relative_peak": 7.805169969935369e-05
+      },
+      "incoming_volume": 329.4657040956623,
+      "absolute_net_volume": 0.01519388287434567,
+      "upper_outlet_fraction": 0.49288407923564226,
+      "fork_crossings": [
+        9,
+        3
+      ],
+      "mean_cell_distance": 65.31654701516516,
+      "initialization_ms": 189.796349,
+      "max_process_rss_kib": 14028,
+      "factors": [
+        {
+          "axis": 0,
+          "size": 2458,
+          "entries": 30507,
+          "reported_payload_bytes": 488112,
+          "setup_ms": 26.893131
+        },
+        {
+          "axis": 1,
+          "size": 2458,
+          "entries": 31247,
+          "reported_payload_bytes": 499952,
+          "setup_ms": 28.323697
+        }
+      ],
+      "factor_byte_scope": "factor numeric+index array payload; Vec headers/capacity excluded",
+      "same_backend_replay_matches": true
+    },
+    "fluid-custom": {
+      "whole_ms": {
+        "mean": 10.902869719444444,
+        "p95": 14.582933,
+        "max": 134.682213
+      },
+      "fluid_ms": {
+        "mean": 6.231040425,
+        "p95": 8.845529,
+        "max": 67.129496
+      },
+      "iterations": {
+        "mean": 15.71111111111111,
+        "p95": 18.0,
+        "max": 23.0
+      },
+      "stages": {
+        "network_ms": {
+          "mean": 0.0005152033333333334,
+          "p95": 0.000757,
+          "max": 0.004966
+        },
+        "prepare_ms": {
+          "mean": 0.004746591111111111,
+          "p95": 0.006422,
+          "max": 0.030901
+        },
+        "robot_ms": {
+          "mean": 0.008495131666666666,
+          "p95": 0.011314,
+          "max": 0.02415
+        },
+        "advection_ms": {
+          "mean": 1.593851685,
+          "p95": 2.265954,
+          "max": 2.638567
+        },
+        "fluid_ms": {
+          "mean": 6.248907573333334,
+          "p95": 8.869262,
+          "max": 67.139984
+        },
+        "rapier_ms": {
+          "mean": 3.0105654122222223,
+          "p95": 3.72866,
+          "max": 65.783975
+        }
+      },
+      "active_cells": [
+        3.0,
+        21.0
+      ],
+      "max_diagnostics": {
+        "divergence_peak": 0.00020466972885572075,
+        "momentum_peak": 1.4863144048459058e-14,
+        "exchange": 1.0756262155611105e-09,
+        "max_area_error": 0.0336172868175334,
+        "max_wall_overshoot": 0.0,
+        "grid_speed_peak": 2.7919510854843512,
+        "force_peak": 0.25564348397016656,
+        "flux_relative_peak": 7.805169969935369e-05
+      },
+      "incoming_volume": 329.4657040956623,
+      "absolute_net_volume": 0.01519388287434567,
+      "upper_outlet_fraction": 0.49288407923564226,
+      "fork_crossings": [
+        9,
+        3
+      ],
+      "mean_cell_distance": 65.31654701516516,
+      "initialization_ms": 156.844089,
+      "max_process_rss_kib": 14048,
+      "factors": [
+        {
+          "axis": 0,
+          "size": 2458,
+          "entries": 30507,
+          "reported_payload_bytes": 488112,
+          "setup_ms": 24.214009
+        },
+        {
+          "axis": 1,
+          "size": 2458,
+          "entries": 31247,
+          "reported_payload_bytes": 499952,
+          "setup_ms": 28.615792
+        }
+      ],
+      "factor_byte_scope": "factor numeric+index array payload; Vec headers/capacity excluded",
+      "deep_ms": {
+        "grid_solve": {
+          "mean": 5.847640406111111,
+          "p95": 8.368889,
+          "max": 66.833043
+        },
+        "velocity_inverse": {
+          "mean": 4.787106106666666,
+          "p95": 7.036751,
+          "max": 65.625012
+        },
+        "factor_total_work": {
+          "mean": 6.417945885555556,
+          "p95": 9.348329,
+          "max": 14.752864
+        },
+        "u_solve": {
+          "mean": 2.5104423544444443,
+          "p95": 3.392663,
+          "max": 6.969384
+        },
+        "v_solve": {
+          "mean": 3.914419842777778,
+          "p95": 6.185893,
+          "max": 11.892364
+        },
+        "max_component_per_inverse": {
+          "mean": 3.9567734672222223,
+          "p95": 6.191369,
+          "max": 11.93945
+        },
+        "full_diagnostics": {
+          "mean": 0.25602745444444447,
+          "p95": 0.336283,
+          "max": 0.461867
+        }
+      },
+      "inverse_calls_per_frame": 21.711111111111112,
+      "inverse_us_per_call": 220.49106939611053,
+      "component_us_per_solve": 147.80325734390993,
+      "same_backend_replay_matches": true
+    },
+    "fluid-faer": {
+      "whole_ms": {
+        "mean": 10.414056964444445,
+        "p95": 13.545779,
+        "max": 68.317589
+      },
+      "fluid_ms": {
+        "mean": 5.69047432,
+        "p95": 7.929846,
+        "max": 36.700856
+      },
+      "iterations": {
+        "mean": 15.71111111111111,
+        "p95": 18.0,
+        "max": 23.0
+      },
+      "stages": {
+        "network_ms": {
+          "mean": 0.0005355911111111111,
+          "p95": 0.000757,
+          "max": 0.006235
+        },
+        "prepare_ms": {
+          "mean": 0.004677044444444445,
+          "p95": 0.006131,
+          "max": 0.012434
+        },
+        "robot_ms": {
+          "mean": 0.00896415611111111,
+          "p95": 0.01223,
+          "max": 0.029204
+        },
+        "advection_ms": {
+          "mean": 1.5838515027777778,
+          "p95": 2.115766,
+          "max": 5.519859
+        },
+        "fluid_ms": {
+          "mean": 5.701792155555555,
+          "p95": 7.944352,
+          "max": 36.712471
+        },
+        "rapier_ms": {
+          "mean": 3.0646522377777776,
+          "p95": 3.851827,
+          "max": 51.831036
+        }
+      },
+      "active_cells": [
+        3.0,
+        21.0
+      ],
+      "max_diagnostics": {
+        "divergence_peak": 0.00020466972885576143,
+        "momentum_peak": 1.456611195122096e-14,
+        "exchange": 1.0756260280829728e-09,
+        "max_area_error": 0.0336172868175334,
+        "max_wall_overshoot": 0.0,
+        "grid_speed_peak": 2.79195108548436,
+        "force_peak": 0.2556434839701668,
+        "flux_relative_peak": 7.805169969494185e-05
+      },
+      "incoming_volume": 329.4657040956633,
+      "absolute_net_volume": 0.015193882873085077,
+      "upper_outlet_fraction": 0.4928840792356423,
+      "fork_crossings": [
+        9,
+        3
+      ],
+      "mean_cell_distance": 65.31654701516516,
+      "initialization_ms": 175.404956,
+      "max_process_rss_kib": 14984,
+      "factors": [
+        {
+          "axis": 0,
+          "size": 2458,
+          "entries": 28646,
+          "reported_payload_bytes": 229168,
+          "setup_ms": 3.965397
+        },
+        {
+          "axis": 1,
+          "size": 2458,
+          "entries": 28785,
+          "reported_payload_bytes": 230280,
+          "setup_ms": 3.896129
+        }
+      ],
+      "factor_byte_scope": "numeric only; symbolic metadata excluded",
+      "deep_ms": {
+        "grid_solve": {
+          "mean": 5.301022177777778,
+          "p95": 7.431016,
+          "max": 36.246875
+        },
+        "velocity_inverse": {
+          "mean": 4.257347645555556,
+          "p95": 6.178558,
+          "max": 34.917898
+        },
+        "factor_total_work": {
+          "mean": 5.771737840555556,
+          "p95": 8.103981,
+          "max": 15.106979
+        },
+        "u_solve": {
+          "mean": 2.3221891455555554,
+          "p95": 3.179456,
+          "max": 10.485271
+        },
+        "v_solve": {
+          "mean": 3.4582642116666666,
+          "p95": 5.32347,
+          "max": 12.222577
+        },
+        "max_component_per_inverse": {
+          "mean": 3.557374061111111,
+          "p95": 5.350899,
+          "max": 12.230519
+        },
+        "full_diagnostics": {
+          "mean": 0.25726030833333335,
+          "p95": 0.338782,
+          "max": 0.435651
+        }
+      },
+      "inverse_calls_per_frame": 21.711111111111112,
+      "inverse_us_per_call": 196.09073085977482,
+      "component_us_per_solve": 132.92129110798362,
+      "same_backend_replay_matches": true
+    }
+  },
+  "comparisons": {
+    "round1": {
+      "whole_saved_ms": 0.986416164444444,
+      "whole_speedup": 1.0897873621469307,
+      "fluid_saved_ms": 0.8601789094444445,
+      "fluid_speedup": 1.1455834218836305,
+      "incoming_volume_relative_change": 2.886579864025407e-15,
+      "mean_cell_distance_relative_change": 0.0,
+      "upper_outlet_fraction_change": 5.551115123125783e-17,
+      "max_sampled_cell_position_difference": 0.0,
+      "different_edges_at_end": 0,
+      "cell_samples_files_equal": true,
+      "crossing_events_files_equal": true,
+      "max_sampled_arrow_velocity_difference": 1.290699999998675e-15,
+      "snapshot_files_equal": false
+    },
+    "round2": {
+      "whole_saved_ms": 0.28797026666666703,
+      "whole_speedup": 1.0267400223316696,
+      "fluid_saved_ms": 0.3548202722222218,
+      "fluid_speedup": 1.0601118744037588,
+      "incoming_volume_relative_change": 2.886579864025407e-15,
+      "mean_cell_distance_relative_change": 0.0,
+      "upper_outlet_fraction_change": 5.551115123125783e-17,
+      "max_sampled_cell_position_difference": 0.0,
+      "different_edges_at_end": 0,
+      "cell_samples_files_equal": true,
+      "crossing_events_files_equal": true,
+      "max_sampled_arrow_velocity_difference": 1.290699999998675e-15,
+      "snapshot_files_equal": false
+    }
+  },
+  "audits": {
+    "custom": {
+      "max_velocity_abs_difference": 0.0,
+      "max_matrix_abs_residual": 8.715250743307479e-15
+    },
+    "faer": {
+      "max_velocity_abs_difference": 4.579669976578771e-16,
+      "max_matrix_abs_residual": 3.9968028886505635e-15
+    }
+  }
+}

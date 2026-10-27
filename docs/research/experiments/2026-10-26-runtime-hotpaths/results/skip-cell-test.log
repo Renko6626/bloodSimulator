@@ -1,0 +1,9 @@
+   Compiling simulation v0.1.0 (/tmp/sunyunbo/blood-runtime-hotpaths-p3w619a_/skip/crates/simulation)
+    Finished `release` profile [optimized] target(s) in 2.10s
+     Running unittests src/lib.rs (/tmp/sunyunbo/blood-stokes-rayon-target/release/deps/simulation-fce3c7a07e510660)
+
+running 1 test
+test cell::tests::compressed_cell_preserves_area_and_recovers_after_release ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.03s
+

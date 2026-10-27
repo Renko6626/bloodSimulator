@@ -1,0 +1,10 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.16s
+     Running unittests src/main.rs (/tmp/sunyunbo/blood-gpu-lab-target/debug/deps/blood_gpu_stokes_lab-20f803b1755db9ed)
+
+running 3 tests
+test case::tests::scaling_preserves_equations_and_audit_checks_constraint_block ... ok
+test gmres::tests::solves_indefinite_system_and_handles_zero_rhs ... ok
+test gpu::tests::wgsl_parses_and_validates_without_gpu ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+

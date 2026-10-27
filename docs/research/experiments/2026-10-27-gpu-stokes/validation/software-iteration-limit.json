@@ -1,0 +1,70 @@
+{
+  "accepted": false,
+  "adapter": {
+    "backend": "Vulkan",
+    "device": 0,
+    "device_type": "Cpu",
+    "driver": "llvmpipe",
+    "driver_info": "Mesa 23.2.1-1ubuntu3.1~22.04.4 (LLVM 15.0.7)",
+    "name": "llvmpipe (LLVM 15.0.7, 256 bits)",
+    "software": true,
+    "vendor": 65541
+  },
+  "case": "/tmp/sunyunbo/blood-gpu-data-v1/small64/region-0",
+  "command": [
+    "/tmp/sunyunbo/blood-gpu-lab-target/release/blood-gpu-stokes-lab",
+    "gpu",
+    "--case",
+    "/tmp/sunyunbo/blood-gpu-data-v1/small64/region-0",
+    "--limit",
+    "1",
+    "--max-iter",
+    "2",
+    "--restart",
+    "2",
+    "--allow-software",
+    "--out",
+    "/tmp/sunyunbo/blood-gpu-budget-check-v1.json"
+  ],
+  "hardware_measurement": false,
+  "known_model_issue": "wide domains omit internal pump; algebra correctness does not establish physical correctness",
+  "max_iterations": 2,
+  "mode": "gpu_gmres_f32",
+  "notes": "Host scalar GMRES; GPU large vectors; includes per-iteration scalar readbacks and final vector readback; no Rapier or rendering",
+  "restart": 2,
+  "rows": 7400,
+  "samples": [
+    {
+      "accepted": false,
+      "audit": {
+        "constraint_rms": 0.021625080925127167,
+        "finite": true,
+        "linear_residual_accepted": false,
+        "momentum_relative_rms": 0.2148135096680188,
+        "momentum_rms": 0.2148135096680188,
+        "pressure_reference_max_absolute": 0.6561586280509728,
+        "relative_residual": 0.7873352372904574,
+        "velocity_reference_relative_l2": 1.0006380556785897
+      },
+      "counters": {
+        "dispatches": 29,
+        "readback_bytes": 29640,
+        "readback_wait_ms": 1.207422,
+        "readbacks": 5
+      },
+      "end_to_end_solve_ms": 6.987465,
+      "outcome": {
+        "cycles": 1,
+        "iterations": 2,
+        "scaled_relative_residual": 0.7317737515870442,
+        "status": "iteration_limit"
+      },
+      "sample": "000"
+    }
+  ],
+  "schema_version": 1,
+  "setup_ms": 171.443881,
+  "spmv_relative_error": 1.8661388290328277e-8,
+  "spmv_roundtrip_ms": 1.9175730000000002,
+  "tolerance": 0.0001
+}

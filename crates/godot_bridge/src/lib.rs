@@ -38,6 +38,11 @@ impl BloodLab {
     }
 
     #[func]
+    fn use_local_world(&mut self) {
+        self.simulation = Simulation::new_local_world(self.simulation.config.clone());
+    }
+
+    #[func]
     fn tick(&mut self, movement: Vector2) {
         self.simulation.tick(MoveInput {
             x: movement.x,

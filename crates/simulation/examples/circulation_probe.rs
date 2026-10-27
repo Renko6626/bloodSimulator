@@ -39,9 +39,12 @@ fn main() {
         ..Config::default()
     };
     let steps = (seconds / config.dt).ceil() as usize;
-    let world = args.get(3).is_some_and(|mode| mode == "world");
+    let local = args.get(3).is_some_and(|mode| mode == "local");
+    let world = local || args.get(3).is_some_and(|mode| mode == "world");
     let init_started = Instant::now();
-    let mut sim = if world {
+    let mut sim = if local {
+        Simulation::new_local_world(config)
+    } else if world {
         Simulation::new_world(config)
     } else {
         Simulation::new(config)
@@ -86,6 +89,11 @@ fn main() {
         .collect();
     let mut progress = vec![0.0; count];
     let mut solve_times = Vec::with_capacity(steps);
+    let mut fluid_times = Vec::with_capacity(steps);
+    let (mut max_divergence, mut max_momentum, mut max_exchange, mut max_net_flux) =
+        (0.0_f64, 0.0_f64, 0.0_f64, 0.0_f64);
+    let (mut min_active, mut max_active) = (usize::MAX, 0);
+    let mut fluid_iterations = 0usize;
     let mut contact_steps = 0;
     let mut maximum_area_error = 0.0_f32;
     let mut maximum_wall_overshoot = 0.0_f32;
@@ -96,6 +104,16 @@ fn main() {
         sim.tick(MoveInput::default());
         let state = sim.snapshot();
         solve_times.push(state.solve_ms);
+        if let Some(fluid) = &state.fluid {
+            fluid_times.push(fluid.solve_ms);
+            max_divergence = max_divergence.max(fluid.divergence_rms);
+            max_momentum = max_momentum.max(fluid.momentum_rms);
+            max_exchange = max_exchange.max(fluid.exchange_error);
+            max_net_flux = max_net_flux.max(fluid.net_flux.abs());
+            min_active = min_active.min(fluid.active_cells);
+            max_active = max_active.max(fluid.active_cells);
+            fluid_iterations += fluid.pressure_iterations;
+        }
         contact_steps += usize::from(state.soft_contacts > 0);
         for (i, cell) in state.cells.iter().enumerate() {
             assert!(
@@ -178,4 +196,14 @@ fn main() {
         solve_times[steps * 95 / 100],
         solve_times[steps - 1]
     );
+    if !fluid_times.is_empty() {
+        fluid_times.sort_by(f64::total_cmp);
+        println!(
+            "local fluid mean/p95/max={:.3}/{:.3}/{:.3} ms, active cells={min_active}..{max_active}, pressure iterations/frame={:.2}, div={max_divergence:.3e}, momentum={max_momentum:.3e}, exchange={max_exchange:.3e}, net flux={max_net_flux:.3e}",
+            fluid_times.iter().sum::<f64>() / steps as f64,
+            fluid_times[(steps * 95).div_ceil(100) - 1],
+            fluid_times[steps - 1],
+            fluid_iterations as f64 / steps as f64
+        );
+    }
 }

@@ -171,7 +171,7 @@ pub fn sample_velocity(position: Vector, map: &MapDefinition, flow: &GraphFlow) 
     if map.edges.is_empty() || flow.rates.len() != map.edges.len() {
         return Vector::ZERO;
     }
-    let nearest = map.nearest_edge(position);
+    let (nearest, signed_distance) = map.nearest_edge_and_signed_distance(position);
     let nearest_projection = map.project_edge(nearest, position);
     let mut velocity = edge_velocity(nearest, &nearest_projection, map, flow);
     let mut best_junction = None;
@@ -214,7 +214,7 @@ pub fn sample_velocity(position: Vector, map: &MapDefinition, flow: &GraphFlow) 
     }
     // signed_distance is negative inside the shared union of vessel channels.
     let fade_width = map.edges[nearest].half_width * 0.25;
-    let clearance = -map.signed_distance(position);
+    let clearance = -signed_distance;
     velocity * smoothstep((clearance / fade_width).clamp(0.0, 1.0))
 }
 

@@ -1,0 +1,209 @@
+{
+  "sources_sha256": {
+    "docs/research/experiments/2026-10-26-runtime-hotpaths/run.py": "08a925a8d6749bcf030b242abb915263136ef03c955417733fedeb534a2f1c9f",
+    "docs/research/experiments/2026-10-26-runtime-hotpaths/probe.rs": "8dacd496cbeadbd2c2874a6e8d6113188d33e10a0a622c8cacb0f902849887d2",
+    "docs/research/experiments/2026-10-26-stokes-sparse/run.py": "a39cac81b48566cecd5044b3bbe4743c20a7201b15c0475a8894019d86bfc0cc",
+    "docs/research/experiments/2026-10-26-stokes-sparse/longrun.py": "e104c95753ad322332c7dfcfea9f22eed93bb328fcc1b4d8c0f73da8da3f7d78",
+    "docs/research/experiments/2026-10-26-stokes-sparse/longrun.rs": "6fce7aa9184f4b42fa82c911f1425d24a440ffbca9ed7b8e66b3ba1cc7282b2d",
+    "docs/research/experiments/2026-10-26-stokes-sparse/sparse.rs": "ff8ce5a7622e60af8b338633230390e4cd20a4b62ec6f69ee5c3f67b377c0345",
+    "docs/research/experiments/2026-10-26-stokes-sparse/compare.rs": "a604f1b3da71ed51397cad92511ef97789c7c3af61a0b23394527f557660c834",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/Cargo.lock": "342197ef935464f24f596ec5df89ead86ed1d1b23bfffc91313b79d2a1bacb15",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/Cargo.toml": "db0f226a6687f7813047b6b7baaa1e29e1f146d5d9f076bf7a3ed5c2c773486b",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/godot_bridge/Cargo.toml": "688bcaf9ff374a29b15b53542daf3e27666b2bd35a0c605f3a9ea8924bb5097d",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/Cargo.toml": "f591af441f6bf07fa828c9f94284435f6ae4df382cac83b7d8e4cec910f32ecf",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/src/view.rs": "9ead0b5acad5e2504a4b48a48e1c207f31bc721e5e0cb3c45c5940af7e6fbe1e",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/src/cell.rs": "b94a98f6aecc15b3305bb2c943fe13305d17a12de023849eb350a776f24da70b",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/src/circulation.rs": "98051a6ea87ac45dab237c1d13c5d80cb2ca1b9b0bae1db98524e595233f98e1",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/src/map.rs": "39ff5a79ba39913b6991a01bd2fa011da6f8e6191c55fd3a40d3e91aa28670d1",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/src/vessel.rs": "89806837b670a7f7f25c5fd3d80fb1e63f7acc01963fd995537891bbeb671b1b",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/src/robot.rs": "abd85a82b52bc3cadb7b7b727a95daff17eb699f37544b5529c35eccdee7ddd6",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/src/config.rs": "8da31b6101d995cab83746f4aefa396c6f7b875b79df2261a49573b6eb1f7839",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/src/lib.rs": "db993324c14efb1766746b0e8787ac08821dac2680b1624314a39d303b8a2559",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/src/runtime.rs": "77d128c3128bb97cb40cc297a7602f77794453806a6cced4ddacc888ae295d1b",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/src/threading.rs": "c874aa764322e65aa721297c93e8603b444d91fbaa357234ee431247a6ddcbea",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/tests/experiment.rs": "d45c12fe68c561d35db3469d1bbc09efdb7f82aae47f4481a063da990af5b809",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/examples/circulation_probe.rs": "35097f916d272d27d58fb960dbab4dc597fbbfc0927c124cd7ff03259d6c57ef",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/src/map/geometry.rs": "b525f0940dfd06bb1f5b70f6a55a41ed53dcd646f3dab77a8c79466e09ff76aa",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/src/circulation/graph.rs": "2af4dc32bd259e63801bee6abed82f0bbf152ff215649acf8c57bdb6766873a1",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/src/fluid/grid.rs": "cdcf8b4087c726725bba6022f5b1d4f11a6545cf0ee21a3aead7622f7b407304",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/src/fluid/tests.rs": "18e0525c2cd912fdc1d4d61b04d2057027442541bdadd663bf7bfcd99ac2847d",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/src/fluid/mod.rs": "01b21badb36b4351dd8fb0665cb1b6ab10d071beca7ec2c7f012667381d3155d",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/simulation/src/fluid/linear.rs": "523d35bc6767af0d6d31cc7e856b0755680eee9b16d466f25f17627d133b48b3",
+    "docs/research/experiments/2026-10-26-stokes-sparse/baseline/crates/godot_bridge/src/lib.rs": "f8e3733300edfdfb17f7b71762505304f7aafaf3375171f10041ee1c5d17fa17"
+  },
+  "seconds": 30,
+  "scene": "72 cells; sparse Stokes; 1e-4; fixed fork; default input; two substeps; no warmup removal",
+  "temporary_workspaces": "/tmp/sunyunbo/blood-runtime-hotpaths-p3w619a_",
+  "cpus": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)",
+  "cpu_model": "Intel(R) Xeon(R) Gold 6330 CPU @ 2.00GHz",
+  "commands": [
+    [
+      "cargo",
+      "test",
+      "--release",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "/tmp/sunyunbo/blood-runtime-hotpaths-p3w619a_/baseline/Cargo.toml",
+      "-p",
+      "simulation",
+      "--target-dir",
+      "/tmp/sunyunbo/blood-stokes-rayon-target",
+      "--lib",
+      "cell::tests::compressed_cell_preserves_area_and_recovers_after_release"
+    ],
+    [
+      "cargo",
+      "build",
+      "--release",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "/tmp/sunyunbo/blood-runtime-hotpaths-p3w619a_/baseline/Cargo.toml",
+      "-p",
+      "simulation",
+      "--target-dir",
+      "/tmp/sunyunbo/blood-stokes-rayon-target",
+      "--example",
+      "runtime_probe"
+    ],
+    [
+      "cargo",
+      "test",
+      "--release",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "/tmp/sunyunbo/blood-runtime-hotpaths-p3w619a_/skip/Cargo.toml",
+      "-p",
+      "simulation",
+      "--target-dir",
+      "/tmp/sunyunbo/blood-stokes-rayon-target",
+      "--lib",
+      "cell::tests::compressed_cell_preserves_area_and_recovers_after_release"
+    ],
+    [
+      "cargo",
+      "build",
+      "--release",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "/tmp/sunyunbo/blood-runtime-hotpaths-p3w619a_/skip/Cargo.toml",
+      "-p",
+      "simulation",
+      "--target-dir",
+      "/tmp/sunyunbo/blood-stokes-rayon-target",
+      "--example",
+      "runtime_probe"
+    ]
+  ],
+  "runs": [
+    {
+      "name": "baseline-r1",
+      "variant": "baseline",
+      "profiling": false,
+      "command": [
+        "flock",
+        "/tmp/blood-stokes-feedback-bench.lock",
+        "taskset",
+        "-c",
+        "2-5",
+        "/tmp/sunyunbo/blood-runtime-hotpaths-p3w619a_/baseline-probe",
+        "30",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-26-runtime-hotpaths/results/baseline-r1"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "skip-r1",
+      "variant": "skip",
+      "profiling": false,
+      "command": [
+        "flock",
+        "/tmp/blood-stokes-feedback-bench.lock",
+        "taskset",
+        "-c",
+        "2-5",
+        "/tmp/sunyunbo/blood-runtime-hotpaths-p3w619a_/skip-probe",
+        "30",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-26-runtime-hotpaths/results/skip-r1"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "skip-r2",
+      "variant": "skip",
+      "profiling": false,
+      "command": [
+        "flock",
+        "/tmp/blood-stokes-feedback-bench.lock",
+        "taskset",
+        "-c",
+        "2-5",
+        "/tmp/sunyunbo/blood-runtime-hotpaths-p3w619a_/skip-probe",
+        "30",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-26-runtime-hotpaths/results/skip-r2"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "baseline-r2",
+      "variant": "baseline",
+      "profiling": false,
+      "command": [
+        "flock",
+        "/tmp/blood-stokes-feedback-bench.lock",
+        "taskset",
+        "-c",
+        "2-5",
+        "/tmp/sunyunbo/blood-runtime-hotpaths-p3w619a_/baseline-probe",
+        "30",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-26-runtime-hotpaths/results/baseline-r2"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "profile-baseline",
+      "variant": "baseline",
+      "profiling": true,
+      "command": [
+        "flock",
+        "/tmp/blood-stokes-feedback-bench.lock",
+        "taskset",
+        "-c",
+        "2-5",
+        "/tmp/sunyunbo/blood-runtime-hotpaths-p3w619a_/baseline-probe",
+        "30",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-26-runtime-hotpaths/results/profile-baseline"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "profile-skip",
+      "variant": "skip",
+      "profiling": true,
+      "command": [
+        "flock",
+        "/tmp/blood-stokes-feedback-bench.lock",
+        "taskset",
+        "-c",
+        "2-5",
+        "/tmp/sunyunbo/blood-runtime-hotpaths-p3w619a_/skip-probe",
+        "30",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-26-runtime-hotpaths/results/profile-skip"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "binary_sha256": {
+    "baseline": "f832d7e846f25dca79deca7bd3dbfc88ffa4faf409ac73dd67e3da9f9cfa5f5e",
+    "skip": "bae8bb19b5806a8940ebebc34e545b1e1b8ae4828b0aeab4d1ab339ba21b1e52"
+  }
+}

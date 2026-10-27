@@ -1,0 +1,24 @@
+{
+  "production_sources_unchanged": true,
+  "cpu_domains": 6,
+  "cpu_samples": 45,
+  "max_cpu_relative_residual": 3.354072564635567e-14,
+  "max_cpu_constraint_rms": 1.0284510434364977e-14,
+  "physical_gpu_performance_measured": false,
+  "software_smoke_accepted": true,
+  "limited_iteration_rejection_verified": true,
+  "lab_source_sha256": {
+    "docs/research/experiments/2026-10-27-gpu-stokes/cloud.py": "955f75ae6cbeb7411877b875990c1f99073c936a95f0b0760ea4ebfaacc9a342",
+    "docs/research/experiments/2026-10-27-gpu-stokes/prepare.py": "91d468f27ce711ef3a6762e20944bfa1c7cfc8affeaba57e39636827d4885e3d",
+    "docs/research/experiments/2026-10-27-gpu-stokes/capture.rs": "97f4a91d81a2df562a959135471326ab5830e87f8e93f1ff515bd786dd5a2e7f",
+    "docs/research/experiments/2026-10-27-gpu-stokes/driver.rs": "9341f6fa0bb08dc5e556d12c26416f53b9ab03a274971b578079d52ce048e3f8",
+    "docs/research/experiments/2026-10-27-gpu-stokes/lab/Cargo.toml": "ec2ca0ea045457c960d351229eb32602cbc1d22bb8f90a58b4fdb6bc5b642422",
+    "docs/research/experiments/2026-10-27-gpu-stokes/lab/Cargo.lock": "1051bcb20293800f4a5cad373a9aaca7f4bf15b4c746ef2ba77cda86d4929a56",
+    "docs/research/experiments/2026-10-27-gpu-stokes/lab/src/case.rs": "840152dd36083a0ea11eb6c521263348f25fd9115ce9e17c2ad9d8cdded875a5",
+    "docs/research/experiments/2026-10-27-gpu-stokes/lab/src/gmres.rs": "609c31917760fa64b26d11bfa21dee4ba71b0ae01a757b9eda9131e81714ecbb",
+    "docs/research/experiments/2026-10-27-gpu-stokes/lab/src/gpu.rs": "2a8edeae9fd878b1b3494e10580d21b240c8d9d481b86a81a86297d55b5fd775",
+    "docs/research/experiments/2026-10-27-gpu-stokes/lab/src/kernels.wgsl": "62632a72945dc664984b07b415f52c62082ddc4fd27b2a1966eb6a1442c9ef4b",
+    "docs/research/experiments/2026-10-27-gpu-stokes/lab/src/main.rs": "79f3288e9e27cffd45c5656915e28a76cb77d65236fe27b5bc1f18919cd75c4a",
+    "crates/simulation/src/fluid/linear.rs": "c011b138959aaa2a5eab07340b2858b0fa7b05fd336b9cfe313aaa06b10fd074"
+  }
+}

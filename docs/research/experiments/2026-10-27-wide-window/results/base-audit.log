@@ -1,0 +1,33 @@
+   Compiling simulation v0.1.0 (/tmp/sunyunbo/blood-wide-window-lg4hoj6_/base/crates/simulation)
+    Finished `release` profile [optimized] target(s) in 8.97s
+     Running unittests src/lib.rs (/tmp/sunyunbo/blood-stokes-rayon-target/release/deps/simulation-55fc4373fa76af32)
+
+running 8 tests
+test circulation::graph::tests::series_parallel_loop_obeys_pressures_conservation_and_scaling ... ok
+test circulation::graph::tests::velocity_is_static_without_head_and_smooth_near_junction ... ok
+test fluid::tests::equal_open_pressures_rest_and_closed_component_is_rejected ... ok
+test fluid::tests::open_channel_matches_poiseuille_and_preserves_pressure_reference ... ok
+test cell::tests::compressed_cell_preserves_area_and_recovers_after_release ... ok
+test fluid::tests::real_fork_conserves_opening_flux_and_solves_true_stokes_residuals ... ok
+test map::tests::fork_has_open_shared_floor_and_boundary ... ok
+test runtime::region_tests::region_handoff_reuses_bodies_and_preparation_applies_no_impulse ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.45s
+
+     Running tests/experiment.rs (/tmp/sunyunbo/blood-stokes-rayon-target/release/deps/experiment-a6bb11ad98626a61)
+
+running 5 tests
+test closed_loop_uses_total_resistance_and_poiseuille_profile ... ok
+test robot_has_no_coasting_and_can_easily_move_against_flow ... ok
+test pause_single_step_and_reset_use_the_same_clock ... ok
+test world_cells_pass_both_branches_and_rejoin ... ok
+test crowded_cells_advect_without_losing_area_or_crossing_walls ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.55s
+
+   Doc-tests simulation
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

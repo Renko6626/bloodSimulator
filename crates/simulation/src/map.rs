@@ -221,18 +221,26 @@ impl MapDefinition {
     }
 
     pub fn nearest_edge(&self, position: Vector) -> usize {
-        self.edges
+        self.nearest_edge_and_signed_distance(position).0
+    }
+
+    /// Reuse each path distance when a caller needs both the vessel and wall score.
+    pub(crate) fn nearest_edge_and_signed_distance(&self, position: Vector) -> (usize, f32) {
+        let mut signed_distance = f32::INFINITY;
+        let nearest = self
+            .edges
             .iter()
             .enumerate()
             .map(|(index, edge)| {
-                (
-                    index,
-                    distance_to_path_squared(&edge.centerline, position).sqrt() - edge.half_width,
-                )
+                let distance =
+                    distance_to_path_squared(&edge.centerline, position).sqrt() - edge.half_width;
+                signed_distance = signed_distance.min(distance);
+                (index, distance)
             })
             .min_by(|a, b| a.1.total_cmp(&b.1))
             .map(|(index, _)| index)
-            .expect("map has at least one edge")
+            .expect("map has at least one edge");
+        (nearest, signed_distance)
     }
 }
 

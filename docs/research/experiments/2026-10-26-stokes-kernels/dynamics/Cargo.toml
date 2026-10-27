@@ -1,0 +1,15 @@
+[package]
+name = "stokes-kernel-dynamics"
+version = "0.1.0"
+edition = "2021"
+[workspace]
+[features]
+default = ["parallel", "warm-pressure"]
+parallel = ["rapier2d/parallel"]
+warm-pressure = ["stokes_kernel_solver/warm-pressure"]
+reciprocal = ["stokes_kernel_solver/reciprocal"]
+fft-slices = ["stokes_kernel_solver/fft-slices"]
+[dependencies]
+rapier2d = "=0.36.1"
+rayon = "=1.12.0"
+stokes_kernel_solver = {path="../solver", default-features=false}

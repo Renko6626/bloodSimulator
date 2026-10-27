@@ -1,0 +1,48 @@
+   Compiling simulation v0.1.0 (/tmp/sunyunbo/blood-faer-speed-4yjxfbac/faer/crates/simulation)
+warning: method `factor_stats` is never used
+   --> crates/simulation/src/fluid/custom_reference.rs:130:12
+    |
+ 13 | impl BandCholesky {
+    | ----------------- method in this implementation
+...
+130 |     pub fn factor_stats(&self) -> (usize, usize) {
+    |            ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `simulation` (lib test) generated 1 warning
+    Finished `release` profile [optimized] target(s) in 5.10s
+     Running unittests src/lib.rs (/tmp/sunyunbo/blood-stokes-rayon-target/release/deps/simulation-55fc4373fa76af32)
+
+running 5 tests
+FAER_KERNEL,"simplicial",numeric_entries=297,solve_scratch_bytes=511
+FACTOR,1,56,297,2376,144510
+FAER_KERNEL,"simplicial",numeric_entries=419,solve_scratch_bytes=639
+FACTOR,0,72,419,3352,280178
+FAER_KERNEL,"test fluid::tests::equal_open_pressures_rest_and_closed_component_is_rejected ... simplicialok"
+,numeric_entries=2258,solve_scratch_bytes=2239
+FACTOR,0,272,2258,18064,475916
+FAER_KERNEL,"simplicial",numeric_entries=1959,solve_scratch_bytes=1983
+FACTOR,1,240,1959,15672,514386
+test fluid::tests::open_channel_matches_poiseuille_and_preserves_pressure_reference ... ok
+FAER_KERNEL,"simplicial",numeric_entries=28646,solve_scratch_bytes=19775
+FACTOR,0,2458,28646,229168,3718887
+FAER_KERNEL,"simplicial",numeric_entries=28785,solve_scratch_bytes=19775
+FAER_KERNEL,"simplicial",numeric_entries=28785,solve_scratch_bytes=19775
+FACTOR,1,2458,28785,230280,3804817
+FAER_KERNEL,"simplicial",numeric_entries=28646,solve_scratch_bytes=19775
+FACTOR,1,2458,28785,230280,3823717
+FACTOR,0,2458,28646,229168,3885101
+FAER_KERNEL,"simplicial",numeric_entries=28646,solve_scratch_bytes=19775
+FACTOR,0,2458,28646,229168,3399094
+FAER_KERNEL,"simplicial",numeric_entries=28785,solve_scratch_bytes=19775
+FACTOR,1,2458,28785,230280,3396195
+fork init=7.708431ms solve=5.021239ms CG=23 div=0.0000000002453461261484588 momentum=0.0000000000000009654459800486785 net=0.0000000032200253761232934
+test fluid::tests::real_fork_conserves_opening_flux_and_solves_true_stokes_residuals ... ok
+COMPARE velocity_max_abs=1.58206781009084807e-15 matrix_residual_max_abs=3.81942741323193502e-15
+test fluid::grid::inverse_comparison::fork_speed_inverse_matches_band_and_original_matrix ... ok
+FAER_AUDIT custom_max_abs=4.57966997657877073e-16 matrix_residual_max_abs=3.99680288865056355e-15
+test fluid::grid::faer_audit::faer_matches_custom_sparse_and_original_matrix ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.08s
+

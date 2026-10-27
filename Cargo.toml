@@ -7,7 +7,8 @@ edition = "2024"
 rust-version = "1.94"
 
 [workspace.dependencies]
-rapier2d = "=0.36.1"
+rapier2d = { version = "=0.36.1", features = ["parallel"] }
+rayon = "=1.12.0"
 godot = { version = "=0.5.5", default-features = false, features = ["api-4-7"] }
 
 [profile.dev.package."*"]

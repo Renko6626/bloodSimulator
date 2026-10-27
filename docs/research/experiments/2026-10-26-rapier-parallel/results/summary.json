@@ -1,0 +1,395 @@
+{
+  "cases": {
+    "serial-original-r1": {
+      "rapier_ms": {
+        "mean": 5.0299828363636365,
+        "p95": 6.430722,
+        "max": 10.518679
+      },
+      "fluid_ms": {
+        "mean": 7.899463554545455,
+        "p95": 9.671979,
+        "max": 31.838164
+      },
+      "diagnostic_ms": {
+        "mean": 0.1528353393939394,
+        "p95": 0.191763,
+        "max": 0.235567
+      },
+      "whole_ms": {
+        "mean": 13.095755054545455,
+        "p95": 16.098831,
+        "max": 39.786218
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 269.8909090909091,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_serial_original": {
+        "max_center_distance": 0.0,
+        "max_center_percent_diameter": 0.0,
+        "max_velocity_distance": 0.0,
+        "max_area_error_difference": 0.0,
+        "recorded_cell_rows_equal": true
+      },
+      "recorded_outlines_equal": true,
+      "recorded_fields_equal": true
+    },
+    "serial-tuned-r1": {
+      "rapier_ms": {
+        "mean": 2.886120887878788,
+        "p95": 4.326889,
+        "max": 4.452149
+      },
+      "fluid_ms": {
+        "mean": 6.902962581818182,
+        "p95": 9.958794,
+        "max": 58.94569
+      },
+      "diagnostic_ms": {
+        "mean": 0.1538647818181818,
+        "p95": 0.228249,
+        "max": 0.454692
+      },
+      "whole_ms": {
+        "mean": 9.955678636363636,
+        "p95": 14.559344,
+        "max": 63.534515
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 6.524242424242424,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_serial_original": {
+        "max_center_distance": 0.0,
+        "max_center_percent_diameter": 0.0,
+        "max_velocity_distance": 0.0,
+        "max_area_error_difference": 0.0,
+        "recorded_cell_rows_equal": true
+      },
+      "recorded_outlines_equal": true,
+      "recorded_fields_equal": true
+    },
+    "parallel-original-t4-r1": {
+      "rapier_ms": {
+        "mean": 3.4570372909090907,
+        "p95": 4.943315,
+        "max": 21.787435
+      },
+      "fluid_ms": {
+        "mean": 5.067498339393939,
+        "p95": 5.625919,
+        "max": 79.556512
+      },
+      "diagnostic_ms": {
+        "mean": 0.1468102696969697,
+        "p95": 0.228029,
+        "max": 0.271973
+      },
+      "whole_ms": {
+        "mean": 8.682963618181818,
+        "p95": 11.824852,
+        "max": 101.631374
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 269.8909090909091,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_serial_original": {
+        "max_center_distance": 0.0,
+        "max_center_percent_diameter": 0.0,
+        "max_velocity_distance": 0.0,
+        "max_area_error_difference": 0.0,
+        "recorded_cell_rows_equal": true
+      },
+      "recorded_outlines_equal": true,
+      "recorded_fields_equal": true
+    },
+    "parallel-tuned-t4-r1": {
+      "rapier_ms": {
+        "mean": 2.2720165515151516,
+        "p95": 2.39957,
+        "max": 3.07981
+      },
+      "fluid_ms": {
+        "mean": 4.673304445454545,
+        "p95": 5.325384,
+        "max": 6.171845
+      },
+      "diagnostic_ms": {
+        "mean": 0.1433329787878788,
+        "p95": 0.148475,
+        "max": 0.236716
+      },
+      "whole_ms": {
+        "mean": 7.100631390909091,
+        "p95": 7.779752,
+        "max": 8.66078
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 6.524242424242424,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_serial_original": {
+        "max_center_distance": 0.0,
+        "max_center_percent_diameter": 0.0,
+        "max_velocity_distance": 0.0,
+        "max_area_error_difference": 0.0,
+        "recorded_cell_rows_equal": true
+      },
+      "recorded_outlines_equal": true,
+      "recorded_fields_equal": true
+    },
+    "parallel-tuned-t2": {
+      "rapier_ms": {
+        "mean": 3.080968287878788,
+        "p95": 3.856518,
+        "max": 24.096103
+      },
+      "fluid_ms": {
+        "mean": 6.41579266060606,
+        "p95": 7.960148,
+        "max": 103.294283
+      },
+      "diagnostic_ms": {
+        "mean": 0.15166519393939393,
+        "p95": 0.193721,
+        "max": 0.304619
+      },
+      "whole_ms": {
+        "mean": 9.660738736363637,
+        "p95": 11.98212,
+        "max": 107.011689
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 6.524242424242424,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_serial_original": {
+        "max_center_distance": 0.0,
+        "max_center_percent_diameter": 0.0,
+        "max_velocity_distance": 0.0,
+        "max_area_error_difference": 0.0,
+        "recorded_cell_rows_equal": true
+      },
+      "recorded_outlines_equal": true,
+      "recorded_fields_equal": true
+    },
+    "parallel-tuned-t1": {
+      "rapier_ms": {
+        "mean": 4.2616321,
+        "p95": 5.520811,
+        "max": 5.587603
+      },
+      "fluid_ms": {
+        "mean": 8.014947872727273,
+        "p95": 9.205188,
+        "max": 59.185972
+      },
+      "diagnostic_ms": {
+        "mean": 0.1931925484848485,
+        "p95": 0.256307,
+        "max": 0.30149
+      },
+      "whole_ms": {
+        "mean": 12.48546520909091,
+        "p95": 14.58686,
+        "max": 63.093966
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 6.524242424242424,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_serial_original": {
+        "max_center_distance": 0.0,
+        "max_center_percent_diameter": 0.0,
+        "max_velocity_distance": 0.0,
+        "max_area_error_difference": 0.0,
+        "recorded_cell_rows_equal": true
+      },
+      "recorded_outlines_equal": true,
+      "recorded_fields_equal": true
+    },
+    "parallel-tuned-t4-r2": {
+      "rapier_ms": {
+        "mean": 2.017261712121212,
+        "p95": 2.223569,
+        "max": 2.62989
+      },
+      "fluid_ms": {
+        "mean": 4.169107787878788,
+        "p95": 5.218618,
+        "max": 5.420929
+      },
+      "diagnostic_ms": {
+        "mean": 0.14050005454545456,
+        "p95": 0.146341,
+        "max": 0.327351
+      },
+      "whole_ms": {
+        "mean": 6.338776118181818,
+        "p95": 7.481052,
+        "max": 8.389504
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 6.524242424242424,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_serial_original": {
+        "max_center_distance": 0.0,
+        "max_center_percent_diameter": 0.0,
+        "max_velocity_distance": 0.0,
+        "max_area_error_difference": 0.0,
+        "recorded_cell_rows_equal": true
+      },
+      "recorded_outlines_equal": true,
+      "recorded_fields_equal": true
+    },
+    "parallel-original-t4-r2": {
+      "rapier_ms": {
+        "mean": 3.4031420393939396,
+        "p95": 3.924659,
+        "max": 34.611625
+      },
+      "fluid_ms": {
+        "mean": 4.69877553939394,
+        "p95": 5.283963,
+        "max": 62.095861
+      },
+      "diagnostic_ms": {
+        "mean": 0.14330939393939393,
+        "p95": 0.227835,
+        "max": 0.235829
+      },
+      "whole_ms": {
+        "mean": 8.256866318181817,
+        "p95": 9.361749,
+        "max": 96.950736
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 269.8909090909091,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_serial_original": {
+        "max_center_distance": 0.0,
+        "max_center_percent_diameter": 0.0,
+        "max_velocity_distance": 0.0,
+        "max_area_error_difference": 0.0,
+        "recorded_cell_rows_equal": true
+      },
+      "recorded_outlines_equal": true,
+      "recorded_fields_equal": true
+    },
+    "serial-tuned-r2": {
+      "rapier_ms": {
+        "mean": 2.543593578787879,
+        "p95": 3.494118,
+        "max": 3.89037
+      },
+      "fluid_ms": {
+        "mean": 6.049361242424243,
+        "p95": 7.260335,
+        "max": 7.447526
+      },
+      "diagnostic_ms": {
+        "mean": 0.13272330606060606,
+        "p95": 0.187521,
+        "max": 0.263481
+      },
+      "whole_ms": {
+        "mean": 8.736900027272727,
+        "p95": 10.883371,
+        "max": 11.282298
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 6.524242424242424,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_serial_original": {
+        "max_center_distance": 0.0,
+        "max_center_percent_diameter": 0.0,
+        "max_velocity_distance": 0.0,
+        "max_area_error_difference": 0.0,
+        "recorded_cell_rows_equal": true
+      },
+      "recorded_outlines_equal": true,
+      "recorded_fields_equal": true
+    },
+    "serial-original-r2": {
+      "rapier_ms": {
+        "mean": 5.245730372727273,
+        "p95": 6.303402,
+        "max": 10.852345
+      },
+      "fluid_ms": {
+        "mean": 8.774731296969698,
+        "p95": 9.916637,
+        "max": 59.799311
+      },
+      "diagnostic_ms": {
+        "mean": 0.15880005757575757,
+        "p95": 0.187844,
+        "max": 0.240631
+      },
+      "whole_ms": {
+        "mean": 14.194065406060606,
+        "p95": 16.203172,
+        "max": 70.896418
+      },
+      "max_area_relative_error": 0.001486434,
+      "max_exchange_mismatch": 1.3e-11,
+      "min_driven_nondriven_particle_gap": -4.14e-07,
+      "mean_contacts_per_substep": 269.8909090909091,
+      "max_fluid_calls_per_frame": 3,
+      "trajectory_vs_serial_original": {
+        "max_center_distance": 0.0,
+        "max_center_percent_diameter": 0.0,
+        "max_velocity_distance": 0.0,
+        "max_area_error_difference": 0.0,
+        "recorded_cell_rows_equal": true
+      },
+      "recorded_outlines_equal": true,
+      "recorded_fields_equal": true
+    }
+  },
+  "repeat_trajectories": {
+    "serial-original": {
+      "max_center_distance": 0.0,
+      "max_center_percent_diameter": 0.0,
+      "max_velocity_distance": 0.0,
+      "max_area_error_difference": 0.0,
+      "recorded_cell_rows_equal": true
+    },
+    "serial-tuned": {
+      "max_center_distance": 0.0,
+      "max_center_percent_diameter": 0.0,
+      "max_velocity_distance": 0.0,
+      "max_area_error_difference": 0.0,
+      "recorded_cell_rows_equal": true
+    },
+    "parallel-original-t4": {
+      "max_center_distance": 0.0,
+      "max_center_percent_diameter": 0.0,
+      "max_velocity_distance": 0.0,
+      "max_area_error_difference": 0.0,
+      "recorded_cell_rows_equal": true
+    },
+    "parallel-tuned-t4": {
+      "max_center_distance": 0.0,
+      "max_center_percent_diameter": 0.0,
+      "max_velocity_distance": 0.0,
+      "max_area_error_difference": 0.0,
+      "recorded_cell_rows_equal": true
+    }
+  },
+  "serial_control_matches_archive": true
+}

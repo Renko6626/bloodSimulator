@@ -1,0 +1,132 @@
+{
+  "accepted": true,
+  "case": "/tmp/sunyunbo/blood-gpu-data-v1/wide96/region-1",
+  "command": [
+    "/tmp/sunyunbo/blood-gpu-lab-target/release/blood-gpu-stokes-lab",
+    "cpu",
+    "--case",
+    "/tmp/sunyunbo/blood-gpu-data-v1/wide96/region-1",
+    "--limit",
+    "8",
+    "--rtol",
+    "0.0001",
+    "--repeats",
+    "10",
+    "--out",
+    "/tmp/sunyunbo/blood-gpu-cpu-validation-v1/wide96-region-1-cpu.json"
+  ],
+  "factorization_ms": 69.03644800000001,
+  "known_model_issue": "wide domains omit internal pump; algebra correctness does not establish physical correctness",
+  "mode": "cpu_lu_f64",
+  "rows": 7309,
+  "samples": [
+    {
+      "audit": {
+        "constraint_rms": 3.347284956866994e-15,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.0533448281205704e-15,
+        "momentum_rms": 3.0533448281205704e-15,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 3.9017812809110995e-15,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 1.1010376,
+      "repeats": 10,
+      "sample": "000"
+    },
+    {
+      "audit": {
+        "constraint_rms": 3.277003880781671e-16,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 4.2908078705951878e-16,
+        "momentum_rms": 4.2908078705951878e-16,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 7.844746336478762e-15,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 1.0804285999999999,
+      "repeats": 10,
+      "sample": "001"
+    },
+    {
+      "audit": {
+        "constraint_rms": 4.641417219892885e-16,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 6.425259044031216e-16,
+        "momentum_rms": 6.425259044031216e-16,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 8.683742216545492e-15,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 1.0798436,
+      "repeats": 10,
+      "sample": "003"
+    },
+    {
+      "audit": {
+        "constraint_rms": 5.281696789218563e-16,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 6.914501056526795e-16,
+        "momentum_rms": 6.914501056526795e-16,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 8.272332956528108e-15,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 1.075886,
+      "repeats": 10,
+      "sample": "007"
+    },
+    {
+      "audit": {
+        "constraint_rms": 6.215217815183672e-16,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 7.442977791012243e-16,
+        "momentum_rms": 7.442977791012243e-16,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 9.063120094004212e-15,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 1.0759665999999999,
+      "repeats": 10,
+      "sample": "015"
+    },
+    {
+      "audit": {
+        "constraint_rms": 5.277746492739097e-16,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 6.267112574398934e-16,
+        "momentum_rms": 6.267112574398934e-16,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 8.434237756502535e-15,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 1.0752711,
+      "repeats": 10,
+      "sample": "031"
+    },
+    {
+      "audit": {
+        "constraint_rms": 3.3376966810163316e-16,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 4.3740230079638417e-16,
+        "momentum_rms": 4.3740230079638417e-16,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 7.447374257888243e-15,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 1.0757422,
+      "repeats": 10,
+      "sample": "063"
+    }
+  ],
+  "schema_version": 1,
+  "source": "production StokesFactor; sequential faer sparse LU",
+  "tolerance": 0.0001
+}

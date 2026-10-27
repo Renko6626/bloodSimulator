@@ -1,0 +1,17 @@
+{
+  "command": [
+    "flock",
+    "/tmp/blood-stokes-feedback-bench.lock",
+    "taskset",
+    "-c",
+    "2-5",
+    "/tmp/sunyunbo/blood-stokes-longrun-k0sbh37u/strict-longrun",
+    "30",
+    "/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-26-stokes-sparse/results/longrun/replay-strict"
+  ],
+  "seconds": 30,
+  "binary_sha256": "527e4298a8569407657b36fb1d071f7d250bdeaf09bfc4d69a10684c927f6e35",
+  "script_sha256": "8e9a7704b576d89340215697f982070d9dd050edd2285193d5fc4ee155cbd730",
+  "reason": "observed paired trajectory divergence; compare identical tolerance repeat before attributing it",
+  "exit_code": 0
+}

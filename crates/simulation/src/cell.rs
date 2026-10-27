@@ -22,9 +22,32 @@ pub(crate) fn advect(
     dt: f32,
     velocity_at: impl Fn(Vector) -> Vector,
 ) {
+    if drag == 0.0 {
+        // Rapier setters also clear a pending kinematic position; retain that
+        // bookkeeping while omitting queries whose response would be zero.
+        for i in 0..body.num_particles() {
+            body.set_particle_velocity(i, body.particle_velocity(i));
+        }
+        return;
+    }
     // Velocity relaxation integrates drag analytically. Contacts and deformation
     // still run in Rapier; positions are never moved directly by the flow.
     let response = 1.0 - (-drag * dt).exp();
+    if body.num_particles() == 12 {
+        let samples: [Vector; 6] =
+            std::array::from_fn(|k| velocity_at(body.particle_position(k * 2)));
+        for i in 0..12 {
+            let k = i / 2;
+            let target = if i % 2 == 0 {
+                samples[k]
+            } else {
+                (samples[k] + samples[(k + 1) % 6]) * 0.5
+            };
+            let velocity = body.particle_velocity(i);
+            body.set_particle_velocity(i, velocity + (target - velocity) * response);
+        }
+        return;
+    }
     for i in 0..body.num_particles() {
         let target = velocity_at(body.particle_position(i));
         let velocity = body.particle_velocity(i);

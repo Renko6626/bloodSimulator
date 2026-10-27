@@ -1,0 +1,92 @@
+{
+  "seconds": 20,
+  "cpus": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "sources_sha256": {
+    "Cargo.toml": "db0f226a6687f7813047b6b7baaa1e29e1f146d5d9f076bf7a3ed5c2c773486b",
+    "Cargo.lock": "e96edf0e9cb404bdb5fff5f5e2ba8b743c8176667b4200ce56046a06737ffba7",
+    "crates/simulation/Cargo.toml": "5184ddf233f18512dc2f96105f7758071db9c62bcdf3382ddec590adf151485a",
+    "crates/godot_bridge/Cargo.toml": "688bcaf9ff374a29b15b53542daf3e27666b2bd35a0c605f3a9ea8924bb5097d",
+    "godot/world.gd": "883a1aeb4390c3525d5e413eaca595d38da77733194719aec24597a1fdffac67",
+    "docs/research/experiments/2026-10-27-region-switch/run.py": "a75737971d7e1615498c09fd6c2206b23537c99bee1d328f85742efdf4fba3e0",
+    "crates/godot_bridge/src/lib.rs": "e46ce8a363600293c77b4138a8ffaaa4de7ab5d0d47d13300889defcc547bbff",
+    "crates/simulation/examples/circulation_probe.rs": "35097f916d272d27d58fb960dbab4dc597fbbfc0927c124cd7ff03259d6c57ef",
+    "crates/simulation/examples/region_probe.rs": "f8929694640097b033e0b713ce6858d7ccce771ec5bbe3251304692d295b1a9d",
+    "crates/simulation/src/cell.rs": "5caa49010945dd6bb593c09444f3cc03ca24075f9fb5f933d1aaefefcffe0ad5",
+    "crates/simulation/src/circulation/graph.rs": "7db73535507736f70b8a27eeb988ed0c85e8d9faba7d42221fb73a01ca1482a9",
+    "crates/simulation/src/circulation.rs": "98051a6ea87ac45dab237c1d13c5d80cb2ca1b9b0bae1db98524e595233f98e1",
+    "crates/simulation/src/config.rs": "8da31b6101d995cab83746f4aefa396c6f7b875b79df2261a49573b6eb1f7839",
+    "crates/simulation/src/fluid/grid.rs": "4bb23d547de5281cc7d98265fd89d342d8fbe8563f2f819a48e50926e15e595b",
+    "crates/simulation/src/fluid/linear.rs": "c011b138959aaa2a5eab07340b2858b0fa7b05fd336b9cfe313aaa06b10fd074",
+    "crates/simulation/src/fluid/mod.rs": "ca505bc55ffea8c0c7edfe0bcdcfda8552a1c8ffdf92113853f54398a95c0fa1",
+    "crates/simulation/src/fluid/regions.rs": "6f0feb6a211b4df8931687131ab8439932709a43ca1577cb920121091ebe6062",
+    "crates/simulation/src/fluid/tests.rs": "a930f1760ac6be6a89f54120422d0b8a2335d00d926c7f22f15fab1fb6580a69",
+    "crates/simulation/src/lib.rs": "db993324c14efb1766746b0e8787ac08821dac2680b1624314a39d303b8a2559",
+    "crates/simulation/src/map/geometry.rs": "b525f0940dfd06bb1f5b70f6a55a41ed53dcd646f3dab77a8c79466e09ff76aa",
+    "crates/simulation/src/map.rs": "b39b2499c540aa1a29586d673f151e23b38ec817ce770149f756787b383ccf0d",
+    "crates/simulation/src/robot.rs": "abd85a82b52bc3cadb7b7b727a95daff17eb699f37544b5529c35eccdee7ddd6",
+    "crates/simulation/src/runtime.rs": "3d6e99e43e8442d3981a7d1cffcdbf1f9952e86410c1f62df0c4bb940d0b1d28",
+    "crates/simulation/src/threading.rs": "c874aa764322e65aa721297c93e8603b444d91fbaa357234ee431247a6ddcbea",
+    "crates/simulation/src/vessel.rs": "89806837b670a7f7f25c5fd3d80fb1e63f7acc01963fd995537891bbeb671b1b",
+    "crates/simulation/src/view.rs": "9ead0b5acad5e2504a4b48a48e1c207f31bc721e5e0cb3c45c5940af7e6fbe1e",
+    "crates/simulation/tests/experiment.rs": "d45c12fe68c561d35db3469d1bbc09efdb7f82aae47f4481a063da990af5b809"
+  },
+  "scene": "production joint LU;two precomputed regions;6 samples;72 cells;real MoveInput waypoint driving",
+  "commands": [
+    [
+      "cargo",
+      "build",
+      "--release",
+      "--offline",
+      "--locked",
+      "-p",
+      "simulation",
+      "--example",
+      "region_probe",
+      "--target-dir",
+      "/tmp/sunyunbo/blood-stokes-rayon-target",
+      "-j",
+      "4"
+    ],
+    [
+      "flock",
+      "/tmp/blood-stokes-feedback-bench.lock",
+      "taskset",
+      "-c",
+      "2-5",
+      "/usr/bin/time",
+      "-f",
+      "MAX_RSS_KIB,%M",
+      "/tmp/sunyunbo/blood-stokes-rayon-target/release/examples/region_probe",
+      "20",
+      "/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-27-region-switch/results/drive"
+    ]
+  ],
+  "exit_code": 0,
+  "binary_sha256": "8d02952a0f6c10d755269f4d226b4a8049246bdcd2828cac48b10a174f5603c9",
+  "verification": {
+    "project_command": [
+      "bash",
+      "scripts/check.sh"
+    ],
+    "project_exit_code": 0,
+    "opt_in_command": [
+      "godot",
+      "--headless",
+      "--path",
+      "godot",
+      "--fixed-fps",
+      "60",
+      "--quit-after",
+      "180",
+      "--",
+      "--local-stokes"
+    ],
+    "opt_in_exit_code": 0,
+    "review": "Read-only scoped review found no substantive issues; no edits or extra tests."
+  }
+}

@@ -1,0 +1,21 @@
+[package]
+name = "stokes_kernel_solver"
+version = "0.0.0"
+edition = "2021"
+[workspace]
+[features]
+default = ["warm-pressure"]
+warm-pressure = []
+reciprocal = []
+fft-slices = []
+comparison = ["dep:stokes_relaxation_solver"]
+[dependencies]
+rayon = "=1.12.0"
+stokes_relaxation_solver = { path = "../../2026-10-26-stokes-relaxation/solver", optional = true }
+[lib]
+path = "lib.rs"
+
+[[bin]]
+name = "compare"
+path = "compare.rs"
+required-features = ["comparison"]

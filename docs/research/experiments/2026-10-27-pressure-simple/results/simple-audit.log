@@ -1,0 +1,31 @@
+   Compiling simulation v0.1.0 (/tmp/sunyunbo/blood-pressure-simple-b1_f2q27/simple/crates/simulation)
+    Finished `release` profile [optimized] target(s) in 3.01s
+     Running unittests src/lib.rs (/tmp/sunyunbo/blood-stokes-rayon-target/release/deps/simulation-fce3c7a07e510660)
+
+running 5 tests
+FACTOR,1,56,298,4768,125798
+FACTOR,0,72,422,6752,195413
+PRESSURE_FACTOR,64,359,5744,293879
+test fluid::tests::equal_open_pressures_rest_and_closed_component_is_rejected ... ok
+FACTOR,1,240,1976,31616,1120692
+FACTOR,0,272,2323,37168,1533955
+PRESSURE_FACTOR,256,2179,34864,1286437
+FACTOR,0,2458,30507,488112,31405362
+FACTOR,0,2458,30507,488112,31554666
+FACTOR,1,2458,31247,499952,33957460
+test fluid::tests::open_channel_matches_poiseuille_and_preserves_pressure_reference ... ok
+FACTOR,1,2458,31247,499952,35262480
+FACTOR,0,2458,30507,488112,31146106
+FACTOR,1,2458,31247,499952,33494654
+PRESSURE_FACTOR,2484,30891,494256,32620906
+PRESSURE_FACTOR,2484,30891,494256,32696961
+PRESSURE_FACTOR,2484,30891,494256,32759990
+SIMPLE_AUDIT max_abs_Pz_minus_rhs=5.50601231275038572e-15
+test fluid::grid::simple_audit::simple_factor_inverts_original_approximate_schur ... ok
+COMPARE velocity_max_abs=1.52655665885959024e-15 matrix_residual_max_abs=6.74460487459782598e-15
+test fluid::grid::inverse_comparison::fork_speed_inverse_matches_band_and_original_matrix ... ok
+fork init=97.680258ms solve=48.778898ms CG=108 div=0.0000000004628558256486928 momentum=0.0000000000000009607739887775948 net=-0.0000000014532170879424682
+test fluid::tests::real_fork_conserves_opening_flux_and_solves_true_stokes_residuals ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.15s
+

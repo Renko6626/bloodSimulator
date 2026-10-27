@@ -1,0 +1,3 @@
+progress frame=600/1800 time=10.0 active=9 grid_speed=2.3387 area_error=0.1787%
+progress frame=1200/1800 time=20.0 active=14 grid_speed=2.2666 area_error=0.2060%
+progress frame=1800/1800 time=30.0 active=21 grid_speed=2.2191 area_error=0.2465%

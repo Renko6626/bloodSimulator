@@ -1,0 +1,514 @@
+{
+  "cases": {
+    "control-r1": {
+      "whole_ms": {
+        "mean": 11.804502653888889,
+        "p95": 14.905104,
+        "max": 51.21885
+      },
+      "fluid_ms": {
+        "mean": 5.970653776111111,
+        "p95": 8.294862,
+        "max": 18.274437
+      },
+      "stages": {
+        "network_ms": {
+          "mean": 0.0004937772222222222,
+          "p95": 0.000775,
+          "max": 0.004633
+        },
+        "prepare_ms": {
+          "mean": 0.004723809444444445,
+          "p95": 0.006103,
+          "max": 0.012536
+        },
+        "robot_ms": {
+          "mean": 0.012371851111111111,
+          "p95": 0.016024,
+          "max": 0.030905
+        },
+        "advection_ms": {
+          "mean": 2.645539496111111,
+          "p95": 3.381559,
+          "max": 4.413514
+        },
+        "fluid_ms": {
+          "mean": 5.990316431666667,
+          "p95": 8.303198,
+          "max": 18.290632
+        },
+        "rapier_ms": {
+          "mean": 3.1172777022222222,
+          "p95": 3.813482,
+          "max": 29.995363
+        }
+      },
+      "iterations_mean": 15.71111111111111,
+      "analytic_samples_mean": 735.5,
+      "observations_match": true,
+      "metrics_ms": {},
+      "metric_calls": {}
+    },
+    "geometry": {
+      "whole_ms": {
+        "mean": 12.213112705555556,
+        "p95": 15.768451,
+        "max": 206.604638
+      },
+      "fluid_ms": {
+        "mean": 5.788286206666666,
+        "p95": 8.244755,
+        "max": 159.562573
+      },
+      "stages": {
+        "network_ms": {
+          "mean": 0.0004953105555555556,
+          "p95": 0.000764,
+          "max": 0.003827
+        },
+        "prepare_ms": {
+          "mean": 0.004870827777777777,
+          "p95": 0.00618,
+          "max": 0.027907
+        },
+        "robot_ms": {
+          "mean": 0.013752601666666666,
+          "p95": 0.017847,
+          "max": 0.02464
+        },
+        "advection_ms": {
+          "mean": 3.0670897366666665,
+          "p95": 4.337786,
+          "max": 5.860904
+        },
+        "fluid_ms": {
+          "mean": 5.805303770555556,
+          "p95": 8.253668,
+          "max": 159.586906
+        },
+        "rapier_ms": {
+          "mean": 3.261827085,
+          "p95": 4.08861,
+          "max": 28.831805
+        }
+      },
+      "iterations_mean": 15.71111111111111,
+      "analytic_samples_mean": 735.5,
+      "observations_match": true,
+      "metrics_ms": {
+        "analytic_total": {
+          "mean": 3.005135821666667,
+          "p95": 4.257318,
+          "max": 5.793338
+        },
+        "nearest_edge": {
+          "mean": 1.02036349,
+          "p95": 1.404203,
+          "max": 3.483287
+        },
+        "signed_distance": {
+          "mean": 0.9835093727777777,
+          "p95": 1.366184,
+          "max": 1.612436
+        },
+        "project_edge": {
+          "mean": 0.3192614272222222,
+          "p95": 0.422305,
+          "max": 0.541362
+        },
+        "edge_length": {
+          "mean": 0.031391792777777774,
+          "p95": 0.042348,
+          "max": 0.108649
+        },
+        "junction_search": {
+          "mean": 0.317569175,
+          "p95": 0.528825,
+          "max": 0.643735
+        },
+        "junction_mix": {
+          "mean": 0.29462455277777777,
+          "p95": 0.404598,
+          "max": 0.549683
+        }
+      },
+      "metric_calls": {
+        "analytic_total": 737.5,
+        "nearest_edge": 737.5,
+        "signed_distance": 737.5,
+        "project_edge": 1521.0866666666666,
+        "edge_length": 420.25388888888887,
+        "junction_search": 737.5,
+        "junction_mix": 359.7705555555556
+      },
+      "analytic_other_ms": {
+        "mean": 0.33304056388888886,
+        "p95": 0.474125,
+        "max": 0.604022
+      }
+    },
+    "fluid": {
+      "whole_ms": {
+        "mean": 11.515645408333333,
+        "p95": 14.800117,
+        "max": 112.219076
+      },
+      "fluid_ms": {
+        "mean": 5.788016303888889,
+        "p95": 8.238057,
+        "max": 67.336561
+      },
+      "stages": {
+        "network_ms": {
+          "mean": 0.0004965905555555555,
+          "p95": 0.000767,
+          "max": 0.007419
+        },
+        "prepare_ms": {
+          "mean": 0.004630249444444444,
+          "p95": 0.006298,
+          "max": 0.031117
+        },
+        "robot_ms": {
+          "mean": 0.01173455,
+          "p95": 0.015746,
+          "max": 0.035493
+        },
+        "advection_ms": {
+          "mean": 2.4725978916666667,
+          "p95": 3.290978,
+          "max": 4.739851
+        },
+        "fluid_ms": {
+          "mean": 5.799577767777778,
+          "p95": 8.250554,
+          "max": 67.344462
+        },
+        "rapier_ms": {
+          "mean": 3.1808868805555557,
+          "p95": 3.953532,
+          "max": 44.727901
+        }
+      },
+      "iterations_mean": 15.71111111111111,
+      "analytic_samples_mean": 735.5,
+      "observations_match": true,
+      "metrics_ms": {
+        "fluid_advance": {
+          "mean": 5.798948548333334,
+          "p95": 8.249905,
+          "max": 67.343791
+        },
+        "marker_prepare": {
+          "mean": 0.08462405833333334,
+          "p95": 0.167208,
+          "max": 0.262927
+        },
+        "marker_spread": {
+          "mean": 0.012263629444444445,
+          "p95": 0.01907,
+          "max": 0.072063
+        },
+        "grid_solve": {
+          "mean": 5.394126595555556,
+          "p95": 7.738175,
+          "max": 67.034915
+        },
+        "combine_field": {
+          "mean": 0.01047177,
+          "p95": 0.013378,
+          "max": 0.065486
+        },
+        "full_diagnostics": {
+          "mean": 0.26079611444444445,
+          "p95": 0.37848,
+          "max": 0.627151
+        },
+        "impulse_and_finish": {
+          "mean": 0.02504019388888889,
+          "p95": 0.034644,
+          "max": 0.070847
+        },
+        "pressure_gradient": {
+          "mean": 0.4285032561111111,
+          "p95": 0.688311,
+          "max": 1.259763
+        },
+        "divergence": {
+          "mean": 0.35838572166666666,
+          "p95": 0.540069,
+          "max": 0.887303
+        },
+        "schur": {
+          "mean": 4.088218770555556,
+          "p95": 6.019133,
+          "max": 53.801448
+        },
+        "true_measure": {
+          "mean": 0.33796642055555554,
+          "p95": 0.502679,
+          "max": 1.183489
+        },
+        "velocity_inverse": {
+          "mean": 4.326065156666667,
+          "p95": 6.365711,
+          "max": 65.842617
+        },
+        "factor_total_work": {
+          "mean": 5.6442191883333335,
+          "p95": 7.905489,
+          "max": 13.406656
+        },
+        "factor_reorder_work": {
+          "mean": 0.14951826777777777,
+          "p95": 0.216976,
+          "max": 0.448927
+        },
+        "factor_forward_work": {
+          "mean": 2.593968106666667,
+          "p95": 3.725409,
+          "max": 6.84512
+        },
+        "factor_backward_work": {
+          "mean": 2.661541758333333,
+          "p95": 3.83974,
+          "max": 6.007909
+        },
+        "factor_restore_work": {
+          "mean": 0.21805674388888888,
+          "p95": 0.360052,
+          "max": 3.189278
+        },
+        "u_solve": {
+          "mean": 2.552054527777778,
+          "p95": 3.533255,
+          "max": 9.693484
+        },
+        "v_solve": {
+          "mean": 3.099323445,
+          "p95": 5.00102,
+          "max": 10.130414
+        },
+        "max_component_per_inverse": {
+          "mean": 3.220396961111111,
+          "p95": 5.035265,
+          "max": 10.130414
+        }
+      },
+      "metric_calls": {
+        "fluid_advance": 2.0,
+        "marker_prepare": 2.0,
+        "marker_spread": 2.0,
+        "grid_solve": 2.0,
+        "combine_field": 2.0,
+        "full_diagnostics": 2.0,
+        "impulse_and_finish": 2.0,
+        "pressure_gradient": 23.711111111111112,
+        "divergence": 25.711111111111112,
+        "schur": 17.711111111111112,
+        "true_measure": 4.0,
+        "velocity_inverse": 21.711111111111112,
+        "factor_total_work": 43.422222222222224,
+        "factor_reorder_work": 43.422222222222224,
+        "factor_forward_work": 43.422222222222224,
+        "factor_backward_work": 43.422222222222224,
+        "factor_restore_work": 43.422222222222224,
+        "u_solve": 21.711111111111112,
+        "v_solve": 21.711111111111112,
+        "max_component_per_inverse": 21.711111111111112
+      },
+      "inverse_outside_max_component_ms": {
+        "mean": 1.1056681955555556,
+        "p95": 2.475638,
+        "max": 62.567899
+      },
+      "inverse_fraction_of_grid_solve": 0.8019954815726963,
+      "inverse_mean_ms_per_call": 0.19925581581371546
+    },
+    "rapier": {
+      "whole_ms": {
+        "mean": 12.37363014111111,
+        "p95": 15.448933,
+        "max": 109.930931
+      },
+      "fluid_ms": {
+        "mean": 6.277061876111111,
+        "p95": 8.58206,
+        "max": 69.578407
+      },
+      "stages": {
+        "network_ms": {
+          "mean": 0.0005974538888888889,
+          "p95": 0.000822,
+          "max": 0.004768
+        },
+        "prepare_ms": {
+          "mean": 0.0048630255555555555,
+          "p95": 0.005967,
+          "max": 0.015835
+        },
+        "robot_ms": {
+          "mean": 0.012837388333333333,
+          "p95": 0.016398,
+          "max": 0.04919
+        },
+        "advection_ms": {
+          "mean": 2.7585917155555557,
+          "p95": 3.586881,
+          "max": 4.431317
+        },
+        "fluid_ms": {
+          "mean": 6.288925095555555,
+          "p95": 8.595355,
+          "max": 69.58547
+        },
+        "rapier_ms": {
+          "mean": 3.2706278783333333,
+          "p95": 4.071765,
+          "max": 36.959379
+        }
+      },
+      "iterations_mean": 15.71111111111111,
+      "analytic_samples_mean": 735.5,
+      "observations_match": true,
+      "metrics_ms": {
+        "rapier_update": {
+          "mean": 0.013769763888888889,
+          "p95": 0.017766,
+          "max": 0.036237
+        },
+        "rapier_collision": {
+          "mean": 0.3713852066666667,
+          "p95": 0.558632,
+          "max": 9.072877
+        },
+        "rapier_islands": {
+          "mean": 0.012847515555555555,
+          "p95": 0.017986,
+          "max": 0.030445
+        },
+        "rapier_constraint_maintenance": {
+          "mean": 0.012111941666666667,
+          "p95": 0.017926,
+          "max": 0.036827
+        },
+        "rapier_solver": {
+          "mean": 2.459014458888889,
+          "p95": 3.044376,
+          "max": 18.548697
+        },
+        "rapier_user_changes": {
+          "mean": 0.055585618333333336,
+          "p95": 0.071428,
+          "max": 0.250025
+        },
+        "rapier_ccd": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "rapier_broad": {
+          "mean": 0.098744245,
+          "p95": 0.104442,
+          "max": 9.000964
+        },
+        "rapier_narrow": {
+          "mean": 0.22855184722222222,
+          "p95": 0.415428,
+          "max": 2.940981
+        },
+        "rapier_final_broad": {
+          "mean": 0.04303702833333333,
+          "p95": 0.0565,
+          "max": 0.127696
+        },
+        "rapier_assembly": {
+          "mean": 0.382890535,
+          "p95": 0.444525,
+          "max": 16.139632
+        },
+        "rapier_resolution": {
+          "mean": 2.0697714822222224,
+          "p95": 2.597133,
+          "max": 11.255501
+        },
+        "rapier_writeback": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        }
+      },
+      "metric_calls": {
+        "rapier_update": 2.0,
+        "rapier_collision": 2.0,
+        "rapier_islands": 2.0,
+        "rapier_constraint_maintenance": 2.0,
+        "rapier_solver": 2.0,
+        "rapier_user_changes": 2.0,
+        "rapier_ccd": 2.0,
+        "rapier_broad": 2.0,
+        "rapier_narrow": 2.0,
+        "rapier_final_broad": 2.0,
+        "rapier_assembly": 2.0,
+        "rapier_resolution": 2.0,
+        "rapier_writeback": 2.0
+      }
+    },
+    "control-r2": {
+      "whole_ms": {
+        "mean": 11.850185909444445,
+        "p95": 14.688912,
+        "max": 82.285758
+      },
+      "fluid_ms": {
+        "mean": 6.0360540644444445,
+        "p95": 8.133166,
+        "max": 45.797249
+      },
+      "stages": {
+        "network_ms": {
+          "mean": 0.0005332105555555556,
+          "p95": 0.000736,
+          "max": 0.004326
+        },
+        "prepare_ms": {
+          "mean": 0.00471302,
+          "p95": 0.006109,
+          "max": 0.012269
+        },
+        "robot_ms": {
+          "mean": 0.012332673888888888,
+          "p95": 0.015684,
+          "max": 0.036242
+        },
+        "advection_ms": {
+          "mean": 2.642901668888889,
+          "p95": 3.553512,
+          "max": 7.270996
+        },
+        "fluid_ms": {
+          "mean": 6.0479003944444445,
+          "p95": 8.148521,
+          "max": 45.86938
+        },
+        "rapier_ms": {
+          "mean": 3.108984581666667,
+          "p95": 3.844673,
+          "max": 31.140611
+        }
+      },
+      "iterations_mean": 15.71111111111111,
+      "analytic_samples_mean": 735.5,
+      "observations_match": true,
+      "metrics_ms": {},
+      "metric_calls": {}
+    }
+  },
+  "notes": [
+    "geometry and fluid are separate instrumented trajectories, not additive phases of one run",
+    "schur/grid/inverse/measure spans nest; do not sum all rows",
+    "factor_*_work sums elapsed work across two parallel tasks; not frame wall time",
+    "native Rapier timers are a separate build with only the profiler feature enabled",
+    "zero native sub-timers may be uninstrumented in the parallel implementation"
+  ]
+}

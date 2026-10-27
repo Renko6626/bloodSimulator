@@ -1,0 +1,273 @@
+{
+  "cases": {
+    "cg-r1": {
+      "whole_ms": {
+        "mean": 11.240242669444445,
+        "p95": 15.044705,
+        "max": 18.743075
+      },
+      "fluid_ms": {
+        "mean": 6.101993033333334,
+        "p95": 8.965871,
+        "max": 11.184235
+      },
+      "iterations": {
+        "mean": 14.911111111111111,
+        "p95": 17.0,
+        "max": 23.0
+      },
+      "mean_cell_distance": 13.743212011093723,
+      "incoming_volume": 68.48708364135037,
+      "upper_fraction": 0.5000153672850267,
+      "max_diagnostics": {
+        "divergence_peak": 0.00020437313239935327,
+        "momentum_peak": 1.4863144048459058e-14,
+        "exchange": 3.860218849480278e-10,
+        "flux_relative_peak": 6.252593167398326e-05,
+        "grid_speed_peak": 2.7919510854843512,
+        "force_peak": 0.25564348397016656,
+        "max_area_error": 0.0336172868175334,
+        "max_wall_overshoot": 0.0
+      },
+      "initialization_ms": 190.196572,
+      "same_backend_replay_matches": true
+    },
+    "simple-r1": {
+      "whole_ms": {
+        "mean": 26.815175469444444,
+        "p95": 34.90911,
+        "max": 42.632376
+      },
+      "fluid_ms": {
+        "mean": 22.091662536111112,
+        "p95": 29.386027,
+        "max": 36.703626
+      },
+      "iterations": {
+        "mean": 53.980555555555554,
+        "p95": 68.0,
+        "max": 87.0
+      },
+      "mean_cell_distance": 13.743740303481395,
+      "incoming_volume": 68.48569403269745,
+      "upper_fraction": 0.5000281631199578,
+      "max_diagnostics": {
+        "divergence_peak": 0.00023779769240791224,
+        "momentum_peak": 1.492822698141087e-14,
+        "exchange": 3.658257964355442e-10,
+        "flux_relative_peak": 4.70239980520529e-06,
+        "grid_speed_peak": 2.7917362528529877,
+        "force_peak": 0.25718260718948505,
+        "max_area_error": 0.03349097635690412,
+        "max_wall_overshoot": 0.0
+      },
+      "initialization_ms": 243.81407,
+      "pressure_factor": {
+        "size": 2484,
+        "entries": 30891,
+        "payload_bytes": 494256,
+        "setup_ns": 31890670
+      },
+      "same_backend_replay_matches": true
+    },
+    "simple-r2": {
+      "whole_ms": {
+        "mean": 26.83293480277778,
+        "p95": 34.493729,
+        "max": 63.593731
+      },
+      "fluid_ms": {
+        "mean": 22.05822902222222,
+        "p95": 29.00447,
+        "max": 36.923053
+      },
+      "iterations": {
+        "mean": 53.980555555555554,
+        "p95": 68.0,
+        "max": 87.0
+      },
+      "mean_cell_distance": 13.743740303481395,
+      "incoming_volume": 68.48569403269745,
+      "upper_fraction": 0.5000281631199578,
+      "max_diagnostics": {
+        "divergence_peak": 0.00023779769240791224,
+        "momentum_peak": 1.492822698141087e-14,
+        "exchange": 3.658257964355442e-10,
+        "flux_relative_peak": 4.70239980520529e-06,
+        "grid_speed_peak": 2.7917362528529877,
+        "force_peak": 0.25718260718948505,
+        "max_area_error": 0.03349097635690412,
+        "max_wall_overshoot": 0.0
+      },
+      "initialization_ms": 210.051871,
+      "pressure_factor": {
+        "size": 2484,
+        "entries": 30891,
+        "payload_bytes": 494256,
+        "setup_ns": 34012295
+      },
+      "same_backend_replay_matches": true
+    },
+    "cg-r2": {
+      "whole_ms": {
+        "mean": 10.230033925,
+        "p95": 13.468569,
+        "max": 140.984884
+      },
+      "fluid_ms": {
+        "mean": 5.482918919444445,
+        "p95": 8.33588,
+        "max": 97.702748
+      },
+      "iterations": {
+        "mean": 14.911111111111111,
+        "p95": 17.0,
+        "max": 23.0
+      },
+      "mean_cell_distance": 13.743212011093723,
+      "incoming_volume": 68.48708364135037,
+      "upper_fraction": 0.5000153672850267,
+      "max_diagnostics": {
+        "divergence_peak": 0.00020437313239935327,
+        "momentum_peak": 1.4863144048459058e-14,
+        "exchange": 3.860218849480278e-10,
+        "flux_relative_peak": 6.252593167398326e-05,
+        "grid_speed_peak": 2.7919510854843512,
+        "force_peak": 0.25564348397016656,
+        "max_area_error": 0.0336172868175334,
+        "max_wall_overshoot": 0.0
+      },
+      "initialization_ms": 195.001296,
+      "same_backend_replay_matches": true
+    },
+    "fluid-cg": {
+      "whole_ms": {
+        "mean": 9.729943172222223,
+        "p95": 12.137834,
+        "max": 219.218456
+      },
+      "fluid_ms": {
+        "mean": 5.059560861111111,
+        "p95": 6.77218,
+        "max": 142.737754
+      },
+      "iterations": {
+        "mean": 14.911111111111111,
+        "p95": 17.0,
+        "max": 23.0
+      },
+      "mean_cell_distance": 13.743212011093723,
+      "incoming_volume": 68.48708364135037,
+      "upper_fraction": 0.5000153672850267,
+      "max_diagnostics": {
+        "divergence_peak": 0.00020437313239935327,
+        "momentum_peak": 1.4863144048459058e-14,
+        "exchange": 3.860218849480278e-10,
+        "flux_relative_peak": 6.252593167398326e-05,
+        "grid_speed_peak": 2.7919510854843512,
+        "force_peak": 0.25564348397016656,
+        "max_area_error": 0.0336172868175334,
+        "max_wall_overshoot": 0.0
+      },
+      "initialization_ms": 197.483863,
+      "deep_ms": {
+        "grid_solve": {
+          "mean": 4.753187730555555,
+          "p95": 6.459305,
+          "max": 142.404725
+        },
+        "velocity_inverse": {
+          "mean": 3.8365795027777776,
+          "p95": 5.447757,
+          "max": 141.204023
+        },
+        "pressure_preconditioner": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        }
+      },
+      "inverse_calls_per_frame": 20.91111111111111,
+      "preconditioner_calls_per_frame": 0.0,
+      "same_backend_replay_matches": true
+    },
+    "fluid-simple": {
+      "whole_ms": {
+        "mean": 24.324726986111113,
+        "p95": 33.967916,
+        "max": 138.691083
+      },
+      "fluid_ms": {
+        "mean": 19.64752016388889,
+        "p95": 26.501674,
+        "max": 122.264324
+      },
+      "iterations": {
+        "mean": 53.980555555555554,
+        "p95": 68.0,
+        "max": 87.0
+      },
+      "mean_cell_distance": 13.743740303481395,
+      "incoming_volume": 68.48569403269745,
+      "upper_fraction": 0.5000281631199578,
+      "max_diagnostics": {
+        "divergence_peak": 0.00023779769240791224,
+        "momentum_peak": 1.492822698141087e-14,
+        "exchange": 3.658257964355442e-10,
+        "flux_relative_peak": 4.70239980520529e-06,
+        "grid_speed_peak": 2.7917362528529877,
+        "force_peak": 0.25718260718948505,
+        "max_area_error": 0.03349097635690412,
+        "max_wall_overshoot": 0.0
+      },
+      "initialization_ms": 237.657271,
+      "pressure_factor": {
+        "size": 2484,
+        "entries": 30891,
+        "payload_bytes": 494256,
+        "setup_ns": 24041440
+      },
+      "deep_ms": {
+        "grid_solve": {
+          "mean": 19.321406130555555,
+          "p95": 26.176548,
+          "max": 121.861717
+        },
+        "velocity_inverse": {
+          "mean": 10.20907348611111,
+          "p95": 14.746154,
+          "max": 111.464032
+        },
+        "pressure_preconditioner": {
+          "mean": 6.2149324777777775,
+          "p95": 8.144804,
+          "max": 14.477654
+        }
+      },
+      "inverse_calls_per_frame": 59.980555555555554,
+      "preconditioner_calls_per_frame": 53.980555555555554,
+      "same_backend_replay_matches": true
+    }
+  },
+  "comparisons": {
+    "round1": {
+      "whole_slowdown": 2.385640262228413,
+      "fluid_slowdown": 3.6204011403210514,
+      "iterations_ratio": 3.620156482861401,
+      "incoming_volume_relative_change": -2.0290083604490583e-05,
+      "upper_fraction_change": 1.2795834931078609e-05,
+      "max_sampled_center_difference": 0.02724082474556518,
+      "different_edges_at_end": 0
+    },
+    "round2": {
+      "whole_slowdown": 2.622956580545042,
+      "fluid_slowdown": 4.02308138170631,
+      "iterations_ratio": 3.620156482861401,
+      "incoming_volume_relative_change": -2.0290083604490583e-05,
+      "upper_fraction_change": 1.2795834931078609e-05,
+      "max_sampled_center_difference": 0.02724082474556518,
+      "different_edges_at_end": 0
+    }
+  },
+  "preconditioner_audit_max_abs_residual": 5.506012312750386e-15
+}

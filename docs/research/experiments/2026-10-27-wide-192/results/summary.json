@@ -1,0 +1,473 @@
+{
+  "runs": {
+    "base-r1": {
+      "frames": 1200,
+      "switches": 6.0,
+      "init_ms": 263.465194,
+      "max_process_rss_kib": 35692,
+      "windows": [
+        {
+          "origin": [
+            -38.0,
+            -24.0
+          ],
+          "n": 96,
+          "h": 0.5,
+          "velocity": 5388,
+          "pressure": 2803,
+          "unknowns": 8191,
+          "init_ms": 64.563494
+        },
+        {
+          "origin": [
+            -34.0,
+            -32.0
+          ],
+          "n": 96,
+          "h": 0.5,
+          "velocity": 4815,
+          "pressure": 2494,
+          "unknowns": 7309,
+          "init_ms": 51.930588
+        }
+      ],
+      "whole_ms": {
+        "mean": 6.992975086666666,
+        "p95": 8.943419,
+        "max": 22.937827,
+        "min": 5.0127
+      },
+      "fluid_ms": {
+        "mean": 2.4125029408333334,
+        "p95": 3.385614,
+        "max": 7.456076,
+        "min": 1.382134
+      },
+      "handoff_ms": {
+        "mean": 2.1620073333333334,
+        "p95": 3.51108,
+        "max": 3.51108,
+        "min": 1.254143
+      },
+      "handoff_velocity_delta": {
+        "mean": 1.3759726288333334,
+        "p95": 1.522286654,
+        "max": 1.522286654,
+        "min": 1.15922308
+      },
+      "max_frame_diagnostics": {
+        "divergence": 4.6234437657862485e-14,
+        "momentum": 5.091248755361237e-14,
+        "exchange": 7.111668790126811e-09,
+        "area_error": 0.135412393,
+        "wall_overshoot": 0.0
+      },
+      "active_cells": {
+        "mean": 27.786666666666665,
+        "p95": 37.0,
+        "max": 38.0,
+        "min": 18.0
+      },
+      "visible_cell_full_weight_fraction": 1.0,
+      "all_visible_cell_centers_full_weight_frame_fraction": 1.0,
+      "full_camera_rectangle_inside_domain_frame_fraction": 0.9858333333333333,
+      "camera_margin": {
+        "mean": 3.077718939784167,
+        "p95": 4.762407303,
+        "max": 4.951627731,
+        "min": -0.987709045
+      },
+      "robot_weight": {
+        "mean": 1.0,
+        "p95": 1.0,
+        "max": 1.0,
+        "min": 1.0
+      }
+    },
+    "wide-r1": {
+      "frames": 1200,
+      "switches": 6.0,
+      "init_ms": 719.49674,
+      "max_process_rss_kib": 145660,
+      "windows": [
+        {
+          "origin": [
+            -38.0,
+            -24.0
+          ],
+          "n": 192,
+          "h": 0.25,
+          "velocity": 21982,
+          "pressure": 11210,
+          "unknowns": 33192,
+          "init_ms": 445.469714
+        },
+        {
+          "origin": [
+            -34.0,
+            -32.0
+          ],
+          "n": 192,
+          "h": 0.25,
+          "velocity": 19591,
+          "pressure": 9974,
+          "unknowns": 29565,
+          "init_ms": 156.098031
+        }
+      ],
+      "whole_ms": {
+        "mean": 17.694761896666666,
+        "p95": 24.49487,
+        "max": 60.773836,
+        "min": 11.837595
+      },
+      "fluid_ms": {
+        "mean": 12.788207008333334,
+        "p95": 17.996144,
+        "max": 33.360459,
+        "min": 8.172813
+      },
+      "handoff_ms": {
+        "mean": 13.882720166666667,
+        "p95": 21.775616,
+        "max": 21.775616,
+        "min": 5.325312
+      },
+      "handoff_velocity_delta": {
+        "mean": 1.3545942901666668,
+        "p95": 1.506993651,
+        "max": 1.506993651,
+        "min": 1.12236166
+      },
+      "max_frame_diagnostics": {
+        "divergence": 1.417589540959427e-13,
+        "momentum": 1.542244076600565e-13,
+        "exchange": 6.5297686402594705e-09,
+        "area_error": 0.127115141,
+        "wall_overshoot": 0.0
+      },
+      "active_cells": {
+        "mean": 27.770833333333332,
+        "p95": 37.0,
+        "max": 38.0,
+        "min": 18.0
+      },
+      "visible_cell_full_weight_fraction": 1.0,
+      "all_visible_cell_centers_full_weight_frame_fraction": 1.0,
+      "full_camera_rectangle_inside_domain_frame_fraction": 0.9858333333333333,
+      "camera_margin": {
+        "mean": 3.0704666090125,
+        "p95": 4.753633499,
+        "max": 4.946949005,
+        "min": -0.987998962
+      },
+      "robot_weight": {
+        "mean": 1.0,
+        "p95": 1.0,
+        "max": 1.0,
+        "min": 1.0
+      }
+    },
+    "wide-r2": {
+      "frames": 1200,
+      "switches": 6.0,
+      "init_ms": 967.371209,
+      "max_process_rss_kib": 147756,
+      "windows": [
+        {
+          "origin": [
+            -38.0,
+            -24.0
+          ],
+          "n": 192,
+          "h": 0.25,
+          "velocity": 21982,
+          "pressure": 11210,
+          "unknowns": 33192,
+          "init_ms": 575.685664
+        },
+        {
+          "origin": [
+            -34.0,
+            -32.0
+          ],
+          "n": 192,
+          "h": 0.25,
+          "velocity": 19591,
+          "pressure": 9974,
+          "unknowns": 29565,
+          "init_ms": 194.629591
+        }
+      ],
+      "whole_ms": {
+        "mean": 18.013969330833334,
+        "p95": 25.834517,
+        "max": 73.276828,
+        "min": 11.906554
+      },
+      "fluid_ms": {
+        "mean": 12.90529073,
+        "p95": 19.626824,
+        "max": 49.959119,
+        "min": 8.114197
+      },
+      "handoff_ms": {
+        "mean": 14.597252166666665,
+        "p95": 34.046417,
+        "max": 34.046417,
+        "min": 5.051461
+      },
+      "handoff_velocity_delta": {
+        "mean": 1.3545942901666668,
+        "p95": 1.506993651,
+        "max": 1.506993651,
+        "min": 1.12236166
+      },
+      "max_frame_diagnostics": {
+        "divergence": 1.417589540959427e-13,
+        "momentum": 1.542244076600565e-13,
+        "exchange": 6.5297686402594705e-09,
+        "area_error": 0.127115141,
+        "wall_overshoot": 0.0
+      },
+      "active_cells": {
+        "mean": 27.770833333333332,
+        "p95": 37.0,
+        "max": 38.0,
+        "min": 18.0
+      },
+      "visible_cell_full_weight_fraction": 1.0,
+      "all_visible_cell_centers_full_weight_frame_fraction": 1.0,
+      "full_camera_rectangle_inside_domain_frame_fraction": 0.9858333333333333,
+      "camera_margin": {
+        "mean": 3.0704666090125,
+        "p95": 4.753633499,
+        "max": 4.946949005,
+        "min": -0.987998962
+      },
+      "robot_weight": {
+        "mean": 1.0,
+        "p95": 1.0,
+        "max": 1.0,
+        "min": 1.0
+      }
+    },
+    "base-r2": {
+      "frames": 1200,
+      "switches": 6.0,
+      "init_ms": 327.837778,
+      "max_process_rss_kib": 34344,
+      "windows": [
+        {
+          "origin": [
+            -38.0,
+            -24.0
+          ],
+          "n": 96,
+          "h": 0.5,
+          "velocity": 5388,
+          "pressure": 2803,
+          "unknowns": 8191,
+          "init_ms": 92.325739
+        },
+        {
+          "origin": [
+            -34.0,
+            -32.0
+          ],
+          "n": 96,
+          "h": 0.5,
+          "velocity": 4815,
+          "pressure": 2494,
+          "unknowns": 7309,
+          "init_ms": 82.444878
+        }
+      ],
+      "whole_ms": {
+        "mean": 7.248351035833333,
+        "p95": 9.386616,
+        "max": 60.264449,
+        "min": 4.804994
+      },
+      "fluid_ms": {
+        "mean": 2.45718971,
+        "p95": 3.416481,
+        "max": 8.24829,
+        "min": 1.39524
+      },
+      "handoff_ms": {
+        "mean": 2.545126333333333,
+        "p95": 5.092676,
+        "max": 5.092676,
+        "min": 1.08853
+      },
+      "handoff_velocity_delta": {
+        "mean": 1.3759726288333334,
+        "p95": 1.522286654,
+        "max": 1.522286654,
+        "min": 1.15922308
+      },
+      "max_frame_diagnostics": {
+        "divergence": 4.6234437657862485e-14,
+        "momentum": 5.091248755361237e-14,
+        "exchange": 7.111668790126811e-09,
+        "area_error": 0.135412393,
+        "wall_overshoot": 0.0
+      },
+      "active_cells": {
+        "mean": 27.786666666666665,
+        "p95": 37.0,
+        "max": 38.0,
+        "min": 18.0
+      },
+      "visible_cell_full_weight_fraction": 1.0,
+      "all_visible_cell_centers_full_weight_frame_fraction": 1.0,
+      "full_camera_rectangle_inside_domain_frame_fraction": 0.9858333333333333,
+      "camera_margin": {
+        "mean": 3.077718939784167,
+        "p95": 4.762407303,
+        "max": 4.951627731,
+        "min": -0.987709045
+      },
+      "robot_weight": {
+        "mean": 1.0,
+        "p95": 1.0,
+        "max": 1.0,
+        "min": 1.0
+      }
+    }
+  },
+  "repeatability": {
+    "base": {
+      "max_cell_sample_absolute_difference": 0.0,
+      "max_flow_sample_absolute_difference": 0.0,
+      "max_robot_coordinate_difference": 0.0
+    },
+    "wide": {
+      "max_cell_sample_absolute_difference": 0.0,
+      "max_flow_sample_absolute_difference": 0.0,
+      "max_robot_coordinate_difference": 0.0
+    }
+  },
+  "cross_variant_cell_center_distance_world_units_at_1s_samples": {
+    "mean": 0.19846933255557064,
+    "p95": 1.0952161780600236,
+    "max": 7.914751090528028,
+    "min": 0.0
+  },
+  "initial_common_full_weight_flow_samples": [
+    {
+      "position": [
+        -20.0,
+        0.0
+      ],
+      "base_velocity": [
+        -5.141904830933,
+        0.042700827122
+      ],
+      "wide_velocity": [
+        -5.383059501648,
+        0.037335414439
+      ],
+      "velocity_delta": 0.24121435044565426,
+      "delta_over_base_speed": 0.04690985951977017
+    },
+    {
+      "position": [
+        -16.0,
+        0.0
+      ],
+      "base_velocity": [
+        -5.101145744324,
+        -0.003765070345
+      ],
+      "wide_velocity": [
+        -5.347266197205,
+        -0.004122757819
+      ],
+      "velocity_delta": 0.24612071279491674,
+      "delta_over_base_speed": 0.04824811093264478
+    },
+    {
+      "position": [
+        -12.0,
+        0.0
+      ],
+      "base_velocity": [
+        -3.016377925873,
+        -0.000614531222
+      ],
+      "wide_velocity": [
+        -3.15664100647,
+        -0.000561495719
+      ],
+      "velocity_delta": 0.1402630906237459,
+      "delta_over_base_speed": 0.04650050197945079
+    },
+    {
+      "position": [
+        -10.0,
+        -4.0
+      ],
+      "base_velocity": [
+        -1.204646945,
+        2.696165323257
+      ],
+      "wide_velocity": [
+        -1.228690385818,
+        2.802062988281
+      ],
+      "velocity_delta": 0.10859282897090392,
+      "delta_over_base_speed": 0.03677315643946509
+    },
+    {
+      "position": [
+        -6.0,
+        -8.0
+      ],
+      "base_velocity": [
+        -0.519959926605,
+        0.832921564579
+      ],
+      "wide_velocity": [
+        -0.514281988144,
+        0.800242364407
+      ],
+      "velocity_delta": 0.03316879722040804,
+      "delta_over_base_speed": 0.033780411052130255
+    },
+    {
+      "position": [
+        -10.0,
+        4.0
+      ],
+      "base_velocity": [
+        -1.204663038254,
+        -2.696185112
+      ],
+      "wide_velocity": [
+        -1.228717684746,
+        -2.802079439163
+      ],
+      "velocity_delta": 0.10859205561715625,
+      "delta_over_base_speed": 0.036772587823707126
+    },
+    {
+      "position": [
+        -6.0,
+        8.0
+      ],
+      "base_velocity": [
+        -0.519970834255,
+        -0.832938551903
+      ],
+      "wide_velocity": [
+        -0.51429361105,
+        -0.800260007381
+      ],
+      "velocity_delta": 0.033168028813840116,
+      "delta_over_base_speed": 0.033778934037371866
+    }
+  ],
+  "current_production_sources_match": true
+}
