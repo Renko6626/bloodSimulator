@@ -118,20 +118,37 @@ pub fn rasterize(
             if normal_dot.abs() < 0.1 || proj.along < h || map.edge_length(edge) - proj.along < h {
                 return Err("unsupported opening without straight buffer".into());
             }
-            if e.centerline.windows(2).any(|p| {
-                let d = Vector::from(p[1]) - Vector::from(p[0]);
-                d.length_squared() < 1e-12 || (d.normalize().dot(tangent)).abs() < 0.9999
-            }) {
-                return Err("unsupported curved opening".into());
-            }
+            let mut buffer_start = proj.along - h;
+            let mut buffer_end = proj.along + h;
             let mut weights = Vec::new();
             for j in start..end {
                 let p = boundary_point(j as f32 + 0.5);
                 if map.nearest_edge(p) != edge {
                     return Err("ambiguous opening segments".into());
                 }
-                let d = map.project_edge(edge, p).distance;
+                let projection = map.project_edge(edge, p);
+                buffer_start = buffer_start.min(projection.along - h);
+                buffer_end = buffer_end.max(projection.along + h);
+                let d = projection.distance;
                 weights.push((1.0 - (d / e.half_width).powi(2)).max(0.0));
+            }
+            if buffer_start < 0.0 || buffer_end > map.edge_length(edge) {
+                return Err("unsupported opening without straight buffer".into());
+            }
+            let mut along = 0.0;
+            for pair in e.centerline.windows(2) {
+                let delta = Vector::from(pair[1]) - Vector::from(pair[0]);
+                let length = delta.length();
+                if length < 1e-6 {
+                    return Err("unsupported curved opening".into());
+                }
+                if along < buffer_end
+                    && along + length > buffer_start
+                    && delta.normalize().dot(tangent) < 0.9999
+                {
+                    return Err("unsupported curved opening".into());
+                }
+                along += length;
             }
             let sum: f32 = weights.iter().sum();
             if sum <= 0.0 {
@@ -347,6 +364,22 @@ mod tests {
         );
     }
     #[test]
+    fn accepts_interior_bends_with_straight_opening_buffers() {
+        let spec = WindowSpec {
+            origin: WindowOrigin {
+                block_x: 0,
+                block_y: 0,
+            },
+            profile: GridProfile::Coarse,
+        };
+        let (mut map, flow) = fixture(false, vec![1.]);
+        map.edges[0].centerline = vec![[-10., 24.], [12., 24.], [24., 30.], [36., 24.], [58., 24.]];
+        let result = rasterize(&map, &flow, spec).unwrap();
+        assert_eq!(result.geometry.openings.len(), 2);
+        assert!((result.geometry.openings[0].outward_flow + 1.).abs() < 1e-5);
+        assert!((result.geometry.openings[1].outward_flow - 1.).abs() < 1e-5);
+    }
+    #[test]
     fn rejects_isolated_and_curved_openings() {
         let spec = WindowSpec {
             origin: WindowOrigin {
@@ -362,7 +395,7 @@ mod tests {
                 .unwrap_err()
                 .contains("no usable opening")
         );
-        map.edges[0].centerline = vec![[-10., 24.], [24., 25.], [58., 24.]];
+        map.edges[0].centerline = vec![[-10., 24.], [0., 24.], [10., 25.], [58., 24.]];
         assert!(
             rasterize(&map, &flow, spec)
                 .unwrap_err()

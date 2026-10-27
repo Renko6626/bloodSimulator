@@ -303,6 +303,7 @@ fn lbm_opening_flux_and_known_populations() {
     .unwrap();
     let zero = open.snapshot_diagnostics().unwrap();
     assert!(zero.max_speed < 1e-5 && (zero.density_min - 1.).abs() < 1e-6);
+    let initial_mass = zero.mass;
     let flows = [-0.6, 0.4, 0.2];
     let profiles = vec![vec![-0.1; 12], vec![0.4 / 6.; 12], vec![0.05; 8]];
     let before = open.populations_for_test();
@@ -345,12 +346,17 @@ fn lbm_opening_flux_and_known_populations() {
     }
     let evolved = open.snapshot_diagnostics().unwrap();
     assert!(evolved.density_min > 0. && evolved.density_max < 2. && evolved.mass.is_finite());
+    assert!((evolved.mass - initial_mass).abs() / initial_mass < 0.001);
     for (a, b) in evolved.opening_fluxes.iter().zip(flows) {
         assert!((a - b).abs() < 1e-4);
     }
     eprintln!(
-        "fork 100 steps: flux {:?}, mass {}, density [{}, {}]",
-        evolved.opening_fluxes, evolved.mass, evolved.density_min, evolved.density_max
+        "fork 100 steps: flux {:?}, initial mass {}, mass {}, density [{}, {}]",
+        evolved.opening_fluxes,
+        initial_mass,
+        evolved.mass,
+        evolved.density_min,
+        evolved.density_max
     );
     eprintln!(
         "adapter {}, flux {:?}, mass {}, density [{}, {}], force-corrected velocity {:?}",
@@ -389,9 +395,18 @@ fn lbm_straight_profile_evolves() {
             opening(WindowSide::Right, 0.6),
         ],
     };
+    // Analytic planar Poiseuille profile: Q=0.6, half-width R=3.
+    let mut velocity = vec![[0.; 2]; n * n];
+    for y in 42..54 {
+        let lateral = ((y as f32 + 0.5) * 0.5 - 24.) / 3.;
+        let speed = 3. * 0.6 / (4. * 3.) * (1. - lateral * lateral);
+        for x in 0..n {
+            velocity[y * n + x] = [speed, 0.];
+        }
+    }
     let initial = InitialField {
         density: vec![1.; n * n],
-        velocity: vec![[0.; 2]; n * n],
+        velocity,
     };
     let mut window = LbmWindow::new(
         spec,
@@ -418,6 +433,7 @@ fn lbm_straight_profile_evolves() {
             &[velocities.iter().map(|v| -v).collect(), velocities.clone()],
         )
         .unwrap();
+    let initial_mass = window.snapshot_diagnostics().unwrap().mass;
     for _ in 0..100 {
         window
             .advance(StepInput {
@@ -431,6 +447,24 @@ fn lbm_straight_profile_evolves() {
         let p = window.sample([0.25, (42 + j) as f32 * 0.5 + 0.25]).unwrap();
         error = error.max((p.velocity[0] - v).abs());
     }
+    let mut interior_error = 0_f32;
+    for j in 0..12 {
+        let lateral = ((j as f32 + 0.5) * 0.5 - 3.) / 3.;
+        let expected = 3. * 0.6 / (4. * 3.) * (1. - lateral * lateral);
+        let p = window
+            .sample([24.25, (42 + j) as f32 * 0.5 + 0.25])
+            .unwrap();
+        interior_error = interior_error.max((p.velocity[0] - expected).abs());
+    }
+    let lower = window.sample([24.25, 21.25]).unwrap();
+    let upper = window.sample([24.25, 26.75]).unwrap();
+    let wall_normal = lower.velocity[1].abs().max(upper.velocity[1].abs());
+    eprintln!(
+        "interior profile error {interior_error}, wall-normal {wall_normal}, initial mass {initial_mass}, final {}",
+        d.mass
+    );
+    assert!(interior_error < 0.003 && wall_normal < 0.001);
+    assert!((d.mass - initial_mass).abs() / initial_mass < 0.001);
     assert!(error < 1e-5 && d.density_min > 0. && d.density_max < 2. && d.mass.is_finite());
     assert!((d.opening_fluxes[0] + 0.6).abs() < 1e-4 && (d.opening_fluxes[1] - 0.6).abs() < 1e-4);
     assert_eq!(
