@@ -164,6 +164,19 @@ impl StreamingWindow {
         }
         Ok(())
     }
+    #[cfg(test)]
+    pub(crate) fn diagnostic_momentum(&mut self) -> Result<[f32; 2], String> {
+        let field = self.window.field()?;
+        let h = self.profile().cell_spacing();
+        let mut total = [0.; 2];
+        for (i, value) in field.iter().enumerate() {
+            if !self.raster.geometry.solid[i] {
+                total[0] += value[0] * value[1] * h * h;
+                total[1] += value[0] * value[2] * h * h;
+            }
+        }
+        Ok(total)
+    }
     pub fn profile(&self) -> GridProfile {
         self.window.spec().profile
     }

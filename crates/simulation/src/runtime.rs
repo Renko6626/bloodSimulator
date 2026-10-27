@@ -94,6 +94,8 @@ pub struct Simulation {
     paused: bool,
     solve_ms: f64,
     local_fluid: Option<LocalRegions>,
+    #[cfg(feature = "lbm-gpu")]
+    lbm: Option<crate::fluid::lbm_coupling::LbmCoupling>,
 }
 
 impl Default for Simulation {
@@ -132,6 +134,47 @@ impl Simulation {
                 flow,
             },
         )
+    }
+
+    #[cfg(feature = "lbm-gpu")]
+    pub fn new_lbm_world(config: Config, options: crate::LbmOptions) -> Result<Self, String> {
+        Self::new_lbm_world_with_map(config, options, MapDefinition::small_world())
+    }
+
+    #[cfg(feature = "lbm-gpu")]
+    pub fn new_lbm_world_with_map(
+        config: Config,
+        options: crate::LbmOptions,
+        map: MapDefinition,
+    ) -> Result<Self, String> {
+        if !config.dt.is_finite()
+            || config.dt <= 0.
+            || config.substeps == 0
+            || !config.viscosity.is_finite()
+            || config.viscosity <= 0.
+        {
+            return Err("invalid mechanical time step".into());
+        }
+        let geometry = map.build_geometry(0.2);
+        let network = GraphNetwork::new(&map, config.viscosity);
+        let flow = network.solve(config.pressure);
+        let lbm = crate::fluid::lbm_coupling::LbmCoupling::new(&map, &flow, &config, options)?;
+        let mut sim = Self::build(
+            config,
+            Environment::World {
+                map,
+                geometry,
+                network,
+                flow,
+            },
+        );
+        sim.lbm = Some(lbm);
+        Ok(sim)
+    }
+
+    #[cfg(feature = "lbm-gpu")]
+    pub fn lbm_stats(&self) -> Option<&crate::LbmStats> {
+        self.lbm.as_ref().map(|f| &f.stats)
     }
 
     /// Two precomputed 64² Stokes regions covering the first fork and upper arm.
@@ -217,6 +260,8 @@ impl Simulation {
             paused: false,
             solve_ms: 0.0,
             local_fluid: None,
+            #[cfg(feature = "lbm-gpu")]
+            lbm: None,
         }
     }
 
@@ -265,6 +310,16 @@ impl Simulation {
     }
 
     pub fn reset(&mut self) {
+        #[cfg(feature = "lbm-gpu")]
+        if let Some(lbm) = &self.lbm {
+            let options = lbm.options.clone();
+            let map = self.world_map().unwrap().clone();
+            let paused = self.paused;
+            *self = Self::new_lbm_world_with_map(self.config.clone(), options, map)
+                .expect("reset LBM world");
+            self.paused = paused;
+            return;
+        }
         let paused = self.paused;
         let local = self.local_fluid.as_ref().map(|f| f.options.clone());
         *self = match self.environment {
@@ -292,9 +347,23 @@ impl Simulation {
             fluid.begin_frame();
             fluid.prepare_pressure(pressure);
         }
+        #[cfg(feature = "lbm-gpu")]
+        if let Some(lbm) = &mut self.lbm {
+            lbm.window.begin_frame();
+            lbm.stats.coupling_ms = 0.;
+            lbm.stats.lbm_ms = 0.;
+            lbm.stats.rapier_ms = 0.;
+        }
         let dt = self.config.dt / self.config.substeps as f32;
         self.physics.integration_parameters.dt = dt;
         for _ in 0..self.config.substeps {
+            #[cfg(feature = "lbm-gpu")]
+            if let (Some(lbm), Environment::World { map, flow, .. }) =
+                (&mut self.lbm, &self.environment)
+            {
+                lbm.prepare(map, flow, self.physics.bodies[self.robot].translation())
+                    .expect("prepare LBM window");
+            }
             if let Some(fluid) = &mut self.local_fluid {
                 fluid
                     .prepare_step(
@@ -314,6 +383,16 @@ impl Simulation {
                 let weight = fluid.weight(position, 0.85);
                 flow_velocity = flow_velocity * (1.0 - weight) + fluid.sample(position) * weight;
             }
+            #[cfg(feature = "lbm-gpu")]
+            if let (Some(lbm), Environment::World { map, .. }) = (&self.lbm, &self.environment) {
+                let (w, local, valid) =
+                    lbm.local(map, self.physics.bodies[self.robot].translation());
+                flow_velocity = if valid {
+                    flow_velocity * (1. - w) + local * w
+                } else {
+                    Vector::ZERO
+                };
+            }
             robot::drive(
                 &mut self.physics.bodies[self.robot],
                 input,
@@ -321,6 +400,22 @@ impl Simulation {
                 &self.config,
             );
             for &handle in &self.cells {
+                #[cfg(feature = "lbm-gpu")]
+                if let (Some(lbm), Environment::World { map, .. }) = (&self.lbm, &self.environment)
+                {
+                    let body = &mut self.physics.soft_bodies[handle];
+                    let response = 1. - (-self.config.cell_drag * dt).exp();
+                    for i in 0..body.num_particles() {
+                        let p = body.particle_position(i);
+                        let (w, _, valid) = lbm.local(map, p);
+                        let v = body.particle_velocity(i);
+                        let target = self.environment.velocity_at(p);
+                        if valid {
+                            body.set_particle_velocity(i, v + (target - v) * response * (1. - w));
+                        }
+                    }
+                    continue;
+                }
                 let local_weight = self.local_fluid.as_ref().map_or(0.0, |local| {
                     local.weight(
                         fluid::center(&self.physics.soft_bodies[handle]),
@@ -346,7 +441,26 @@ impl Simulation {
                     )
                     .expect("local Stokes step");
             }
+            #[cfg(feature = "lbm-gpu")]
+            if let (Some(lbm), Environment::World { map, .. }) = (&mut self.lbm, &self.environment)
+            {
+                lbm.advance(
+                    map,
+                    &mut self.physics,
+                    &self.cells,
+                    self.robot,
+                    dt,
+                    self.config.cell_drag,
+                )
+                .expect("advance LBM window");
+            }
+            #[cfg(feature = "lbm-gpu")]
+            let rapier_started = Instant::now();
             self.physics.step();
+            #[cfg(feature = "lbm-gpu")]
+            if let Some(lbm) = &mut self.lbm {
+                lbm.stats.rapier_ms += rapier_started.elapsed().as_secs_f64() * 1000.;
+            }
         }
         self.steps += 1;
     }
@@ -376,6 +490,18 @@ impl Simulation {
                 let velocity = self.environment.velocity_at(position) * (1.0 - weight)
                     + fluid.sample(position) * weight;
                 arrow.velocity = velocity.to_array();
+            }
+        }
+        #[cfg(feature = "lbm-gpu")]
+        if let (Some(lbm), Environment::World { map, .. }) = (&self.lbm, &self.environment) {
+            for arrow in &mut arrows {
+                let p = Vector::from_array(arrow.position);
+                let (w, u, valid) = lbm.local(map, p);
+                arrow.velocity = if valid {
+                    (self.environment.velocity_at(p) * (1. - w) + u * w).to_array()
+                } else {
+                    [0.; 2]
+                };
             }
         }
         Snapshot {
@@ -529,6 +655,164 @@ mod region_tests {
             assert!(stats.divergence_rms < 1e-8);
             assert!(stats.momentum_rms < 1e-8);
             assert!(stats.exchange_error < 1e-7);
+        }
+    }
+}
+
+#[cfg(all(test, feature = "lbm-gpu"))]
+mod lbm_runtime_tests {
+    use super::*;
+    use crate::{GridProfile, LbmOptions, map::VesselEdge};
+    fn map() -> MapDefinition {
+        let nodes = vec![[-50., 24.], [100., 24.], [100., 80.], [-50., 80.]];
+        let edges = [(0, 1), (1, 2), (2, 3), (3, 0)]
+            .into_iter()
+            .map(|(from, to)| VesselEdge {
+                from,
+                to,
+                half_width: 3.,
+                centerline: vec![nodes[from], nodes[to]],
+            })
+            .collect();
+        MapDefinition {
+            nodes,
+            edges,
+            pump_edge: 0,
+            spawn: [24., 24.],
+            landmarks: vec![],
+        }
+    }
+    fn options() -> LbmOptions {
+        LbmOptions {
+            profile: GridProfile::Coarse,
+            allow_software: true,
+            ..Default::default()
+        }
+    }
+    #[test]
+    #[ignore = "explicit software-adapter functional diagnostic"]
+    fn lbm_runtime_prepare_pause_and_time() {
+        let config = Config {
+            cell_count: 1,
+            pressure: 0.01,
+            ..Default::default()
+        };
+        let mut sim = Simulation::new_lbm_world_with_map(config, options(), map()).unwrap();
+        let handles = sim.cells.clone();
+        let robot = sim.robot;
+        let before: Vec<_> = sim.physics.soft_bodies[handles[0]]
+            .particle_positions()
+            .zip(sim.physics.soft_bodies[handles[0]].particle_velocities())
+            .collect();
+        let robot_before = (
+            sim.physics.bodies[robot].translation(),
+            sim.physics.bodies[robot].linvel(),
+        );
+        let Environment::World { map, flow, .. } = &sim.environment else {
+            unreachable!()
+        };
+        let lbm = sim.lbm.as_mut().unwrap();
+        lbm.window.begin_frame();
+        lbm.prepare(map, flow, Vector::new(40., 24.)).unwrap();
+        assert_eq!(
+            before,
+            sim.physics.soft_bodies[handles[0]]
+                .particle_positions()
+                .zip(sim.physics.soft_bodies[handles[0]].particle_velocities())
+                .collect::<Vec<_>>()
+        );
+        assert_eq!(
+            robot_before,
+            (
+                sim.physics.bodies[robot].translation(),
+                sim.physics.bodies[robot].linvel()
+            )
+        );
+        assert_eq!(handles, sim.cells);
+        let (w, _, valid) = lbm.local(map, Vector::new(24., 24.));
+        assert!(valid && w > 0.99);
+        let (w, _, valid) = lbm.local(map, Vector::new(17., 24.));
+        assert!(valid && (w - 0.15625).abs() < 1e-5);
+        assert_eq!(lbm.local(map, Vector::new(15., 24.)).0, 0.);
+        assert!(!lbm.local(map, Vector::new(24., 30.)).2);
+        sim.set_paused(true);
+        sim.tick(MoveInput::default());
+        assert_eq!(sim.snapshot().steps, 0);
+        sim.single_step(MoveInput::default());
+        assert_eq!(sim.snapshot().steps, 1);
+        assert!((sim.lbm_stats().unwrap().elapsed_fluid_time - sim.config.dt as f64).abs() < 1e-7);
+        sim.tick(MoveInput::default());
+        assert_eq!(sim.snapshot().steps, 1);
+    }
+    #[test]
+    #[ignore = "explicit software-adapter functional diagnostic"]
+    fn lbm_exchange_conserves_momentum_and_weights_once() {
+        let config = Config {
+            cell_count: 1,
+            pressure: 0.,
+            ..Default::default()
+        };
+        let mut sim = Simulation::new_lbm_world_with_map(config, options(), map()).unwrap();
+        let h = sim.cells[0];
+        let body = &mut sim.physics.soft_bodies[h];
+        let center = body.particle_positions().sum::<Vector>() / body.num_particles() as f32;
+        for i in 0..body.num_particles() {
+            body.set_particle_position(
+                i,
+                body.particle_position(i) + Vector::new(-14., 24.) - center,
+            );
+            body.set_particle_velocity(i, Vector::X);
+        }
+        let Environment::World { map, .. } = &sim.environment else {
+            unreachable!()
+        };
+        let lbm = sim.lbm.as_mut().unwrap();
+        let fluid_before = Vector::from_array(lbm.window.diagnostic_momentum().unwrap());
+        let body = &sim.physics.soft_bodies[h];
+        let center = body.particle_positions().sum::<Vector>() / body.num_particles() as f32;
+        let expected_weight: f32 = (0..4)
+            .map(|k| {
+                let p = (body.particle_position(k * body.num_particles() / 4) + center) * 0.5;
+                lbm.local(map, p).0
+            })
+            .sum();
+        let dt = sim.config.dt / sim.config.substeps as f32;
+        let before = body.particle_velocities().sum::<Vector>() / body.num_particles() as f32;
+        let kicks = lbm
+            .exchange(
+                map,
+                &mut sim.physics,
+                &sim.cells,
+                sim.robot,
+                dt,
+                sim.config.cell_drag,
+            )
+            .unwrap();
+        let body = &sim.physics.soft_bodies[h];
+        let after = body.particle_velocities().sum::<Vector>() / body.num_particles() as f32;
+        let impulse = after - before;
+        let spacing = lbm.window.profile().cell_spacing();
+        let fluid: Vector = kicks.iter().map(|k| Vector::from_array(*k)).sum::<Vector>()
+            * (spacing.powi(3) / lbm.window.lattice_dt());
+        assert!((impulse.x + 0.25 / 4. * dt * expected_weight).abs() < 1e-6);
+        assert!((impulse + fluid).length() < 1e-6);
+        lbm.window.apply_kicks(&kicks).unwrap();
+        let fluid_after = Vector::from_array(lbm.window.diagnostic_momentum().unwrap());
+        assert!((impulse + fluid_after - fluid_before).length() < 1e-5);
+    }
+    #[test]
+    #[ignore = "explicit software-adapter functional diagnostic"]
+    fn default_map_lbm_boundary_is_explicit() {
+        let config = Config {
+            cell_count: 0,
+            ..Default::default()
+        };
+        match Simulation::new_lbm_world(config, options()) {
+            Ok(_) => eprintln!("default map LBM window constructed"),
+            Err(error) => {
+                eprintln!("default map LBM window rejected: {error}");
+                assert!(error.contains("opening"), "unexpected failure: {error}");
+            }
         }
     }
 }

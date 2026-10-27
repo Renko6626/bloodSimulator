@@ -2,6 +2,8 @@
 //! integrates a body: the caller keeps the sole Rapier stepping location.
 mod grid;
 #[cfg(feature = "lbm-gpu")]
+pub mod lbm_coupling;
+#[cfg(feature = "lbm-gpu")]
 pub mod lbm_geometry;
 #[cfg(feature = "lbm-gpu")]
 pub mod streaming_window;
