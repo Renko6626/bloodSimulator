@@ -1517,6 +1517,7 @@ name = "simulation"
 version = "0.1.0"
 dependencies = [
  "blood-fluid",
+ "blood-fluid-gpu",
  "rapier2d",
  "rayon",
 ]

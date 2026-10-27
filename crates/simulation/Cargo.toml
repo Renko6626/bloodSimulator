@@ -4,7 +4,12 @@ version = "0.1.0"
 edition.workspace = true
 rust-version.workspace = true
 
+[features]
+default = []
+lbm-gpu = ["dep:blood-fluid-gpu"]
+
 [dependencies]
 rapier2d.workspace = true
 rayon.workspace = true
 blood-fluid = { path = "../fluid" }
+blood-fluid-gpu = { path = "../fluid-gpu", optional = true }

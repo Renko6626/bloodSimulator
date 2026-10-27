@@ -1,4 +1,5 @@
-//! Optional, portable GPU solver backends; never a simulation dependency.
+//! GPU backends: Stokes solvers and the optional simulation-facing LBM module.
+pub mod lbm;
 use blood_fluid::krylov as gmres;
 mod legacy;
 mod mg;
@@ -268,4 +269,34 @@ pub fn smoke(allow_software: bool) -> FluidResult<Value> {
     Ok(
         json!({"mode":"smoke","adapter":context.info,"hardware_measurement":false,"samples":samples,"accepted":accepted}),
     )
+}
+
+#[cfg(test)]
+mod lbm_contract_test {
+    use super::lbm::{GridProfile, WindowOrigin, WindowSpec};
+
+    #[test]
+    fn lbm_window_profiles_and_block_shift() {
+        for (profile, cells, shift) in [(GridProfile::Fine, 192, 64), (GridProfile::Coarse, 96, 32)]
+        {
+            let window = WindowSpec {
+                origin: WindowOrigin {
+                    block_x: -1,
+                    block_y: 2,
+                },
+                profile,
+            };
+            assert_eq!(window.world_bounds(), [[-16.0, 32.0], [32.0, 80.0]]);
+            assert_eq!(profile.cells_per_side(), cells);
+            assert_eq!(profile.cells_per_block(), shift);
+            let moved = WindowSpec {
+                origin: WindowOrigin {
+                    block_x: 0,
+                    block_y: 2,
+                },
+                profile,
+            };
+            assert_eq!(moved.origin_cell_offset_from(window), [shift as i64, 0]);
+        }
+    }
 }
