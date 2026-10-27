@@ -215,6 +215,46 @@ pub fn rasterize(
     })
 }
 
+/// Recompute opening profiles from cached geometry and the current network flow.
+pub fn opening_profiles(
+    map: &MapDefinition,
+    flow: &GraphFlow,
+    raster: &MapWindowGeometry,
+    spec: WindowSpec,
+) -> Result<(Vec<f32>, Vec<Vec<f32>>), String> {
+    if flow.rates.len() != map.edges.len() || flow.rates.iter().any(|v| !v.is_finite()) {
+        return Err("invalid graph flow".into());
+    }
+    let h = spec.profile.cell_spacing();
+    let mut targets = Vec::new();
+    let mut profiles = Vec::new();
+    for (opening, meta) in raster.geometry.openings.iter().zip(&raster.openings) {
+        let edge = &map.edges[meta.segment];
+        let normal_dot =
+            opening.direction[0] * meta.normal[0] + opening.direction[1] * meta.normal[1];
+        let flux = flow.rates[meta.segment] / EQUIVALENT_DEPTH * normal_dot.signum();
+        let count = (opening.cells.end - opening.cells.start) as usize;
+        let weights: Vec<f32> = (0..count)
+            .map(|i| {
+                let t = (i as f32 + 0.5) / count as f32;
+                let p = Vector::new(
+                    meta.endpoints[0][0] + t * (meta.endpoints[1][0] - meta.endpoints[0][0]),
+                    meta.endpoints[0][1] + t * (meta.endpoints[1][1] - meta.endpoints[0][1]),
+                );
+                let d = map.project_edge(meta.segment, p).distance;
+                (1.0 - (d / edge.half_width).powi(2)).max(0.0)
+            })
+            .collect();
+        let sum: f32 = weights.iter().sum();
+        if sum <= 0.0 {
+            return Err("opening has no profile support".into());
+        }
+        targets.push(flux);
+        profiles.push(weights.into_iter().map(|w| flux * w / (sum * h)).collect());
+    }
+    Ok((targets, profiles))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

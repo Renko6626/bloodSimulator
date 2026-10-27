@@ -1,0 +1,12 @@
+# Task 4 report
+
+`simulation::streaming_window::StreamingWindow` exposes `new(map, flow, position, profile, config)`, `active_origin`, `bounds`, `begin_frame`, `maybe_shift(map, flow, position)`, `advance(StepInput)`, `sample(position)`, and public `diagnostics`. `begin_frame` is called at the fixed-step boundary; migration is limited to one per frame. `advance` is one lattice dt and refreshes one shared field snapshot for subsequent samples. `GridProfile` is chosen at creation. Geometry and opening profiles are derived from the map; targets are recomputed using cached opening metadata and current flow without rasterizing unchanged geometry. New strips use the current rasterized network background, while overlap retains all nine populations. Eight warmup entries compare maximum density, velocity magnitude and momentum magnitude differences against the corresponding pre-shift central overlap. Overlap error compares macroscopic fields immediately after copying; the GPU test independently checks all populations.
+
+Validation:
+- `cargo test -p simulation --features lbm-gpu streaming_window`: passed (1 regular, 1 explicit diagnostic ignored).
+- `cargo test -p simulation --features lbm-gpu streaming_window -- --ignored --nocapture`: passed on software adapter. Straight and fork, 4 pre-shift and 8 post-shift lattice steps, changed graph flow at shift. Maximum center difference vs fixed window at same time was 0 for density, velocity and momentum in both cases (tolerances 0.02, 0.05, 0.05). This short duration does not establish long-term migration accuracy: disturbances may not yet reach the measured center. Maximum warmup difference from pre-shift baseline was straight density 0.001221, velocity 0.047769, momentum 0.047645; fork 0.001182, 0.046724, 0.046609. These include the deliberate flow change and normal evolution, not only migration.
+- `cargo test -p blood-fluid-gpu lbm`: passed 2 regular tests, 4 diagnostics ignored.
+- `cargo test -p blood-fluid-gpu lbm_shift_xy -- --ignored --nocapture`: passed; all nine populations checked for integer x/y overlap and changed exposed strips.
+- `cargo fmt --all -- --check` and `git diff --check`: passed before final test-only assertion; rerun below.
+
+No hardware performance, longer transient, mixing, coupling, or Rapier integration was evaluated. RED/GREEN was not recorded: tests were added alongside implementation and verified green; the initial command used an incorrect package name and did not run tests.

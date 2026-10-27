@@ -354,7 +354,8 @@ impl LbmWindow {
         self.queue.submit([encoder.finish()]);
         Ok(())
     }
-    fn field(&self) -> LbmResult<Vec<[f32; 4]>> {
+    /// Snapshot row-major [density, velocity_x, velocity_y, reserved] values.
+    pub fn field(&self) -> LbmResult<Vec<[f32; 4]>> {
         let n = self.spec.profile.cells_per_side().pow(2);
         let mut encoder = self
             .device

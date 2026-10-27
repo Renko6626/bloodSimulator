@@ -3,6 +3,8 @@
 mod grid;
 #[cfg(feature = "lbm-gpu")]
 pub mod lbm_geometry;
+#[cfg(feature = "lbm-gpu")]
+pub mod streaming_window;
 
 mod regions;
 pub(crate) use regions::LocalRegions;

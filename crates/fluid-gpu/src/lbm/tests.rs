@@ -476,3 +476,65 @@ fn lbm_straight_profile_evolves() {
         d.opening_fluxes, d.mass, d.density_min, d.density_max, error
     );
 }
+
+#[test]
+#[ignore = "explicit software-adapter functional diagnostic"]
+fn lbm_shift_xy_preserves_populations_and_initializes_changed_strip() {
+    let spec = WindowSpec {
+        origin: WindowOrigin {
+            block_x: 0,
+            block_y: 0,
+        },
+        profile: GridProfile::Coarse,
+    };
+    let n = spec.profile.cells_per_side() as usize;
+    let geometry = WindowGeometry {
+        solid: vec![false; n * n],
+        openings: vec![],
+    };
+    let config = WindowConfig {
+        dt: 0.01,
+        viscosity: 0.1,
+        allow_software: true,
+    };
+    let initial = InitialField {
+        density: (0..n * n).map(|i| 1. + i as f32 * 0.000001).collect(),
+        velocity: (0..n * n).map(|i| [i as f32 * 0.000001, 0.01]).collect(),
+    };
+    let changed = InitialField {
+        density: vec![1.02; n * n],
+        velocity: vec![[0.03, -0.02]; n * n],
+    };
+    for (dx, dy) in [(1, 0), (0, 1)] {
+        let mut w = LbmWindow::new(spec, config, initial.clone(), geometry.clone()).unwrap();
+        let before = w.populations_for_test();
+        let shifted_spec = WindowSpec {
+            origin: WindowOrigin {
+                block_x: dx,
+                block_y: dy,
+            },
+            ..spec
+        };
+        let fresh = LbmWindow::new(shifted_spec, config, changed.clone(), geometry.clone())
+            .unwrap()
+            .populations_for_test();
+        w.shift_to(shifted_spec.origin, changed.clone(), geometry.clone())
+            .unwrap();
+        let after = w.populations_for_test();
+        for q in 0..9 {
+            for y in 0..n {
+                for x in 0..n {
+                    let ox = x + dx as usize * 32;
+                    let oy = y + dy as usize * 32;
+                    let i = q * n * n + y * n + x;
+                    let expected = if ox < n && oy < n {
+                        before[q * n * n + oy * n + ox]
+                    } else {
+                        fresh[i]
+                    };
+                    assert_eq!(after[i], expected, "q={q} x={x} y={y}");
+                }
+            }
+        }
+    }
+}

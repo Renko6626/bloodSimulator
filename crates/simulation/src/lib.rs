@@ -13,8 +13,8 @@ pub mod vessel;
 mod view;
 
 pub use config::Config;
-#[cfg(feature = "lbm-gpu")]
-pub use fluid::lbm_geometry;
 pub use fluid::{FluidStats, LocalFluidOptions};
+#[cfg(feature = "lbm-gpu")]
+pub use fluid::{lbm_geometry, streaming_window};
 pub use runtime::{MoveInput, Simulation};
 pub use view::{FlowArrow, Snapshot};
