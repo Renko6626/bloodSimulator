@@ -112,7 +112,7 @@ impl LbmWindow {
             ..Default::default()
         }))
         .map_err(|e| e.to_string())?;
-        let data = initial_populations(spec, config, &initial);
+        let data = initial_populations(spec, config, &initial, [0.; 2]);
         let make = |label, contents: &[u8], usage| {
             device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
                 label: Some(label),
@@ -422,7 +422,7 @@ impl LbmWindow {
         };
         let n = self.spec.profile.cells_per_side() as usize;
         validate(n, &initial, &geometry)?;
-        let data = initial_populations(new, self.config, &initial);
+        let data = initial_populations(new, self.config, &initial, self.force);
         let target = 1 - self.current;
         self.queue
             .write_buffer(&self.populations[target], 0, bytemuck::cast_slice(&data));
@@ -495,13 +495,19 @@ fn validate(n: usize, initial: &InitialField, geometry: &WindowGeometry) -> LbmR
     }
     Ok(())
 }
-fn initial_populations(spec: WindowSpec, c: WindowConfig, initial: &InitialField) -> Vec<f32> {
+fn initial_populations(
+    spec: WindowSpec,
+    c: WindowConfig,
+    initial: &InitialField,
+    acceleration: [f32; 2],
+) -> Vec<f32> {
     let n = initial.density.len();
     let k = c.dt / spec.profile.cell_spacing();
+    let force = params(spec, c, acceleration).force;
     let mut result = vec![0.; n * 9];
     for i in 0..n {
         let u = initial.velocity[i];
-        let eq = model::equilibrium(initial.density[i], [u[0] * k, u[1] * k]);
+        let eq = model::initial(initial.density[i], [u[0] * k, u[1] * k], force);
         for q in 0..9 {
             result[q * n + i] = eq[q];
         }

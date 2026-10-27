@@ -27,6 +27,13 @@ pub(super) fn equilibrium(rho: f32, u: [f32; 2]) -> [f32; 9] {
         W[q] * ((rho - 1.) + rho * (3. * cu + 4.5 * cu * cu - 1.5 * (u[0] * u[0] + u[1] * u[1])))
     })
 }
+pub(super) fn initial(rho: f32, u: [f32; 2], force: [f32; 2]) -> [f32; 9] {
+    let mut populations = equilibrium(rho, u);
+    for q in 0..9 {
+        populations[q] -= 1.5 * W[q] * (C[q][0] * force[0] + C[q][1] * force[1]);
+    }
+    populations
+}
 #[cfg(test)]
 pub(super) fn cell_position(spec: WindowSpec, x: u32, y: u32) -> [f32; 2] {
     let o = spec.world_bounds()[0];
