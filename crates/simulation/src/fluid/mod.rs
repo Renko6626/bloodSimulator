@@ -1,6 +1,8 @@
 //! World-space local fluid fields. Owns fields and marker-force history, never
 //! integrates a body: the caller keeps the sole Rapier stepping location.
 mod grid;
+#[cfg(feature = "lbm-gpu")]
+pub mod lbm_geometry;
 
 mod regions;
 pub(crate) use regions::LocalRegions;
