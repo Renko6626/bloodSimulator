@@ -538,3 +538,54 @@ fn lbm_shift_xy_preserves_populations_and_initializes_changed_strip() {
         }
     }
 }
+
+#[test]
+#[ignore = "explicit software-adapter functional diagnostic"]
+fn lbm_kick_changes_gpu_momentum() {
+    let spec = WindowSpec {
+        origin: WindowOrigin {
+            block_x: 0,
+            block_y: 0,
+        },
+        profile: GridProfile::Coarse,
+    };
+    let n = spec.profile.cells_per_side() as usize;
+    let config = WindowConfig {
+        dt: 0.01,
+        viscosity: 0.1,
+        allow_software: true,
+    };
+    let mut window = LbmWindow::new(
+        spec,
+        config,
+        InitialField {
+            density: vec![1.; n * n],
+            velocity: vec![[0.; 2]; n * n],
+        },
+        WindowGeometry {
+            solid: {
+                let mut s = vec![false; n * n];
+                s[41 * n + 40] = true;
+                s
+            },
+            openings: vec![],
+        },
+    )
+    .unwrap();
+    let mut kicks = vec![[0.; 2]; n * n];
+    kicks[40 * n + 40] = [0.001, -0.002];
+    kicks[41 * n + 40] = [0.01, 0.01];
+    window.apply_kicks(&kicks).unwrap();
+    let field = window.field().unwrap();
+    let p = field[40 * n + 40];
+    let solid = field[41 * n + 40];
+    assert!(solid[1].abs() < 1e-7 && solid[2].abs() < 1e-7);
+    let sum_x: f32 = field.iter().map(|v| v[0] * v[1]).sum();
+    let sum_y: f32 = field.iter().map(|v| v[0] * v[2]).sum();
+    assert!((sum_x - 0.05).abs() < 1e-5 && (sum_y + 0.1).abs() < 1e-5);
+    assert!((p[0] - 1.).abs() < 1e-6);
+    assert!(
+        (p[1] - 0.05).abs() < 1e-5 && (p[2] + 0.1).abs() < 1e-5,
+        "{p:?}"
+    );
+}

@@ -76,6 +76,8 @@ pub struct LbmWindow {
     collide: wgpu::ComputePipeline,
     macros: wgpu::ComputePipeline,
     force: [f32; 2],
+    kicks: wgpu::Buffer,
+    kick_pipeline: wgpu::ComputePipeline,
 }
 impl LbmWindow {
     pub fn new(
@@ -147,6 +149,11 @@ impl LbmWindow {
             bytemuck::cast_slice(&boundary_data),
             wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_DST,
         );
+        let kicks = make(
+            "lbm-kicks",
+            bytemuck::cast_slice(&vec![[0_f32; 2]; n * n]),
+            wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_DST,
+        );
         let output = device.create_buffer(&wgpu::BufferDescriptor {
             label: Some("lbm-output"),
             size: (n * n * 16) as u64,
@@ -159,7 +166,7 @@ impl LbmWindow {
             usage: wgpu::BufferUsages::MAP_READ | wgpu::BufferUsages::COPY_DST,
             mapped_at_creation: false,
         });
-        let entries: Vec<_> = (0..6)
+        let entries: Vec<_> = (0..7)
             .map(|binding| wgpu::BindGroupLayoutEntry {
                 binding,
                 visibility: wgpu::ShaderStages::COMPUTE,
@@ -210,6 +217,10 @@ impl LbmWindow {
                         binding: 5,
                         resource: boundary.as_entire_binding(),
                     },
+                    wgpu::BindGroupEntry {
+                        binding: 6,
+                        resource: kicks.as_entire_binding(),
+                    },
                 ],
             })
         };
@@ -233,6 +244,7 @@ impl LbmWindow {
                 cache: None,
             })
         };
+        let kick_pipeline = pipeline("apply_kicks");
         let collide = pipeline("collide_stream");
         let macros = pipeline("macros");
         let boundary_pipeline = pipeline("reconstruct");
@@ -256,6 +268,8 @@ impl LbmWindow {
             collide,
             macros,
             force: [0.; 2],
+            kicks,
+            kick_pipeline,
         })
     }
     #[cfg(test)]
@@ -307,6 +321,31 @@ impl LbmWindow {
     }
     pub fn geometry(&self) -> &WindowGeometry {
         &self.geometry
+    }
+    /// Apply per-cell lattice momentum changes to current populations on the GPU.
+    pub fn apply_kicks(&mut self, kicks: &[[f32; 2]]) -> LbmResult<()> {
+        let n = self.spec.profile.cells_per_side().pow(2) as usize;
+        if kicks.len() != n || kicks.iter().flatten().any(|v| !v.is_finite()) {
+            return Err("invalid momentum kicks".into());
+        }
+        self.queue
+            .write_buffer(&self.kicks, 0, bytemuck::cast_slice(kicks));
+        let mut encoder = self
+            .device
+            .create_command_encoder(&wgpu::CommandEncoderDescriptor {
+                label: Some("lbm-kicks"),
+            });
+        {
+            let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
+                label: Some("lbm-kicks"),
+                timestamp_writes: None,
+            });
+            pass.set_pipeline(&self.kick_pipeline);
+            pass.set_bind_group(0, &self.groups[self.current], &[]);
+            pass.dispatch_workgroups((n as u32).div_ceil(128), 1, 1);
+        }
+        self.queue.submit([encoder.finish()]);
+        Ok(())
     }
     /// Advance exactly one lattice step of `config.dt` game-time units.
     pub fn advance(&mut self, input: StepInput) -> LbmResult<()> {

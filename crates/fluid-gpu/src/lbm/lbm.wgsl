@@ -87,3 +87,10 @@ fn reconstruct(@builtin(global_invocation_id) id:vec3<u32>) {
  src[plus*count+i]=src[OPP[plus]*count+i]+W[OPP[plus]]+kn/6.+(kt-d)/2.-W[plus];
  src[minus*count+i]=src[OPP[minus]*count+i]+W[OPP[minus]]+kn/6.-(kt-d)/2.-W[minus];
 }
+
+@group(0) @binding(6) var<storage,read> kicks:array<vec2<f32>>;
+@compute @workgroup_size(128)
+fn apply_kicks(@builtin(global_invocation_id) id:vec3<u32>) {
+ let i=id.x; let n=p.nx*p.ny; if(i>=n || mask[i]!=0u){return;}
+ for(var q=0u;q<9u;q++){src[q*n+i]+=3.*W[q]*dot(vec2<f32>(C[q]), kicks[i]);}
+}

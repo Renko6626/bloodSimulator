@@ -26,6 +26,7 @@ pub struct StreamingWindow {
     window: LbmWindow,
     raster: MapWindowGeometry,
     field: Vec<[f32; 4]>,
+    dt: f32,
     shifted: bool,
     baseline: Option<Vec<(usize, [f32; 4])>>,
     pub diagnostics: MigrationDiagnostics,
@@ -69,6 +70,7 @@ impl StreamingWindow {
             window,
             raster,
             field,
+            dt: config.dt,
             shifted: false,
             baseline: None,
             diagnostics: MigrationDiagnostics::default(),
@@ -143,7 +145,16 @@ impl StreamingWindow {
     }
     /// Advance one lattice dt and refresh the one shared CPU sampling snapshot.
     pub fn advance(&mut self, input: StepInput) -> Result<(), String> {
-        self.window.advance(input)?;
+        self.advance_batch(input, 1)
+    }
+    /// Advance a bounded number of lattice steps with one shared readback.
+    pub fn advance_batch(&mut self, input: StepInput, count: usize) -> Result<(), String> {
+        if count == 0 || count > 1024 {
+            return Err("invalid lattice step count".into());
+        }
+        for _ in 0..count {
+            self.window.advance(input)?;
+        }
         self.field = self.window.field()?;
         if let Some(baseline) = &self.baseline {
             self.diagnostics.warmup.push(delta(baseline, &self.field));
@@ -153,36 +164,96 @@ impl StreamingWindow {
         }
         Ok(())
     }
-    pub fn sample(&self, position: [f32; 2]) -> Result<LocalSample, String> {
-        if !position.iter().all(|v| v.is_finite()) {
-            return Err("nonfinite position".into());
-        }
-        let o = self.bounds()[0];
-        let h = self.window.spec().profile.cell_spacing();
-        let n = self.window.spec().profile.cells_per_side() as usize;
-        let x = ((position[0] - o[0]) / h).floor() as i64;
-        let y = ((position[1] - o[1]) / h).floor() as i64;
-        if x < 0 || y < 0 || x >= n as i64 || y >= n as i64 {
-            return Ok(LocalSample {
-                density: 0.,
-                velocity: [0.; 2],
-                status: LocalSampleStatus::OutsideWindow,
-            });
-        }
-        let i = y as usize * n + x as usize;
-        let p = self.field[i];
-        let valid =
-            !self.raster.geometry.solid[i] && p[0] > 0. && p[..3].iter().all(|v| v.is_finite());
-        Ok(LocalSample {
-            density: if valid { p[0] } else { 0. },
-            velocity: if valid { [p[1], p[2]] } else { [0.; 2] },
-            status: if valid {
-                LocalSampleStatus::Valid
-            } else {
-                LocalSampleStatus::SolidOrInvalid
-            },
-        })
+    pub fn profile(&self) -> GridProfile {
+        self.window.spec().profile
     }
+    pub fn lattice_dt(&self) -> f32 {
+        self.dt
+    }
+    /// Row-major grid of lattice momentum changes (dimensionless density times lattice velocity).
+    pub fn apply_kicks(&mut self, kicks: &[[f32; 2]]) -> Result<(), String> {
+        self.window.apply_kicks(kicks)
+    }
+    /// Normalized fluid-only interpolation weights; also used to spread reaction momentum.
+    pub fn supported_weights(
+        &self,
+        position: [f32; 2],
+    ) -> Result<(LocalSampleStatus, Vec<(usize, f32)>), String> {
+        supported_weights(
+            position,
+            self.bounds()[0],
+            self.profile(),
+            &self.raster.geometry.solid,
+            &self.field,
+        )
+    }
+    pub fn sample(&self, position: [f32; 2]) -> Result<LocalSample, String> {
+        let (status, weights) = self.supported_weights(position)?;
+        let mut sample = LocalSample {
+            density: 0.,
+            velocity: [0.; 2],
+            status,
+        };
+        for (i, w) in weights {
+            sample.density += w * self.field[i][0];
+            sample.velocity[0] += w * self.field[i][1];
+            sample.velocity[1] += w * self.field[i][2];
+        }
+        Ok(sample)
+    }
+}
+fn supported_weights(
+    position: [f32; 2],
+    origin: [f32; 2],
+    profile: GridProfile,
+    solid: &[bool],
+    field: &[[f32; 4]],
+) -> Result<(LocalSampleStatus, Vec<(usize, f32)>), String> {
+    if !position.iter().all(|v| v.is_finite()) {
+        return Err("nonfinite position".into());
+    }
+    let h = profile.cell_spacing();
+    let n = profile.cells_per_side() as usize;
+    let x = (position[0] - origin[0]) / h;
+    let y = (position[1] - origin[1]) / h;
+    if x < 0. || y < 0. || x >= n as f32 || y >= n as f32 {
+        return Ok((LocalSampleStatus::OutsideWindow, vec![]));
+    }
+    let valid =
+        |i: usize| !solid[i] && field[i][0] > 0. && field[i][..3].iter().all(|v| v.is_finite());
+    if !valid(y.floor() as usize * n + x.floor() as usize) {
+        return Ok((LocalSampleStatus::SolidOrInvalid, vec![]));
+    }
+    let x = x - 0.5;
+    let y = y - 0.5;
+    let ix = x.floor() as i32;
+    let iy = y.floor() as i32;
+    let fx = x - ix as f32;
+    let fy = y - iy as f32;
+    let mut weights = Vec::with_capacity(4);
+    for (dx, dy, w) in [
+        (0, 0, (1. - fx) * (1. - fy)),
+        (1, 0, fx * (1. - fy)),
+        (0, 1, (1. - fx) * fy),
+        (1, 1, fx * fy),
+    ] {
+        let xx = ix + dx;
+        let yy = iy + dy;
+        if w > 0. && xx >= 0 && yy >= 0 && xx < n as i32 && yy < n as i32 {
+            let i = yy as usize * n + xx as usize;
+            if valid(i) {
+                weights.push((i, w));
+            }
+        }
+    }
+    let sum: f32 = weights.iter().map(|(_, w)| w).sum();
+    if sum <= 0. {
+        return Ok((LocalSampleStatus::SolidOrInvalid, vec![]));
+    }
+    for (_, w) in &mut weights {
+        *w /= sum;
+    }
+    Ok((LocalSampleStatus::Valid, weights))
 }
 fn delta(baseline: &[(usize, [f32; 4])], field: &[[f32; 4]]) -> ContinuityDelta {
     let mut d = ContinuityDelta::default();
@@ -217,6 +288,79 @@ mod tests {
             }
         );
         assert!(origin_for([f32::NAN, 0.]).is_err());
+    }
+    #[test]
+    fn supported_bilinear_weights_exclude_solids_and_outside() {
+        let n = GridProfile::Coarse.cells_per_side() as usize;
+        let mut solid = vec![false; n * n];
+        let field = vec![[1., 0., 0., 0.]; n * n];
+        let origin = [-16., 0.];
+        let (status, weights) =
+            supported_weights([-15.5, 0.5], origin, GridProfile::Coarse, &solid, &field).unwrap();
+        assert_eq!(status, LocalSampleStatus::Valid);
+        assert_eq!(weights.len(), 4);
+        assert!(weights.iter().all(|(_, w)| (*w - 0.25).abs() < 1e-6));
+        solid[n] = true;
+        let (_, weights) =
+            supported_weights([-15.5, 0.5], origin, GridProfile::Coarse, &solid, &field).unwrap();
+        assert_eq!(weights.len(), 3);
+        assert!((weights.iter().map(|(_, w)| w).sum::<f32>() - 1.).abs() < 1e-6);
+        assert!(weights.iter().all(|(i, _)| *i != n));
+        assert_eq!(
+            supported_weights([-15.75, 0.75], origin, GridProfile::Coarse, &solid, &field)
+                .unwrap()
+                .0,
+            LocalSampleStatus::SolidOrInvalid
+        );
+        assert_eq!(
+            supported_weights([-16.01, 0.5], origin, GridProfile::Coarse, &solid, &field)
+                .unwrap()
+                .0,
+            LocalSampleStatus::OutsideWindow
+        );
+    }
+
+    #[test]
+    #[ignore = "explicit software-adapter functional diagnostic"]
+    fn batched_advance_matches_individual_steps() {
+        let (map, flow) = fixture(false);
+        let config = WindowConfig {
+            dt: 0.01,
+            viscosity: 0.1,
+            allow_software: true,
+        };
+        let mut a =
+            StreamingWindow::new(&map, &flow, [24., 24.], GridProfile::Coarse, config).unwrap();
+        let mut b =
+            StreamingWindow::new(&map, &flow, [24., 24.], GridProfile::Coarse, config).unwrap();
+        let input = StepInput {
+            acceleration: [0., 0.],
+        };
+        let n = GridProfile::Coarse.cells_per_side() as usize;
+        for (i, velocity) in [
+            (48 * n + 48, 1.),
+            (48 * n + 49, 3.),
+            (49 * n + 48, 5.),
+            (49 * n + 49, 7.),
+        ] {
+            a.field[i][1] = velocity;
+        }
+        let sample = a.sample([24.5, 24.5]).unwrap();
+        assert!((sample.velocity[0] - 4.).abs() < 1e-6);
+        // Restore cache from the unchanged GPU before comparing time advancement.
+        a.field = a.window.field().unwrap();
+        a.advance_batch(input, 4).unwrap();
+        for _ in 0..4 {
+            b.advance(input).unwrap();
+        }
+        for p in [[24.25, 24.25], [20.5, 23.5], [35.25, 24.25]] {
+            let x = a.sample(p).unwrap();
+            let y = b.sample(p).unwrap();
+            assert_eq!(x.status, y.status);
+            assert!((x.density - y.density).abs() < 1e-6);
+            assert!((x.velocity[0] - y.velocity[0]).abs() < 1e-6);
+            assert!((x.velocity[1] - y.velocity[1]).abs() < 1e-6);
+        }
     }
     fn fixture(fork: bool) -> (MapDefinition, GraphFlow) {
         use crate::{circulation::Flow, map::VesselEdge};
