@@ -1,0 +1,87 @@
+{
+  "accepted": true,
+  "adapter": {
+    "backend": "Vulkan",
+    "device": 7308,
+    "device_type": "DiscreteGpu",
+    "driver": "NVIDIA",
+    "driver_info": "582.78",
+    "name": "NVIDIA GeForce GTX 1050 Ti",
+    "software": false,
+    "vendor": 4318
+  },
+  "command": [
+    "E:\\Game\\bloodSimulator\\target\\fluid-bench\\release\\fluid-bench.exe",
+    "smoke",
+    "--out",
+    "E:\\Game\\bloodSimulator\\target\\gpu-experiments\\20261027-mg-c1-gtx1050ti\\smoke.json"
+  ],
+  "hardware_measurement": false,
+  "mode": "smoke",
+  "samples": [
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 6.799155505277099e-8,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.109115553095212e-8,
+        "momentum_rms": 9.064551612806759e-8,
+        "pressure_reference_max_absolute": 1.6207255759681516e-7,
+        "relative_residual": 3.519364142664336e-8,
+        "velocity_reference_relative_l2": 3.795652972102209e-8
+      },
+      "max_error": 1.6207255759681516e-7,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 148,
+          "readback_bytes": 108,
+          "readback_wait_ms": 7.2969,
+          "readbacks": 4,
+          "submissions": 8
+        },
+        "iterations": 2,
+        "multigrid_levels": [
+          2
+        ],
+        "status": "converged",
+        "stopping_relative": 8.262913577710009e-8
+      },
+      "rows": 3
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 4.6576558377243305e-7,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 7.459838172752847e-7,
+        "momentum_rms": 7.459838172752847e-7,
+        "pressure_reference_max_absolute": 2.6226043701171875e-6,
+        "relative_residual": 3.1552410287102075e-6,
+        "velocity_reference_relative_l2": 1.4047056399191871e-6
+      },
+      "max_error": 3.691808397876528e-6,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 308,
+          "readback_bytes": 1124,
+          "readback_wait_ms": 8.2441,
+          "readbacks": 4,
+          "submissions": 8
+        },
+        "iterations": 8,
+        "multigrid_levels": [
+          129,
+          33
+        ],
+        "status": "converged",
+        "stopping_relative": 3.583339386520169e-6
+      },
+      "rows": 257
+    }
+  ],
+  "schema_version": 2
+}

@@ -1,0 +1,377 @@
+{
+  "c2/small64/cpu-lu": {
+    "samples": 16,
+    "mean_ms": 2.246930625,
+    "min_ms": 0.9351,
+    "max_ms": 3.81125,
+    "max_relative_residual": 2.047865680070463e-14,
+    "max_velocity_error": 0.0,
+    "iterations": [
+      0,
+      0
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ],
+    "dispatches": [
+      0,
+      0
+    ],
+    "mean_setup_ms": 165.704475
+  },
+  "c2/small64/cpu-fgmres-mg": {
+    "samples": 16,
+    "mean_ms": 95.03151875,
+    "min_ms": 61.076699999999995,
+    "max_ms": 143.58950000000002,
+    "max_relative_residual": 1.0994636422037598e-05,
+    "max_velocity_error": 3.29862148553357e-05,
+    "iterations": [
+      15,
+      16
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ],
+    "dispatches": [
+      0,
+      0
+    ],
+    "mean_setup_ms": 196.9274
+  },
+  "c2/small64/gpu-fgmres-mg": {
+    "samples": 16,
+    "mean_ms": 130.3666125,
+    "min_ms": 63.583,
+    "max_ms": 345.4898,
+    "max_relative_residual": 1.2412955840416622e-05,
+    "max_velocity_error": 3.2581961919678376e-05,
+    "iterations": [
+      15,
+      16
+    ],
+    "readbacks": [
+      5,
+      5
+    ],
+    "submissions": [
+      10,
+      10
+    ],
+    "dispatches": [
+      1564,
+      1564
+    ],
+    "mean_setup_ms": 1184.462325
+  },
+  "c2/wide96/cpu-lu": {
+    "samples": 16,
+    "mean_ms": 1.75756125,
+    "min_ms": 1.13153,
+    "max_ms": 2.41641,
+    "max_relative_residual": 9.829600778200395e-15,
+    "max_velocity_error": 0.0,
+    "iterations": [
+      0,
+      0
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ],
+    "dispatches": [
+      0,
+      0
+    ],
+    "mean_setup_ms": 99.26985
+  },
+  "c2/wide96/cpu-fgmres-mg": {
+    "samples": 16,
+    "mean_ms": 267.21203125,
+    "min_ms": 168.2805,
+    "max_ms": 529.1773,
+    "max_relative_residual": 2.5929516472312128e-05,
+    "max_velocity_error": 0.0008040756691720804,
+    "iterations": [
+      32,
+      42
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ],
+    "dispatches": [
+      0,
+      0
+    ],
+    "mean_setup_ms": 160.183425
+  },
+  "c2/wide96/gpu-fgmres-mg": {
+    "samples": 16,
+    "mean_ms": 201.69205,
+    "min_ms": 113.19510000000001,
+    "max_ms": 273.6427,
+    "max_relative_residual": 2.5963553933270505e-05,
+    "max_velocity_error": 0.0008046307614620999,
+    "iterations": [
+      32,
+      42
+    ],
+    "readbacks": [
+      7,
+      10
+    ],
+    "submissions": [
+      14,
+      21
+    ],
+    "dispatches": [
+      3116,
+      4675
+    ],
+    "mean_setup_ms": 895.8250499999999
+  },
+  "c2/wide192/cpu-lu": {
+    "samples": 16,
+    "mean_ms": 10.311501875,
+    "min_ms": 7.5592,
+    "max_ms": 15.433700000000002,
+    "max_relative_residual": 3.223866075870169e-14,
+    "max_velocity_error": 0.0,
+    "iterations": [
+      0,
+      0
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ],
+    "dispatches": [
+      0,
+      0
+    ],
+    "mean_setup_ms": 629.4588249999999
+  },
+  "c2/wide192/cpu-fgmres-mg": {
+    "samples": 16,
+    "mean_ms": 1117.485925,
+    "min_ms": 773.1510999999999,
+    "max_ms": 1748.8421999999998,
+    "max_relative_residual": 1.4097506870814688e-05,
+    "max_velocity_error": 0.0007790017305799299,
+    "iterations": [
+      34,
+      46
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ],
+    "dispatches": [
+      0,
+      0
+    ],
+    "mean_setup_ms": 1103.3124
+  },
+  "c2/wide192/gpu-fgmres-mg": {
+    "samples": 16,
+    "mean_ms": 305.6107,
+    "min_ms": 206.6361,
+    "max_ms": 400.4221,
+    "max_relative_residual": 1.4210083451075146e-05,
+    "max_velocity_error": 0.0007801062693756991,
+    "iterations": [
+      34,
+      46
+    ],
+    "readbacks": [
+      9,
+      10
+    ],
+    "submissions": [
+      19,
+      21
+    ],
+    "dispatches": [
+      4699,
+      5635
+    ],
+    "mean_setup_ms": 1819.557
+  },
+  "c1/small64/cpu-fgmres-mg": {
+    "samples": 16,
+    "mean_ms": 54.3556,
+    "min_ms": 42.7755,
+    "max_ms": 74.07039999999999,
+    "max_relative_residual": 1.710907117072574e-05,
+    "max_velocity_error": 5.58630563041241e-05,
+    "iterations": [
+      17,
+      18
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ],
+    "dispatches": [
+      0,
+      0
+    ],
+    "mean_setup_ms": 177.3612
+  },
+  "c1/small64/gpu-fgmres-mg": {
+    "samples": 16,
+    "mean_ms": 85.093775,
+    "min_ms": 58.2693,
+    "max_ms": 119.6007,
+    "max_relative_residual": 1.7429810963632427e-05,
+    "max_velocity_error": 5.581202105854469e-05,
+    "iterations": [
+      17,
+      18
+    ],
+    "readbacks": [
+      6,
+      6
+    ],
+    "submissions": [
+      12,
+      12
+    ],
+    "dispatches": [
+      1356,
+      1356
+    ],
+    "mean_setup_ms": 889.5456250000001
+  },
+  "c1/wide96/cpu-fgmres-mg": {
+    "samples": 16,
+    "mean_ms": 233.9349875,
+    "min_ms": 154.2037,
+    "max_ms": 395.0937,
+    "max_relative_residual": 3.299880945040144e-05,
+    "max_velocity_error": 0.0060378599148562485,
+    "iterations": [
+      36,
+      51
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ],
+    "dispatches": [
+      0,
+      0
+    ],
+    "mean_setup_ms": 202.44740000000002
+  },
+  "c1/wide96/gpu-fgmres-mg": {
+    "samples": 16,
+    "mean_ms": 215.76689375,
+    "min_ms": 120.208,
+    "max_ms": 741.7420999999999,
+    "max_relative_residual": 3.299638986453383e-05,
+    "max_velocity_error": 0.006037696748475711,
+    "iterations": [
+      36,
+      51
+    ],
+    "readbacks": [
+      9,
+      11
+    ],
+    "submissions": [
+      19,
+      23
+    ],
+    "dispatches": [
+      2259,
+      3155
+    ],
+    "mean_setup_ms": 951.290025
+  },
+  "c1/wide192/cpu-fgmres-mg": {
+    "samples": 16,
+    "mean_ms": 1003.63054375,
+    "min_ms": 634.9365,
+    "max_ms": 1574.1876000000002,
+    "max_relative_residual": 1.7635848406356006e-05,
+    "max_velocity_error": 0.0022993002568614377,
+    "iterations": [
+      38,
+      57
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ],
+    "dispatches": [
+      0,
+      0
+    ],
+    "mean_setup_ms": 1264.0342
+  },
+  "c1/wide192/gpu-fgmres-mg": {
+    "samples": 16,
+    "mean_ms": 222.936775,
+    "min_ms": 133.4652,
+    "max_ms": 330.45799999999997,
+    "max_relative_residual": 1.755633466267881e-05,
+    "max_velocity_error": 0.002300048126929277,
+    "iterations": [
+      38,
+      57
+    ],
+    "readbacks": [
+      9,
+      12
+    ],
+    "submissions": [
+      19,
+      25
+    ],
+    "dispatches": [
+      2659,
+      4243
+    ],
+    "mean_setup_ms": 1826.9444
+  }
+}

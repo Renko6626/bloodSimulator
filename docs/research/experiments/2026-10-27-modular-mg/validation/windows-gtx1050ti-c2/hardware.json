@@ -1,0 +1,25 @@
+﻿{
+    "recorded_at":  "2026-10-27T18:08:35.1712797+08:00",
+    "cpu":  [
+                {
+                    "Name":  "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
+                    "NumberOfCores":  6,
+                    "NumberOfLogicalProcessors":  12
+                }
+            ],
+    "gpu":  [
+                {
+                    "Name":  "NVIDIA GeForce GTX 1050 Ti",
+                    "DriverVersion":  "32.0.15.8278"
+                },
+                {
+                    "Name":  "Intel(R) UHD Graphics 630",
+                    "DriverVersion":  "31.0.101.2115"
+                }
+            ],
+    "memory_bytes":  34203353088,
+    "git_commit":  "de0733c3f8d2c9cbaa1ef15136682df7bd487c7e",
+    "git_status":  [
+
+                   ]
+}

@@ -1,0 +1,20 @@
+{
+  "accepted": true,
+  "adapter": {
+    "backend": "Vulkan",
+    "device": 7308,
+    "device_type": "DiscreteGpu",
+    "driver": "NVIDIA",
+    "driver_info": "582.78",
+    "name": "NVIDIA GeForce GTX 1050 Ti",
+    "software": false,
+    "vendor": 4318
+  },
+  "command": [
+    "E:\\Game\\bloodSimulator\\target\\fluid-bench\\release\\fluid-bench.exe",
+    "probe",
+    "--out",
+    "E:\\Game\\bloodSimulator\\target\\gpu-experiments\\20261027-mg-c1-gtx1050ti\\probe.json"
+  ],
+  "schema_version": 2
+}

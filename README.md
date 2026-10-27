@@ -16,7 +16,7 @@
 
 [独立 GPU 实验与云端运行说明](docs/research/experiments/2026-10-27-gpu-stokes/README.md)提供跨厂商 wgpu／WGSL 迭代基线、真实矩阵采集和 CPU 参照。[Windows GTX 1050 Ti 基线](docs/research/experiments/2026-10-27-gpu-stokes/windows-gtx1050ti.md)已完成：GPU 功能检查通过，但真实系统的 48 次 GMRES 求解均在 400 次迭代后未收敛，当前方案尚不可用，未进入正式游戏后端。
 
-后续已按确认路线实现[可插拔后端与 GPU 分块多重网格](docs/research/experiments/2026-10-27-modular-mg/README.md)：公共流体、GPU 后端、独立实验入口三个 crate，提供 CPU LU、CPU／GPU FGMRES-MG 与旧 GPU GMRES 基线。CPU LU 仍为默认局部后端，GPU 可选；新算法的物理 GPU 性能待测。
+后续已按确认路线实现[可插拔后端与 GPU 分块多重网格](docs/research/experiments/2026-10-27-modular-mg/README.md)：公共流体、GPU 后端、独立实验入口三个 crate，提供 CPU LU、CPU／GPU FGMRES-MG 与旧 GPU GMRES 基线。[GTX 1050 Ti 新版实测](docs/research/experiments/2026-10-27-modular-mg/windows-gtx1050ti.md)的 1／2 次 V-cycle 两组共 96 次 GPU 求解全部通过，但默认两次配置各规模仍需约 130／202／306 ms，CPU LU 更快，继续作为默认局部后端。
 
 Windows GPU 实验入口：双击根目录 `run-gpu-experiment.cmd`，完成构建、硬件探测、已知解检查、真实矩阵采集与新 CPU／GPU 后端回放。需要 Rust、Python 3 和系统链接工具，首次运行会下载依赖；详细要求和结果路径见新的模块化实验说明。
 
