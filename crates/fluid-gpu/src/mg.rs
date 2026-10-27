@@ -407,6 +407,8 @@ pub struct MgSolver {
     options: SolveOptions,
     work: wgpu::Buffer,
     scalar: wgpu::Buffer,
+    state_readback: wgpu::Buffer,
+    solution_readback: wgpu::Buffer,
     group: wgpu::BindGroup,
     pipelines: Vec<wgpu::ComputePipeline>,
     start: Vec<Step>,
@@ -542,6 +544,16 @@ impl MgSolver {
                 | wgpu::BufferUsages::COPY_DST
                 | wgpu::BufferUsages::COPY_SRC,
         );
+        let state_readback = buffer(
+            "MG state readback",
+            32,
+            wgpu::BufferUsages::MAP_READ | wgpu::BufferUsages::COPY_DST,
+        );
+        let solution_readback = buffer(
+            "MG solution readback",
+            n as u64 * 4,
+            wgpu::BufferUsages::MAP_READ | wgpu::BufferUsages::COPY_DST,
+        );
         let partial = buffer(
             "FGMRES reduction",
             (m + 1) as u64 * n.div_ceil(256) as u64 * 4,
@@ -643,6 +655,8 @@ impl MgSolver {
             options,
             work,
             scalar,
+            state_readback,
+            solution_readback,
             group,
             pipelines,
             start,
@@ -752,13 +766,12 @@ impl MgSolver {
     }
     fn read(&mut self, scalar: bool, offset: u64, size: u64) -> LabResult<Vec<f32>> {
         let start = Instant::now();
-        let staging = self.context.device.create_buffer(&wgpu::BufferDescriptor {
-            label: Some("MG readback"),
-            size,
-            usage: wgpu::BufferUsages::MAP_READ | wgpu::BufferUsages::COPY_DST,
-            mapped_at_creation: false,
-        });
-        self.detail("readback_create_buffer_ms", start);
+        let staging = if scalar {
+            &self.state_readback
+        } else {
+            &self.solution_readback
+        };
+        self.detail("readback_select_buffer_ms", start);
         let timer = Instant::now();
         let mut encoder = self
             .context
@@ -767,7 +780,7 @@ impl MgSolver {
         encoder.copy_buffer_to_buffer(
             if scalar { &self.scalar } else { &self.work },
             offset,
-            &staging,
+            staging,
             0,
             size,
         );
@@ -781,16 +794,18 @@ impl MgSolver {
         self.mark("queue_submit_ms", timer);
         let timer = Instant::now();
         let (tx, rx) = mpsc::sync_channel(1);
-        staging.slice(..).map_async(wgpu::MapMode::Read, move |r| {
-            let _ = tx.send(r);
-        });
+        staging
+            .slice(0..size)
+            .map_async(wgpu::MapMode::Read, move |r| {
+                let _ = tx.send(r);
+            });
         self.context
             .device
             .poll(wgpu::PollType::wait_indefinitely())?;
         rx.recv()??;
         self.mark("readback_map_poll_ms", timer);
         let timer = Instant::now();
-        let mapped = staging.slice(..).get_mapped_range();
+        let mapped = staging.slice(0..size).get_mapped_range();
         let result = bytemuck::cast_slice::<u8, f32>(&mapped).to_vec();
         drop(mapped);
         staging.unmap();

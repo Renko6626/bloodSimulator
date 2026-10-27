@@ -1,0 +1,88 @@
+{
+  "accepted": true,
+  "adapter": {
+    "backend": "Vulkan",
+    "device": 0,
+    "device_type": "Cpu",
+    "driver": "llvmpipe",
+    "driver_info": "Mesa 23.2.1-1ubuntu3.1~22.04.4 (LLVM 15.0.7)",
+    "name": "llvmpipe (LLVM 15.0.7, 256 bits)",
+    "software": true,
+    "vendor": 65541
+  },
+  "command": [
+    "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+    "smoke",
+    "--allow-software",
+    "--out",
+    "/tmp/sunyunbo/blood-reuse-software-smoke.json"
+  ],
+  "hardware_measurement": false,
+  "mode": "smoke",
+  "samples": [
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 6.799155505277099e-8,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 7.128836827396706e-8,
+        "momentum_rms": 2.078395230337589e-7,
+        "pressure_reference_max_absolute": 2.92659791512051e-7,
+        "relative_residual": 7.317078580814919e-8,
+        "velocity_reference_relative_l2": 3.795652972102209e-8
+      },
+      "max_error": 2.92659791512051e-7,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 148,
+          "readback_bytes": 108,
+          "readback_wait_ms": 26.931998,
+          "readbacks": 4,
+          "submissions": 8
+        },
+        "iterations": 2,
+        "multigrid_levels": [
+          2
+        ],
+        "status": "converged",
+        "stopping_relative": 9.233912156781773e-8
+      },
+      "rows": 3
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 6.689360134453274e-7,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 1.0351773174649057e-6,
+        "momentum_rms": 1.0351773174649057e-6,
+        "pressure_reference_max_absolute": 2.1457672119140625e-6,
+        "relative_residual": 4.421676470179304e-6,
+        "velocity_reference_relative_l2": 1.302338649830341e-6
+      },
+      "max_error": 3.354633609786717e-6,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 308,
+          "readback_bytes": 1124,
+          "readback_wait_ms": 63.037933,
+          "readbacks": 4,
+          "submissions": 8
+        },
+        "iterations": 8,
+        "multigrid_levels": [
+          129,
+          33
+        ],
+        "status": "converged",
+        "stopping_relative": 5.047778264868459e-6
+      },
+      "rows": 257
+    }
+  ],
+  "schema_version": 2
+}

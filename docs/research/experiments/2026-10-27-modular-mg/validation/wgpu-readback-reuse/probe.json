@@ -1,0 +1,20 @@
+{
+  "accepted": true,
+  "adapter": {
+    "backend": "Vulkan",
+    "device": 9476,
+    "device_type": "DiscreteGpu",
+    "driver": "NVIDIA",
+    "driver_info": "580.65.06",
+    "name": "NVIDIA GeForce RTX 3060",
+    "software": false,
+    "vendor": 4318
+  },
+  "command": [
+    "/workspace/blood-readback-reuse-7b604e1/bin/fluid-bench",
+    "probe",
+    "--out",
+    "/workspace/blood-readback-reuse-7b604e1/results/probe.json"
+  ],
+  "schema_version": 2
+}

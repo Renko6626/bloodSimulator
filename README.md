@@ -12,18 +12,12 @@
 
 局部 Stokes 原型已接入 faer 联合 LU，并提供两块固定重叠区域：加载时预分解，玩家进入上方相邻管段时切换，复用点力历史和原 Rapier 物体。默认世界保持解析血流，`--local-stokes` 显式开启双区验证。十二物理节点保留，解析驱动采用此前确认的六次采样。
 
-[20 秒实际行驶验证](docs/research/experiments/2026-10-27-region-switch/README.md)完成六次交接：release 模拟整步均值约 8.42 ms，额外交接均值约 3.00 ms、最大 4.51 ms。切换存在可测的局部流速差，尚未做真人手感或长期验收。当前只覆盖出生分叉和上方邻区，全地图详细流体调度与远处实体装卸尚未实施。历史性能实验见[研究索引](docs/research/README.md)。
+**流体性能研究已阶段性暂停。** 当前模型、近似、核心算法、实验结果和未解决问题统一见[流体实验阶段记录](docs/research/2026-10-27-fluid-checkpoint.md)。GPU 候选虽能收敛，RTX 3060 最近回放仍约 46–184 ms／次，未达到实时游戏要求；CPU LU 继续作为显式局部默认后端。
 
-[独立 GPU 实验与云端运行说明](docs/research/experiments/2026-10-27-gpu-stokes/README.md)提供跨厂商 wgpu／WGSL 迭代基线、真实矩阵采集和 CPU 参照。[Windows GTX 1050 Ti 基线](docs/research/experiments/2026-10-27-gpu-stokes/windows-gtx1050ti.md)已完成：GPU 功能检查通过，但真实系统的 48 次 GMRES 求解均在 400 次迭代后未收敛，当前方案尚不可用，未进入正式游戏后端。
-
-后续已按确认路线实现[可插拔后端与 GPU 分块多重网格](docs/research/experiments/2026-10-27-modular-mg/README.md)：公共流体、GPU 后端、独立实验入口三个 crate，提供 CPU LU、CPU／GPU FGMRES-MG 与旧 GPU GMRES 基线。[GTX 1050 Ti 新版实测](docs/research/experiments/2026-10-27-modular-mg/windows-gtx1050ti.md)的 1／2 次 V-cycle 两组共 96 次 GPU 求解全部通过，但默认两次配置各规模仍需约 130／202／306 ms，CPU LU 更快，继续作为默认局部后端。
-
-进一步的 [RTX 3060 分段 profiling](docs/research/experiments/2026-10-27-modular-mg/gpu-profile.md)已区分主机编码、回读准备与设备各类 kernel；主机编码主要集中在 encoder.finish，回读准备主要集中在 create_buffer；设备侧 MG 平滑也有显著成本。实验入口新增可选 `--profile host|gpu`，默认关闭，不改变求解算法或玩家要求。
-
-Windows GPU 实验入口：双击根目录 `run-gpu-experiment.cmd`，完成构建、硬件探测、已知解检查、真实矩阵采集与新 CPU／GPU 后端回放。需要 Rust、Python 3 和系统链接工具，首次运行会下载依赖；详细要求和结果路径见新的模块化实验说明。
+保留模块化求解器、分段 profiling 和已验证的回读缓冲复用。云实例已停止。历史实验与复现入口见[研究索引](docs/research/README.md)；旧报告中的后续建议不代表继续执行的安排。
 
 - [当前状态与待办](docs/STATUS.md)：统一维护阶段结论、下一步优先级与待确认事项。
-- [流体研究索引](docs/research/README.md)：最新欠松弛结果，以及 Stokes、Rayon、LBM 等历史实验与原始数据。
+- [流体研究索引](docs/research/README.md)：按测量时点保留的 Stokes、GPU、Rayon、LBM 实验与原始数据。
 - [世界小地图设计](docs/superpowers/specs/2026-10-22-world-small-map-design.md)与[实施记录](docs/superpowers/plans/2026-10-22-world-small-map.md)：已确认的地图、流速、镜头与实现限制。
 - [整体架构](docs/superpowers/specs/2026-10-21-world-architecture-design.md)与[玩法设计草案](docs/superpowers/specs/2026-10-19-blood-simulator-design.md)。
 - [正式原型性能诊断](docs/superpowers/plans/2026-10-22-performance-audit.md)：72 个细胞的节点数对照与流速查询开销。

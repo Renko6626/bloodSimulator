@@ -1,0 +1,317 @@
+{
+  "accepted": true,
+  "adapter": {
+    "backend": "Vulkan",
+    "kind": "DiscreteGpu",
+    "name": "NVIDIA GeForce RTX 3060",
+    "software": false
+  },
+  "backend": "gpu-fgmres-mg",
+  "case": "/workspace/blood-readback-reuse-7b604e1/data/wide96/region-1",
+  "command": [
+    "/workspace/blood-profile-detail-f3aaa4f/bin/fluid-bench",
+    "run",
+    "--backend",
+    "gpu-fgmres-mg",
+    "--case",
+    "/workspace/blood-readback-reuse-7b604e1/data/wide96/region-1",
+    "--limit",
+    "4",
+    "--restart",
+    "32",
+    "--max-iter",
+    "200",
+    "--rtol",
+    "1e-4",
+    "--mg-cycles",
+    "2",
+    "--repeats",
+    "1",
+    "--profile",
+    "host",
+    "--out",
+    "/workspace/blood-readback-reuse-7b604e1/results/wide96-region-1-gpu-fgmres-mg-c2-baseline-host-r1.json"
+  ],
+  "hardware_measurement": true,
+  "mode": "run",
+  "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+  "options": {
+    "max_iterations": 200,
+    "restart": 32,
+    "tolerance": 0.0001,
+    "v_cycles": 2
+  },
+  "rows": 7309,
+  "samples": [
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 0.000031471167719695456,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 2.4092610481274765e-6,
+        "momentum_rms": 2.4092610481274765e-6,
+        "pressure_reference_max_absolute": 0.0008076043787692555,
+        "relative_residual": 0.000022850824006801987,
+        "velocity_reference_relative_l2": 0.00031036676211907175
+      },
+      "mean_solve_ms": 128.051847,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 3116,
+          "readback_bytes": 29428,
+          "readback_wait_ms": 40.666135,
+          "readbacks": 7,
+          "submissions": 14
+        },
+        "iterations": 32,
+        "multigrid_levels": [
+          4815,
+          1316,
+          399,
+          123,
+          43
+        ],
+        "profile": {
+          "gpu_interval_span_ms": 0.0,
+          "gpu_stages": {},
+          "gpu_timestamp_status": "not_requested_or_unsupported_or_batch_too_large",
+          "gpu_timestamps_enabled": false,
+          "host_detail_ms": {
+            "encode_begin_pass_ms": 0.5730899999999909,
+            "encode_dispatch_ms": 0.12547600000000347,
+            "encode_end_pass_ms": 0.9606570000000049,
+            "encode_finish_ms": 75.72458700000001,
+            "encode_set_pipeline_bind_group_ms": 0.7018830000000034,
+            "readback_create_buffer_ms": 16.51603,
+            "readback_encode_copy_ms": 0.017554,
+            "readback_finish_ms": 0.186341
+          },
+          "host_ms": {
+            "command_encode_ms": 78.85828000000001,
+            "original_audit_ms": 0.19384,
+            "queue_submit_ms": 2.3409869999999997,
+            "readback_decode_ms": 0.014627000000000001,
+            "readback_map_poll_ms": 23.618771,
+            "readback_prepare_ms": 16.725225000000002,
+            "rhs_prepare_upload_ms": 0.046103000000000005,
+            "solution_map_ms": 0.013576
+          },
+          "notes": "Opt-in diagnostics perturb timing. Pass durations exclude gaps; interval span includes gaps/idle between passes. Host timers and GPU timeline overlap. Planned gated dispatches are included.",
+          "profile_readback_bytes": 0,
+          "profile_readbacks": 0,
+          "timestamp_period_ns": 1.0,
+          "total_ms": 128.039391,
+          "unaccounted_ms": 6.227981999999983
+        },
+        "status": "converged",
+        "stopping_relative": 0.00007172168109069666
+      },
+      "sample": "000"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 1.5994203122004005e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 1.457437094111134e-7,
+        "momentum_rms": 1.457437094111134e-7,
+        "pressure_reference_max_absolute": 0.00013780273117658393,
+        "relative_residual": 0.000018590062855163592,
+        "velocity_reference_relative_l2": 0.00011759660120611571
+      },
+      "mean_solve_ms": 150.116917,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 3899,
+          "readback_bytes": 29492,
+          "readback_wait_ms": 47.269748,
+          "readbacks": 9,
+          "submissions": 19
+        },
+        "iterations": 35,
+        "multigrid_levels": [
+          4815,
+          1316,
+          399,
+          123,
+          43
+        ],
+        "profile": {
+          "gpu_interval_span_ms": 0.0,
+          "gpu_stages": {},
+          "gpu_timestamp_status": "not_requested_or_unsupported_or_batch_too_large",
+          "gpu_timestamps_enabled": false,
+          "host_detail_ms": {
+            "encode_begin_pass_ms": 0.6808039999999862,
+            "encode_dispatch_ms": 0.14615300000000522,
+            "encode_end_pass_ms": 1.1564189999999972,
+            "encode_finish_ms": 89.617234,
+            "encode_set_pipeline_bind_group_ms": 0.8354580000000057,
+            "readback_create_buffer_ms": 18.140181999999996,
+            "readback_encode_copy_ms": 0.025372,
+            "readback_finish_ms": 0.116005
+          },
+          "host_ms": {
+            "command_encode_ms": 93.404249,
+            "original_audit_ms": 0.214667,
+            "queue_submit_ms": 2.771599,
+            "readback_decode_ms": 0.024465,
+            "readback_map_poll_ms": 28.577005,
+            "readback_prepare_ms": 18.288097,
+            "rhs_prepare_upload_ms": 0.116585,
+            "solution_map_ms": 0.015673
+          },
+          "notes": "Opt-in diagnostics perturb timing. Pass durations exclude gaps; interval span includes gaps/idle between passes. Host timers and GPU timeline overlap. Planned gated dispatches are included.",
+          "profile_readback_bytes": 0,
+          "profile_readbacks": 0,
+          "timestamp_period_ns": 1.0,
+          "total_ms": 150.10486600000002,
+          "unaccounted_ms": 6.6925260000000435
+        },
+        "status": "converged",
+        "stopping_relative": 0.00008274528858356803
+      },
+      "sample": "001"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 2.019750637320119e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.54685016828697e-7,
+        "momentum_rms": 3.54685016828697e-7,
+        "pressure_reference_max_absolute": 0.00006198386620466512,
+        "relative_residual": 0.000017942042279826184,
+        "velocity_reference_relative_l2": 0.00005983792777841429
+      },
+      "mean_solve_ms": 82.766038,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 3116,
+          "readback_bytes": 29428,
+          "readback_wait_ms": 38.75879099999999,
+          "readbacks": 7,
+          "submissions": 14
+        },
+        "iterations": 32,
+        "multigrid_levels": [
+          4815,
+          1316,
+          399,
+          123,
+          43
+        ],
+        "profile": {
+          "gpu_interval_span_ms": 0.0,
+          "gpu_stages": {},
+          "gpu_timestamp_status": "not_requested_or_unsupported_or_batch_too_large",
+          "gpu_timestamps_enabled": false,
+          "host_detail_ms": {
+            "encode_begin_pass_ms": 0.5636820000000033,
+            "encode_dispatch_ms": 0.11420200000000245,
+            "encode_end_pass_ms": 0.8168410000000018,
+            "encode_finish_ms": 33.976184999999994,
+            "encode_set_pipeline_bind_group_ms": 0.6816179999999984,
+            "readback_create_buffer_ms": 12.568164999999999,
+            "readback_encode_copy_ms": 0.014213,
+            "readback_finish_ms": 0.084613
+          },
+          "host_ms": {
+            "command_encode_ms": 36.92706200000001,
+            "original_audit_ms": 0.217637,
+            "queue_submit_ms": 1.738451,
+            "readback_decode_ms": 0.013699000000000001,
+            "readback_map_poll_ms": 25.647001,
+            "readback_prepare_ms": 12.672139000000001,
+            "rhs_prepare_upload_ms": 0.066787,
+            "solution_map_ms": 0.014815
+          },
+          "notes": "Opt-in diagnostics perturb timing. Pass durations exclude gaps; interval span includes gaps/idle between passes. Host timers and GPU timeline overlap. Planned gated dispatches are included.",
+          "profile_readback_bytes": 0,
+          "profile_readbacks": 0,
+          "timestamp_period_ns": 1.0,
+          "total_ms": 82.75361000000001,
+          "unaccounted_ms": 5.456018999999998
+        },
+        "status": "converged",
+        "stopping_relative": 0.00007609086301941407
+      },
+      "sample": "003"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 1.5066813765637223e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.610485810355891e-7,
+        "momentum_rms": 3.610485810355891e-7,
+        "pressure_reference_max_absolute": 0.0000426500422872067,
+        "relative_residual": 0.000011981923889493732,
+        "velocity_reference_relative_l2": 0.000027545931211511576
+      },
+      "mean_solve_ms": 86.672908,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 3116,
+          "readback_bytes": 29428,
+          "readback_wait_ms": 39.184124999999995,
+          "readbacks": 7,
+          "submissions": 14
+        },
+        "iterations": 32,
+        "multigrid_levels": [
+          4815,
+          1316,
+          399,
+          123,
+          43
+        ],
+        "profile": {
+          "gpu_interval_span_ms": 0.0,
+          "gpu_stages": {},
+          "gpu_timestamp_status": "not_requested_or_unsupported_or_batch_too_large",
+          "gpu_timestamps_enabled": false,
+          "host_detail_ms": {
+            "encode_begin_pass_ms": 0.6279289999999903,
+            "encode_dispatch_ms": 0.12335800000000009,
+            "encode_end_pass_ms": 0.768342000000004,
+            "encode_finish_ms": 37.264917,
+            "encode_set_pipeline_bind_group_ms": 0.7486000000000027,
+            "readback_create_buffer_ms": 13.520223999999999,
+            "readback_encode_copy_ms": 0.014104,
+            "readback_finish_ms": 0.088353
+          },
+          "host_ms": {
+            "command_encode_ms": 40.378526,
+            "original_audit_ms": 0.231078,
+            "queue_submit_ms": 1.891401,
+            "readback_decode_ms": 0.013239,
+            "readback_map_poll_ms": 25.010953,
+            "readback_prepare_ms": 13.627991,
+            "rhs_prepare_upload_ms": 0.052407,
+            "solution_map_ms": 0.013251
+          },
+          "notes": "Opt-in diagnostics perturb timing. Pass durations exclude gaps; interval span includes gaps/idle between passes. Host timers and GPU timeline overlap. Planned gated dispatches are included.",
+          "profile_readback_bytes": 0,
+          "profile_readbacks": 0,
+          "timestamp_period_ns": 1.0,
+          "total_ms": 86.66065300000001,
+          "unaccounted_ms": 5.441807000000026
+        },
+        "status": "converged",
+        "stopping_relative": 0.00005148555523172735
+      },
+      "sample": "007"
+    }
+  ],
+  "schema_version": 2,
+  "setup_ms": 589.492871
+}
