@@ -333,6 +333,11 @@ impl Simulation {
     }
 
     fn step(&mut self, input: MoveInput) {
+        #[cfg(feature = "lbm-gpu")]
+        if let Some(lbm) = &self.lbm {
+            lbm.validate_mechanical_time(&self.config)
+                .expect("invalid LBM timing");
+        }
         let started = Instant::now();
         crate::threading::install(|| self.step_inner(input));
         self.solve_ms = started.elapsed().as_secs_f64() * 1000.0;
@@ -743,6 +748,57 @@ mod lbm_runtime_tests {
         assert!((sim.lbm_stats().unwrap().elapsed_fluid_time - sim.config.dt as f64).abs() < 1e-7);
         sim.tick(MoveInput::default());
         assert_eq!(sim.snapshot().steps, 1);
+
+        for change_substeps in [false, true] {
+            if change_substeps {
+                sim.config.substeps *= 2;
+            } else {
+                sim.config.dt *= 2.;
+            }
+            let robot_before = (
+                sim.physics.bodies[sim.robot].translation(),
+                sim.physics.bodies[sim.robot].linvel(),
+            );
+            let cell_before: Vec<_> = sim.physics.soft_bodies[sim.cells[0]]
+                .particle_positions()
+                .zip(sim.physics.soft_bodies[sim.cells[0]].particle_velocities())
+                .collect();
+            let steps_before = sim.snapshot().steps;
+            let time_before = sim.lbm_stats().unwrap().elapsed_fluid_time;
+            let failure = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                sim.single_step(MoveInput::default())
+            }))
+            .unwrap_err();
+            let message = failure.downcast_ref::<String>().unwrap();
+            assert!(message.contains("reset required"));
+            assert_eq!(
+                robot_before,
+                (
+                    sim.physics.bodies[sim.robot].translation(),
+                    sim.physics.bodies[sim.robot].linvel()
+                )
+            );
+            assert_eq!(
+                cell_before,
+                sim.physics.soft_bodies[sim.cells[0]]
+                    .particle_positions()
+                    .zip(sim.physics.soft_bodies[sim.cells[0]].particle_velocities())
+                    .collect::<Vec<_>>()
+            );
+            assert_eq!(steps_before, sim.snapshot().steps);
+            assert_eq!(time_before, sim.lbm_stats().unwrap().elapsed_fluid_time);
+            sim.reset();
+            assert_eq!(sim.world_map().unwrap().spawn, [24., 24.]);
+            assert_eq!(
+                sim.lbm.as_ref().unwrap().options.profile,
+                GridProfile::Coarse
+            );
+            sim.single_step(MoveInput::default());
+            assert_eq!(sim.snapshot().steps, 1);
+            assert!(
+                (sim.lbm_stats().unwrap().elapsed_fluid_time - sim.config.dt as f64).abs() < 1e-7
+            );
+        }
     }
     #[test]
     #[ignore = "explicit software-adapter functional diagnostic"]

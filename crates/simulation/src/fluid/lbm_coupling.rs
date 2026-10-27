@@ -37,6 +37,7 @@ pub(crate) struct LbmCoupling {
     pub window: StreamingWindow,
     pub options: LbmOptions,
     pub stats: LbmStats,
+    mechanical_dt: f32,
 }
 impl LbmCoupling {
     pub fn new(
@@ -80,12 +81,19 @@ impl LbmCoupling {
         Ok(Self {
             window,
             options,
+            mechanical_dt: dt,
             stats: LbmStats {
                 lattice_steps_per_substep: count,
                 lattice_dt,
                 ..Default::default()
             },
         })
+    }
+    pub fn validate_mechanical_time(&self, config: &Config) -> Result<(), &'static str> {
+        if config.substeps == 0 || config.dt / config.substeps as f32 != self.mechanical_dt {
+            return Err("LBM mechanical substep changed; reset required before stepping");
+        }
+        Ok(())
     }
     pub fn prepare(
         &mut self,
