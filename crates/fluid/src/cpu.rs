@@ -39,6 +39,7 @@ impl PreparedSolver for LuSolver {
             stopping_relative: None,
             multigrid_levels: Vec::new(),
             counters: SolverCounters::default(),
+            profile: None,
         })
     }
 }

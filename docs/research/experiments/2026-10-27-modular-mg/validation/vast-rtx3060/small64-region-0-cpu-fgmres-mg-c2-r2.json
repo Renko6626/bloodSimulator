@@ -1,0 +1,182 @@
+{
+  "accepted": true,
+  "adapter": null,
+  "backend": "cpu-fgmres-mg",
+  "case": "/workspace/blood-experiment-f3aaa4f/data/small64/region-0",
+  "command": [
+    "/workspace/blood-experiment-f3aaa4f/bin/fluid-bench",
+    "run",
+    "--backend",
+    "cpu-fgmres-mg",
+    "--case",
+    "/workspace/blood-experiment-f3aaa4f/data/small64/region-0",
+    "--limit",
+    "4",
+    "--restart",
+    "32",
+    "--max-iter",
+    "200",
+    "--rtol",
+    "1e-4",
+    "--mg-cycles",
+    "2",
+    "--repeats",
+    "1",
+    "--out",
+    "/workspace/blood-experiment-f3aaa4f/results/small64-region-0-cpu-fgmres-mg-c2-r2.json"
+  ],
+  "hardware_measurement": false,
+  "mode": "run",
+  "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+  "options": {
+    "max_iterations": 200,
+    "restart": 32,
+    "tolerance": 0.0001,
+    "v_cycles": 2
+  },
+  "rows": 7400,
+  "samples": [
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 2.5347230463702864e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 4.932951794487432e-7,
+        "momentum_rms": 4.932951794487432e-7,
+        "pressure_reference_max_absolute": 0.00004784950523784026,
+        "relative_residual": 6.82943740446765e-6,
+        "velocity_reference_relative_l2": 0.000013077514886522221
+      },
+      "mean_solve_ms": 48.547664,
+      "report": {
+        "backend": "cpu-fgmres-mg",
+        "counters": {
+          "dispatches": 0,
+          "readback_bytes": 0,
+          "readback_wait_ms": 0.0,
+          "readbacks": 0,
+          "submissions": 0
+        },
+        "iterations": 16,
+        "multigrid_levels": [
+          4916,
+          1278,
+          355,
+          98,
+          35
+        ],
+        "status": "converged",
+        "stopping_relative": 0.00004063341240202201
+      },
+      "sample": "000"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 3.504977217299281e-7,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 5.633940681148192e-8,
+        "momentum_rms": 5.633940681148192e-8,
+        "pressure_reference_max_absolute": 0.000011686035860072191,
+        "relative_residual": 0.000010714301334147196,
+        "velocity_reference_relative_l2": 9.03436358637335e-6
+      },
+      "mean_solve_ms": 45.110799,
+      "report": {
+        "backend": "cpu-fgmres-mg",
+        "counters": {
+          "dispatches": 0,
+          "readback_bytes": 0,
+          "readback_wait_ms": 0.0,
+          "readbacks": 0,
+          "submissions": 0
+        },
+        "iterations": 15,
+        "multigrid_levels": [
+          4916,
+          1278,
+          355,
+          98,
+          35
+        ],
+        "status": "converged",
+        "stopping_relative": 0.00009569068978672123
+      },
+      "sample": "001"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 6.072265900901725e-7,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 9.698403560135828e-8,
+        "momentum_rms": 9.698403560135828e-8,
+        "pressure_reference_max_absolute": 0.00002028502825760642,
+        "relative_residual": 0.00001082037012174127,
+        "velocity_reference_relative_l2": 9.613164323480154e-6
+      },
+      "mean_solve_ms": 44.605153,
+      "report": {
+        "backend": "cpu-fgmres-mg",
+        "counters": {
+          "dispatches": 0,
+          "readback_bytes": 0,
+          "readback_wait_ms": 0.0,
+          "readbacks": 0,
+          "submissions": 0
+        },
+        "iterations": 15,
+        "multigrid_levels": [
+          4916,
+          1278,
+          355,
+          98,
+          35
+        ],
+        "status": "converged",
+        "stopping_relative": 0.0000969099874558158
+      },
+      "sample": "003"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 7.012143293115269e-7,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 1.0982797319209981e-7,
+        "momentum_rms": 1.0982797319209981e-7,
+        "pressure_reference_max_absolute": 0.00002288887970685466,
+        "relative_residual": 0.000010994636474170302,
+        "velocity_reference_relative_l2": 0.000010454492501957353
+      },
+      "mean_solve_ms": 44.350397,
+      "report": {
+        "backend": "cpu-fgmres-mg",
+        "counters": {
+          "dispatches": 0,
+          "readback_bytes": 0,
+          "readback_wait_ms": 0.0,
+          "readbacks": 0,
+          "submissions": 0
+        },
+        "iterations": 15,
+        "multigrid_levels": [
+          4916,
+          1278,
+          355,
+          98,
+          35
+        ],
+        "status": "converged",
+        "stopping_relative": 0.00009822085942858992
+      },
+      "sample": "007"
+    }
+  ],
+  "schema_version": 2,
+  "setup_ms": 106.194019
+}

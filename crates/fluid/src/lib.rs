@@ -50,6 +50,9 @@ pub struct SolveReport {
     pub stopping_relative: Option<f64>,
     pub multigrid_levels: Vec<usize>,
     pub counters: SolverCounters,
+    /// Optional diagnostic data; absent from normal solves and archived reports.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub profile: Option<serde_json::Value>,
 }
 impl SolveReport {
     pub fn converged(&self) -> bool {

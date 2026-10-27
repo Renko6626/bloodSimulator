@@ -1,0 +1,196 @@
+{
+  "completed_successfully": true,
+  "hardware_measurement": true,
+  "runs": [
+    {
+      "name": "probe",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "smoke",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-gpu-fgmres-mg-c1-off-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-gpu-fgmres-mg-c1-host-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-gpu-fgmres-mg-c1-gpu-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-gpu-fgmres-mg-c2-off-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-gpu-fgmres-mg-c2-host-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-gpu-fgmres-mg-c2-gpu-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-gpu-fgmres-mg-c2-gpu-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-gpu-fgmres-mg-c2-host-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-gpu-fgmres-mg-c2-off-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-gpu-fgmres-mg-c1-gpu-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-gpu-fgmres-mg-c1-host-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-gpu-fgmres-mg-c1-off-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-gpu-fgmres-mg-c1-off-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-gpu-fgmres-mg-c1-host-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-gpu-fgmres-mg-c1-gpu-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-gpu-fgmres-mg-c2-off-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-gpu-fgmres-mg-c2-host-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-gpu-fgmres-mg-c2-gpu-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-gpu-fgmres-mg-c2-gpu-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-gpu-fgmres-mg-c2-host-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-gpu-fgmres-mg-c2-off-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-gpu-fgmres-mg-c1-gpu-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-gpu-fgmres-mg-c1-host-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-gpu-fgmres-mg-c1-off-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-gpu-fgmres-mg-c1-off-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-gpu-fgmres-mg-c1-host-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-gpu-fgmres-mg-c1-gpu-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-gpu-fgmres-mg-c2-off-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-gpu-fgmres-mg-c2-host-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-gpu-fgmres-mg-c2-gpu-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-gpu-fgmres-mg-c2-gpu-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-gpu-fgmres-mg-c2-host-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-gpu-fgmres-mg-c2-off-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-gpu-fgmres-mg-c1-gpu-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-gpu-fgmres-mg-c1-host-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-gpu-fgmres-mg-c1-off-r2",
+      "exit_code": 0,
+      "accepted": true
+    }
+  ]
+}

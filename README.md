@@ -18,6 +18,8 @@
 
 后续已按确认路线实现[可插拔后端与 GPU 分块多重网格](docs/research/experiments/2026-10-27-modular-mg/README.md)：公共流体、GPU 后端、独立实验入口三个 crate，提供 CPU LU、CPU／GPU FGMRES-MG 与旧 GPU GMRES 基线。[GTX 1050 Ti 新版实测](docs/research/experiments/2026-10-27-modular-mg/windows-gtx1050ti.md)的 1／2 次 V-cycle 两组共 96 次 GPU 求解全部通过，但默认两次配置各规模仍需约 130／202／306 ms，CPU LU 更快，继续作为默认局部后端。
 
+进一步的 [RTX 3060 分段 profiling](docs/research/experiments/2026-10-27-modular-mg/gpu-profile.md)已区分主机编码、回读准备与设备各类 kernel；主机编码主要集中在 encoder.finish，回读准备主要集中在 create_buffer；设备侧 MG 平滑也有显著成本。实验入口新增可选 `--profile host|gpu`，默认关闭，不改变求解算法或玩家要求。
+
 Windows GPU 实验入口：双击根目录 `run-gpu-experiment.cmd`，完成构建、硬件探测、已知解检查、真实矩阵采集与新 CPU／GPU 后端回放。需要 Rust、Python 3 和系统链接工具，首次运行会下载依赖；详细要求和结果路径见新的模块化实验说明。
 
 - [当前状态与待办](docs/STATUS.md)：统一维护阶段结论、下一步优先级与待确认事项。

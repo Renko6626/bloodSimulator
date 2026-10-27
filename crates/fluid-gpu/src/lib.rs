@@ -2,6 +2,7 @@
 use blood_fluid::krylov as gmres;
 mod legacy;
 mod mg;
+mod profile;
 use blood_fluid::{
     DeviceInfo, FluidResult, PreparedSolver, SolveOptions, SolveReport, SolverCounters,
     SolverFactory, StokesProblem,
@@ -14,21 +15,47 @@ struct Factory {
     context: Arc<legacy::Context>,
     options: SolveOptions,
     multigrid: bool,
+    profiling: bool,
 }
 pub fn factory(
     name: &str,
     options: SolveOptions,
     allow_software: bool,
 ) -> FluidResult<Arc<dyn SolverFactory>> {
+    make_factory(name, options, allow_software, false, false)
+}
+/// Diagnostic entry point; timestamps are optional and never a game requirement.
+pub fn factory_profiled(
+    name: &str,
+    options: SolveOptions,
+    allow_software: bool,
+    timestamps: bool,
+) -> FluidResult<Arc<dyn SolverFactory>> {
+    if name != "gpu-fgmres-mg" {
+        return Err("profiling currently supports gpu-fgmres-mg".into());
+    }
+    make_factory(name, options, allow_software, true, timestamps)
+}
+fn make_factory(
+    name: &str,
+    options: SolveOptions,
+    allow_software: bool,
+    profiling: bool,
+    timestamps: bool,
+) -> FluidResult<Arc<dyn SolverFactory>> {
     if name != "gpu-gmres" && name != "gpu-fgmres-mg" {
         return Err("unknown GPU backend".into());
     }
-    let context =
-        pollster::block_on(legacy::Context::new(allow_software)).map_err(|e| e.to_string())?;
+    let context = pollster::block_on(legacy::Context::new_with_timestamps(
+        allow_software,
+        timestamps,
+    ))
+    .map_err(|e| e.to_string())?;
     Ok(Arc::new(Factory {
         context: Arc::new(context),
         options,
         multigrid: name == "gpu-fgmres-mg",
+        profiling,
     }))
 }
 impl SolverFactory for Factory {
@@ -51,7 +78,7 @@ impl SolverFactory for Factory {
     fn prepare(&self, p: Arc<StokesProblem>) -> FluidResult<Box<dyn PreparedSolver>> {
         p.validate()?;
         if self.multigrid {
-            return mg::MgSolver::new(self.context.clone(), p, self.options)
+            return mg::MgSolver::new(self.context.clone(), p, self.options, self.profiling)
                 .map(|s| Box::new(s) as Box<dyn PreparedSolver>)
                 .map_err(|e| e.to_string());
         }
@@ -136,6 +163,7 @@ impl PreparedSolver for LegacySolver {
                     readback_bytes: c.readback_bytes,
                     readback_wait_ms: c.readback_wait_ms,
                 },
+                profile: None,
             })
         })();
         result.map_err(|e| e.to_string())
@@ -161,6 +189,7 @@ pub fn smoke(allow_software: bool) -> FluidResult<Value> {
         context: context.clone(),
         options,
         multigrid: true,
+        profiling: false,
     };
     let mut samples = Vec::new();
     let mut accepted = true;
@@ -227,6 +256,7 @@ pub fn smoke(allow_software: bool) -> FluidResult<Value> {
                 context: context.clone(),
                 options,
                 multigrid: false,
+                profiling: false,
             };
             let mut solver = old.prepare(p.clone())?;
             let r = solver.solve(&b, &mut x)?;

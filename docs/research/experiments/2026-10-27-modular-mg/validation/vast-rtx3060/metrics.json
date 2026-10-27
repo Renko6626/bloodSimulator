@@ -1,0 +1,407 @@
+{
+  "small64/cpu-lu/c2": {
+    "samples": 16,
+    "mean_ms": 0.77424543125,
+    "median_ms": 0.8317458,
+    "min_ms": 0.6194355,
+    "max_ms": 0.8853725000000001,
+    "mean_readback_wait_ms": 0.0,
+    "mean_non_readback_wait_ms": 0.77424543125,
+    "iterations": [
+      0,
+      0
+    ],
+    "max_relative_residual": 2.1062967069597846e-14,
+    "max_velocity_reference_relative_l2": 0.0,
+    "dispatches": [
+      0,
+      0
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ]
+  },
+  "small64/cpu-fgmres-mg/c1": {
+    "samples": 16,
+    "mean_ms": 29.133262375,
+    "median_ms": 30.193004000000002,
+    "min_ms": 23.734381999999997,
+    "max_ms": 33.77454,
+    "mean_readback_wait_ms": 0.0,
+    "mean_non_readback_wait_ms": 29.133262375,
+    "iterations": [
+      17,
+      18
+    ],
+    "max_relative_residual": 1.710907117072149e-05,
+    "max_velocity_reference_relative_l2": 5.586305630412166e-05,
+    "dispatches": [
+      0,
+      0
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ]
+  },
+  "small64/gpu-fgmres-mg/c1": {
+    "samples": 16,
+    "mean_ms": 57.110998625,
+    "median_ms": 58.0707975,
+    "min_ms": 37.852123,
+    "max_ms": 81.833012,
+    "mean_readback_wait_ms": 20.631686,
+    "mean_non_readback_wait_ms": 36.479312625,
+    "iterations": [
+      17,
+      18
+    ],
+    "max_relative_residual": 1.7429810963632427e-05,
+    "max_velocity_reference_relative_l2": 5.581202105854469e-05,
+    "dispatches": [
+      1356,
+      1356
+    ],
+    "readbacks": [
+      6,
+      6
+    ],
+    "submissions": [
+      12,
+      12
+    ]
+  },
+  "small64/cpu-fgmres-mg/c2": {
+    "samples": 16,
+    "mean_ms": 45.9318703125,
+    "median_ms": 47.346569,
+    "min_ms": 36.406095,
+    "max_ms": 54.101735999999995,
+    "mean_readback_wait_ms": 0.0,
+    "mean_non_readback_wait_ms": 45.9318703125,
+    "iterations": [
+      15,
+      16
+    ],
+    "max_relative_residual": 1.0994636474170302e-05,
+    "max_velocity_reference_relative_l2": 3.298621485501133e-05,
+    "dispatches": [
+      0,
+      0
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ]
+  },
+  "small64/gpu-fgmres-mg/c2": {
+    "samples": 16,
+    "mean_ms": 76.51230875,
+    "median_ms": 76.954711,
+    "min_ms": 46.89394,
+    "max_ms": 99.759253,
+    "mean_readback_wait_ms": 25.920716125,
+    "mean_non_readback_wait_ms": 50.591592625,
+    "iterations": [
+      15,
+      16
+    ],
+    "max_relative_residual": 1.2412955840416622e-05,
+    "max_velocity_reference_relative_l2": 3.2581961919678376e-05,
+    "dispatches": [
+      1564,
+      1564
+    ],
+    "readbacks": [
+      5,
+      5
+    ],
+    "submissions": [
+      10,
+      10
+    ]
+  },
+  "wide96/cpu-lu/c2": {
+    "samples": 16,
+    "mean_ms": 0.59900224375,
+    "median_ms": 0.5924787500000002,
+    "min_ms": 0.554783,
+    "max_ms": 0.6558225,
+    "mean_readback_wait_ms": 0.0,
+    "mean_non_readback_wait_ms": 0.59900224375,
+    "iterations": [
+      0,
+      0
+    ],
+    "max_relative_residual": 1.0077571032556025e-14,
+    "max_velocity_reference_relative_l2": 0.0,
+    "dispatches": [
+      0,
+      0
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ]
+  },
+  "wide96/cpu-fgmres-mg/c1": {
+    "samples": 16,
+    "mean_ms": 92.74827156250001,
+    "median_ms": 95.486265,
+    "min_ms": 69.451761,
+    "max_ms": 109.371494,
+    "mean_readback_wait_ms": 0.0,
+    "mean_non_readback_wait_ms": 92.74827156250001,
+    "iterations": [
+      36,
+      51
+    ],
+    "max_relative_residual": 3.2998809450392834e-05,
+    "max_velocity_reference_relative_l2": 0.0060378599148553005,
+    "dispatches": [
+      0,
+      0
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ]
+  },
+  "wide96/gpu-fgmres-mg/c1": {
+    "samples": 16,
+    "mean_ms": 95.28518737499999,
+    "median_ms": 99.4430395,
+    "min_ms": 57.968516,
+    "max_ms": 151.945467,
+    "mean_readback_wait_ms": 39.2386019375,
+    "mean_non_readback_wait_ms": 56.0465854375,
+    "iterations": [
+      36,
+      51
+    ],
+    "max_relative_residual": 3.299638986453383e-05,
+    "max_velocity_reference_relative_l2": 0.006037696748475711,
+    "dispatches": [
+      2259,
+      3155
+    ],
+    "readbacks": [
+      9,
+      11
+    ],
+    "submissions": [
+      19,
+      23
+    ]
+  },
+  "wide96/cpu-fgmres-mg/c2": {
+    "samples": 16,
+    "mean_ms": 124.142505,
+    "median_ms": 120.3152975,
+    "min_ms": 99.221169,
+    "max_ms": 158.458214,
+    "mean_readback_wait_ms": 0.0,
+    "mean_non_readback_wait_ms": 124.142505,
+    "iterations": [
+      32,
+      42
+    ],
+    "max_relative_residual": 2.5929516472318304e-05,
+    "max_velocity_reference_relative_l2": 0.000804075669173774,
+    "dispatches": [
+      0,
+      0
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ]
+  },
+  "wide96/gpu-fgmres-mg/c2": {
+    "samples": 16,
+    "mean_ms": 126.776840375,
+    "median_ms": 126.569794,
+    "min_ms": 74.931502,
+    "max_ms": 182.605246,
+    "mean_readback_wait_ms": 49.354512687500005,
+    "mean_non_readback_wait_ms": 77.4223276875,
+    "iterations": [
+      32,
+      42
+    ],
+    "max_relative_residual": 2.5963553933270505e-05,
+    "max_velocity_reference_relative_l2": 0.0008046307614620999,
+    "dispatches": [
+      3116,
+      4675
+    ],
+    "readbacks": [
+      7,
+      10
+    ],
+    "submissions": [
+      14,
+      21
+    ]
+  },
+  "wide192/cpu-lu/c2": {
+    "samples": 16,
+    "mean_ms": 3.85339655,
+    "median_ms": 3.7881078000000006,
+    "min_ms": 3.0436591999999996,
+    "max_ms": 4.8857897999999995,
+    "mean_readback_wait_ms": 0.0,
+    "mean_non_readback_wait_ms": 3.85339655,
+    "iterations": [
+      0,
+      0
+    ],
+    "max_relative_residual": 3.2184459681067607e-14,
+    "max_velocity_reference_relative_l2": 0.0,
+    "dispatches": [
+      0,
+      0
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ]
+  },
+  "wide192/cpu-fgmres-mg/c1": {
+    "samples": 16,
+    "mean_ms": 416.3813365,
+    "median_ms": 439.8807415,
+    "min_ms": 295.640311,
+    "max_ms": 555.6164660000001,
+    "mean_readback_wait_ms": 0.0,
+    "mean_non_readback_wait_ms": 416.3813365,
+    "iterations": [
+      38,
+      57
+    ],
+    "max_relative_residual": 1.76358484063691e-05,
+    "max_velocity_reference_relative_l2": 0.0022993002568613865,
+    "dispatches": [
+      0,
+      0
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ]
+  },
+  "wide192/gpu-fgmres-mg/c1": {
+    "samples": 16,
+    "mean_ms": 124.2741998125,
+    "median_ms": 117.2557055,
+    "min_ms": 78.70753900000001,
+    "max_ms": 183.681617,
+    "mean_readback_wait_ms": 58.275741625,
+    "mean_non_readback_wait_ms": 65.9984581875,
+    "iterations": [
+      38,
+      57
+    ],
+    "max_relative_residual": 1.755633466267881e-05,
+    "max_velocity_reference_relative_l2": 0.002300048126929277,
+    "dispatches": [
+      2659,
+      4243
+    ],
+    "readbacks": [
+      9,
+      12
+    ],
+    "submissions": [
+      19,
+      25
+    ]
+  },
+  "wide192/cpu-fgmres-mg/c2": {
+    "samples": 16,
+    "mean_ms": 539.5281369375,
+    "median_ms": 519.3758740000001,
+    "min_ms": 431.336754,
+    "max_ms": 668.718074,
+    "mean_readback_wait_ms": 0.0,
+    "mean_non_readback_wait_ms": 539.5281369375,
+    "iterations": [
+      34,
+      46
+    ],
+    "max_relative_residual": 1.409750687079531e-05,
+    "max_velocity_reference_relative_l2": 0.0007790017305794572,
+    "dispatches": [
+      0,
+      0
+    ],
+    "readbacks": [
+      0,
+      0
+    ],
+    "submissions": [
+      0,
+      0
+    ]
+  },
+  "wide192/gpu-fgmres-mg/c2": {
+    "samples": 16,
+    "mean_ms": 177.226307375,
+    "median_ms": 175.698374,
+    "min_ms": 134.16282199999998,
+    "max_ms": 226.223623,
+    "mean_readback_wait_ms": 80.687516125,
+    "mean_non_readback_wait_ms": 96.53879124999999,
+    "iterations": [
+      34,
+      46
+    ],
+    "max_relative_residual": 1.4210083451075146e-05,
+    "max_velocity_reference_relative_l2": 0.0007801062693756991,
+    "dispatches": [
+      4699,
+      5635
+    ],
+    "readbacks": [
+      9,
+      10
+    ],
+    "submissions": [
+      19,
+      21
+    ]
+  }
+}

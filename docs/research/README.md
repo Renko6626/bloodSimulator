@@ -4,6 +4,10 @@
 
 ## 当前候选
 
+[RTX 3060 分段 profiling](experiments/2026-10-27-modular-mg/gpu-profile.md)：新增 off／host／gpu 可选诊断，区分编码／提交／回读／审核和设备 pass 类别。首轮 144 次回放全部通过，匹配输入的迭代与残差诊断相同；主机编码约占 host 组总耗时 45%–59%，设备侧以 MG 平滑为首。记录仪器化干预，未根据单个 SpMV 的速度宣称整体加速。
+
+[Vast.ai RTX 3060 冻结输入回放](experiments/2026-10-27-modular-mg/vast-rtx3060.md)：按用户提供的 SSH 入口执行既有后端，两种 GPU 循环配置共 96 次全部通过。一次 V-cycle 的 small64／wide96／wide192 均值约 57／95／124 ms，CPU LU 约 0.77／0.60／3.85 ms；GPU 实时成本仍未解决。记录配额、交错顺序及 Linux／Windows 动态输入差异，不以跨机均值比计算纯硬件加速。
+
 [可插拔流体后端与 GPU 分块多重网格](experiments/2026-10-27-modular-mg/README.md)：用户已确认并实现三个 crate、工厂接口与统一 capture／replay 入口。新路线为 FGMRES＋右分块预条件＋速度块连通聚合多重网格；默认局部 CPU LU、GPU 可选。原方程与耦合保留，新软件功能验证与物理 GPU 性能分开记录。
 
 [首版 wgpu GPU Stokes 实验与 Windows 基线](experiments/2026-10-27-gpu-stokes/README.md)：保留真实数据格式、旧 GMRES32 算法与历史来源。GTX 1050 Ti 的 48 次真实求解均达到 400 次迭代上限且未通过残差门槛；后续模块化 FGMRES／MG 已另行实现。旧源码注入采集仅适用历史版本，新实验走上述统一入口。

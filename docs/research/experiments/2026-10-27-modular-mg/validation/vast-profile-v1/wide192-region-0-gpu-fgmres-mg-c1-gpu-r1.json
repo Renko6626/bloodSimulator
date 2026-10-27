@@ -1,0 +1,721 @@
+{
+  "accepted": true,
+  "adapter": {
+    "backend": "Vulkan",
+    "kind": "DiscreteGpu",
+    "name": "NVIDIA GeForce RTX 3060",
+    "software": false
+  },
+  "backend": "gpu-fgmres-mg",
+  "case": "/workspace/blood-profile-f3aaa4f/data/wide192/region-0",
+  "command": [
+    "/workspace/blood-profile-f3aaa4f/bin/fluid-bench",
+    "run",
+    "--backend",
+    "gpu-fgmres-mg",
+    "--case",
+    "/workspace/blood-profile-f3aaa4f/data/wide192/region-0",
+    "--limit",
+    "4",
+    "--restart",
+    "32",
+    "--max-iter",
+    "200",
+    "--rtol",
+    "1e-4",
+    "--mg-cycles",
+    "1",
+    "--repeats",
+    "1",
+    "--profile",
+    "gpu",
+    "--out",
+    "/workspace/blood-profile-f3aaa4f/results/wide192-region-0-gpu-fgmres-mg-c1-gpu-r1.json"
+  ],
+  "hardware_measurement": true,
+  "mode": "run",
+  "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+  "options": {
+    "max_iterations": 200,
+    "restart": 32,
+    "tolerance": 0.0001,
+    "v_cycles": 1
+  },
+  "rows": 33192,
+  "samples": [
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 0.000044012090464220335,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 4.0679845535539376e-6,
+        "momentum_rms": 8.749513776021627e-6,
+        "pressure_reference_max_absolute": 0.0055285788559462645,
+        "relative_residual": 0.00001516856971167084,
+        "velocity_reference_relative_l2": 0.002300048126929277
+      },
+      "mean_solve_ms": 214.460826,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 4243,
+          "readback_bytes": 133120,
+          "readback_wait_ms": 78.394637,
+          "readbacks": 12,
+          "submissions": 25
+        },
+        "iterations": 57,
+        "multigrid_levels": [
+          21982,
+          5804,
+          1624,
+          485,
+          159,
+          64
+        ],
+        "profile": {
+          "gpu_interval_span_ms": 71.35731199999998,
+          "gpu_stages": {
+            "backsolve": {
+              "dispatches": 2,
+              "ms": 0.109888,
+              "single_workgroup_dispatches": 2,
+              "workgroups": 2
+            },
+            "block_pressure": {
+              "dispatches": 64,
+              "ms": 0.2974399999999999,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 8320
+            },
+            "block_velocity_rhs": {
+              "dispatches": 64,
+              "ms": 0.5677760000000001,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 5504
+            },
+            "clear": {
+              "dispatches": 384,
+              "ms": 1.5894720000000016,
+              "single_workgroup_dispatches": 128,
+              "workgroups": 7680
+            },
+            "cycle_control": {
+              "dispatches": 3,
+              "ms": 0.14112,
+              "single_workgroup_dispatches": 3,
+              "workgroups": 3
+            },
+            "dot_chunks": {
+              "dispatches": 195,
+              "ms": 4.383296000000001,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 283270
+            },
+            "dot_reduce": {
+              "dispatches": 195,
+              "ms": 0.9953599999999999,
+              "single_workgroup_dispatches": 71,
+              "workgroups": 2179
+            },
+            "mg_coarse": {
+              "dispatches": 64,
+              "ms": 0.931296,
+              "single_workgroup_dispatches": 64,
+              "workgroups": 64
+            },
+            "mg_prolong": {
+              "dispatches": 320,
+              "ms": 2.6180160000000012,
+              "single_workgroup_dispatches": 64,
+              "workgroups": 7616
+            },
+            "mg_residual": {
+              "dispatches": 320,
+              "ms": 3.5307519999999983,
+              "single_workgroup_dispatches": 64,
+              "workgroups": 7616
+            },
+            "mg_restrict": {
+              "dispatches": 320,
+              "ms": 5.524096000000003,
+              "single_workgroup_dispatches": 128,
+              "workgroups": 2176
+            },
+            "mg_smooth": {
+              "dispatches": 1920,
+              "ms": 22.78627200000002,
+              "single_workgroup_dispatches": 384,
+              "workgroups": 45696
+            },
+            "normalize": {
+              "dispatches": 67,
+              "ms": 0.32294399999999995,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 8710
+            },
+            "orthogonalize": {
+              "dispatches": 128,
+              "ms": 1.2928320000000002,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 16640
+            },
+            "qr": {
+              "dispatches": 64,
+              "ms": 0.46198400000000006,
+              "single_workgroup_dispatches": 64,
+              "workgroups": 64
+            },
+            "solution_update": {
+              "dispatches": 2,
+              "ms": 0.040416,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 260
+            },
+            "stokes_spmv": {
+              "dispatches": 67,
+              "ms": 0.669408,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 8710
+            },
+            "vector_copy": {
+              "dispatches": 64,
+              "ms": 0.292576,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 5504
+            }
+          },
+          "gpu_timestamp_status": "enabled",
+          "gpu_timestamps_enabled": true,
+          "host_ms": {
+            "command_encode_ms": 130.382233,
+            "original_audit_ms": 1.193838,
+            "profile_collect_ms": 0.355196,
+            "queue_submit_ms": 4.078771,
+            "readback_decode_ms": 0.069635,
+            "readback_map_poll_ms": 77.70520599999999,
+            "readback_prepare_ms": 0.28497,
+            "rhs_prepare_upload_ms": 0.215838,
+            "solution_map_ms": 0.075617
+          },
+          "notes": "Opt-in diagnostics perturb timing. Pass durations exclude gaps; interval span includes gaps/idle between passes. Host timers and GPU timeline overlap. Planned gated dispatches are included.",
+          "profile_readback_bytes": 67888,
+          "profile_readbacks": 11,
+          "timestamp_period_ns": 1.0,
+          "total_ms": 214.436927,
+          "unaccounted_ms": 0.07562300000003574
+        },
+        "status": "converged",
+        "stopping_relative": 0.00008701334469262536
+      },
+      "sample": "000"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 9.091885619145596e-7,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 2.36383817369582e-7,
+        "momentum_rms": 2.36383817369582e-7,
+        "pressure_reference_max_absolute": 0.00009520717289671077,
+        "relative_residual": 0.000010810663596271583,
+        "velocity_reference_relative_l2": 0.0000965694120221638
+      },
+      "mean_solve_ms": 168.32393100000002,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 3715,
+          "readback_bytes": 133088,
+          "readback_wait_ms": 72.148564,
+          "readbacks": 11,
+          "submissions": 23
+        },
+        "iterations": 56,
+        "multigrid_levels": [
+          21982,
+          5804,
+          1624,
+          485,
+          159,
+          64
+        ],
+        "profile": {
+          "gpu_interval_span_ms": 64.925888,
+          "gpu_stages": {
+            "backsolve": {
+              "dispatches": 2,
+              "ms": 0.107712,
+              "single_workgroup_dispatches": 2,
+              "workgroups": 2
+            },
+            "block_pressure": {
+              "dispatches": 56,
+              "ms": 0.26624,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 7280
+            },
+            "block_velocity_rhs": {
+              "dispatches": 56,
+              "ms": 0.5256,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 4816
+            },
+            "clear": {
+              "dispatches": 336,
+              "ms": 1.3716480000000009,
+              "single_workgroup_dispatches": 112,
+              "workgroups": 6720
+            },
+            "cycle_control": {
+              "dispatches": 3,
+              "ms": 0.140736,
+              "single_workgroup_dispatches": 3,
+              "workgroups": 3
+            },
+            "dot_chunks": {
+              "dispatches": 171,
+              "ms": 3.5921599999999994,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 222950
+            },
+            "dot_reduce": {
+              "dispatches": 171,
+              "ms": 0.8552000000000001,
+              "single_workgroup_dispatches": 63,
+              "workgroups": 1715
+            },
+            "mg_coarse": {
+              "dispatches": 56,
+              "ms": 0.9008960000000001,
+              "single_workgroup_dispatches": 56,
+              "workgroups": 56
+            },
+            "mg_prolong": {
+              "dispatches": 280,
+              "ms": 2.430975999999999,
+              "single_workgroup_dispatches": 56,
+              "workgroups": 6664
+            },
+            "mg_residual": {
+              "dispatches": 280,
+              "ms": 3.3257279999999994,
+              "single_workgroup_dispatches": 56,
+              "workgroups": 6664
+            },
+            "mg_restrict": {
+              "dispatches": 280,
+              "ms": 5.291392,
+              "single_workgroup_dispatches": 112,
+              "workgroups": 1904
+            },
+            "mg_smooth": {
+              "dispatches": 1680,
+              "ms": 21.572064000000015,
+              "single_workgroup_dispatches": 336,
+              "workgroups": 39984
+            },
+            "normalize": {
+              "dispatches": 59,
+              "ms": 0.287552,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 7670
+            },
+            "orthogonalize": {
+              "dispatches": 112,
+              "ms": 1.1955520000000002,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 14560
+            },
+            "qr": {
+              "dispatches": 56,
+              "ms": 0.43676800000000005,
+              "single_workgroup_dispatches": 56,
+              "workgroups": 56
+            },
+            "solution_update": {
+              "dispatches": 2,
+              "ms": 0.040544,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 260
+            },
+            "stokes_spmv": {
+              "dispatches": 59,
+              "ms": 0.6479679999999998,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 7670
+            },
+            "vector_copy": {
+              "dispatches": 56,
+              "ms": 0.260256,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 4816
+            }
+          },
+          "gpu_timestamp_status": "enabled",
+          "gpu_timestamps_enabled": true,
+          "host_ms": {
+            "command_encode_ms": 90.576676,
+            "original_audit_ms": 1.193039,
+            "profile_collect_ms": 0.29309399999999997,
+            "queue_submit_ms": 3.9693019999999994,
+            "readback_decode_ms": 0.0403,
+            "readback_map_poll_ms": 71.622775,
+            "readback_prepare_ms": 0.19814700000000002,
+            "rhs_prepare_upload_ms": 0.257274,
+            "solution_map_ms": 0.076652
+          },
+          "notes": "Opt-in diagnostics perturb timing. Pass durations exclude gaps; interval span includes gaps/idle between passes. Host timers and GPU timeline overlap. Planned gated dispatches are included.",
+          "profile_readback_bytes": 59440,
+          "profile_readbacks": 10,
+          "timestamp_period_ns": 1.0,
+          "total_ms": 168.298457,
+          "unaccounted_ms": 0.07119800000000964
+        },
+        "status": "converged",
+        "stopping_relative": 0.00008515890256438892
+      },
+      "sample": "001"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 1.5324764365706963e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 4.0848888534534873e-7,
+        "momentum_rms": 4.0848888534534873e-7,
+        "pressure_reference_max_absolute": 0.00015541232451601883,
+        "relative_residual": 0.000010883073543596869,
+        "velocity_reference_relative_l2": 0.00009431781908647188
+      },
+      "mean_solve_ms": 131.724739,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 3715,
+          "readback_bytes": 133088,
+          "readback_wait_ms": 69.29198000000001,
+          "readbacks": 11,
+          "submissions": 23
+        },
+        "iterations": 56,
+        "multigrid_levels": [
+          21982,
+          5804,
+          1624,
+          485,
+          159,
+          64
+        ],
+        "profile": {
+          "gpu_interval_span_ms": 64.409216,
+          "gpu_stages": {
+            "backsolve": {
+              "dispatches": 2,
+              "ms": 0.107296,
+              "single_workgroup_dispatches": 2,
+              "workgroups": 2
+            },
+            "block_pressure": {
+              "dispatches": 56,
+              "ms": 0.26134399999999997,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 7280
+            },
+            "block_velocity_rhs": {
+              "dispatches": 56,
+              "ms": 0.5258560000000001,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 4816
+            },
+            "clear": {
+              "dispatches": 336,
+              "ms": 1.3686400000000005,
+              "single_workgroup_dispatches": 112,
+              "workgroups": 6720
+            },
+            "cycle_control": {
+              "dispatches": 3,
+              "ms": 0.141024,
+              "single_workgroup_dispatches": 3,
+              "workgroups": 3
+            },
+            "dot_chunks": {
+              "dispatches": 171,
+              "ms": 3.5892159999999995,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 222950
+            },
+            "dot_reduce": {
+              "dispatches": 171,
+              "ms": 0.8588159999999998,
+              "single_workgroup_dispatches": 63,
+              "workgroups": 1715
+            },
+            "mg_coarse": {
+              "dispatches": 56,
+              "ms": 0.8876800000000001,
+              "single_workgroup_dispatches": 56,
+              "workgroups": 56
+            },
+            "mg_prolong": {
+              "dispatches": 280,
+              "ms": 2.421663999999999,
+              "single_workgroup_dispatches": 56,
+              "workgroups": 6664
+            },
+            "mg_residual": {
+              "dispatches": 280,
+              "ms": 3.3255679999999996,
+              "single_workgroup_dispatches": 56,
+              "workgroups": 6664
+            },
+            "mg_restrict": {
+              "dispatches": 280,
+              "ms": 5.275232000000002,
+              "single_workgroup_dispatches": 112,
+              "workgroups": 1904
+            },
+            "mg_smooth": {
+              "dispatches": 1680,
+              "ms": 21.471039999999995,
+              "single_workgroup_dispatches": 336,
+              "workgroups": 39984
+            },
+            "normalize": {
+              "dispatches": 59,
+              "ms": 0.284448,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 7670
+            },
+            "orthogonalize": {
+              "dispatches": 112,
+              "ms": 1.1823679999999996,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 14560
+            },
+            "qr": {
+              "dispatches": 56,
+              "ms": 0.423968,
+              "single_workgroup_dispatches": 56,
+              "workgroups": 56
+            },
+            "solution_update": {
+              "dispatches": 2,
+              "ms": 0.040223999999999996,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 260
+            },
+            "stokes_spmv": {
+              "dispatches": 59,
+              "ms": 0.627456,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 7670
+            },
+            "vector_copy": {
+              "dispatches": 56,
+              "ms": 0.259232,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 4816
+            }
+          },
+          "gpu_timestamp_status": "enabled",
+          "gpu_timestamps_enabled": true,
+          "host_ms": {
+            "command_encode_ms": 57.914275999999994,
+            "original_audit_ms": 1.28475,
+            "profile_collect_ms": 0.267249,
+            "queue_submit_ms": 2.852461,
+            "readback_decode_ms": 0.038396,
+            "readback_map_poll_ms": 68.87723,
+            "readback_prepare_ms": 0.163293,
+            "rhs_prepare_upload_ms": 0.152566,
+            "solution_map_ms": 0.079602
+          },
+          "notes": "Opt-in diagnostics perturb timing. Pass durations exclude gaps; interval span includes gaps/idle between passes. Host timers and GPU timeline overlap. Planned gated dispatches are included.",
+          "profile_readback_bytes": 59440,
+          "profile_readbacks": 10,
+          "timestamp_period_ns": 1.0,
+          "total_ms": 131.695301,
+          "unaccounted_ms": 0.06547800000001303
+        },
+        "status": "converged",
+        "stopping_relative": 0.0000855354485909688
+      },
+      "sample": "003"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 1.7411651070871255e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 4.6165935727018013e-7,
+        "momentum_rms": 4.6165935727018013e-7,
+        "pressure_reference_max_absolute": 0.00017259119859576455,
+        "relative_residual": 0.000010949444372347089,
+        "velocity_reference_relative_l2": 0.00009307672718460772
+      },
+      "mean_solve_ms": 132.463549,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 3715,
+          "readback_bytes": 133088,
+          "readback_wait_ms": 70.050709,
+          "readbacks": 11,
+          "submissions": 23
+        },
+        "iterations": 56,
+        "multigrid_levels": [
+          21982,
+          5804,
+          1624,
+          485,
+          159,
+          64
+        ],
+        "profile": {
+          "gpu_interval_span_ms": 65.11888,
+          "gpu_stages": {
+            "backsolve": {
+              "dispatches": 2,
+              "ms": 0.107264,
+              "single_workgroup_dispatches": 2,
+              "workgroups": 2
+            },
+            "block_pressure": {
+              "dispatches": 56,
+              "ms": 0.26614400000000005,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 7280
+            },
+            "block_velocity_rhs": {
+              "dispatches": 56,
+              "ms": 0.5358079999999998,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 4816
+            },
+            "clear": {
+              "dispatches": 336,
+              "ms": 1.3815679999999995,
+              "single_workgroup_dispatches": 112,
+              "workgroups": 6720
+            },
+            "cycle_control": {
+              "dispatches": 3,
+              "ms": 0.139968,
+              "single_workgroup_dispatches": 3,
+              "workgroups": 3
+            },
+            "dot_chunks": {
+              "dispatches": 171,
+              "ms": 3.606719999999999,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 222950
+            },
+            "dot_reduce": {
+              "dispatches": 171,
+              "ms": 0.8489919999999999,
+              "single_workgroup_dispatches": 63,
+              "workgroups": 1715
+            },
+            "mg_coarse": {
+              "dispatches": 56,
+              "ms": 0.894144,
+              "single_workgroup_dispatches": 56,
+              "workgroups": 56
+            },
+            "mg_prolong": {
+              "dispatches": 280,
+              "ms": 2.450528,
+              "single_workgroup_dispatches": 56,
+              "workgroups": 6664
+            },
+            "mg_residual": {
+              "dispatches": 280,
+              "ms": 3.3143999999999987,
+              "single_workgroup_dispatches": 56,
+              "workgroups": 6664
+            },
+            "mg_restrict": {
+              "dispatches": 280,
+              "ms": 5.314048000000002,
+              "single_workgroup_dispatches": 112,
+              "workgroups": 1904
+            },
+            "mg_smooth": {
+              "dispatches": 1680,
+              "ms": 21.59548800000005,
+              "single_workgroup_dispatches": 336,
+              "workgroups": 39984
+            },
+            "normalize": {
+              "dispatches": 59,
+              "ms": 0.28528000000000003,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 7670
+            },
+            "orthogonalize": {
+              "dispatches": 112,
+              "ms": 1.1828159999999996,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 14560
+            },
+            "qr": {
+              "dispatches": 56,
+              "ms": 0.43059200000000003,
+              "single_workgroup_dispatches": 56,
+              "workgroups": 56
+            },
+            "solution_update": {
+              "dispatches": 2,
+              "ms": 0.039712,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 260
+            },
+            "stokes_spmv": {
+              "dispatches": 59,
+              "ms": 0.6304960000000001,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 7670
+            },
+            "vector_copy": {
+              "dispatches": 56,
+              "ms": 0.260704,
+              "single_workgroup_dispatches": 0,
+              "workgroups": 4816
+            }
+          },
+          "gpu_timestamp_status": "enabled",
+          "gpu_timestamps_enabled": true,
+          "host_ms": {
+            "command_encode_ms": 57.50129199999999,
+            "original_audit_ms": 1.501166,
+            "profile_collect_ms": 0.321776,
+            "queue_submit_ms": 3.0138379999999994,
+            "readback_decode_ms": 0.052672,
+            "readback_map_poll_ms": 69.48044100000001,
+            "readback_prepare_ms": 0.20771100000000003,
+            "rhs_prepare_upload_ms": 0.185372,
+            "solution_map_ms": 0.079742
+          },
+          "notes": "Opt-in diagnostics perturb timing. Pass durations exclude gaps; interval span includes gaps/idle between passes. Host timers and GPU timeline overlap. Planned gated dispatches are included.",
+          "profile_readback_bytes": 59440,
+          "profile_readbacks": 10,
+          "timestamp_period_ns": 1.0,
+          "total_ms": 132.420435,
+          "unaccounted_ms": 0.07642500000000041
+        },
+        "status": "converged",
+        "stopping_relative": 0.00008617710776822555
+      },
+      "sample": "007"
+    }
+  ],
+  "schema_version": 2,
+  "setup_ms": 1516.30708
+}

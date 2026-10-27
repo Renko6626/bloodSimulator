@@ -1,0 +1,187 @@
+{
+  "accepted": true,
+  "adapter": {
+    "backend": "Vulkan",
+    "kind": "DiscreteGpu",
+    "name": "NVIDIA GeForce RTX 3060",
+    "software": false
+  },
+  "backend": "gpu-fgmres-mg",
+  "case": "/workspace/blood-experiment-f3aaa4f/data/small64/region-1",
+  "command": [
+    "/workspace/blood-experiment-f3aaa4f/bin/fluid-bench",
+    "run",
+    "--backend",
+    "gpu-fgmres-mg",
+    "--case",
+    "/workspace/blood-experiment-f3aaa4f/data/small64/region-1",
+    "--limit",
+    "4",
+    "--restart",
+    "32",
+    "--max-iter",
+    "200",
+    "--rtol",
+    "1e-4",
+    "--mg-cycles",
+    "2",
+    "--repeats",
+    "1",
+    "--out",
+    "/workspace/blood-experiment-f3aaa4f/results/small64-region-1-gpu-fgmres-mg-c2-r2.json"
+  ],
+  "hardware_measurement": true,
+  "mode": "run",
+  "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+  "options": {
+    "max_iterations": 200,
+    "restart": 32,
+    "tolerance": 0.0001,
+    "v_cycles": 2
+  },
+  "rows": 5689,
+  "samples": [
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 3.7743746131320697e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 1.5188810514668532e-6,
+        "momentum_rms": 1.5188810514668532e-6,
+        "pressure_reference_max_absolute": 0.00007816560958107122,
+        "relative_residual": 8.452361266472336e-6,
+        "velocity_reference_relative_l2": 0.000032581961919678376
+      },
+      "mean_solve_ms": 91.49127899999999,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 1564,
+          "readback_bytes": 22884,
+          "readback_wait_ms": 26.188001999999997,
+          "readbacks": 5,
+          "submissions": 10
+        },
+        "iterations": 16,
+        "multigrid_levels": [
+          3779,
+          1005,
+          282,
+          83,
+          29
+        ],
+        "status": "converged",
+        "stopping_relative": 0.00004813169819681559
+      },
+      "sample": "000"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 5.152925906300188e-7,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.0762205125240457e-7,
+        "momentum_rms": 3.0762205125240457e-7,
+        "pressure_reference_max_absolute": 0.000021300972392890305,
+        "relative_residual": 9.17852440363811e-6,
+        "velocity_reference_relative_l2": 6.777207438246426e-6
+      },
+      "mean_solve_ms": 76.994641,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 1564,
+          "readback_bytes": 22884,
+          "readback_wait_ms": 23.661597999999998,
+          "readbacks": 5,
+          "submissions": 10
+        },
+        "iterations": 16,
+        "multigrid_levels": [
+          3779,
+          1005,
+          282,
+          83,
+          29
+        ],
+        "status": "converged",
+        "stopping_relative": 0.00006703393781672828
+      },
+      "sample": "001"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 5.071316233241901e-7,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.0860976437832075e-7,
+        "momentum_rms": 3.0860976437832075e-7,
+        "pressure_reference_max_absolute": 0.000020154485363042818,
+        "relative_residual": 9.196887400904544e-6,
+        "velocity_reference_relative_l2": 6.182327051941862e-6
+      },
+      "mean_solve_ms": 79.932665,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 1564,
+          "readback_bytes": 22884,
+          "readback_wait_ms": 25.48455,
+          "readbacks": 5,
+          "submissions": 10
+        },
+        "iterations": 16,
+        "multigrid_levels": [
+          3779,
+          1005,
+          282,
+          83,
+          29
+        ],
+        "status": "converged",
+        "stopping_relative": 0.00006647612487272542
+      },
+      "sample": "003"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 5.026222334616068e-7,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.111453628495701e-7,
+        "momentum_rms": 3.111453628495701e-7,
+        "pressure_reference_max_absolute": 0.000019781405078148073,
+        "relative_residual": 9.236933059667062e-6,
+        "velocity_reference_relative_l2": 6.208505917897451e-6
+      },
+      "mean_solve_ms": 52.679817,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 1564,
+          "readback_bytes": 22884,
+          "readback_wait_ms": 25.097264000000003,
+          "readbacks": 5,
+          "submissions": 10
+        },
+        "iterations": 16,
+        "multigrid_levels": [
+          3779,
+          1005,
+          282,
+          83,
+          29
+        ],
+        "status": "converged",
+        "stopping_relative": 0.00006613575880905708
+      },
+      "sample": "007"
+    }
+  ],
+  "schema_version": 2,
+  "setup_ms": 564.383997
+}

@@ -1,11 +1,16 @@
 //! Device-resident block FGMRES. Immutable dynamic-uniform slots allow batches.
-use crate::{LabResult, legacy::Context};
+use crate::{
+    LabResult,
+    legacy::Context,
+    profile::{Dispatch, Profiler},
+};
 use blood_fluid::{
     CsrMatrix, PreparedSolver, SolveOptions, SolveReport, SolverCounters, StokesProblem,
     block::BlockPreconditioner,
 };
 use bytemuck::{Pod, Zeroable};
 use std::{
+    cell::RefCell,
     num::NonZeroU64,
     sync::{Arc, mpsc},
     time::Instant,
@@ -65,6 +70,7 @@ struct Step {
     param: u32,
     x: u32,
     y: u32,
+    label: &'static str,
 }
 #[derive(Default)]
 struct Arena {
@@ -128,6 +134,39 @@ impl Plans {
             param,
             x,
             y,
+            label: match kernel {
+                0 if p.ptr == self.k.ptr && p.n == self.n => "stokes_spmv",
+                0 if p.ptr == self.k.ptr => "block_velocity_rhs",
+                0 if p.ptr == self.coarse.ptr => "mg_coarse",
+                0 if self
+                    .levels
+                    .iter()
+                    .any(|l| l.r.is_some_and(|m| m.ptr == p.ptr)) =>
+                {
+                    "mg_restrict"
+                }
+                0 if self
+                    .levels
+                    .iter()
+                    .any(|l| l.p.is_some_and(|m| m.ptr == p.ptr)) =>
+                {
+                    "mg_prolong"
+                }
+                0 => "mg_residual",
+                1 => "dot_chunks",
+                2 => "dot_reduce",
+                3 if p.mode == 1 => "orthogonalize",
+                3 if p.mode == 2 => "solution_update",
+                3 if p.mode == 3 => "normalize",
+                3 if p.mode == 5 => "clear",
+                3 => "vector_copy",
+                4 => "mg_smooth",
+                5 => "block_pressure",
+                6 => "cycle_control",
+                7 => "qr",
+                8 => "backsolve",
+                _ => unreachable!(),
+            },
         });
     }
     fn vector(&mut self, out: &mut Vec<Step>, n: u32, src: u32, dst: u32, mode: u32, gate: u32) {
@@ -377,12 +416,14 @@ pub struct MgSolver {
     scalar_len: usize,
     levels: Vec<usize>,
     counters: SolverCounters,
+    profile: Option<RefCell<Profiler>>,
 }
 impl MgSolver {
     pub fn new(
         context: Arc<Context>,
         problem: Arc<StokesProblem>,
         options: SolveOptions,
+        profiling: bool,
     ) -> LabResult<Self> {
         if options.restart == 0
             || options.restart > 64
@@ -450,7 +491,7 @@ impl MgSolver {
             tolerance: options.tolerance as f32,
         };
         let start = plans.start();
-        let iterations = (0..m).map(|j| plans.iteration(j)).collect();
+        let iterations: Vec<Vec<Step>> = (0..m).map(|j| plans.iteration(j)).collect();
         let finish = plans.finish();
         let mut uniforms = vec![0_u8; plans.params.len() * stride as usize];
         for (i, p) in plans.params.iter().enumerate() {
@@ -592,6 +633,9 @@ impl MgSolver {
         })
         .collect();
         let level_sizes = pre.hierarchy.levels.iter().map(|l| l.matrix.rows).collect();
+        let max_batch =
+            (iterations.iter().map(Vec::len).max().unwrap() * 8).max(start.len() + finish.len());
+        let profile = profiling.then(|| RefCell::new(Profiler::new(&context, max_batch)));
         Ok(Self {
             context,
             problem,
@@ -608,27 +652,101 @@ impl MgSolver {
             scalar_len,
             levels: level_sizes,
             counters: Default::default(),
+            profile,
         })
     }
     fn encode<'a>(&self, steps: impl Iterator<Item = &'a Step>) -> wgpu::CommandBuffer {
+        let timer = Instant::now();
+        let mut profile = self.profile.as_ref().map(RefCell::borrow_mut);
+        let from = profile.as_ref().map_or(0, |p| p.pending.len());
+        let mut labels = Vec::new();
         let mut encoder = self
             .context
             .device
             .create_command_encoder(&Default::default());
         for s in steps {
+            let index = (from + labels.len()) as u32 * 2;
+            let timestamps = profile.as_ref().and_then(|p| p.queries.as_ref()).map(|q| {
+                assert!((index as usize / 2) < q.capacity);
+                wgpu::ComputePassTimestampWrites {
+                    query_set: &q.set,
+                    beginning_of_pass_write_index: Some(index),
+                    end_of_pass_write_index: Some(index + 1),
+                }
+            });
+            if timestamps.is_some() {
+                labels.push(Dispatch {
+                    label: s.label,
+                    groups: s.x as u64 * s.y as u64,
+                });
+            }
             // Pass boundaries establish storage dependencies between the kernels.
+            let detail_timer = profile.as_ref().map(|_| Instant::now());
             let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
                 label: None,
-                timestamp_writes: None,
+                timestamp_writes: timestamps,
             });
+            let begin_time = detail_timer.map(|t| t.elapsed());
+            let detail_timer = profile.as_ref().map(|_| Instant::now());
             pass.set_pipeline(&self.pipelines[s.kernel]);
             pass.set_bind_group(0, &self.group, &[s.param]);
+            let state_time = detail_timer.map(|t| t.elapsed());
+            let detail_timer = profile.as_ref().map(|_| Instant::now());
             pass.dispatch_workgroups(s.x, s.y, 1);
+            let dispatch_time = detail_timer.map(|t| t.elapsed());
+            let detail_timer = profile.as_ref().map(|_| Instant::now());
+            drop(pass);
+            let end_time = detail_timer.map(|t| t.elapsed());
+            if let Some(p) = profile.as_mut() {
+                p.detail("encode_begin_pass_ms", begin_time.unwrap());
+                p.detail("encode_set_pipeline_bind_group_ms", state_time.unwrap());
+                p.detail("encode_dispatch_ms", dispatch_time.unwrap());
+                p.detail("encode_end_pass_ms", end_time.unwrap());
+            }
         }
-        encoder.finish()
+        if let Some(p) = profile.as_mut() {
+            if let Some(q) = &p.queries {
+                let count = labels.len() as u32 * 2;
+                // Resolve offset must be 256-aligned. Copy each result range into
+                // its own readback slot so finish + next start cannot overwrite it.
+                encoder.resolve_query_set(
+                    &q.set,
+                    from as u32 * 2..from as u32 * 2 + count,
+                    &q.resolve,
+                    0,
+                );
+                encoder.copy_buffer_to_buffer(
+                    &q.resolve,
+                    0,
+                    &q.readback,
+                    from as u64 * 16,
+                    labels.len() as u64 * 16,
+                );
+            }
+            p.pending.extend(labels);
+        }
+        let finish_timer = Instant::now();
+        let buffer = encoder.finish();
+        if let Some(p) = profile.as_mut() {
+            p.detail("encode_finish_ms", finish_timer.elapsed());
+            p.mark("command_encode_ms", timer.elapsed());
+        }
+        buffer
+    }
+    fn mark(&self, label: &'static str, timer: Instant) {
+        if let Some(p) = &self.profile {
+            p.borrow_mut().mark(label, timer.elapsed());
+        }
+    }
+    fn detail(&self, label: &'static str, timer: Instant) {
+        if let Some(p) = &self.profile {
+            p.borrow_mut().detail(label, timer.elapsed());
+        }
     }
     fn submit(&mut self, buffer: wgpu::CommandBuffer, dispatches: usize) {
+        let timer = Instant::now();
         self.context.queue.submit([buffer]);
+        self.mark("queue_submit_ms", timer);
         self.counters.submissions += 1;
         self.counters.dispatches += dispatches as u64;
     }
@@ -640,6 +758,8 @@ impl MgSolver {
             usage: wgpu::BufferUsages::MAP_READ | wgpu::BufferUsages::COPY_DST,
             mapped_at_creation: false,
         });
+        self.detail("readback_create_buffer_ms", start);
+        let timer = Instant::now();
         let mut encoder = self
             .context
             .device
@@ -651,7 +771,15 @@ impl MgSolver {
             0,
             size,
         );
-        self.context.queue.submit([encoder.finish()]);
+        self.detail("readback_encode_copy_ms", timer);
+        let timer = Instant::now();
+        let command = encoder.finish();
+        self.detail("readback_finish_ms", timer);
+        self.mark("readback_prepare_ms", start);
+        let timer = Instant::now();
+        self.context.queue.submit([command]);
+        self.mark("queue_submit_ms", timer);
+        let timer = Instant::now();
         let (tx, rx) = mpsc::sync_channel(1);
         staging.slice(..).map_async(wgpu::MapMode::Read, move |r| {
             let _ = tx.send(r);
@@ -660,17 +788,27 @@ impl MgSolver {
             .device
             .poll(wgpu::PollType::wait_indefinitely())?;
         rx.recv()??;
+        self.mark("readback_map_poll_ms", timer);
+        let timer = Instant::now();
         let mapped = staging.slice(..).get_mapped_range();
         let result = bytemuck::cast_slice::<u8, f32>(&mapped).to_vec();
         drop(mapped);
         staging.unmap();
+        self.mark("readback_decode_ms", timer);
         self.counters.submissions += 1;
         self.counters.readbacks += 1;
         self.counters.readback_bytes += size;
         self.counters.readback_wait_ms += start.elapsed().as_secs_f64() * 1000.;
+        if let Some(p) = &self.profile {
+            p.borrow_mut().collect(&self.context)?;
+        }
         Ok(result)
     }
     fn solve_inner(&mut self, b: &[f64], out: &mut [f64]) -> LabResult<SolveReport> {
+        let solve_timer = Instant::now();
+        if let Some(p) = &self.profile {
+            p.borrow_mut().reset();
+        }
         let n = self.problem.matrix.rows;
         if b.len() != n || out.len() != n {
             return Err("invalid vector length".into());
@@ -695,6 +833,7 @@ impl MgSolver {
         self.context
             .queue
             .write_buffer(&self.scalar, 0, bytemuck::cast_slice(&scalar));
+        self.mark("rhs_prepare_upload_ms", solve_timer);
         self.counters = Default::default();
         let mut last;
         let mut status = "iteration_limit";
@@ -731,9 +870,12 @@ impl MgSolver {
             self.submit(cmd, self.finish.len());
         }
         let y = self.read(false, 0, n as u64 * 4)?;
+        let timer = Instant::now();
         for i in 0..n {
             out[i] = y[i] as f64 * self.scale[i];
         }
+        self.mark("solution_map_ms", timer);
+        let timer = Instant::now();
         if status == "converged"
             && !self
                 .problem
@@ -742,6 +884,7 @@ impl MgSolver {
         {
             status = "original_residual_failed";
         }
+        self.mark("original_audit_ms", timer);
         Ok(SolveReport {
             backend: "gpu-fgmres-mg".into(),
             status: status.into(),
@@ -749,6 +892,10 @@ impl MgSolver {
             stopping_relative: Some(last[1] as f64 / bnorm.max(1e-30)),
             multigrid_levels: self.levels.clone(),
             counters: self.counters.clone(),
+            profile: self
+                .profile
+                .as_ref()
+                .map(|p| p.borrow().report(solve_timer.elapsed())),
         })
     }
 }

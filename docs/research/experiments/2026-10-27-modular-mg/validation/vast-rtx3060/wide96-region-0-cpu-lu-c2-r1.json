@@ -1,0 +1,158 @@
+{
+  "accepted": true,
+  "adapter": null,
+  "backend": "cpu-lu",
+  "case": "/workspace/blood-experiment-f3aaa4f/data/wide96/region-0",
+  "command": [
+    "/workspace/blood-experiment-f3aaa4f/bin/fluid-bench",
+    "run",
+    "--backend",
+    "cpu-lu",
+    "--case",
+    "/workspace/blood-experiment-f3aaa4f/data/wide96/region-0",
+    "--limit",
+    "4",
+    "--restart",
+    "32",
+    "--max-iter",
+    "200",
+    "--rtol",
+    "1e-4",
+    "--mg-cycles",
+    "2",
+    "--repeats",
+    "10",
+    "--out",
+    "/workspace/blood-experiment-f3aaa4f/results/wide96-region-0-cpu-lu-c2-r1.json"
+  ],
+  "hardware_measurement": false,
+  "mode": "run",
+  "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+  "options": {
+    "max_iterations": 200,
+    "restart": 32,
+    "tolerance": 0.0001,
+    "v_cycles": 2
+  },
+  "rows": 8191,
+  "samples": [
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 3.0522987685097804e-15,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 2.3651305176305894e-15,
+        "momentum_rms": 3.6206797908232816e-15,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 2.7680283027482305e-15,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 0.5869532,
+      "report": {
+        "backend": "cpu-lu",
+        "counters": {
+          "dispatches": 0,
+          "readback_bytes": 0,
+          "readback_wait_ms": 0.0,
+          "readbacks": 0,
+          "submissions": 0
+        },
+        "iterations": 0,
+        "multigrid_levels": [],
+        "status": "converged",
+        "stopping_relative": null
+      },
+      "sample": "000"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 3.004737845204209e-16,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.755080354779107e-16,
+        "momentum_rms": 3.755080354779107e-16,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 9.829600778200395e-15,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 0.5834864999999999,
+      "report": {
+        "backend": "cpu-lu",
+        "counters": {
+          "dispatches": 0,
+          "readback_bytes": 0,
+          "readback_wait_ms": 0.0,
+          "readbacks": 0,
+          "submissions": 0
+        },
+        "iterations": 0,
+        "multigrid_levels": [],
+        "status": "converged",
+        "stopping_relative": null
+      },
+      "sample": "001"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 5.20000494409268e-16,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 6.167490856288602e-16,
+        "momentum_rms": 6.167490856288602e-16,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 9.701769690399516e-15,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 0.5878847000000001,
+      "report": {
+        "backend": "cpu-lu",
+        "counters": {
+          "dispatches": 0,
+          "readback_bytes": 0,
+          "readback_wait_ms": 0.0,
+          "readbacks": 0,
+          "submissions": 0
+        },
+        "iterations": 0,
+        "multigrid_levels": [],
+        "status": "converged",
+        "stopping_relative": null
+      },
+      "sample": "003"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 6.036451509372927e-16,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 7.270625311149915e-16,
+        "momentum_rms": 7.270625311149915e-16,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 1.0077571032556025e-14,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 0.5858450000000001,
+      "report": {
+        "backend": "cpu-lu",
+        "counters": {
+          "dispatches": 0,
+          "readback_bytes": 0,
+          "readback_wait_ms": 0.0,
+          "readbacks": 0,
+          "submissions": 0
+        },
+        "iterations": 0,
+        "multigrid_levels": [],
+        "status": "converged",
+        "stopping_relative": null
+      },
+      "sample": "007"
+    }
+  ],
+  "schema_version": 2,
+  "setup_ms": 55.992435
+}

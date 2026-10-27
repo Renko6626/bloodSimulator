@@ -1,0 +1,392 @@
+{
+  "small64/c1/original": {
+    "samples": 2,
+    "mean_ms": 79.3299845,
+    "min_ms": 74.566897,
+    "max_ms": 84.093072
+  },
+  "small64/c1/off": {
+    "samples": 2,
+    "mean_ms": 76.525949,
+    "min_ms": 71.70616100000001,
+    "max_ms": 81.345737
+  },
+  "small64/c1/host": {
+    "samples": 2,
+    "mean_ms": 72.7370655,
+    "min_ms": 65.07723999999999,
+    "max_ms": 80.396891,
+    "host_ms": {
+      "command_encode_ms": 41.901608499999995,
+      "original_audit_ms": 0.2200875,
+      "queue_submit_ms": 1.3919890000000001,
+      "readback_decode_ms": 0.0139995,
+      "readback_map_poll_ms": 5.9084699999999994,
+      "readback_prepare_ms": 17.52367,
+      "rhs_prepare_upload_ms": 0.0742075,
+      "solution_map_ms": 0.0176725
+    },
+    "host_detail_ms": {
+      "encode_begin_pass_ms": 0.22623749999999693,
+      "encode_dispatch_ms": 0.04747199999999972,
+      "encode_end_pass_ms": 0.43970150000000086,
+      "encode_finish_ms": 40.535619999999994,
+      "encode_set_pipeline_bind_group_ms": 0.30281349999999907,
+      "readback_create_buffer_ms": 17.252368,
+      "readback_encode_copy_ms": 0.018015,
+      "readback_finish_ms": 0.247689
+    }
+  },
+  "small64/c1/gpu": {
+    "samples": 2,
+    "mean_ms": 69.9242165,
+    "min_ms": 64.181964,
+    "max_ms": 75.666469,
+    "host_ms": {
+      "command_encode_ms": 48.632298500000005,
+      "original_audit_ms": 0.24109750000000002,
+      "profile_collect_ms": 0.0922975,
+      "queue_submit_ms": 1.226255,
+      "readback_decode_ms": 0.013179000000000001,
+      "readback_map_poll_ms": 19.418513,
+      "readback_prepare_ms": 0.15486550000000002,
+      "rhs_prepare_upload_ms": 0.0700185,
+      "solution_map_ms": 0.0150765
+    },
+    "host_detail_ms": {
+      "encode_begin_pass_ms": 0.3016109999999994,
+      "encode_dispatch_ms": 0.045685000000000114,
+      "encode_end_pass_ms": 0.5241144999999998,
+      "encode_finish_ms": 47.070631500000005,
+      "encode_set_pipeline_bind_group_ms": 0.2842860000000002,
+      "readback_create_buffer_ms": 0.0238415,
+      "readback_encode_copy_ms": 0.011236,
+      "readback_finish_ms": 0.11620449999999999
+    }
+  },
+  "small64/c2/original": {
+    "samples": 2,
+    "mean_ms": 95.5753885,
+    "min_ms": 93.420808,
+    "max_ms": 97.729969
+  },
+  "small64/c2/off": {
+    "samples": 2,
+    "mean_ms": 107.25056900000001,
+    "min_ms": 101.258154,
+    "max_ms": 113.242984
+  },
+  "small64/c2/host": {
+    "samples": 2,
+    "mean_ms": 122.31039949999999,
+    "min_ms": 110.24775000000001,
+    "max_ms": 134.37304899999998,
+    "host_ms": {
+      "command_encode_ms": 75.5298825,
+      "original_audit_ms": 0.290196,
+      "queue_submit_ms": 2.4868429999999995,
+      "readback_decode_ms": 0.0326365,
+      "readback_map_poll_ms": 13.162572,
+      "readback_prepare_ms": 19.0741705,
+      "rhs_prepare_upload_ms": 0.053847,
+      "solution_map_ms": 0.0153995
+    },
+    "host_detail_ms": {
+      "encode_begin_pass_ms": 0.3071514999999978,
+      "encode_dispatch_ms": 0.0636245000000005,
+      "encode_end_pass_ms": 0.5165930000000009,
+      "encode_finish_ms": 73.807535,
+      "encode_set_pipeline_bind_group_ms": 0.4081174999999999,
+      "readback_create_buffer_ms": 18.8571355,
+      "readback_encode_copy_ms": 0.01922,
+      "readback_finish_ms": 0.19260349999999998
+    }
+  },
+  "small64/c2/gpu": {
+    "samples": 2,
+    "mean_ms": 102.8356825,
+    "min_ms": 101.19228700000001,
+    "max_ms": 104.479078,
+    "host_ms": {
+      "command_encode_ms": 75.15510749999999,
+      "original_audit_ms": 0.218327,
+      "profile_collect_ms": 0.091762,
+      "queue_submit_ms": 2.2088865,
+      "readback_decode_ms": 0.013653499999999999,
+      "readback_map_poll_ms": 24.826372499999998,
+      "readback_prepare_ms": 0.19121,
+      "rhs_prepare_upload_ms": 0.0504405,
+      "solution_map_ms": 0.013164499999999999
+    },
+    "host_detail_ms": {
+      "encode_begin_pass_ms": 0.3836395000000006,
+      "encode_dispatch_ms": 0.05879750000000069,
+      "encode_end_pass_ms": 0.4791150000000015,
+      "encode_finish_ms": 73.40634800000001,
+      "encode_set_pipeline_bind_group_ms": 0.3458150000000013,
+      "readback_create_buffer_ms": 0.031662499999999996,
+      "readback_encode_copy_ms": 0.012722500000000001,
+      "readback_finish_ms": 0.14240150000000001
+    }
+  },
+  "wide96/c2/gpu": {
+    "samples": 2,
+    "mean_ms": 230.9187625,
+    "min_ms": 223.402414,
+    "max_ms": 238.435111,
+    "host_ms": {
+      "command_encode_ms": 163.627991,
+      "original_audit_ms": 0.252374,
+      "profile_collect_ms": 0.27172799999999997,
+      "queue_submit_ms": 5.4827895,
+      "readback_decode_ms": 0.028152,
+      "readback_map_poll_ms": 60.76444849999999,
+      "readback_prepare_ms": 0.3095205,
+      "rhs_prepare_upload_ms": 0.0648365,
+      "solution_map_ms": 0.016472
+    },
+    "host_detail_ms": {
+      "encode_begin_pass_ms": 0.9651719999999939,
+      "encode_dispatch_ms": 0.14573599999999953,
+      "encode_end_pass_ms": 1.5164315000000106,
+      "encode_finish_ms": 158.872015,
+      "encode_set_pipeline_bind_group_ms": 0.9022284999999917,
+      "readback_create_buffer_ms": 0.06660999999999999,
+      "readback_encode_copy_ms": 0.0238565,
+      "readback_finish_ms": 0.212683
+    }
+  },
+  "wide96/c2/host": {
+    "samples": 2,
+    "mean_ms": 189.574371,
+    "min_ms": 182.61409700000002,
+    "max_ms": 196.534645,
+    "host_ms": {
+      "command_encode_ms": 113.995745,
+      "original_audit_ms": 0.2680975,
+      "queue_submit_ms": 4.766188999999999,
+      "readback_decode_ms": 0.027684,
+      "readback_map_poll_ms": 29.641128000000002,
+      "readback_prepare_ms": 31.502084,
+      "rhs_prepare_upload_ms": 0.06805800000000001,
+      "solution_map_ms": 0.017197999999999998
+    },
+    "host_detail_ms": {
+      "encode_begin_pass_ms": 0.7936420000000016,
+      "encode_dispatch_ms": 0.16013200000000244,
+      "encode_end_pass_ms": 1.3962200000000058,
+      "encode_finish_ms": 109.5495925,
+      "encode_set_pipeline_bind_group_ms": 0.9800309999999977,
+      "readback_create_buffer_ms": 31.2259225,
+      "readback_encode_copy_ms": 0.032408,
+      "readback_finish_ms": 0.2353635
+    }
+  },
+  "wide96/c2/off": {
+    "samples": 2,
+    "mean_ms": 203.197792,
+    "min_ms": 197.52784300000002,
+    "max_ms": 208.867741
+  },
+  "wide96/c2/original": {
+    "samples": 2,
+    "mean_ms": 208.1594965,
+    "min_ms": 205.060116,
+    "max_ms": 211.258877
+  },
+  "wide96/c1/gpu": {
+    "samples": 2,
+    "mean_ms": 128.85391,
+    "min_ms": 127.39363200000001,
+    "max_ms": 130.314188,
+    "host_ms": {
+      "command_encode_ms": 84.5901245,
+      "original_audit_ms": 0.24581250000000002,
+      "profile_collect_ms": 0.192075,
+      "queue_submit_ms": 2.3823230000000004,
+      "readback_decode_ms": 0.020569999999999998,
+      "readback_map_poll_ms": 40.9890095,
+      "readback_prepare_ms": 0.241978,
+      "rhs_prepare_upload_ms": 0.086859,
+      "solution_map_ms": 0.015662
+    },
+    "host_detail_ms": {
+      "encode_begin_pass_ms": 0.6157880000000046,
+      "encode_dispatch_ms": 0.09247799999999806,
+      "encode_end_pass_ms": 1.0859950000000027,
+      "encode_finish_ms": 81.4097195,
+      "encode_set_pipeline_bind_group_ms": 0.584443,
+      "readback_create_buffer_ms": 0.046398999999999996,
+      "readback_encode_copy_ms": 0.017148,
+      "readback_finish_ms": 0.1726195
+    }
+  },
+  "wide96/c1/host": {
+    "samples": 2,
+    "mean_ms": 143.925208,
+    "min_ms": 137.735066,
+    "max_ms": 150.11535,
+    "host_ms": {
+      "command_encode_ms": 79.49696449999999,
+      "original_audit_ms": 0.471811,
+      "queue_submit_ms": 3.8929245000000003,
+      "readback_decode_ms": 0.03073,
+      "readback_map_poll_ms": 11.321527500000002,
+      "readback_prepare_ms": 36.53018,
+      "rhs_prepare_upload_ms": 0.0710005,
+      "solution_map_ms": 0.0238655
+    },
+    "host_detail_ms": {
+      "encode_begin_pass_ms": 0.5435710000000005,
+      "encode_dispatch_ms": 0.10488949999999743,
+      "encode_end_pass_ms": 0.9871455000000022,
+      "encode_finish_ms": 76.4764265,
+      "encode_set_pipeline_bind_group_ms": 0.6563269999999992,
+      "readback_create_buffer_ms": 36.214763000000005,
+      "readback_encode_copy_ms": 0.0343835,
+      "readback_finish_ms": 0.27041999999999994
+    }
+  },
+  "wide96/c1/off": {
+    "samples": 2,
+    "mean_ms": 157.1313445,
+    "min_ms": 157.00183,
+    "max_ms": 157.260859
+  },
+  "wide96/c1/original": {
+    "samples": 2,
+    "mean_ms": 138.804776,
+    "min_ms": 138.312726,
+    "max_ms": 139.296826
+  },
+  "wide192/c1/original": {
+    "samples": 2,
+    "mean_ms": 191.270948,
+    "min_ms": 180.056407,
+    "max_ms": 202.485489
+  },
+  "wide192/c1/off": {
+    "samples": 2,
+    "mean_ms": 210.8292985,
+    "min_ms": 208.988754,
+    "max_ms": 212.669843
+  },
+  "wide192/c1/host": {
+    "samples": 2,
+    "mean_ms": 188.047911,
+    "min_ms": 179.419991,
+    "max_ms": 196.675831,
+    "host_ms": {
+      "command_encode_ms": 93.52773499999999,
+      "original_audit_ms": 1.3744755,
+      "queue_submit_ms": 4.142401,
+      "readback_decode_ms": 0.053075,
+      "readback_map_poll_ms": 36.753195500000004,
+      "readback_prepare_ms": 40.3925405,
+      "rhs_prepare_upload_ms": 0.19010549999999998,
+      "solution_map_ms": 0.067699
+    },
+    "host_detail_ms": {
+      "encode_begin_pass_ms": 0.7987930000000072,
+      "encode_dispatch_ms": 0.1704460000000056,
+      "encode_end_pass_ms": 1.5524390000000055,
+      "encode_finish_ms": 88.762476,
+      "encode_set_pipeline_bind_group_ms": 1.083957999999995,
+      "readback_create_buffer_ms": 40.0408935,
+      "readback_encode_copy_ms": 0.03741749999999999,
+      "readback_finish_ms": 0.303023
+    }
+  },
+  "wide192/c1/gpu": {
+    "samples": 2,
+    "mean_ms": 207.87349749999998,
+    "min_ms": 178.376882,
+    "max_ms": 237.370113,
+    "host_ms": {
+      "command_encode_ms": 114.0130225,
+      "original_audit_ms": 1.5482870000000002,
+      "profile_collect_ms": 0.395054,
+      "queue_submit_ms": 6.247829999999999,
+      "readback_decode_ms": 0.06261900000000001,
+      "readback_map_poll_ms": 84.60722150000001,
+      "readback_prepare_ms": 0.47856099999999996,
+      "rhs_prepare_upload_ms": 0.2577875,
+      "solution_map_ms": 0.11334599999999999
+    },
+    "host_detail_ms": {
+      "encode_begin_pass_ms": 1.1418309999999994,
+      "encode_dispatch_ms": 0.18986800000000664,
+      "encode_end_pass_ms": 1.8054895000000144,
+      "encode_finish_ms": 108.05696999999999,
+      "encode_set_pipeline_bind_group_ms": 1.1566599999999956,
+      "readback_create_buffer_ms": 0.094216,
+      "readback_encode_copy_ms": 0.033593,
+      "readback_finish_ms": 0.342372
+    }
+  },
+  "wide192/c2/original": {
+    "samples": 2,
+    "mean_ms": 245.4898675,
+    "min_ms": 225.46513000000002,
+    "max_ms": 265.514605
+  },
+  "wide192/c2/off": {
+    "samples": 2,
+    "mean_ms": 246.9167175,
+    "min_ms": 240.395885,
+    "max_ms": 253.43755000000002
+  },
+  "wide192/c2/host": {
+    "samples": 2,
+    "mean_ms": 256.181511,
+    "min_ms": 255.886186,
+    "max_ms": 256.476836,
+    "host_ms": {
+      "command_encode_ms": 145.156891,
+      "original_audit_ms": 1.5184785,
+      "queue_submit_ms": 8.1722225,
+      "readback_decode_ms": 0.076956,
+      "readback_map_poll_ms": 55.0482405,
+      "readback_prepare_ms": 36.27857,
+      "rhs_prepare_upload_ms": 0.21886899999999998,
+      "solution_map_ms": 0.10901
+    },
+    "host_detail_ms": {
+      "encode_begin_pass_ms": 1.0455460000000008,
+      "encode_dispatch_ms": 0.21949950000000135,
+      "encode_end_pass_ms": 1.8224620000000085,
+      "encode_finish_ms": 139.25417499999998,
+      "encode_set_pipeline_bind_group_ms": 1.3164139999999926,
+      "readback_create_buffer_ms": 35.867577999999995,
+      "readback_encode_copy_ms": 0.044032,
+      "readback_finish_ms": 0.35589800000000005
+    }
+  },
+  "wide192/c2/gpu": {
+    "samples": 2,
+    "mean_ms": 247.268572,
+    "min_ms": 235.02542100000002,
+    "max_ms": 259.511723,
+    "host_ms": {
+      "command_encode_ms": 148.509368,
+      "original_audit_ms": 1.349191,
+      "profile_collect_ms": 0.34472949999999997,
+      "queue_submit_ms": 6.8301169999999995,
+      "readback_decode_ms": 0.0429635,
+      "readback_map_poll_ms": 89.46459949999999,
+      "readback_prepare_ms": 0.315553,
+      "rhs_prepare_upload_ms": 0.22319050000000001,
+      "solution_map_ms": 0.074837
+    },
+    "host_detail_ms": {
+      "encode_begin_pass_ms": 1.1924654999999862,
+      "encode_dispatch_ms": 0.18444749999999577,
+      "encode_end_pass_ms": 1.7487020000000097,
+      "encode_finish_ms": 142.7736805,
+      "encode_set_pipeline_bind_group_ms": 1.1232834999999923,
+      "readback_create_buffer_ms": 0.073693,
+      "readback_encode_copy_ms": 0.0270255,
+      "readback_finish_ms": 0.208418
+    }
+  }
+}

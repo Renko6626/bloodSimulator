@@ -44,6 +44,8 @@ def main():
     parser.add_argument('--max-iter', type=int, default=200)
     parser.add_argument('--mg-cycles', type=int, choices=[1, 2, 3, 4], default=2)
     parser.add_argument('--rtol', type=float, default=1e-4)
+    parser.add_argument('--profile', choices=['off', 'host', 'gpu'], default='off',
+                        help='Opt-in gpu-fgmres-mg diagnostics; compare overhead against off')
     args = parser.parse_args()
     assert args.limit > 0 and args.rounds > 0 and args.frames > 0
     if args.data:
@@ -134,7 +136,8 @@ def main():
                     ['run', '--backend', backend, '--case', str(folder), '--limit', str(args.limit),
                      '--restart', str(args.restart), '--max-iter', str(args.max_iter), '--rtol', str(args.rtol),
                      '--mg-cycles', str(args.mg_cycles),
-                     '--repeats', '10' if backend == 'cpu-lu' else '1'])
+                     '--repeats', '10' if backend == 'cpu-lu' else '1']
+                    + (['--profile', args.profile] if backend == 'gpu-fgmres-mg' else []))
     if not all(sha(REPO / name) == value for name, value in manifest['source_sha256'].items()):
         finish(False, 'Sources changed during the experiment')
     finish(all(r['exit_code'] == 0 for r in manifest['runs']))

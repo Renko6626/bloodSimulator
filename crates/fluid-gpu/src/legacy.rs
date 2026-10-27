@@ -27,6 +27,9 @@ pub struct Context {
 
 impl Context {
     pub async fn new(allow_software: bool) -> LabResult<Self> {
+        Self::new_with_timestamps(allow_software, false).await
+    }
+    pub async fn new_with_timestamps(allow_software: bool, timestamps: bool) -> LabResult<Self> {
         let instance = wgpu::Instance::new(&wgpu::InstanceDescriptor {
             backends: wgpu::Backends::from_env().unwrap_or(wgpu::Backends::PRIMARY),
             ..Default::default()
@@ -60,7 +63,11 @@ impl Context {
         let (device, queue) = adapter
             .request_device(&wgpu::DeviceDescriptor {
                 label: Some("blood-stokes-lab"),
-                required_features: wgpu::Features::empty(),
+                required_features: if timestamps {
+                    adapter.features() & wgpu::Features::TIMESTAMP_QUERY
+                } else {
+                    wgpu::Features::empty()
+                },
                 required_limits: wgpu::Limits::default(),
                 ..Default::default()
             })

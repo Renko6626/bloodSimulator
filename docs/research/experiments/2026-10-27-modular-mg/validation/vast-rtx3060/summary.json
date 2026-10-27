@@ -1,0 +1,316 @@
+{
+  "completed_successfully": true,
+  "hardware_measurement": true,
+  "runs": [
+    {
+      "name": "probe",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "smoke",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-cpu-lu-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-cpu-fgmres-mg-c1-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-gpu-fgmres-mg-c1-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-cpu-fgmres-mg-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-gpu-fgmres-mg-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-1-gpu-fgmres-mg-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-1-cpu-fgmres-mg-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-1-gpu-fgmres-mg-c1-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-1-cpu-fgmres-mg-c1-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-1-cpu-lu-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-cpu-lu-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-cpu-fgmres-mg-c1-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-gpu-fgmres-mg-c1-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-cpu-fgmres-mg-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-gpu-fgmres-mg-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-1-gpu-fgmres-mg-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-1-cpu-fgmres-mg-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-1-gpu-fgmres-mg-c1-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-1-cpu-fgmres-mg-c1-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-1-cpu-lu-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-cpu-lu-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-cpu-fgmres-mg-c1-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-gpu-fgmres-mg-c1-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-cpu-fgmres-mg-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-gpu-fgmres-mg-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-1-gpu-fgmres-mg-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-1-cpu-fgmres-mg-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-1-gpu-fgmres-mg-c1-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-1-cpu-fgmres-mg-c1-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-1-cpu-lu-c2-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-1-gpu-fgmres-mg-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-1-cpu-fgmres-mg-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-1-gpu-fgmres-mg-c1-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-1-cpu-fgmres-mg-c1-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-1-cpu-lu-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-cpu-lu-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-cpu-fgmres-mg-c1-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-gpu-fgmres-mg-c1-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-cpu-fgmres-mg-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-gpu-fgmres-mg-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-1-gpu-fgmres-mg-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-1-cpu-fgmres-mg-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-1-gpu-fgmres-mg-c1-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-1-cpu-fgmres-mg-c1-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-1-cpu-lu-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-cpu-lu-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-cpu-fgmres-mg-c1-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-gpu-fgmres-mg-c1-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-cpu-fgmres-mg-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-gpu-fgmres-mg-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-1-gpu-fgmres-mg-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-1-cpu-fgmres-mg-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-1-gpu-fgmres-mg-c1-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-1-cpu-fgmres-mg-c1-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-1-cpu-lu-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-cpu-lu-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-cpu-fgmres-mg-c1-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-gpu-fgmres-mg-c1-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-cpu-fgmres-mg-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-0-gpu-fgmres-mg-c2-r2",
+      "exit_code": 0,
+      "accepted": true
+    }
+  ]
+}

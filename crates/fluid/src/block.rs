@@ -194,6 +194,7 @@ impl PreparedSolver for BlockSolver {
                 .map(|l| l.matrix.rows)
                 .collect(),
             counters: SolverCounters::default(),
+            profile: None,
         })
     }
 }

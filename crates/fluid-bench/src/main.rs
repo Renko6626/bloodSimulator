@@ -10,6 +10,21 @@ fn value(args: &[String], flag: &str, default: &str) -> String {
         .map_or(default.to_string(), Clone::clone)
 }
 fn factory(name: &str, options: SolveOptions, _args: &[String]) -> Result<Arc<dyn SolverFactory>> {
+    let profile = value(_args, "--profile", "off");
+    if !["off", "host", "gpu"].contains(&profile.as_str()) {
+        return Err("--profile must be off, host, or gpu".into());
+    }
+    if profile != "off" {
+        #[cfg(feature = "gpu")]
+        return blood_fluid_gpu::factory_profiled(
+            name,
+            options,
+            _args.iter().any(|a| a == "--allow-software"),
+            profile == "gpu",
+        );
+        #[cfg(not(feature = "gpu"))]
+        return Err("profiling requires --features gpu".into());
+    }
     match name {
         "cpu-lu" => Ok(Arc::new(blood_fluid::cpu::LuFactory)),
         "cpu-fgmres-mg" => Ok(Arc::new(blood_fluid::cpu::MultigridFactory { options })),
