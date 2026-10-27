@@ -102,3 +102,10 @@ pub struct FluidSample {
     pub local_weight: f32,
     pub status: LocalSampleStatus,
 }
+
+mod gpu;
+mod model;
+pub use gpu::*;
+
+#[cfg(test)]
+mod tests;
