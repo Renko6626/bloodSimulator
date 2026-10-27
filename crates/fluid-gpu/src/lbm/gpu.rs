@@ -1,4 +1,4 @@
-use super::{LocalSampleStatus, OpeningSpec, WindowOrigin, WindowSpec, model};
+use super::{LocalSampleStatus, OpeningSpec, WindowOrigin, WindowSide, WindowSpec, model};
 use bytemuck::{Pod, Zeroable};
 use std::sync::mpsc;
 use wgpu::util::DeviceExt;
@@ -18,8 +18,7 @@ pub struct InitialField {
     pub density: Vec<f32>,
     pub velocity: Vec<[f32; 2]>,
 }
-/// Row-major solid mask and opening metadata. Until opening reconstruction is
-/// implemented, every outer edge is a wall, including declared openings.
+/// Row-major solid mask and opening metadata.
 #[derive(Clone, Debug)]
 pub struct WindowGeometry {
     pub solid: Vec<bool>,
@@ -40,6 +39,8 @@ pub struct Diagnostics {
     pub density_min: f32,
     pub density_max: f32,
     pub max_speed: f32,
+    pub mass: f32,
+    pub opening_fluxes: Vec<f32>,
     pub software_adapter: bool,
     pub adapter_name: String,
 }
@@ -67,6 +68,8 @@ pub struct LbmWindow {
     current: usize,
     uniform: wgpu::Buffer,
     mask: wgpu::Buffer,
+    boundary: wgpu::Buffer,
+    boundary_pipeline: wgpu::ComputePipeline,
     output: wgpu::Buffer,
     readback: wgpu::Buffer,
     groups: [wgpu::BindGroup; 2],
@@ -138,6 +141,12 @@ impl LbmWindow {
             bytemuck::cast_slice(&masks),
             wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_DST,
         );
+        let boundary_data = boundary_profiles(spec, config, &geometry, None)?;
+        let boundary = make(
+            "lbm-boundaries",
+            bytemuck::cast_slice(&boundary_data),
+            wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_DST,
+        );
         let output = device.create_buffer(&wgpu::BufferDescriptor {
             label: Some("lbm-output"),
             size: (n * n * 16) as u64,
@@ -150,7 +159,7 @@ impl LbmWindow {
             usage: wgpu::BufferUsages::MAP_READ | wgpu::BufferUsages::COPY_DST,
             mapped_at_creation: false,
         });
-        let entries: Vec<_> = (0..5)
+        let entries: Vec<_> = (0..6)
             .map(|binding| wgpu::BindGroupLayoutEntry {
                 binding,
                 visibility: wgpu::ShaderStages::COMPUTE,
@@ -159,7 +168,7 @@ impl LbmWindow {
                         wgpu::BufferBindingType::Uniform
                     } else {
                         wgpu::BufferBindingType::Storage {
-                            read_only: binding == 4,
+                            read_only: binding >= 4,
                         }
                     },
                     has_dynamic_offset: false,
@@ -197,6 +206,10 @@ impl LbmWindow {
                         binding: 4,
                         resource: mask.as_entire_binding(),
                     },
+                    wgpu::BindGroupEntry {
+                        binding: 5,
+                        resource: boundary.as_entire_binding(),
+                    },
                 ],
             })
         };
@@ -222,6 +235,7 @@ impl LbmWindow {
         };
         let collide = pipeline("collide_stream");
         let macros = pipeline("macros");
+        let boundary_pipeline = pipeline("reconstruct");
         Ok(Self {
             spec,
             config,
@@ -234,6 +248,8 @@ impl LbmWindow {
             current: 0,
             uniform,
             mask,
+            boundary,
+            boundary_pipeline,
             output,
             readback,
             groups,
@@ -270,6 +286,22 @@ impl LbmWindow {
         read.unmap();
         result
     }
+    /// Supply outward normal velocities for each opening cell, in world units.
+    /// Each profile must integrate to its corresponding outward flow target.
+    pub fn set_opening_profiles(&mut self, flows: &[f32], profiles: &[Vec<f32>]) -> LbmResult<()> {
+        if flows.len() != self.geometry.openings.len() {
+            return Err("opening target count mismatch".into());
+        }
+        let mut geometry = self.geometry.clone();
+        for (opening, &flow) in geometry.openings.iter_mut().zip(flows) {
+            opening.outward_flow = flow;
+        }
+        let data = boundary_profiles(self.spec, self.config, &geometry, Some(profiles))?;
+        self.queue
+            .write_buffer(&self.boundary, 0, bytemuck::cast_slice(&data));
+        self.geometry = geometry;
+        Ok(())
+    }
     pub fn spec(&self) -> WindowSpec {
         self.spec
     }
@@ -305,8 +337,21 @@ impl LbmWindow {
                 1,
             );
         }
-        self.queue.submit([encoder.finish()]);
         self.current = 1 - self.current;
+        {
+            let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
+                label: Some("lbm-openings"),
+                timestamp_writes: None,
+            });
+            pass.set_pipeline(&self.boundary_pipeline);
+            pass.set_bind_group(0, &self.groups[self.current], &[]);
+            pass.dispatch_workgroups(
+                (self.spec.profile.cells_per_side().pow(2)).div_ceil(128),
+                1,
+                1,
+            );
+        }
+        self.queue.submit([encoder.finish()]);
         Ok(())
     }
     fn field(&self) -> LbmResult<Vec<[f32; 4]>> {
@@ -386,6 +431,7 @@ impl LbmWindow {
         let mut lo = f32::INFINITY;
         let mut hi = f32::NEG_INFINITY;
         let mut speed = 0_f32;
+        let mut mass = 0_f32;
         for (i, p) in f.iter().enumerate() {
             if self.geometry.solid[i] {
                 continue;
@@ -393,6 +439,7 @@ impl LbmWindow {
             if p[0] <= 0. || !p[..3].iter().all(|v| v.is_finite()) {
                 return Err("invalid fluid state".into());
             }
+            mass += p[0];
             lo = lo.min(p[0]);
             hi = hi.max(p[0]);
             speed = speed.max(p[1].hypot(p[2]));
@@ -404,6 +451,27 @@ impl LbmWindow {
             density_min: lo,
             density_max: hi,
             max_speed: speed,
+            mass,
+            opening_fluxes: self
+                .geometry
+                .openings
+                .iter()
+                .map(|o| {
+                    let normal = side_normal(o.side);
+                    o.cells
+                        .clone()
+                        .map(|j| {
+                            let i = side_cell(
+                                o.side,
+                                j as usize,
+                                self.spec.profile.cells_per_side() as usize,
+                            );
+                            (f[i][1] * normal[0] + f[i][2] * normal[1])
+                                * self.spec.profile.cell_spacing()
+                        })
+                        .sum()
+                })
+                .collect(),
             software_adapter: self.software,
             adapter_name: self.adapter_name.clone(),
         })
@@ -422,6 +490,7 @@ impl LbmWindow {
         };
         let n = self.spec.profile.cells_per_side() as usize;
         validate(n, &initial, &geometry)?;
+        let boundary_data = boundary_profiles(new, self.config, &geometry, None)?;
         let data = initial_populations(new, self.config, &initial, self.force);
         let target = 1 - self.current;
         self.queue
@@ -455,6 +524,8 @@ impl LbmWindow {
         let masks: Vec<u32> = geometry.solid.iter().map(|&x| u32::from(x)).collect();
         self.queue
             .write_buffer(&self.mask, 0, bytemuck::cast_slice(&masks));
+        self.queue
+            .write_buffer(&self.boundary, 0, bytemuck::cast_slice(&boundary_data));
         self.current = target;
         self.spec = new;
         self.geometry = geometry;
@@ -513,4 +584,90 @@ fn initial_populations(
         }
     }
     result
+}
+
+fn side_normal(side: WindowSide) -> [f32; 2] {
+    match side {
+        WindowSide::Left => [-1., 0.],
+        WindowSide::Right => [1., 0.],
+        WindowSide::Bottom => [0., -1.],
+        WindowSide::Top => [0., 1.],
+    }
+}
+fn side_cell(side: WindowSide, j: usize, n: usize) -> usize {
+    match side {
+        WindowSide::Left => j * n,
+        WindowSide::Right => j * n + n - 1,
+        WindowSide::Bottom => j,
+        WindowSide::Top => (n - 1) * n + j,
+    }
+}
+fn boundary_profiles(
+    spec: WindowSpec,
+    config: WindowConfig,
+    geometry: &WindowGeometry,
+    profiles: Option<&[Vec<f32>]>,
+) -> LbmResult<Vec<[f32; 4]>> {
+    let n = spec.profile.cells_per_side() as usize;
+    if profiles.is_some_and(|p| p.len() != geometry.openings.len()) {
+        return Err("opening profile count mismatch".into());
+    }
+    let mut data = vec![[0.; 4]; n * n];
+    for (k, o) in geometry.openings.iter().enumerate() {
+        let normal = side_normal(o.side);
+        let dot = o.direction[0] * normal[0] + o.direction[1] * normal[1];
+        if !o.outward_flow.is_finite()
+            || !o.direction.iter().all(|v| v.is_finite())
+            || (o.direction[0].hypot(o.direction[1]) - 1.).abs() > 1e-3
+            || dot.abs() < 0.1
+            || o.cells.start == 0
+            || o.cells.end >= n as u32
+            || o.cells.start >= o.cells.end
+        {
+            return Err("invalid or corner opening".into());
+        }
+        let len = (o.cells.end - o.cells.start) as usize;
+        let default: Vec<f32> = (0..len)
+            .map(|j| {
+                let x = (j as f32 + 0.5) / len as f32;
+                x * (1. - x)
+            })
+            .collect();
+        let sum: f32 = default.iter().sum();
+        let values = profiles.map(|p| p[k].clone()).unwrap_or_else(|| {
+            default
+                .iter()
+                .map(|w| o.outward_flow * w / (sum * spec.profile.cell_spacing()))
+                .collect()
+        });
+        if values.len() != len
+            || values.iter().any(|v| !v.is_finite())
+            || (values.iter().sum::<f32>() * spec.profile.cell_spacing() - o.outward_flow).abs()
+                > 1e-4 * (1. + o.outward_flow.abs())
+        {
+            return Err("invalid opening profile or flux".into());
+        }
+        for (j, &v) in o.cells.clone().zip(&values) {
+            let i = side_cell(o.side, j as usize, n);
+            if geometry.solid[i] || data[i][0] != 0. {
+                return Err("opening overlaps solid or another opening".into());
+            }
+            let scale = config.dt / spec.profile.cell_spacing();
+            let u = [
+                v * o.direction[0] / dot * scale,
+                v * o.direction[1] / dot * scale,
+            ];
+            if u[0].hypot(u[1]) >= 0.5 {
+                return Err("opening lattice speed too large".into());
+            }
+            let code = match o.side {
+                WindowSide::Left => 1.,
+                WindowSide::Right => 2.,
+                WindowSide::Bottom => 3.,
+                WindowSide::Top => 4.,
+            };
+            data[i] = [code, u[0], u[1], 0.];
+        }
+    }
+    Ok(data)
 }

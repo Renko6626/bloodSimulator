@@ -294,6 +294,59 @@ mod tests {
         }
     }
     #[test]
+    #[ignore = "explicit software-adapter functional diagnostic"]
+    fn map_fork_profiles_drive_gpu() {
+        use blood_fluid_gpu::lbm::{LbmWindow, StepInput, WindowConfig};
+        let spec = WindowSpec {
+            origin: WindowOrigin {
+                block_x: 0,
+                block_y: 0,
+            },
+            profile: GridProfile::Coarse,
+        };
+        let (map, flow) = fixture(true, vec![0.6, 0.4, 0.2]);
+        let raster = rasterize(&map, &flow, spec).unwrap();
+        let targets: Vec<_> = raster
+            .geometry
+            .openings
+            .iter()
+            .map(|o| o.outward_flow)
+            .collect();
+        let profiles: Vec<_> = raster
+            .openings
+            .iter()
+            .map(|o| o.normal_velocity.clone())
+            .collect();
+        let mut window = LbmWindow::new(
+            spec,
+            WindowConfig {
+                dt: 0.01,
+                viscosity: 0.1,
+                allow_software: true,
+            },
+            raster.initial,
+            raster.geometry,
+        )
+        .unwrap();
+        window.set_opening_profiles(&targets, &profiles).unwrap();
+        for _ in 0..100 {
+            window
+                .advance(StepInput {
+                    acceleration: [0., 0.],
+                })
+                .unwrap();
+        }
+        let d = window.snapshot_diagnostics().unwrap();
+        for (actual, expected) in d.opening_fluxes.iter().zip(&targets) {
+            assert!((actual - expected).abs() < 1e-4);
+        }
+        assert!(d.density_min > 0. && d.density_max < 2. && d.mass.is_finite());
+        eprintln!(
+            "map fork flux {:?}, mass {}, density [{}, {}]",
+            d.opening_fluxes, d.mass, d.density_min, d.density_max
+        );
+    }
+    #[test]
     fn rejects_isolated_and_curved_openings() {
         let spec = WindowSpec {
             origin: WindowOrigin {

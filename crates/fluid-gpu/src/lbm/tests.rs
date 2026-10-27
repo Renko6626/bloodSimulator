@@ -34,6 +34,7 @@ fn lbm_software_window_smoke() {
     let n = spec.profile.cells_per_side() as usize;
     let mut density = vec![1.0; n * n];
     density[40 * n + 40] = 1.05;
+    density[20 * n] = 1.05;
     let initial = InitialField {
         density,
         velocity: vec![[0.0, 0.0]; n * n],
@@ -53,6 +54,11 @@ fn lbm_software_window_smoke() {
             acceleration: [0.0, 0.0],
         })
         .unwrap();
+    let opposite = window.sample([47.75, 10.25]).unwrap();
+    assert!(
+        (opposite.density - 1.0).abs() < 1e-6,
+        "no periodic transport: {opposite:?}"
+    );
     let stationary = window.sample([30.25, 20.25]).unwrap();
     assert!((stationary.density - 1.0).abs() < 1e-6);
     assert!(stationary.velocity[0].abs() < 1e-6 && stationary.velocity[1].abs() < 1e-6);
@@ -215,4 +221,224 @@ fn reference_collision(f: [f64; 9], force: [f64; 2], omega: f64) -> [f64; 9] {
         delta[r] = -rates[r] * d + (1. - rates[r] / 2.) * z;
     }
     std::array::from_fn(|q| f[q] + (0..9).map(|r| m[r][q] * delta[r] / norm[r]).sum::<f64>())
+}
+
+#[test]
+#[ignore = "explicit software-adapter functional diagnostic"]
+fn lbm_opening_flux_and_known_populations() {
+    let spec = WindowSpec {
+        origin: WindowOrigin {
+            block_x: 0,
+            block_y: 0,
+        },
+        profile: GridProfile::Coarse,
+    };
+    let n = spec.profile.cells_per_side() as usize;
+    let mut solid = vec![true; n * n];
+    for y in 42..54 {
+        for x in 0..n {
+            solid[y * n + x] = false;
+        }
+    }
+    for y in 48..n {
+        for x in 44..52 {
+            solid[y * n + x] = false;
+        }
+    }
+    let openings = vec![
+        OpeningSpec {
+            side: WindowSide::Left,
+            cells: 42..54,
+            direction: [1., 0.],
+            outward_flow: 0.,
+            background_speed: 0.,
+        },
+        OpeningSpec {
+            side: WindowSide::Right,
+            cells: 42..54,
+            direction: [1., 0.],
+            outward_flow: 0.,
+            background_speed: 0.,
+        },
+        OpeningSpec {
+            side: WindowSide::Top,
+            cells: 44..52,
+            direction: [0., 1.],
+            outward_flow: 0.,
+            background_speed: 0.,
+        },
+    ];
+    let initial = InitialField {
+        density: vec![1.; n * n],
+        velocity: vec![[0.; 2]; n * n],
+    };
+    let config = WindowConfig {
+        dt: 0.01,
+        viscosity: 0.1,
+        allow_software: true,
+    };
+    let mut open = LbmWindow::new(
+        spec,
+        config,
+        initial.clone(),
+        WindowGeometry {
+            solid: solid.clone(),
+            openings,
+        },
+    )
+    .unwrap();
+    let mut closed = LbmWindow::new(
+        spec,
+        config,
+        initial,
+        WindowGeometry {
+            solid,
+            openings: vec![],
+        },
+    )
+    .unwrap();
+    open.advance(StepInput {
+        acceleration: [0., 0.],
+    })
+    .unwrap();
+    let zero = open.snapshot_diagnostics().unwrap();
+    assert!(zero.max_speed < 1e-5 && (zero.density_min - 1.).abs() < 1e-6);
+    let flows = [-0.6, 0.4, 0.2];
+    let profiles = vec![vec![-0.1; 12], vec![0.4 / 6.; 12], vec![0.05; 8]];
+    let before = open.populations_for_test();
+    open.set_opening_profiles(&flows, &profiles).unwrap();
+    assert_eq!(before, open.populations_for_test());
+    let force = StepInput {
+        acceleration: [0.01, -0.02],
+    };
+    open.advance(force).unwrap();
+    closed
+        .advance(StepInput {
+            acceleration: [0., 0.],
+        })
+        .unwrap();
+    closed.advance(force).unwrap();
+    let actual = open.populations_for_test();
+    let reference = closed.populations_for_test();
+    let i = 48 * n;
+    for q in [0, 2, 3, 4, 6, 7] {
+        assert!(
+            (actual[q * n * n + i] - reference[q * n * n + i]).abs() < 1e-7,
+            "known q={q}"
+        );
+    }
+    let d = open.snapshot_diagnostics().unwrap();
+    for (a, b) in d.opening_fluxes.iter().zip(flows) {
+        assert!((a - b).abs() < 1e-4, "flux {a} vs {b}");
+    }
+    assert!(d.density_min > 0. && d.mass.is_finite());
+    let p = open.sample([0.25, 24.25]).unwrap();
+    assert!(
+        (p.velocity[0] - 0.1).abs() < 1e-5 && p.velocity[1].abs() < 1e-5,
+        "force-corrected {p:?}"
+    );
+    for _ in 0..99 {
+        open.advance(StepInput {
+            acceleration: [0., 0.],
+        })
+        .unwrap();
+    }
+    let evolved = open.snapshot_diagnostics().unwrap();
+    assert!(evolved.density_min > 0. && evolved.density_max < 2. && evolved.mass.is_finite());
+    for (a, b) in evolved.opening_fluxes.iter().zip(flows) {
+        assert!((a - b).abs() < 1e-4);
+    }
+    eprintln!(
+        "fork 100 steps: flux {:?}, mass {}, density [{}, {}]",
+        evolved.opening_fluxes, evolved.mass, evolved.density_min, evolved.density_max
+    );
+    eprintln!(
+        "adapter {}, flux {:?}, mass {}, density [{}, {}], force-corrected velocity {:?}",
+        d.adapter_name, d.opening_fluxes, d.mass, d.density_min, d.density_max, p.velocity
+    );
+}
+
+#[test]
+#[ignore = "explicit software-adapter functional diagnostic"]
+fn lbm_straight_profile_evolves() {
+    let spec = WindowSpec {
+        origin: WindowOrigin {
+            block_x: 0,
+            block_y: 0,
+        },
+        profile: GridProfile::Coarse,
+    };
+    let n = spec.profile.cells_per_side() as usize;
+    let mut solid = vec![true; n * n];
+    for y in 42..54 {
+        for x in 0..n {
+            solid[y * n + x] = false;
+        }
+    }
+    let opening = |side, flow| OpeningSpec {
+        side,
+        cells: 42..54,
+        direction: [1., 0.],
+        outward_flow: flow,
+        background_speed: 0.,
+    };
+    let geometry = WindowGeometry {
+        solid,
+        openings: vec![
+            opening(WindowSide::Left, -0.6),
+            opening(WindowSide::Right, 0.6),
+        ],
+    };
+    let initial = InitialField {
+        density: vec![1.; n * n],
+        velocity: vec![[0.; 2]; n * n],
+    };
+    let mut window = LbmWindow::new(
+        spec,
+        WindowConfig {
+            dt: 0.01,
+            viscosity: 0.1,
+            allow_software: true,
+        },
+        initial,
+        geometry,
+    )
+    .unwrap();
+    let shape: Vec<f32> = (0..12)
+        .map(|j| {
+            let x = (j as f32 + 0.5) / 12.;
+            x * (1. - x)
+        })
+        .collect();
+    let sum: f32 = shape.iter().sum();
+    let velocities: Vec<f32> = shape.iter().map(|v| 0.6 * v / (sum * 0.5)).collect();
+    window
+        .set_opening_profiles(
+            &[-0.6, 0.6],
+            &[velocities.iter().map(|v| -v).collect(), velocities.clone()],
+        )
+        .unwrap();
+    for _ in 0..100 {
+        window
+            .advance(StepInput {
+                acceleration: [0., 0.],
+            })
+            .unwrap();
+    }
+    let d = window.snapshot_diagnostics().unwrap();
+    let mut error = 0_f32;
+    for (j, v) in velocities.iter().enumerate() {
+        let p = window.sample([0.25, (42 + j) as f32 * 0.5 + 0.25]).unwrap();
+        error = error.max((p.velocity[0] - v).abs());
+    }
+    assert!(error < 1e-5 && d.density_min > 0. && d.density_max < 2. && d.mass.is_finite());
+    assert!((d.opening_fluxes[0] + 0.6).abs() < 1e-4 && (d.opening_fluxes[1] - 0.6).abs() < 1e-4);
+    assert_eq!(
+        window.sample([10.25, 10.25]).unwrap().status,
+        LocalSampleStatus::SolidOrInvalid
+    );
+    eprintln!(
+        "straight 100 steps: flux {:?}, mass {}, density [{}, {}], max profile error {}",
+        d.opening_fluxes, d.mass, d.density_min, d.density_max, error
+    );
 }

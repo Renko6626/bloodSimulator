@@ -56,3 +56,34 @@ fn macros(@builtin(global_invocation_id) id:vec3<u32>){
  let rho=1.+drho;let u=(j+0.5*p.force)/rho*p.scale;
  output[i]=vec4(rho,u,drho);
 }
+
+@group(0) @binding(5) var<storage,read> boundary:array<vec4<f32>>;
+@compute @workgroup_size(128)
+fn reconstruct(@builtin(global_invocation_id) id:vec3<u32>) {
+ let i=id.x; let count=p.nx*p.ny; if(i>=count || boundary[i].x==0.) {return;}
+ var n=vec2<i32>(1,0);
+ switch u32(boundary[i].x) {
+  case 2u: {n=vec2(-1,0);}
+  case 3u: {n=vec2(0,1);}
+  case 4u: {n=vec2(0,-1);}
+  default: {}
+ }
+ let t=vec2(-n.y,n.x);
+ var axial=0u; var plus=0u; var minus=0u; var tangent=0u; var tangent_opp=0u;
+ var a=0.; var b=0.;
+ for(var q=0u;q<9u;q++) {
+  let cn=dot(C[q],n); let ct=dot(C[q],t);
+  let f=src[q*count+i]+W[q];
+  if(cn==0) {a+=f; if(ct==1){tangent=q;} if(ct == -1){tangent_opp=q;}}
+  if(cn == -1) {b+=f;}
+  if(cn==1) {if(ct==0){axial=q;} else if(ct==1){plus=q;} else {minus=q;}}
+ }
+ let u=boundary[i].yz; let un=dot(u,vec2<f32>(n)); let ut=dot(u,vec2<f32>(t));
+ let force_n=dot(p.force,vec2<f32>(n)); let ft=dot(p.force,vec2<f32>(t));
+ let rho=(a+2.*b-0.5*force_n)/(1.-un);
+ let kn=rho*un-0.5*force_n; let kt=rho*ut-0.5*ft;
+ let d=src[tangent*count+i]+W[tangent]-src[tangent_opp*count+i]-W[tangent_opp];
+ src[axial*count+i]=src[OPP[axial]*count+i]+W[OPP[axial]]+2.*kn/3.-W[axial];
+ src[plus*count+i]=src[OPP[plus]*count+i]+W[OPP[plus]]+kn/6.+(kt-d)/2.-W[plus];
+ src[minus*count+i]=src[OPP[minus]*count+i]+W[OPP[minus]]+kn/6.-(kt-d)/2.-W[minus];
+}
