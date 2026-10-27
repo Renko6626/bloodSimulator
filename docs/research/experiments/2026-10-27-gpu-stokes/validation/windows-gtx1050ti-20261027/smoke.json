@@ -1,0 +1,47 @@
+{
+  "accepted": true,
+  "adapter": {
+    "backend": "Vulkan",
+    "device": 7308,
+    "device_type": "DiscreteGpu",
+    "driver": "NVIDIA",
+    "driver_info": "582.78",
+    "name": "NVIDIA GeForce GTX 1050 Ti",
+    "software": false,
+    "vendor": 4318
+  },
+  "command": [
+    "E:\\Game\\bloodSimulator\\target\\gpu-lab\\release\\blood-gpu-stokes-lab.exe",
+    "smoke",
+    "--out",
+    "E:\\Game\\bloodSimulator\\target\\gpu-experiments\\20261027-155954\\results\\smoke.json"
+  ],
+  "hardware_measurement": false,
+  "max_error": 2.384185791015625e-7,
+  "mode": "smoke",
+  "multi_chunk_max_error": 0.0,
+  "multi_chunk_outcome": {
+    "cycles": 1,
+    "iterations": 2,
+    "scaled_relative_residual": 0.0,
+    "status": "converged_scaled"
+  },
+  "outcome": {
+    "cycles": 1,
+    "iterations": 3,
+    "scaled_relative_residual": 1.3249370691808608e-7,
+    "status": "converged_scaled"
+  },
+  "schema_version": 1,
+  "solution": [
+    1.000000238418579,
+    1.0,
+    1.9999998807907104
+  ],
+  "zero_rhs": {
+    "cycles": 0,
+    "iterations": 0,
+    "scaled_relative_residual": 0.0,
+    "status": "converged_scaled"
+  }
+}

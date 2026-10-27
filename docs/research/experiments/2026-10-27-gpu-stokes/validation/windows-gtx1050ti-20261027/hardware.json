@@ -1,0 +1,28 @@
+﻿{
+    "recorded_at":  "2026-10-27T15:59:54.7738027+08:00",
+    "cpu":  [
+                {
+                    "Name":  "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
+                    "NumberOfCores":  6,
+                    "NumberOfLogicalProcessors":  12
+                }
+            ],
+    "gpu":  [
+                {
+                    "Name":  "NVIDIA GeForce GTX 1050 Ti",
+                    "DriverVersion":  "32.0.15.8278"
+                },
+                {
+                    "Name":  "Intel(R) UHD Graphics 630",
+                    "DriverVersion":  "31.0.101.2115"
+                }
+            ],
+    "memory_bytes":  34203353088,
+    "git_commit":  "8f1a14a2067a1c154910aa8f692bcb3277219837",
+    "git_status":  [
+                       " M docs/research/experiments/2026-10-27-gpu-stokes/README.md",
+                       " M docs/research/experiments/2026-10-27-gpu-stokes/prepare.py",
+                       "?? run-gpu-experiment.cmd",
+                       "?? scripts/gpu-experiment.ps1"
+                   ]
+}

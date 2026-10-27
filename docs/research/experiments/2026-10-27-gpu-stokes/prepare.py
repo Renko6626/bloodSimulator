@@ -113,7 +113,7 @@ def main():
         save()
         with (data / 'build.log').open('w') as log:
             subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, check=True)
-        binary = args.target_dir / 'release/examples/gpu_capture'
+        binary = args.target_dir / ('release/examples/gpu_capture.exe' if os.name == 'nt' else 'release/examples/gpu_capture')
         info['binary_sha256'] = sha(binary)
         command = [str(binary), str(args.frames)]
         info['commands'].append(command)

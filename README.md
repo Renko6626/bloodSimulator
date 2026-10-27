@@ -14,7 +14,9 @@
 
 [20 秒实际行驶验证](docs/research/experiments/2026-10-27-region-switch/README.md)完成六次交接：release 模拟整步均值约 8.42 ms，额外交接均值约 3.00 ms、最大 4.51 ms。切换存在可测的局部流速差，尚未做真人手感或长期验收。当前只覆盖出生分叉和上方邻区，全地图详细流体调度与远处实体装卸尚未实施。历史性能实验见[研究索引](docs/research/README.md)。
 
-[独立 GPU 实验与云端运行说明](docs/research/experiments/2026-10-27-gpu-stokes/README.md)已准备跨厂商 wgpu／WGSL 迭代基线、真实矩阵采集和 CPU 参照。物理 GPU 收敛及性能留待云端实测，尚未进入正式游戏后端。
+[独立 GPU 实验与云端运行说明](docs/research/experiments/2026-10-27-gpu-stokes/README.md)提供跨厂商 wgpu／WGSL 迭代基线、真实矩阵采集和 CPU 参照。[Windows GTX 1050 Ti 基线](docs/research/experiments/2026-10-27-gpu-stokes/windows-gtx1050ti.md)已完成：GPU 功能检查通过，但真实系统的 48 次 GMRES 求解均在 400 次迭代后未收敛，当前方案尚不可用，未进入正式游戏后端。
+
+Windows GPU 实验入口：双击根目录 `run-gpu-experiment.cmd`，自动完成测试、构建、硬件探测、真实矩阵采集与 CPU／GPU 回放。需要 Rust 工具链，首次运行会下载依赖；详细要求和结果路径见上面的实验说明。
 
 - [当前状态与待办](docs/STATUS.md)：统一维护阶段结论、下一步优先级与待确认事项。
 - [流体研究索引](docs/research/README.md)：最新欠松弛结果，以及 Stokes、Rayon、LBM 等历史实验与原始数据。

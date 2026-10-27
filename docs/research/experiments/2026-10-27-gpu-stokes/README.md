@@ -15,7 +15,15 @@
 
 它是 GPU 运算／迭代／同步成本的起点。简单缩放不保证实际分叉系统能在默认迭代预算内收敛，更不保证比 CPU LU 快；这是后续是否需要多重网格的测量依据。
 
+**2026-10-27 Windows 实测：** [i7-8750H／GTX 1050 Ti 基线与原始结果](windows-gtx1050ti.md)已完成。Vulkan 物理 GPU、单元与小型数值检查通过；六域 CPU 参照通过，48 次真实 GPU 回放均达到 400 次迭代上限，未通过残差门槛。下文“本机完成的验证”保留此前 Linux 无物理 GPU 环境的历史记录。
+
 ## 云服务器上运行
+
+### Windows 一键实验
+
+在仓库根目录双击 `run-gpu-experiment.cmd`，或在 PowerShell 执行 `./scripts/gpu-experiment.ps1`。需要 Rust 及可用的 Windows C++ 链接工具；首次运行联网下载锁定依赖。脚本优先使用 Codex 自带 Python，也可通过 `-Python C:\path\python.exe` 指定 Python 3。
+
+入口依次执行关键测试、release 构建、物理 GPU 探测、小型数值检查、全部三种规模的真实矩阵采集、CPU 参照和两轮 GPU 回放。使用原定迭代预算与容差；未收敛保留为失败结果。每次写入新的 `target/gpu-experiments/日期时间/`，包含硬件、日志、矩阵和结果；`results/summary.json` 给出最终状态。首次编译和采集可能较慢，此入口不是预编译二进制分发包。
 
 从仓库根目录执行。Rust 最低 1.94；Linux GPU 镜像需提供可用 Vulkan 驱动／ICD 和 loader，**只有 CUDA Toolkit 不保证 Vulkan 可用**。不需要 Vulkan SDK；驱动和系统运行时仍需正确安装。可用 `WGPU_BACKEND=vulkan` 明确选择后端。
 

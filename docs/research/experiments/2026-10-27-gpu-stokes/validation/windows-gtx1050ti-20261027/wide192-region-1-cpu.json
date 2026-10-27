@@ -1,0 +1,87 @@
+{
+  "accepted": true,
+  "case": "E:\\Game\\bloodSimulator\\target\\gpu-experiments\\20261027-155954\\data\\wide192\\region-1",
+  "command": [
+    "E:\\Game\\bloodSimulator\\target\\gpu-lab\\release\\blood-gpu-stokes-lab.exe",
+    "cpu",
+    "--case",
+    "E:\\Game\\bloodSimulator\\target\\gpu-experiments\\20261027-155954\\data\\wide192\\region-1",
+    "--limit",
+    "4",
+    "--rtol",
+    "0.0001",
+    "--repeats",
+    "10",
+    "--out",
+    "E:\\Game\\bloodSimulator\\target\\gpu-experiments\\20261027-155954\\results\\wide192-region-1-cpu.json"
+  ],
+  "factorization_ms": 257.10670000000005,
+  "known_model_issue": "wide domains omit internal pump; algebra correctness does not establish physical correctness",
+  "mode": "cpu_lu_f64",
+  "rows": 29565,
+  "samples": [
+    {
+      "audit": {
+        "constraint_rms": 9.812018615532208e-15,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 6.093398403176092e-15,
+        "momentum_rms": 8.365922230611606e-15,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 7.945587227371673e-15,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 10.74285,
+      "repeats": 10,
+      "sample": "000"
+    },
+    {
+      "audit": {
+        "constraint_rms": 1.5509390114484734e-15,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 1.896036257816976e-15,
+        "momentum_rms": 1.896036257816976e-15,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 2.4772647746900978e-14,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 11.47147,
+      "repeats": 10,
+      "sample": "001"
+    },
+    {
+      "audit": {
+        "constraint_rms": 2.6645535963465008e-15,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 2.5212867704895617e-15,
+        "momentum_rms": 2.5212867704895617e-15,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 2.6501924165411272e-14,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 10.70889,
+      "repeats": 10,
+      "sample": "003"
+    },
+    {
+      "audit": {
+        "constraint_rms": 3.4564221777664664e-15,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 2.833370768866154e-15,
+        "momentum_rms": 2.833370768866154e-15,
+        "pressure_reference_max_absolute": 0.0,
+        "relative_residual": 2.7680325353108113e-14,
+        "velocity_reference_relative_l2": 0.0
+      },
+      "mean_solve_ms": 11.3904,
+      "repeats": 10,
+      "sample": "007"
+    }
+  ],
+  "schema_version": 1,
+  "source": "production StokesFactor; sequential faer sparse LU",
+  "tolerance": 0.0001
+}

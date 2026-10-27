@@ -1,0 +1,152 @@
+{
+  "accepted": false,
+  "adapter": {
+    "backend": "Vulkan",
+    "device": 7308,
+    "device_type": "DiscreteGpu",
+    "driver": "NVIDIA",
+    "driver_info": "582.78",
+    "name": "NVIDIA GeForce GTX 1050 Ti",
+    "software": false,
+    "vendor": 4318
+  },
+  "case": "E:\\Game\\bloodSimulator\\target\\gpu-experiments\\20261027-155954\\data\\small64\\region-1",
+  "command": [
+    "E:\\Game\\bloodSimulator\\target\\gpu-lab\\release\\blood-gpu-stokes-lab.exe",
+    "gpu",
+    "--case",
+    "E:\\Game\\bloodSimulator\\target\\gpu-experiments\\20261027-155954\\data\\small64\\region-1",
+    "--limit",
+    "4",
+    "--rtol",
+    "0.0001",
+    "--restart",
+    "32",
+    "--max-iter",
+    "400",
+    "--out",
+    "E:\\Game\\bloodSimulator\\target\\gpu-experiments\\20261027-155954\\results\\small64-region-1-gpu-r1.json"
+  ],
+  "hardware_measurement": true,
+  "known_model_issue": "wide domains omit internal pump; algebra correctness does not establish physical correctness",
+  "max_iterations": 400,
+  "mode": "gpu_gmres_f32",
+  "notes": "Host scalar GMRES; GPU large vectors; includes per-iteration scalar readbacks and final vector readback; no Rapier or rendering",
+  "restart": 32,
+  "rows": 5689,
+  "samples": [
+    {
+      "accepted": false,
+      "audit": {
+        "constraint_rms": 0.0007805207980484522,
+        "finite": true,
+        "linear_residual_accepted": false,
+        "momentum_relative_rms": 0.02567117200564106,
+        "momentum_rms": 0.02567117200564106,
+        "pressure_reference_max_absolute": 0.27244975154432854,
+        "relative_residual": 0.07038792270201687,
+        "velocity_reference_relative_l2": 0.9692326223155309
+      },
+      "counters": {
+        "dispatches": 4069,
+        "readback_bytes": 77212,
+        "readback_wait_ms": 671.4881999999998,
+        "readbacks": 415
+      },
+      "end_to_end_solve_ms": 1331.7879,
+      "outcome": {
+        "cycles": 13,
+        "iterations": 400,
+        "scaled_relative_residual": 0.05070133571998972,
+        "status": "iteration_limit"
+      },
+      "sample": "000"
+    },
+    {
+      "accepted": false,
+      "audit": {
+        "constraint_rms": 0.0005075417869091481,
+        "finite": true,
+        "linear_residual_accepted": false,
+        "momentum_relative_rms": 0.007873858228605618,
+        "momentum_rms": 0.007873858228605618,
+        "pressure_reference_max_absolute": 0.0583029244104928,
+        "relative_residual": 0.15123644760488947,
+        "velocity_reference_relative_l2": 0.6984947703652267
+      },
+      "counters": {
+        "dispatches": 4069,
+        "readback_bytes": 77212,
+        "readback_wait_ms": 828.9505000000006,
+        "readbacks": 415
+      },
+      "end_to_end_solve_ms": 1597.9645,
+      "outcome": {
+        "cycles": 13,
+        "iterations": 400,
+        "scaled_relative_residual": 0.16148840144099438,
+        "status": "iteration_limit"
+      },
+      "sample": "001"
+    },
+    {
+      "accepted": false,
+      "audit": {
+        "constraint_rms": 0.0005049971929001324,
+        "finite": true,
+        "linear_residual_accepted": false,
+        "momentum_relative_rms": 0.007977650145779747,
+        "momentum_rms": 0.007977650145779747,
+        "pressure_reference_max_absolute": 0.05540004449606081,
+        "relative_residual": 0.15475564677361012,
+        "velocity_reference_relative_l2": 0.6872234550690787
+      },
+      "counters": {
+        "dispatches": 4069,
+        "readback_bytes": 77212,
+        "readback_wait_ms": 687.6914000000006,
+        "readbacks": 415
+      },
+      "end_to_end_solve_ms": 1355.0837,
+      "outcome": {
+        "cycles": 13,
+        "iterations": 400,
+        "scaled_relative_residual": 0.1649239351854084,
+        "status": "iteration_limit"
+      },
+      "sample": "003"
+    },
+    {
+      "accepted": false,
+      "audit": {
+        "constraint_rms": 0.0004959517194741833,
+        "finite": true,
+        "linear_residual_accepted": false,
+        "momentum_relative_rms": 0.007840758042844459,
+        "momentum_rms": 0.007840758042844459,
+        "pressure_reference_max_absolute": 0.05360583024373962,
+        "relative_residual": 0.1530103654676838,
+        "velocity_reference_relative_l2": 0.678325921903642
+      },
+      "counters": {
+        "dispatches": 4069,
+        "readback_bytes": 77212,
+        "readback_wait_ms": 703.0527999999996,
+        "readbacks": 415
+      },
+      "end_to_end_solve_ms": 1396.9268000000002,
+      "outcome": {
+        "cycles": 13,
+        "iterations": 400,
+        "scaled_relative_residual": 0.16305272629104645,
+        "status": "iteration_limit"
+      },
+      "sample": "007"
+    }
+  ],
+  "schema_version": 1,
+  "setup_ms": 697.4544999999999,
+  "spmv_relative_error": 1.9727400994681994e-8,
+  "spmv_roundtrip_ms": 4.3824,
+  "tolerance": 0.0001
+}
