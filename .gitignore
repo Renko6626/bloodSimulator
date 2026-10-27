@@ -19,3 +19,5 @@ Thumbs.db
 
 # Generated distribution output.
 /dist/
+
+.worktrees/
