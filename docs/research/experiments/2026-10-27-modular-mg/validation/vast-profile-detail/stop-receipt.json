@@ -1,0 +1,12 @@
+{
+  "checked_at_utc": "2026-10-27T11:15:38.513895+00:00",
+  "id": 57949215,
+  "actual_status": "exited",
+  "intended_status": "stopped",
+  "cur_state": "stopped",
+  "gpu_name": "RTX 3060",
+  "operation": "stop",
+  "request_accepted": true,
+  "data_preserved": true,
+  "experiment_commit": "84cc9cc"
+}

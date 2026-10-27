@@ -4,6 +4,8 @@
 
 ## 正式原型
 
+云端收尾：用户已授权实验完成并取回结果后主动停机，约定见根目录 [AGENTS.md](../AGENTS.md)。本次 RTX 3060 实例 `57949215` 已调用 Vast.ai stop；平台核对为 `cur_state: stopped`、`actual_status: exited`，磁盘数据保留，仍可能有存储费用。安全状态回执见[停机记录](research/experiments/2026-10-27-modular-mg/validation/vast-profile-detail/stop-receipt.json)；API 密钥未进入日志或仓库。
+
 按用户要求新增 [GPU 分段 profiling](research/experiments/2026-10-27-modular-mg/gpu-profile.md)：opt-in 主机计时与可选 GPU 时间戳已在 RTX 3060 上验证，off／host／gpu 的迭代和残差诊断一致。首轮 host 组命令编码占约 45%–59%，设备侧最大类别为 MG 平滑；仍有大量单工作组 dispatch。细分确认编码约 95%–98% 在 encoder.finish，回读准备约 98%–99% 在 create_buffer；下一步先对照复用 staging，再减少小 pass／dispatch 的组织成本并验证数据依赖。本轮未融合 kernel 或更改算法。
 
 最新云端验证见 [Vast.ai RTX 3060／Xeon 回放](research/experiments/2026-10-27-modular-mg/vast-rtx3060.md)：96 次 GPU 求解全部通过，两种配置交错测量。一次 V-cycle 的三规模均值约 57／95／124 ms，CPU LU 约 0.77／0.60／3.85 ms；本轮无新增 CPU 配额节流，仍不是独占宿主 CPU。GPU 仍明显慢于固定因子 LU，下一步先分段 profile 命令编码、提交、GPU 执行及审核。未改求解算法；Linux／Windows 后续动态 RHS 不全同字节，跨机对比限制已记录。
