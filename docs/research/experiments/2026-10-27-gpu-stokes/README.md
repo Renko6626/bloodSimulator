@@ -1,5 +1,7 @@
 # 跨厂商 GPU Stokes 实验与云端接手
 
+**后续入口已更新：** 当前代码使用[可插拔模块与 GPU 分块多重网格实验](../2026-10-27-modular-mg/README.md)，Windows 根入口也已切到该版本。下文保留首版 GMRES 的设计、历史命令和验证口径；`prepare.py` 仅适用历史源码布局，新采集请用 `scripts/fluid-experiment.py`。原 Windows 结果与来源快照未改。
+
 用户已确认独立 **Rust＋wgpu／WGSL** 实验。这里准备可运行代码和复现步骤，正式模拟、根依赖、Godot 渲染器均保持。
 
 主路线不依赖 CUDA、ROCm、cuDSS。开发服务器需要 Rust 和相应图形运行支持；将来玩家运行的是打包后的程序，只需满足图形驱动／系统运行时要求，不需要科研 SDK 或 Rust 工具链。wgpu 使用 Vulkan／D3D12／Metal，**不等于所有旧显卡都支持**；Windows／macOS 和消费级显卡尚待实测。当前程序不需要窗口或显示器。

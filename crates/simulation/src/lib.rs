@@ -13,6 +13,6 @@ pub mod vessel;
 mod view;
 
 pub use config::Config;
-pub use fluid::FluidStats;
+pub use fluid::{FluidStats, LocalFluidOptions};
 pub use runtime::{MoveInput, Simulation};
 pub use view::{FlowArrow, Snapshot};

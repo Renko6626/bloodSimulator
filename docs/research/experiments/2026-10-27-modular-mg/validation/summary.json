@@ -1,0 +1,133 @@
+{
+  "hardware_measurement": false,
+  "tolerance": 0.0001,
+  "restart": 32,
+  "max_iterations": 200,
+  "cases": [
+    {
+      "case": "small64",
+      "cpu-c1": {
+        "samples": 15,
+        "iterations_min": 17,
+        "iterations_max": 18,
+        "all_accepted": true,
+        "relative_residual_max": 1.710907117072149e-05,
+        "velocity_reference_relative_l2_max": 5.586305630412166e-05
+      },
+      "cpu-c2": {
+        "samples": 15,
+        "iterations_min": 15,
+        "iterations_max": 16,
+        "all_accepted": true,
+        "relative_residual_max": 1.1525414959610199e-05,
+        "velocity_reference_relative_l2_max": 5.840409447854698e-05
+      },
+      "gpu-software-c2": {
+        "samples": 15,
+        "iterations_min": 15,
+        "iterations_max": 16,
+        "all_accepted": true,
+        "relative_residual_max": 1.2552776714943345e-05,
+        "velocity_reference_relative_l2_max": 5.8509610947581376e-05,
+        "readbacks": {
+          "min": 5,
+          "max": 5
+        },
+        "dispatches": {
+          "min": 1564,
+          "max": 1564
+        },
+        "submissions": {
+          "min": 10,
+          "max": 10
+        }
+      }
+    },
+    {
+      "case": "wide96",
+      "cpu-c1": {
+        "samples": 15,
+        "iterations_min": 36,
+        "iterations_max": 51,
+        "all_accepted": true,
+        "relative_residual_max": 3.2998809450392834e-05,
+        "velocity_reference_relative_l2_max": 0.0060378599148553005
+      },
+      "cpu-c2": {
+        "samples": 15,
+        "iterations_min": 32,
+        "iterations_max": 46,
+        "all_accepted": true,
+        "relative_residual_max": 2.5929516472318304e-05,
+        "velocity_reference_relative_l2_max": 0.000804075669173774
+      },
+      "gpu-software-c2": {
+        "samples": 15,
+        "iterations_min": 32,
+        "iterations_max": 46,
+        "all_accepted": true,
+        "relative_residual_max": 2.5930390552684893e-05,
+        "velocity_reference_relative_l2_max": 0.0008035800824228574,
+        "readbacks": {
+          "min": 7,
+          "max": 10
+        },
+        "dispatches": {
+          "min": 3116,
+          "max": 4675
+        },
+        "submissions": {
+          "min": 14,
+          "max": 21
+        }
+      }
+    },
+    {
+      "case": "wide192",
+      "cpu-c1": {
+        "samples": 15,
+        "iterations_min": 38,
+        "iterations_max": 57,
+        "all_accepted": true,
+        "relative_residual_max": 1.76358484063691e-05,
+        "velocity_reference_relative_l2_max": 0.0022993002568613865
+      },
+      "cpu-c2": {
+        "samples": 15,
+        "iterations_min": 34,
+        "iterations_max": 49,
+        "all_accepted": true,
+        "relative_residual_max": 1.409750687079531e-05,
+        "velocity_reference_relative_l2_max": 0.0007790017305794572
+      },
+      "gpu-software-c2": {
+        "samples": 15,
+        "iterations_min": 34,
+        "iterations_max": 49,
+        "all_accepted": true,
+        "relative_residual_max": 1.4271654485527144e-05,
+        "velocity_reference_relative_l2_max": 0.0007764882073662235,
+        "readbacks": {
+          "min": 9,
+          "max": 11
+        },
+        "dispatches": {
+          "min": 4699,
+          "max": 6571
+        },
+        "submissions": {
+          "min": 19,
+          "max": 23
+        }
+      }
+    }
+  ],
+  "validation_commands": [
+    "bash scripts/check.sh",
+    "cargo test --offline --locked -p blood-fluid -p blood-fluid-gpu --target-dir /tmp/sunyunbo/blood-gpu-lab-target -j4",
+    "cargo test --offline --manifest-path docs/research/experiments/2026-10-27-gpu-stokes/lab/Cargo.toml --target-dir /tmp/sunyunbo/blood-gpu-lab-target -j4",
+    "CARGO_TARGET_DIR=/tmp/sunyunbo/blood-gpu-lab-target python3 scripts/fluid-experiment.py --data /tmp/sunyunbo/blood-gpu-data-v1 --out /tmp/sunyunbo/blood-modular-gpu-final-v1 --offline --backends gpu-fgmres-mg --allow-software --limit 8 --rounds 1",
+    "CARGO_TARGET_DIR=/tmp/sunyunbo/blood-gpu-lab-target python3 scripts/fluid-experiment.py --data /tmp/sunyunbo/blood-native-capture-v1 --out /tmp/sunyunbo/blood-modular-cpu-final-c2 --offline --cpu-only --limit 8 --rounds 1",
+    "CARGO_TARGET_DIR=/tmp/sunyunbo/blood-gpu-lab-target python3 scripts/fluid-experiment.py --data /tmp/sunyunbo/blood-native-capture-v1 --out /tmp/sunyunbo/blood-modular-cpu-final-c1 --offline --backends cpu-fgmres-mg --cpu-only --mg-cycles 1 --limit 8 --rounds 1"
+  ]
+}

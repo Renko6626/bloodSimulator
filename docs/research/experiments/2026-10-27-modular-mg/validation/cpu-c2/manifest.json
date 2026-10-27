@@ -1,0 +1,3938 @@
+{
+  "schema_version": 2,
+  "platform": "Linux-6.8.0-111-generic-x86_64-with-glibc2.35",
+  "build_command": [
+    "cargo",
+    "build",
+    "--release",
+    "--locked",
+    "-p",
+    "fluid-bench",
+    "--target-dir",
+    "/tmp/sunyunbo/blood-gpu-lab-target",
+    "-j",
+    "4",
+    "--offline"
+  ],
+  "binary_sha256": "8a9f491d756c099646ac6146483c6bcc2bdb26a41a08c31f3bafb48cc284aca6",
+  "source_sha256": {
+    "Cargo.toml": "fab0902d06db0f9f6c8a68ec5faa688951282a45e1330ea4cd1ca0445e85eae7",
+    "Cargo.lock": "6e41a07c6cdfdffd3325bf6fd04c1b86a8d5d6f52fc70c7edb680a9283f55af1",
+    "scripts/fluid-experiment.py": "bfb0ea8fd9c28c90b17066f492de01ca8340b19e47badb3074a7550ad2878b1c",
+    "crates/fluid/src/block.rs": "d18a1d4851abbfbcbe0dac001ad69a8687b4b95bc9a806785a70c19f5cbee87e",
+    "crates/fluid/src/cpu.rs": "4126f0a0302fbffe470e89df7bbd6d9af0ac68fda9a8a85f2656875b145e8919",
+    "crates/fluid/src/dataset.rs": "fda51e0df7db73adeea89cccea5adfc2d1acaa37c10947310098961037450e38",
+    "crates/fluid/src/krylov.rs": "182e5835d40bb448f82cdf25e43aab4206502afc71cacbc0f23df7a4305d2a0d",
+    "crates/fluid/src/lib.rs": "d39bb7c633bcef8752cd493006d75460bf3bcf8d75f0b0b4c721a81274c1ded2",
+    "crates/fluid/src/lu.rs": "6e4e31464e7cefd78d2d033bb04a496686dc7308329b114d47d74fa79b9612b7",
+    "crates/fluid/src/matrix.rs": "f100c0f4f8c4cefa63306238baeb6a1456d1d1c3e86c9904a922b55b4ce0e15e",
+    "crates/fluid/src/multigrid.rs": "e2733235c62da08d46708d123e1c597f355be462d807766ce94d2244d3c22edc",
+    "crates/fluid/src/problem.rs": "de1cfdfe37c63158c663518aa43aa2ba1272ee3398ffccde7d29c14222cc537a",
+    "crates/fluid-bench/src/capture.rs": "8287787fbb5017bd227ef0d47ad8dd48432be5b7dddd1f1d9bc8147dd68d0785",
+    "crates/fluid-bench/src/main.rs": "72abeae394f780b6ec37d990043f6e4166b609063e7c133825481fedad4dff8b",
+    "crates/fluid-gpu/src/legacy.rs": "c9698dc89cb17ab33a15e8bed4be00c4403df01678e9066c26f44411a14dece4",
+    "crates/fluid-gpu/src/lib.rs": "d5fbfcb0d572405cbbe96dd116329681d6b8341780a54fcdeb465a301e98654d",
+    "crates/fluid-gpu/src/mg.rs": "412f3550c6b411c811ac1cdf0a65cddf599446d7165b178498d8f26f60b1f409",
+    "crates/godot_bridge/src/lib.rs": "e46ce8a363600293c77b4138a8ffaaa4de7ab5d0d47d13300889defcc547bbff",
+    "crates/simulation/examples/circulation_probe.rs": "35097f916d272d27d58fb960dbab4dc597fbbfc0927c124cd7ff03259d6c57ef",
+    "crates/simulation/examples/region_probe.rs": "f8929694640097b033e0b713ce6858d7ccce771ec5bbe3251304692d295b1a9d",
+    "crates/simulation/src/cell.rs": "5caa49010945dd6bb593c09444f3cc03ca24075f9fb5f933d1aaefefcffe0ad5",
+    "crates/simulation/src/circulation/graph.rs": "7db73535507736f70b8a27eeb988ed0c85e8d9faba7d42221fb73a01ca1482a9",
+    "crates/simulation/src/circulation.rs": "98051a6ea87ac45dab237c1d13c5d80cb2ca1b9b0bae1db98524e595233f98e1",
+    "crates/simulation/src/config.rs": "8da31b6101d995cab83746f4aefa396c6f7b875b79df2261a49573b6eb1f7839",
+    "crates/simulation/src/fluid/grid.rs": "f5c4518835f6b24bbceea72eb84bd70b395be205273df80a03965d3537374f9b",
+    "crates/simulation/src/fluid/linear.rs": "b9cdc2a2dacb2b55f318be9832aa738e4271029545a2d36d99583bbc1bea7933",
+    "crates/simulation/src/fluid/mod.rs": "964c4db8466a18c822d83d1869e072996a8bc7530f558257259cc97128c1e8ef",
+    "crates/simulation/src/fluid/regions.rs": "5529a47c5cbcbda9bbe6081fb0a1bd25277b3c97ef5336df20df4b641454d355",
+    "crates/simulation/src/fluid/tests.rs": "5eb4aebd8437261a05ef8bad1ddd3ce71a4036a6040c28833fd8d58c575d4316",
+    "crates/simulation/src/lib.rs": "ce4ca734adaa15a4a21a0a23de03bb9074345f8ceceb72f7ccd35f82b2880347",
+    "crates/simulation/src/map/geometry.rs": "b525f0940dfd06bb1f5b70f6a55a41ed53dcd646f3dab77a8c79466e09ff76aa",
+    "crates/simulation/src/map.rs": "b39b2499c540aa1a29586d673f151e23b38ec817ce770149f756787b383ccf0d",
+    "crates/simulation/src/robot.rs": "abd85a82b52bc3cadb7b7b727a95daff17eb699f37544b5529c35eccdee7ddd6",
+    "crates/simulation/src/runtime.rs": "9447c7b1ac47f4bd1568289f523ec139acf6860ff934726e85272390b4738516",
+    "crates/simulation/src/threading.rs": "c874aa764322e65aa721297c93e8603b444d91fbaa357234ee431247a6ddcbea",
+    "crates/simulation/src/vessel.rs": "89806837b670a7f7f25c5fd3d80fb1e63f7acc01963fd995537891bbeb671b1b",
+    "crates/simulation/src/view.rs": "9ead0b5acad5e2504a4b48a48e1c207f31bc721e5e0cb3c45c5940af7e6fbe1e",
+    "crates/simulation/tests/experiment.rs": "d45c12fe68c561d35db3469d1bbc09efdb7f82aae47f4481a063da990af5b809",
+    "crates/fluid-gpu/src/legacy.wgsl": "62632a72945dc664984b07b415f52c62082ddc4fd27b2a1966eb6a1442c9ef4b",
+    "crates/fluid-gpu/src/mg.wgsl": "25b2b3147754f5791a24103bdcdecf369a876ad833c94670c7322f8c06f965ef",
+    "crates/fluid/Cargo.toml": "5f531c562ccb70e4d8be5d2412510ffa9caf5e4e5a187f45f961f360644f3d38",
+    "crates/fluid-bench/Cargo.toml": "a2243a4c45f666ebd257e1ccec065f579c3088fc9365afc2a17c9d1371372ed3",
+    "crates/fluid-gpu/Cargo.toml": "b8ce5c56e01fc56e22facc76517a795d9f9ac3c35a3a972f37045e82f4e07464",
+    "crates/godot_bridge/Cargo.toml": "688bcaf9ff374a29b15b53542daf3e27666b2bd35a0c605f3a9ea8924bb5097d",
+    "crates/simulation/Cargo.toml": "57b51385986d48003645d7af28b10f4fbf74131de99fa0cccd146022f2c2a96e"
+  },
+  "options": {
+    "out": "/tmp/sunyunbo/blood-modular-cpu-final-c2",
+    "data": "/tmp/sunyunbo/blood-native-capture-v1",
+    "backends": [
+      "cpu-lu",
+      "cpu-fgmres-mg",
+      "gpu-fgmres-mg"
+    ],
+    "cases": [
+      "small64",
+      "wide96",
+      "wide192"
+    ],
+    "cpu_only": true,
+    "allow_software": false,
+    "offline": true,
+    "frames": 240,
+    "limit": 8,
+    "rounds": 1,
+    "restart": 32,
+    "max_iter": 200,
+    "mg_cycles": 2,
+    "rtol": 0.0001
+  },
+  "runs": [
+    {
+      "name": "small64-region-0-cpu-lu-r1",
+      "command": [
+        "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+        "run",
+        "--backend",
+        "cpu-lu",
+        "--case",
+        "/tmp/sunyunbo/blood-native-capture-v1/small64/region-0",
+        "--limit",
+        "8",
+        "--restart",
+        "32",
+        "--max-iter",
+        "200",
+        "--rtol",
+        "0.0001",
+        "--mg-cycles",
+        "2",
+        "--repeats",
+        "10",
+        "--out",
+        "/tmp/sunyunbo/blood-modular-cpu-final-c2/small64-region-0-cpu-lu-r1.json"
+      ],
+      "exit_code": 0,
+      "result": {
+        "accepted": true,
+        "adapter": null,
+        "backend": "cpu-lu",
+        "case": "/tmp/sunyunbo/blood-native-capture-v1/small64/region-0",
+        "command": [
+          "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+          "run",
+          "--backend",
+          "cpu-lu",
+          "--case",
+          "/tmp/sunyunbo/blood-native-capture-v1/small64/region-0",
+          "--limit",
+          "8",
+          "--restart",
+          "32",
+          "--max-iter",
+          "200",
+          "--rtol",
+          "0.0001",
+          "--mg-cycles",
+          "2",
+          "--repeats",
+          "10",
+          "--out",
+          "/tmp/sunyunbo/blood-modular-cpu-final-c2/small64-region-0-cpu-lu-r1.json"
+        ],
+        "hardware_measurement": false,
+        "mode": "run",
+        "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+        "options": {
+          "max_iterations": 200,
+          "restart": 32,
+          "tolerance": 0.0001,
+          "v_cycles": 2
+        },
+        "rows": 7400,
+        "samples": [
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.0179446850536683e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 2.1481244168588697e-15,
+              "momentum_rms": 2.1481244168588697e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 9.443170595058953e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.7444667,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "000"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.964800502068795e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 4.115168838489259e-16,
+              "momentum_rms": 4.115168838489259e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 1.9392961334317778e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.6931521,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "001"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 4.348777621713205e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 6.742168826970839e-16,
+              "momentum_rms": 6.742168826970839e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 1.8140885565223863e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.6776052,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "003"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 4.718041827011714e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 7.44997897871408e-16,
+              "momentum_rms": 7.44997897871408e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 1.7599121816338637e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.6806064999999999,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "007"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 4.697983795820918e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 7.54866680772645e-16,
+              "momentum_rms": 7.54866680772645e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 1.765868017879729e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.6774357,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "015"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 3.725130406227209e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 6.386939829351795e-16,
+              "momentum_rms": 6.386939829351795e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 1.555859864570542e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.6798038000000001,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "031"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.2040623665272434e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 3.317791819642392e-16,
+              "momentum_rms": 3.317791819642392e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 9.768516900043232e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.6808573,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "063"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.5821966932846785e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 1.8910557453365165e-16,
+              "momentum_rms": 1.8910557453365165e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 7.222677865576537e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.6781452000000001,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "127"
+          }
+        ],
+        "schema_version": 2,
+        "setup_ms": 83.82763899999999
+      }
+    },
+    {
+      "name": "small64-region-0-cpu-fgmres-mg-r1",
+      "command": [
+        "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+        "run",
+        "--backend",
+        "cpu-fgmres-mg",
+        "--case",
+        "/tmp/sunyunbo/blood-native-capture-v1/small64/region-0",
+        "--limit",
+        "8",
+        "--restart",
+        "32",
+        "--max-iter",
+        "200",
+        "--rtol",
+        "0.0001",
+        "--mg-cycles",
+        "2",
+        "--repeats",
+        "1",
+        "--out",
+        "/tmp/sunyunbo/blood-modular-cpu-final-c2/small64-region-0-cpu-fgmres-mg-r1.json"
+      ],
+      "exit_code": 0,
+      "result": {
+        "accepted": true,
+        "adapter": null,
+        "backend": "cpu-fgmres-mg",
+        "case": "/tmp/sunyunbo/blood-native-capture-v1/small64/region-0",
+        "command": [
+          "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+          "run",
+          "--backend",
+          "cpu-fgmres-mg",
+          "--case",
+          "/tmp/sunyunbo/blood-native-capture-v1/small64/region-0",
+          "--limit",
+          "8",
+          "--restart",
+          "32",
+          "--max-iter",
+          "200",
+          "--rtol",
+          "0.0001",
+          "--mg-cycles",
+          "2",
+          "--repeats",
+          "1",
+          "--out",
+          "/tmp/sunyunbo/blood-modular-cpu-final-c2/small64-region-0-cpu-fgmres-mg-r1.json"
+        ],
+        "hardware_measurement": false,
+        "mode": "run",
+        "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+        "options": {
+          "max_iterations": 200,
+          "restart": 32,
+          "tolerance": 0.0001,
+          "v_cycles": 2
+        },
+        "rows": 7400,
+        "samples": [
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.5347230463702864e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 4.932951794487432e-07,
+              "momentum_rms": 4.932951794487432e-07,
+              "pressure_reference_max_absolute": 4.784950523784026e-05,
+              "relative_residual": 6.82943740446765e-06,
+              "velocity_reference_relative_l2": 1.3077514886522221e-05
+            },
+            "mean_solve_ms": 28.558453,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 16,
+              "multigrid_levels": [
+                4916,
+                1278,
+                355,
+                98,
+                35
+              ],
+              "status": "converged",
+              "stopping_relative": 4.063341240202201e-05
+            },
+            "sample": "000"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 3.504977217299281e-07,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 5.633940681148192e-08,
+              "momentum_rms": 5.633940681148192e-08,
+              "pressure_reference_max_absolute": 1.1686035860072191e-05,
+              "relative_residual": 1.0714301334147196e-05,
+              "velocity_reference_relative_l2": 9.03436358637335e-06
+            },
+            "mean_solve_ms": 26.308287999999997,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 15,
+              "multigrid_levels": [
+                4916,
+                1278,
+                355,
+                98,
+                35
+              ],
+              "status": "converged",
+              "stopping_relative": 9.569068978672123e-05
+            },
+            "sample": "001"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 6.072265900901725e-07,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 9.698403560135828e-08,
+              "momentum_rms": 9.698403560135828e-08,
+              "pressure_reference_max_absolute": 2.028502825760642e-05,
+              "relative_residual": 1.082037012174127e-05,
+              "velocity_reference_relative_l2": 9.613164323480154e-06
+            },
+            "mean_solve_ms": 26.291144,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 15,
+              "multigrid_levels": [
+                4916,
+                1278,
+                355,
+                98,
+                35
+              ],
+              "status": "converged",
+              "stopping_relative": 9.69099874558158e-05
+            },
+            "sample": "003"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 7.012143293115269e-07,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 1.0982797319209981e-07,
+              "momentum_rms": 1.0982797319209981e-07,
+              "pressure_reference_max_absolute": 2.288887970685466e-05,
+              "relative_residual": 1.0994636474170302e-05,
+              "velocity_reference_relative_l2": 1.0454492501957353e-05
+            },
+            "mean_solve_ms": 26.354933,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 15,
+              "multigrid_levels": [
+                4916,
+                1278,
+                355,
+                98,
+                35
+              ],
+              "status": "converged",
+              "stopping_relative": 9.822085942858992e-05
+            },
+            "sample": "007"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 7.21945744946965e-07,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 1.0606699965883098e-07,
+              "momentum_rms": 1.0606699965883098e-07,
+              "pressure_reference_max_absolute": 2.1560390822687042e-05,
+              "relative_residual": 1.1210685557458842e-05,
+              "velocity_reference_relative_l2": 1.0990033104135264e-05
+            },
+            "mean_solve_ms": 26.257863999999998,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 15,
+              "multigrid_levels": [
+                4916,
+                1278,
+                355,
+                98,
+                35
+              ],
+              "status": "converged",
+              "stopping_relative": 9.869446956393677e-05
+            },
+            "sample": "015"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 3.245858421477793e-07,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 3.63357821004461e-08,
+              "momentum_rms": 3.63357821004461e-08,
+              "pressure_reference_max_absolute": 7.060859979870007e-06,
+              "relative_residual": 5.255988887398662e-06,
+              "velocity_reference_relative_l2": 5.2870181239538516e-06
+            },
+            "mean_solve_ms": 28.303887,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 16,
+              "multigrid_levels": [
+                4916,
+                1278,
+                355,
+                98,
+                35
+              ],
+              "status": "converged",
+              "stopping_relative": 4.45165633299207e-05
+            },
+            "sample": "031"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 5.951147658507349e-07,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 9.192181101079469e-08,
+              "momentum_rms": 9.192181101079469e-08,
+              "pressure_reference_max_absolute": 1.6123367363288926e-05,
+              "relative_residual": 1.1525414959610199e-05,
+              "velocity_reference_relative_l2": 3.1411924606999506e-05
+            },
+            "mean_solve_ms": 26.255164,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 15,
+              "multigrid_levels": [
+                4916,
+                1278,
+                355,
+                98,
+                35
+              ],
+              "status": "converged",
+              "stopping_relative": 9.860392383838028e-05
+            },
+            "sample": "063"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 3.4822579672711747e-07,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 7.098844087047465e-08,
+              "momentum_rms": 7.098844087047465e-08,
+              "pressure_reference_max_absolute": 9.320458732073322e-06,
+              "relative_residual": 8.453260226783998e-06,
+              "velocity_reference_relative_l2": 5.840409447854698e-05
+            },
+            "mean_solve_ms": 26.387445,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 15,
+              "multigrid_levels": [
+                4916,
+                1278,
+                355,
+                98,
+                35
+              ],
+              "status": "converged",
+              "stopping_relative": 7.534545985430159e-05
+            },
+            "sample": "127"
+          }
+        ],
+        "schema_version": 2,
+        "setup_ms": 96.766221
+      }
+    },
+    {
+      "name": "small64-region-1-cpu-lu-r1",
+      "command": [
+        "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+        "run",
+        "--backend",
+        "cpu-lu",
+        "--case",
+        "/tmp/sunyunbo/blood-native-capture-v1/small64/region-1",
+        "--limit",
+        "8",
+        "--restart",
+        "32",
+        "--max-iter",
+        "200",
+        "--rtol",
+        "0.0001",
+        "--mg-cycles",
+        "2",
+        "--repeats",
+        "10",
+        "--out",
+        "/tmp/sunyunbo/blood-modular-cpu-final-c2/small64-region-1-cpu-lu-r1.json"
+      ],
+      "exit_code": 0,
+      "result": {
+        "accepted": true,
+        "adapter": null,
+        "backend": "cpu-lu",
+        "case": "/tmp/sunyunbo/blood-native-capture-v1/small64/region-1",
+        "command": [
+          "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+          "run",
+          "--backend",
+          "cpu-lu",
+          "--case",
+          "/tmp/sunyunbo/blood-native-capture-v1/small64/region-1",
+          "--limit",
+          "8",
+          "--restart",
+          "32",
+          "--max-iter",
+          "200",
+          "--rtol",
+          "0.0001",
+          "--mg-cycles",
+          "2",
+          "--repeats",
+          "10",
+          "--out",
+          "/tmp/sunyunbo/blood-modular-cpu-final-c2/small64-region-1-cpu-lu-r1.json"
+        ],
+        "hardware_measurement": false,
+        "mode": "run",
+        "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+        "options": {
+          "max_iterations": 200,
+          "restart": 32,
+          "tolerance": 0.0001,
+          "v_cycles": 2
+        },
+        "rows": 5689,
+        "samples": [
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.420546500652024e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 2.309064333077001e-15,
+              "momentum_rms": 2.309064333077001e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 7.894217001967045e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.5212478,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "000"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 5.960276700828743e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 8.609572208743722e-16,
+              "momentum_rms": 8.609572208743722e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 1.8411708454094817e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.4757581999999999,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "001"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 6.759968857417823e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 9.003886271496524e-16,
+              "momentum_rms": 9.003886271496524e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 1.977858353213898e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.4792452000000001,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "003"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 6.476542124244845e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 9.774071342043093e-16,
+              "momentum_rms": 9.774071342043093e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 2.1062967069597846e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.4738801,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "007"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 6.263150625842976e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 9.686084658045623e-16,
+              "momentum_rms": 9.686084658045623e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 2.1137868622148366e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.4778449,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "015"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 5.732292407520096e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 7.517957095493243e-16,
+              "momentum_rms": 7.517957095493243e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 1.8133194739172103e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.4734767,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "031"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 4.2266780862474277e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 5.735385281437788e-16,
+              "momentum_rms": 5.735385281437788e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 1.311658445362063e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.4773433999999999,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "063"
+          }
+        ],
+        "schema_version": 2,
+        "setup_ms": 56.510314
+      }
+    },
+    {
+      "name": "small64-region-1-cpu-fgmres-mg-r1",
+      "command": [
+        "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+        "run",
+        "--backend",
+        "cpu-fgmres-mg",
+        "--case",
+        "/tmp/sunyunbo/blood-native-capture-v1/small64/region-1",
+        "--limit",
+        "8",
+        "--restart",
+        "32",
+        "--max-iter",
+        "200",
+        "--rtol",
+        "0.0001",
+        "--mg-cycles",
+        "2",
+        "--repeats",
+        "1",
+        "--out",
+        "/tmp/sunyunbo/blood-modular-cpu-final-c2/small64-region-1-cpu-fgmres-mg-r1.json"
+      ],
+      "exit_code": 0,
+      "result": {
+        "accepted": true,
+        "adapter": null,
+        "backend": "cpu-fgmres-mg",
+        "case": "/tmp/sunyunbo/blood-native-capture-v1/small64/region-1",
+        "command": [
+          "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+          "run",
+          "--backend",
+          "cpu-fgmres-mg",
+          "--case",
+          "/tmp/sunyunbo/blood-native-capture-v1/small64/region-1",
+          "--limit",
+          "8",
+          "--restart",
+          "32",
+          "--max-iter",
+          "200",
+          "--rtol",
+          "0.0001",
+          "--mg-cycles",
+          "2",
+          "--repeats",
+          "1",
+          "--out",
+          "/tmp/sunyunbo/blood-modular-cpu-final-c2/small64-region-1-cpu-fgmres-mg-r1.json"
+        ],
+        "hardware_measurement": false,
+        "mode": "run",
+        "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+        "options": {
+          "max_iterations": 200,
+          "restart": 32,
+          "tolerance": 0.0001,
+          "v_cycles": 2
+        },
+        "rows": 5689,
+        "samples": [
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 3.7736686727729153e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 7.539270985937638e-07,
+              "momentum_rms": 7.539270985937638e-07,
+              "pressure_reference_max_absolute": 7.786641937890248e-05,
+              "relative_residual": 7.639205019337098e-06,
+              "velocity_reference_relative_l2": 3.298621485501133e-05
+            },
+            "mean_solve_ms": 22.721352,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 16,
+              "multigrid_levels": [
+                3779,
+                1005,
+                282,
+                83,
+                29
+              ],
+              "status": "converged",
+              "stopping_relative": 4.804713905453866e-05
+            },
+            "sample": "000"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 5.142830398874835e-07,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 3.364688590439997e-08,
+              "momentum_rms": 3.364688590439997e-08,
+              "pressure_reference_max_absolute": 2.1313639591291622e-05,
+              "relative_residual": 7.044876491950277e-06,
+              "velocity_reference_relative_l2": 6.770432725615854e-06
+            },
+            "mean_solve_ms": 22.524193,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 16,
+              "multigrid_levels": [
+                3779,
+                1005,
+                282,
+                83,
+                29
+              ],
+              "status": "converged",
+              "stopping_relative": 6.670486690666352e-05
+            },
+            "sample": "001"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 5.058173977654589e-07,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 3.550804799997358e-08,
+              "momentum_rms": 3.550804799997358e-08,
+              "pressure_reference_max_absolute": 2.0173099077404333e-05,
+              "relative_residual": 7.002614297470276e-06,
+              "velocity_reference_relative_l2": 6.179351088000624e-06
+            },
+            "mean_solve_ms": 22.620952,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 16,
+              "multigrid_levels": [
+                3779,
+                1005,
+                282,
+                83,
+                29
+              ],
+              "status": "converged",
+              "stopping_relative": 6.609654703551743e-05
+            },
+            "sample": "003"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 5.01633540655234e-07,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 3.661922488582555e-08,
+              "momentum_rms": 3.661922488582555e-08,
+              "pressure_reference_max_absolute": 1.9737144036434395e-05,
+              "relative_residual": 6.989005874529364e-06,
+              "velocity_reference_relative_l2": 6.173914885223411e-06
+            },
+            "mean_solve_ms": 22.185426,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 16,
+              "multigrid_levels": [
+                3779,
+                1005,
+                282,
+                83,
+                29
+              ],
+              "status": "converged",
+              "stopping_relative": 6.575508297740496e-05
+            },
+            "sample": "007"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 4.957611732228504e-07,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 3.819373279661557e-08,
+              "momentum_rms": 3.819373279661557e-08,
+              "pressure_reference_max_absolute": 1.932971952647855e-05,
+              "relative_residual": 7.0294107617268936e-06,
+              "velocity_reference_relative_l2": 6.587101515847758e-06
+            },
+            "mean_solve_ms": 22.08883,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 16,
+              "multigrid_levels": [
+                3779,
+                1005,
+                282,
+                83,
+                29
+              ],
+              "status": "converged",
+              "stopping_relative": 6.573831326758025e-05
+            },
+            "sample": "015"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 4.7001831543170056e-07,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 4.197184346397112e-08,
+              "momentum_rms": 4.197184346397112e-08,
+              "pressure_reference_max_absolute": 1.768867593907736e-05,
+              "relative_residual": 7.141281575400849e-06,
+              "velocity_reference_relative_l2": 7.671038410495211e-06
+            },
+            "mean_solve_ms": 22.19127,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 16,
+              "multigrid_levels": [
+                3779,
+                1005,
+                282,
+                83,
+                29
+              ],
+              "status": "converged",
+              "stopping_relative": 6.574348362348602e-05
+            },
+            "sample": "031"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 4.203211845403033e-07,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 5.1713172325332137e-08,
+              "momentum_rms": 5.1713172325332137e-08,
+              "pressure_reference_max_absolute": 1.4630073914022323e-05,
+              "relative_residual": 6.1433746942265155e-06,
+              "velocity_reference_relative_l2": 8.336593914759083e-06
+            },
+            "mean_solve_ms": 22.232467,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 16,
+              "multigrid_levels": [
+                3779,
+                1005,
+                282,
+                83,
+                29
+              ],
+              "status": "converged",
+              "stopping_relative": 5.4885161718516596e-05
+            },
+            "sample": "063"
+          }
+        ],
+        "schema_version": 2,
+        "setup_ms": 66.157968
+      }
+    },
+    {
+      "name": "wide96-region-0-cpu-lu-r1",
+      "command": [
+        "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+        "run",
+        "--backend",
+        "cpu-lu",
+        "--case",
+        "/tmp/sunyunbo/blood-native-capture-v1/wide96/region-0",
+        "--limit",
+        "8",
+        "--restart",
+        "32",
+        "--max-iter",
+        "200",
+        "--rtol",
+        "0.0001",
+        "--mg-cycles",
+        "2",
+        "--repeats",
+        "10",
+        "--out",
+        "/tmp/sunyunbo/blood-modular-cpu-final-c2/wide96-region-0-cpu-lu-r1.json"
+      ],
+      "exit_code": 0,
+      "result": {
+        "accepted": true,
+        "adapter": null,
+        "backend": "cpu-lu",
+        "case": "/tmp/sunyunbo/blood-native-capture-v1/wide96/region-0",
+        "command": [
+          "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+          "run",
+          "--backend",
+          "cpu-lu",
+          "--case",
+          "/tmp/sunyunbo/blood-native-capture-v1/wide96/region-0",
+          "--limit",
+          "8",
+          "--restart",
+          "32",
+          "--max-iter",
+          "200",
+          "--rtol",
+          "0.0001",
+          "--mg-cycles",
+          "2",
+          "--repeats",
+          "10",
+          "--out",
+          "/tmp/sunyunbo/blood-modular-cpu-final-c2/wide96-region-0-cpu-lu-r1.json"
+        ],
+        "hardware_measurement": false,
+        "mode": "run",
+        "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+        "options": {
+          "max_iterations": 200,
+          "restart": 32,
+          "tolerance": 0.0001,
+          "v_cycles": 2
+        },
+        "rows": 8191,
+        "samples": [
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 3.0522987685097804e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 2.3651305176305894e-15,
+              "momentum_rms": 3.6206797908232816e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 2.7680283027482305e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.5562389000000001,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "000"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 3.004737845204209e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 3.755080354779107e-16,
+              "momentum_rms": 3.755080354779107e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 9.829600778200395e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.5044664999999999,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "001"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 5.20000494409268e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 6.167490856288602e-16,
+              "momentum_rms": 6.167490856288602e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 9.701769690399516e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.5044999,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "003"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 6.036451509372927e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 7.270625311149915e-16,
+              "momentum_rms": 7.270625311149915e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 1.0077571032556025e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.4989834,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "007"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 5.799932651420131e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 7.478632668711207e-16,
+              "momentum_rms": 7.478632668711207e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 9.712472879163143e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.4981647999999999,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "015"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 5.668184916723762e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 7.281999340530686e-16,
+              "momentum_rms": 7.281999340530686e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 9.382108656566357e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.49602789999999997,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "031"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 4.3864824588992864e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 5.639910243313972e-16,
+              "momentum_rms": 5.639910243313972e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 9.551740588105336e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.49979320000000005,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "063"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 6.738384436737511e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 8.317547241981991e-16,
+              "momentum_rms": 8.317547241981991e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 1.0272347673907762e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.4956284999999999,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "127"
+          }
+        ],
+        "schema_version": 2,
+        "setup_ms": 49.872199
+      }
+    },
+    {
+      "name": "wide96-region-0-cpu-fgmres-mg-r1",
+      "command": [
+        "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+        "run",
+        "--backend",
+        "cpu-fgmres-mg",
+        "--case",
+        "/tmp/sunyunbo/blood-native-capture-v1/wide96/region-0",
+        "--limit",
+        "8",
+        "--restart",
+        "32",
+        "--max-iter",
+        "200",
+        "--rtol",
+        "0.0001",
+        "--mg-cycles",
+        "2",
+        "--repeats",
+        "1",
+        "--out",
+        "/tmp/sunyunbo/blood-modular-cpu-final-c2/wide96-region-0-cpu-fgmres-mg-r1.json"
+      ],
+      "exit_code": 0,
+      "result": {
+        "accepted": true,
+        "adapter": null,
+        "backend": "cpu-fgmres-mg",
+        "case": "/tmp/sunyunbo/blood-native-capture-v1/wide96/region-0",
+        "command": [
+          "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+          "run",
+          "--backend",
+          "cpu-fgmres-mg",
+          "--case",
+          "/tmp/sunyunbo/blood-native-capture-v1/wide96/region-0",
+          "--limit",
+          "8",
+          "--restart",
+          "32",
+          "--max-iter",
+          "200",
+          "--rtol",
+          "0.0001",
+          "--mg-cycles",
+          "2",
+          "--repeats",
+          "1",
+          "--out",
+          "/tmp/sunyunbo/blood-modular-cpu-final-c2/wide96-region-0-cpu-fgmres-mg-r1.json"
+        ],
+        "hardware_measurement": false,
+        "mode": "run",
+        "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+        "options": {
+          "max_iterations": 200,
+          "restart": 32,
+          "tolerance": 0.0001,
+          "v_cycles": 2
+        },
+        "rows": 8191,
+        "samples": [
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 5.448143581626956e-05,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 3.665399212217019e-06,
+              "momentum_rms": 5.611206973164842e-06,
+              "pressure_reference_max_absolute": 0.0010642411346422076,
+              "relative_residual": 2.5929516472318304e-05,
+              "velocity_reference_relative_l2": 0.000804075669173774
+            },
+            "mean_solve_ms": 81.397973,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 34,
+              "multigrid_levels": [
+                5388,
+                1509,
+                466,
+                152,
+                61
+              ],
+              "status": "converged",
+              "stopping_relative": 7.879391350129939e-05
+            },
+            "sample": "000"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.3918580287572711e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 3.01367281315308e-08,
+              "momentum_rms": 3.01367281315308e-08,
+              "pressure_reference_max_absolute": 0.00020374906505236934,
+              "relative_residual": 2.277058169915526e-05,
+              "velocity_reference_relative_l2": 0.0002105453234194517
+            },
+            "mean_solve_ms": 94.20379399999999,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 40,
+              "multigrid_levels": [
+                5388,
+                1509,
+                466,
+                152,
+                61
+              ],
+              "status": "converged",
+              "stopping_relative": 9.85525014195508e-05
+            },
+            "sample": "001"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.0844153765705934e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 4.348915087226327e-08,
+              "momentum_rms": 4.348915087226327e-08,
+              "pressure_reference_max_absolute": 0.0003608275918838,
+              "relative_residual": 2.021505537401374e-05,
+              "velocity_reference_relative_l2": 0.0002210645313466888
+            },
+            "mean_solve_ms": 93.94218599999999,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 41,
+              "multigrid_levels": [
+                5388,
+                1509,
+                466,
+                152,
+                61
+              ],
+              "status": "converged",
+              "stopping_relative": 8.736969941418946e-05
+            },
+            "sample": "003"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.4489539207897124e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 3.826116279311837e-08,
+              "momentum_rms": 3.826116279311837e-08,
+              "pressure_reference_max_absolute": 0.00046659600417531255,
+              "relative_residual": 2.100960332380338e-05,
+              "velocity_reference_relative_l2": 0.00025231120755190266
+            },
+            "mean_solve_ms": 109.776053,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 42,
+              "multigrid_levels": [
+                5388,
+                1509,
+                466,
+                152,
+                61
+              ],
+              "status": "converged",
+              "stopping_relative": 8.975908028267038e-05
+            },
+            "sample": "007"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.804985154017996e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 2.6488164604876926e-08,
+              "momentum_rms": 2.6488164604876926e-08,
+              "pressure_reference_max_absolute": 0.0005734595688979896,
+              "relative_residual": 2.293286705955925e-05,
+              "velocity_reference_relative_l2": 0.0002929125305669923
+            },
+            "mean_solve_ms": 158.170105,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 43,
+              "multigrid_levels": [
+                5388,
+                1509,
+                466,
+                152,
+                61
+              ],
+              "status": "converged",
+              "stopping_relative": 9.806691708341816e-05
+            },
+            "sample": "015"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.7484884823532796e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 3.5798645356645265e-08,
+              "momentum_rms": 3.5798645356645265e-08,
+              "pressure_reference_max_absolute": 0.0006237309017327886,
+              "relative_residual": 2.2274956923243177e-05,
+              "velocity_reference_relative_l2": 0.0002914504460726131
+            },
+            "mean_solve_ms": 127.40063900000001,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 45,
+              "multigrid_levels": [
+                5388,
+                1509,
+                466,
+                152,
+                61
+              ],
+              "status": "converged",
+              "stopping_relative": 9.516562732723195e-05
+            },
+            "sample": "031"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.0387630141530234e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 2.90290482782349e-08,
+              "momentum_rms": 2.90290482782349e-08,
+              "pressure_reference_max_absolute": 0.00042536947420146465,
+              "relative_residual": 2.1724392394994336e-05,
+              "velocity_reference_relative_l2": 0.00026767472320735313
+            },
+            "mean_solve_ms": 169.86278399999998,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 46,
+              "multigrid_levels": [
+                5388,
+                1509,
+                466,
+                152,
+                61
+              ],
+              "status": "converged",
+              "stopping_relative": 9.228231494823436e-05
+            },
+            "sample": "063"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.425542060260728e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 7.577958177924761e-08,
+              "momentum_rms": 7.577958177924761e-08,
+              "pressure_reference_max_absolute": 0.00011601394342652949,
+              "relative_residual": 1.8672486026172427e-05,
+              "velocity_reference_relative_l2": 8.534594111044855e-05
+            },
+            "mean_solve_ms": 95.97654999999999,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 39,
+              "multigrid_levels": [
+                5388,
+                1509,
+                466,
+                152,
+                61
+              ],
+              "status": "converged",
+              "stopping_relative": 8.154630370914291e-05
+            },
+            "sample": "127"
+          }
+        ],
+        "schema_version": 2,
+        "setup_ms": 72.65575100000001
+      }
+    },
+    {
+      "name": "wide96-region-1-cpu-lu-r1",
+      "command": [
+        "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+        "run",
+        "--backend",
+        "cpu-lu",
+        "--case",
+        "/tmp/sunyunbo/blood-native-capture-v1/wide96/region-1",
+        "--limit",
+        "8",
+        "--restart",
+        "32",
+        "--max-iter",
+        "200",
+        "--rtol",
+        "0.0001",
+        "--mg-cycles",
+        "2",
+        "--repeats",
+        "10",
+        "--out",
+        "/tmp/sunyunbo/blood-modular-cpu-final-c2/wide96-region-1-cpu-lu-r1.json"
+      ],
+      "exit_code": 0,
+      "result": {
+        "accepted": true,
+        "adapter": null,
+        "backend": "cpu-lu",
+        "case": "/tmp/sunyunbo/blood-native-capture-v1/wide96/region-1",
+        "command": [
+          "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+          "run",
+          "--backend",
+          "cpu-lu",
+          "--case",
+          "/tmp/sunyunbo/blood-native-capture-v1/wide96/region-1",
+          "--limit",
+          "8",
+          "--restart",
+          "32",
+          "--max-iter",
+          "200",
+          "--rtol",
+          "0.0001",
+          "--mg-cycles",
+          "2",
+          "--repeats",
+          "10",
+          "--out",
+          "/tmp/sunyunbo/blood-modular-cpu-final-c2/wide96-region-1-cpu-lu-r1.json"
+        ],
+        "hardware_measurement": false,
+        "mode": "run",
+        "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+        "options": {
+          "max_iterations": 200,
+          "restart": 32,
+          "tolerance": 0.0001,
+          "v_cycles": 2
+        },
+        "rows": 7309,
+        "samples": [
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 3.347284956866994e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 3.0533448281205704e-15,
+              "momentum_rms": 3.0533448281205704e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 3.9017812809110995e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.5143177,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "000"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 3.277003880781671e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 4.2908078705951878e-16,
+              "momentum_rms": 4.2908078705951878e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 7.844746336478762e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.4654564,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "001"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 4.641417219892885e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 6.425259044031216e-16,
+              "momentum_rms": 6.425259044031216e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 8.683742216545492e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.4611561,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "003"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 5.281696789218563e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 6.914501056526795e-16,
+              "momentum_rms": 6.914501056526795e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 8.272332956528108e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.46253500000000003,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "007"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 6.215217815183672e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 7.442977791012243e-16,
+              "momentum_rms": 7.442977791012243e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 9.063120094004212e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.4618097,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "015"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 5.277746492739097e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 6.267112574398934e-16,
+              "momentum_rms": 6.267112574398934e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 8.434237756502535e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.4577522,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "031"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 3.3376966810163316e-16,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 4.3740230079638417e-16,
+              "momentum_rms": 4.3740230079638417e-16,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 7.447374257888243e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 0.45915919999999993,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "063"
+          }
+        ],
+        "schema_version": 2,
+        "setup_ms": 45.121463
+      }
+    },
+    {
+      "name": "wide96-region-1-cpu-fgmres-mg-r1",
+      "command": [
+        "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+        "run",
+        "--backend",
+        "cpu-fgmres-mg",
+        "--case",
+        "/tmp/sunyunbo/blood-native-capture-v1/wide96/region-1",
+        "--limit",
+        "8",
+        "--restart",
+        "32",
+        "--max-iter",
+        "200",
+        "--rtol",
+        "0.0001",
+        "--mg-cycles",
+        "2",
+        "--repeats",
+        "1",
+        "--out",
+        "/tmp/sunyunbo/blood-modular-cpu-final-c2/wide96-region-1-cpu-fgmres-mg-r1.json"
+      ],
+      "exit_code": 0,
+      "result": {
+        "accepted": true,
+        "adapter": null,
+        "backend": "cpu-fgmres-mg",
+        "case": "/tmp/sunyunbo/blood-native-capture-v1/wide96/region-1",
+        "command": [
+          "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+          "run",
+          "--backend",
+          "cpu-fgmres-mg",
+          "--case",
+          "/tmp/sunyunbo/blood-native-capture-v1/wide96/region-1",
+          "--limit",
+          "8",
+          "--restart",
+          "32",
+          "--max-iter",
+          "200",
+          "--rtol",
+          "0.0001",
+          "--mg-cycles",
+          "2",
+          "--repeats",
+          "1",
+          "--out",
+          "/tmp/sunyunbo/blood-modular-cpu-final-c2/wide96-region-1-cpu-fgmres-mg-r1.json"
+        ],
+        "hardware_measurement": false,
+        "mode": "run",
+        "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+        "options": {
+          "max_iterations": 200,
+          "restart": 32,
+          "tolerance": 0.0001,
+          "v_cycles": 2
+        },
+        "rows": 7309,
+        "samples": [
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 3.1474862450835395e-05,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 1.4477120314220264e-06,
+              "momentum_rms": 1.4477120314220264e-06,
+              "pressure_reference_max_absolute": 0.000806662455914875,
+              "relative_residual": 2.2771666890373154e-05,
+              "velocity_reference_relative_l2": 0.00031044105913652733
+            },
+            "mean_solve_ms": 67.298636,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 32,
+              "multigrid_levels": [
+                4815,
+                1316,
+                399,
+                123,
+                43
+              ],
+              "status": "converged",
+              "stopping_relative": 7.170313242027715e-05
+            },
+            "sample": "000"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.5965051038733446e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 5.812863363359147e-08,
+              "momentum_rms": 5.812863363359147e-08,
+              "pressure_reference_max_absolute": 0.00013775314532712968,
+              "relative_residual": 1.8432752477760832e-05,
+              "velocity_reference_relative_l2": 0.00011751375046760253
+            },
+            "mean_solve_ms": 71.759345,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 35,
+              "multigrid_levels": [
+                4815,
+                1316,
+                399,
+                123,
+                43
+              ],
+              "status": "converged",
+              "stopping_relative": 8.258468520493693e-05
+            },
+            "sample": "001"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.017969631368081e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 8.085866241512095e-08,
+              "momentum_rms": 8.085866241512095e-08,
+              "pressure_reference_max_absolute": 6.19617861348093e-05,
+              "relative_residual": 1.7442255931375007e-05,
+              "velocity_reference_relative_l2": 5.984095881337971e-05
+            },
+            "mean_solve_ms": 66.968833,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 32,
+              "multigrid_levels": [
+                4815,
+                1316,
+                399,
+                123,
+                43
+              ],
+              "status": "converged",
+              "stopping_relative": 7.592838016765316e-05
+            },
+            "sample": "003"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.5074889470496914e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 7.997467207001727e-08,
+              "momentum_rms": 7.997467207001727e-08,
+              "pressure_reference_max_absolute": 4.263619355959758e-05,
+              "relative_residual": 1.1405272350306673e-05,
+              "velocity_reference_relative_l2": 2.7533867938225372e-05
+            },
+            "mean_solve_ms": 67.040271,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 32,
+              "multigrid_levels": [
+                4815,
+                1316,
+                399,
+                123,
+                43
+              ],
+              "status": "converged",
+              "stopping_relative": 5.134820098654276e-05
+            },
+            "sample": "007"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.4447506650622385e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 8.225065209208261e-08,
+              "momentum_rms": 8.225065209208261e-08,
+              "pressure_reference_max_absolute": 3.4911889292978115e-05,
+              "relative_residual": 1.0886074975292482e-05,
+              "velocity_reference_relative_l2": 3.0437540117749134e-05
+            },
+            "mean_solve_ms": 67.76729200000001,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 32,
+              "multigrid_levels": [
+                4815,
+                1316,
+                399,
+                123,
+                43
+              ],
+              "status": "converged",
+              "stopping_relative": 4.8210371783072516e-05
+            },
+            "sample": "015"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.3035285616994826e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 1.6276628641460169e-07,
+              "momentum_rms": 1.6276628641460169e-07,
+              "pressure_reference_max_absolute": 5.020753612314244e-05,
+              "relative_residual": 1.917201127007915e-05,
+              "velocity_reference_relative_l2": 5.1333447155614224e-05
+            },
+            "mean_solve_ms": 66.91850600000001,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 32,
+              "multigrid_levels": [
+                4815,
+                1316,
+                399,
+                123,
+                43
+              ],
+              "status": "converged",
+              "stopping_relative": 8.442939470639925e-05
+            },
+            "sample": "031"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.081415725117329e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 1.5971895503510258e-07,
+              "momentum_rms": 1.5971895503510258e-07,
+              "pressure_reference_max_absolute": 5.078391363180779e-05,
+              "relative_residual": 2.2482617557247557e-05,
+              "velocity_reference_relative_l2": 5.7965700526681685e-05
+            },
+            "mean_solve_ms": 67.333477,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 32,
+              "multigrid_levels": [
+                4815,
+                1316,
+                399,
+                123,
+                43
+              ],
+              "status": "converged",
+              "stopping_relative": 9.816489255930597e-05
+            },
+            "sample": "063"
+          }
+        ],
+        "schema_version": 2,
+        "setup_ms": 67.85749200000001
+      }
+    },
+    {
+      "name": "wide192-region-0-cpu-lu-r1",
+      "command": [
+        "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+        "run",
+        "--backend",
+        "cpu-lu",
+        "--case",
+        "/tmp/sunyunbo/blood-native-capture-v1/wide192/region-0",
+        "--limit",
+        "8",
+        "--restart",
+        "32",
+        "--max-iter",
+        "200",
+        "--rtol",
+        "0.0001",
+        "--mg-cycles",
+        "2",
+        "--repeats",
+        "10",
+        "--out",
+        "/tmp/sunyunbo/blood-modular-cpu-final-c2/wide192-region-0-cpu-lu-r1.json"
+      ],
+      "exit_code": 0,
+      "result": {
+        "accepted": true,
+        "adapter": null,
+        "backend": "cpu-lu",
+        "case": "/tmp/sunyunbo/blood-native-capture-v1/wide192/region-0",
+        "command": [
+          "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+          "run",
+          "--backend",
+          "cpu-lu",
+          "--case",
+          "/tmp/sunyunbo/blood-native-capture-v1/wide192/region-0",
+          "--limit",
+          "8",
+          "--restart",
+          "32",
+          "--max-iter",
+          "200",
+          "--rtol",
+          "0.0001",
+          "--mg-cycles",
+          "2",
+          "--repeats",
+          "10",
+          "--out",
+          "/tmp/sunyunbo/blood-modular-cpu-final-c2/wide192-region-0-cpu-lu-r1.json"
+        ],
+        "hardware_measurement": false,
+        "mode": "run",
+        "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+        "options": {
+          "max_iterations": 200,
+          "restart": 32,
+          "tolerance": 0.0001,
+          "v_cycles": 2
+        },
+        "rows": 33192,
+        "samples": [
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.0284510434364977e-14,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 5.173372395771961e-15,
+              "momentum_rms": 1.1127007108655831e-14,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 6.198687312943894e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 4.3716669,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "000"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.1559358403399775e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 1.879765428147601e-15,
+              "momentum_rms": 1.879765428147601e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 3.212142567010299e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 4.301417599999999,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "001"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.8569835508470727e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 3.189801733645056e-15,
+              "momentum_rms": 3.189801733645056e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 3.2184459681067607e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 4.215559600000001,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "003"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.172642624441014e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 3.4963017265309003e-15,
+              "momentum_rms": 3.4963017265309003e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 3.1577764748007176e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 4.1045522,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "007"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.347612621905163e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 3.743746708329499e-15,
+              "momentum_rms": 3.743746708329499e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 3.230297291356648e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 5.5797428,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "015"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.437582962363218e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 3.729267611096408e-15,
+              "momentum_rms": 3.729267611096408e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 3.212161349004391e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 6.501209399999999,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "031"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.7013803990628456e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 2.8167464597595596e-15,
+              "momentum_rms": 2.8167464597595596e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 3.152961727833322e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 6.5398235,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "063"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.6826668433565346e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 4.004199983283563e-15,
+              "momentum_rms": 4.004199983283563e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 3.354072564635567e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 6.4228949,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "127"
+          }
+        ],
+        "schema_version": 2,
+        "setup_ms": 436.181839
+      }
+    },
+    {
+      "name": "wide192-region-0-cpu-fgmres-mg-r1",
+      "command": [
+        "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+        "run",
+        "--backend",
+        "cpu-fgmres-mg",
+        "--case",
+        "/tmp/sunyunbo/blood-native-capture-v1/wide192/region-0",
+        "--limit",
+        "8",
+        "--restart",
+        "32",
+        "--max-iter",
+        "200",
+        "--rtol",
+        "0.0001",
+        "--mg-cycles",
+        "2",
+        "--repeats",
+        "1",
+        "--out",
+        "/tmp/sunyunbo/blood-modular-cpu-final-c2/wide192-region-0-cpu-fgmres-mg-r1.json"
+      ],
+      "exit_code": 0,
+      "result": {
+        "accepted": true,
+        "adapter": null,
+        "backend": "cpu-fgmres-mg",
+        "case": "/tmp/sunyunbo/blood-native-capture-v1/wide192/region-0",
+        "command": [
+          "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+          "run",
+          "--backend",
+          "cpu-fgmres-mg",
+          "--case",
+          "/tmp/sunyunbo/blood-native-capture-v1/wide192/region-0",
+          "--limit",
+          "8",
+          "--restart",
+          "32",
+          "--max-iter",
+          "200",
+          "--rtol",
+          "0.0001",
+          "--mg-cycles",
+          "2",
+          "--repeats",
+          "1",
+          "--out",
+          "/tmp/sunyunbo/blood-modular-cpu-final-c2/wide192-region-0-cpu-fgmres-mg-r1.json"
+        ],
+        "hardware_measurement": false,
+        "mode": "run",
+        "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+        "options": {
+          "max_iterations": 200,
+          "restart": 32,
+          "tolerance": 0.0001,
+          "v_cycles": 2
+        },
+        "rows": 33192,
+        "samples": [
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 3.332104381078084e-05,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 1.72067744761897e-06,
+              "momentum_rms": 3.7008722215720415e-06,
+              "pressure_reference_max_absolute": 0.0014231405001172703,
+              "relative_residual": 1.1196271076550845e-05,
+              "velocity_reference_relative_l2": 0.0007790017305794572
+            },
+            "mean_solve_ms": 442.372544,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 35,
+              "multigrid_levels": [
+                21982,
+                5804,
+                1624,
+                485,
+                159,
+                64
+              ],
+              "status": "converged",
+              "stopping_relative": 6.697923033588475e-05
+            },
+            "sample": "000"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.0402739031020921e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 1.606932708629822e-08,
+              "momentum_rms": 1.606932708629822e-08,
+              "pressure_reference_max_absolute": 0.00019348314874528816,
+              "relative_residual": 1.1625681794566743e-05,
+              "velocity_reference_relative_l2": 0.00018892218886046915
+            },
+            "mean_solve_ms": 449.44697,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 43,
+              "multigrid_levels": [
+                21982,
+                5804,
+                1624,
+                485,
+                159,
+                64
+              ],
+              "status": "converged",
+              "stopping_relative": 9.648481001322333e-05
+            },
+            "sample": "001"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.7730502059324945e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 6.153869949513603e-08,
+              "momentum_rms": 6.153869949513603e-08,
+              "pressure_reference_max_absolute": 0.00034891992849789277,
+              "relative_residual": 1.1810464722964418e-05,
+              "velocity_reference_relative_l2": 0.0002002638624564449
+            },
+            "mean_solve_ms": 552.995702,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 44,
+              "multigrid_levels": [
+                21982,
+                5804,
+                1624,
+                485,
+                159,
+                64
+              ],
+              "status": "converged",
+              "stopping_relative": 9.818544492609659e-05
+            },
+            "sample": "003"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.881588131809224e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 4.3539612679005433e-08,
+              "momentum_rms": 4.3539612679005433e-08,
+              "pressure_reference_max_absolute": 0.0004166507159497901,
+              "relative_residual": 1.1098415073814796e-05,
+              "velocity_reference_relative_l2": 0.00020113977062413484
+            },
+            "mean_solve_ms": 447.74182099999996,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 46,
+              "multigrid_levels": [
+                21982,
+                5804,
+                1624,
+                485,
+                159,
+                64
+              ],
+              "status": "converged",
+              "stopping_relative": 9.17549000458557e-05
+            },
+            "sample": "007"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.1265050244081296e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 5.489104789114871e-08,
+              "momentum_rms": 5.489104789114871e-08,
+              "pressure_reference_max_absolute": 0.00046160152870394766,
+              "relative_residual": 1.1966544479818601e-05,
+              "velocity_reference_relative_l2": 0.00020996933287059966
+            },
+            "mean_solve_ms": 455.823714,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 48,
+              "multigrid_levels": [
+                21982,
+                5804,
+                1624,
+                485,
+                159,
+                64
+              ],
+              "status": "converged",
+              "stopping_relative": 9.850168371328748e-05
+            },
+            "sample": "015"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.104626541166352e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 6.448483373733558e-08,
+              "momentum_rms": 6.448483373733558e-08,
+              "pressure_reference_max_absolute": 0.00041638676705541,
+              "relative_residual": 1.174129026206702e-05,
+              "velocity_reference_relative_l2": 0.00018087239791533813
+            },
+            "mean_solve_ms": 497.235798,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 49,
+              "multigrid_levels": [
+                21982,
+                5804,
+                1624,
+                485,
+                159,
+                64
+              ],
+              "status": "converged",
+              "stopping_relative": 9.683847824464565e-05
+            },
+            "sample": "031"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.4766275691202729e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 5.500725107514737e-08,
+              "momentum_rms": 5.500725107514737e-08,
+              "pressure_reference_max_absolute": 0.0002543002436120323,
+              "relative_residual": 1.0852966361835265e-05,
+              "velocity_reference_relative_l2": 0.00014333673063518716
+            },
+            "mean_solve_ms": 541.8105869999999,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 49,
+              "multigrid_levels": [
+                21982,
+                5804,
+                1624,
+                485,
+                159,
+                64
+              ],
+              "status": "converged",
+              "stopping_relative": 8.950186488329285e-05
+            },
+            "sample": "063"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.6284057002974819e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 1.1271894073393811e-07,
+              "momentum_rms": 1.1271894073393811e-07,
+              "pressure_reference_max_absolute": 9.249120075011108e-05,
+              "relative_residual": 8.827982747874107e-06,
+              "velocity_reference_relative_l2": 6.0493984639175084e-05
+            },
+            "mean_solve_ms": 373.53427500000004,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 39,
+              "multigrid_levels": [
+                21982,
+                5804,
+                1624,
+                485,
+                159,
+                64
+              ],
+              "status": "converged",
+              "stopping_relative": 7.39340483540874e-05
+            },
+            "sample": "127"
+          }
+        ],
+        "schema_version": 2,
+        "setup_ms": 661.325182
+      }
+    },
+    {
+      "name": "wide192-region-1-cpu-lu-r1",
+      "command": [
+        "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+        "run",
+        "--backend",
+        "cpu-lu",
+        "--case",
+        "/tmp/sunyunbo/blood-native-capture-v1/wide192/region-1",
+        "--limit",
+        "8",
+        "--restart",
+        "32",
+        "--max-iter",
+        "200",
+        "--rtol",
+        "0.0001",
+        "--mg-cycles",
+        "2",
+        "--repeats",
+        "10",
+        "--out",
+        "/tmp/sunyunbo/blood-modular-cpu-final-c2/wide192-region-1-cpu-lu-r1.json"
+      ],
+      "exit_code": 0,
+      "result": {
+        "accepted": true,
+        "adapter": null,
+        "backend": "cpu-lu",
+        "case": "/tmp/sunyunbo/blood-native-capture-v1/wide192/region-1",
+        "command": [
+          "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+          "run",
+          "--backend",
+          "cpu-lu",
+          "--case",
+          "/tmp/sunyunbo/blood-native-capture-v1/wide192/region-1",
+          "--limit",
+          "8",
+          "--restart",
+          "32",
+          "--max-iter",
+          "200",
+          "--rtol",
+          "0.0001",
+          "--mg-cycles",
+          "2",
+          "--repeats",
+          "10",
+          "--out",
+          "/tmp/sunyunbo/blood-modular-cpu-final-c2/wide192-region-1-cpu-lu-r1.json"
+        ],
+        "hardware_measurement": false,
+        "mode": "run",
+        "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+        "options": {
+          "max_iterations": 200,
+          "restart": 32,
+          "tolerance": 0.0001,
+          "v_cycles": 2
+        },
+        "rows": 29565,
+        "samples": [
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 9.812018615532208e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 6.093398403176092e-15,
+              "momentum_rms": 8.365922230611606e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 7.945587227371673e-15,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 3.9034155999999998,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "000"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.6029246834673848e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 1.9108298874164004e-15,
+              "momentum_rms": 1.9108298874164004e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 2.5115070063881232e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 4.000024300000001,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "001"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.678411202173129e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 2.5543939693007306e-15,
+              "momentum_rms": 2.5543939693007306e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 2.677154844450883e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 3.902224499999999,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "003"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 3.0970719135929093e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 2.8801487589493583e-15,
+              "momentum_rms": 2.8801487589493583e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 2.6747255179355524e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 3.7579249000000003,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "007"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.8767631428743327e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 2.6718672150729967e-15,
+              "momentum_rms": 2.6718672150729967e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 2.4993926424623188e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 3.3920879,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "015"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.1600369738625825e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 2.1308895036273665e-15,
+              "momentum_rms": 2.1308895036273665e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 2.2234242849811833e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 3.5725569,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "031"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.4334615070732272e-15,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 1.5755829194247653e-15,
+              "momentum_rms": 1.5755829194247653e-15,
+              "pressure_reference_max_absolute": 0.0,
+              "relative_residual": 2.0226630492425493e-14,
+              "velocity_reference_relative_l2": 0.0
+            },
+            "mean_solve_ms": 3.5630721000000003,
+            "report": {
+              "backend": "cpu-lu",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 0,
+              "multigrid_levels": [],
+              "status": "converged",
+              "stopping_relative": null
+            },
+            "sample": "063"
+          }
+        ],
+        "schema_version": 2,
+        "setup_ms": 123.828288
+      }
+    },
+    {
+      "name": "wide192-region-1-cpu-fgmres-mg-r1",
+      "command": [
+        "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+        "run",
+        "--backend",
+        "cpu-fgmres-mg",
+        "--case",
+        "/tmp/sunyunbo/blood-native-capture-v1/wide192/region-1",
+        "--limit",
+        "8",
+        "--restart",
+        "32",
+        "--max-iter",
+        "200",
+        "--rtol",
+        "0.0001",
+        "--mg-cycles",
+        "2",
+        "--repeats",
+        "1",
+        "--out",
+        "/tmp/sunyunbo/blood-modular-cpu-final-c2/wide192-region-1-cpu-fgmres-mg-r1.json"
+      ],
+      "exit_code": 0,
+      "result": {
+        "accepted": true,
+        "adapter": null,
+        "backend": "cpu-fgmres-mg",
+        "case": "/tmp/sunyunbo/blood-native-capture-v1/wide192/region-1",
+        "command": [
+          "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+          "run",
+          "--backend",
+          "cpu-fgmres-mg",
+          "--case",
+          "/tmp/sunyunbo/blood-native-capture-v1/wide192/region-1",
+          "--limit",
+          "8",
+          "--restart",
+          "32",
+          "--max-iter",
+          "200",
+          "--rtol",
+          "0.0001",
+          "--mg-cycles",
+          "2",
+          "--repeats",
+          "1",
+          "--out",
+          "/tmp/sunyunbo/blood-modular-cpu-final-c2/wide192-region-1-cpu-fgmres-mg-r1.json"
+        ],
+        "hardware_measurement": false,
+        "mode": "run",
+        "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+        "options": {
+          "max_iterations": 200,
+          "restart": 32,
+          "tolerance": 0.0001,
+          "v_cycles": 2
+        },
+        "rows": 29565,
+        "samples": [
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.671601647861684e-05,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 2.4425501761516335e-06,
+              "momentum_rms": 3.3534956137777294e-06,
+              "pressure_reference_max_absolute": 0.0014148029830636233,
+              "relative_residual": 1.409750687079531e-05,
+              "velocity_reference_relative_l2": 0.00038901463550835354
+            },
+            "mean_solve_ms": 336.353852,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 34,
+              "multigrid_levels": [
+                19591,
+                5101,
+                1371,
+                407,
+                125,
+                44
+              ],
+              "status": "converged",
+              "stopping_relative": 8.150087741922174e-05
+            },
+            "sample": "000"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.3521717607832378e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 1.1034624268331328e-07,
+              "momentum_rms": 1.1034624268331328e-07,
+              "pressure_reference_max_absolute": 0.00015855501548836526,
+              "relative_residual": 1.0951703318928747e-05,
+              "velocity_reference_relative_l2": 0.00015578204042841401
+            },
+            "mean_solve_ms": 357.316303,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 42,
+              "multigrid_levels": [
+                19591,
+                5101,
+                1371,
+                407,
+                125,
+                44
+              ],
+              "status": "converged",
+              "stopping_relative": 9.100628253748858e-05
+            },
+            "sample": "001"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.8088861043846503e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 6.132977867950129e-08,
+              "momentum_rms": 6.132977867950129e-08,
+              "pressure_reference_max_absolute": 0.0002113561145759002,
+              "relative_residual": 1.0843411256279814e-05,
+              "velocity_reference_relative_l2": 0.0001495890716316701
+            },
+            "mean_solve_ms": 322.572144,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 38,
+              "multigrid_levels": [
+                19591,
+                5101,
+                1371,
+                407,
+                125,
+                44
+              ],
+              "status": "converged",
+              "stopping_relative": 8.885664789292317e-05
+            },
+            "sample": "003"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 2.1511197317916367e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 8.329809650598226e-08,
+              "momentum_rms": 8.329809650598226e-08,
+              "pressure_reference_max_absolute": 0.000282752637426692,
+              "relative_residual": 1.1325425321982875e-05,
+              "velocity_reference_relative_l2": 0.00017044560098238013
+            },
+            "mean_solve_ms": 300.091884,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 35,
+              "multigrid_levels": [
+                19591,
+                5101,
+                1371,
+                407,
+                125,
+                44
+              ],
+              "status": "converged",
+              "stopping_relative": 9.360546475260505e-05
+            },
+            "sample": "007"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.951116501443467e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 8.129940099231997e-08,
+              "momentum_rms": 8.129940099231997e-08,
+              "pressure_reference_max_absolute": 0.00023490045366500456,
+              "relative_residual": 1.0344847327048455e-05,
+              "velocity_reference_relative_l2": 0.00014633902649820705
+            },
+            "mean_solve_ms": 299.766814,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 35,
+              "multigrid_levels": [
+                19591,
+                5101,
+                1371,
+                407,
+                125,
+                44
+              ],
+              "status": "converged",
+              "stopping_relative": 8.567270031078042e-05
+            },
+            "sample": "015"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.945472820759889e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 7.714786091562335e-08,
+              "momentum_rms": 7.714786091562335e-08,
+              "pressure_reference_max_absolute": 0.00027660137522800277,
+              "relative_residual": 1.1754212375965153e-05,
+              "velocity_reference_relative_l2": 0.00020031445159578547
+            },
+            "mean_solve_ms": 402.04950499999995,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 36,
+              "multigrid_levels": [
+                19591,
+                5101,
+                1371,
+                407,
+                125,
+                44
+              ],
+              "status": "converged",
+              "stopping_relative": 9.747454340103899e-05
+            },
+            "sample": "031"
+          },
+          {
+            "accepted": true,
+            "audit": {
+              "constraint_rms": 1.5558464608849298e-06,
+              "finite": true,
+              "linear_residual_accepted": true,
+              "momentum_relative_rms": 2.502306972220746e-07,
+              "momentum_rms": 2.502306972220746e-07,
+              "pressure_reference_max_absolute": 5.779463347327374e-05,
+              "relative_residual": 1.2253434653545347e-05,
+              "velocity_reference_relative_l2": 6.944020518944943e-05
+            },
+            "mean_solve_ms": 292.362615,
+            "report": {
+              "backend": "cpu-fgmres-mg",
+              "counters": {
+                "dispatches": 0,
+                "readback_bytes": 0,
+                "readback_wait_ms": 0.0,
+                "readbacks": 0,
+                "submissions": 0
+              },
+              "iterations": 34,
+              "multigrid_levels": [
+                19591,
+                5101,
+                1371,
+                407,
+                125,
+                44
+              ],
+              "status": "converged",
+              "stopping_relative": 9.924674062044907e-05
+            },
+            "sample": "063"
+          }
+        ],
+        "schema_version": 2,
+        "setup_ms": 455.019094
+      }
+    }
+  ],
+  "hardware_measurement": false,
+  "dataset_sha256": {
+    "small64/region-0/columns.u32": "8fa12e6bba175a18aec428e3663a5bb806ee25db27271adaee5dacd55934b8e0",
+    "small64/region-0/domain.json": "40ec35707b55b197f580a228ef3af2f3b588b771bc6e5ee16a3495f97b06af4d",
+    "small64/region-0/matrix.json": "9127f8655f78b57b9a47943fef97d0e4aad121186f17cbc11d227401d8c61365",
+    "small64/region-0/matrix.mtx": "5cee3a3567013c0dedf3dd80972ed24b090bc7602abbdc2a99293ef0443383ec",
+    "small64/region-0/rhs-000.f64": "074de4ba3b689ba32afd8b3e24950e424d9952a990308f71cb955b9f9005d2c0",
+    "small64/region-0/rhs-001.f64": "609a4993c8f112a7939c614d4f71e1541289c4fa79858879328d8e99b4f51d63",
+    "small64/region-0/rhs-003.f64": "412894c265abcfe6ba6eeb9d54aeea40b29abefbb95ed7b1772911677c351e14",
+    "small64/region-0/rhs-007.f64": "ccaff99d4dc8d307867c810e040d153aee5c5585914bd67ad853cf26d5a49be1",
+    "small64/region-0/rhs-015.f64": "991ac5983126ae452e90cd13cf8bca1c879d648d6527dd9d63fba787e1998c46",
+    "small64/region-0/rhs-031.f64": "e4f6b381cbb882a54f878aa5c999ffbf936ca14cad00a8e897caf5f3d1682f45",
+    "small64/region-0/rhs-063.f64": "a03b8ddeaf5bef86ed7832f09779affbac69e22b14b513d8bb89eda2917dbdda",
+    "small64/region-0/rhs-127.f64": "c2fc550eed5ff2955b372f148c71f0b535bd016ae57bd928800c9e75a8d257f2",
+    "small64/region-0/row_ptr.u32": "685f2b8eea8d0662deb952cb986e8991195d3aaf3de3eb3e612a3c984b127dca",
+    "small64/region-0/samples.csv": "20528a454c5aed12fe7ca39eae6b7d74f7e7add34508e626e5053044efed4ae4",
+    "small64/region-0/solution-000.f64": "e7d425ff50ce07ea238699d9e14df7a71ae96e3aa84fbfd9c717c1395eefb844",
+    "small64/region-0/solution-001.f64": "c3509baef9c891b4225f981bd1c6fceb229babf761401b58643fe235586837f1",
+    "small64/region-0/solution-003.f64": "85a74727da1f295329b46a1b1189c7767ec726cdaae7f761bcbcce8191fa78a6",
+    "small64/region-0/solution-007.f64": "24e06d2debc154ad5e62f52663f55c30d23c15ef2b74c5cce067e93dfbecb8fb",
+    "small64/region-0/solution-015.f64": "d4b618aa4b6f9f865bb98303fd1a31ee5f006e9011b74b076c65313998cbe78d",
+    "small64/region-0/solution-031.f64": "44cf6e3865c2de34b1ef181ca6a8f11eb98486f6abd95d293477facdd6348df8",
+    "small64/region-0/solution-063.f64": "fcc3cbfb2ab509fa178c78deeb1ddfeb9572ad6eb2497dbe514a7ddf5351d2e2",
+    "small64/region-0/solution-127.f64": "974c7b5ebd0dba2e611939c02807cda0f768a7147f79f21e803d57f04796ec46",
+    "small64/region-0/values.f64": "77a9e1b59817984483480b9f4a00b6ef222298258d702a499160a9e789f1e7a9",
+    "small64/region-1/columns.u32": "31fc4fbde6392c3b26c8612ca75eb1a9af914d05f8c00bb4e7c0792b26b9728d",
+    "small64/region-1/domain.json": "d017006c924f5774b1226ce2419747767915493b7f44f2f16c383ae8e63365c5",
+    "small64/region-1/matrix.json": "1eff0779941488d3c625cf7cb13c86d2f2d864a067d0f2eaa3753848ef3d236b",
+    "small64/region-1/matrix.mtx": "8e5fbb9fb0e681dee11a0730c2956ec9f6d3bd0fba559d50394a46bfdf587606",
+    "small64/region-1/rhs-000.f64": "d4151b65a0d4f9be67bf467e52ef0b722cf94b73d8386f48eb6e88fadb34a5a5",
+    "small64/region-1/rhs-001.f64": "c4f9afbb7871f812081a2769043e96541f8f79398cd604f65889be7f51863725",
+    "small64/region-1/rhs-003.f64": "b260438435bb9bb658d8022e1f2f7e7a96843dee20806afadf4e2d4cd25834b1",
+    "small64/region-1/rhs-007.f64": "5d7672eb64e52d4c19a24ce8b7d9d144235a359a9f2d50f65f7b95eac827eeb0",
+    "small64/region-1/rhs-015.f64": "fb156042d5ac1dd84f8d510486fdd09481aeb3faff4ea437c45e42c21df8e5ac",
+    "small64/region-1/rhs-031.f64": "c44c932fb64d668ecdee4e68d5d9c647af818e437875026f05b85fb4017ecd28",
+    "small64/region-1/rhs-063.f64": "8a8c6a6857199ff39f191fa9d4bbccd744b5a91bdd63452001062049d449d08f",
+    "small64/region-1/row_ptr.u32": "fdd1f94d56be31925de39fb8e1b1ecb2fe13fed2bf583ac708220ce72b5b5f2c",
+    "small64/region-1/samples.csv": "101e77cca20643cbdd1ddfcd57a6bd08198d5b12ba57d8b813ce078d9a285097",
+    "small64/region-1/solution-000.f64": "19643478f58bcbf0dfbde770411143a9c4dc0bee5306096c9944018e40c500ca",
+    "small64/region-1/solution-001.f64": "76195fe0db82c4ead377e22cccb5280c0d90cd587237bf66947308316dbf417a",
+    "small64/region-1/solution-003.f64": "873c37dfcbed1063cb239f6a1842144d3649d0c09d84f259b72d6db824d96faf",
+    "small64/region-1/solution-007.f64": "ffa9b5155b830749d1114971bc31b19d2e16522c2506cfefd8be2e52fea166d3",
+    "small64/region-1/solution-015.f64": "30e52a195bbe278591585621e818c46ff01ecb44a9fbb65602e00d529b9fe115",
+    "small64/region-1/solution-031.f64": "86721859d0d85eb903df7aa0dcf62e641aa58223fff47f8f8098f660fc3cf1ad",
+    "small64/region-1/solution-063.f64": "f67482e14ca6f3732d88a79903c50a28f2422e676eba67dd1fe36ea15443c2fd",
+    "small64/region-1/values.f64": "8d2352ef70d745ec80f63120031141ee98b8bf908356b82695c8befbb8652f8c",
+    "wide96/region-0/columns.u32": "a54efbb1ed78974facdd747d54b4952f72fdb4a5578e71c8df06be7f63636ada",
+    "wide96/region-0/domain.json": "9d31164d1b8695a253ff6f269356329e8618a003d0041f0eaf1372e9f6a966c2",
+    "wide96/region-0/matrix.json": "85c9a93f5f97a8f396b036696f65c36bf62945253eeeb61f5a2c4394283b6a3b",
+    "wide96/region-0/matrix.mtx": "f8d8347805f623c9a14b124da09910b34952bcdcdad2f931186f9ca84d7dc30b",
+    "wide96/region-0/rhs-000.f64": "3c8faaacf2b8fc1d6d6afe862ffebb1a49c7ba0e6744c257c01e86c578b256c0",
+    "wide96/region-0/rhs-001.f64": "74df4237cfb0642092b704bb6c8e850bbc7555cbd0767247941d573c3928976a",
+    "wide96/region-0/rhs-003.f64": "5c5e4d26e11a35579c040a895ef484c542db05269a38a0e99f2481cabf99800f",
+    "wide96/region-0/rhs-007.f64": "0747cd7a65ade1026d16232f3edabfed30f9ad5221971be1d043ff3653dbed9f",
+    "wide96/region-0/rhs-015.f64": "429aacc65194efa9877bdd5cf623149441bd9f1aa94bf8da8918a611402e6c0f",
+    "wide96/region-0/rhs-031.f64": "82fe6ce93d98868433f2835397f9c41293e1d0e2ea6067a08a213cc0d4a19d54",
+    "wide96/region-0/rhs-063.f64": "cc084a10ba8617513cdef6f30d7d8398ff8bc75506dfc20ab5834efa39063029",
+    "wide96/region-0/rhs-127.f64": "15359cd6620d98c205b657402ef68aef125dd375474e50459d51ce49b38e703d",
+    "wide96/region-0/row_ptr.u32": "97c8b27d0b067d4314b334c640084aca53a959f7a8cd04bed54c40cfe0e68150",
+    "wide96/region-0/samples.csv": "d32d8914c39291906e21fb25163c1823721d3c3a6c8d059cd8e0309da79213e9",
+    "wide96/region-0/solution-000.f64": "b39ff7419cf0d117d6906491d57b4df218e6849b2349151f35de665e25f0694c",
+    "wide96/region-0/solution-001.f64": "c7792518814f80661e7693b9ea280d6580af9951e8298d6c786f6299fc79ce54",
+    "wide96/region-0/solution-003.f64": "ffd898942814610e750c74bba984c9f004f43c9db7a7f5b10914d1972bfbc36d",
+    "wide96/region-0/solution-007.f64": "11259ad94a992cf38e6006ee0ac9b54a72d16b63d6d3913fd649fc9dc0880e56",
+    "wide96/region-0/solution-015.f64": "c87138396a61ea048c4f0cf05f4450776cf0b144e71844a5375f9d9727ef7f08",
+    "wide96/region-0/solution-031.f64": "c02d7d246d8378b728e16d1ee4314fa58b59a57de788f866b5eceae8547d2622",
+    "wide96/region-0/solution-063.f64": "e8d0828d1038a5c56c9440ead5567db0c1a05547485f44cec74c99d215eba3f3",
+    "wide96/region-0/solution-127.f64": "55dd9463e3871953c6e6b823839e417454f70f0450ba7f3a2cb0bcd511399c87",
+    "wide96/region-0/values.f64": "fe228bfcdaf55e416649e0fde1357cceca4410bf234cb409470b550987820e6e",
+    "wide96/region-1/columns.u32": "ce93e50757caff4a3234755940d3c6bedaa54e93cea068a121d05e5ab9b3a71b",
+    "wide96/region-1/domain.json": "974f0216b01aa0996458df210c65524a43188e6fd74862462ffde76ac56b297d",
+    "wide96/region-1/matrix.json": "805b3875bf92374d70ea48763f3e3fe6fc6db7bc40612fe6db94dac91ed5a0e7",
+    "wide96/region-1/matrix.mtx": "52aba068620e240fd2c4458b72c587ffe348757343378fa7bac2f50e48b6e094",
+    "wide96/region-1/rhs-000.f64": "58ddf769fffed02bc98340387e2dfab8e135ff83c7757ed17f8e3863804b8dc6",
+    "wide96/region-1/rhs-001.f64": "475157b72bc60fd3a0bdc7d7595631e0bc5355082e244142ca546bcc1537b633",
+    "wide96/region-1/rhs-003.f64": "06db936e9a5cadc56cda1037378cf1bcb62c253310f37e8fda0b03fc53aeaaf7",
+    "wide96/region-1/rhs-007.f64": "f2441c2e2e43485c028fd2e67daf580ff9294ca92a9ee979f6153668845cffeb",
+    "wide96/region-1/rhs-015.f64": "8b2305ca71a66fb9cbcbabe58b31b343e92402cd652676aa9a44f7c93cbe42ac",
+    "wide96/region-1/rhs-031.f64": "c5384d63848c5f463abc7161e9872671ca2c235819770f7ba4432916e39d75a9",
+    "wide96/region-1/rhs-063.f64": "cbd93eb0b7c8a5aa5631ee56bb810ff63e46415f0d83733bf20795829a9f4292",
+    "wide96/region-1/row_ptr.u32": "c791110df711aa729c441c60d42f00fd293a162f2a7107466701e1dddf0dd1fc",
+    "wide96/region-1/samples.csv": "72689a41ea88e9710adf1191a41a204a2f777b4f565427c8553edcbd982ba7a5",
+    "wide96/region-1/solution-000.f64": "2d4ef67e942aa92604e2c13020528b62aedf4b89895d46231e6ea618bde5296c",
+    "wide96/region-1/solution-001.f64": "1603649ac44e807b4cafaf0307b3d48c96f94eb8fe00b7249f56f23d784b34b7",
+    "wide96/region-1/solution-003.f64": "2886e6a5fdc85cebd6c0b23a908200b4b8b96b917922f0f17a082a5048cbe029",
+    "wide96/region-1/solution-007.f64": "96ceeed1e251692079406f98758c5047b0c187d77c0b08edefdca5b0f7875819",
+    "wide96/region-1/solution-015.f64": "db9dea8ab82a3be5d36f7b74b74e0837dea722fc8e381b513c79449e119f85a1",
+    "wide96/region-1/solution-031.f64": "5dd22272e793b91a9b8d8a4ebac8b662cf4dd1fcdde380fae1974eca779312b4",
+    "wide96/region-1/solution-063.f64": "f09056a489a3758cc6c5edd43d9c08d071617e0683cdf363d99c930051d718dd",
+    "wide96/region-1/values.f64": "e3c933e01cb7e71e546e891e640f0be61c3986ce6fc262e6740157fe730a7549",
+    "wide192/region-0/columns.u32": "b78b26d5470b5c3ea835b8f9a58efbe64c22f835bd2b24aebe6fa05510d2db82",
+    "wide192/region-0/domain.json": "568fb9f7e876787393a608b2bb2e719f74129a5b506502e05e6916cccc0bf2f6",
+    "wide192/region-0/matrix.json": "d136a2084245d6d5b73d256d9adcc025b9fd131e1789b0560b30ad72109a96b6",
+    "wide192/region-0/matrix.mtx": "9f8610a2eacc37e07815bc6eb0a5871d692af1ecba2221e49456e3429d1e31fd",
+    "wide192/region-0/rhs-000.f64": "238cf2118765b7a4411d77684a3e000f1f7d9c4a4495a20e1c41f29626dbbd40",
+    "wide192/region-0/rhs-001.f64": "47d9fd710f49f11db4cc299f1461cbfb2b89421a308e2598d900f66b7385be0a",
+    "wide192/region-0/rhs-003.f64": "2cbdac033b4f3a27e768c5dec25c85b94a7befb880c2f58f8bdc326db9cda6bf",
+    "wide192/region-0/rhs-007.f64": "272b479f3d666ec4ba6dccf35d59991ec093801a92baeb261d3d8b0cca024df4",
+    "wide192/region-0/rhs-015.f64": "d6748e9df05f8f4a0a1557d489a05fb1365b083eff6cb819d0114ad80bdb8b75",
+    "wide192/region-0/rhs-031.f64": "5f7c0619c4442702fd35abcd817c2260a9db68029f2d0a0f9f5c9c5f90fb5038",
+    "wide192/region-0/rhs-063.f64": "594c9859e3aee48ed787137a910fe3cdae03595f0ef1540913fc3cb9d3452205",
+    "wide192/region-0/rhs-127.f64": "d77c2b01c7cf905c0628325dcc17e7d55e57c25333350f4ef1c1ec5a79feb3ab",
+    "wide192/region-0/row_ptr.u32": "f57ef6ce8e0e1eb7e2bef4c2ac3d301d7a4ce456507bd988a830bea2f0acac05",
+    "wide192/region-0/samples.csv": "abb3e6649563316eb36f62948761eef652622ef6a1dad04fbf6d5f7bd8f0e65e",
+    "wide192/region-0/solution-000.f64": "a783a5e013c9736612f9e4d3cab0b98460aed92d2dd1682358e3adf67acd7c61",
+    "wide192/region-0/solution-001.f64": "bb5d02feda9630401f780669dcfb9281f5a93fbc7583f3a48d4ceb30d8502659",
+    "wide192/region-0/solution-003.f64": "8aa03bca372ba64abe7c1648288525290feca67b19dbb2790d37978edb74a716",
+    "wide192/region-0/solution-007.f64": "9ea7a3e9a2dbcc7a50ea9bbe0632e2ae669c79c2ef1fa8f358a8935feb6ea79e",
+    "wide192/region-0/solution-015.f64": "7e15f7a507a5ab62cf4d474514d636e7c71b13f9e6c9f07f9d70efc466e8cc50",
+    "wide192/region-0/solution-031.f64": "63c0c4a646f3afa0548a3ce9644c8f24419c34be727f418ea669c9d106b8da16",
+    "wide192/region-0/solution-063.f64": "188633e1e1e27f4f7734c17a3084643f097817bdd25e11881416cf25a60fb883",
+    "wide192/region-0/solution-127.f64": "3ecd0c467cbc5da82520f14eeb4022a134ed841560e6407bbb2dcb14fc2f8b63",
+    "wide192/region-0/values.f64": "f224f76bce64d9f002f8fcb6d4840635ee43f5188dfe5bffae6b5fbe42b22fc0",
+    "wide192/region-1/columns.u32": "9e4fae632a13916594291c0c281e19293a99214f4d8fd1f82f2b403ef103b0fc",
+    "wide192/region-1/domain.json": "e889199f0cf5ceefb8d6a40e6cede803b74d96c83af1df8b79e73d0735dd2a0b",
+    "wide192/region-1/matrix.json": "082c6201eecb1f48b77760eff1ec81bad2c52abc20ba5283e903fb251bb3b5df",
+    "wide192/region-1/matrix.mtx": "63842000de33e19dbd41b1f0d00a387f274d8ac5056d364272c9a0d34b7cd871",
+    "wide192/region-1/rhs-000.f64": "58f90af621285aa848f711bd3c4021b2d19a74abdfee68dc39ac9d13a8c578ee",
+    "wide192/region-1/rhs-001.f64": "aeaa1069671040c095ba6046116b8cc4d4c10a41f43429805c658ea34ef3bd96",
+    "wide192/region-1/rhs-003.f64": "6fb669dcd1d39501d408e9c14a29769a752ecada5e63cb990a6dc35cb49fab69",
+    "wide192/region-1/rhs-007.f64": "1f25a46abdd0324070ad822622e9bbb218c3040eb898993bb9556aedc920bd87",
+    "wide192/region-1/rhs-015.f64": "cb469ac99d92d0409522a5b515bf37b112f56bffb4d3de1c65b84ab632950317",
+    "wide192/region-1/rhs-031.f64": "fd3bb51841d0a41e405b101d687c2c327aa39289b5dd19f902062a21d00e520c",
+    "wide192/region-1/rhs-063.f64": "d851b18a80426bf650e116a2f1f91d78ae5e8098d8749a785bdcc555f82bb500",
+    "wide192/region-1/row_ptr.u32": "ea4931d6a25ff19d47ef55f045cc2985a37c0e4e1fc36c4c3030dac012580b6d",
+    "wide192/region-1/samples.csv": "2e9584f9a6b08d0fe8e8c2501935958b8dc5fba026ff1149fb15eee5a8137d61",
+    "wide192/region-1/solution-000.f64": "1499fe786846f49ca41da9565752a664c9199a944574b9f162b4cdcb292635f0",
+    "wide192/region-1/solution-001.f64": "b108a2d80a95870b387c939a55ef3ce981057c235b26c93b725c45c74634d2e4",
+    "wide192/region-1/solution-003.f64": "8925e436b3e45629f220c9e9986532f3e916d735da20576cb11b780552f3056d",
+    "wide192/region-1/solution-007.f64": "8edc3c0f5f0a166a5698d03ffad6ad627d1c9816d90c7c509106f8c2ed269bf5",
+    "wide192/region-1/solution-015.f64": "3f12d175d1621f1b3bb4fa88ed64d0bce39a0e657efa46fce7fc55cca36eeb9a",
+    "wide192/region-1/solution-031.f64": "65dd0657201482642f9f6bb3578d5d81def9616018f9af2d5d7f3aef9e2c04fe",
+    "wide192/region-1/solution-063.f64": "ac9fb12564c1d5f51209ca9c06c859f3978fe1447c36a49ce7d2d6eacd378548",
+    "wide192/region-1/values.f64": "a37a4d3282cb13161f97886a839e2bc425008b090d8963a505e20657d37efb80"
+  },
+  "completed_successfully": true
+}

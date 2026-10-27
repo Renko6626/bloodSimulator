@@ -1,5 +1,5 @@
 //! Two precomputed, overlapping local domains sharing the caller's physics world.
-use super::{FluidStats, LocalFluid, ORIGIN};
+use super::{FluidStats, LocalFluid, LocalFluidOptions};
 use crate::{circulation::graph::GraphFlow, map::MapDefinition};
 use rapier2d::prelude::*;
 use std::time::Instant;
@@ -7,6 +7,7 @@ use std::time::Instant;
 pub(crate) struct LocalRegions {
     regions: [LocalFluid; 2],
     active: usize,
+    pub options: LocalFluidOptions,
 }
 
 impl LocalRegions {
@@ -15,13 +16,15 @@ impl LocalRegions {
         flow: &GraphFlow,
         viscosity: f32,
         cells: usize,
+        options: LocalFluidOptions,
     ) -> Result<Self, String> {
         Ok(Self {
             regions: [
-                LocalFluid::new_at(map, flow, viscosity, cells, ORIGIN)?,
-                LocalFluid::new_at(map, flow, viscosity, cells, [-18.0, -16.0])?,
+                LocalFluid::new_at(map, flow, viscosity, cells, options.origins[0], &options)?,
+                LocalFluid::new_at(map, flow, viscosity, cells, options.origins[1], &options)?,
             ],
             active: 0,
+            options,
         })
     }
 

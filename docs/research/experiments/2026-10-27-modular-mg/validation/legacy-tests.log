@@ -1,0 +1,14 @@
+     Locking 1 package to latest Rust 1.94 compatible version
+      Adding blood-fluid v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/fluid)
+    Blocking waiting for file lock on package cache
+   Compiling blood-fluid v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/fluid)
+   Compiling blood-gpu-stokes-lab v0.1.0 (/data/sunyunbo/www/bloodSimulator/docs/research/experiments/2026-10-27-gpu-stokes/lab)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.75s
+     Running unittests src/main.rs (/tmp/sunyunbo/blood-gpu-lab-target/debug/deps/blood_gpu_stokes_lab-342f384df1e9850e)
+
+running 3 tests
+test case::tests::scaling_preserves_equations_and_audit_checks_constraint_block ... ok
+test gmres::tests::solves_indefinite_system_and_handles_zero_rhs ... ok
+test gpu::tests::wgsl_parses_and_validates_without_gpu ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s

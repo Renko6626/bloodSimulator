@@ -1,0 +1,21 @@
+{
+  "accepted": true,
+  "adapter": {
+    "backend": "Vulkan",
+    "device": 0,
+    "device_type": "Cpu",
+    "driver": "llvmpipe",
+    "driver_info": "Mesa 23.2.1-1ubuntu3.1~22.04.4 (LLVM 15.0.7)",
+    "name": "llvmpipe (LLVM 15.0.7, 256 bits)",
+    "software": true,
+    "vendor": 65541
+  },
+  "command": [
+    "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+    "probe",
+    "--out",
+    "/tmp/sunyunbo/blood-modular-gpu-final-v1/probe.json",
+    "--allow-software"
+  ],
+  "schema_version": 2
+}

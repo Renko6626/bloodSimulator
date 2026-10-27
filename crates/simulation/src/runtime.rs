@@ -136,6 +136,10 @@ impl Simulation {
 
     /// Two precomputed 64² Stokes regions covering the first fork and upper arm.
     pub fn new_local_world(config: Config) -> Self {
+        Self::new_local_world_with_options(config, crate::LocalFluidOptions::default())
+    }
+
+    pub fn new_local_world_with_options(config: Config, options: crate::LocalFluidOptions) -> Self {
         let mut sim = Self::new_world(config);
         let Environment::World { map, network, .. } = &sim.environment else {
             unreachable!()
@@ -145,6 +149,7 @@ impl Simulation {
             &network.solve(1.0),
             sim.config.viscosity,
             sim.cells.len(),
+            options,
         )
         .expect("construct local Stokes regions");
         fluid.prepare_pressure(sim.config.pressure);
@@ -261,10 +266,12 @@ impl Simulation {
 
     pub fn reset(&mut self) {
         let paused = self.paused;
-        let local = self.local_fluid.is_some();
+        let local = self.local_fluid.as_ref().map(|f| f.options.clone());
         *self = match self.environment {
             Environment::Loop { .. } => Self::new(self.config.clone()),
-            Environment::World { .. } if local => Self::new_local_world(self.config.clone()),
+            Environment::World { .. } if local.is_some() => {
+                Self::new_local_world_with_options(self.config.clone(), local.unwrap())
+            }
             Environment::World { .. } => Self::new_world(self.config.clone()),
         };
         self.paused = paused;
@@ -439,6 +446,28 @@ fn world_cell_centers(map: &MapDefinition, config: &Config) -> Vec<Vector> {
 #[cfg(test)]
 mod region_tests {
     use super::*;
+
+    #[test]
+    fn reset_preserves_explicit_solver_and_grid_options() {
+        let options = crate::LocalFluidOptions {
+            n: 32,
+            h: 0.5,
+            solver: std::sync::Arc::new(blood_fluid::cpu::MultigridFactory::default()),
+            ..Default::default()
+        };
+        let mut sim = Simulation::new_local_world_with_options(Config::default(), options);
+        let initial = sim.snapshot();
+        sim.tick(MoveInput { x: 1., y: 0. });
+        sim.reset();
+        let restored = sim.snapshot();
+        let samples = |s: crate::Snapshot| {
+            s.arrows
+                .into_iter()
+                .map(|a| (a.position, a.velocity))
+                .collect::<Vec<_>>()
+        };
+        assert_eq!(samples(initial), samples(restored));
+    }
 
     #[test]
     fn region_handoff_reuses_bodies_and_preparation_applies_no_impulse() {

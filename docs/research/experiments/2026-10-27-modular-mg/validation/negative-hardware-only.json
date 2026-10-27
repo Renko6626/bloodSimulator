@@ -1,0 +1,11 @@
+{
+  "accepted": false,
+  "command": [
+    "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+    "probe",
+    "--out",
+    "/tmp/sunyunbo/blood-mg-negative-v1/hardware-only.json"
+  ],
+  "error": "software adapter rejected: llvmpipe (LLVM 15.0.7, 256 bits); use --allow-software only for functional checks",
+  "schema_version": 2
+}

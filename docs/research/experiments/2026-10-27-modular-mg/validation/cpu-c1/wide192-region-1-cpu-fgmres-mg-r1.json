@@ -1,0 +1,294 @@
+{
+  "accepted": true,
+  "adapter": null,
+  "backend": "cpu-fgmres-mg",
+  "case": "/tmp/sunyunbo/blood-native-capture-v1/wide192/region-1",
+  "command": [
+    "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+    "run",
+    "--backend",
+    "cpu-fgmres-mg",
+    "--case",
+    "/tmp/sunyunbo/blood-native-capture-v1/wide192/region-1",
+    "--limit",
+    "8",
+    "--restart",
+    "32",
+    "--max-iter",
+    "200",
+    "--rtol",
+    "0.0001",
+    "--mg-cycles",
+    "1",
+    "--repeats",
+    "1",
+    "--out",
+    "/tmp/sunyunbo/blood-modular-cpu-final-c1/wide192-region-1-cpu-fgmres-mg-r1.json"
+  ],
+  "hardware_measurement": false,
+  "mode": "run",
+  "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+  "options": {
+    "max_iterations": 200,
+    "restart": 32,
+    "tolerance": 0.0001,
+    "v_cycles": 1
+  },
+  "rows": 29565,
+  "samples": [
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 0.00003022525238789396,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 8.017515236500439e-6,
+        "momentum_rms": 0.000011007635561191112,
+        "pressure_reference_max_absolute": 0.0011834455002746047,
+        "relative_residual": 0.0000176358484063691,
+        "velocity_reference_relative_l2": 0.0003679140692107352
+      },
+      "mean_solve_ms": 218.628756,
+      "report": {
+        "backend": "cpu-fgmres-mg",
+        "counters": {
+          "dispatches": 0,
+          "readback_bytes": 0,
+          "readback_wait_ms": 0.0,
+          "readbacks": 0,
+          "submissions": 0
+        },
+        "iterations": 38,
+        "multigrid_levels": [
+          19591,
+          5101,
+          1371,
+          407,
+          125,
+          44
+        ],
+        "status": "converged",
+        "stopping_relative": 0.00009217248076597843
+      },
+      "sample": "000"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 1.4788159801816723e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.1304826820954603e-7,
+        "momentum_rms": 3.1304826820954603e-7,
+        "pressure_reference_max_absolute": 0.00008440570796316993,
+        "relative_residual": 0.000012412530294084043,
+        "velocity_reference_relative_l2": 0.00009393280084688903
+      },
+      "mean_solve_ms": 264.22483800000003,
+      "report": {
+        "backend": "cpu-fgmres-mg",
+        "counters": {
+          "dispatches": 0,
+          "readback_bytes": 0,
+          "readback_wait_ms": 0.0,
+          "readbacks": 0,
+          "submissions": 0
+        },
+        "iterations": 47,
+        "multigrid_levels": [
+          19591,
+          5101,
+          1371,
+          407,
+          125,
+          44
+        ],
+        "status": "converged",
+        "stopping_relative": 0.00009868566220947983
+      },
+      "sample": "001"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 1.8764313360020423e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 5.708628336597739e-7,
+        "momentum_rms": 5.708628336597739e-7,
+        "pressure_reference_max_absolute": 0.00018879395395787757,
+        "relative_residual": 0.00001221431115022328,
+        "velocity_reference_relative_l2": 0.0001027050956188538
+      },
+      "mean_solve_ms": 215.851428,
+      "report": {
+        "backend": "cpu-fgmres-mg",
+        "counters": {
+          "dispatches": 0,
+          "readback_bytes": 0,
+          "readback_wait_ms": 0.0,
+          "readbacks": 0,
+          "submissions": 0
+        },
+        "iterations": 38,
+        "multigrid_levels": [
+          19591,
+          5101,
+          1371,
+          407,
+          125,
+          44
+        ],
+        "status": "converged",
+        "stopping_relative": 0.0000934166006765305
+      },
+      "sample": "003"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 1.8494428330423922e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.5293642689841914e-7,
+        "momentum_rms": 3.5293642689841914e-7,
+        "pressure_reference_max_absolute": 0.00012382206991876088,
+        "relative_residual": 0.000010064558605433713,
+        "velocity_reference_relative_l2": 0.00007333697994724907
+      },
+      "mean_solve_ms": 261.847361,
+      "report": {
+        "backend": "cpu-fgmres-mg",
+        "counters": {
+          "dispatches": 0,
+          "readback_bytes": 0,
+          "readback_wait_ms": 0.0,
+          "readbacks": 0,
+          "submissions": 0
+        },
+        "iterations": 39,
+        "multigrid_levels": [
+          19591,
+          5101,
+          1371,
+          407,
+          125,
+          44
+        ],
+        "status": "converged",
+        "stopping_relative": 0.0000814305420968543
+      },
+      "sample": "007"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 1.986463600479373e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 4.5341061676382244e-7,
+        "momentum_rms": 4.5341061676382244e-7,
+        "pressure_reference_max_absolute": 0.00012264505639075773,
+        "relative_residual": 0.000011039218360396144,
+        "velocity_reference_relative_l2": 0.00006818265698768513
+      },
+      "mean_solve_ms": 310.93516500000004,
+      "report": {
+        "backend": "cpu-fgmres-mg",
+        "counters": {
+          "dispatches": 0,
+          "readback_bytes": 0,
+          "readback_wait_ms": 0.0,
+          "readbacks": 0,
+          "submissions": 0
+        },
+        "iterations": 42,
+        "multigrid_levels": [
+          19591,
+          5101,
+          1371,
+          407,
+          125,
+          44
+        ],
+        "status": "converged",
+        "stopping_relative": 0.00008766541527301906
+      },
+      "sample": "015"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 1.5855807737266549e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 2.943950503139908e-7,
+        "momentum_rms": 2.943950503139908e-7,
+        "pressure_reference_max_absolute": 0.00009836699815654604,
+        "relative_residual": 9.88358044730708e-6,
+        "velocity_reference_relative_l2": 0.00007666263516619566
+      },
+      "mean_solve_ms": 238.147056,
+      "report": {
+        "backend": "cpu-fgmres-mg",
+        "counters": {
+          "dispatches": 0,
+          "readback_bytes": 0,
+          "readback_wait_ms": 0.0,
+          "readbacks": 0,
+          "submissions": 0
+        },
+        "iterations": 43,
+        "multigrid_levels": [
+          19591,
+          5101,
+          1371,
+          407,
+          125,
+          44
+        ],
+        "status": "converged",
+        "stopping_relative": 0.0000801332134292632
+      },
+      "sample": "031"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 1.4013295743359828e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 4.958829059278054e-7,
+        "momentum_rms": 4.958829059278054e-7,
+        "pressure_reference_max_absolute": 0.00012798442648556674,
+        "relative_residual": 0.000012017710325067693,
+        "velocity_reference_relative_l2": 0.00012302105856482848
+      },
+      "mean_solve_ms": 284.706834,
+      "report": {
+        "backend": "cpu-fgmres-mg",
+        "counters": {
+          "dispatches": 0,
+          "readback_bytes": 0,
+          "readback_wait_ms": 0.0,
+          "readbacks": 0,
+          "submissions": 0
+        },
+        "iterations": 51,
+        "multigrid_levels": [
+          19591,
+          5101,
+          1371,
+          407,
+          125,
+          44
+        ],
+        "status": "converged",
+        "stopping_relative": 0.00008983247270806412
+      },
+      "sample": "063"
+    }
+  ],
+  "schema_version": 2,
+  "setup_ms": 457.01734999999996
+}

@@ -1,0 +1,15 @@
+[package]
+name = "fluid-bench"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+
+[features]
+default = []
+gpu = ["dep:blood-fluid-gpu"]
+
+[dependencies]
+blood-fluid = { path = "../fluid" }
+blood-fluid-gpu = { path = "../fluid-gpu", optional = true }
+simulation = { path = "../simulation" }
+serde_json.workspace = true

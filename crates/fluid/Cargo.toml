@@ -1,0 +1,10 @@
+[package]
+name = "blood-fluid"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+faer.workspace = true
+serde.workspace = true
+serde_json.workspace = true

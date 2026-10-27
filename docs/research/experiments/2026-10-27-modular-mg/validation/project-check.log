@@ -1,0 +1,141 @@
+   Compiling cfg_aliases v0.2.2
+    Checking smallvec v1.16.3
+   Compiling zerocopy v0.8.63
+   Compiling serde_core v1.0.229
+   Compiling parking_lot_core v0.9.12
+   Compiling zmij v1.0.23
+   Compiling serde_json v1.0.154
+    Checking scopeguard v1.2.0
+    Checking foldhash v0.1.5
+    Checking unicode-width v0.2.2
+    Checking bit-vec v0.8.0
+   Compiling ash v0.38.0+1.3.281
+    Checking termcolor v1.4.1
+   Compiling serde v1.0.229
+    Checking gpu-alloc-types v0.3.1
+    Checking libloading v0.8.9
+    Checking spirv v0.3.0+sdk-1.3.268.0
+    Checking gpu-descriptor-types v0.2.0
+    Checking unicode-ident v1.0.27
+    Checking memchr v2.8.3
+    Checking itoa v1.0.18
+    Checking hexf-parse v0.2.1
+    Checking rustc-hash v1.1.0
+    Checking renderdoc-sys v1.1.0
+    Checking raw-window-handle v0.6.2
+   Compiling litrs v1.0.1
+   Compiling naga v27.0.3
+   Compiling wgpu-hal v27.0.4
+    Checking indexmap v2.14.2
+   Compiling wgpu-core v27.0.3
+   Compiling wgpu v27.0.1
+    Checking pollster v0.4.0
+   Compiling bytemuck_derive v1.12.1
+   Compiling zerocopy-derive v0.8.63
+    Checking lock_api v0.4.14
+   Compiling serde_derive v1.0.229
+    Checking hashbrown v0.15.5
+    Checking gpu-alloc v0.6.2
+    Checking spade v2.15.1
+    Checking bit-set v0.8.0
+    Checking codespan-reporting v0.12.0
+    Checking parking_lot v0.12.5
+    Checking gpu-descriptor v0.3.2
+   Compiling document-features v0.2.12
+    Checking bytemuck v1.25.2
+    Checking num-complex v0.4.6
+    Checking dyn-stack v0.13.2
+    Checking safe_arch v1.2.0
+    Checking wgpu-types v27.0.1
+    Checking pulp v0.22.3
+    Checking nano-gemm-c32 v0.2.1
+    Checking nano-gemm-c64 v0.2.1
+    Checking wide v1.7.1
+    Checking gemm-common v0.19.0
+    Checking qd v0.8.0
+    Checking faer-traits v0.24.0
+    Checking gemm-f32 v0.19.0
+    Checking gemm-c32 v0.19.0
+    Checking gemm-c64 v0.19.0
+    Checking gemm-f64 v0.19.0
+    Checking gemm v0.19.0
+    Checking half v2.7.1
+    Checking simba v0.10.2
+    Checking nano-gemm v0.2.2
+    Checking faer v0.24.4
+    Checking nalgebra v0.35.0
+    Checking wgpu-core-deps-windows-linux-android v27.0.0
+    Checking glamx v0.3.1
+    Checking parry2d v0.31.1
+    Checking rapier2d v0.36.1
+    Checking blood-fluid v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/fluid)
+    Checking simulation v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/simulation)
+    Checking blood-fluid-gpu v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/fluid-gpu)
+    Checking godot_bridge v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/godot_bridge)
+    Checking fluid-bench v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/fluid-bench)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 34.73s
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.18
+   Compiling serde_core v1.0.229
+   Compiling zmij v1.0.23
+   Compiling serde_json v1.0.154
+   Compiling serde v1.0.229
+   Compiling blood-fluid v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/fluid)
+   Compiling simulation v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/simulation)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 11.43s
+     Running unittests src/lib.rs (target/debug/deps/simulation-bd7b372d8e5b574d)
+
+running 9 tests
+test circulation::graph::tests::series_parallel_loop_obeys_pressures_conservation_and_scaling ... ok
+test circulation::graph::tests::velocity_is_static_without_head_and_smooth_near_junction ... ok
+test fluid::tests::equal_open_pressures_rest_and_closed_component_is_rejected ... ok
+test cell::tests::compressed_cell_preserves_area_and_recovers_after_release ... ok
+test fluid::tests::open_channel_matches_poiseuille_and_preserves_pressure_reference ... ok
+test map::tests::fork_has_open_shared_floor_and_boundary ... ok
+test fluid::tests::real_fork_conserves_opening_flux_and_solves_true_stokes_residuals ... ok
+test runtime::region_tests::reset_preserves_explicit_solver_and_grid_options ... ok
+test runtime::region_tests::region_handoff_reuses_bodies_and_preparation_applies_no_impulse ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.80s
+
+     Running tests/experiment.rs (target/debug/deps/experiment-666889063ab3b3a4)
+
+running 5 tests
+test closed_loop_uses_total_resistance_and_poiseuille_profile ... ok
+test robot_has_no_coasting_and_can_easily_move_against_flow ... ok
+test world_cells_pass_both_branches_and_rejoin ... ok
+test crowded_cells_advect_without_losing_area_or_crossing_walls ... ok
+test pause_single_step_and_reset_use_the_same_clock ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.73s
+
+   Doc-tests simulation
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Compiling godot_bridge v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/godot_bridge)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.82s
+Initialize godot-rust (API v4.7.stable.official, runtime v4.7.1.stable.official, safeguards strict)
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+Initialize godot-rust (API v4.7.stable.official, runtime v4.7.1.stable.official, safeguards strict)
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+Initialize godot-rust (API v4.7.stable.official, runtime v4.7.1.stable.official, safeguards strict)
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org

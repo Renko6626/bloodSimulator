@@ -1,0 +1,293 @@
+{
+  "accepted": true,
+  "adapter": {
+    "backend": "Vulkan",
+    "kind": "Cpu",
+    "name": "llvmpipe (LLVM 15.0.7, 256 bits)",
+    "software": true
+  },
+  "backend": "gpu-fgmres-mg",
+  "case": "/tmp/sunyunbo/blood-gpu-data-v1/wide96/region-1",
+  "command": [
+    "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+    "run",
+    "--backend",
+    "gpu-fgmres-mg",
+    "--case",
+    "/tmp/sunyunbo/blood-gpu-data-v1/wide96/region-1",
+    "--limit",
+    "8",
+    "--restart",
+    "32",
+    "--max-iter",
+    "200",
+    "--rtol",
+    "0.0001",
+    "--mg-cycles",
+    "2",
+    "--repeats",
+    "1",
+    "--out",
+    "/tmp/sunyunbo/blood-modular-gpu-final-v1/wide96-region-1-gpu-fgmres-mg-r1.json",
+    "--allow-software"
+  ],
+  "hardware_measurement": false,
+  "mode": "run",
+  "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+  "options": {
+    "max_iterations": 200,
+    "restart": 32,
+    "tolerance": 0.0001,
+    "v_cycles": 2
+  },
+  "rows": 7309,
+  "samples": [
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 0.0000314730176887899,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 2.6367988531777506e-6,
+        "momentum_rms": 2.6367988531777506e-6,
+        "pressure_reference_max_absolute": 0.000807456517843308,
+        "relative_residual": 0.00002287742193452743,
+        "velocity_reference_relative_l2": 0.0003105189871839465
+      },
+      "mean_solve_ms": 1084.58797,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 3116,
+          "readback_bytes": 29428,
+          "readback_wait_ms": 1063.4759499999998,
+          "readbacks": 7,
+          "submissions": 14
+        },
+        "iterations": 32,
+        "multigrid_levels": [
+          4815,
+          1316,
+          399,
+          123,
+          43
+        ],
+        "status": "converged",
+        "stopping_relative": 0.00007173158596451456
+      },
+      "sample": "000"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 1.5965173645986873e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 1.45877257669354e-7,
+        "momentum_rms": 1.45877257669354e-7,
+        "pressure_reference_max_absolute": 0.0001376849271536862,
+        "relative_residual": 0.0000185571240996419,
+        "velocity_reference_relative_l2": 0.00011747061310189184
+      },
+      "mean_solve_ms": 1182.462411,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 3899,
+          "readback_bytes": 29492,
+          "readback_wait_ms": 1143.484684,
+          "readbacks": 9,
+          "submissions": 19
+        },
+        "iterations": 35,
+        "multigrid_levels": [
+          4815,
+          1316,
+          399,
+          123,
+          43
+        ],
+        "status": "converged",
+        "stopping_relative": 0.00008261666634013247
+      },
+      "sample": "001"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 2.0193116890220443e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.456668597037976e-7,
+        "momentum_rms": 3.456668597037976e-7,
+        "pressure_reference_max_absolute": 0.00006199564660695073,
+        "relative_residual": 0.000017913030665990915,
+        "velocity_reference_relative_l2": 0.00005984862414852151
+      },
+      "mean_solve_ms": 1142.616545,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 3116,
+          "readback_bytes": 29428,
+          "readback_wait_ms": 1101.718649,
+          "readbacks": 7,
+          "submissions": 14
+        },
+        "iterations": 32,
+        "multigrid_levels": [
+          4815,
+          1316,
+          399,
+          123,
+          43
+        ],
+        "status": "converged",
+        "stopping_relative": 0.00007608161551860948
+      },
+      "sample": "003"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 1.508170460231158e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.6651541937615477e-7,
+        "momentum_rms": 3.6651541937615477e-7,
+        "pressure_reference_max_absolute": 0.00004261470108034293,
+        "relative_residual": 0.000012010797694783033,
+        "velocity_reference_relative_l2": 0.00002752915279518452
+      },
+      "mean_solve_ms": 1024.8828839999999,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 3116,
+          "readback_bytes": 29428,
+          "readback_wait_ms": 1002.1900620000001,
+          "readbacks": 7,
+          "submissions": 14
+        },
+        "iterations": 32,
+        "multigrid_levels": [
+          4815,
+          1316,
+          399,
+          123,
+          43
+        ],
+        "status": "converged",
+        "stopping_relative": 0.0000515140004649164
+      },
+      "sample": "007"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 1.4464989469355655e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.8059033506911783e-7,
+        "momentum_rms": 3.8059033506911783e-7,
+        "pressure_reference_max_absolute": 0.000034966665188283785,
+        "relative_residual": 0.000011568634341351243,
+        "velocity_reference_relative_l2": 0.000030422322970734966
+      },
+      "mean_solve_ms": 1098.875715,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 3116,
+          "readback_bytes": 29428,
+          "readback_wait_ms": 1066.134133,
+          "readbacks": 7,
+          "submissions": 14
+        },
+        "iterations": 32,
+        "multigrid_levels": [
+          4815,
+          1316,
+          399,
+          123,
+          43
+        ],
+        "status": "converged",
+        "stopping_relative": 0.00004840360826974952
+      },
+      "sample": "015"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 2.3044232243610472e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 3.5806065937968704e-7,
+        "momentum_rms": 3.5806065937968704e-7,
+        "pressure_reference_max_absolute": 0.00005021070361718033,
+        "relative_residual": 0.000019527464803097217,
+        "velocity_reference_relative_l2": 0.000051343079707978085
+      },
+      "mean_solve_ms": 1137.794513,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 3116,
+          "readback_bytes": 29428,
+          "readback_wait_ms": 1112.678204,
+          "readbacks": 7,
+          "submissions": 14
+        },
+        "iterations": 32,
+        "multigrid_levels": [
+          4815,
+          1316,
+          399,
+          123,
+          43
+        ],
+        "status": "converged",
+        "stopping_relative": 0.0000845409896928898
+      },
+      "sample": "031"
+    },
+    {
+      "accepted": true,
+      "audit": {
+        "constraint_rms": 2.082161539549708e-6,
+        "finite": true,
+        "linear_residual_accepted": true,
+        "momentum_relative_rms": 2.753416830261725e-7,
+        "momentum_rms": 2.753416830261725e-7,
+        "pressure_reference_max_absolute": 0.00005079998220051951,
+        "relative_residual": 0.000022738293157341364,
+        "velocity_reference_relative_l2": 0.00005797425430249508
+      },
+      "mean_solve_ms": 1049.650122,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 3116,
+          "readback_bytes": 29428,
+          "readback_wait_ms": 1028.4721759999998,
+          "readbacks": 7,
+          "submissions": 14
+        },
+        "iterations": 32,
+        "multigrid_levels": [
+          4815,
+          1316,
+          399,
+          123,
+          43
+        ],
+        "status": "converged",
+        "stopping_relative": 0.00009825593136324017
+      },
+      "sample": "063"
+    }
+  ],
+  "schema_version": 2,
+  "setup_ms": 325.18179000000003
+}

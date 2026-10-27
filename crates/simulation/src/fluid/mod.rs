@@ -1,7 +1,7 @@
 //! World-space local fluid fields. Owns fields and marker-force history, never
 //! integrates a body: the caller keeps the sole Rapier stepping location.
 mod grid;
-mod linear;
+
 mod regions;
 pub(crate) use regions::LocalRegions;
 #[cfg(test)]
@@ -12,9 +12,23 @@ use grid::{Field, Grid};
 use rapier2d::prelude::*;
 use std::time::Instant;
 
-const N: usize = 64;
-const H: f64 = 0.25;
-const ORIGIN: [f64; 2] = [-22.0, -8.0];
+#[derive(Clone)]
+pub struct LocalFluidOptions {
+    pub n: usize,
+    pub h: f64,
+    pub origins: [[f64; 2]; 2],
+    pub solver: std::sync::Arc<dyn blood_fluid::SolverFactory>,
+}
+impl Default for LocalFluidOptions {
+    fn default() -> Self {
+        Self {
+            n: 64,
+            h: 0.25,
+            origins: [[-22., -8.], [-18., -16.]],
+            solver: std::sync::Arc::new(blood_fluid::cpu::LuFactory),
+        }
+    }
+}
 const OMEGA: f64 = 0.5;
 
 #[derive(Clone, Debug, Default)]
@@ -57,16 +71,20 @@ impl LocalFluid {
         viscosity: f32,
         cells: usize,
         origin: [f64; 2],
+        options: &LocalFluidOptions,
     ) -> Result<Self, String> {
-        let mask = (0..N * N)
+        let n = options.n;
+        let h = options.h;
+        let mask = (0..n * n)
             .map(|k| {
                 map.signed_distance(Vector::new(
-                    (origin[0] + (k % N) as f64 * H + H / 2.0) as f32,
-                    (origin[1] + (k / N) as f64 * H + H / 2.0) as f32,
+                    (origin[0] + (k % n) as f64 * h + h / 2.0) as f32,
+                    (origin[1] + (k / n) as f64 * h + h / 2.0) as f32,
                 )) < -0.08
             })
             .collect();
-        let grid = Grid::new(N, H, origin, mask, 1.0, [true; 4])?;
+        let mut grid =
+            Grid::with_factory(n, h, origin, mask, 1.0, [true; 4], options.solver.as_ref())?;
         let boundary = |position: [f64; 2]| {
             let p = Vector::new(position[0] as f32, position[1] as f32);
             let edge = map.nearest_edge(p);
@@ -108,8 +126,8 @@ impl LocalFluid {
                 bounds: [
                     [origin[0] as f32, origin[1] as f32],
                     [
-                        (origin[0] + N as f64 * H) as f32,
-                        (origin[1] + N as f64 * H) as f32,
+                        (origin[0] + n as f64 * h) as f32,
+                        (origin[1] + n as f64 * h) as f32,
                     ],
                 ],
                 ..FluidStats::default()
@@ -261,7 +279,7 @@ impl LocalFluid {
         for m in markers {
             for axis in 0..2 {
                 for &(k, w) in &m.weights[axis] {
-                    rhs[k] += m.force[axis] * w / (H * H);
+                    rhs[k] += m.force[axis] * w / (self.grid.h * self.grid.h);
                 }
             }
         }
@@ -346,8 +364,8 @@ impl LocalFluid {
         }
         let split = self.grid.component_split();
         let fluid_impulse = [
-            rhs[..split].iter().sum::<f64>() * H * H * dt as f64,
-            rhs[split..].iter().sum::<f64>() * H * H * dt as f64,
+            rhs[..split].iter().sum::<f64>() * self.grid.h * self.grid.h * dt as f64,
+            rhs[split..].iter().sum::<f64>() * self.grid.h * self.grid.h * dt as f64,
         ];
         let error = (body_impulse[0] + fluid_impulse[0]).hypot(body_impulse[1] + fluid_impulse[1]);
         self.stats.active_cells = active;

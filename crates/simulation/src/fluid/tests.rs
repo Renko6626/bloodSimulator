@@ -4,7 +4,7 @@ use super::grid::Grid;
 fn open_channel_matches_poiseuille_and_preserves_pressure_reference() {
     let n = 16;
     let h = 1.0 / n as f64;
-    let grid = Grid::new(
+    let mut grid = Grid::new(
         n,
         h,
         [0.0, 0.0],
@@ -38,7 +38,7 @@ fn open_channel_matches_poiseuille_and_preserves_pressure_reference() {
 
 #[test]
 fn equal_open_pressures_rest_and_closed_component_is_rejected() {
-    let grid = Grid::new(
+    let mut grid = Grid::new(
         8,
         0.125,
         [0.0, 0.0],
@@ -71,7 +71,7 @@ fn real_fork_conserves_opening_flux_and_solves_true_stokes_residuals() {
         })
         .collect();
     let start = Instant::now();
-    let grid = Grid::new(n, 0.25, [-22.0, -8.0], mask, 1.0, [true; 4]).unwrap();
+    let mut grid = Grid::new(n, 0.25, [-22.0, -8.0], mask, 1.0, [true; 4]).unwrap();
     let init = start.elapsed();
     let boundary = |p: [f64; 2]| {
         let p = Vector::new(p[0] as f32, p[1] as f32);

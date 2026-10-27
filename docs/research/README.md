@@ -4,7 +4,9 @@
 
 ## 当前候选
 
-[独立 wgpu GPU Stokes 实验准备](experiments/2026-10-27-gpu-stokes/README.md)：用户已确认跨厂商 Rust＋wgpu／WGSL 路线。真实矩阵／RHS／CPU 解采集、GPU SpMV／两次正交化／重启 GMRES、原方程检查和云端编排已准备；六域 45 样本 CPU 回放及显式软件功能检查通过。物理 GPU 的真实收敛和性能待云端执行，未引入正式后端；多重网格与 LBM 分阶段安排。
+[可插拔流体后端与 GPU 分块多重网格](experiments/2026-10-27-modular-mg/README.md)：用户已确认并实现三个 crate、工厂接口与统一 capture／replay 入口。新路线为 FGMRES＋右分块预条件＋速度块连通聚合多重网格；默认局部 CPU LU、GPU 可选。原方程与耦合保留，新软件功能验证与物理 GPU 性能分开记录。
+
+[首版 wgpu GPU Stokes 实验与 Windows 基线](experiments/2026-10-27-gpu-stokes/README.md)：保留真实数据格式、旧 GMRES32 算法与历史来源。GTX 1050 Ti 的 48 次真实求解均达到 400 次迭代上限且未通过残差门槛；后续模块化 FGMRES／MG 已另行实现。旧源码注入采集仅适用历史版本，新实验走上述统一入口。
 
 [同域 48×48 的 192² 性能](experiments/2026-10-27-wide-192/README.md)：两轮各 20 秒，192² 流体均值约 12.79–12.91 ms、模拟整步约 17.69–18.01 ms，约为本轮匹配 96² 的 5.28／2.51 倍；双区进程峰值 RSS 约 142–144 MiB。仅提高分辨率，保留已知域内泵驱动缺失，未改正式参数。
 

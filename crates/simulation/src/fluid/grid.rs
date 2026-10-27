@@ -1,8 +1,11 @@
 //! Stair-step MAC Stokes domain with pressure-traction openings.
 //! A is assembled from viscous energy; boundary-normal half cells carry half
 //! tangential energy. D and -D^T share the same face fluxes (cell area scaled out).
-use super::linear::StokesFactor;
+#[cfg(test)]
+use blood_fluid::cpu::LuFactory;
+use blood_fluid::{CsrMatrix, Geometry, PreparedSolver, SolverFactory, StokesProblem};
 use std::collections::VecDeque;
+use std::sync::Arc;
 
 const NONE: usize = usize::MAX;
 
@@ -27,7 +30,7 @@ pub(super) struct Grid {
     pub origin: [f64; 2],
     pub cells: Vec<usize>,
     components: [Component; 2],
-    factor: StokesFactor,
+    factor: Box<dyn PreparedSolver>,
 }
 
 pub(super) struct Field {
@@ -40,6 +43,7 @@ pub(super) struct Field {
 }
 
 impl Grid {
+    #[cfg(test)]
     pub fn new(
         n: usize,
         h: f64,
@@ -47,6 +51,18 @@ impl Grid {
         mask: Vec<bool>,
         viscosity: f64,
         openings: [bool; 4],
+    ) -> Result<Self, String> {
+        Self::with_factory(n, h, origin, mask, viscosity, openings, &LuFactory)
+    }
+
+    pub fn with_factory(
+        n: usize,
+        h: f64,
+        origin: [f64; 2],
+        mask: Vec<bool>,
+        viscosity: f64,
+        openings: [bool; 4],
+        factory: &dyn SolverFactory,
     ) -> Result<Self, String> {
         if n < 2
             || mask.len() != n * n
@@ -200,7 +216,23 @@ impl Grid {
         };
         let (u, v) = crate::threading::install(|| rayon::join(|| build(0), || build(1)));
         let components = [u?, v?];
-        let factor = Self::build_factor(&components, cells.len(), h)?;
+        let geometry = Geometry {
+            n,
+            h,
+            origin,
+            pressure_cells: cells.clone(),
+            u_positions: components[0].faces.iter().map(|f| f.position).collect(),
+            v_positions: components[1].faces.iter().map(|f| f.position).collect(),
+            openings,
+        };
+        let problem = Arc::new(Self::build_problem(
+            &components,
+            cells.len(),
+            h,
+            viscosity,
+            geometry,
+        )?);
+        let factor = factory.prepare(problem)?;
         Ok(Self {
             n,
             h,
@@ -256,7 +288,7 @@ impl Grid {
     }
 
     pub fn solve(
-        &self,
+        &mut self,
         force: &[f64],
         boundary: &impl Fn([f64; 2]) -> f64,
     ) -> Result<Field, String> {
@@ -277,7 +309,17 @@ impl Grid {
                 };
             }
         }
-        let (velocity, pressure) = self.factor.solve(&rhs);
+        let mut full_rhs = rhs.clone();
+        full_rhs.resize(self.velocity_count() + self.cells.len(), 0.);
+        let mut velocity = vec![0.; full_rhs.len()];
+        let report = self.factor.solve(&full_rhs, &mut velocity)?;
+        if !report.converged() {
+            return Err(format!(
+                "fluid solver {} failed: {}",
+                report.backend, report.status
+            ));
+        }
+        let pressure = velocity.split_off(self.velocity_count());
         let (divergence_rms, momentum_rms, net_flux) = self.measure(&velocity, &pressure, &rhs);
         Ok(Field {
             divergence_rms,
@@ -285,7 +327,7 @@ impl Grid {
             net_flux,
             velocity,
             pressure,
-            iterations: 0,
+            iterations: report.iterations,
         })
     }
 
@@ -385,33 +427,39 @@ fn peskin(r: f64) -> f64 {
 }
 
 impl Grid {
-    fn build_factor(
+    fn build_problem(
         components: &[Component; 2],
         pressure_count: usize,
         h: f64,
-    ) -> Result<StokesFactor, String> {
-        use faer::sparse::Triplet;
+        viscosity: f64,
+        geometry: Geometry,
+    ) -> Result<StokesProblem, String> {
         let nv: usize = components.iter().map(|c| c.faces.len()).sum();
         let mut entries = Vec::new();
         let mut offset = 0;
         for c in components {
             for (i, f) in c.faces.iter().enumerate() {
                 let row = offset + i;
-                entries.push(Triplet::new(row, row, c.diagonal[i]));
+                entries.push((row, row, c.diagonal[i]));
                 for &(j, a) in &c.neighbors[i] {
-                    entries.push(Triplet::new(row, offset + j, a));
+                    entries.push((row, offset + j, a));
                 }
                 // K = [ A, -B^T ; -B, 0 ], rhs = [ force ; 0 ].
                 // Keep the same one-sided opening gradient as Grid::transpose.
                 for (p, minus_b) in [(f.minus, -1.0 / h), (f.plus, 1.0 / h)] {
                     if p != NONE {
-                        entries.push(Triplet::new(row, nv + p, minus_b));
-                        entries.push(Triplet::new(nv + p, row, minus_b));
+                        entries.push((row, nv + p, minus_b));
+                        entries.push((nv + p, row, minus_b));
                     }
                 }
             }
             offset += c.faces.len();
         }
-        StokesFactor::new(nv, pressure_count, &entries)
+        Ok(StokesProblem {
+            matrix: CsrMatrix::from_triplets(nv + pressure_count, &entries)?,
+            velocity_count: nv,
+            viscosity,
+            geometry: Some(geometry),
+        })
     }
 }

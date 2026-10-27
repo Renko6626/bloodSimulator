@@ -1,0 +1,76 @@
+{
+  "accepted": false,
+  "adapter": {
+    "backend": "Vulkan",
+    "kind": "Cpu",
+    "name": "llvmpipe (LLVM 15.0.7, 256 bits)",
+    "software": true
+  },
+  "backend": "gpu-fgmres-mg",
+  "case": "/tmp/sunyunbo/blood-gpu-data-v1/wide192/region-0",
+  "command": [
+    "/tmp/sunyunbo/blood-gpu-lab-target/release/fluid-bench",
+    "run",
+    "--backend",
+    "gpu-fgmres-mg",
+    "--case",
+    "/tmp/sunyunbo/blood-gpu-data-v1/wide192/region-0",
+    "--limit",
+    "1",
+    "--max-iter",
+    "2",
+    "--allow-software",
+    "--out",
+    "/tmp/sunyunbo/blood-mg-negative-v1/budget.json"
+  ],
+  "hardware_measurement": false,
+  "mode": "run",
+  "notes": "Linear-system replay only; no Rapier/rendering timing. Wide-domain pump omission unchanged.",
+  "options": {
+    "max_iterations": 2,
+    "restart": 32,
+    "tolerance": 0.0001,
+    "v_cycles": 2
+  },
+  "rows": 33192,
+  "samples": [
+    {
+      "accepted": false,
+      "audit": {
+        "constraint_rms": 0.23716992676460538,
+        "finite": true,
+        "linear_residual_accepted": false,
+        "momentum_relative_rms": 0.2731287618189779,
+        "momentum_rms": 0.5874515580633438,
+        "pressure_reference_max_absolute": 6.464608502217927,
+        "relative_residual": 0.2842536370648018,
+        "velocity_reference_relative_l2": 3.0189077455924447
+      },
+      "mean_solve_ms": 106.074905,
+      "report": {
+        "backend": "gpu-fgmres-mg",
+        "counters": {
+          "dispatches": 246,
+          "readback_bytes": 132864,
+          "readback_wait_ms": 102.23058499999999,
+          "readbacks": 4,
+          "submissions": 8
+        },
+        "iterations": 2,
+        "multigrid_levels": [
+          21982,
+          5804,
+          1624,
+          485,
+          159,
+          64
+        ],
+        "status": "iteration_limit",
+        "stopping_relative": 0.5223519617214489
+      },
+      "sample": "000"
+    }
+  ],
+  "schema_version": 2,
+  "setup_ms": 775.849304
+}

@@ -1,0 +1,38 @@
+{
+  "completed_successfully": true,
+  "hardware_measurement": false,
+  "error": null,
+  "runs": [
+    {
+      "name": "small64-region-0-cpu-fgmres-mg-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "small64-region-1-cpu-fgmres-mg-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-0-cpu-fgmres-mg-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide96-region-1-cpu-fgmres-mg-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-0-cpu-fgmres-mg-r1",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "wide192-region-1-cpu-fgmres-mg-r1",
+      "exit_code": 0,
+      "accepted": true
+    }
+  ],
+  "notes": "Solver replay only. Never infer game-frame cost or hardware speedup from failed/software runs."
+}

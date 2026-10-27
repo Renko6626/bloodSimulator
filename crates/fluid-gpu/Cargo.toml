@@ -1,0 +1,13 @@
+[package]
+name = "blood-fluid-gpu"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+blood-fluid = { path = "../fluid" }
+wgpu.workspace = true
+pollster.workspace = true
+bytemuck.workspace = true
+serde.workspace = true
+serde_json.workspace = true
