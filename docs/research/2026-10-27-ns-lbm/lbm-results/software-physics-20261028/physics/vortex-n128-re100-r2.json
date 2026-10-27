@@ -1,0 +1,45 @@
+{
+  "adapter": {
+    "backend": "Vulkan",
+    "driver": "llvmpipe",
+    "driver_info": "Mesa 23.2.1-1ubuntu3.1~22.04.4 (LLVM 15.0.7)",
+    "name": "llvmpipe (LLVM 15.0.7, 256 bits)",
+    "software": true,
+    "type": "Cpu"
+  },
+  "advance_total_ms": 2241.4973250000007,
+  "case": "vortex",
+  "config": {
+    "active_cells": 16384,
+    "dt_lbm": 0.0003787878787878788,
+    "h": 0.04908738521234052,
+    "lx": 6.283185307179586,
+    "ly": 6.283185307179586,
+    "nu": 0.05,
+    "nx": 128,
+    "ny": 128,
+    "periodic_y": true,
+    "steps_per_frame": 44,
+    "steps_per_mechanical": 22,
+    "tau_nu": 0.5235802027385804
+  },
+  "device_total_ms": 2184.493720999999,
+  "diagnostics": {
+    "energy": 96.70384414468913,
+    "max_lattice_speed": 0.023053411911231718,
+    "max_mach": 0.03992968071806687,
+    "max_speed": 2.987507716895831,
+    "mean_u": 1.9999999861611286,
+    "mean_v": 0.700000138245148,
+    "re_measured_mean": 251.32741054813957,
+    "rho_max": 1.0000731145846657,
+    "rho_mean": 1.0000000000422702,
+    "rho_min": 0.9999269311083481
+  },
+  "max_relative_l2": 0.0005663379855723311,
+  "re_reference": 100.0,
+  "refinement": 2,
+  "relative_l2": 0.0005663379855723311,
+  "seconds": 1.0,
+  "steps": 2640
+}

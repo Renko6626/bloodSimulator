@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "backend": "Vulkan",
+    "driver": "NVIDIA",
+    "driver_info": "580.159.03",
+    "name": "NVIDIA GeForce RTX 3060",
+    "software": false,
+    "type": "DiscreteGpu"
+  },
+  "cases": [
+    {
+      "config": {
+        "active_cells": 288,
+        "dt_lbm": 0.004166666666666667,
+        "h": 0.25,
+        "lx": 6.0,
+        "ly": 3.0,
+        "nu": 0.1,
+        "nx": 24,
+        "ny": 12,
+        "periodic_y": true,
+        "steps_per_frame": 4,
+        "steps_per_mechanical": 2,
+        "tau_nu": 0.52
+      },
+      "diagnostics": {
+        "energy": 0.0367549700981242,
+        "max_lattice_speed": 0.0016037617324517462,
+        "max_mach": 0.0027777968038411086,
+        "max_speed": 0.09622570394710477,
+        "mean_u": 0.007708313279888696,
+        "mean_v": -0.0000833091710066785,
+        "re_measured_mean": 0.23124939839666087,
+        "rho_max": 1.0000069211382652,
+        "rho_mean": 0.9999999999999747,
+        "rho_min": 0.9999922559800325
+      },
+      "max_abs_velocity": 1.0634124342212559e-7,
+      "periodic_y": true,
+      "relative_velocity_l2": 9.301317697850481e-7,
+      "steps": 60
+    },
+    {
+      "config": {
+        "active_cells": 288,
+        "dt_lbm": 0.004166666666666667,
+        "h": 0.25,
+        "lx": 6.0,
+        "ly": 3.0,
+        "nu": 0.1,
+        "nx": 24,
+        "ny": 12,
+        "periodic_y": false,
+        "steps_per_frame": 4,
+        "steps_per_mechanical": 2,
+        "tau_nu": 0.52
+      },
+      "diagnostics": {
+        "energy": 0.03563900631345011,
+        "max_lattice_speed": 0.0016216861005953448,
+        "max_mach": 0.0028088427201593902,
+        "max_speed": 0.09730116603572068,
+        "mean_u": 0.007028403491454406,
+        "mean_v": 0.00006599810133896729,
+        "re_measured_mean": 0.21085210474363214,
+        "rho_max": 1.0000299764360534,
+        "rho_mean": 1.000000000004977,
+        "rho_min": 0.9999602313218929
+      },
+      "max_abs_velocity": 1.0923612345226097e-7,
+      "periodic_y": false,
+      "relative_velocity_l2": 9.385225695144824e-7,
+      "steps": 60
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "verified_bundle_sha256": "129d1236423b953fb8bffbe7f54eedb7f0c04d8ce0d3484e89a70e6281ea8ce4",
+  "binary_sha256": "e95ac670fcf85f8b10f48b0a5e740e152d6750688dcc65bbee27f55e2d016b6f",
+  "result_files_verified": 136,
+  "source_files_verified": 12,
+  "commands": 40,
+  "timing_configs": 10,
+  "timing_frames": 2400,
+  "physics_cases": 18
+}

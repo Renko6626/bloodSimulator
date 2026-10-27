@@ -1,0 +1,61 @@
+58420bd4f000-58420bdfa000 r--p 00000000 00:31 2156342600                 /workspace/blood-ns-profile-20261027/bin/profile
+58420bdfa000-58420c2ab000 r-xp 000aa000 00:31 2156342600                 /workspace/blood-ns-profile-20261027/bin/profile
+58420c2ab000-58420c2ca000 r--p 0055a000 00:31 2156342600                 /workspace/blood-ns-profile-20261027/bin/profile
+58420c2ca000-58420c2cc000 rw-p 00578000 00:31 2156342600                 /workspace/blood-ns-profile-20261027/bin/profile
+58422ae17000-58422ec2d000 rw-p 00000000 00:00 0                          [heap]
+7261bc000000-7261bc021000 rw-p 00000000 00:00 0 
+7261bc021000-7261c0000000 ---p 00000000 00:00 0 
+7261c4000000-7261c4021000 rw-p 00000000 00:00 0 
+7261c4021000-7261c8000000 ---p 00000000 00:00 0 
+7261cc000000-7261cc021000 rw-p 00000000 00:00 0 
+7261cc021000-7261d0000000 ---p 00000000 00:00 0 
+7261d3dff000-7261d3e00000 ---p 00000000 00:00 0 
+7261d3e00000-7261d4000000 rw-p 00000000 00:00 0 
+7261d4000000-7261d4021000 rw-p 00000000 00:00 0 
+7261d4021000-7261d8000000 ---p 00000000 00:00 0 
+7261da631000-7261da632000 ---p 00000000 00:00 0 
+7261da632000-7261da634000 rw-p 00000000 00:00 0 
+7261da634000-7261da635000 ---p 00000000 00:00 0 
+7261da635000-7261da637000 rw-p 00000000 00:00 0 
+7261da637000-7261da638000 ---p 00000000 00:00 0 
+7261da638000-7261da838000 rw-p 00000000 00:00 0 
+7261da838000-7261da839000 ---p 00000000 00:00 0 
+7261da839000-7261daa39000 rw-p 00000000 00:00 0 
+7261daa39000-7261daa3a000 ---p 00000000 00:00 0 
+7261daa3a000-7261dac3a000 rw-p 00000000 00:00 0 
+7261dac3a000-7261dac3c000 rw-p 00000000 00:00 0 
+7261dac3c000-7261dac64000 r--p 00000000 00:31 31375150                   /usr/lib/x86_64-linux-gnu/libc.so.6
+7261dac64000-7261daded000 r-xp 00028000 00:31 31375150                   /usr/lib/x86_64-linux-gnu/libc.so.6
+7261daded000-7261dae3c000 r--p 001b1000 00:31 31375150                   /usr/lib/x86_64-linux-gnu/libc.so.6
+7261dae3c000-7261dae40000 r--p 001ff000 00:31 31375150                   /usr/lib/x86_64-linux-gnu/libc.so.6
+7261dae40000-7261dae42000 rw-p 00203000 00:31 31375150                   /usr/lib/x86_64-linux-gnu/libc.so.6
+7261dae42000-7261dae4f000 rw-p 00000000 00:00 0 
+7261dae4f000-7261dae5f000 r--p 00000000 00:31 31375153                   /usr/lib/x86_64-linux-gnu/libm.so.6
+7261dae5f000-7261daede000 r-xp 00010000 00:31 31375153                   /usr/lib/x86_64-linux-gnu/libm.so.6
+7261daede000-7261daf36000 r--p 0008f000 00:31 31375153                   /usr/lib/x86_64-linux-gnu/libm.so.6
+7261daf36000-7261daf37000 r--p 000e7000 00:31 31375153                   /usr/lib/x86_64-linux-gnu/libm.so.6
+7261daf37000-7261daf38000 rw-p 000e8000 00:31 31375153                   /usr/lib/x86_64-linux-gnu/libm.so.6
+7261daf38000-7261daf3c000 r--p 00000000 00:31 1108536057                 /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+7261daf3c000-7261daf60000 r-xp 00004000 00:31 1108536057                 /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+7261daf60000-7261daf64000 r--p 00028000 00:31 1108536057                 /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+7261daf64000-7261daf65000 r--p 0002b000 00:31 1108536057                 /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+7261daf65000-7261daf66000 rw-p 0002c000 00:31 1108536057                 /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+7261daf67000-7261daf68000 ---p 00000000 00:00 0 
+7261daf68000-7261daf6a000 rw-p 00000000 00:00 0 
+7261daf6a000-7261daf6b000 ---p 00000000 00:00 0 
+7261daf6b000-7261daf6d000 rw-p 00000000 00:00 0 
+7261daf70000-7261daf71000 r--p 00000000 00:31 2156342602                 /workspace/blood-ns-profile-20261027/bin/sample.so
+7261daf71000-7261daf72000 r-xp 00001000 00:31 2156342602                 /workspace/blood-ns-profile-20261027/bin/sample.so
+7261daf72000-7261daf73000 r--p 00002000 00:31 2156342602                 /workspace/blood-ns-profile-20261027/bin/sample.so
+7261daf73000-7261daf74000 r--p 00002000 00:31 2156342602                 /workspace/blood-ns-profile-20261027/bin/sample.so
+7261daf74000-7261daf75000 rw-p 00003000 00:31 2156342602                 /workspace/blood-ns-profile-20261027/bin/sample.so
+7261daf75000-7261dbeb9000 rw-p 00000000 00:00 0 
+7261dbeb9000-7261dbeba000 r--p 00000000 00:31 31375147                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7261dbeba000-7261dbee5000 r-xp 00001000 00:31 31375147                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7261dbee5000-7261dbeef000 r--p 0002c000 00:31 31375147                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7261dbeef000-7261dbef1000 r--p 00036000 00:31 31375147                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7261dbef1000-7261dbef3000 rw-p 00038000 00:31 31375147                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7ffcf5d7f000-7ffcf5da1000 rw-p 00000000 00:00 0                          [stack]
+7ffcf5dc2000-7ffcf5dc6000 r--p 00000000 00:00 0                          [vvar]
+7ffcf5dc6000-7ffcf5dc8000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]

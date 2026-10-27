@@ -1,0 +1,6 @@
+{
+  "analysis_script_sha256": "8226c27dde768b8065680146a7686b964a7d1e5fc4b774817d3bb32b87aa92e4",
+  "command": "python3 docs/research/2026-10-27-ns-lbm/profile/analyze-profile.py docs/research/2026-10-27-ns-lbm/profile/results-vast/results",
+  "bundle_sha256": "cb6214724f45d9a9623ed1962c0409a0931c91e31ca23852d31da079cd11a27f",
+  "note": "Remote source archive contains earlier analyzer preview. This hash identifies final local analysis including ELF PT_LOAD mapping and numerical comparisons."
+}

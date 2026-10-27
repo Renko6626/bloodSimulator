@@ -1,0 +1,48 @@
+{
+  "adapter": {
+    "backend": "Vulkan",
+    "driver": "llvmpipe",
+    "driver_info": "Mesa 23.2.1-1ubuntu3.1~22.04.4 (LLVM 15.0.7)",
+    "name": "llvmpipe (LLVM 15.0.7, 256 bits)",
+    "software": true,
+    "type": "Cpu"
+  },
+  "body_model": "12 nodes; radius 0.7; mass 1; 4 markers; gamma 0.25",
+  "cell_init_ms": 0.9411660000000001,
+  "cells": 72,
+  "config": {
+    "active_cells": 5760,
+    "dt_lbm": 0.0005952380952380953,
+    "h": 0.25,
+    "lx": 48.0,
+    "ly": 7.5,
+    "nu": 0.75,
+    "nx": 192,
+    "ny": 30,
+    "periodic_y": false,
+    "steps_per_frame": 28,
+    "steps_per_mechanical": 14,
+    "tau_nu": 0.5214285714285715
+  },
+  "diagnostics": {
+    "energy": 20574.227396484144,
+    "max_lattice_speed": 0.034457002928860635,
+    "max_mach": 0.05968127974933623,
+    "max_speed": 14.471941230121464,
+    "mean_u": 9.752449452204424,
+    "mean_v": 1.5163970622388156e-8,
+    "re_measured_mean": 97.52449452204424,
+    "rho_max": 1.0000178071204573,
+    "rho_mean": 0.9999999996115447,
+    "rho_min": 0.9999820834491402
+  },
+  "dispatches_per_frame": 32,
+  "exchange": "explicit once per 1/120s; collocated bilinear; momentum kick",
+  "frames": 1,
+  "init_ms": 46.610443000000004,
+  "re_reference": 100.0,
+  "readback_bytes_per_frame": 184352,
+  "submissions_per_frame": 2,
+  "timestamps": true,
+  "warmup_frames": 30
+}

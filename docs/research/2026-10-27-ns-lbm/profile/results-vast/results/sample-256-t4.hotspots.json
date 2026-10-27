@@ -1,0 +1,1859 @@
+{
+  "metadata": {
+    "records": 28060,
+    "stored": 28060,
+    "overruns_in_active_stages": 2,
+    "timer_failures": 0,
+    "timers": 5,
+    "interval_ns": 2004008,
+    "main_tid": 1155,
+    "format": "little-endian u64 PC,u32 tid,u32 stage"
+  },
+  "unknown_symbols": 11,
+  "stage_samples": {
+    "advection": 16471,
+    "diffusion_u": 3195,
+    "diffusion_v": 3067,
+    "pressure_rhs": 292,
+    "pressure_solve": 3149,
+    "pressure_correct": 192,
+    "rapier": 1488,
+    "diagnostics": 156,
+    "coupling": 32,
+    "drive": 18
+  },
+  "thread_samples": [
+    {
+      "stage": "advection",
+      "tid": 1156,
+      "samples": 4125,
+      "main": false
+    },
+    {
+      "stage": "advection",
+      "tid": 1158,
+      "samples": 4121,
+      "main": false
+    },
+    {
+      "stage": "advection",
+      "tid": 1159,
+      "samples": 4117,
+      "main": false
+    },
+    {
+      "stage": "advection",
+      "tid": 1157,
+      "samples": 4106,
+      "main": false
+    },
+    {
+      "stage": "diffusion_u",
+      "tid": 1155,
+      "samples": 3190,
+      "main": true
+    },
+    {
+      "stage": "pressure_solve",
+      "tid": 1155,
+      "samples": 3149,
+      "main": true
+    },
+    {
+      "stage": "diffusion_v",
+      "tid": 1155,
+      "samples": 3066,
+      "main": true
+    },
+    {
+      "stage": "rapier",
+      "tid": 1155,
+      "samples": 380,
+      "main": true
+    },
+    {
+      "stage": "rapier",
+      "tid": 1156,
+      "samples": 350,
+      "main": false
+    },
+    {
+      "stage": "rapier",
+      "tid": 1157,
+      "samples": 343,
+      "main": false
+    },
+    {
+      "stage": "rapier",
+      "tid": 1158,
+      "samples": 306,
+      "main": false
+    },
+    {
+      "stage": "pressure_rhs",
+      "tid": 1155,
+      "samples": 292,
+      "main": true
+    },
+    {
+      "stage": "pressure_correct",
+      "tid": 1155,
+      "samples": 192,
+      "main": true
+    },
+    {
+      "stage": "diagnostics",
+      "tid": 1155,
+      "samples": 156,
+      "main": true
+    },
+    {
+      "stage": "rapier",
+      "tid": 1159,
+      "samples": 109,
+      "main": false
+    },
+    {
+      "stage": "coupling",
+      "tid": 1155,
+      "samples": 32,
+      "main": true
+    },
+    {
+      "stage": "drive",
+      "tid": 1156,
+      "samples": 7,
+      "main": false
+    },
+    {
+      "stage": "drive",
+      "tid": 1158,
+      "samples": 4,
+      "main": false
+    },
+    {
+      "stage": "drive",
+      "tid": 1157,
+      "samples": 4,
+      "main": false
+    },
+    {
+      "stage": "diffusion_u",
+      "tid": 1156,
+      "samples": 3,
+      "main": false
+    },
+    {
+      "stage": "drive",
+      "tid": 1155,
+      "samples": 2,
+      "main": true
+    },
+    {
+      "stage": "advection",
+      "tid": 1155,
+      "samples": 2,
+      "main": true
+    },
+    {
+      "stage": "diffusion_u",
+      "tid": 1157,
+      "samples": 1,
+      "main": false
+    },
+    {
+      "stage": "diffusion_v",
+      "tid": 1159,
+      "samples": 1,
+      "main": false
+    },
+    {
+      "stage": "diffusion_u",
+      "tid": 1158,
+      "samples": 1,
+      "main": false
+    },
+    {
+      "stage": "drive",
+      "tid": 1159,
+      "samples": 1,
+      "main": false
+    }
+  ],
+  "hotspots": [
+    {
+      "stage": "advection",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "ns_mac_lab::grid::weights",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.00:?",
+      "samples": 11700,
+      "stage_percent": 71.03393843725335,
+      "all_percent": 41.696364932287956
+    },
+    {
+      "stage": "advection",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<&<ns_mac_lab::grid::Grid>::advect::{closure#0} as core::ops::function::FnMut<((usize, &mut f64),)>>::call_mut",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.00:?",
+      "samples": 1985,
+      "stage_percent": 12.051484427175035,
+      "all_percent": 7.074126870990734
+    },
+    {
+      "stage": "advection",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "_RNvNtCsfkm9AioTFUP_10ns_mac_lab4grid13vector_sample.llvm.17788952620215612864",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.00:?",
+      "samples": 1370,
+      "stage_percent": 8.317649201627102,
+      "all_percent": 4.8823948681397
+    },
+    {
+      "stage": "advection",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "floor",
+      "source": "compiler_builtins.a799184123da7bba-cgu.246:?",
+      "samples": 1270,
+      "stage_percent": 7.710521522676219,
+      "all_percent": 4.526015680684248
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<pulp::x86::v3::V3>::vectorize::imp::<<pulp::x86::v3::V3 as pulp::Simd>::vectorize::Impl<faer::linalg::matmul::matvec_colmajor::matvec::Impl<f64>>>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.11:?",
+      "samples": 854,
+      "stage_percent": 26.72926447574335,
+      "all_percent": 3.0434782608695654
+    },
+    {
+      "stage": "pressure_solve",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<pulp::x86::v3::V3>::vectorize::imp::<<pulp::x86::v3::V3 as pulp::Simd>::vectorize::Impl<faer::linalg::matmul::matvec_colmajor::matvec::Impl<f64>>>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.11:?",
+      "samples": 733,
+      "stage_percent": 23.277230866941885,
+      "all_percent": 2.6122594440484677
+    },
+    {
+      "stage": "diffusion_v",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<pulp::x86::v3::V3>::vectorize::imp::<<pulp::x86::v3::V3 as pulp::Simd>::vectorize::Impl<faer::linalg::matmul::matvec_colmajor::matvec::Impl<f64>>>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.11:?",
+      "samples": 712,
+      "stage_percent": 23.214867949135964,
+      "all_percent": 2.5374198146828224
+    },
+    {
+      "stage": "pressure_solve",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<pulp::x86::v3::V3>::vectorize::imp::<<pulp::x86::v3::V3 as pulp::Simd>::vectorize::Impl<faer::linalg::matmul::matvec_rowmajor::matvec::Impl<f64>>>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.05:?",
+      "samples": 673,
+      "stage_percent": 21.37186408383614,
+      "all_percent": 2.398431931575196
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<pulp::x86::v3::V3>::vectorize::imp::<<pulp::x86::v3::V3 as pulp::Simd>::vectorize::Impl<faer::linalg::matmul::matvec_rowmajor::matvec::Impl<f64>>>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.05:?",
+      "samples": 653,
+      "stage_percent": 20.438184663536777,
+      "all_percent": 2.3271560940841054
+    },
+    {
+      "stage": "diffusion_v",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<pulp::x86::v3::V3>::vectorize::imp::<<pulp::x86::v3::V3 as pulp::Simd>::vectorize::Impl<faer::linalg::matmul::matvec_rowmajor::matvec::Impl<f64>>>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.05:?",
+      "samples": 613,
+      "stage_percent": 19.98695793935442,
+      "all_percent": 2.1846044191019245
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<faer::sparse::linalg::cholesky::supernodal::SupernodalLltRef<usize, f64>>::solve_in_place_with_conj",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.02:?",
+      "samples": 476,
+      "stage_percent": 14.898278560250391,
+      "all_percent": 1.6963649322879544
+    },
+    {
+      "stage": "pressure_solve",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<faer::sparse::linalg::cholesky::supernodal::SupernodalLltRef<usize, f64>>::solve_in_place_with_conj",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.02:?",
+      "samples": 474,
+      "stage_percent": 15.052397586535408,
+      "all_percent": 1.6892373485388454
+    },
+    {
+      "stage": "diffusion_v",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<faer::sparse::linalg::cholesky::supernodal::SupernodalLltRef<usize, f64>>::solve_in_place_with_conj",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.02:?",
+      "samples": 446,
+      "stage_percent": 14.541897619823931,
+      "all_percent": 1.5894511760513186
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "rapier2d::dynamics::solver::staged_island_solver::solve::solve_pass",
+      "source": "rapier2d.6f45b7eca759402f-cgu.07:?",
+      "samples": 406,
+      "stage_percent": 27.28494623655914,
+      "all_percent": 1.4468995010691377
+    },
+    {
+      "stage": "diffusion_v",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<pulp::x86::v3::V3>::vectorize::imp_fastcall::<<pulp::x86::v3::V3 as pulp::Simd>::vectorize::Impl<faer::linalg::triangular_solve::solve_lower_triangular_in_place_imp<f64>::{closure#2}>>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.08:?",
+      "samples": 392,
+      "stage_percent": 12.781219432670362,
+      "all_percent": 1.3970064148253742
+    },
+    {
+      "stage": "pressure_solve",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<pulp::x86::v3::V3>::vectorize::imp_fastcall::<<pulp::x86::v3::V3 as pulp::Simd>::vectorize::Impl<faer::linalg::triangular_solve::solve_lower_triangular_in_place_imp<f64>::{closure#2}>>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.08:?",
+      "samples": 381,
+      "stage_percent": 12.0990790727215,
+      "all_percent": 1.3578047042052743
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<pulp::x86::v3::V3>::vectorize::imp_fastcall::<<pulp::x86::v3::V3 as pulp::Simd>::vectorize::Impl<faer::linalg::triangular_solve::solve_lower_triangular_in_place_imp<f64>::{closure#2}>>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.08:?",
+      "samples": 372,
+      "stage_percent": 11.64319248826291,
+      "all_percent": 1.3257305773342838
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::solve_color_constraint",
+      "source": "rapier2d.6f45b7eca759402f-cgu.07:?",
+      "samples": 333,
+      "stage_percent": 22.379032258064516,
+      "all_percent": 1.1867426942266572
+    },
+    {
+      "stage": "diffusion_v",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "faer::linalg::matmul::matmul_imp::<f64>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.06:?",
+      "samples": 217,
+      "stage_percent": 7.075317900228236,
+      "all_percent": 0.7733428367783322
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "faer::linalg::matmul::matmul_imp::<f64>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.06:?",
+      "samples": 216,
+      "stage_percent": 6.76056338028169,
+      "all_percent": 0.7697790449037776
+    },
+    {
+      "stage": "pressure_solve",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "faer::linalg::matmul::matmul_imp::<f64>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.06:?",
+      "samples": 214,
+      "stage_percent": 6.795808193077168,
+      "all_percent": 0.7626514611546685
+    },
+    {
+      "stage": "pressure_correct",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<ns_mac_lab::grid::Grid>::project",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.00:?",
+      "samples": 192,
+      "stage_percent": 100.0,
+      "all_percent": 0.684248039914469
+    },
+    {
+      "stage": "rapier",
+      "module": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "function": "__sched_yield",
+      "source": "??:?",
+      "samples": 177,
+      "stage_percent": 11.89516129032258,
+      "all_percent": 0.6307911617961511
+    },
+    {
+      "stage": "pressure_rhs",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "_RNvMs0_NtCsfkm9AioTFUP_10ns_mac_lab4gridNtB5_4Grid13divergence_at.llvm.17788952620215612864",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.00:?",
+      "samples": 160,
+      "stage_percent": 54.794520547945204,
+      "all_percent": 0.5702066999287242
+    },
+    {
+      "stage": "pressure_solve",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "faer::linalg::triangular_solve::solve_lower_triangular_in_place_imp::<f64>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.08:?",
+      "samples": 135,
+      "stage_percent": 4.287075261987932,
+      "all_percent": 0.481111903064861
+    },
+    {
+      "stage": "diffusion_v",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "faer::linalg::triangular_solve::solve_lower_triangular_in_place_imp::<f64>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.08:?",
+      "samples": 134,
+      "stage_percent": 4.369090316269971,
+      "all_percent": 0.4775481111903065
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "faer::linalg::triangular_solve::solve_lower_triangular_in_place_imp::<f64>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.08:?",
+      "samples": 131,
+      "stage_percent": 4.100156494522691,
+      "all_percent": 0.4668567355666429
+    },
+    {
+      "stage": "pressure_solve",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<faer::sparse::linalg::cholesky::supernodal::SupernodalLltRef<usize, f64>>::supernode",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.02:?",
+      "samples": 130,
+      "stage_percent": 4.12829469672912,
+      "all_percent": 0.4632929436920884
+    },
+    {
+      "stage": "pressure_rhs",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<ns_mac_lab::grid::Grid>::project",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.00:?",
+      "samples": 130,
+      "stage_percent": 44.52054794520548,
+      "all_percent": 0.4632929436920884
+    },
+    {
+      "stage": "pressure_solve",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "faer::linalg::matmul::matvec_rowmajor::matvec::<f64>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.05:?",
+      "samples": 129,
+      "stage_percent": 4.096538583677358,
+      "all_percent": 0.4597291518175339
+    },
+    {
+      "stage": "diffusion_v",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "faer::linalg::matmul::matvec_rowmajor::matvec::<f64>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.05:?",
+      "samples": 124,
+      "stage_percent": 4.043038800130421,
+      "all_percent": 0.4419101924447612
+    },
+    {
+      "stage": "diffusion_v",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<faer::sparse::linalg::cholesky::supernodal::SupernodalLltRef<usize, f64>>::supernode",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.02:?",
+      "samples": 123,
+      "stage_percent": 4.010433648516465,
+      "all_percent": 0.4383464005702067
+    },
+    {
+      "stage": "pressure_solve",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "faer::linalg::matmul::matvec_colmajor::matvec::<f64>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.11:?",
+      "samples": 117,
+      "stage_percent": 3.7154652270562085,
+      "all_percent": 0.41696364932287955
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<faer::sparse::linalg::cholesky::supernodal::SupernodalLltRef<usize, f64>>::supernode",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.02:?",
+      "samples": 114,
+      "stage_percent": 3.568075117370892,
+      "all_percent": 0.406272273699216
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "faer::linalg::matmul::matvec_rowmajor::matvec::<f64>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.05:?",
+      "samples": 111,
+      "stage_percent": 3.4741784037558685,
+      "all_percent": 0.3955808980755524
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "faer::linalg::matmul::matvec_colmajor::matvec::<f64>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.11:?",
+      "samples": 108,
+      "stage_percent": 3.380281690140845,
+      "all_percent": 0.3848895224518888
+    },
+    {
+      "stage": "diffusion_v",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "faer::linalg::matmul::matvec_colmajor::matvec::<f64>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.11:?",
+      "samples": 106,
+      "stage_percent": 3.4561460710792304,
+      "all_percent": 0.37776193870277974
+    },
+    {
+      "stage": "diffusion_v",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<faer::sparse::linalg::cholesky::LltRef<usize, f64>>::solve_in_place_with_conj",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.13:?",
+      "samples": 102,
+      "stage_percent": 3.3257254646234107,
+      "all_percent": 0.36350677120456165
+    },
+    {
+      "stage": "diagnostics",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "_RNvMs0_NtCsfkm9AioTFUP_10ns_mac_lab4gridNtB5_4Grid13divergence_at.llvm.17788952620215612864",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.00:?",
+      "samples": 87,
+      "stage_percent": 55.76923076923077,
+      "all_percent": 0.31004989308624376
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::soft_constraint::soft_element_constraint::soft_scalar_constraint::SoftScalarConstraint>::apply_impulse",
+      "source": "rapier2d.6f45b7eca759402f-cgu.07:?",
+      "samples": 83,
+      "stage_percent": 5.577956989247312,
+      "all_percent": 0.29579472558802566
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "rapier2d::dynamics::solver::staged_island_solver::worker::run_worker",
+      "source": "rapier2d.6f45b7eca759402f-cgu.10:?",
+      "samples": 73,
+      "stage_percent": 4.905913978494624,
+      "all_percent": 0.2601568068424804
+    },
+    {
+      "stage": "pressure_solve",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<faer::sparse::linalg::cholesky::LltRef<usize, f64>>::solve_in_place_with_conj",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.13:?",
+      "samples": 71,
+      "stage_percent": 2.254684026675135,
+      "all_percent": 0.25302922309337134
+    },
+    {
+      "stage": "diagnostics",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<ns_mac_lab::grid::Grid>::diagnostics",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.00:?",
+      "samples": 68,
+      "stage_percent": 43.58974358974359,
+      "all_percent": 0.24233784746970777
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "faer::linalg::temp_mat_uninit::<f64, usize, usize>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.12:?",
+      "samples": 67,
+      "stage_percent": 2.0970266040688577,
+      "all_percent": 0.23877405559515325
+    },
+    {
+      "stage": "diffusion_v",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "faer::linalg::temp_mat_uninit::<f64, usize, usize>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.12:?",
+      "samples": 66,
+      "stage_percent": 2.15194000652103,
+      "all_percent": 0.23521026372059872
+    },
+    {
+      "stage": "pressure_solve",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "faer::linalg::temp_mat_uninit::<f64, usize, usize>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.12:?",
+      "samples": 66,
+      "stage_percent": 2.0959034614163228,
+      "all_percent": 0.23521026372059872
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<faer::sparse::linalg::cholesky::LltRef<usize, f64>>::solve_in_place_with_conj",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.13:?",
+      "samples": 55,
+      "stage_percent": 1.7214397496087637,
+      "all_percent": 0.19600855310049894
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::solve_volume_constraint",
+      "source": "rapier2d.6f45b7eca759402f-cgu.13:?",
+      "samples": 53,
+      "stage_percent": 3.5618279569892475,
+      "all_percent": 0.18888096935138987
+    },
+    {
+      "stage": "advection",
+      "module": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "function": "__sched_yield",
+      "source": "??:?",
+      "samples": 53,
+      "stage_percent": 0.32177766984396816,
+      "all_percent": 0.18888096935138987
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::writeback_constraints",
+      "source": "rapier2d.6f45b7eca759402f-cgu.13:?",
+      "samples": 35,
+      "stage_percent": 2.3521505376344085,
+      "all_percent": 0.1247327156094084
+    },
+    {
+      "stage": "rapier",
+      "module": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "function": "syscall",
+      "source": "??:?",
+      "samples": 33,
+      "stage_percent": 2.217741935483871,
+      "all_percent": 0.11760513186029936
+    },
+    {
+      "stage": "advection",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "_RNCINvNtCs5ASfKDLXyfD_10rayon_core4join12join_contextNCINvNvNtNtCsi2y6i1rReQX_5rayon4iter8plumbing24bridge_producer_consumer6helperINtNtBY_9enumerate17EnumerateProducerINtNtB10_5slice15IterMutProducerdEEINtNtBY_8for_each15ForEachConsumerNCNvMs0_NtCsfkm9AioTFUP_10ns_mac_lab4gridNtB3V_4Grid6advect0EE0NCBR_s_0uuE0B3X_.llvm.16107912906716103672",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.10:?",
+      "samples": 26,
+      "stage_percent": 0.15785319652722968,
+      "all_percent": 0.09265858873841767
+    },
+    {
+      "stage": "advection",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "rayon::iter::plumbing::bridge_producer_consumer::helper::<rayon::iter::enumerate::EnumerateProducer<rayon::slice::IterMutProducer<f64>>, rayon::iter::for_each::ForEachConsumer<<ns_mac_lab::grid::Grid>::advect::{closure#0}>>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.12:?",
+      "samples": 21,
+      "stage_percent": 0.1274968125796855,
+      "all_percent": 0.07483962936564505
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "function": "__nss_database_lookup",
+      "source": "??:?",
+      "samples": 21,
+      "stage_percent": 0.6572769953051644,
+      "all_percent": 0.07483962936564505
+    },
+    {
+      "stage": "advection",
+      "module": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "function": "syscall",
+      "source": "??:?",
+      "samples": 19,
+      "stage_percent": 0.11535425900066784,
+      "all_percent": 0.06771204561653599
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "crossbeam_epoch::default::with_handle::<crossbeam_epoch::default::pin::{closure#0}, crossbeam_epoch::guard::Guard>",
+      "source": "rayon_core.412a6610e189998b-cgu.0:?",
+      "samples": 19,
+      "stage_percent": 1.2768817204301075,
+      "all_percent": 0.06771204561653599
+    },
+    {
+      "stage": "diffusion_v",
+      "module": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "function": "__nss_database_lookup",
+      "source": "??:?",
+      "samples": 18,
+      "stage_percent": 0.58689272905119,
+      "all_percent": 0.06414825374198146
+    },
+    {
+      "stage": "pressure_solve",
+      "module": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "function": "__nss_database_lookup",
+      "source": "??:?",
+      "samples": 16,
+      "stage_percent": 0.5080978088281994,
+      "all_percent": 0.05702066999287242
+    },
+    {
+      "stage": "coupling",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "ns_mac_lab::grid::weights",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.00:?",
+      "samples": 15,
+      "stage_percent": 46.875,
+      "all_percent": 0.05345687811831789
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::solve_volume_constraint::{closure#1}",
+      "source": "rapier2d.6f45b7eca759402f-cgu.13:?",
+      "samples": 15,
+      "stage_percent": 1.0080645161290323,
+      "all_percent": 0.05345687811831789
+    },
+    {
+      "stage": "rapier",
+      "module": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "function": "__nss_database_lookup",
+      "source": "??:?",
+      "samples": 15,
+      "stage_percent": 1.0080645161290323,
+      "all_percent": 0.05345687811831789
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::fill_body_constraints",
+      "source": "rapier2d.6f45b7eca759402f-cgu.13:?",
+      "samples": 14,
+      "stage_percent": 0.9408602150537635,
+      "all_percent": 0.04989308624376337
+    },
+    {
+      "stage": "drive",
+      "module": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "function": "__sched_yield",
+      "source": "??:?",
+      "samples": 14,
+      "stage_percent": 77.77777777777777,
+      "all_percent": 0.04989308624376337
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::staged_island_solver::sync::StageSync>::claim",
+      "source": "rapier2d.6f45b7eca759402f-cgu.05:?",
+      "samples": 10,
+      "stage_percent": 0.6720430107526881,
+      "all_percent": 0.03563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::prepare_awake_body",
+      "source": "rapier2d.6f45b7eca759402f-cgu.13:?",
+      "samples": 10,
+      "stage_percent": 0.6720430107526881,
+      "all_percent": 0.03563791874554526
+    },
+    {
+      "stage": "diffusion_v",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "libpulp_v0_22_3_ld_b32s_1111110000000000",
+      "source": "??:?",
+      "samples": 10,
+      "stage_percent": 0.32605151613955,
+      "all_percent": 0.03563791874554526
+    },
+    {
+      "stage": "coupling",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<ns_mac_lab::coupling::Cells>::exchange",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.01:?",
+      "samples": 9,
+      "stage_percent": 28.125,
+      "all_percent": 0.03207412687099073
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<crossbeam_deque::deque::Stealer<rayon_core::job::JobRef>>::steal",
+      "source": "rayon_core.412a6610e189998b-cgu.0:?",
+      "samples": 9,
+      "stage_percent": 0.6048387096774194,
+      "all_percent": 0.03207412687099073
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "rapier2d::dynamics::soft_body::soft_body_set::soft_body_set_proxies::sync_soft_body",
+      "source": "rapier2d.6f45b7eca759402f-cgu.12:?",
+      "samples": 8,
+      "stage_percent": 0.5376344086021505,
+      "all_percent": 0.02851033499643621
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<parry2d::shape::polyline::Polyline>::update_vertices::<<rapier2d::dynamics::soft_body::collision_mesh::collision_mesh::SoftCollisionMesh>::deform_shape::{closure#0}>",
+      "source": "rapier2d.6f45b7eca759402f-cgu.12:?",
+      "samples": 7,
+      "stage_percent": 0.47043010752688175,
+      "all_percent": 0.024946543121881683
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::soft_body::soft_body::SoftBody>::elements_volume::<core::iter::adapters::map::Map<core::slice::iter::Iter<u32>, <rapier2d::dynamics::soft_body::soft_body_volume::SoftVolumePiece>::boundary_elements::{closure#0}>, <rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::prepare_awake_body::{closure#3}>",
+      "source": "rapier2d.6f45b7eca759402f-cgu.08:?",
+      "samples": 7,
+      "stage_percent": 0.47043010752688175,
+      "all_percent": 0.024946543121881683
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::writeback_particles",
+      "source": "rapier2d.6f45b7eca759402f-cgu.13:?",
+      "samples": 7,
+      "stage_percent": 0.47043010752688175,
+      "all_percent": 0.024946543121881683
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::assemble_contacts::<<rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#5}, <rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#6}>",
+      "source": "rapier2d.6f45b7eca759402f-cgu.13:?",
+      "samples": 7,
+      "stage_percent": 0.47043010752688175,
+      "all_percent": 0.024946543121881683
+    },
+    {
+      "stage": "advection",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "crossbeam_epoch::default::with_handle::<crossbeam_epoch::default::pin::{closure#0}, crossbeam_epoch::guard::Guard>",
+      "source": "rayon_core.412a6610e189998b-cgu.0:?",
+      "samples": 6,
+      "stage_percent": 0.036427660737053,
+      "all_percent": 0.021382751247327157
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "_RNvMs8_NtCs5ASfKDLXyfD_10rayon_core8registryNtB5_12WorkerThread9find_work.llvm.7439481908032698731",
+      "source": "rayon_core.412a6610e189998b-cgu.1:?",
+      "samples": 6,
+      "stage_percent": 0.4032258064516129,
+      "all_percent": 0.021382751247327157
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::soft_body::soft_body::SoftBody>::boundary_volume_gradients::<core::iter::adapters::map::Map<core::slice::iter::Iter<u32>, <rapier2d::dynamics::soft_body::soft_body_volume::SoftVolumePiece>::boundary_elements::{closure#0}>, <rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::prepare_awake_body::{closure#3}>",
+      "source": "rapier2d.6f45b7eca759402f-cgu.08:?",
+      "samples": 6,
+      "stage_percent": 0.4032258064516129,
+      "all_percent": 0.021382751247327157
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::soft_body::soft_body_set::soft_body_set::SoftBodySet>::apply_user_changes",
+      "source": "rapier2d.6f45b7eca759402f-cgu.12:?",
+      "samples": 6,
+      "stage_percent": 0.4032258064516129,
+      "all_percent": 0.021382751247327157
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::resweep_strained_constraints",
+      "source": "rapier2d.6f45b7eca759402f-cgu.13:?",
+      "samples": 6,
+      "stage_percent": 0.4032258064516129,
+      "all_percent": 0.021382751247327157
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::assemble::<<rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#2}, <rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#3}>",
+      "source": "rapier2d.6f45b7eca759402f-cgu.13:?",
+      "samples": 6,
+      "stage_percent": 0.4032258064516129,
+      "all_percent": 0.021382751247327157
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "libpulp_v0_22_3_ld_b32s_1111110000000000",
+      "source": "??:?",
+      "samples": 6,
+      "stage_percent": 0.18779342723004694,
+      "all_percent": 0.021382751247327157
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::fill_body_constraints::{closure#3}",
+      "source": "rapier2d.6f45b7eca759402f-cgu.13:?",
+      "samples": 6,
+      "stage_percent": 0.4032258064516129,
+      "all_percent": 0.021382751247327157
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::soft_body::soft_body::SoftBody>::update_orientation",
+      "source": "rapier2d.6f45b7eca759402f-cgu.08:?",
+      "samples": 6,
+      "stage_percent": 0.4032258064516129,
+      "all_percent": 0.021382751247327157
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rayon_core::registry::WorkerThread>::wait_until_cold",
+      "source": "??:?",
+      "samples": 5,
+      "stage_percent": 0.33602150537634407,
+      "all_percent": 0.01781895937277263
+    },
+    {
+      "stage": "pressure_solve",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "libpulp_v0_22_3_ld_b32s_1111110000000000",
+      "source": "??:?",
+      "samples": 5,
+      "stage_percent": 0.15878056525881232,
+      "all_percent": 0.01781895937277263
+    },
+    {
+      "stage": "advection",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<crossbeam_deque::deque::Stealer<rayon_core::job::JobRef>>::steal",
+      "source": "rayon_core.412a6610e189998b-cgu.0:?",
+      "samples": 4,
+      "stage_percent": 0.024285107158035335,
+      "all_percent": 0.014255167498218105
+    },
+    {
+      "stage": "rapier",
+      "module": "unmapped",
+      "function": "??",
+      "source": "??:0",
+      "samples": 4,
+      "stage_percent": 0.26881720430107525,
+      "all_percent": 0.014255167498218105
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::geometry::narrow_phase::NarrowPhase>::compute_contacts",
+      "source": "rapier2d.6f45b7eca759402f-cgu.03:?",
+      "samples": 4,
+      "stage_percent": 0.26881720430107525,
+      "all_percent": 0.014255167498218105
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "function": "__sched_yield",
+      "source": "??:?",
+      "samples": 4,
+      "stage_percent": 0.12519561815336464,
+      "all_percent": 0.014255167498218105
+    },
+    {
+      "stage": "rapier",
+      "module": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "function": "__default_morecore",
+      "source": "??:?",
+      "samples": 4,
+      "stage_percent": 0.26881720430107525,
+      "all_percent": 0.014255167498218105
+    },
+    {
+      "stage": "advection",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<crossbeam_deque::deque::Worker<rayon_core::job::JobRef>>::pop",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.05:?",
+      "samples": 4,
+      "stage_percent": 0.024285107158035335,
+      "all_percent": 0.014255167498218105
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<&<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::assemble<<rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#2}, <rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#3}>::{closure#3} as core::ops::function::FnMut<(usize,)>>::call_mut",
+      "source": "rapier2d.6f45b7eca759402f-cgu.14:?",
+      "samples": 4,
+      "stage_percent": 0.26881720430107525,
+      "all_percent": 0.014255167498218105
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::init_solver_bodies::<<rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#4}>",
+      "source": "rapier2d.6f45b7eca759402f-cgu.13:?",
+      "samples": 4,
+      "stage_percent": 0.26881720430107525,
+      "all_percent": 0.014255167498218105
+    },
+    {
+      "stage": "advection",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rayon_core::registry::WorkerThread>::wait_until_cold",
+      "source": "??:?",
+      "samples": 4,
+      "stage_percent": 0.024285107158035335,
+      "all_percent": 0.014255167498218105
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<parry2d::partitioning::bvh::bvh_tree::Bvh>::insert_or_update_partially",
+      "source": "??:?",
+      "samples": 4,
+      "stage_percent": 0.26881720430107525,
+      "all_percent": 0.014255167498218105
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "_RINvNtCsgxBkk5gSRhY_4core3ptr9drop_glueNtNtNtNtNtNtCs9yiBmyWKJv7_8rapier2d8dynamics6solver15soft_constraint21soft_contact_assembly31soft_contact_assembly_workspace12MeshContactsEBN_.llvm.9710066115483106744",
+      "source": "rapier2d.6f45b7eca759402f-cgu.08:?",
+      "samples": 4,
+      "stage_percent": 0.26881720430107525,
+      "all_percent": 0.014255167498218105
+    },
+    {
+      "stage": "pressure_solve",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "libpulp_v0_22_3_ld_b32s_1111000000000000",
+      "source": "??:?",
+      "samples": 3,
+      "stage_percent": 0.09526833915528739,
+      "all_percent": 0.010691375623663579
+    },
+    {
+      "stage": "diffusion_v",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "libpulp_v0_22_3_ld_b32s_1100000000000000",
+      "source": "??:?",
+      "samples": 3,
+      "stage_percent": 0.09781545484186502,
+      "all_percent": 0.010691375623663579
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::soft_body::soft_body::SoftBody>::cluster_frame",
+      "source": "rapier2d.6f45b7eca759402f-cgu.08:?",
+      "samples": 3,
+      "stage_percent": 0.20161290322580644,
+      "all_percent": 0.010691375623663579
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rayon_core::job::StackJob<rayon_core::latch::SpinLatch, rayon_core::join::join_context::call_b<(), rayon::iter::plumbing::bridge_producer_consumer::helper<rayon::range::IterProducer<usize>, rayon::iter::for_each::ForEachConsumer<<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::assemble<<rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#2}, <rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#3}>::{closure#3}>>::{closure#1}>::{closure#0}, ()> as rayon_core::job::Job>::execute",
+      "source": "rapier2d.6f45b7eca759402f-cgu.01:?",
+      "samples": 3,
+      "stage_percent": 0.20161290322580644,
+      "all_percent": 0.010691375623663579
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::soft_body::soft_body::SoftBody>::refresh_vertex_caches",
+      "source": "rapier2d.6f45b7eca759402f-cgu.08:?",
+      "samples": 3,
+      "stage_percent": 0.20161290322580644,
+      "all_percent": 0.010691375623663579
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "_RNCINvNtCs5ASfKDLXyfD_10rayon_core4join12join_contextNCINvNvNtNtCsi2y6i1rReQX_5rayon4iter8plumbing24bridge_producer_consumer6helperINtNtBY_3zip11ZipProducerINtNtB10_5slice12IterProducerTNtNtNtCs3sy18bPB7DX_7parry2d15bounding_volume4aabb4AabbmfEEINtB2x_15IterMutProducerNtNtNtNtB34_12partitioning3bvh10bvh_insert19BvhLeafUpdateStatusEEINtNtBY_8for_each15ForEachConsumerNCNvMB4l_NtNtB4n_8bvh_tree3Bvh41insert_or_update_batch_partially_parallel0EE0NCBR_s_0uuE0B34_.llvm.18098464367838948011",
+      "source": "parry2d.284e5fbc2306adf3-cgu.05:?",
+      "samples": 3,
+      "stage_percent": 0.20161290322580644,
+      "all_percent": 0.010691375623663579
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rayon_core::job::StackJob<rayon_core::latch::SpinLatch, rayon_core::join::join_context::call_b<rayon::iter::collect::consumer::CollectResult<rapier2d::dynamics::soft_body::soft_body_set::soft_body_set_proxies::SyncOutcome>, rayon::iter::plumbing::bridge_producer_consumer::helper<rayon::slice::IterMutProducer<(&mut rapier2d::dynamics::soft_body::soft_body::SoftBody, bool)>, rayon::iter::map::MapConsumer<rayon::iter::collect::consumer::CollectConsumer<rapier2d::dynamics::soft_body::soft_body_set::soft_body_set_proxies::SyncOutcome>, <rapier2d::dynamics::soft_body::soft_body_set::soft_body_set::SoftBodySet>::sync_particle_positions_and_collect::{closure#1}>>::{closure#1}>::{closure#0}, rayon::iter::collect::consumer::CollectResult<rapier2d::dynamics::soft_body::soft_body_set::soft_body_set_proxies::SyncOutcome>> as rayon_core::job::Job>::execute",
+      "source": "rapier2d.6f45b7eca759402f-cgu.01:?",
+      "samples": 3,
+      "stage_percent": 0.20161290322580644,
+      "all_percent": 0.010691375623663579
+    },
+    {
+      "stage": "coupling",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "_RNvNtCsfkm9AioTFUP_10ns_mac_lab4grid13vector_sample.llvm.17788952620215612864",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.00:?",
+      "samples": 3,
+      "stage_percent": 9.375,
+      "all_percent": 0.010691375623663579
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<parry2d::shape::polyline::Polyline as parry2d::shape::shape::Shape>::compute_local_aabb",
+      "source": "??:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "coupling",
+      "module": "unmapped",
+      "function": "??",
+      "source": "??:0",
+      "samples": 2,
+      "stage_percent": 6.25,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<alloc::vec::Vec<(rapier2d::geometry::collider_handle::ColliderHandle, parry2d::bounding_volume::aabb::Aabb, f32)>>::extend_desugared::<core::iter::adapters::flatten::Flatten<alloc::vec::into_iter::IntoIter<alloc::vec::Vec<(rapier2d::geometry::collider_handle::ColliderHandle, parry2d::bounding_volume::aabb::Aabb, f32)>>>>",
+      "source": "rapier2d.6f45b7eca759402f-cgu.00:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<&<rapier2d::pipeline::physics_pipeline::PhysicsPipeline>::build_islands_and_solve_velocity_constraints::{closure#2} as core::ops::function::FnMut<(&[rapier2d::dynamics::rigid_body_handle::RigidBodyHandle],)>>::call_mut",
+      "source": "rapier2d.6f45b7eca759402f-cgu.12:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "function": "atanf32",
+      "source": "??:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<parry2d::partitioning::bvh::bvh_tree::Bvh>::refit_recurse::<true>",
+      "source": "parry2d.284e5fbc2306adf3-cgu.00:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<core::iter::adapters::chain::Chain<core::ops::range::Range<usize>, core::ops::range::Range<usize>> as core::iter::traits::iterator::Iterator>::try_fold::<(), core::iter::adapters::filter::filter_try_fold<usize, (), core::ops::control_flow::ControlFlow<rayon_core::job::JobRef>, <rayon_core::registry::WorkerThread>::steal::{closure#0}, core::iter::traits::iterator::Iterator::find_map::check<usize, rayon_core::job::JobRef, <rayon_core::registry::WorkerThread>::steal::{closure#1}>::{closure#0}>::{closure#0}, core::ops::control_flow::ControlFlow<rayon_core::job::JobRef>>",
+      "source": "rayon_core.412a6610e189998b-cgu.2:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "advection",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rayon_core::job::StackJob<rayon_core::latch::SpinLatch, rayon_core::join::join_context::call_b<(), rayon::iter::plumbing::bridge_producer_consumer::helper<rayon::iter::enumerate::EnumerateProducer<rayon::slice::IterMutProducer<f64>>, rayon::iter::for_each::ForEachConsumer<<ns_mac_lab::grid::Grid>::advect::{closure#0}>>::{closure#1}>::{closure#0}, ()>>::run_inline",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.01:?",
+      "samples": 2,
+      "stage_percent": 0.012142553579017668,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "pressure_rhs",
+      "module": "unmapped",
+      "function": "??",
+      "source": "??:0",
+      "samples": 2,
+      "stage_percent": 0.684931506849315,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "libpulp_v0_22_3_ld_b32s_1100000000000000",
+      "source": "??:?",
+      "samples": 2,
+      "stage_percent": 0.06259780907668232,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<parry2d::partitioning::bvh::bvh_tree::Bvh>::rebuild_range_binned",
+      "source": "??:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<parry2d::shape::shared_shape::SharedShape>::make_mut",
+      "source": "??:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<parry2d::shape::polyline::Polyline as parry2d::shape::shape::Shape>::compute_aabb",
+      "source": "??:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::soft_body::collision_mesh::collision_mesh::SoftCollisionMesh>::refresh_vertex_cache",
+      "source": "rapier2d.6f45b7eca759402f-cgu.03:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "function": "__libc_free",
+      "source": "??:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "libpulp_v0_22_3_st_b32s_1111110000000000",
+      "source": "??:?",
+      "samples": 2,
+      "stage_percent": 0.06259780907668232,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::count_body_constraints",
+      "source": "rapier2d.6f45b7eca759402f-cgu.13:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<parry2d::shape::polyline::Polyline>::compute_pseudo_normals",
+      "source": "??:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<&<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::assemble_contacts<<rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#5}, <rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#6}>::{closure#1} as core::ops::function::FnMut<((usize, &mut rapier2d::dynamics::solver::soft_constraint::soft_contact_assembly::soft_contact_assembly_workspace::BodyContacts),)>>::call_mut",
+      "source": "rapier2d.6f45b7eca759402f-cgu.13:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rayon_core::job::StackJob<rayon_core::latch::SpinLatch, rayon_core::join::join_context::call_b<(), rayon::iter::plumbing::bridge_producer_consumer::helper<rayon::iter::enumerate::EnumerateProducer<rayon::slice::IterMutProducer<rapier2d::dynamics::solver::soft_constraint::soft_contact_assembly::soft_contact_assembly_workspace::BodyContacts>>, rayon::iter::for_each::ForEachConsumer<<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::assemble_contacts<<rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#5}, <rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#6}>::{closure#1}>>::{closure#1}>::{closure#0}, ()> as rayon_core::job::Job>::execute",
+      "source": "rapier2d.6f45b7eca759402f-cgu.01:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "coupling",
+      "module": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "function": "hypotf64",
+      "source": "??:?",
+      "samples": 2,
+      "stage_percent": 6.25,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "advection",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<crossbeam_deque::deque::Stealer<rayon_core::job::JobRef>>::steal",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.05:?",
+      "samples": 2,
+      "stage_percent": 0.012142553579017668,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "drive",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<ns_mac_lab::grid::Grid>::step",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.00:?",
+      "samples": 2,
+      "stage_percent": 11.11111111111111,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve",
+      "source": "rapier2d.6f45b7eca759402f-cgu.10:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "_RNvMs0_NtNtNtCs3sy18bPB7DX_7parry2d12partitioning3bvh9bvh_refitNtNtB7_8bvh_tree3Bvh25recurse_refit_without_opt.llvm.11946867757642033079",
+      "source": "parry2d.284e5fbc2306adf3-cgu.00:?",
+      "samples": 2,
+      "stage_percent": 0.13440860215053763,
+      "all_percent": 0.007127583749109052
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::pipeline::physics_pipeline::PhysicsPipeline>::step_inner",
+      "source": "rapier2d.6f45b7eca759402f-cgu.10:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<alloc::vec::Vec<rapier2d::dynamics::soft_body::soft_body_handle::SoftBodyHandle> as alloc::vec::spec_from_iter_nested::SpecFromIterNested<rapier2d::dynamics::soft_body::soft_body_handle::SoftBodyHandle, core::iter::adapters::map::Map<core::iter::adapters::filter::Filter<rapier2d::data::arena::Iter<rapier2d::dynamics::soft_body::soft_body::SoftBody>, <rapier2d::dynamics::soft_body::soft_body_set::soft_body_set::SoftBodySet>::apply_user_changes::{closure#0}>, <rapier2d::dynamics::soft_body::soft_body_set::soft_body_set::SoftBodySet>::apply_user_changes::{closure#1}>>>::from_iter",
+      "source": "rapier2d.6f45b7eca759402f-cgu.00:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "pressure_solve",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "libpulp_v0_22_3_st_b32s_1100000000000000",
+      "source": "??:?",
+      "samples": 1,
+      "stage_percent": 0.031756113051762465,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::soft_body::soft_body::SoftBody>::update_meshes",
+      "source": "rapier2d.6f45b7eca759402f-cgu.08:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<parry2d::partitioning::bvh::bvh_tree::Bvh>::refit_recurse::<false>",
+      "source": "parry2d.284e5fbc2306adf3-cgu.00:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "rayon_core::scope::do_in_place_scope::<<rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#12}, ()>",
+      "source": "rapier2d.6f45b7eca759402f-cgu.05:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "unmapped",
+      "function": "??",
+      "source": "??:0",
+      "samples": 1,
+      "stage_percent": 0.03129890453834116,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<alloc::vec::into_iter::IntoIter<(rapier2d::geometry::collider_handle::ColliderHandle, rapier2d::dynamics::soft_body::collision_mesh::collision_mesh::SoftMeshRef, rapier2d::geometry::narrow_phase::soft_contacts::soft_self_contacts::SoftSelfContacts)> as core::ops::drop::Drop>::drop",
+      "source": "rapier2d.6f45b7eca759402f-cgu.10:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "drive",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<crossbeam_deque::deque::Injector<rayon_core::job::JobRef>>::steal",
+      "source": "rayon_core.412a6610e189998b-cgu.0:?",
+      "samples": 1,
+      "stage_percent": 5.555555555555555,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<alloc::vec::Vec<rapier2d::dynamics::soft_body::soft_body_handle::SoftBodyHandle> as alloc::vec::spec_from_iter_nested::SpecFromIterNested<rapier2d::dynamics::soft_body::soft_body_handle::SoftBodyHandle, core::iter::adapters::map::Map<core::iter::adapters::filter::Filter<rapier2d::data::arena::Iter<rapier2d::dynamics::soft_body::soft_body::SoftBody>, <rapier2d::dynamics::soft_body::soft_body_set::soft_body_set::SoftBodySet>::apply_pending_tears::{closure#0}>, <rapier2d::dynamics::soft_body::soft_body_set::soft_body_set::SoftBodySet>::apply_pending_tears::{closure#1}>>>::from_iter",
+      "source": "rapier2d.6f45b7eca759402f-cgu.00:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::island_manager::manager::IslandManager>::update_substep_groups",
+      "source": "rapier2d.6f45b7eca759402f-cgu.03:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "function": "atan2f",
+      "source": "??:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::assemble_clusters",
+      "source": "rapier2d.6f45b7eca759402f-cgu.13:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<crossbeam_deque::deque::Worker<rayon_core::job::JobRef>>::pop",
+      "source": "rayon_core.412a6610e189998b-cgu.0:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::solver::solver_body::SolverBodies>::resize",
+      "source": "??:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<alloc::vec::Vec<(&mut rapier2d::dynamics::soft_body::soft_body::SoftBody, bool)> as alloc::vec::spec_from_iter_nested::SpecFromIterNested<(&mut rapier2d::dynamics::soft_body::soft_body::SoftBody, bool), core::iter::adapters::map::Map<rapier2d::data::arena::IterMut<rapier2d::dynamics::soft_body::soft_body::SoftBody>, <rapier2d::dynamics::soft_body::soft_body_set::soft_body_set::SoftBodySet>::sync_particle_positions_and_collect::{closure#0}>>>::from_iter",
+      "source": "rapier2d.6f45b7eca759402f-cgu.00:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "rayon::iter::plumbing::bridge_producer_consumer::helper::<rayon::range::IterProducer<usize>, rayon::iter::for_each::ForEachConsumer<<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::assemble<<rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#2}, <rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#3}>::{closure#3}>>",
+      "source": "rapier2d.6f45b7eca759402f-cgu.01:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "diffusion_v",
+      "module": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "function": "__sched_yield",
+      "source": "??:?",
+      "samples": 1,
+      "stage_percent": 0.032605151613955004,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "libpulp_v0_22_3_ld_b32s_1111000000000000",
+      "source": "??:?",
+      "samples": 1,
+      "stage_percent": 0.03129890453834116,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<crossbeam_deque::deque::Injector<rayon_core::job::JobRef>>::steal",
+      "source": "rayon_core.412a6610e189998b-cgu.0:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rayon_core::job::StackJob<rayon_core::latch::LatchRef<rayon_core::latch::LockLatch>, <rayon_core::registry::Registry>::in_worker_cold<rayon_core::join::join_context<rayon::iter::plumbing::bridge_producer_consumer::helper<rayon::slice::IterMutProducer<&mut rapier2d::dynamics::soft_body::soft_body::SoftBody>, rayon::iter::for_each::ForEachConsumer<<rapier2d::dynamics::soft_body::soft_body_set::soft_body_set::SoftBodySet>::refresh_vertex_caches::{closure#1}>>::{closure#0}, rayon::iter::plumbing::bridge_producer_consumer::helper<rayon::slice::IterMutProducer<&mut rapier2d::dynamics::soft_body::soft_body::SoftBody>, rayon::iter::for_each::ForEachConsumer<<rapier2d::dynamics::soft_body::soft_body_set::soft_body_set::SoftBodySet>::refresh_vertex_caches::{closure#1}>>::{closure#1}, (), ()>::{closure#0}, ((), ())>::{closure#0}::{closure#0}, ((), ())> as rayon_core::job::Job>::execute",
+      "source": "rapier2d.6f45b7eca759402f-cgu.01:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rayon_core::registry::WorkerThread>::take_local_job",
+      "source": "parry2d.284e5fbc2306adf3-cgu.05:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "rayon_core::current_num_threads",
+      "source": "??:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "rayon_core::join::join_context::<rayon::iter::plumbing::bridge_producer_consumer::helper<rayon::iter::enumerate::EnumerateProducer<rayon::slice::IterMutProducer<rapier2d::dynamics::solver::soft_constraint::soft_contact_assembly::soft_contact_assembly_workspace::BodyContacts>>, rayon::iter::for_each::ForEachConsumer<<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::assemble_contacts<<rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#5}, <rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#6}>::{closure#1}>>::{closure#0}, rayon::iter::plumbing::bridge_producer_consumer::helper<rayon::iter::enumerate::EnumerateProducer<rayon::slice::IterMutProducer<rapier2d::dynamics::solver::soft_constraint::soft_contact_assembly::soft_contact_assembly_workspace::BodyContacts>>, rayon::iter::for_each::ForEachConsumer<<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::assemble_contacts<<rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#5}, <rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#6}>::{closure#1}>>::{closure#1}, (), ()>::{closure#0}",
+      "source": "rapier2d.6f45b7eca759402f-cgu.01:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::soft_body::soft_body_set::soft_body_set::SoftBodySet>::update_cluster_proxies",
+      "source": "rapier2d.6f45b7eca759402f-cgu.12:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "_RNvXs4_NtCs5ASfKDLXyfD_10rayon_core5latchNtB5_9LockLatchNtB5_5Latch3set.llvm.6862911212203180740",
+      "source": "rapier2d.6f45b7eca759402f-cgu.05:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rayon_core::latch::LockLatch>::wait",
+      "source": "rayon_core.412a6610e189998b-cgu.4:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<alloc::vec::Vec<*mut rapier2d::dynamics::solver::solver_contact_graph::ContactRef> as alloc::vec::spec_from_iter_nested::SpecFromIterNested<*mut rapier2d::dynamics::solver::solver_contact_graph::ContactRef, core::iter::adapters::map::Map<core::iter::adapters::zip::Zip<core::slice::iter::IterMut<alloc::vec::Vec<rapier2d::dynamics::solver::solver_contact_graph::ContactRef>>, core::slice::iter::Iter<u32>>, <rapier2d::dynamics::solver::solver_contact_graph::SolverContactGraph>::resize_for_bulk_rebuild::{closure#0}>>>::from_iter",
+      "source": "rapier2d.6f45b7eca759402f-cgu.00:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<alloc::vec::Vec<&mut rapier2d::dynamics::soft_body::soft_body::SoftBody> as alloc::vec::spec_from_iter_nested::SpecFromIterNested<&mut rapier2d::dynamics::soft_body::soft_body::SoftBody, core::iter::adapters::map::Map<rapier2d::data::arena::IterMut<rapier2d::dynamics::soft_body::soft_body::SoftBody>, <rapier2d::dynamics::soft_body::soft_body_set::soft_body_set::SoftBodySet>::refresh_vertex_caches::{closure#0}>>>::from_iter",
+      "source": "rapier2d.6f45b7eca759402f-cgu.00:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "_RNvMNtNtNtCs3sy18bPB7DX_7parry2d12partitioning3bvh10bvh_insertNtNtB4_8bvh_tree3Bvh20insert_new_unchecked.llvm.11946867757642033079",
+      "source": "parry2d.284e5fbc2306adf3-cgu.00:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::soft_body::soft_body::SoftBody>::elements_volume::<&[[u32; 2]], <rapier2d::dynamics::soft_body::collision_mesh::collision_mesh::SoftCollisionMesh>::update_orientation::{closure#0}>",
+      "source": "rapier2d.6f45b7eca759402f-cgu.08:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::dynamics::soft_body::soft_body_set::soft_body_set::SoftBodySet>::sync_particle_positions_and_collect",
+      "source": "rapier2d.6f45b7eca759402f-cgu.12:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<alloc::vec::Vec<(rapier2d::geometry::collider_handle::ColliderHandle, rapier2d::geometry::collider_handle::ColliderHandle)> as alloc::vec::spec_extend::SpecExtend<(rapier2d::geometry::collider_handle::ColliderHandle, rapier2d::geometry::collider_handle::ColliderHandle), core::iter::adapters::flatten::FlatMap<core::slice::iter::Chunks<(u32, u32)>, core::iter::adapters::filter_map::FilterMap<core::slice::iter::Iter<(u32, u32)>, <rapier2d::geometry::broad_phase_bvh::BroadPhaseBvh>::update::{closure#3}>, &<rapier2d::geometry::broad_phase_bvh::BroadPhaseBvh>::update::{closure#4}>>>::spec_extend",
+      "source": "rapier2d.6f45b7eca759402f-cgu.00:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<&<parry2d::partitioning::bvh::bvh_tree::Bvh>::insert_or_update_batch_partially_parallel::{closure#0} as core::ops::function::FnMut<((&(parry2d::bounding_volume::aabb::Aabb, u32, f32), &mut parry2d::partitioning::bvh::bvh_insert::BvhLeafUpdateStatus),)>>::call_mut",
+      "source": "parry2d.284e5fbc2306adf3-cgu.15:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<parry2d::partitioning::bvh::bvh_tree::Bvh>::insert_with_change_detection",
+      "source": "??:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "diffusion_u",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "crossbeam_epoch::default::with_handle::<crossbeam_epoch::default::pin::{closure#0}, crossbeam_epoch::guard::Guard>",
+      "source": "rayon_core.412a6610e189998b-cgu.0:?",
+      "samples": 1,
+      "stage_percent": 0.03129890453834116,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "rayon::iter::plumbing::bridge_producer_consumer::helper::<rayon::slice::IterMutProducer<&mut rapier2d::dynamics::soft_body::soft_body::SoftBody>, rayon::iter::for_each::ForEachConsumer<<rapier2d::dynamics::soft_body::soft_body_set::soft_body_set::SoftBodySet>::refresh_vertex_caches::{closure#1}>>",
+      "source": "rapier2d.6f45b7eca759402f-cgu.01:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rayon_core::job::StackJob<rayon_core::latch::SpinLatch, rayon_core::join::join_context::call_b<(), rayon::iter::plumbing::bridge_producer_consumer::helper<rayon::iter::zip::ZipProducer<rayon::slice::IterProducer<(parry2d::bounding_volume::aabb::Aabb, u32, f32)>, rayon::slice::IterMutProducer<parry2d::partitioning::bvh::bvh_insert::BvhLeafUpdateStatus>>, rayon::iter::for_each::ForEachConsumer<<parry2d::partitioning::bvh::bvh_tree::Bvh>::insert_or_update_batch_partially_parallel::{closure#0}>>::{closure#1}>::{closure#0}, ()> as rayon_core::job::Job>::execute",
+      "source": "parry2d.284e5fbc2306adf3-cgu.05:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::geometry::collider::Collider>::compute_broad_phase_aabb",
+      "source": "??:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "drive",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "crossbeam_epoch::default::with_handle::<crossbeam_epoch::default::pin::{closure#0}, crossbeam_epoch::guard::Guard>",
+      "source": "rayon_core.412a6610e189998b-cgu.0:?",
+      "samples": 1,
+      "stage_percent": 5.555555555555555,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rayon_core::latch::LockLatch as rayon_core::latch::Latch>::set",
+      "source": "rapier2d.6f45b7eca759402f-cgu.01:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<alloc::vec::Vec<rapier2d::dynamics::rigid_body_handle::RigidBodyHandle>>::extend_desugared::<core::iter::adapters::flatten::FlatMap<core::option::IntoIter<usize>, core::iter::adapters::copied::Copied<core::slice::iter::Iter<rapier2d::dynamics::rigid_body_handle::RigidBodyHandle>>, <rapier2d::dynamics::island_manager::manager::IslandManager>::active_bodies::{closure#0}>>",
+      "source": "rapier2d.6f45b7eca759402f-cgu.00:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::pipeline::physics_pipeline::PhysicsPipeline>::step",
+      "source": "??:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rapier2d::geometry::narrow_phase::NarrowPhase>::emit_contact_force_events",
+      "source": "rapier2d.6f45b7eca759402f-cgu.03:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<parry2d::partitioning::bvh::bvh_tree::Bvh>::traverse_two_branches::<true, <parry2d::partitioning::bvh::bvh_tree::Bvh>::self_intersect_node_parallel<true>::{closure#0}>",
+      "source": "rapier2d.6f45b7eca759402f-cgu.06:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "pressure_solve",
+      "module": "unmapped",
+      "function": "??",
+      "source": "??:0",
+      "samples": 1,
+      "stage_percent": 0.031756113051762465,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<alloc::vec::Vec<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::AwakeCluster> as alloc::vec::spec_from_iter::SpecFromIter<rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::AwakeCluster, core::iter::adapters::map::Map<core::iter::adapters::filter::Filter<core::iter::adapters::enumerate::Enumerate<core::slice::iter::Iter<rapier2d::dynamics::soft_body::soft_body_cluster::SoftBodyCluster>>, <rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::collect_awake_bodies<<rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#2}>::{closure#2}>, <rapier2d::dynamics::solver::soft_constraint::soft_constraints_set::soft_constraints_set::SoftConstraintsSet>::collect_awake_bodies<<rapier2d::dynamics::solver::staged_island_solver::StagedIslandSolver>::init_and_solve::{closure#2}>::{closure#3}>>>::from_iter",
+      "source": "rapier2d.6f45b7eca759402f-cgu.00:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "diagnostics",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<ns_mac_lab::coupling::Cells>::diagnostics",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.01:?",
+      "samples": 1,
+      "stage_percent": 0.6410256410256411,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "advection",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rayon_core::job::StackJob<rayon_core::latch::SpinLatch, rayon_core::join::join_context::call_b<(), rayon::iter::plumbing::bridge_producer_consumer::helper<rayon::iter::enumerate::EnumerateProducer<rayon::slice::IterMutProducer<f64>>, rayon::iter::for_each::ForEachConsumer<<ns_mac_lab::grid::Grid>::advect::{closure#0}>>::{closure#1}>::{closure#0}, ()> as rayon_core::job::Job>::execute",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.01:?",
+      "samples": 1,
+      "stage_percent": 0.006071276789508834,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "advection",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<crossbeam_epoch::internal::Global>::try_advance",
+      "source": "crossbeam_epoch.7dc25a2a7cf7b639-cgu.0:?",
+      "samples": 1,
+      "stage_percent": 0.006071276789508834,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "advection",
+      "module": "unmapped",
+      "function": "??",
+      "source": "??:0",
+      "samples": 1,
+      "stage_percent": 0.006071276789508834,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "coupling",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "floor",
+      "source": "compiler_builtins.a799184123da7bba-cgu.246:?",
+      "samples": 1,
+      "stage_percent": 3.125,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "advection",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<rayon_core::sleep::Sleep>::wake_any_threads",
+      "source": "??:?",
+      "samples": 1,
+      "stage_percent": 0.006071276789508834,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "advection",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "crossbeam_epoch::default::with_handle::<crossbeam_epoch::default::pin::{closure#0}, crossbeam_epoch::guard::Guard>",
+      "source": "ns_mac_lab.b289e8826f507e71-cgu.05:?",
+      "samples": 1,
+      "stage_percent": 0.006071276789508834,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "function": "timer_settime",
+      "source": "??:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<crossbeam_epoch::internal::Global>::try_advance",
+      "source": "crossbeam_epoch.7dc25a2a7cf7b639-cgu.0:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "_RNCINvNtCs5ASfKDLXyfD_10rayon_core4join12join_contextNCINvNvNtNtCsi2y6i1rReQX_5rayon4iter8plumbing24bridge_producer_consumer6helperINtNtB10_5slice15IterMutProducerQNtNtNtNtCs9yiBmyWKJv7_8rapier2d8dynamics9soft_body9soft_body8SoftBodyEINtNtBY_8for_each15ForEachConsumerNCNvMNtNtB2G_13soft_body_set23soft_body_set_step_syncNtNtB4p_13soft_body_set11SoftBodySet21refresh_vertex_cachess_0EE0NCBR_s_0uuE0B2K_.llvm.6862911212203180740",
+      "source": "rapier2d.6f45b7eca759402f-cgu.05:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    },
+    {
+      "stage": "rapier",
+      "module": "/workspace/blood-ns-profile-20261027/bin/profile",
+      "function": "<std::sys::sync::mutex::futex::Mutex>::lock_contended",
+      "source": "??:?",
+      "samples": 1,
+      "stage_percent": 0.06720430107526881,
+      "all_percent": 0.003563791874554526
+    }
+  ]
+}

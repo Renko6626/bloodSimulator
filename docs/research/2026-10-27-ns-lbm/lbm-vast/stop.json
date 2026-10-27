@@ -1,0 +1,29 @@
+{
+  "id": 57988490,
+  "public_ipaddr": "124.60.192.12",
+  "mapped_ssh_port": 35018,
+  "results_verified": {
+    "verified_bundle_sha256": "129d1236423b953fb8bffbe7f54eedb7f0c04d8ce0d3484e89a70e6281ea8ce4",
+    "binary_sha256": "e95ac670fcf85f8b10f48b0a5e740e152d6750688dcc65bbee27f55e2d016b6f",
+    "result_files_verified": 136,
+    "source_files_verified": 12,
+    "commands": 40,
+    "timing_configs": 10,
+    "timing_frames": 2400,
+    "physics_cases": 18
+  },
+  "requested_at": "2026-10-27T17:17:42.122671+00:00",
+  "response": {
+    "success": true
+  },
+  "last_checked_at": "2026-10-27T17:18:17.880007+00:00",
+  "final_status": {
+    "id": 57988490,
+    "actual_status": "exited",
+    "cur_state": "stopped",
+    "intended_status": "stopped",
+    "public_ipaddr": "124.60.192.12",
+    "ssh_host": "ssh7.vast.ai",
+    "ssh_port": 11786
+  }
+}

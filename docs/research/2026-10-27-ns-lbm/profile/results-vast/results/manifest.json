@@ -1,0 +1,548 @@
+{
+  "started": "2026-10-27T13:35:37.295576+00:00",
+  "commands": [
+    {
+      "argv": [
+        "lscpu"
+      ],
+      "environment_overrides": {},
+      "log": "cpu-info.log",
+      "returncode": 0,
+      "wall_seconds": 0.039879396092146635
+    },
+    {
+      "argv": [
+        "nvidia-smi",
+        "-q"
+      ],
+      "environment_overrides": {},
+      "log": "gpu-info.log",
+      "returncode": 0,
+      "wall_seconds": 0.15144006500486284
+    },
+    {
+      "argv": [
+        "./bin/perf-probe"
+      ],
+      "environment_overrides": {},
+      "log": "perf-permission.log",
+      "returncode": 1,
+      "wall_seconds": 0.0014412750024348497
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/baseline",
+        "bench",
+        "192",
+        "192",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r1-192-baseline"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "4"
+      },
+      "log": "r1-192-baseline.log",
+      "returncode": 0,
+      "wall_seconds": 10.419699644902721
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "192",
+        "192",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r1-192-off4"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "4"
+      },
+      "log": "r1-192-off4.log",
+      "returncode": 0,
+      "wall_seconds": 10.629987120977603
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "192",
+        "192",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r1-192-detail4"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "4",
+        "NS_PROFILE": "1"
+      },
+      "log": "r1-192-detail4.log",
+      "returncode": 0,
+      "wall_seconds": 10.480044850031845
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "192",
+        "192",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r1-192-off1"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "1"
+      },
+      "log": "r1-192-off1.log",
+      "returncode": 0,
+      "wall_seconds": 26.88360873691272
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "192",
+        "192",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r1-192-detail1"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "1",
+        "NS_PROFILE": "1"
+      },
+      "log": "r1-192-detail1.log",
+      "returncode": 0,
+      "wall_seconds": 26.849919834989123
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/baseline",
+        "bench",
+        "256",
+        "256",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r1-256-baseline"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "4"
+      },
+      "log": "r1-256-baseline.log",
+      "returncode": 0,
+      "wall_seconds": 18.28295983292628
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "256",
+        "256",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r1-256-off4"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "4"
+      },
+      "log": "r1-256-off4.log",
+      "returncode": 0,
+      "wall_seconds": 18.359677547006868
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "256",
+        "256",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r1-256-detail4"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "4",
+        "NS_PROFILE": "1"
+      },
+      "log": "r1-256-detail4.log",
+      "returncode": 0,
+      "wall_seconds": 19.50733415898867
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "256",
+        "256",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r1-256-off1"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "1"
+      },
+      "log": "r1-256-off1.log",
+      "returncode": 0,
+      "wall_seconds": 40.90563746995758
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "256",
+        "256",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r1-256-detail1"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "1",
+        "NS_PROFILE": "1"
+      },
+      "log": "r1-256-detail1.log",
+      "returncode": 0,
+      "wall_seconds": 40.57269641500898
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "256",
+        "256",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r2-256-detail1"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "1",
+        "NS_PROFILE": "1"
+      },
+      "log": "r2-256-detail1.log",
+      "returncode": 0,
+      "wall_seconds": 41.25203282898292
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "256",
+        "256",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r2-256-off1"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "1"
+      },
+      "log": "r2-256-off1.log",
+      "returncode": 0,
+      "wall_seconds": 41.02930222894065
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "256",
+        "256",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r2-256-detail4"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "4",
+        "NS_PROFILE": "1"
+      },
+      "log": "r2-256-detail4.log",
+      "returncode": 0,
+      "wall_seconds": 19.376392186968587
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "256",
+        "256",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r2-256-off4"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "4"
+      },
+      "log": "r2-256-off4.log",
+      "returncode": 0,
+      "wall_seconds": 19.228561614989303
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/baseline",
+        "bench",
+        "256",
+        "256",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r2-256-baseline"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "4"
+      },
+      "log": "r2-256-baseline.log",
+      "returncode": 0,
+      "wall_seconds": 18.6193029419519
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "192",
+        "192",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r2-192-detail1"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "1",
+        "NS_PROFILE": "1"
+      },
+      "log": "r2-192-detail1.log",
+      "returncode": 0,
+      "wall_seconds": 26.76230233197566
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "192",
+        "192",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r2-192-off1"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "1"
+      },
+      "log": "r2-192-off1.log",
+      "returncode": 0,
+      "wall_seconds": 26.987618390005082
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "192",
+        "192",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r2-192-detail4"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "4",
+        "NS_PROFILE": "1"
+      },
+      "log": "r2-192-detail4.log",
+      "returncode": 0,
+      "wall_seconds": 10.536027322988957
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "192",
+        "192",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r2-192-off4"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "4"
+      },
+      "log": "r2-192-off4.log",
+      "returncode": 0,
+      "wall_seconds": 10.53777119400911
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/baseline",
+        "bench",
+        "192",
+        "192",
+        "72",
+        "120",
+        "/workspace/blood-ns-profile-20261027/results/r2-192-baseline"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "4"
+      },
+      "log": "r2-192-baseline.log",
+      "returncode": 0,
+      "wall_seconds": 10.744579100981355
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "192",
+        "192",
+        "72",
+        "240",
+        "/workspace/blood-ns-profile-20261027/results/sample-192-t4"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "4",
+        "NS_PROFILE": "1",
+        "LD_PRELOAD": "/workspace/blood-ns-profile-20261027/bin/sample.so",
+        "NS_SAMPLES": "/workspace/blood-ns-profile-20261027/results/sample-192-t4.samples"
+      },
+      "log": "sample-192-t4.log",
+      "returncode": 0,
+      "wall_seconds": 19.267296985024586
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "bench",
+        "256",
+        "256",
+        "72",
+        "240",
+        "/workspace/blood-ns-profile-20261027/results/sample-256-t4"
+      ],
+      "environment_overrides": {
+        "NS_THREADS": "4",
+        "NS_PROFILE": "1",
+        "LD_PRELOAD": "/workspace/blood-ns-profile-20261027/bin/sample.so",
+        "NS_SAMPLES": "/workspace/blood-ns-profile-20261027/results/sample-256-t4.samples"
+      },
+      "log": "sample-256-t4.log",
+      "returncode": 0,
+      "wall_seconds": 33.906991235911846
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-ns-profile-20261027/bin/profile",
+        "physics",
+        "/workspace/blood-ns-profile-20261027/results/physics"
+      ],
+      "environment_overrides": {},
+      "log": "physics.log",
+      "returncode": 0,
+      "wall_seconds": 64.5212521610083
+    }
+  ],
+  "status": "complete",
+  "cpus": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "frames": 120,
+  "physical_substeps": 2,
+  "dt": 0.008333333333333333,
+  "environment_start": {
+    "/proc/loadavg": "0.39 0.51 1.27 1/2196 955\n",
+    "/proc/sys/kernel/perf_event_paranoid": "4\n",
+    "/proc/self/status": "Name:\tpython3\nUmask:\t0002\nState:\tR (running)\nTgid:\t955\nNgid:\t0\nPid:\t955\nPPid:\t952\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t64\nGroups:\t0 \nNStgid:\t955\nNSpid:\t955\nNSpgid:\t951\nNSsid:\t951\nKthread:\t0\nVmPeak:\t   22824 kB\nVmSize:\t   22732 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   16448 kB\nVmRSS:\t   16448 kB\nRssAnon:\t    6596 kB\nRssFile:\t    9852 kB\nRssShmem:\t       0 kB\nVmData:\t    7104 kB\nVmStk:\t     136 kB\nVmExe:\t    2956 kB\nVmLib:\t    5780 kB\nVmPTE:\t      84 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffffff\nThreads:\t1\nSigQ:\t2/513501\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000001001001\nSigCgt:\t0000000000000002\nCapInh:\t0000000000000000\nCapPrm:\t00000000a80405fb\nCapEff:\t00000000a80405fb\nCapBnd:\t00000000a80405fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tthread vulnerable\nSpeculationIndirectBranch:\tconditional enabled\nCpus_allowed:\tffffffff,ffffffff\nCpus_allowed_list:\t0-63\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000003\nMems_allowed_list:\t0-1\nvoluntary_ctxt_switches:\t0\nnonvoluntary_ctxt_switches:\t0\nx86_Thread_features:\t\nx86_Thread_features_locked:\t\n",
+    "/sys/fs/cgroup/cpu.max": "1536000 100000\n",
+    "/sys/fs/cgroup/cpu.stat": "usage_usec 49427880\nuser_usec 43716678\nsystem_usec 5711202\ncore_sched.force_idle_usec 0\nnr_periods 5562\nnr_throttled 2\nthrottled_usec 8986734\nnr_bursts 0\nburst_usec 0\n",
+    "/root/.vast_containerlabel": "C.57949215\n"
+  },
+  "input_hashes": {
+    "bin/baseline": "c443cc4bc64998ad4b2a5b2ef2f7ddc9bba8c7cb7fc9cbe83bf175f0f199f69b",
+    "bin/perf-probe": "971c618f38b9ed65ef9eca638acb79b9aa49b16974976d69e70ec563dd1eb582",
+    "bin/profile": "0a4eeaae403ba9f954f33820b3a3dfabf45bcb7d3f6ad7f7daa3200dc9170a7d",
+    "bin/sample.so": "a3122c1e045ede530b3fb1968ae86b3e5521ef25511ba72ba956f13534649894"
+  },
+  "sources_sha256": {
+    "source/lab/Cargo.lock": "6003f5895895b07ed9529909aa030d6204f6f3be1b60d03ed4e9be6addfc9d30",
+    "source/lab/Cargo.toml": "7dc69f1feb6218a43327731a3b410232b2bc02faef79348bb125489998929894",
+    "source/lab/src/cases.rs": "86bca4e98b334f2328929dcbabefbb35d30dd0b8b2e34c04dbb263ceec1587ff",
+    "source/lab/src/coupling.rs": "5d9e3bc319e9161f7112d68ed8de359b06c7579f117d56f2b38fc9313c5894e2",
+    "source/lab/src/factor.rs": "92a97c105fdab5a5431f57d69fc3370215f73abfe5ddaa9eae68d2cc00282d48",
+    "source/lab/src/grid.rs": "e4c61681d594373b864c2d29dd27f2b1ce44cc67d17fc8961dcea85a31c4873a",
+    "source/lab/src/main.rs": "474f5229a1b5c644dad547cdcb1b7cc454f377edc41d43b5e6a6d4a30098ff3a",
+    "source/lab/src/profile.rs": "10011d0d2359aa5c4fc5e1feba4e07e1c5d7a158072c606ca851fe63d311e51b",
+    "source/lab/src/tests.rs": "321fb064c611bff899681118771d51fccd5971889cc5b05af5a35da7f878191b",
+    "source/profile/perf-probe.c": "3b66720c20f7279fd1d62b49815d1340815bd62387fbac7926f7d40810f6260b",
+    "source/profile/run-vast.py": "5cc0adc67784d31309361034c703740e12b2fa43f11d6c873f5c1365ce2e08f7",
+    "source/profile/sample.c": "4f037b438c5ed4916b353b0d182167975b0a6ecc9dcf61d925803812e78e1972"
+  },
+  "environment_end": {
+    "/proc/loadavg": "3.00 2.12 1.70 1/2197 1177\n",
+    "/proc/sys/kernel/perf_event_paranoid": "4\n",
+    "/proc/self/status": "Name:\tpython3\nUmask:\t0002\nState:\tR (running)\nTgid:\t955\nNgid:\t0\nPid:\t955\nPPid:\t952\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t64\nGroups:\t0 \nNStgid:\t955\nNSpid:\t955\nNSpgid:\t951\nNSsid:\t951\nKthread:\t0\nVmPeak:\t   31480 kB\nVmSize:\t   31480 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   24284 kB\nVmRSS:\t   24284 kB\nRssAnon:\t   14144 kB\nRssFile:\t   10140 kB\nRssShmem:\t       0 kB\nVmData:\t   15500 kB\nVmStk:\t     136 kB\nVmExe:\t    2956 kB\nVmLib:\t    6004 kB\nVmPTE:\t     100 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffffff\nThreads:\t1\nSigQ:\t2/513501\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000001001001\nSigCgt:\t0000000000000002\nCapInh:\t0000000000000000\nCapPrm:\t00000000a80405fb\nCapEff:\t00000000a80405fb\nCapBnd:\t00000000a80405fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tthread vulnerable\nSpeculationIndirectBranch:\tconditional enabled\nCpus_allowed:\tffffffff,ffffffff\nCpus_allowed_list:\t0-63\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000003\nMems_allowed_list:\t0-1\nvoluntary_ctxt_switches:\t59\nnonvoluntary_ctxt_switches:\t11\nx86_Thread_features:\t\nx86_Thread_features_locked:\t\n",
+    "/sys/fs/cgroup/cpu.max": "1536000 100000\n",
+    "/sys/fs/cgroup/cpu.stat": "usage_usec 874543388\nuser_usec 857082434\nsystem_usec 17460954\ncore_sched.force_idle_usec 0\nnr_periods 11222\nnr_throttled 2\nthrottled_usec 8986734\nnr_bursts 0\nburst_usec 0\n",
+    "/root/.vast_containerlabel": "C.57949215\n"
+  },
+  "finished": "2026-10-27T13:45:03.372440+00:00"
+}

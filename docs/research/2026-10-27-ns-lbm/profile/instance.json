@@ -1,0 +1,93 @@
+{
+  "id": 57949215,
+  "ssh_host": "ssh8.vast.ai",
+  "ssh_port": 35230,
+  "public_ipaddr": "154.64.230.50",
+  "ports": {
+    "10100/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "53555"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "53555"
+      }
+    ],
+    "10200/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "53574"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "53574"
+      }
+    ],
+    "1111/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "53511"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "53511"
+      }
+    ],
+    "22/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "53507"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "53507"
+      }
+    ],
+    "53536/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "53536"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "53536"
+      }
+    ],
+    "6006/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "53556"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "53556"
+      }
+    ],
+    "8080/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "53559"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "53559"
+      }
+    ],
+    "8384/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "53596"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "53596"
+      }
+    ]
+  },
+  "cur_state": "running",
+  "actual_status": "running",
+  "gpu_name": "RTX 3060",
+  "cpu_name": "Xeon\u00ae E5-2683 v4 ",
+  "cpu_cores_effective": 16.0
+}

@@ -1,0 +1,720 @@
+{
+  "started": "2026-10-27T17:14:54.209568+00:00",
+  "status": "complete",
+  "software_check": false,
+  "physics_only": false,
+  "binary_sha256": "e95ac670fcf85f8b10f48b0a5e740e152d6750688dcc65bbee27f55e2d016b6f",
+  "sources": {
+    "lbm/Cargo.lock": "97e2730b7fa35cbd01768d45c06cd2d6a0a0a0570523e410095bc52811ab5213",
+    "lbm/Cargo.toml": "0b0b56785a8be4d4e6c3263bea70df522cb699db920b689486240b05d74c3861",
+    "lbm/src/cases.rs": "e2829419cd120f103ccd72a6608a4af2a4ddad6af2ef795c370f592a1b84fd41",
+    "lbm/src/coupling.rs": "6fd251f1e8c9c28e74ab1a5b365381764280b9802ff1231bf8cec50b0184962b",
+    "lbm/src/gpu.rs": "8dd85b8c96782d3287528468f0de990e07f5eaf98c3b48f3f22794859bfc6d43",
+    "lbm/src/lbm.wgsl": "0e43dca9d1ff47f2722fe2f56980a4b375248c76ce06bef182a33e50cc696b45",
+    "lbm/src/main.rs": "715df059f2fe705ee20f13578a8cbf922a6c05f29c85173e6e73cdeb10054ef9",
+    "lbm/src/model.rs": "01fa437c18627ad0c90d6393fdaefa7450b4f4f01d742c7d5c63bd7743391f97",
+    "lbm/src/tests.rs": "1d4a28335dade9846b216e3f88a098d90f8aa8f4eeb5f61446952e97474ae49a"
+  },
+  "commands": [
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "probe"
+      ],
+      "log": "probe.log",
+      "returncode": 0,
+      "seconds": 0.44134436873719096
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "compare",
+        "/workspace/blood-lbm-20261028/results/compare.json"
+      ],
+      "log": "compare.log",
+      "returncode": 0,
+      "seconds": 0.45982674276456237
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "steady",
+        "192",
+        "0.1",
+        "1",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "steady-192-re0.1-r1.log",
+      "returncode": 0,
+      "seconds": 1.1840866287238896
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "steady",
+        "256",
+        "0.1",
+        "1",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "steady-256-re0.1-r1.log",
+      "returncode": 0,
+      "seconds": 1.8374664918519557
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "steady",
+        "192",
+        "100",
+        "1",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "steady-192-re100-r1.log",
+      "returncode": 0,
+      "seconds": 0.5993968988768756
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "steady",
+        "256",
+        "100",
+        "1",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "steady-256-re100-r1.log",
+      "returncode": 0,
+      "seconds": 0.5922120572067797
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "steady",
+        "192",
+        "300",
+        "1",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "steady-192-re300-r1.log",
+      "returncode": 0,
+      "seconds": 0.5480017359368503
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "steady",
+        "256",
+        "300",
+        "1",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "steady-256-re300-r1.log",
+      "returncode": 0,
+      "seconds": 0.6061727851629257
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "pulse",
+        "192",
+        "100",
+        "1",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "pulse-192-re100-r1.log",
+      "returncode": 0,
+      "seconds": 4.879553704988211
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "pulse",
+        "192",
+        "100",
+        "2",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "pulse-192-re100-r2.log",
+      "returncode": 0,
+      "seconds": 4.8921344531700015
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "pulse",
+        "256",
+        "100",
+        "1",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "pulse-256-re100-r1.log",
+      "returncode": 0,
+      "seconds": 8.27892497414723
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "pulse",
+        "256",
+        "100",
+        "2",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "pulse-256-re100-r2.log",
+      "returncode": 0,
+      "seconds": 8.356467582751065
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "vortex",
+        "64",
+        "100",
+        "1",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "vortex-64-re100-r1.log",
+      "returncode": 0,
+      "seconds": 0.5103574097156525
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "vortex",
+        "64",
+        "100",
+        "2",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "vortex-64-re100-r2.log",
+      "returncode": 0,
+      "seconds": 0.49819704983383417
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "vortex",
+        "128",
+        "100",
+        "1",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "vortex-128-re100-r1.log",
+      "returncode": 0,
+      "seconds": 0.7038904237560928
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "vortex",
+        "128",
+        "100",
+        "2",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "vortex-128-re100-r2.log",
+      "returncode": 0,
+      "seconds": 0.7216839832253754
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "vortex",
+        "192",
+        "100",
+        "1",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "vortex-192-re100-r1.log",
+      "returncode": 0,
+      "seconds": 1.1377874808385968
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "vortex",
+        "192",
+        "100",
+        "2",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "vortex-192-re100-r2.log",
+      "returncode": 0,
+      "seconds": 1.145467660855502
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "vortex",
+        "256",
+        "100",
+        "1",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "vortex-256-re100-r1.log",
+      "returncode": 0,
+      "seconds": 1.6695885080844164
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "physics",
+        "vortex",
+        "256",
+        "100",
+        "2",
+        "/workspace/blood-lbm-20261028/results/physics"
+      ],
+      "log": "vortex-256-re100-r2.log",
+      "returncode": 0,
+      "seconds": 1.7744423509575427
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "192",
+        "192",
+        "0",
+        "120",
+        "100",
+        "/workspace/blood-lbm-20261028/results/r1-192x192-c0-re100"
+      ],
+      "log": "r1-192x192-c0-re100.log",
+      "returncode": 0,
+      "seconds": 0.7188607691787183
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "192",
+        "192",
+        "72",
+        "120",
+        "100",
+        "/workspace/blood-lbm-20261028/results/r1-192x192-c72-re100"
+      ],
+      "log": "r1-192x192-c72-re100.log",
+      "returncode": 0,
+      "seconds": 1.2941881529986858
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "256",
+        "256",
+        "0",
+        "120",
+        "100",
+        "/workspace/blood-lbm-20261028/results/r1-256x256-c0-re100"
+      ],
+      "log": "r1-256x256-c0-re100.log",
+      "returncode": 0,
+      "seconds": 1.2246704190038145
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "256",
+        "256",
+        "72",
+        "120",
+        "100",
+        "/workspace/blood-lbm-20261028/results/r1-256x256-c72-re100"
+      ],
+      "log": "r1-256x256-c72-re100.log",
+      "returncode": 0,
+      "seconds": 1.6607540571130812
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "192",
+        "30",
+        "0",
+        "120",
+        "100",
+        "/workspace/blood-lbm-20261028/results/r1-192x30-c0-re100"
+      ],
+      "log": "r1-192x30-c0-re100.log",
+      "returncode": 0,
+      "seconds": 0.5269590499810874
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "192",
+        "30",
+        "72",
+        "120",
+        "100",
+        "/workspace/blood-lbm-20261028/results/r1-192x30-c72-re100"
+      ],
+      "log": "r1-192x30-c72-re100.log",
+      "returncode": 0,
+      "seconds": 0.9402790828607976
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "256",
+        "40",
+        "0",
+        "120",
+        "100",
+        "/workspace/blood-lbm-20261028/results/r1-256x40-c0-re100"
+      ],
+      "log": "r1-256x40-c0-re100.log",
+      "returncode": 0,
+      "seconds": 0.5623046737164259
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "256",
+        "40",
+        "72",
+        "120",
+        "100",
+        "/workspace/blood-lbm-20261028/results/r1-256x40-c72-re100"
+      ],
+      "log": "r1-256x40-c72-re100.log",
+      "returncode": 0,
+      "seconds": 0.9604759151116014
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "192",
+        "30",
+        "0",
+        "120",
+        "0.1",
+        "/workspace/blood-lbm-20261028/results/r1-192x30-c0-re0.1"
+      ],
+      "log": "r1-192x30-c0-re0.1.log",
+      "returncode": 0,
+      "seconds": 1.24369991524145
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "256",
+        "40",
+        "0",
+        "120",
+        "0.1",
+        "/workspace/blood-lbm-20261028/results/r1-256x40-c0-re0.1"
+      ],
+      "log": "r1-256x40-c0-re0.1.log",
+      "returncode": 0,
+      "seconds": 1.923197832889855
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "256",
+        "40",
+        "0",
+        "120",
+        "0.1",
+        "/workspace/blood-lbm-20261028/results/r2-256x40-c0-re0.1"
+      ],
+      "log": "r2-256x40-c0-re0.1.log",
+      "returncode": 0,
+      "seconds": 1.9785747011192143
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "192",
+        "30",
+        "0",
+        "120",
+        "0.1",
+        "/workspace/blood-lbm-20261028/results/r2-192x30-c0-re0.1"
+      ],
+      "log": "r2-192x30-c0-re0.1.log",
+      "returncode": 0,
+      "seconds": 1.2493167771026492
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "256",
+        "40",
+        "72",
+        "120",
+        "100",
+        "/workspace/blood-lbm-20261028/results/r2-256x40-c72-re100"
+      ],
+      "log": "r2-256x40-c72-re100.log",
+      "returncode": 0,
+      "seconds": 1.1066678590141237
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "256",
+        "40",
+        "0",
+        "120",
+        "100",
+        "/workspace/blood-lbm-20261028/results/r2-256x40-c0-re100"
+      ],
+      "log": "r2-256x40-c0-re100.log",
+      "returncode": 0,
+      "seconds": 0.5759089309722185
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "192",
+        "30",
+        "72",
+        "120",
+        "100",
+        "/workspace/blood-lbm-20261028/results/r2-192x30-c72-re100"
+      ],
+      "log": "r2-192x30-c72-re100.log",
+      "returncode": 0,
+      "seconds": 0.940248241648078
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "192",
+        "30",
+        "0",
+        "120",
+        "100",
+        "/workspace/blood-lbm-20261028/results/r2-192x30-c0-re100"
+      ],
+      "log": "r2-192x30-c0-re100.log",
+      "returncode": 0,
+      "seconds": 0.4668740648776293
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "256",
+        "256",
+        "72",
+        "120",
+        "100",
+        "/workspace/blood-lbm-20261028/results/r2-256x256-c72-re100"
+      ],
+      "log": "r2-256x256-c72-re100.log",
+      "returncode": 0,
+      "seconds": 1.6556673180311918
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "256",
+        "256",
+        "0",
+        "120",
+        "100",
+        "/workspace/blood-lbm-20261028/results/r2-256x256-c0-re100"
+      ],
+      "log": "r2-256x256-c0-re100.log",
+      "returncode": 0,
+      "seconds": 1.1122687919996679
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "192",
+        "192",
+        "72",
+        "120",
+        "100",
+        "/workspace/blood-lbm-20261028/results/r2-192x192-c72-re100"
+      ],
+      "log": "r2-192x192-c72-re100.log",
+      "returncode": 0,
+      "seconds": 1.4065544228069484
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/workspace/blood-lbm-20261028/bin/lbm-gpu-lab",
+        "bench",
+        "192",
+        "192",
+        "0",
+        "120",
+        "100",
+        "/workspace/blood-lbm-20261028/results/r2-192x192-c0-re100"
+      ],
+      "log": "r2-192x192-c0-re100.log",
+      "returncode": 0,
+      "seconds": 0.7847001915797591
+    }
+  ],
+  "scripts": {
+    "lbm-run.py": "13ccf81afc5047d8ad04e532a4882ad3e820c04c22a2f6538d9dd7b680175b8a",
+    "lbm-analyze.py": "f97a146504a2d865ebd85bd94a00fe15882ed48f200db752a97e4f9d5161c47d"
+  },
+  "environment": {
+    "/proc/loadavg": "0.13 0.27 0.31 1/765 1222\n",
+    "/proc/self/status": "Name:\tpython3\nUmask:\t0002\nState:\tR (running)\nTgid:\t1222\nNgid:\t0\nPid:\t1222\nPPid:\t1216\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t64\nGroups:\t0 \nNStgid:\t1222\nNSpid:\t1222\nNSpgid:\t1216\nNSsid:\t1216\nVmPeak:\t   35060 kB\nVmSize:\t   24548 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   27964 kB\nVmRSS:\t   17712 kB\nRssAnon:\t    7344 kB\nRssFile:\t   10368 kB\nRssShmem:\t       0 kB\nVmData:\t    8556 kB\nVmStk:\t     136 kB\nVmExe:\t    2956 kB\nVmLib:\t    6012 kB\nVmPTE:\t      80 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t1\nSigQ:\t1/126861\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000001001000\nSigCgt:\t0000000000000002\nCapInh:\t0000000000000000\nCapPrm:\t00000000a80405fb\nCapEff:\t00000000a80405fb\nCapBnd:\t00000000a80405fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tthread vulnerable\nSpeculationIndirectBranch:\tconditional enabled\nCpus_allowed:\tfffff\nCpus_allowed_list:\t0-19\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t0\nnonvoluntary_ctxt_switches:\t0\n"
+  },
+  "finished": "2026-10-27T17:15:57.689242+00:00"
+}

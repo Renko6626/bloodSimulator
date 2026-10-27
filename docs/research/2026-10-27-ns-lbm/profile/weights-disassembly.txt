@@ -1,0 +1,757 @@
+<ns_mac_lab::grid::weights>:
+   b00b0:	55                   	push   %rbp
+   b00b1:	41 57                	push   %r15
+   b00b3:	41 56                	push   %r14
+   b00b5:	41 55                	push   %r13
+   b00b7:	41 54                	push   %r12
+   b00b9:	53                   	push   %rbx
+   b00ba:	48 83 ec 58          	sub    $0x58,%rsp
+   b00be:	49 89 f4             	mov    %rsi,%r12
+   b00c1:	48 89 7c 24 08       	mov    %rdi,0x8(%rsp)
+   b00c6:	f2 0f 10 01          	movsd  (%rcx),%xmm0
+   b00ca:	4c 8b 36             	mov    (%rsi),%r14
+   b00cd:	f2 0f 10 5e 10       	movsd  0x10(%rsi),%xmm3
+   b00d2:	66 49 0f 6e ce       	movq   %r14,%xmm1
+   b00d7:	66 0f 62 0d a1 01 f8 	punpckldq -0x7fe5f(%rip),%xmm1        # 30280 <anon.79f3dcad26f6655a48793b72295599eb.0.llvm.9744291467066343783+0x210>
+   b00de:	ff 
+   b00df:	66 0f 5c 0d 59 ff f7 	subpd  -0x800a7(%rip),%xmm1        # 30040 <__abi_tag+0x2fd44>
+   b00e6:	ff 
+   b00e7:	66 0f 28 d1          	movapd %xmm1,%xmm2
+   b00eb:	66 0f 15 d1          	unpckhpd %xmm1,%xmm2
+   b00ef:	f2 0f 58 d1          	addsd  %xmm1,%xmm2
+   b00f3:	f2 0f 5e da          	divsd  %xmm2,%xmm3
+   b00f7:	f2 0f 5e c3          	divsd  %xmm3,%xmm0
+   b00fb:	48 89 54 24 10       	mov    %rdx,0x10(%rsp)
+   b0100:	48 85 d2             	test   %rdx,%rdx
+   b0103:	4c 89 74 24 18       	mov    %r14,0x18(%rsp)
+   b0108:	74 58                	je     b0162 <ns_mac_lab::grid::weights+0xb2>
+   b010a:	f2 0f 10 59 08       	movsd  0x8(%rcx),%xmm3
+   b010f:	4d 8b 7c 24 08       	mov    0x8(%r12),%r15
+   b0114:	66 49 0f 6e e7       	movq   %r15,%xmm4
+   b0119:	66 0f 62 25 5f 01 f8 	punpckldq -0x7fea1(%rip),%xmm4        # 30280 <anon.79f3dcad26f6655a48793b72295599eb.0.llvm.9744291467066343783+0x210>
+   b0120:	ff 
+   b0121:	66 0f 5c 25 17 ff f7 	subpd  -0x800e9(%rip),%xmm4        # 30040 <__abi_tag+0x2fd44>
+   b0128:	ff 
+   b0129:	f2 41 0f 10 4c 24 18 	movsd  0x18(%r12),%xmm1
+   b0130:	66 0f 28 d4          	movapd %xmm4,%xmm2
+   b0134:	66 0f 15 d4          	unpckhpd %xmm4,%xmm2
+   b0138:	f2 0f 58 d4          	addsd  %xmm4,%xmm2
+   b013c:	f2 0f 5e ca          	divsd  %xmm2,%xmm1
+   b0140:	41 80 7c 24 30 00    	cmpb   $0x0,0x30(%r12)
+   b0146:	66 0f 57 d2          	xorpd  %xmm2,%xmm2
+   b014a:	75 08                	jne    b0154 <ns_mac_lab::grid::weights+0xa4>
+   b014c:	f2 0f 10 15 44 0c f8 	movsd  -0x7f3bc(%rip),%xmm2        # 30d98 <anon.50f01070968bea0afbe70e6b2f2d877c.48.llvm.16107912906716103672+0x8>
+   b0153:	ff 
+   b0154:	f2 0f 58 05 7c 0c f8 	addsd  -0x7f384(%rip),%xmm0        # 30dd8 <anon.50f01070968bea0afbe70e6b2f2d877c.48.llvm.16107912906716103672+0x48>
+   b015b:	ff 
+   b015c:	f2 0f 5e d9          	divsd  %xmm1,%xmm3
+   b0160:	eb 45                	jmp    b01a7 <ns_mac_lab::grid::weights+0xf7>
+   b0162:	f2 0f 10 59 08       	movsd  0x8(%rcx),%xmm3
+   b0167:	49 8b 44 24 08       	mov    0x8(%r12),%rax
+   b016c:	f2 41 0f 10 64 24 18 	movsd  0x18(%r12),%xmm4
+   b0173:	49 89 c7             	mov    %rax,%r15
+   b0176:	66 48 0f 6e c8       	movq   %rax,%xmm1
+   b017b:	66 0f 62 0d fd 00 f8 	punpckldq -0x7ff03(%rip),%xmm1        # 30280 <anon.79f3dcad26f6655a48793b72295599eb.0.llvm.9744291467066343783+0x210>
+   b0182:	ff 
+   b0183:	66 0f 5c 0d b5 fe f7 	subpd  -0x8014b(%rip),%xmm1        # 30040 <__abi_tag+0x2fd44>
+   b018a:	ff 
+   b018b:	66 0f 28 d1          	movapd %xmm1,%xmm2
+   b018f:	66 0f 15 d1          	unpckhpd %xmm1,%xmm2
+   b0193:	f2 0f 58 d1          	addsd  %xmm1,%xmm2
+   b0197:	f2 0f 5e e2          	divsd  %xmm2,%xmm4
+   b019b:	f2 0f 5e dc          	divsd  %xmm4,%xmm3
+   b019f:	f2 0f 10 15 51 0c f8 	movsd  -0x7f3af(%rip),%xmm2        # 30df8 <anon.50f01070968bea0afbe70e6b2f2d877c.48.llvm.16107912906716103672+0x68>
+   b01a6:	ff 
+   b01a7:	66 0f 29 44 24 40    	movapd %xmm0,0x40(%rsp)
+   b01ad:	f2 0f 5c da          	subsd  %xmm2,%xmm3
+   b01b1:	66 0f 29 5c 24 20    	movapd %xmm3,0x20(%rsp)
+   b01b7:	4c 8b 2d c2 8f 4c 00 	mov    0x4c8fc2(%rip),%r13        # 579180 <_DYNAMIC+0x308>
+   b01be:	41 ff d5             	call   *%r13
+   b01c1:	f2 4c 0f 2c f0       	cvttsd2si %xmm0,%r14
+   b01c6:	66 0f 2e 05 7a 0b f8 	ucomisd -0x7f486(%rip),%xmm0        # 30d48 <anon.9db07e612c83336c203a03ab03b9271e.53.llvm.6422049598199583057+0x18>
+   b01cd:	ff 
+   b01ce:	48 bb ff ff ff ff ff 	movabs $0x7fffffffffffffff,%rbx
+   b01d5:	ff ff 7f 
+   b01d8:	4c 0f 47 f3          	cmova  %rbx,%r14
+   b01dc:	31 ed                	xor    %ebp,%ebp
+   b01de:	66 0f 29 44 24 30    	movapd %xmm0,0x30(%rsp)
+   b01e4:	66 0f 2e c0          	ucomisd %xmm0,%xmm0
+   b01e8:	4c 0f 4a f5          	cmovp  %rbp,%r14
+   b01ec:	66 0f 28 44 24 20    	movapd 0x20(%rsp),%xmm0
+   b01f2:	41 ff d5             	call   *%r13
+   b01f5:	f2 48 0f 2c c8       	cvttsd2si %xmm0,%rcx
+   b01fa:	66 0f 2e 05 46 0b f8 	ucomisd -0x7f4ba(%rip),%xmm0        # 30d48 <anon.9db07e612c83336c203a03ab03b9271e.53.llvm.6422049598199583057+0x18>
+   b0201:	ff 
+   b0202:	48 0f 47 cb          	cmova  %rbx,%rcx
+   b0206:	66 0f 2e c0          	ucomisd %xmm0,%xmm0
+   b020a:	48 0f 4a cd          	cmovp  %rbp,%rcx
+   b020e:	48 8b 6c 24 18       	mov    0x18(%rsp),%rbp
+   b0213:	49 89 e9             	mov    %rbp,%r9
+   b0216:	49 f7 d9             	neg    %r9
+   b0219:	4c 0f 48 cd          	cmovs  %rbp,%r9
+   b021d:	0f 83 7b 08 00 00    	jae    b0a9e <ns_mac_lab::grid::weights+0x9ee>
+   b0223:	66 0f 28 74 24 20    	movapd 0x20(%rsp),%xmm6
+   b0229:	66 0f 14 74 24 40    	unpcklpd 0x40(%rsp),%xmm6
+   b022f:	66 0f 14 44 24 30    	unpcklpd 0x30(%rsp),%xmm0
+   b0235:	66 0f 5c f0          	subpd  %xmm0,%xmm6
+   b0239:	66 0f 28 c6          	movapd %xmm6,%xmm0
+   b023d:	4c 89 fb             	mov    %r15,%rbx
+   b0240:	4f 8d 14 3f          	lea    (%r15,%r15,1),%r10
+   b0244:	4d 89 d3             	mov    %r10,%r11
+   b0247:	49 f7 db             	neg    %r11
+   b024a:	4d 0f 48 da          	cmovs  %r10,%r11
+   b024e:	4d 89 fd             	mov    %r15,%r13
+   b0251:	49 f7 dd             	neg    %r13
+   b0254:	4d 0f 48 ef          	cmovs  %r15,%r13
+   b0258:	66 0f 15 c6          	unpckhpd %xmm6,%xmm0
+   b025c:	66 0f 28 0d 1c 07 f8 	movapd -0x7f8e4(%rip),%xmm1        # 30980 <anon.10a6097f81e7efb5f429444a081119db.135.llvm.18064805065927349754+0x4b0>
+   b0263:	ff 
+   b0264:	66 0f 5c ce          	subpd  %xmm6,%xmm1
+   b0268:	66 0f 28 d1          	movapd %xmm1,%xmm2
+   b026c:	66 0f 15 d1          	unpckhpd %xmm1,%xmm2
+   b0270:	66 0f 28 d9          	movapd %xmm1,%xmm3
+   b0274:	41 f6 44 24 30 01    	testb  $0x1,0x30(%r12)
+   b027a:	74 3d                	je     b02b9 <ns_mac_lab::grid::weights+0x209>
+   b027c:	48 85 db             	test   %rbx,%rbx
+   b027f:	0f 84 26 08 00 00    	je     b0aab <ns_mac_lab::grid::weights+0x9fb>
+   b0285:	48 83 fd ff          	cmp    $0xffffffffffffffff,%rbp
+   b0289:	0f 84 b0 00 00 00    	je     b033f <ns_mac_lab::grid::weights+0x28f>
+   b028f:	48 83 fb ff          	cmp    $0xffffffffffffffff,%rbx
+   b0293:	0f 84 e7 00 00 00    	je     b0380 <ns_mac_lab::grid::weights+0x2d0>
+   b0299:	4c 89 f0             	mov    %r14,%rax
+   b029c:	48 09 e8             	or     %rbp,%rax
+   b029f:	48 c1 e8 20          	shr    $0x20,%rax
+   b02a3:	0f 84 9f 01 00 00    	je     b0448 <ns_mac_lab::grid::weights+0x398>
+   b02a9:	4c 89 f0             	mov    %r14,%rax
+   b02ac:	48 99                	cqto   
+   b02ae:	48 f7 fd             	idiv   %rbp
+   b02b1:	48 89 d7             	mov    %rdx,%rdi
+   b02b4:	e9 98 01 00 00       	jmp    b0451 <ns_mac_lab::grid::weights+0x3a1>
+   b02b9:	48 83 7c 24 10 00    	cmpq   $0x0,0x10(%rsp)
+   b02bf:	74 4b                	je     b030c <ns_mac_lab::grid::weights+0x25c>
+   b02c1:	48 89 e8             	mov    %rbp,%rax
+   b02c4:	48 f7 d0             	not    %rax
+   b02c7:	49 bd 00 00 00 00 00 	movabs $0x8000000000000000,%r13
+   b02ce:	00 00 80 
+   b02d1:	4c 89 f2             	mov    %r14,%rdx
+   b02d4:	4c 31 ea             	xor    %r13,%rdx
+   b02d7:	48 09 c2             	or     %rax,%rdx
+   b02da:	0f 94 c0             	sete   %al
+   b02dd:	4d 85 d2             	test   %r10,%r10
+   b02e0:	0f 84 e7 07 00 00    	je     b0acd <ns_mac_lab::grid::weights+0xa1d>
+   b02e6:	84 c0                	test   %al,%al
+   b02e8:	0f 85 12 08 00 00    	jne    b0b00 <ns_mac_lab::grid::weights+0xa50>
+   b02ee:	48 8d 41 01          	lea    0x1(%rcx),%rax
+   b02f2:	48 89 c2             	mov    %rax,%rdx
+   b02f5:	4c 09 d2             	or     %r10,%rdx
+   b02f8:	48 c1 ea 20          	shr    $0x20,%rdx
+   b02fc:	0f 84 b9 00 00 00    	je     b03bb <ns_mac_lab::grid::weights+0x30b>
+   b0302:	48 99                	cqto   
+   b0304:	49 f7 fa             	idiv   %r10
+   b0307:	e9 b4 00 00 00       	jmp    b03c0 <ns_mac_lab::grid::weights+0x310>
+   b030c:	4d 85 d2             	test   %r10,%r10
+   b030f:	0f 84 d6 07 00 00    	je     b0aeb <ns_mac_lab::grid::weights+0xa3b>
+   b0315:	48 83 fd ff          	cmp    $0xffffffffffffffff,%rbp
+   b0319:	0f 84 ff 01 00 00    	je     b051e <ns_mac_lab::grid::weights+0x46e>
+   b031f:	4c 89 f0             	mov    %r14,%rax
+   b0322:	48 09 e8             	or     %rbp,%rax
+   b0325:	48 c1 e8 20          	shr    $0x20,%rax
+   b0329:	0f 84 23 04 00 00    	je     b0752 <ns_mac_lab::grid::weights+0x6a2>
+   b032f:	4c 89 f0             	mov    %r14,%rax
+   b0332:	48 99                	cqto   
+   b0334:	48 f7 fd             	idiv   %rbp
+   b0337:	48 89 d7             	mov    %rdx,%rdi
+   b033a:	e9 1c 04 00 00       	jmp    b075b <ns_mac_lab::grid::weights+0x6ab>
+   b033f:	48 b8 00 00 00 00 00 	movabs $0x8000000000000000,%rax
+   b0346:	00 00 80 
+   b0349:	48 83 fb ff          	cmp    $0xffffffffffffffff,%rbx
+   b034d:	0f 84 17 02 00 00    	je     b056a <ns_mac_lab::grid::weights+0x4ba>
+   b0353:	4c 01 f0             	add    %r14,%rax
+   b0356:	48 ff c0             	inc    %rax
+   b0359:	48 83 f8 02          	cmp    $0x2,%rax
+   b035d:	0f 82 9d 07 00 00    	jb     b0b00 <ns_mac_lab::grid::weights+0xa50>
+   b0363:	48 89 c8             	mov    %rcx,%rax
+   b0366:	48 09 d8             	or     %rbx,%rax
+   b0369:	48 c1 e8 20          	shr    $0x20,%rax
+   b036d:	0f 84 31 05 00 00    	je     b08a4 <ns_mac_lab::grid::weights+0x7f4>
+   b0373:	48 89 c8             	mov    %rcx,%rax
+   b0376:	48 99                	cqto   
+   b0378:	48 f7 fb             	idiv   %rbx
+   b037b:	e9 2a 05 00 00       	jmp    b08aa <ns_mac_lab::grid::weights+0x7fa>
+   b0380:	48 b8 00 00 00 00 00 	movabs $0x8000000000000000,%rax
+   b0387:	00 00 80 
+   b038a:	48 01 c8             	add    %rcx,%rax
+   b038d:	48 ff c0             	inc    %rax
+   b0390:	48 83 f8 02          	cmp    $0x2,%rax
+   b0394:	0f 82 44 07 00 00    	jb     b0ade <ns_mac_lab::grid::weights+0xa2e>
+   b039a:	49 8d 46 01          	lea    0x1(%r14),%rax
+   b039e:	48 89 c1             	mov    %rax,%rcx
+   b03a1:	48 09 e9             	or     %rbp,%rcx
+   b03a4:	48 c1 e9 20          	shr    $0x20,%rcx
+   b03a8:	0f 84 33 05 00 00    	je     b08e1 <ns_mac_lab::grid::weights+0x831>
+   b03ae:	48 99                	cqto   
+   b03b0:	48 f7 fd             	idiv   %rbp
+   b03b3:	48 89 d1             	mov    %rdx,%rcx
+   b03b6:	e9 2c 05 00 00       	jmp    b08e7 <ns_mac_lab::grid::weights+0x837>
+   b03bb:	31 d2                	xor    %edx,%edx
+   b03bd:	41 f7 f2             	div    %r10d
+   b03c0:	48 89 d6             	mov    %rdx,%rsi
+   b03c3:	48 c1 fe 3f          	sar    $0x3f,%rsi
+   b03c7:	4c 21 de             	and    %r11,%rsi
+   b03ca:	48 01 d6             	add    %rdx,%rsi
+   b03cd:	74 4a                	je     b0419 <ns_mac_lab::grid::weights+0x369>
+   b03cf:	48 39 de             	cmp    %rbx,%rsi
+   b03d2:	74 45                	je     b0419 <ns_mac_lab::grid::weights+0x369>
+   b03d4:	49 8d 7e 01          	lea    0x1(%r14),%rdi
+   b03d8:	48 83 fd ff          	cmp    $0xffffffffffffffff,%rbp
+   b03dc:	75 09                	jne    b03e7 <ns_mac_lab::grid::weights+0x337>
+   b03de:	4c 39 ef             	cmp    %r13,%rdi
+   b03e1:	0f 84 19 07 00 00    	je     b0b00 <ns_mac_lab::grid::weights+0xa50>
+   b03e7:	66 0f 28 da          	movapd %xmm2,%xmm3
+   b03eb:	f2 0f 59 d9          	mulsd  %xmm1,%xmm3
+   b03ef:	48 39 de             	cmp    %rbx,%rsi
+   b03f2:	72 08                	jb     b03fc <ns_mac_lab::grid::weights+0x34c>
+   b03f4:	66 0f 57 1d a4 06 f8 	xorpd  -0x7f95c(%rip),%xmm3        # 30aa0 <anon.10a6097f81e7efb5f429444a081119db.135.llvm.18064805065927349754+0x5d0>
+   b03fb:	ff 
+   b03fc:	4c 89 f0             	mov    %r14,%rax
+   b03ff:	48 09 e8             	or     %rbp,%rax
+   b0402:	48 c1 e8 20          	shr    $0x20,%rax
+   b0406:	0f 84 c3 01 00 00    	je     b05cf <ns_mac_lab::grid::weights+0x51f>
+   b040c:	4c 89 f0             	mov    %r14,%rax
+   b040f:	48 99                	cqto   
+   b0411:	48 f7 fd             	idiv   %rbp
+   b0414:	e9 bd 01 00 00       	jmp    b05d6 <ns_mac_lab::grid::weights+0x526>
+   b0419:	49 8d 7e 01          	lea    0x1(%r14),%rdi
+   b041d:	45 31 e4             	xor    %r12d,%r12d
+   b0420:	66 0f 28 da          	movapd %xmm2,%xmm3
+   b0424:	f2 0f 59 d9          	mulsd  %xmm1,%xmm3
+   b0428:	66 0f 57 ed          	xorpd  %xmm5,%xmm5
+   b042c:	f2 0f 59 dd          	mulsd  %xmm5,%xmm3
+   b0430:	48 83 fd ff          	cmp    $0xffffffffffffffff,%rbp
+   b0434:	0f 85 0a 02 00 00    	jne    b0644 <ns_mac_lab::grid::weights+0x594>
+   b043a:	4c 39 ef             	cmp    %r13,%rdi
+   b043d:	0f 85 01 02 00 00    	jne    b0644 <ns_mac_lab::grid::weights+0x594>
+   b0443:	e9 b8 06 00 00       	jmp    b0b00 <ns_mac_lab::grid::weights+0xa50>
+   b0448:	44 89 f0             	mov    %r14d,%eax
+   b044b:	31 d2                	xor    %edx,%edx
+   b044d:	f7 f5                	div    %ebp
+   b044f:	89 d7                	mov    %edx,%edi
+   b0451:	48 89 fe             	mov    %rdi,%rsi
+   b0454:	48 c1 fe 3f          	sar    $0x3f,%rsi
+   b0458:	48 89 c8             	mov    %rcx,%rax
+   b045b:	48 09 d8             	or     %rbx,%rax
+   b045e:	48 c1 e8 20          	shr    $0x20,%rax
+   b0462:	74 0a                	je     b046e <ns_mac_lab::grid::weights+0x3be>
+   b0464:	48 89 c8             	mov    %rcx,%rax
+   b0467:	48 99                	cqto   
+   b0469:	48 f7 fb             	idiv   %rbx
+   b046c:	eb 06                	jmp    b0474 <ns_mac_lab::grid::weights+0x3c4>
+   b046e:	89 c8                	mov    %ecx,%eax
+   b0470:	31 d2                	xor    %edx,%edx
+   b0472:	f7 f3                	div    %ebx
+   b0474:	4c 21 ce             	and    %r9,%rsi
+   b0477:	49 89 d7             	mov    %rdx,%r15
+   b047a:	49 c1 ff 3f          	sar    $0x3f,%r15
+   b047e:	4d 21 ef             	and    %r13,%r15
+   b0481:	49 01 d7             	add    %rdx,%r15
+   b0484:	49 ff c6             	inc    %r14
+   b0487:	4c 89 f0             	mov    %r14,%rax
+   b048a:	48 09 e8             	or     %rbp,%rax
+   b048d:	48 c1 e8 20          	shr    $0x20,%rax
+   b0491:	74 0a                	je     b049d <ns_mac_lab::grid::weights+0x3ed>
+   b0493:	4c 89 f0             	mov    %r14,%rax
+   b0496:	48 99                	cqto   
+   b0498:	48 f7 fd             	idiv   %rbp
+   b049b:	eb 07                	jmp    b04a4 <ns_mac_lab::grid::weights+0x3f4>
+   b049d:	44 89 f0             	mov    %r14d,%eax
+   b04a0:	31 d2                	xor    %edx,%edx
+   b04a2:	f7 f5                	div    %ebp
+   b04a4:	48 01 fe             	add    %rdi,%rsi
+   b04a7:	4c 0f af fd          	imul   %rbp,%r15
+   b04ab:	49 89 d2             	mov    %rdx,%r10
+   b04ae:	49 c1 fa 3f          	sar    $0x3f,%r10
+   b04b2:	4d 21 ca             	and    %r9,%r10
+   b04b5:	49 01 d2             	add    %rdx,%r10
+   b04b8:	48 ff c1             	inc    %rcx
+   b04bb:	48 89 c8             	mov    %rcx,%rax
+   b04be:	48 09 d8             	or     %rbx,%rax
+   b04c1:	48 c1 e8 20          	shr    $0x20,%rax
+   b04c5:	74 0a                	je     b04d1 <ns_mac_lab::grid::weights+0x421>
+   b04c7:	48 89 c8             	mov    %rcx,%rax
+   b04ca:	48 99                	cqto   
+   b04cc:	48 f7 fb             	idiv   %rbx
+   b04cf:	eb 06                	jmp    b04d7 <ns_mac_lab::grid::weights+0x427>
+   b04d1:	89 c8                	mov    %ecx,%eax
+   b04d3:	31 d2                	xor    %edx,%edx
+   b04d5:	f7 f3                	div    %ebx
+   b04d7:	4f 8d 04 3a          	lea    (%r10,%r15,1),%r8
+   b04db:	49 01 f7             	add    %rsi,%r15
+   b04de:	48 89 d7             	mov    %rdx,%rdi
+   b04e1:	48 c1 ff 3f          	sar    $0x3f,%rdi
+   b04e5:	4c 21 ef             	and    %r13,%rdi
+   b04e8:	48 01 d7             	add    %rdx,%rdi
+   b04eb:	48 0f af fd          	imul   %rbp,%rdi
+   b04ef:	48 01 fe             	add    %rdi,%rsi
+   b04f2:	4c 01 d7             	add    %r10,%rdi
+   b04f5:	66 0f 28 d1          	movapd %xmm1,%xmm2
+   b04f9:	66 0f c6 d6 01       	shufpd $0x1,%xmm6,%xmm2
+   b04fe:	f2 0f 10 cb          	movsd  %xmm3,%xmm1
+   b0502:	66 0f 14 de          	unpcklpd %xmm6,%xmm3
+   b0506:	66 0f 59 ca          	mulpd  %xmm2,%xmm1
+   b050a:	66 0f 59 c3          	mulpd  %xmm3,%xmm0
+   b050e:	b9 01 00 00 00       	mov    $0x1,%ecx
+   b0513:	41 bc 01 00 00 00    	mov    $0x1,%r12d
+   b0519:	e9 39 05 00 00       	jmp    b0a57 <ns_mac_lab::grid::weights+0x9a7>
+   b051e:	48 b8 00 00 00 00 00 	movabs $0x8000000000000000,%rax
+   b0525:	00 00 80 
+   b0528:	4c 01 f0             	add    %r14,%rax
+   b052b:	48 ff c0             	inc    %rax
+   b052e:	48 83 f8 02          	cmp    $0x2,%rax
+   b0532:	0f 82 c8 05 00 00    	jb     b0b00 <ns_mac_lab::grid::weights+0xa50>
+   b0538:	66 0f 28 d1          	movapd %xmm1,%xmm2
+   b053c:	66 0f c6 d6 01       	shufpd $0x1,%xmm6,%xmm2
+   b0541:	f2 0f 10 cb          	movsd  %xmm3,%xmm1
+   b0545:	66 0f 14 de          	unpcklpd %xmm6,%xmm3
+   b0549:	48 8d 41 01          	lea    0x1(%rcx),%rax
+   b054d:	48 89 c2             	mov    %rax,%rdx
+   b0550:	4c 09 d2             	or     %r10,%rdx
+   b0553:	48 c1 ea 20          	shr    $0x20,%rdx
+   b0557:	0f 84 27 04 00 00    	je     b0984 <ns_mac_lab::grid::weights+0x8d4>
+   b055d:	48 99                	cqto   
+   b055f:	49 f7 fa             	idiv   %r10
+   b0562:	48 89 d6             	mov    %rdx,%rsi
+   b0565:	e9 21 04 00 00       	jmp    b098b <ns_mac_lab::grid::weights+0x8db>
+   b056a:	49 39 c6             	cmp    %rax,%r14
+   b056d:	0f 84 8d 05 00 00    	je     b0b00 <ns_mac_lab::grid::weights+0xa50>
+   b0573:	48 39 c1             	cmp    %rax,%rcx
+   b0576:	0f 84 62 05 00 00    	je     b0ade <ns_mac_lab::grid::weights+0xa2e>
+   b057c:	48 ff c8             	dec    %rax
+   b057f:	49 39 c6             	cmp    %rax,%r14
+   b0582:	0f 84 78 05 00 00    	je     b0b00 <ns_mac_lab::grid::weights+0xa50>
+   b0588:	48 39 c1             	cmp    %rax,%rcx
+   b058b:	0f 84 4d 05 00 00    	je     b0ade <ns_mac_lab::grid::weights+0xa2e>
+   b0591:	f2 0f 59 d1          	mulsd  %xmm1,%xmm2
+   b0595:	66 0f 14 d6          	unpcklpd %xmm6,%xmm2
+   b0599:	66 0f 14 c0          	unpcklpd %xmm0,%xmm0
+   b059d:	66 0f 28 d9          	movapd %xmm1,%xmm3
+   b05a1:	66 0f 14 de          	unpcklpd %xmm6,%xmm3
+   b05a5:	66 0f 12 0d eb 07 f8 	movlpd -0x7f815(%rip),%xmm1        # 30d98 <anon.50f01070968bea0afbe70e6b2f2d877c.48.llvm.16107912906716103672+0x8>
+   b05ac:	ff 
+   b05ad:	66 0f 59 c3          	mulpd  %xmm3,%xmm0
+   b05b1:	66 0f 59 ca          	mulpd  %xmm2,%xmm1
+   b05b5:	b9 01 00 00 00       	mov    $0x1,%ecx
+   b05ba:	31 ff                	xor    %edi,%edi
+   b05bc:	31 f6                	xor    %esi,%esi
+   b05be:	45 31 c0             	xor    %r8d,%r8d
+   b05c1:	41 bc 01 00 00 00    	mov    $0x1,%r12d
+   b05c7:	45 31 ff             	xor    %r15d,%r15d
+   b05ca:	e9 88 04 00 00       	jmp    b0a57 <ns_mac_lab::grid::weights+0x9a7>
+   b05cf:	44 89 f0             	mov    %r14d,%eax
+   b05d2:	31 d2                	xor    %edx,%edx
+   b05d4:	f7 f5                	div    %ebp
+   b05d6:	49 89 d7             	mov    %rdx,%r15
+   b05d9:	49 c1 ff 3f          	sar    $0x3f,%r15
+   b05dd:	4d 21 cf             	and    %r9,%r15
+   b05e0:	48 8d 46 ff          	lea    -0x1(%rsi),%rax
+   b05e4:	49 89 f4             	mov    %rsi,%r12
+   b05e7:	49 f7 d4             	not    %r12
+   b05ea:	4d 01 d4             	add    %r10,%r12
+   b05ed:	48 39 de             	cmp    %rbx,%rsi
+   b05f0:	4c 0f 42 e0          	cmovb  %rax,%r12
+   b05f4:	4c 0f af e5          	imul   %rbp,%r12
+   b05f8:	49 01 d7             	add    %rdx,%r15
+   b05fb:	48 89 f8             	mov    %rdi,%rax
+   b05fe:	48 09 e8             	or     %rbp,%rax
+   b0601:	48 c1 e8 20          	shr    $0x20,%rax
+   b0605:	74 0a                	je     b0611 <ns_mac_lab::grid::weights+0x561>
+   b0607:	48 89 f8             	mov    %rdi,%rax
+   b060a:	48 99                	cqto   
+   b060c:	48 f7 fd             	idiv   %rbp
+   b060f:	eb 06                	jmp    b0617 <ns_mac_lab::grid::weights+0x567>
+   b0611:	89 f8                	mov    %edi,%eax
+   b0613:	31 d2                	xor    %edx,%edx
+   b0615:	f7 f5                	div    %ebp
+   b0617:	4d 01 e7             	add    %r12,%r15
+   b061a:	31 c0                	xor    %eax,%eax
+   b061c:	48 39 de             	cmp    %rbx,%rsi
+   b061f:	0f 92 c0             	setb   %al
+   b0622:	49 89 d0             	mov    %rdx,%r8
+   b0625:	49 c1 f8 3f          	sar    $0x3f,%r8
+   b0629:	4d 21 c8             	and    %r9,%r8
+   b062c:	48 8d 35 9d 05 f8 ff 	lea    -0x7fa63(%rip),%rsi        # 30bd0 <anon.4025e114333e7e9fafd56f03d6ba17f6.19.llvm.13770579139157259679+0x50>
+   b0633:	f2 0f 10 2c c6       	movsd  (%rsi,%rax,8),%xmm5
+   b0638:	49 01 d0             	add    %rdx,%r8
+   b063b:	4d 01 e0             	add    %r12,%r8
+   b063e:	41 bc 01 00 00 00    	mov    $0x1,%r12d
+   b0644:	66 0f 28 e0          	movapd %xmm0,%xmm4
+   b0648:	f2 0f 59 e1          	mulsd  %xmm1,%xmm4
+   b064c:	48 83 c1 02          	add    $0x2,%rcx
+   b0650:	48 89 c8             	mov    %rcx,%rax
+   b0653:	4c 09 d0             	or     %r10,%rax
+   b0656:	48 c1 e8 20          	shr    $0x20,%rax
+   b065a:	74 0a                	je     b0666 <ns_mac_lab::grid::weights+0x5b6>
+   b065c:	48 89 c8             	mov    %rcx,%rax
+   b065f:	48 99                	cqto   
+   b0661:	49 f7 fa             	idiv   %r10
+   b0664:	eb 07                	jmp    b066d <ns_mac_lab::grid::weights+0x5bd>
+   b0666:	89 c8                	mov    %ecx,%eax
+   b0668:	31 d2                	xor    %edx,%edx
+   b066a:	41 f7 f2             	div    %r10d
+   b066d:	f2 0f 59 e5          	mulsd  %xmm5,%xmm4
+   b0671:	48 89 d1             	mov    %rdx,%rcx
+   b0674:	48 c1 f9 3f          	sar    $0x3f,%rcx
+   b0678:	4c 21 d9             	and    %r11,%rcx
+   b067b:	48 01 d1             	add    %rdx,%rcx
+   b067e:	74 1e                	je     b069e <ns_mac_lab::grid::weights+0x5ee>
+   b0680:	48 39 d9             	cmp    %rbx,%rcx
+   b0683:	74 19                	je     b069e <ns_mac_lab::grid::weights+0x5ee>
+   b0685:	4c 89 f0             	mov    %r14,%rax
+   b0688:	48 09 e8             	or     %rbp,%rax
+   b068b:	48 c1 e8 20          	shr    $0x20,%rax
+   b068f:	74 20                	je     b06b1 <ns_mac_lab::grid::weights+0x601>
+   b0691:	4c 89 f0             	mov    %r14,%rax
+   b0694:	48 99                	cqto   
+   b0696:	48 f7 fd             	idiv   %rbp
+   b0699:	48 89 d6             	mov    %rdx,%rsi
+   b069c:	eb 1c                	jmp    b06ba <ns_mac_lab::grid::weights+0x60a>
+   b069e:	f2 0f 59 d6          	mulsd  %xmm6,%xmm2
+   b06a2:	66 0f 57 c9          	xorpd  %xmm1,%xmm1
+   b06a6:	f2 0f 59 d1          	mulsd  %xmm1,%xmm2
+   b06aa:	31 c9                	xor    %ecx,%ecx
+   b06ac:	e9 84 00 00 00       	jmp    b0735 <ns_mac_lab::grid::weights+0x685>
+   b06b1:	44 89 f0             	mov    %r14d,%eax
+   b06b4:	31 d2                	xor    %edx,%edx
+   b06b6:	f7 f5                	div    %ebp
+   b06b8:	89 d6                	mov    %edx,%esi
+   b06ba:	48 89 f0             	mov    %rsi,%rax
+   b06bd:	48 c1 f8 3f          	sar    $0x3f,%rax
+   b06c1:	4c 21 c8             	and    %r9,%rax
+   b06c4:	48 8d 51 ff          	lea    -0x1(%rcx),%rdx
+   b06c8:	49 89 cb             	mov    %rcx,%r11
+   b06cb:	49 f7 d3             	not    %r11
+   b06ce:	4d 01 da             	add    %r11,%r10
+   b06d1:	f2 0f 59 d6          	mulsd  %xmm6,%xmm2
+   b06d5:	48 39 d9             	cmp    %rbx,%rcx
+   b06d8:	4c 0f 42 d2          	cmovb  %rdx,%r10
+   b06dc:	72 08                	jb     b06e6 <ns_mac_lab::grid::weights+0x636>
+   b06de:	66 0f 57 15 ba 03 f8 	xorpd  -0x7fc46(%rip),%xmm2        # 30aa0 <anon.10a6097f81e7efb5f429444a081119db.135.llvm.18064805065927349754+0x5d0>
+   b06e5:	ff 
+   b06e6:	4c 0f af d5          	imul   %rbp,%r10
+   b06ea:	48 01 c6             	add    %rax,%rsi
+   b06ed:	48 89 f8             	mov    %rdi,%rax
+   b06f0:	48 09 e8             	or     %rbp,%rax
+   b06f3:	48 c1 e8 20          	shr    $0x20,%rax
+   b06f7:	74 0a                	je     b0703 <ns_mac_lab::grid::weights+0x653>
+   b06f9:	48 89 f8             	mov    %rdi,%rax
+   b06fc:	48 99                	cqto   
+   b06fe:	48 f7 fd             	idiv   %rbp
+   b0701:	eb 06                	jmp    b0709 <ns_mac_lab::grid::weights+0x659>
+   b0703:	89 f8                	mov    %edi,%eax
+   b0705:	31 d2                	xor    %edx,%edx
+   b0707:	f7 f5                	div    %ebp
+   b0709:	4c 01 d6             	add    %r10,%rsi
+   b070c:	31 c0                	xor    %eax,%eax
+   b070e:	48 39 d9             	cmp    %rbx,%rcx
+   b0711:	0f 92 c0             	setb   %al
+   b0714:	48 89 d7             	mov    %rdx,%rdi
+   b0717:	48 c1 ff 3f          	sar    $0x3f,%rdi
+   b071b:	4c 21 cf             	and    %r9,%rdi
+   b071e:	48 8d 0d ab 04 f8 ff 	lea    -0x7fb55(%rip),%rcx        # 30bd0 <anon.4025e114333e7e9fafd56f03d6ba17f6.19.llvm.13770579139157259679+0x50>
+   b0725:	f2 0f 10 0c c1       	movsd  (%rcx,%rax,8),%xmm1
+   b072a:	48 01 d7             	add    %rdx,%rdi
+   b072d:	4c 01 d7             	add    %r10,%rdi
+   b0730:	b9 01 00 00 00       	mov    $0x1,%ecx
+   b0735:	66 0f 14 da          	unpcklpd %xmm2,%xmm3
+   b0739:	f2 0f 59 c6          	mulsd  %xmm6,%xmm0
+   b073d:	f2 0f 59 c1          	mulsd  %xmm1,%xmm0
+   b0741:	66 0f 14 e0          	unpcklpd %xmm0,%xmm4
+   b0745:	66 0f 28 c4          	movapd %xmm4,%xmm0
+   b0749:	66 0f 28 cb          	movapd %xmm3,%xmm1
+   b074d:	e9 05 03 00 00       	jmp    b0a57 <ns_mac_lab::grid::weights+0x9a7>
+   b0752:	44 89 f0             	mov    %r14d,%eax
+   b0755:	31 d2                	xor    %edx,%edx
+   b0757:	f7 f5                	div    %ebp
+   b0759:	89 d7                	mov    %edx,%edi
+   b075b:	48 89 fe             	mov    %rdi,%rsi
+   b075e:	48 c1 fe 3f          	sar    $0x3f,%rsi
+   b0762:	49 ff c6             	inc    %r14
+   b0765:	4c 89 f0             	mov    %r14,%rax
+   b0768:	48 09 e8             	or     %rbp,%rax
+   b076b:	48 c1 e8 20          	shr    $0x20,%rax
+   b076f:	74 0d                	je     b077e <ns_mac_lab::grid::weights+0x6ce>
+   b0771:	4c 89 f0             	mov    %r14,%rax
+   b0774:	48 99                	cqto   
+   b0776:	48 f7 fd             	idiv   %rbp
+   b0779:	49 89 d0             	mov    %rdx,%r8
+   b077c:	eb 0a                	jmp    b0788 <ns_mac_lab::grid::weights+0x6d8>
+   b077e:	44 89 f0             	mov    %r14d,%eax
+   b0781:	31 d2                	xor    %edx,%edx
+   b0783:	f7 f5                	div    %ebp
+   b0785:	41 89 d0             	mov    %edx,%r8d
+   b0788:	4c 21 ce             	and    %r9,%rsi
+   b078b:	66 0f 28 d1          	movapd %xmm1,%xmm2
+   b078f:	66 0f c6 d6 01       	shufpd $0x1,%xmm6,%xmm2
+   b0794:	f2 0f 10 cb          	movsd  %xmm3,%xmm1
+   b0798:	66 0f 14 de          	unpcklpd %xmm6,%xmm3
+   b079c:	4d 89 c6             	mov    %r8,%r14
+   b079f:	49 c1 fe 3f          	sar    $0x3f,%r14
+   b07a3:	4d 21 ce             	and    %r9,%r14
+   b07a6:	48 8d 41 01          	lea    0x1(%rcx),%rax
+   b07aa:	48 89 c2             	mov    %rax,%rdx
+   b07ad:	4c 09 d2             	or     %r10,%rdx
+   b07b0:	48 c1 ea 20          	shr    $0x20,%rdx
+   b07b4:	74 0a                	je     b07c0 <ns_mac_lab::grid::weights+0x710>
+   b07b6:	48 99                	cqto   
+   b07b8:	49 f7 fa             	idiv   %r10
+   b07bb:	49 89 d1             	mov    %rdx,%r9
+   b07be:	eb 08                	jmp    b07c8 <ns_mac_lab::grid::weights+0x718>
+   b07c0:	31 d2                	xor    %edx,%edx
+   b07c2:	41 f7 f2             	div    %r10d
+   b07c5:	41 89 d1             	mov    %edx,%r9d
+   b07c8:	48 01 fe             	add    %rdi,%rsi
+   b07cb:	66 0f 59 d1          	mulpd  %xmm1,%xmm2
+   b07cf:	66 0f 59 c3          	mulpd  %xmm3,%xmm0
+   b07d3:	4d 01 c6             	add    %r8,%r14
+   b07d6:	48 89 c8             	mov    %rcx,%rax
+   b07d9:	4c 09 d0             	or     %r10,%rax
+   b07dc:	48 c1 e8 20          	shr    $0x20,%rax
+   b07e0:	74 0a                	je     b07ec <ns_mac_lab::grid::weights+0x73c>
+   b07e2:	48 89 c8             	mov    %rcx,%rax
+   b07e5:	48 99                	cqto   
+   b07e7:	49 f7 fa             	idiv   %r10
+   b07ea:	eb 07                	jmp    b07f3 <ns_mac_lab::grid::weights+0x743>
+   b07ec:	89 c8                	mov    %ecx,%eax
+   b07ee:	31 d2                	xor    %edx,%edx
+   b07f0:	41 f7 f2             	div    %r10d
+   b07f3:	4c 89 c8             	mov    %r9,%rax
+   b07f6:	48 c1 f8 3f          	sar    $0x3f,%rax
+   b07fa:	4c 21 d8             	and    %r11,%rax
+   b07fd:	48 89 d7             	mov    %rdx,%rdi
+   b0800:	48 c1 ff 3f          	sar    $0x3f,%rdi
+   b0804:	4c 21 df             	and    %r11,%rdi
+   b0807:	4c 01 c8             	add    %r9,%rax
+   b080a:	48 01 d7             	add    %rdx,%rdi
+   b080d:	49 89 f8             	mov    %rdi,%r8
+   b0810:	49 f7 d0             	not    %r8
+   b0813:	4d 01 d0             	add    %r10,%r8
+   b0816:	31 c9                	xor    %ecx,%ecx
+   b0818:	48 39 df             	cmp    %rbx,%rdi
+   b081b:	0f 92 c1             	setb   %cl
+   b081e:	4c 0f 42 c7          	cmovb  %rdi,%r8
+   b0822:	4c 0f af c5          	imul   %rbp,%r8
+   b0826:	4d 8d 3c 30          	lea    (%r8,%rsi,1),%r15
+   b082a:	4d 01 f0             	add    %r14,%r8
+   b082d:	48 89 c7             	mov    %rax,%rdi
+   b0830:	48 f7 d7             	not    %rdi
+   b0833:	4c 01 d7             	add    %r10,%rdi
+   b0836:	31 d2                	xor    %edx,%edx
+   b0838:	48 39 d8             	cmp    %rbx,%rax
+   b083b:	0f 92 c2             	setb   %dl
+   b083e:	66 0f 28 1d 5a 02 f8 	movapd -0x7fda6(%rip),%xmm3        # 30aa0 <anon.10a6097f81e7efb5f429444a081119db.135.llvm.18064805065927349754+0x5d0>
+   b0845:	ff 
+   b0846:	66 0f 28 c8          	movapd %xmm0,%xmm1
+   b084a:	66 0f 57 cb          	xorpd  %xmm3,%xmm1
+   b084e:	48 0f 42 f8          	cmovb  %rax,%rdi
+   b0852:	66 0f 57 da          	xorpd  %xmm2,%xmm3
+   b0856:	48 0f af fd          	imul   %rbp,%rdi
+   b085a:	48 01 fe             	add    %rdi,%rsi
+   b085d:	4c 01 f7             	add    %r14,%rdi
+   b0860:	66 0f 6e e1          	movd   %ecx,%xmm4
+   b0864:	66 0f c4 e2 04       	pinsrw $0x4,%edx,%xmm4
+   b0869:	66 0f 70 e4 a0       	pshufd $0xa0,%xmm4,%xmm4
+   b086e:	66 0f 72 f4 1f       	pslld  $0x1f,%xmm4
+   b0873:	66 0f 72 e4 1f       	psrad  $0x1f,%xmm4
+   b0878:	66 0f 6f ec          	movdqa %xmm4,%xmm5
+   b087c:	66 0f df eb          	pandn  %xmm3,%xmm5
+   b0880:	66 0f 54 d4          	andpd  %xmm4,%xmm2
+   b0884:	66 0f 56 d5          	orpd   %xmm5,%xmm2
+   b0888:	66 0f 54 c4          	andpd  %xmm4,%xmm0
+   b088c:	66 0f 55 e1          	andnpd %xmm1,%xmm4
+   b0890:	66 0f 56 c4          	orpd   %xmm4,%xmm0
+   b0894:	b9 01 00 00 00       	mov    $0x1,%ecx
+   b0899:	41 bc 01 00 00 00    	mov    $0x1,%r12d
+   b089f:	e9 af 01 00 00       	jmp    b0a53 <ns_mac_lab::grid::weights+0x9a3>
+   b08a4:	89 c8                	mov    %ecx,%eax
+   b08a6:	31 d2                	xor    %edx,%edx
+   b08a8:	f7 f3                	div    %ebx
+   b08aa:	66 0f 28 d1          	movapd %xmm1,%xmm2
+   b08ae:	66 0f c6 d6 01       	shufpd $0x1,%xmm6,%xmm2
+   b08b3:	66 0f 28 d9          	movapd %xmm1,%xmm3
+   b08b7:	66 0f 14 de          	unpcklpd %xmm6,%xmm3
+   b08bb:	49 89 d0             	mov    %rdx,%r8
+   b08be:	49 c1 f8 3f          	sar    $0x3f,%r8
+   b08c2:	4d 21 e8             	and    %r13,%r8
+   b08c5:	49 01 d0             	add    %rdx,%r8
+   b08c8:	48 ff c1             	inc    %rcx
+   b08cb:	48 89 c8             	mov    %rcx,%rax
+   b08ce:	48 09 d8             	or     %rbx,%rax
+   b08d1:	48 c1 e8 20          	shr    $0x20,%rax
+   b08d5:	74 30                	je     b0907 <ns_mac_lab::grid::weights+0x857>
+   b08d7:	48 89 c8             	mov    %rcx,%rax
+   b08da:	48 99                	cqto   
+   b08dc:	48 f7 fb             	idiv   %rbx
+   b08df:	eb 2c                	jmp    b090d <ns_mac_lab::grid::weights+0x85d>
+   b08e1:	31 d2                	xor    %edx,%edx
+   b08e3:	f7 f5                	div    %ebp
+   b08e5:	89 d1                	mov    %edx,%ecx
+   b08e7:	48 89 cf             	mov    %rcx,%rdi
+   b08ea:	48 c1 ff 3f          	sar    $0x3f,%rdi
+   b08ee:	4c 21 cf             	and    %r9,%rdi
+   b08f1:	4c 89 f0             	mov    %r14,%rax
+   b08f4:	48 09 e8             	or     %rbp,%rax
+   b08f7:	48 c1 e8 20          	shr    $0x20,%rax
+   b08fb:	74 41                	je     b093e <ns_mac_lab::grid::weights+0x88e>
+   b08fd:	4c 89 f0             	mov    %r14,%rax
+   b0900:	48 99                	cqto   
+   b0902:	48 f7 fd             	idiv   %rbp
+   b0905:	eb 3e                	jmp    b0945 <ns_mac_lab::grid::weights+0x895>
+   b0907:	89 c8                	mov    %ecx,%eax
+   b0909:	31 d2                	xor    %edx,%edx
+   b090b:	f7 f3                	div    %ebx
+   b090d:	66 0f 59 ca          	mulpd  %xmm2,%xmm1
+   b0911:	66 0f 59 c3          	mulpd  %xmm3,%xmm0
+   b0915:	49 f7 d8             	neg    %r8
+   b0918:	48 89 d7             	mov    %rdx,%rdi
+   b091b:	48 c1 ff 3f          	sar    $0x3f,%rdi
+   b091f:	4c 21 ef             	and    %r13,%rdi
+   b0922:	48 01 d7             	add    %rdx,%rdi
+   b0925:	48 f7 df             	neg    %rdi
+   b0928:	b9 01 00 00 00       	mov    $0x1,%ecx
+   b092d:	48 89 fe             	mov    %rdi,%rsi
+   b0930:	41 bc 01 00 00 00    	mov    $0x1,%r12d
+   b0936:	4d 89 c7             	mov    %r8,%r15
+   b0939:	e9 19 01 00 00       	jmp    b0a57 <ns_mac_lab::grid::weights+0x9a7>
+   b093e:	44 89 f0             	mov    %r14d,%eax
+   b0941:	31 d2                	xor    %edx,%edx
+   b0943:	f7 f5                	div    %ebp
+   b0945:	48 01 cf             	add    %rcx,%rdi
+   b0948:	48 89 d6             	mov    %rdx,%rsi
+   b094b:	48 c1 fe 3f          	sar    $0x3f,%rsi
+   b094f:	4c 21 ce             	and    %r9,%rsi
+   b0952:	48 01 d6             	add    %rdx,%rsi
+   b0955:	66 0f 28 d1          	movapd %xmm1,%xmm2
+   b0959:	66 0f c6 d6 01       	shufpd $0x1,%xmm6,%xmm2
+   b095e:	f2 0f 10 cb          	movsd  %xmm3,%xmm1
+   b0962:	66 0f 14 de          	unpcklpd %xmm6,%xmm3
+   b0966:	66 0f 59 ca          	mulpd  %xmm2,%xmm1
+   b096a:	66 0f 59 c3          	mulpd  %xmm3,%xmm0
+   b096e:	b9 01 00 00 00       	mov    $0x1,%ecx
+   b0973:	49 89 f8             	mov    %rdi,%r8
+   b0976:	41 bc 01 00 00 00    	mov    $0x1,%r12d
+   b097c:	49 89 f7             	mov    %rsi,%r15
+   b097f:	e9 d3 00 00 00       	jmp    b0a57 <ns_mac_lab::grid::weights+0x9a7>
+   b0984:	31 d2                	xor    %edx,%edx
+   b0986:	41 f7 f2             	div    %r10d
+   b0989:	89 d6                	mov    %edx,%esi
+   b098b:	66 0f 59 d1          	mulpd  %xmm1,%xmm2
+   b098f:	66 0f 59 c3          	mulpd  %xmm3,%xmm0
+   b0993:	48 89 c8             	mov    %rcx,%rax
+   b0996:	4c 09 d0             	or     %r10,%rax
+   b0999:	48 c1 e8 20          	shr    $0x20,%rax
+   b099d:	74 0a                	je     b09a9 <ns_mac_lab::grid::weights+0x8f9>
+   b099f:	48 89 c8             	mov    %rcx,%rax
+   b09a2:	48 99                	cqto   
+   b09a4:	49 f7 fa             	idiv   %r10
+   b09a7:	eb 07                	jmp    b09b0 <ns_mac_lab::grid::weights+0x900>
+   b09a9:	89 c8                	mov    %ecx,%eax
+   b09ab:	31 d2                	xor    %edx,%edx
+   b09ad:	41 f7 f2             	div    %r10d
+   b09b0:	48 89 f0             	mov    %rsi,%rax
+   b09b3:	48 c1 f8 3f          	sar    $0x3f,%rax
+   b09b7:	4c 21 d8             	and    %r11,%rax
+   b09ba:	48 89 d1             	mov    %rdx,%rcx
+   b09bd:	48 c1 f9 3f          	sar    $0x3f,%rcx
+   b09c1:	4c 21 d9             	and    %r11,%rcx
+   b09c4:	48 01 f0             	add    %rsi,%rax
+   b09c7:	48 01 d1             	add    %rdx,%rcx
+   b09ca:	49 89 c8             	mov    %rcx,%r8
+   b09cd:	49 f7 d0             	not    %r8
+   b09d0:	4d 01 d0             	add    %r10,%r8
+   b09d3:	31 d2                	xor    %edx,%edx
+   b09d5:	48 39 d9             	cmp    %rbx,%rcx
+   b09d8:	0f 92 c2             	setb   %dl
+   b09db:	4c 0f 42 c1          	cmovb  %rcx,%r8
+   b09df:	49 f7 d8             	neg    %r8
+   b09e2:	48 89 c7             	mov    %rax,%rdi
+   b09e5:	48 f7 d7             	not    %rdi
+   b09e8:	4c 01 d7             	add    %r10,%rdi
+   b09eb:	31 c9                	xor    %ecx,%ecx
+   b09ed:	48 39 d8             	cmp    %rbx,%rax
+   b09f0:	0f 92 c1             	setb   %cl
+   b09f3:	66 0f 28 0d a5 00 f8 	movapd -0x7ff5b(%rip),%xmm1        # 30aa0 <anon.10a6097f81e7efb5f429444a081119db.135.llvm.18064805065927349754+0x5d0>
+   b09fa:	ff 
+   b09fb:	66 0f 28 d8          	movapd %xmm0,%xmm3
+   b09ff:	66 0f 57 d9          	xorpd  %xmm1,%xmm3
+   b0a03:	48 0f 42 f8          	cmovb  %rax,%rdi
+   b0a07:	66 0f 57 ca          	xorpd  %xmm2,%xmm1
+   b0a0b:	66 0f 6e e2          	movd   %edx,%xmm4
+   b0a0f:	66 0f c4 e1 04       	pinsrw $0x4,%ecx,%xmm4
+   b0a14:	48 f7 df             	neg    %rdi
+   b0a17:	66 0f 70 e4 a0       	pshufd $0xa0,%xmm4,%xmm4
+   b0a1c:	66 0f 72 f4 1f       	pslld  $0x1f,%xmm4
+   b0a21:	66 0f 72 e4 1f       	psrad  $0x1f,%xmm4
+   b0a26:	66 0f 6f ec          	movdqa %xmm4,%xmm5
+   b0a2a:	66 0f df e9          	pandn  %xmm1,%xmm5
+   b0a2e:	66 0f 54 d4          	andpd  %xmm4,%xmm2
+   b0a32:	66 0f 56 d5          	orpd   %xmm5,%xmm2
+   b0a36:	66 0f 54 c4          	andpd  %xmm4,%xmm0
+   b0a3a:	66 0f 55 e3          	andnpd %xmm3,%xmm4
+   b0a3e:	66 0f 56 c4          	orpd   %xmm4,%xmm0
+   b0a42:	b9 01 00 00 00       	mov    $0x1,%ecx
+   b0a47:	48 89 fe             	mov    %rdi,%rsi
+   b0a4a:	41 bc 01 00 00 00    	mov    $0x1,%r12d
+   b0a50:	4d 89 c7             	mov    %r8,%r15
+   b0a53:	66 0f 28 ca          	movapd %xmm2,%xmm1
+   b0a57:	48 8b 44 24 08       	mov    0x8(%rsp),%rax
+   b0a5c:	4c 89 20             	mov    %r12,(%rax)
+   b0a5f:	4c 89 78 08          	mov    %r15,0x8(%rax)
+   b0a63:	66 0f 13 48 10       	movlpd %xmm1,0x10(%rax)
+   b0a68:	4c 89 60 18          	mov    %r12,0x18(%rax)
+   b0a6c:	4c 89 40 20          	mov    %r8,0x20(%rax)
+   b0a70:	66 0f 13 40 28       	movlpd %xmm0,0x28(%rax)
+   b0a75:	48 89 48 30          	mov    %rcx,0x30(%rax)
+   b0a79:	48 89 70 38          	mov    %rsi,0x38(%rax)
+   b0a7d:	66 0f 17 48 40       	movhpd %xmm1,0x40(%rax)
+   b0a82:	48 89 48 48          	mov    %rcx,0x48(%rax)
+   b0a86:	48 89 78 50          	mov    %rdi,0x50(%rax)
+   b0a8a:	66 0f 17 40 58       	movhpd %xmm0,0x58(%rax)
+   b0a8f:	48 83 c4 58          	add    $0x58,%rsp
+   b0a93:	5b                   	pop    %rbx
+   b0a94:	41 5c                	pop    %r12
+   b0a96:	41 5d                	pop    %r13
+   b0a98:	41 5e                	pop    %r14
+   b0a9a:	41 5f                	pop    %r15
+   b0a9c:	5d                   	pop    %rbp
+   b0a9d:	c3                   	ret    
+   b0a9e:	48 8d 3d bb bb 4a 00 	lea    0x4abbbb(%rip),%rdi        # 55c660 <__frame_dummy_init_array_entry+0x188>
+   b0aa5:	ff 15 25 86 4c 00    	call   *0x4c8625(%rip)        # 5790d0 <_DYNAMIC+0x258>
+   b0aab:	48 83 fd ff          	cmp    $0xffffffffffffffff,%rbp
+   b0aaf:	75 0f                	jne    b0ac0 <ns_mac_lab::grid::weights+0xa10>
+   b0ab1:	48 b8 00 00 00 00 00 	movabs $0x8000000000000000,%rax
+   b0ab8:	00 00 80 
+   b0abb:	49 39 c6             	cmp    %rax,%r14
+   b0abe:	74 40                	je     b0b00 <ns_mac_lab::grid::weights+0xa50>
+   b0ac0:	48 8d 3d e1 bb 4a 00 	lea    0x4abbe1(%rip),%rdi        # 55c6a8 <__frame_dummy_init_array_entry+0x1d0>
+   b0ac7:	ff 15 03 86 4c 00    	call   *0x4c8603(%rip)        # 5790d0 <_DYNAMIC+0x258>
+   b0acd:	84 c0                	test   %al,%al
+   b0acf:	75 2f                	jne    b0b00 <ns_mac_lab::grid::weights+0xa50>
+   b0ad1:	48 8d 3d b8 bb 4a 00 	lea    0x4abbb8(%rip),%rdi        # 55c690 <__frame_dummy_init_array_entry+0x1b8>
+   b0ad8:	ff 15 f2 85 4c 00    	call   *0x4c85f2(%rip)        # 5790d0 <_DYNAMIC+0x258>
+   b0ade:	48 8d 3d c3 bb 4a 00 	lea    0x4abbc3(%rip),%rdi        # 55c6a8 <__frame_dummy_init_array_entry+0x1d0>
+   b0ae5:	ff 15 7d 86 4c 00    	call   *0x4c867d(%rip)        # 579168 <_DYNAMIC+0x2f0>
+   b0aeb:	48 83 fd ff          	cmp    $0xffffffffffffffff,%rbp
+   b0aef:	75 1c                	jne    b0b0d <ns_mac_lab::grid::weights+0xa5d>
+   b0af1:	48 b8 00 00 00 00 00 	movabs $0x8000000000000000,%rax
+   b0af8:	00 00 80 
+   b0afb:	49 39 c6             	cmp    %rax,%r14
+   b0afe:	75 0d                	jne    b0b0d <ns_mac_lab::grid::weights+0xa5d>
+   b0b00:	48 8d 3d 59 bb 4a 00 	lea    0x4abb59(%rip),%rdi        # 55c660 <__frame_dummy_init_array_entry+0x188>
+   b0b07:	ff 15 5b 86 4c 00    	call   *0x4c865b(%rip)        # 579168 <_DYNAMIC+0x2f0>
+   b0b0d:	48 8d 3d 64 bb 4a 00 	lea    0x4abb64(%rip),%rdi        # 55c678 <__frame_dummy_init_array_entry+0x1a0>
+   b0b14:	ff 15 b6 85 4c 00    	call   *0x4c85b6(%rip)        # 5790d0 <_DYNAMIC+0x258>
+   b0b1a:	cc                   	int3   
+   b0b1b:	cc                   	int3   
+   b0b1c:	cc                   	int3   
+   b0b1d:	cc                   	int3   
+   b0b1e:	cc                   	int3   
+   b0b1f:	cc                   	int3   

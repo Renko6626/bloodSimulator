@@ -1,0 +1,314 @@
+{
+  "192": {
+    "weight_samples": 6646,
+    "instruction_opcodes": {
+      "setb": 33,
+      "unpckhpd": 46,
+      "addsd": 75,
+      "neg": 54,
+      "subpd": 140,
+      "mov": 2408,
+      "sub": 43,
+      "movlpd": 4,
+      "movapd": 223,
+      "or": 48,
+      "ucomisd": 330,
+      "mulsd": 149,
+      "and": 152,
+      "cmp": 130,
+      "divsd": 399,
+      "inc": 27,
+      "movsd": 171,
+      "testb": 49,
+      "add": 606,
+      "punpckldq": 40,
+      "xor": 172,
+      "unpcklpd": 29,
+      "test": 52,
+      "movabs": 16,
+      "movq": 47,
+      "lea": 166,
+      "orpd": 34,
+      "div": 88,
+      "shr": 110,
+      "jae": 65,
+      "sar": 64,
+      "cmova": 26,
+      "pop": 55,
+      "jmp": 31,
+      "imul": 72,
+      "push": 74,
+      "ret": 29,
+      "cmovp": 4,
+      "je": 110,
+      "not": 9,
+      "movhpd": 55,
+      "call": 23,
+      "cmpq": 1,
+      "psrad": 16,
+      "cmovs": 2,
+      "jne": 28,
+      "pinsrw": 28,
+      "mulpd": 40,
+      "cvttsd2si": 29,
+      "movdqa": 8,
+      "shufpd": 15,
+      "jb": 5,
+      "andpd": 2,
+      "pshufd": 4,
+      "cmovb": 5,
+      "xorpd": 3,
+      "andnpd": 1,
+      "cmpb": 1
+    },
+    "top_instruction_addresses": [
+      {
+        "pc": "0xb00fb",
+        "samples": 554,
+        "opcode": "mov",
+        "text": "   b00fb:\t48 89 54 24 10       \tmov    %rdx,0x10(%rsp)"
+      },
+      {
+        "pc": "0xb03c0",
+        "samples": 410,
+        "opcode": "mov",
+        "text": "   b03c0:\t48 89 d6             \tmov    %rdx,%rsi"
+      },
+      {
+        "pc": "0xb00f7",
+        "samples": 395,
+        "opcode": "divsd",
+        "text": "   b00f7:\tf2 0f 5e c3          \tdivsd  %xmm3,%xmm0"
+      },
+      {
+        "pc": "0xb0759",
+        "samples": 224,
+        "opcode": "mov",
+        "text": "   b0759:\t89 d7                \tmov    %edx,%edi"
+      },
+      {
+        "pc": "0xb0709",
+        "samples": 218,
+        "opcode": "add",
+        "text": "   b0709:\t4c 01 d6             \tadd    %r10,%rsi"
+      },
+      {
+        "pc": "0xb0785",
+        "samples": 172,
+        "opcode": "mov",
+        "text": "   b0785:\t41 89 d0             \tmov    %edx,%r8d"
+      },
+      {
+        "pc": "0xb06b8",
+        "samples": 137,
+        "opcode": "mov",
+        "text": "   b06b8:\t89 d6                \tmov    %edx,%esi"
+      },
+      {
+        "pc": "0xb01c6",
+        "samples": 132,
+        "opcode": "ucomisd",
+        "text": "   b01c6:\t66 0f 2e 05 7a 0b f8 \tucomisd -0x7f486(%rip),%xmm0        # 30d48 <anon.9db07e612c83336c203a03ab03b9271e.53.llvm.6422049598199583057+0x18>"
+      },
+      {
+        "pc": "0xb07c5",
+        "samples": 127,
+        "opcode": "mov",
+        "text": "   b07c5:\t41 89 d1             \tmov    %edx,%r9d"
+      },
+      {
+        "pc": "0xb066d",
+        "samples": 126,
+        "opcode": "mulsd",
+        "text": "   b066d:\tf2 0f 59 e5          \tmulsd  %xmm5,%xmm4"
+      },
+      {
+        "pc": "0xb01fa",
+        "samples": 117,
+        "opcode": "ucomisd",
+        "text": "   b01fa:\t66 0f 2e 05 46 0b f8 \tucomisd -0x7f4ba(%rip),%xmm0        # 30d48 <anon.9db07e612c83336c203a03ab03b9271e.53.llvm.6422049598199583057+0x18>"
+      },
+      {
+        "pc": "0xb01b1",
+        "samples": 112,
+        "opcode": "movapd",
+        "text": "   b01b1:\t66 0f 29 5c 24 20    \tmovapd %xmm3,0x20(%rsp)"
+      },
+      {
+        "pc": "0xb07f3",
+        "samples": 90,
+        "opcode": "mov",
+        "text": "   b07f3:\t4c 89 c8             \tmov    %r9,%rax"
+      },
+      {
+        "pc": "0xb0617",
+        "samples": 84,
+        "opcode": "add",
+        "text": "   b0617:\t4d 01 e7             \tadd    %r12,%r15"
+      },
+      {
+        "pc": "0xb05d6",
+        "samples": 83,
+        "opcode": "mov",
+        "text": "   b05d6:\t49 89 d7             \tmov    %rdx,%r15"
+      }
+    ],
+    "caveat": "Timer PC sampling is not precise PMU attribution; counts do not measure instruction latency or executed instruction frequency."
+  },
+  "256": {
+    "weight_samples": 11700,
+    "instruction_opcodes": {
+      "add": 1143,
+      "punpckldq": 68,
+      "mov": 4512,
+      "orpd": 55,
+      "jmp": 65,
+      "push": 156,
+      "div": 139,
+      "lea": 311,
+      "movq": 55,
+      "movsd": 315,
+      "addsd": 135,
+      "je": 222,
+      "divsd": 329,
+      "ucomisd": 643,
+      "not": 21,
+      "movhpd": 103,
+      "testb": 113,
+      "test": 81,
+      "movapd": 384,
+      "or": 82,
+      "shr": 179,
+      "cmp": 182,
+      "subpd": 253,
+      "psrad": 55,
+      "mulsd": 240,
+      "xor": 317,
+      "setb": 80,
+      "jae": 91,
+      "call": 19,
+      "and": 256,
+      "jb": 23,
+      "sar": 116,
+      "sub": 66,
+      "imul": 112,
+      "jne": 52,
+      "neg": 102,
+      "pinsrw": 48,
+      "pop": 111,
+      "cvttsd2si": 58,
+      "unpcklpd": 47,
+      "cmova": 35,
+      "mulpd": 45,
+      "andpd": 6,
+      "shufpd": 41,
+      "cmovs": 5,
+      "inc": 43,
+      "ret": 38,
+      "movabs": 35,
+      "unpckhpd": 66,
+      "idiv": 1,
+      "cmovb": 9,
+      "movlpd": 10,
+      "andnpd": 3,
+      "movdqa": 7,
+      "pshufd": 4,
+      "cmovp": 3,
+      "xorpd": 9,
+      "cmpq": 1
+    },
+    "top_instruction_addresses": [
+      {
+        "pc": "0xb00fb",
+        "samples": 1296,
+        "opcode": "mov",
+        "text": "   b00fb:\t48 89 54 24 10       \tmov    %rdx,0x10(%rsp)"
+      },
+      {
+        "pc": "0xb03c0",
+        "samples": 680,
+        "opcode": "mov",
+        "text": "   b03c0:\t48 89 d6             \tmov    %rdx,%rsi"
+      },
+      {
+        "pc": "0xb0709",
+        "samples": 419,
+        "opcode": "add",
+        "text": "   b0709:\t4c 01 d6             \tadd    %r10,%rsi"
+      },
+      {
+        "pc": "0xb0785",
+        "samples": 345,
+        "opcode": "mov",
+        "text": "   b0785:\t41 89 d0             \tmov    %edx,%r8d"
+      },
+      {
+        "pc": "0xb00f7",
+        "samples": 324,
+        "opcode": "divsd",
+        "text": "   b00f7:\tf2 0f 5e c3          \tdivsd  %xmm3,%xmm0"
+      },
+      {
+        "pc": "0xb0759",
+        "samples": 264,
+        "opcode": "mov",
+        "text": "   b0759:\t89 d7                \tmov    %edx,%edi"
+      },
+      {
+        "pc": "0xb01fa",
+        "samples": 255,
+        "opcode": "ucomisd",
+        "text": "   b01fa:\t66 0f 2e 05 46 0b f8 \tucomisd -0x7f4ba(%rip),%xmm0        # 30d48 <anon.9db07e612c83336c203a03ab03b9271e.53.llvm.6422049598199583057+0x18>"
+      },
+      {
+        "pc": "0xb01c6",
+        "samples": 239,
+        "opcode": "ucomisd",
+        "text": "   b01c6:\t66 0f 2e 05 7a 0b f8 \tucomisd -0x7f486(%rip),%xmm0        # 30d48 <anon.9db07e612c83336c203a03ab03b9271e.53.llvm.6422049598199583057+0x18>"
+      },
+      {
+        "pc": "0xb06b8",
+        "samples": 236,
+        "opcode": "mov",
+        "text": "   b06b8:\t89 d6                \tmov    %edx,%esi"
+      },
+      {
+        "pc": "0xb07c5",
+        "samples": 211,
+        "opcode": "mov",
+        "text": "   b07c5:\t41 89 d1             \tmov    %edx,%r9d"
+      },
+      {
+        "pc": "0xb066d",
+        "samples": 205,
+        "opcode": "mulsd",
+        "text": "   b066d:\tf2 0f 59 e5          \tmulsd  %xmm5,%xmm4"
+      },
+      {
+        "pc": "0xb07f3",
+        "samples": 188,
+        "opcode": "mov",
+        "text": "   b07f3:\t4c 89 c8             \tmov    %r9,%rax"
+      },
+      {
+        "pc": "0xb01b1",
+        "samples": 188,
+        "opcode": "movapd",
+        "text": "   b01b1:\t66 0f 29 5c 24 20    \tmovapd %xmm3,0x20(%rsp)"
+      },
+      {
+        "pc": "0xb0617",
+        "samples": 177,
+        "opcode": "add",
+        "text": "   b0617:\t4d 01 e7             \tadd    %r12,%r15"
+      },
+      {
+        "pc": "0xb05d6",
+        "samples": 163,
+        "opcode": "mov",
+        "text": "   b05d6:\t49 89 d7             \tmov    %rdx,%r15"
+      }
+    ],
+    "caveat": "Timer PC sampling is not precise PMU attribution; counts do not measure instruction latency or executed instruction frequency."
+  }
+}

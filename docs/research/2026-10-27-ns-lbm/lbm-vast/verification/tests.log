@@ -1,0 +1,13 @@
+   Compiling lbm-gpu-lab v0.1.0 (/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.63s
+     Running unittests src/main.rs (target/lbm-lab/debug/deps/lbm_gpu_lab-ba4c8aeca0cd8701)
+
+running 5 tests
+test tests::cell_and_fluid_receive_opposite_actual_impulses ... ok
+test tests::impulse_kick_preserves_density_and_adds_prescribed_momentum ... ok
+test tests::gpu_shader_validates ... ok
+test tests::periodic_force_transfers_expected_momentum_without_mass_change ... ok
+test tests::wall_channel_preserves_profile_with_small_discretization_error ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.26s
+

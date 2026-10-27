@@ -1,0 +1,11 @@
+{
+  "command": "CARGO_TARGET_DIR=target/ns-lab cargo rustc --release --offline --locked --manifest-path docs/research/2026-10-27-ns-lbm/lab/Cargo.toml -- -C debuginfo=1",
+  "binary_sha256": "0a4eeaae403ba9f954f33820b3a3dfabf45bcb7d3f6ad7f7daa3200dc9170a7d",
+  "baseline_sha256": "c443cc4bc64998ad4b2a5b2ef2f7ddc9bba8c7cb7fc9cbe83bf175f0f199f69b",
+  "payload_sha256": "76387004a59c69bff8b0157e58b83a697994d4b177acd4925956e3bd2b5cf0bc",
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)",
+  "target_cpu": "generic x86_64; no native tuning",
+  "scope": "self-process CPU only; no GPU kernels in NS baseline",
+  "sampler_build_command": "cc -O2 -Wall -Wextra -fPIC -shared profile/sample.c -o sample.so -ldl -pthread -lrt",
+  "probe_build_command": "cc -O2 profile/perf-probe.c -o perf-probe"
+}

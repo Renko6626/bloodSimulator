@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-27T16:56:17.163499+00:00",
+  "before": {
+    "id": 57949215,
+    "cur_state": "stopped",
+    "actual_status": "exited",
+    "intended_status": "stopped",
+    "ssh_host": "ssh8.vast.ai",
+    "ssh_port": 35230,
+    "public_ipaddr": "154.64.230.50",
+    "ports": null
+  },
+  "start": {
+    "success": false,
+    "error": "resources_unavailable",
+    "msg": "Required resources are currently unavailable, state change queued."
+  }
+}

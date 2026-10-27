@@ -1,0 +1,45 @@
+{
+  "adapter": {
+    "backend": "Vulkan",
+    "driver": "NVIDIA",
+    "driver_info": "580.159.03",
+    "name": "NVIDIA GeForce RTX 3060",
+    "software": false,
+    "type": "DiscreteGpu"
+  },
+  "advance_total_ms": 79.07963700000003,
+  "case": "steady",
+  "config": {
+    "active_cells": 5760,
+    "dt_lbm": 0.0005952380952380953,
+    "h": 0.25,
+    "lx": 48.0,
+    "ly": 7.5,
+    "nu": 0.75,
+    "nx": 192,
+    "ny": 30,
+    "periodic_y": false,
+    "steps_per_frame": 28,
+    "steps_per_mechanical": 14,
+    "tau_nu": 0.5214285714285715
+  },
+  "device_total_ms": 25.33737599999997,
+  "diagnostics": {
+    "energy": 21556.77859563018,
+    "max_lattice_speed": 0.03564827782767161,
+    "max_mach": 0.061744628399858316,
+    "max_speed": 14.972276687622074,
+    "mean_u": 9.992867439985275,
+    "mean_v": 8.507630404608335e-7,
+    "re_measured_mean": 99.92867439985275,
+    "rho_max": 1.000001115957275,
+    "rho_mean": 0.9999996856446766,
+    "rho_min": 0.9999970658391248
+  },
+  "max_relative_l2": 0.0011663926191694486,
+  "re_reference": 100.0,
+  "refinement": 1,
+  "relative_l2": 0.0011663926191694486,
+  "seconds": 2.0,
+  "steps": 3360
+}

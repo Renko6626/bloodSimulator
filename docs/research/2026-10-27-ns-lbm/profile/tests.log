@@ -1,0 +1,12 @@
+   Compiling ns-mac-lab v0.1.0 (/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lab)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.12s
+     Running unittests src/main.rs (target/ns-lab/debug/deps/ns_mac_lab-5187c0cd45680a4d)
+
+running 4 tests
+test tests::implicit_viscosity_dissipates_energy ... ok
+test tests::projection_removes_actual_mac_divergence ... ok
+test tests::drag_exchanges_equal_opposite_momentum ... ok
+test tests::steady_channel_preserves_analytic_flow_with_second_order_wall_error ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.93s
+

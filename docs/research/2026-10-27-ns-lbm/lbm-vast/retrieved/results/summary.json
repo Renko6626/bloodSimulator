@@ -1,0 +1,1959 @@
+{
+  "manifest_status": "complete",
+  "software_check": false,
+  "commands_failed": [],
+  "timing_runs": [
+    {
+      "run": "r1-192x192-c0-re100",
+      "config": {
+        "active_cells": 36864,
+        "dt_lbm": 0.0005952380952380953,
+        "h": 0.25,
+        "lx": 48.0,
+        "ly": 48.0,
+        "nu": 4.8,
+        "nx": 192,
+        "ny": 192,
+        "periodic_y": false,
+        "steps_per_frame": 28,
+        "steps_per_mechanical": 14,
+        "tau_nu": 0.6371428571428571
+      },
+      "cells": 0,
+      "re_reference": 100.0,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 1.5616108,
+        "p95": 1.698622
+      },
+      "whole_ms": {
+        "mean": 2.3022087166666667,
+        "p95": 2.504696
+      },
+      "gpu_ms": {
+        "mean": 0.6963,
+        "p95": 0.6970879999999999
+      },
+      "encode_ms": {
+        "mean": 0.13727438333333333,
+        "p95": 0.196372
+      },
+      "wait_ms": {
+        "mean": 1.1082684583333333,
+        "p95": 1.1594410000000002
+      },
+      "coupling_ms": {
+        "mean": 0.00012848333333333333,
+        "p95": 0.000185
+      },
+      "rapier_ms": {
+        "mean": 0.00022213333333333333,
+        "p95": 0.00034599999999999995
+      },
+      "diagnostics_ms": {
+        "mean": 0.7377504333333333,
+        "p95": 0.8743460000000001
+      },
+      "rho_min": 0.9999971715733409,
+      "rho_max": 1.000002843560651,
+      "max_mach": 0.061856885123093425,
+      "max_area_rel": 0.0,
+      "max_uploaded_exchange_mismatch": 0.0
+    },
+    {
+      "run": "r1-192x192-c72-re100",
+      "config": {
+        "active_cells": 36864,
+        "dt_lbm": 0.0005952380952380953,
+        "h": 0.25,
+        "lx": 48.0,
+        "ly": 48.0,
+        "nu": 4.8,
+        "nx": 192,
+        "ny": 192,
+        "periodic_y": false,
+        "steps_per_frame": 28,
+        "steps_per_mechanical": 14,
+        "tau_nu": 0.6371428571428571
+      },
+      "cells": 72,
+      "re_reference": 100.0,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 2.2647907833333334,
+        "p95": 2.404298
+      },
+      "whole_ms": {
+        "mean": 6.0966176333333335,
+        "p95": 6.6340840000000005
+      },
+      "gpu_ms": {
+        "mean": 0.7140362666666665,
+        "p95": 0.715136
+      },
+      "encode_ms": {
+        "mean": 0.15731678333333335,
+        "p95": 0.170438
+      },
+      "wait_ms": {
+        "mean": 1.1798511333333332,
+        "p95": 1.234029
+      },
+      "coupling_ms": {
+        "mean": 0.49894038333333335,
+        "p95": 0.5394639999999999
+      },
+      "rapier_ms": {
+        "mean": 3.0117175833333336,
+        "p95": 3.464047
+      },
+      "diagnostics_ms": {
+        "mean": 0.8168681916666666,
+        "p95": 0.8682810000000001
+      },
+      "rho_min": 0.9999857377260923,
+      "rho_max": 1.0000139561016113,
+      "max_mach": 0.06181096973291633,
+      "max_area_rel": 0.0002906373261365447,
+      "max_uploaded_exchange_mismatch": 6.04575243432286e-09
+    },
+    {
+      "run": "r1-192x30-c0-re0.1",
+      "config": {
+        "active_cells": 5760,
+        "dt_lbm": 4.1666666666666665e-05,
+        "h": 0.25,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 750.0,
+        "nx": 192,
+        "ny": 30,
+        "periodic_y": false,
+        "steps_per_frame": 400,
+        "steps_per_mechanical": 200,
+        "tau_nu": 2.0
+      },
+      "cells": 0,
+      "re_reference": 0.1,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 5.546597083333333,
+        "p95": 5.592588
+      },
+      "whole_ms": {
+        "mean": 5.795921933333333,
+        "p95": 5.839869
+      },
+      "gpu_ms": {
+        "mean": 2.9414352,
+        "p95": 2.941408
+      },
+      "encode_ms": {
+        "mean": 1.991200325,
+        "p95": 2.013654
+      },
+      "wait_ms": {
+        "mean": 3.298656075,
+        "p95": 3.324545
+      },
+      "coupling_ms": {
+        "mean": 0.00027048333333333334,
+        "p95": 0.000276
+      },
+      "rapier_ms": {
+        "mean": 0.00033334166666666666,
+        "p95": 0.00035400000000000004
+      },
+      "diagnostics_ms": {
+        "mean": 0.24479293333333332,
+        "p95": 0.260772
+      },
+      "rho_min": 0.9999997785125743,
+      "rho_max": 0.9999999714345904,
+      "max_mach": 0.004333349154251724,
+      "max_area_rel": 0.0,
+      "max_uploaded_exchange_mismatch": 0.0
+    },
+    {
+      "run": "r1-192x30-c0-re100",
+      "config": {
+        "active_cells": 5760,
+        "dt_lbm": 0.0005952380952380953,
+        "h": 0.25,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 0.75,
+        "nx": 192,
+        "ny": 30,
+        "periodic_y": false,
+        "steps_per_frame": 28,
+        "steps_per_mechanical": 14,
+        "tau_nu": 0.5214285714285715
+      },
+      "cells": 0,
+      "re_reference": 100.0,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 0.6209222083333333,
+        "p95": 0.741758
+      },
+      "whole_ms": {
+        "mean": 0.7522247333333334,
+        "p95": 0.859353
+      },
+      "gpu_ms": {
+        "mean": 0.22938826666666665,
+        "p95": 0.229952
+      },
+      "encode_ms": {
+        "mean": 0.127033925,
+        "p95": 0.17538700000000002
+      },
+      "wait_ms": {
+        "mean": 0.40532015,
+        "p95": 0.451025
+      },
+      "coupling_ms": {
+        "mean": 0.0001074,
+        "p95": 0.00016999999999999999
+      },
+      "rapier_ms": {
+        "mean": 0.00010365833333333334,
+        "p95": 0.000174
+      },
+      "diagnostics_ms": {
+        "mean": 0.12928855833333333,
+        "p95": 0.233983
+      },
+      "rho_min": 0.9999960247951094,
+      "rho_max": 1.000001837965101,
+      "max_mach": 0.06178496060720004,
+      "max_area_rel": 0.0,
+      "max_uploaded_exchange_mismatch": 0.0
+    },
+    {
+      "run": "r1-192x30-c72-re100",
+      "config": {
+        "active_cells": 5760,
+        "dt_lbm": 0.0005952380952380953,
+        "h": 0.25,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 0.75,
+        "nx": 192,
+        "ny": 30,
+        "periodic_y": false,
+        "steps_per_frame": 28,
+        "steps_per_mechanical": 14,
+        "tau_nu": 0.5214285714285715
+      },
+      "cells": 72,
+      "re_reference": 100.0,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 0.8713616416666666,
+        "p95": 0.9391499999999999
+      },
+      "whole_ms": {
+        "mean": 3.7528828583333333,
+        "p95": 4.278175
+      },
+      "gpu_ms": {
+        "mean": 0.23702399999999998,
+        "p95": 0.23740799999999998
+      },
+      "encode_ms": {
+        "mean": 0.144995075,
+        "p95": 0.16749
+      },
+      "wait_ms": {
+        "mean": 0.4498886,
+        "p95": 0.473263
+      },
+      "coupling_ms": {
+        "mean": 0.14361881666666668,
+        "p95": 0.16692200000000001
+      },
+      "rapier_ms": {
+        "mean": 2.740899241666667,
+        "p95": 3.221363
+      },
+      "diagnostics_ms": {
+        "mean": 0.13794023333333336,
+        "p95": 0.163188
+      },
+      "rho_min": 0.999974197242409,
+      "rho_max": 1.000027080764994,
+      "max_mach": 0.05968127188312637,
+      "max_area_rel": 4.6710539973848775e-05,
+      "max_uploaded_exchange_mismatch": 4.494403110374097e-09
+    },
+    {
+      "run": "r1-256x256-c0-re100",
+      "config": {
+        "active_cells": 65536,
+        "dt_lbm": 0.000462962962962963,
+        "h": 0.1875,
+        "lx": 48.0,
+        "ly": 48.0,
+        "nu": 4.8,
+        "nx": 256,
+        "ny": 256,
+        "periodic_y": false,
+        "steps_per_frame": 36,
+        "steps_per_mechanical": 18,
+        "tau_nu": 0.6896296296296296
+      },
+      "cells": 0,
+      "re_reference": 100.0,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 3.0185027,
+        "p95": 3.0895289999999997
+      },
+      "whole_ms": {
+        "mean": 5.3221817666666675,
+        "p95": 5.54941
+      },
+      "gpu_ms": {
+        "mean": 1.4652743999999998,
+        "p95": 1.466688
+      },
+      "encode_ms": {
+        "mean": 0.286072875,
+        "p95": 0.316851
+      },
+      "wait_ms": {
+        "mean": 1.9987500416666668,
+        "p95": 2.026952
+      },
+      "coupling_ms": {
+        "mean": 0.00022285,
+        "p95": 0.000246
+      },
+      "rapier_ms": {
+        "mean": 0.00035878333333333337,
+        "p95": 0.000405
+      },
+      "diagnostics_ms": {
+        "mean": 2.299424925,
+        "p95": 2.4652849999999997
+      },
+      "rho_min": 0.9999969995114952,
+      "rho_max": 1.0000030789524317,
+      "max_mach": 0.06415057254583766,
+      "max_area_rel": 0.0,
+      "max_uploaded_exchange_mismatch": 0.0
+    },
+    {
+      "run": "r1-256x256-c72-re100",
+      "config": {
+        "active_cells": 65536,
+        "dt_lbm": 0.000462962962962963,
+        "h": 0.1875,
+        "lx": 48.0,
+        "ly": 48.0,
+        "nu": 4.8,
+        "nx": 256,
+        "ny": 256,
+        "periodic_y": false,
+        "steps_per_frame": 36,
+        "steps_per_mechanical": 18,
+        "tau_nu": 0.6896296296296296
+      },
+      "cells": 72,
+      "re_reference": 100.0,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 3.7689451000000003,
+        "p95": 3.9492680000000004
+      },
+      "whole_ms": {
+        "mean": 8.388552166666667,
+        "p95": 8.826916
+      },
+      "gpu_ms": {
+        "mean": 1.4972239999999999,
+        "p95": 1.4985279999999999
+      },
+      "encode_ms": {
+        "mean": 0.18082599166666666,
+        "p95": 0.190195
+      },
+      "wait_ms": {
+        "mean": 2.0929106833333333,
+        "p95": 2.135695
+      },
+      "coupling_ms": {
+        "mean": 0.8385528833333333,
+        "p95": 0.878355
+      },
+      "rapier_ms": {
+        "mean": 3.1596628,
+        "p95": 3.5161160000000002
+      },
+      "diagnostics_ms": {
+        "mean": 1.456669925,
+        "p95": 1.52334
+      },
+      "rho_min": 0.9999812985770404,
+      "rho_max": 1.0000210732687265,
+      "max_mach": 0.06409972675506687,
+      "max_area_rel": 0.0003321569441561145,
+      "max_uploaded_exchange_mismatch": 4.901498051404409e-09
+    },
+    {
+      "run": "r1-256x40-c0-re0.1",
+      "config": {
+        "active_cells": 10240,
+        "dt_lbm": 2.3408239700374533e-05,
+        "h": 0.1875,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 750.0,
+        "nx": 256,
+        "ny": 40,
+        "periodic_y": false,
+        "steps_per_frame": 712,
+        "steps_per_mechanical": 356,
+        "tau_nu": 1.9981273408239701
+      },
+      "cells": 0,
+      "re_reference": 0.1,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 9.917402741666667,
+        "p95": 9.982813
+      },
+      "whole_ms": {
+        "mean": 10.352522283333334,
+        "p95": 10.419301
+      },
+      "gpu_ms": {
+        "mean": 6.103104266666666,
+        "p95": 6.119168
+      },
+      "encode_ms": {
+        "mean": 3.1056125583333336,
+        "p95": 3.161173
+      },
+      "wait_ms": {
+        "mean": 6.492683291666666,
+        "p95": 6.519569000000001
+      },
+      "coupling_ms": {
+        "mean": 0.00025525,
+        "p95": 0.000277
+      },
+      "rapier_ms": {
+        "mean": 0.0003384333333333333,
+        "p95": 0.00034999999999999994
+      },
+      "diagnostics_ms": {
+        "mean": 0.43078218333333335,
+        "p95": 0.445284
+      },
+      "rho_min": 1.000000049261871,
+      "rho_max": 1.000000299391104,
+      "max_mach": 0.003244870949228341,
+      "max_area_rel": 0.0,
+      "max_uploaded_exchange_mismatch": 0.0
+    },
+    {
+      "run": "r1-256x40-c0-re100",
+      "config": {
+        "active_cells": 10240,
+        "dt_lbm": 0.000462962962962963,
+        "h": 0.1875,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 0.75,
+        "nx": 256,
+        "ny": 40,
+        "periodic_y": false,
+        "steps_per_frame": 36,
+        "steps_per_mechanical": 18,
+        "tau_nu": 0.5296296296296297
+      },
+      "cells": 0,
+      "re_reference": 100.0,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 0.8477023666666667,
+        "p95": 0.9835170000000001
+      },
+      "whole_ms": {
+        "mean": 1.0804891166666666,
+        "p95": 1.34039
+      },
+      "gpu_ms": {
+        "mean": 0.3443421333333333,
+        "p95": 0.34499199999999997
+      },
+      "encode_ms": {
+        "mean": 0.13606734166666667,
+        "p95": 0.21232399999999998
+      },
+      "wait_ms": {
+        "mean": 0.6015408166666667,
+        "p95": 0.643169
+      },
+      "coupling_ms": {
+        "mean": 0.0001029,
+        "p95": 0.000185
+      },
+      "rapier_ms": {
+        "mean": 0.00013711666666666667,
+        "p95": 0.00023300000000000003
+      },
+      "diagnostics_ms": {
+        "mean": 0.23101750000000001,
+        "p95": 0.403613
+      },
+      "rho_min": 0.9999968276824802,
+      "rho_max": 1.0000016107223928,
+      "max_mach": 0.06411315233960385,
+      "max_area_rel": 0.0,
+      "max_uploaded_exchange_mismatch": 0.0
+    },
+    {
+      "run": "r1-256x40-c72-re100",
+      "config": {
+        "active_cells": 10240,
+        "dt_lbm": 0.000462962962962963,
+        "h": 0.1875,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 0.75,
+        "nx": 256,
+        "ny": 40,
+        "periodic_y": false,
+        "steps_per_frame": 36,
+        "steps_per_mechanical": 18,
+        "tau_nu": 0.5296296296296297
+      },
+      "cells": 72,
+      "re_reference": 100.0,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 1.108222225,
+        "p95": 1.209794
+      },
+      "whole_ms": {
+        "mean": 3.9437835000000003,
+        "p95": 4.382652
+      },
+      "gpu_ms": {
+        "mean": 0.3532197333333333,
+        "p95": 0.354016
+      },
+      "encode_ms": {
+        "mean": 0.15893594166666666,
+        "p95": 0.18659900000000001
+      },
+      "wait_ms": {
+        "mean": 0.6138640083333333,
+        "p95": 0.679679
+      },
+      "coupling_ms": {
+        "mean": 0.17666890000000002,
+        "p95": 0.21133000000000002
+      },
+      "rapier_ms": {
+        "mean": 2.620513766666667,
+        "p95": 3.009963
+      },
+      "diagnostics_ms": {
+        "mean": 0.2124884,
+        "p95": 0.26602499999999996
+      },
+      "rho_min": 0.99996682186611,
+      "rho_max": 1.000029933435144,
+      "max_mach": 0.06190867557834056,
+      "max_area_rel": 5.19000612421161e-05,
+      "max_uploaded_exchange_mismatch": 5.213279604829212e-09
+    },
+    {
+      "run": "r2-192x192-c0-re100",
+      "config": {
+        "active_cells": 36864,
+        "dt_lbm": 0.0005952380952380953,
+        "h": 0.25,
+        "lx": 48.0,
+        "ly": 48.0,
+        "nu": 4.8,
+        "nx": 192,
+        "ny": 192,
+        "periodic_y": false,
+        "steps_per_frame": 28,
+        "steps_per_mechanical": 14,
+        "tau_nu": 0.6371428571428571
+      },
+      "cells": 0,
+      "re_reference": 100.0,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 1.6189013416666667,
+        "p95": 1.7710489999999999
+      },
+      "whole_ms": {
+        "mean": 2.341198775,
+        "p95": 2.680007
+      },
+      "gpu_ms": {
+        "mean": 0.6961181333333334,
+        "p95": 0.6973119999999999
+      },
+      "encode_ms": {
+        "mean": 0.153182525,
+        "p95": 0.20174799999999998
+      },
+      "wait_ms": {
+        "mean": 1.1154781249999999,
+        "p95": 1.170776
+      },
+      "coupling_ms": {
+        "mean": 0.00014231666666666667,
+        "p95": 0.00020899999999999998
+      },
+      "rapier_ms": {
+        "mean": 0.00021795833333333335,
+        "p95": 0.000343
+      },
+      "diagnostics_ms": {
+        "mean": 0.7189308666666666,
+        "p95": 0.9258919999999999
+      },
+      "rho_min": 0.9999971715733409,
+      "rho_max": 1.000002843560651,
+      "max_mach": 0.061856885123093425,
+      "max_area_rel": 0.0,
+      "max_uploaded_exchange_mismatch": 0.0
+    },
+    {
+      "run": "r2-192x192-c72-re100",
+      "config": {
+        "active_cells": 36864,
+        "dt_lbm": 0.0005952380952380953,
+        "h": 0.25,
+        "lx": 48.0,
+        "ly": 48.0,
+        "nu": 4.8,
+        "nx": 192,
+        "ny": 192,
+        "periodic_y": false,
+        "steps_per_frame": 28,
+        "steps_per_mechanical": 14,
+        "tau_nu": 0.6371428571428571
+      },
+      "cells": 72,
+      "re_reference": 100.0,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 2.352799325,
+        "p95": 2.45326
+      },
+      "whole_ms": {
+        "mean": 6.410292208333333,
+        "p95": 6.8436
+      },
+      "gpu_ms": {
+        "mean": 0.7139824,
+        "p95": 0.71536
+      },
+      "encode_ms": {
+        "mean": 0.16681334166666667,
+        "p95": 0.17241499999999998
+      },
+      "wait_ms": {
+        "mean": 1.2042405333333333,
+        "p95": 1.246458
+      },
+      "coupling_ms": {
+        "mean": 0.5262088083333334,
+        "p95": 0.5412049999999999
+      },
+      "rapier_ms": {
+        "mean": 3.211096375,
+        "p95": 3.552431
+      },
+      "diagnostics_ms": {
+        "mean": 0.8429703,
+        "p95": 0.876942
+      },
+      "rho_min": 0.9999857377260923,
+      "rho_max": 1.0000139561016113,
+      "max_mach": 0.06181096973291633,
+      "max_area_rel": 0.0002906373261365447,
+      "max_uploaded_exchange_mismatch": 6.04575243432286e-09
+    },
+    {
+      "run": "r2-192x30-c0-re0.1",
+      "config": {
+        "active_cells": 5760,
+        "dt_lbm": 4.1666666666666665e-05,
+        "h": 0.25,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 750.0,
+        "nx": 192,
+        "ny": 30,
+        "periodic_y": false,
+        "steps_per_frame": 400,
+        "steps_per_mechanical": 200,
+        "tau_nu": 2.0
+      },
+      "cells": 0,
+      "re_reference": 0.1,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 5.296248583333334,
+        "p95": 5.335894
+      },
+      "whole_ms": {
+        "mean": 5.546306466666667,
+        "p95": 5.5862359999999995
+      },
+      "gpu_ms": {
+        "mean": 2.904092,
+        "p95": 2.913248
+      },
+      "encode_ms": {
+        "mean": 1.7735432083333333,
+        "p95": 1.800887
+      },
+      "wait_ms": {
+        "mean": 3.267972975,
+        "p95": 3.293816
+      },
+      "coupling_ms": {
+        "mean": 0.000254275,
+        "p95": 0.000263
+      },
+      "rapier_ms": {
+        "mean": 0.00034055833333333335,
+        "p95": 0.000357
+      },
+      "diagnostics_ms": {
+        "mean": 0.24544534999999998,
+        "p95": 0.26213000000000003
+      },
+      "rho_min": 0.9999997785125743,
+      "rho_max": 0.9999999714345904,
+      "max_mach": 0.004333349154251724,
+      "max_area_rel": 0.0,
+      "max_uploaded_exchange_mismatch": 0.0
+    },
+    {
+      "run": "r2-192x30-c0-re100",
+      "config": {
+        "active_cells": 5760,
+        "dt_lbm": 0.0005952380952380953,
+        "h": 0.25,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 0.75,
+        "nx": 192,
+        "ny": 30,
+        "periodic_y": false,
+        "steps_per_frame": 28,
+        "steps_per_mechanical": 14,
+        "tau_nu": 0.5214285714285715
+      },
+      "cells": 0,
+      "re_reference": 100.0,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 0.5728954916666668,
+        "p95": 0.745695
+      },
+      "whole_ms": {
+        "mean": 0.7016188833333333,
+        "p95": 0.842713
+      },
+      "gpu_ms": {
+        "mean": 0.22866559999999997,
+        "p95": 0.22912
+      },
+      "encode_ms": {
+        "mean": 0.11064124166666667,
+        "p95": 0.202507
+      },
+      "wait_ms": {
+        "mean": 0.3805632,
+        "p95": 0.434759
+      },
+      "coupling_ms": {
+        "mean": 9.406666666666666e-05,
+        "p95": 0.00016099999999999998
+      },
+      "rapier_ms": {
+        "mean": 0.00022779166666666667,
+        "p95": 0.000184
+      },
+      "diagnostics_ms": {
+        "mean": 0.12690033333333334,
+        "p95": 0.23439700000000002
+      },
+      "rho_min": 0.9999960247951094,
+      "rho_max": 1.000001837965101,
+      "max_mach": 0.06178496060720004,
+      "max_area_rel": 0.0,
+      "max_uploaded_exchange_mismatch": 0.0
+    },
+    {
+      "run": "r2-192x30-c72-re100",
+      "config": {
+        "active_cells": 5760,
+        "dt_lbm": 0.0005952380952380953,
+        "h": 0.25,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 0.75,
+        "nx": 192,
+        "ny": 30,
+        "periodic_y": false,
+        "steps_per_frame": 28,
+        "steps_per_mechanical": 14,
+        "tau_nu": 0.5214285714285715
+      },
+      "cells": 72,
+      "re_reference": 100.0,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 0.869456325,
+        "p95": 0.9414399999999999
+      },
+      "whole_ms": {
+        "mean": 3.694521875,
+        "p95": 4.1806719999999995
+      },
+      "gpu_ms": {
+        "mean": 0.23603733333333332,
+        "p95": 0.23631999999999997
+      },
+      "encode_ms": {
+        "mean": 0.14453405,
+        "p95": 0.171733
+      },
+      "wait_ms": {
+        "mean": 0.4456997916666667,
+        "p95": 0.470488
+      },
+      "coupling_ms": {
+        "mean": 0.14591014166666666,
+        "p95": 0.172983
+      },
+      "rapier_ms": {
+        "mean": 2.6736212,
+        "p95": 3.047166
+      },
+      "diagnostics_ms": {
+        "mean": 0.14873157499999998,
+        "p95": 0.208378
+      },
+      "rho_min": 0.999974197242409,
+      "rho_max": 1.000027080764994,
+      "max_mach": 0.05968127188312637,
+      "max_area_rel": 4.6710539973848775e-05,
+      "max_uploaded_exchange_mismatch": 4.494403110374097e-09
+    },
+    {
+      "run": "r2-256x256-c0-re100",
+      "config": {
+        "active_cells": 65536,
+        "dt_lbm": 0.000462962962962963,
+        "h": 0.1875,
+        "lx": 48.0,
+        "ly": 48.0,
+        "nu": 4.8,
+        "nx": 256,
+        "ny": 256,
+        "periodic_y": false,
+        "steps_per_frame": 36,
+        "steps_per_mechanical": 18,
+        "tau_nu": 0.6896296296296296
+      },
+      "cells": 0,
+      "re_reference": 100.0,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 2.930014225,
+        "p95": 3.0815620000000004
+      },
+      "whole_ms": {
+        "mean": 5.034754716666667,
+        "p95": 5.552274000000001
+      },
+      "gpu_ms": {
+        "mean": 1.4651754666666668,
+        "p95": 1.466336
+      },
+      "encode_ms": {
+        "mean": 0.26306995,
+        "p95": 0.320303
+      },
+      "wait_ms": {
+        "mean": 1.9859372666666668,
+        "p95": 2.0183980000000004
+      },
+      "coupling_ms": {
+        "mean": 0.000202225,
+        "p95": 0.000237
+      },
+      "rapier_ms": {
+        "mean": 0.00024208333333333333,
+        "p95": 0.00030000000000000003
+      },
+      "diagnostics_ms": {
+        "mean": 2.1010453083333336,
+        "p95": 2.466631
+      },
+      "rho_min": 0.9999969995114952,
+      "rho_max": 1.0000030789524317,
+      "max_mach": 0.06415057254583766,
+      "max_area_rel": 0.0,
+      "max_uploaded_exchange_mismatch": 0.0
+    },
+    {
+      "run": "r2-256x256-c72-re100",
+      "config": {
+        "active_cells": 65536,
+        "dt_lbm": 0.000462962962962963,
+        "h": 0.1875,
+        "lx": 48.0,
+        "ly": 48.0,
+        "nu": 4.8,
+        "nx": 256,
+        "ny": 256,
+        "periodic_y": false,
+        "steps_per_frame": 36,
+        "steps_per_mechanical": 18,
+        "tau_nu": 0.6896296296296296
+      },
+      "cells": 72,
+      "re_reference": 100.0,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 3.7351523083333333,
+        "p95": 3.907018
+      },
+      "whole_ms": {
+        "mean": 8.3169729,
+        "p95": 8.826975000000001
+      },
+      "gpu_ms": {
+        "mean": 1.4967965333333333,
+        "p95": 1.498304
+      },
+      "encode_ms": {
+        "mean": 0.17711830833333334,
+        "p95": 0.189054
+      },
+      "wait_ms": {
+        "mean": 2.0864724833333335,
+        "p95": 2.131142
+      },
+      "coupling_ms": {
+        "mean": 0.824409275,
+        "p95": 0.873906
+      },
+      "rapier_ms": {
+        "mean": 3.1577751083333334,
+        "p95": 3.539351
+      },
+      "diagnostics_ms": {
+        "mean": 1.4208691999999998,
+        "p95": 1.484031
+      },
+      "rho_min": 0.9999812985770404,
+      "rho_max": 1.0000210732687265,
+      "max_mach": 0.06409972675506687,
+      "max_area_rel": 0.0003321569441561145,
+      "max_uploaded_exchange_mismatch": 4.901498051404409e-09
+    },
+    {
+      "run": "r2-256x40-c0-re0.1",
+      "config": {
+        "active_cells": 10240,
+        "dt_lbm": 2.3408239700374533e-05,
+        "h": 0.1875,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 750.0,
+        "nx": 256,
+        "ny": 40,
+        "periodic_y": false,
+        "steps_per_frame": 712,
+        "steps_per_mechanical": 356,
+        "tau_nu": 1.9981273408239701
+      },
+      "cells": 0,
+      "re_reference": 0.1,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 9.865709066666666,
+        "p95": 9.922666999999999
+      },
+      "whole_ms": {
+        "mean": 10.359920950000001,
+        "p95": 10.426018000000001
+      },
+      "gpu_ms": {
+        "mean": 6.103417866666666,
+        "p95": 6.119071999999999
+      },
+      "encode_ms": {
+        "mean": 3.0575683166666665,
+        "p95": 3.102092
+      },
+      "wait_ms": {
+        "mean": 6.49442915,
+        "p95": 6.521915
+      },
+      "coupling_ms": {
+        "mean": 0.00024408333333333332,
+        "p95": 0.00026000000000000003
+      },
+      "rapier_ms": {
+        "mean": 0.00036721666666666666,
+        "p95": 0.000379
+      },
+      "diagnostics_ms": {
+        "mean": 0.48988745,
+        "p95": 0.504723
+      },
+      "rho_min": 1.000000049261871,
+      "rho_max": 1.000000299391104,
+      "max_mach": 0.003244870949228341,
+      "max_area_rel": 0.0,
+      "max_uploaded_exchange_mismatch": 0.0
+    },
+    {
+      "run": "r2-256x40-c0-re100",
+      "config": {
+        "active_cells": 10240,
+        "dt_lbm": 0.000462962962962963,
+        "h": 0.1875,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 0.75,
+        "nx": 256,
+        "ny": 40,
+        "periodic_y": false,
+        "steps_per_frame": 36,
+        "steps_per_mechanical": 18,
+        "tau_nu": 0.5296296296296297
+      },
+      "cells": 0,
+      "re_reference": 100.0,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 0.774010375,
+        "p95": 0.869228
+      },
+      "whole_ms": {
+        "mean": 1.0333072916666668,
+        "p95": 1.166493
+      },
+      "gpu_ms": {
+        "mean": 0.3152557333333333,
+        "p95": 0.316032
+      },
+      "encode_ms": {
+        "mean": 0.146620175,
+        "p95": 0.203227
+      },
+      "wait_ms": {
+        "mean": 0.517749775,
+        "p95": 0.5416610000000001
+      },
+      "coupling_ms": {
+        "mean": 0.00012510833333333334,
+        "p95": 0.00018399999999999997
+      },
+      "rapier_ms": {
+        "mean": 0.00013193333333333333,
+        "p95": 0.000186
+      },
+      "diagnostics_ms": {
+        "mean": 0.25755068333333336,
+        "p95": 0.391105
+      },
+      "rho_min": 0.9999968276824802,
+      "rho_max": 1.0000016107223928,
+      "max_mach": 0.06411315233960385,
+      "max_area_rel": 0.0,
+      "max_uploaded_exchange_mismatch": 0.0
+    },
+    {
+      "run": "r2-256x40-c72-re100",
+      "config": {
+        "active_cells": 10240,
+        "dt_lbm": 0.000462962962962963,
+        "h": 0.1875,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 0.75,
+        "nx": 256,
+        "ny": 40,
+        "periodic_y": false,
+        "steps_per_frame": 36,
+        "steps_per_mechanical": 18,
+        "tau_nu": 0.5296296296296297
+      },
+      "cells": 72,
+      "re_reference": 100.0,
+      "samples": 120,
+      "fluid_coupling_ms": {
+        "mean": 1.1849881666666666,
+        "p95": 1.2657950000000002
+      },
+      "whole_ms": {
+        "mean": 4.506347933333333,
+        "p95": 4.9351009999999995
+      },
+      "gpu_ms": {
+        "mean": 0.32230746666666665,
+        "p95": 0.32310399999999995
+      },
+      "encode_ms": {
+        "mean": 0.1891879,
+        "p95": 0.199812
+      },
+      "wait_ms": {
+        "mean": 0.5990554833333334,
+        "p95": 0.661978
+      },
+      "coupling_ms": {
+        "mean": 0.20882307500000002,
+        "p95": 0.21615
+      },
+      "rapier_ms": {
+        "mean": 3.073239875,
+        "p95": 3.462677
+      },
+      "diagnostics_ms": {
+        "mean": 0.2448623,
+        "p95": 0.252034
+      },
+      "rho_min": 0.99996682186611,
+      "rho_max": 1.000029933435144,
+      "max_mach": 0.06190867557834056,
+      "max_area_rel": 5.19000612421161e-05,
+      "max_uploaded_exchange_mismatch": 5.213279604829212e-09
+    }
+  ],
+  "physics": [
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 47.458924999999965,
+      "case": "pulse",
+      "config": {
+        "active_cells": 5760,
+        "dt_lbm": 0.0005952380952380953,
+        "h": 0.25,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 0.75,
+        "nx": 192,
+        "ny": 30,
+        "periodic_y": false,
+        "steps_per_frame": 28,
+        "steps_per_mechanical": 14,
+        "tau_nu": 0.5214285714285715
+      },
+      "device_total_ms": 20.859616000000006,
+      "diagnostics": {
+        "energy": 21575.17782414346,
+        "max_lattice_speed": 0.03564867746262324,
+        "max_mach": 0.06174532058789902,
+        "max_speed": 14.972444534301761,
+        "mean_u": 10.006151197353999,
+        "mean_v": 2.554733195362739e-07,
+        "re_measured_mean": 100.06151197354,
+        "rho_max": 1.0000014542602003,
+        "rho_mean": 1.0000000152630188,
+        "rho_min": 0.9999972509685904
+      },
+      "max_relative_l2": 0.0012226847785208577,
+      "re_reference": 100.0,
+      "refinement": 1,
+      "relative_l2": 0.0012226847785208577,
+      "seconds": 1.0,
+      "steps": 1680
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 73.81071,
+      "case": "pulse",
+      "config": {
+        "active_cells": 5760,
+        "dt_lbm": 0.00029761904761904765,
+        "h": 0.25,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 0.75,
+        "nx": 192,
+        "ny": 30,
+        "periodic_y": false,
+        "steps_per_frame": 56,
+        "steps_per_mechanical": 28,
+        "tau_nu": 0.5107142857142857
+      },
+      "device_total_ms": 41.116415999999994,
+      "diagnostics": {
+        "energy": 21575.031395008704,
+        "max_lattice_speed": 0.01782435008457735,
+        "max_mach": 0.030872679958382585,
+        "max_speed": 14.972454071044975,
+        "mean_u": 10.006062092383702,
+        "mean_v": 5.406909611593846e-07,
+        "re_measured_mean": 100.06062092383702,
+        "rho_max": 1.0000003831228241,
+        "rho_mean": 1.0000000114217982,
+        "rho_min": 0.9999992938392097
+      },
+      "max_relative_l2": 0.0012334045972812596,
+      "re_reference": 100.0,
+      "refinement": 2,
+      "relative_l2": 0.0012334045972812596,
+      "seconds": 1.0,
+      "steps": 3360
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 143.61211600000004,
+      "case": "pulse",
+      "config": {
+        "active_cells": 10240,
+        "dt_lbm": 0.000462962962962963,
+        "h": 0.1875,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 0.75,
+        "nx": 256,
+        "ny": 40,
+        "periodic_y": false,
+        "steps_per_frame": 36,
+        "steps_per_mechanical": 18,
+        "tau_nu": 0.5296296296296297
+      },
+      "device_total_ms": 81.80380799999999,
+      "diagnostics": {
+        "energy": 21593.872075054034,
+        "max_lattice_speed": 0.036999036058967684,
+        "max_mach": 0.06408421028520499,
+        "max_speed": 14.984609603881912,
+        "mean_u": 10.009323728084563,
+        "mean_v": -2.870144587774348e-07,
+        "re_measured_mean": 100.09323728084564,
+        "rho_max": 1.0000008256174624,
+        "rho_mean": 0.9999999932515493,
+        "rho_min": 0.9999983187881298
+      },
+      "max_relative_l2": 0.0006822364094903153,
+      "re_reference": 100.0,
+      "refinement": 1,
+      "relative_l2": 0.0006822364094903153,
+      "seconds": 1.0,
+      "steps": 2160
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 239.909646,
+      "case": "pulse",
+      "config": {
+        "active_cells": 10240,
+        "dt_lbm": 0.0002314814814814815,
+        "h": 0.1875,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 0.75,
+        "nx": 256,
+        "ny": 40,
+        "periodic_y": false,
+        "steps_per_frame": 72,
+        "steps_per_mechanical": 36,
+        "tau_nu": 0.5148148148148148
+      },
+      "device_total_ms": 172.19331199999993,
+      "diagnostics": {
+        "energy": 21593.67265998801,
+        "max_lattice_speed": 0.018499492127218558,
+        "max_mach": 0.03204206027856299,
+        "max_speed": 14.984588623047031,
+        "mean_u": 10.0092348664999,
+        "mean_v": 8.987625681911026e-07,
+        "re_measured_mean": 100.09234866499901,
+        "rho_max": 1.0000002223532647,
+        "rho_mean": 1.0000000000927685,
+        "rho_min": 0.9999995600956026
+      },
+      "max_relative_l2": 0.000692108654986989,
+      "re_reference": 100.0,
+      "refinement": 2,
+      "relative_l2": 0.000692108654986989,
+      "seconds": 1.0,
+      "steps": 4320
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 629.2739309999994,
+      "case": "steady",
+      "config": {
+        "active_cells": 5760,
+        "dt_lbm": 4.1666666666666665e-05,
+        "h": 0.25,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 750.0,
+        "nx": 192,
+        "ny": 30,
+        "periodic_y": false,
+        "steps_per_frame": 400,
+        "steps_per_mechanical": 200,
+        "tau_nu": 2.0
+      },
+      "device_total_ms": 356.46934400000015,
+      "diagnostics": {
+        "energy": 21700.35179980822,
+        "max_lattice_speed": 0.00250185982386289,
+        "max_mach": 0.004333348328345848,
+        "max_speed": 15.011158943177342,
+        "mean_u": 10.033363950252532,
+        "mean_v": 1.1750671546906233e-07,
+        "re_measured_mean": 0.10033363950252533,
+        "rho_max": 0.999999958294211,
+        "rho_mean": 0.9999999483890254,
+        "rho_min": 0.9999999317951733
+      },
+      "max_relative_l2": 0.004130171214880849,
+      "re_reference": 0.1,
+      "refinement": 1,
+      "relative_l2": 0.002538546575374895,
+      "seconds": 2.0,
+      "steps": 48000
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 79.07963700000003,
+      "case": "steady",
+      "config": {
+        "active_cells": 5760,
+        "dt_lbm": 0.0005952380952380953,
+        "h": 0.25,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 0.75,
+        "nx": 192,
+        "ny": 30,
+        "periodic_y": false,
+        "steps_per_frame": 28,
+        "steps_per_mechanical": 14,
+        "tau_nu": 0.5214285714285715
+      },
+      "device_total_ms": 25.33737599999997,
+      "diagnostics": {
+        "energy": 21556.77859563018,
+        "max_lattice_speed": 0.03564827782767161,
+        "max_mach": 0.061744628399858316,
+        "max_speed": 14.972276687622074,
+        "mean_u": 9.992867439985275,
+        "mean_v": 8.507630404608335e-07,
+        "re_measured_mean": 99.92867439985275,
+        "rho_max": 1.000001115957275,
+        "rho_mean": 0.9999996856446766,
+        "rho_min": 0.9999970658391248
+      },
+      "max_relative_l2": 0.0011663926191694486,
+      "re_reference": 100.0,
+      "refinement": 1,
+      "relative_l2": 0.0011663926191694486,
+      "seconds": 2.0,
+      "steps": 3360
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 70.08485699999999,
+      "case": "steady",
+      "config": {
+        "active_cells": 5760,
+        "dt_lbm": 0.0005952380952380953,
+        "h": 0.25,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 0.25,
+        "nx": 192,
+        "ny": 30,
+        "periodic_y": false,
+        "steps_per_frame": 28,
+        "steps_per_mechanical": 14,
+        "tau_nu": 0.5071428571428571
+      },
+      "device_total_ms": 25.676799999999986,
+      "diagnostics": {
+        "energy": 21556.548820186006,
+        "max_lattice_speed": 0.03564646811712434,
+        "max_mach": 0.061741493889243444,
+        "max_speed": 14.971516609192221,
+        "mean_u": 9.99296062986056,
+        "mean_v": -4.9709562451501674e-08,
+        "re_measured_mean": 299.7888188958168,
+        "rho_max": 1.000001211417839,
+        "rho_mean": 0.9999997080517157,
+        "rho_min": 0.9999969520722516
+      },
+      "max_relative_l2": 0.0011554629360922164,
+      "re_reference": 300.0,
+      "refinement": 1,
+      "relative_l2": 0.0011554629360922164,
+      "seconds": 2.0,
+      "steps": 3360
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 1168.624187,
+      "case": "steady",
+      "config": {
+        "active_cells": 10240,
+        "dt_lbm": 2.3408239700374533e-05,
+        "h": 0.1875,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 750.0,
+        "nx": 256,
+        "ny": 40,
+        "periodic_y": false,
+        "steps_per_frame": 712,
+        "steps_per_mechanical": 356,
+        "tau_nu": 1.9981273408239701
+      },
+      "device_total_ms": 736.7410240000003,
+      "diagnostics": {
+        "energy": 21656.012641622685,
+        "max_lattice_speed": 0.001873425925418039,
+        "max_mach": 0.0032448688870407856,
+        "max_speed": 15.006141662598493,
+        "mean_u": 10.01867567896843,
+        "mean_v": 1.2311738828429952e-07,
+        "re_measured_mean": 0.10018675678968429,
+        "rho_max": 1.0000001031876309,
+        "rho_mean": 1.0000001001225427,
+        "rho_min": 1.0000000944964995
+      },
+      "max_relative_l2": 0.002309712388310147,
+      "re_reference": 0.1,
+      "refinement": 1,
+      "relative_l2": 0.0014195780546122027,
+      "seconds": 2.0,
+      "steps": 85440
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 93.35982999999999,
+      "case": "steady",
+      "config": {
+        "active_cells": 10240,
+        "dt_lbm": 0.000462962962962963,
+        "h": 0.1875,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 0.75,
+        "nx": 256,
+        "ny": 40,
+        "periodic_y": false,
+        "steps_per_frame": 36,
+        "steps_per_mechanical": 18,
+        "tau_nu": 0.5296296296296297
+      },
+      "device_total_ms": 38.08316799999999,
+      "diagnostics": {
+        "energy": 21571.987489523926,
+        "max_lattice_speed": 0.03699506123860679,
+        "max_mach": 0.06407732569438895,
+        "max_speed": 14.982999801635748,
+        "mean_u": 9.99518705010414,
+        "mean_v": -1.4144463262866224e-07,
+        "re_measured_mean": 99.95187050104141,
+        "rho_max": 1.0000009657815099,
+        "rho_mean": 1.0000001230400812,
+        "rho_min": 0.999998546030838
+      },
+      "max_relative_l2": 0.0007253172758343846,
+      "re_reference": 100.0,
+      "refinement": 1,
+      "relative_l2": 0.0007253172758343846,
+      "seconds": 2.0,
+      "steps": 4320
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 100.29145899999999,
+      "case": "steady",
+      "config": {
+        "active_cells": 10240,
+        "dt_lbm": 0.000462962962962963,
+        "h": 0.1875,
+        "lx": 48.0,
+        "ly": 7.5,
+        "nu": 0.25,
+        "nx": 256,
+        "ny": 40,
+        "periodic_y": false,
+        "steps_per_frame": 36,
+        "steps_per_mechanical": 18,
+        "tau_nu": 0.5098765432098765
+      },
+      "device_total_ms": 41.388768000000006,
+      "diagnostics": {
+        "energy": 21573.863909046682,
+        "max_lattice_speed": 0.03699613265049349,
+        "max_mach": 0.06407918143421255,
+        "max_speed": 14.983433723449863,
+        "mean_u": 9.995641306042671,
+        "mean_v": -7.549603719070319e-07,
+        "re_measured_mean": 299.86923918128014,
+        "rho_max": 1.0000009341165423,
+        "rho_mean": 1.00000003056266,
+        "rho_min": 0.9999983381130733
+      },
+      "max_relative_l2": 0.0006849712100734956,
+      "re_reference": 300.0,
+      "refinement": 1,
+      "relative_l2": 0.0006849712100734956,
+      "seconds": 2.0,
+      "steps": 4320
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 46.535707000000016,
+      "case": "vortex",
+      "config": {
+        "active_cells": 16384,
+        "dt_lbm": 0.0007575757575757576,
+        "h": 0.04908738521234052,
+        "lx": 6.283185307179586,
+        "ly": 6.283185307179586,
+        "nu": 0.05,
+        "nx": 128,
+        "ny": 128,
+        "periodic_y": true,
+        "steps_per_frame": 22,
+        "steps_per_mechanical": 11,
+        "tau_nu": 0.5471604054771608
+      },
+      "device_total_ms": 17.32540800000001,
+      "diagnostics": {
+        "energy": 96.70604552915073,
+        "max_lattice_speed": 0.046107973658991296,
+        "max_mach": 0.07986135301142039,
+        "max_speed": 2.987582220954349,
+        "mean_u": 2.0000000479631126,
+        "mean_v": 0.699999995327456,
+        "re_measured_mean": 251.32741831440592,
+        "rho_max": 1.000293197343126,
+        "rho_mean": 1.0000000001157296,
+        "rho_min": 0.999707731185481
+      },
+      "max_relative_l2": 0.0005212502670036783,
+      "re_reference": 100.0,
+      "refinement": 1,
+      "relative_l2": 0.0005212502670036783,
+      "seconds": 1.0,
+      "steps": 1320
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 72.38161900000001,
+      "case": "vortex",
+      "config": {
+        "active_cells": 16384,
+        "dt_lbm": 0.0003787878787878788,
+        "h": 0.04908738521234052,
+        "lx": 6.283185307179586,
+        "ly": 6.283185307179586,
+        "nu": 0.05,
+        "nx": 128,
+        "ny": 128,
+        "periodic_y": true,
+        "steps_per_frame": 44,
+        "steps_per_mechanical": 22,
+        "tau_nu": 0.5235802027385804
+      },
+      "device_total_ms": 34.000319999999995,
+      "diagnostics": {
+        "energy": 96.70384811358942,
+        "max_lattice_speed": 0.02305341680288283,
+        "max_mach": 0.03992968919065513,
+        "max_speed": 2.9875083508083082,
+        "mean_u": 2.0000000498257577,
+        "mean_v": 0.6999999676068716,
+        "re_measured_mean": 251.32741854847282,
+        "rho_max": 1.0000731147592887,
+        "rho_mean": 0.9999999999666294,
+        "rho_min": 0.9999269298277795
+      },
+      "max_relative_l2": 0.0005660769701632754,
+      "re_reference": 100.0,
+      "refinement": 2,
+      "relative_l2": 0.0005660769701632754,
+      "seconds": 1.0,
+      "steps": 2640
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 101.67550000000001,
+      "case": "vortex",
+      "config": {
+        "active_cells": 36864,
+        "dt_lbm": 0.0005208333333333333,
+        "h": 0.032724923474893676,
+        "lx": 6.283185307179586,
+        "ly": 6.283185307179586,
+        "nu": 0.05,
+        "nx": 192,
+        "ny": 192,
+        "periodic_y": true,
+        "steps_per_frame": 32,
+        "steps_per_mechanical": 16,
+        "tau_nu": 0.5729512522224832
+      },
+      "device_total_ms": 47.78102399999998,
+      "diagnostics": {
+        "energy": 96.70981464650824,
+        "max_lattice_speed": 0.04755352027647148,
+        "max_mach": 0.08236511319760541,
+        "max_speed": 2.9878757990579214,
+        "mean_u": 1.9999999521403677,
+        "mean_v": 0.6999999647548412,
+        "re_measured_mean": 251.32740627296465,
+        "rho_max": 1.0003111473051831,
+        "rho_mean": 0.9999999998569851,
+        "rho_min": 0.9996891134651378
+      },
+      "max_relative_l2": 0.0002577594321868849,
+      "re_reference": 100.0,
+      "refinement": 1,
+      "relative_l2": 0.0002577594321868849,
+      "seconds": 1.0,
+      "steps": 1920
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 150.89853899999997,
+      "case": "vortex",
+      "config": {
+        "active_cells": 36864,
+        "dt_lbm": 0.00026041666666666666,
+        "h": 0.032724923474893676,
+        "lx": 6.283185307179586,
+        "ly": 6.283185307179586,
+        "nu": 0.05,
+        "nx": 192,
+        "ny": 192,
+        "periodic_y": true,
+        "steps_per_frame": 64,
+        "steps_per_mechanical": 32,
+        "tau_nu": 0.5364756261112416
+      },
+      "device_total_ms": 96.78803199999997,
+      "diagnostics": {
+        "energy": 96.70749306575642,
+        "max_lattice_speed": 0.023776109650492268,
+        "max_mach": 0.041181429920981304,
+        "max_speed": 2.9877940563572754,
+        "mean_u": 2.000000018419491,
+        "mean_v": 0.6999999310288345,
+        "re_measured_mean": 251.32741460184494,
+        "rho_max": 1.000077840697486,
+        "rho_mean": 1.00000000072866,
+        "rho_min": 0.999922223505564
+      },
+      "max_relative_l2": 0.00024013444294640888,
+      "re_reference": 100.0,
+      "refinement": 2,
+      "relative_l2": 0.00024013444294640888,
+      "seconds": 1.0,
+      "steps": 3840
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 176.52895800000002,
+      "case": "vortex",
+      "config": {
+        "active_cells": 65536,
+        "dt_lbm": 0.0003787878787878788,
+        "h": 0.02454369260617026,
+        "lx": 6.283185307179586,
+        "ly": 6.283185307179586,
+        "nu": 0.05,
+        "nx": 256,
+        "ny": 256,
+        "periodic_y": true,
+        "steps_per_frame": 44,
+        "steps_per_mechanical": 22,
+        "tau_nu": 0.5943208109543218
+      },
+      "device_total_ms": 107.23552000000001,
+      "diagnostics": {
+        "energy": 96.71089213005965,
+        "max_lattice_speed": 0.0461142403900839,
+        "max_mach": 0.07987220730807015,
+        "max_speed": 2.987988275979327,
+        "mean_u": 2.0000000025356712,
+        "mean_v": 0.69999997865169,
+        "re_measured_mean": 251.3274126058253,
+        "rho_max": 1.0002927583409473,
+        "rho_mean": 0.9999999998163762,
+        "rho_min": 0.9997076995205134
+      },
+      "max_relative_l2": 0.0002020562005814915,
+      "re_reference": 100.0,
+      "refinement": 1,
+      "relative_l2": 0.00019768801452540254,
+      "seconds": 1.0,
+      "steps": 2640
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 288.3141860000001,
+      "case": "vortex",
+      "config": {
+        "active_cells": 65536,
+        "dt_lbm": 0.0001893939393939394,
+        "h": 0.02454369260617026,
+        "lx": 6.283185307179586,
+        "ly": 6.283185307179586,
+        "nu": 0.05,
+        "nx": 256,
+        "ny": 256,
+        "periodic_y": true,
+        "steps_per_frame": 88,
+        "steps_per_mechanical": 44,
+        "tau_nu": 0.5471604054771608
+      },
+      "device_total_ms": 215.0329600000001,
+      "diagnostics": {
+        "energy": 96.70871118118025,
+        "max_lattice_speed": 0.02305663029419579,
+        "max_mach": 0.03993525512087886,
+        "max_speed": 2.9879247893872316,
+        "mean_u": 2.0000000943546183,
+        "mean_v": 0.6999999234031773,
+        "re_measured_mean": 251.32742414413448,
+        "rho_max": 1.0000731044565327,
+        "rho_mean": 0.9999999987740353,
+        "rho_min": 0.9999269124236889
+      },
+      "max_relative_l2": 0.00013065094537009292,
+      "re_reference": 100.0,
+      "refinement": 2,
+      "relative_l2": 0.00013065094537009292,
+      "seconds": 1.0,
+      "steps": 5280
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 26.90395,
+      "case": "vortex",
+      "config": {
+        "active_cells": 4096,
+        "dt_lbm": 0.001388888888888889,
+        "h": 0.09817477042468103,
+        "lx": 6.283185307179586,
+        "ly": 6.283185307179586,
+        "nu": 0.05,
+        "nx": 64,
+        "ny": 64,
+        "periodic_y": true,
+        "steps_per_frame": 12,
+        "steps_per_mechanical": 6,
+        "tau_nu": 0.5216151858436987
+      },
+      "device_total_ms": 6.218112000000001,
+      "diagnostics": {
+        "energy": 96.68615612362203,
+        "max_lattice_speed": 0.04224454446052936,
+        "max_mach": 0.07316969734823922,
+        "max_speed": 2.986090886957544,
+        "mean_u": 2.0000000114087015,
+        "mean_v": 0.700000003372125,
+        "re_measured_mean": 251.32741372084317,
+        "rho_max": 1.0002456717193127,
+        "rho_mean": 0.9999999991997015,
+        "rho_min": 0.9997548360843211
+      },
+      "max_relative_l2": 0.0022753873028083624,
+      "re_reference": 100.0,
+      "refinement": 1,
+      "relative_l2": 0.0022753873028083624,
+      "seconds": 1.0,
+      "steps": 720
+    },
+    {
+      "adapter": {
+        "backend": "Vulkan",
+        "driver": "NVIDIA",
+        "driver_info": "580.159.03",
+        "name": "NVIDIA GeForce RTX 3060",
+        "software": false,
+        "type": "DiscreteGpu"
+      },
+      "advance_total_ms": 35.10194499999999,
+      "case": "vortex",
+      "config": {
+        "active_cells": 4096,
+        "dt_lbm": 0.0006944444444444445,
+        "h": 0.09817477042468103,
+        "lx": 6.283185307179586,
+        "ly": 6.283185307179586,
+        "nu": 0.05,
+        "nx": 64,
+        "ny": 64,
+        "periodic_y": true,
+        "steps_per_frame": 24,
+        "steps_per_mechanical": 12,
+        "tau_nu": 0.5108075929218494
+      },
+      "device_total_ms": 11.822048000000002,
+      "diagnostics": {
+        "energy": 96.68429599941715,
+        "max_lattice_speed": 0.0211217763669363,
+        "max_mach": 0.03658398981364124,
+        "max_speed": 2.9860207859310113,
+        "mean_u": 2.000000066764187,
+        "mean_v": 0.6999999949978988,
+        "re_measured_mean": 251.3274206770186,
+        "rho_max": 1.0000613197917119,
+        "rho_mean": 0.9999999995911182,
+        "rho_min": 0.9999387378920801
+      },
+      "max_relative_l2": 0.002331238848836729,
+      "re_reference": 100.0,
+      "refinement": 2,
+      "relative_l2": 0.002331238848836729,
+      "seconds": 1.0,
+      "steps": 1440
+    }
+  ]
+}

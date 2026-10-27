@@ -1,0 +1,376 @@
+{
+  "started": "2026-10-27T16:38:25.696246+00:00",
+  "status": "complete",
+  "software_check": true,
+  "physics_only": true,
+  "binary_sha256": "4d499a00af348b28c2f5b816238f5cc9c13e33f25c2b3f41dd8e76c52f5c9ace",
+  "sources": {
+    "lbm/Cargo.lock": "97e2730b7fa35cbd01768d45c06cd2d6a0a0a0570523e410095bc52811ab5213",
+    "lbm/Cargo.toml": "0b0b56785a8be4d4e6c3263bea70df522cb699db920b689486240b05d74c3861",
+    "lbm/src/cases.rs": "e2829419cd120f103ccd72a6608a4af2a4ddad6af2ef795c370f592a1b84fd41",
+    "lbm/src/coupling.rs": "b4e5fe7d7075a96670cefacce551a248c76500b7f9b6f3c90e68d604688bf1cd",
+    "lbm/src/gpu.rs": "8dd85b8c96782d3287528468f0de990e07f5eaf98c3b48f3f22794859bfc6d43",
+    "lbm/src/lbm.wgsl": "0e43dca9d1ff47f2722fe2f56980a4b375248c76ce06bef182a33e50cc696b45",
+    "lbm/src/main.rs": "8b52a667e45bf89163d3a1a5f515dc1c442e8eab09412e4e3d3dceaa1b6b1ea5",
+    "lbm/src/model.rs": "01fa437c18627ad0c90d6393fdaefa7450b4f4f01d742c7d5c63bd7743391f97",
+    "lbm/src/tests.rs": "1d4a28335dade9846b216e3f88a098d90f8aa8f4eeb5f61446952e97474ae49a"
+  },
+  "commands": [
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "probe",
+        "--allow-software"
+      ],
+      "log": "probe.log",
+      "returncode": 0,
+      "seconds": 0.0656401589512825
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "compare",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/compare.json",
+        "--allow-software"
+      ],
+      "log": "compare.log",
+      "returncode": 0,
+      "seconds": 0.2299315556883812
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "steady",
+        "192",
+        "0.1",
+        "1",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "steady-192-re0.1-r1.log",
+      "returncode": 0,
+      "seconds": 14.677444007247686
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "steady",
+        "256",
+        "0.1",
+        "1",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "steady-256-re0.1-r1.log",
+      "returncode": 0,
+      "seconds": 43.691242376342416
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "steady",
+        "192",
+        "100",
+        "1",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "steady-192-re100-r1.log",
+      "returncode": 0,
+      "seconds": 1.2450706120580435
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "steady",
+        "256",
+        "100",
+        "1",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "steady-256-re100-r1.log",
+      "returncode": 0,
+      "seconds": 2.6149742119014263
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "steady",
+        "192",
+        "300",
+        "1",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "steady-192-re300-r1.log",
+      "returncode": 0,
+      "seconds": 1.2561377212405205
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "steady",
+        "256",
+        "300",
+        "1",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "steady-256-re300-r1.log",
+      "returncode": 0,
+      "seconds": 2.453907208517194
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "pulse",
+        "192",
+        "100",
+        "1",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "pulse-192-re100-r1.log",
+      "returncode": 0,
+      "seconds": 6.174680121243
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "pulse",
+        "192",
+        "100",
+        "2",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "pulse-192-re100-r2.log",
+      "returncode": 0,
+      "seconds": 7.015958409756422
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "pulse",
+        "256",
+        "100",
+        "1",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "pulse-256-re100-r1.log",
+      "returncode": 0,
+      "seconds": 11.131882067769766
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "pulse",
+        "256",
+        "100",
+        "2",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "pulse-256-re100-r2.log",
+      "returncode": 0,
+      "seconds": 13.01028499007225
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "vortex",
+        "64",
+        "100",
+        "1",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "vortex-64-re100-r1.log",
+      "returncode": 0,
+      "seconds": 0.5304238926619291
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "vortex",
+        "64",
+        "100",
+        "2",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "vortex-64-re100-r2.log",
+      "returncode": 0,
+      "seconds": 0.6364285629242659
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "vortex",
+        "128",
+        "100",
+        "1",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "vortex-128-re100-r1.log",
+      "returncode": 0,
+      "seconds": 1.8383653461933136
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "vortex",
+        "128",
+        "100",
+        "2",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "vortex-128-re100-r2.log",
+      "returncode": 0,
+      "seconds": 2.758956978097558
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "vortex",
+        "192",
+        "100",
+        "1",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "vortex-192-re100-r1.log",
+      "returncode": 0,
+      "seconds": 4.685614684596658
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "vortex",
+        "192",
+        "100",
+        "2",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "vortex-192-re100-r2.log",
+      "returncode": 0,
+      "seconds": 7.8355151526629925
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "vortex",
+        "256",
+        "100",
+        "1",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "vortex-256-re100-r1.log",
+      "returncode": 0,
+      "seconds": 10.04576694779098
+    },
+    {
+      "argv": [
+        "taskset",
+        "-c",
+        "2-5",
+        "/data/sunyunbo/www/bloodSimulator/target/lbm-lab/release/lbm-gpu-lab",
+        "physics",
+        "vortex",
+        "256",
+        "100",
+        "2",
+        "/data/sunyunbo/www/bloodSimulator/docs/research/2026-10-27-ns-lbm/lbm-results/software-physics-20261028/physics",
+        "--allow-software"
+      ],
+      "log": "vortex-256-re100-r2.log",
+      "returncode": 0,
+      "seconds": 17.931767884641886
+    }
+  ],
+  "environment": {
+    "/proc/loadavg": "12.94 12.56 14.46 5/18749 3963696\n",
+    "/proc/self/status": "Name:\tpython3\nUmask:\t0002\nState:\tR (running)\nTgid:\t3963690\nNgid:\t0\nPid:\t3963690\nPPid:\t2348342\nTracerPid:\t0\nUid:\t1007\t1007\t1007\t1007\nGid:\t1008\t1008\t1008\t1008\nFDSize:\t128\nGroups:\t1008 \nNStgid:\t3963690\nNSpid:\t3963690\nNSpgid:\t3963690\nNSsid:\t3963690\nKthread:\t0\nVmPeak:\t   40892 kB\nVmSize:\t   30380 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   25984 kB\nVmRSS:\t   16776 kB\nRssAnon:\t    6984 kB\nRssFile:\t    9792 kB\nRssShmem:\t       0 kB\nVmData:\t    7916 kB\nVmStk:\t     136 kB\nVmExe:\t    2624 kB\nVmLib:\t    5248 kB\nVmPTE:\t      84 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffffff\nThreads:\t1\nSigQ:\t0/2061270\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000001001000\nSigCgt:\t0000000000000002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t000001ffffffffff\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t0\nSeccomp_filters:\t0\nSpeculation_Store_Bypass:\tthread vulnerable\nSpeculationIndirectBranch:\tconditional enabled\nCpus_allowed:\tffff,ffffffff,ffffffff,ffffffff\nCpus_allowed_list:\t0-111\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000003\nMems_allowed_list:\t0-1\nvoluntary_ctxt_switches:\t2\nnonvoluntary_ctxt_switches:\t2\nx86_Thread_features:\t\nx86_Thread_features_locked:\t\n"
+  },
+  "finished": "2026-10-27T16:40:55.581597+00:00"
+}

@@ -1,0 +1,12 @@
+[package]
+name = "ns-mac-lab"
+version = "0.1.0"
+edition = "2024"
+
+[workspace]
+
+[dependencies]
+faer = { version = "=0.24.4", default-features = false, features = ["std", "sparse-linalg"] }
+rapier2d = { version = "=0.36.1", features = ["parallel"] }
+rayon = "=1.12.0"
+serde_json = "=1.0.154"
