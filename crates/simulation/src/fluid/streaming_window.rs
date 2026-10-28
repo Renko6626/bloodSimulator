@@ -177,6 +177,14 @@ impl StreamingWindow {
         }
         Ok(total)
     }
+    pub fn cached_diagnostics(
+        &self,
+    ) -> Result<(blood_fluid_gpu::lbm::Diagnostics, Vec<f32>), String> {
+        Ok((
+            self.window.diagnostics_from_field(&self.field)?,
+            self.window.opening_targets(),
+        ))
+    }
     pub fn profile(&self) -> GridProfile {
         self.window.spec().profile
     }

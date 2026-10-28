@@ -21,4 +21,4 @@ pub use fluid::{FluidStats, LocalFluidOptions};
 #[cfg(feature = "lbm-gpu")]
 pub use fluid::{lbm_geometry, streaming_window};
 pub use runtime::{MoveInput, Simulation};
-pub use view::{FlowArrow, Snapshot};
+pub use view::{FlowArrow, LbmSnapshot, Snapshot};

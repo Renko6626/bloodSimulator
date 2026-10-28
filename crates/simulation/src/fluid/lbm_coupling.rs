@@ -17,7 +17,7 @@ pub struct LbmOptions {
 impl Default for LbmOptions {
     fn default() -> Self {
         Self {
-            profile: GridProfile::Coarse,
+            profile: GridProfile::Fine,
             outer_band: 4.,
             velocity_bound: 10.,
             allow_software: false,
@@ -128,6 +128,31 @@ impl LbmCoupling {
                     true,
                 )
             }
+        }
+    }
+    pub fn sample_world(
+        &self,
+        map: &MapDefinition,
+        p: Vector,
+        background: Vector,
+    ) -> blood_fluid_gpu::lbm::FluidSample {
+        let (weight, local, valid) = self.local(map, p);
+        blood_fluid_gpu::lbm::FluidSample {
+            local_velocity: local.to_array(),
+            background_velocity: if valid {
+                background.to_array()
+            } else {
+                [0.; 2]
+            },
+            local_weight: weight,
+            status: if !valid {
+                LocalSampleStatus::SolidOrInvalid
+            } else {
+                self.window
+                    .sample(p.to_array())
+                    .map(|s| s.status)
+                    .unwrap_or(LocalSampleStatus::SolidOrInvalid)
+            },
         }
     }
     pub fn advance(

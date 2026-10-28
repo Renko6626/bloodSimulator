@@ -91,6 +91,7 @@ pub struct Simulation {
     cells: Vec<SoftBodyHandle>,
     walls: Vec<Vec<[f32; 2]>>,
     steps: u64,
+    elapsed_time: f32,
     paused: bool,
     solve_ms: f64,
     local_fluid: Option<LocalRegions>,
@@ -177,6 +178,21 @@ impl Simulation {
         self.lbm.as_ref().map(|f| &f.stats)
     }
 
+    /// Sample the composed LBM/background field in world space when LBM is active.
+    #[cfg(feature = "lbm-gpu")]
+    pub fn sample_world(&self, position: [f32; 2]) -> Option<blood_fluid_gpu::lbm::FluidSample> {
+        let (Some(lbm), Environment::World { map, .. }) = (&self.lbm, &self.environment) else {
+            return None;
+        };
+        let p = Vector::from_array(position);
+        let background = if p.is_finite() {
+            self.environment.velocity_at(p)
+        } else {
+            Vector::ZERO
+        };
+        Some(lbm.sample_world(map, p, background))
+    }
+
     /// Two precomputed 64² Stokes regions covering the first fork and upper arm.
     pub fn new_local_world(config: Config) -> Self {
         Self::new_local_world_with_options(config, crate::LocalFluidOptions::default())
@@ -257,6 +273,7 @@ impl Simulation {
             cells,
             walls,
             steps: 0,
+            elapsed_time: 0.,
             paused: false,
             solve_ms: 0.0,
             local_fluid: None,
@@ -298,27 +315,30 @@ impl Simulation {
     }
 
     pub fn tick(&mut self, input: MoveInput) {
-        if !self.paused {
-            self.step(input);
-        }
+        self.try_tick(input).expect("simulation tick");
     }
-
     pub fn single_step(&mut self, input: MoveInput) {
-        if self.paused {
-            self.step(input);
-        }
+        self.try_single_step(input).expect("simulation step");
     }
-
+    pub fn try_tick(&mut self, input: MoveInput) -> Result<(), String> {
+        if !self.paused {
+            self.step(input)?;
+        }
+        Ok(())
+    }
+    pub fn try_single_step(&mut self, input: MoveInput) -> Result<(), String> {
+        if self.paused {
+            self.step(input)?;
+        }
+        Ok(())
+    }
     pub fn reset(&mut self) {
+        self.try_reset().expect("reset simulation");
+    }
+    pub fn try_reset(&mut self) -> Result<(), String> {
         #[cfg(feature = "lbm-gpu")]
         if let Some(lbm) = &self.lbm {
-            let options = lbm.options.clone();
-            let map = self.world_map().unwrap().clone();
-            let paused = self.paused;
-            *self = Self::new_lbm_world_with_map(self.config.clone(), options, map)
-                .expect("reset LBM world");
-            self.paused = paused;
-            return;
+            return self.try_reset_lbm_profile(lbm.options.profile);
         }
         let paused = self.paused;
         let local = self.local_fluid.as_ref().map(|f| f.options.clone());
@@ -330,20 +350,33 @@ impl Simulation {
             Environment::World { .. } => Self::new_world(self.config.clone()),
         };
         self.paused = paused;
+        Ok(())
     }
-
-    fn step(&mut self, input: MoveInput) {
+    #[cfg(feature = "lbm-gpu")]
+    pub fn try_reset_lbm_profile(&mut self, profile: crate::GridProfile) -> Result<(), String> {
+        let lbm = self.lbm.as_ref().ok_or("LBM is not active")?;
+        let mut options = lbm.options.clone();
+        options.profile = profile;
+        let map = self.world_map().ok_or("LBM world is unavailable")?.clone();
+        let paused = self.paused;
+        let mut replacement = Self::new_lbm_world_with_map(self.config.clone(), options, map)?;
+        replacement.paused = paused;
+        *self = replacement;
+        Ok(())
+    }
+    fn step(&mut self, input: MoveInput) -> Result<(), String> {
         #[cfg(feature = "lbm-gpu")]
         if let Some(lbm) = &self.lbm {
             lbm.validate_mechanical_time(&self.config)
-                .expect("invalid LBM timing");
+                .map_err(str::to_owned)?;
         }
         let started = Instant::now();
-        crate::threading::install(|| self.step_inner(input));
+        let result = crate::threading::install(|| self.step_inner(input));
         self.solve_ms = started.elapsed().as_secs_f64() * 1000.0;
+        result
     }
 
-    fn step_inner(&mut self, input: MoveInput) {
+    fn step_inner(&mut self, input: MoveInput) -> Result<(), String> {
         let time = self.steps as f32 * self.config.dt;
         let pressure = self.config.pressure
             * (1.0 + 0.15 * (std::f32::consts::TAU * self.config.pulse_hz * time).sin());
@@ -367,7 +400,9 @@ impl Simulation {
                 (&mut self.lbm, &self.environment)
             {
                 lbm.prepare(map, flow, self.physics.bodies[self.robot].translation())
-                    .expect("prepare LBM window");
+                    .map_err(|e| {
+                        format!("LBM prepare failed; frame may be partially advanced: {e}")
+                    })?;
             }
             if let Some(fluid) = &mut self.local_fluid {
                 fluid
@@ -390,13 +425,12 @@ impl Simulation {
             }
             #[cfg(feature = "lbm-gpu")]
             if let (Some(lbm), Environment::World { map, .. }) = (&self.lbm, &self.environment) {
-                let (w, local, valid) =
-                    lbm.local(map, self.physics.bodies[self.robot].translation());
-                flow_velocity = if valid {
-                    flow_velocity * (1. - w) + local * w
-                } else {
-                    Vector::ZERO
-                };
+                let sample = lbm.sample_world(
+                    map,
+                    self.physics.bodies[self.robot].translation(),
+                    flow_velocity,
+                );
+                flow_velocity = composed_velocity(sample);
             }
             robot::drive(
                 &mut self.physics.bodies[self.robot],
@@ -457,7 +491,7 @@ impl Simulation {
                     dt,
                     self.config.cell_drag,
                 )
-                .expect("advance LBM window");
+                .map_err(|e| format!("LBM advance failed; frame may be partially advanced: {e}"))?;
             }
             #[cfg(feature = "lbm-gpu")]
             let rapier_started = Instant::now();
@@ -468,6 +502,8 @@ impl Simulation {
             }
         }
         self.steps += 1;
+        self.elapsed_time += self.config.dt;
+        Ok(())
     }
 
     pub fn snapshot(&self) -> Snapshot {
@@ -501,14 +537,59 @@ impl Simulation {
         if let (Some(lbm), Environment::World { map, .. }) = (&self.lbm, &self.environment) {
             for arrow in &mut arrows {
                 let p = Vector::from_array(arrow.position);
-                let (w, u, valid) = lbm.local(map, p);
-                arrow.velocity = if valid {
-                    (self.environment.velocity_at(p) * (1. - w) + u * w).to_array()
-                } else {
-                    [0.; 2]
-                };
+                arrow.velocity =
+                    composed_velocity(lbm.sample_world(map, p, self.environment.velocity_at(p)))
+                        .to_array();
             }
         }
+        #[cfg(feature = "lbm-gpu")]
+        let (lbm_snapshot, lbm_status) = match &self.lbm {
+            Some(lbm) => match lbm.window.cached_diagnostics() {
+                Ok((d, targets)) => {
+                    let residuals = d
+                        .opening_fluxes
+                        .iter()
+                        .zip(&targets)
+                        .map(|(a, t)| a - t)
+                        .collect();
+                    let origin = lbm.window.active_origin();
+                    let migration = &lbm.window.diagnostics;
+                    let delta = |d: &crate::fluid::streaming_window::ContinuityDelta| {
+                        [d.density, d.velocity, d.momentum]
+                    };
+                    (
+                        Some(crate::LbmSnapshot {
+                            profile: format!("{:?}", lbm.window.profile()),
+                            origin_blocks: [origin.block_x, origin.block_y],
+                            bounds: lbm.window.bounds(),
+                            opening_targets: targets,
+                            opening_fluxes: d.opening_fluxes,
+                            opening_residuals: residuals,
+                            density_min: d.density_min,
+                            density_max: d.density_max,
+                            mass: d.mass,
+                            region_switches: migration.region_switches,
+                            overlap_error: migration.overlap_error,
+                            center: delta(&migration.center),
+                            warmup: migration.warmup.iter().map(delta).collect(),
+                            lattice_steps_per_substep: lbm.stats.lattice_steps_per_substep,
+                            lattice_dt: lbm.stats.lattice_dt,
+                            elapsed_fluid_time: lbm.stats.elapsed_fluid_time,
+                            coupling_ms: lbm.stats.coupling_ms,
+                            lbm_ms: lbm.stats.lbm_ms,
+                            rapier_ms: lbm.stats.rapier_ms,
+                            adapter_name: d.adapter_name,
+                            software_adapter: d.software_adapter,
+                        }),
+                        None,
+                    )
+                }
+                Err(e) => (None, Some(e)),
+            },
+            None => (None, None),
+        };
+        #[cfg(not(feature = "lbm-gpu"))]
+        let (lbm_snapshot, lbm_status) = (None, None);
         Snapshot {
             robot: self.physics.bodies[self.robot].translation().to_array(),
             cells: self
@@ -523,7 +604,7 @@ impl Simulation {
                 .collect(),
             arrows,
             steps: self.steps,
-            time: self.steps as f32 * self.config.dt,
+            time: self.elapsed_time,
             paused: self.paused,
             solve_ms: self.solve_ms,
             soft_contacts,
@@ -533,8 +614,16 @@ impl Simulation {
                 Environment::Loop { .. } => Vec::new(),
             },
             fluid: self.local_fluid.as_ref().map(|f| f.stats().clone()),
+            lbm: lbm_snapshot,
+            lbm_status,
         }
     }
+}
+
+#[cfg(feature = "lbm-gpu")]
+fn composed_velocity(sample: blood_fluid_gpu::lbm::FluidSample) -> Vector {
+    Vector::from_array(sample.background_velocity) * (1. - sample.local_weight)
+        + Vector::from_array(sample.local_velocity) * sample.local_weight
 }
 
 /// Spread the initial population over all routes, leaving junctions and the
@@ -703,6 +792,57 @@ mod lbm_runtime_tests {
             ..Default::default()
         };
         let mut sim = Simulation::new_lbm_world_with_map(config, options(), map()).unwrap();
+        let snapshot = sim.snapshot().lbm.unwrap();
+        assert_eq!(snapshot.profile, "Coarse");
+        assert_eq!(snapshot.bounds, [[0., 0.], [48., 48.]]);
+        assert_eq!(
+            snapshot.opening_targets.len(),
+            snapshot.opening_fluxes.len()
+        );
+        assert_eq!(
+            snapshot.opening_residuals.len(),
+            snapshot.opening_targets.len()
+        );
+        assert!(!snapshot.adapter_name.is_empty());
+        if snapshot.software_adapter {
+            let mut hardware_only = options();
+            hardware_only.allow_software = false;
+            let error = match Simulation::new_lbm_world_with_map(
+                sim.config.clone(),
+                hardware_only,
+                map(),
+            ) {
+                Ok(_) => panic!("software adapter unexpectedly accepted"),
+                Err(e) => e,
+            };
+            assert!(error.contains("software adapter"));
+        }
+        let inside = sim.sample_world([24., 24.]).unwrap();
+        assert_eq!(
+            inside.status,
+            blood_fluid_gpu::lbm::LocalSampleStatus::Valid
+        );
+        let outside = sim.sample_world([60., 24.]).unwrap();
+        assert_eq!(
+            outside.status,
+            blood_fluid_gpu::lbm::LocalSampleStatus::OutsideWindow
+        );
+        assert_eq!(outside.local_weight, 0.);
+        assert_ne!(outside.background_velocity, [0., 0.]);
+        let solid = sim.sample_world([24., 30.]).unwrap();
+        assert_eq!(
+            solid.status,
+            blood_fluid_gpu::lbm::LocalSampleStatus::SolidOrInvalid
+        );
+        assert_eq!(solid.background_velocity, [0., 0.]);
+        sim.set_paused(true);
+        sim.try_reset_lbm_profile(GridProfile::Fine).unwrap();
+        assert_eq!(sim.snapshot().lbm.unwrap().profile, "Fine");
+        assert!(sim.snapshot().paused);
+        sim.try_reset().unwrap();
+        assert_eq!(sim.snapshot().lbm.unwrap().profile, "Fine");
+        sim.try_reset_lbm_profile(GridProfile::Coarse).unwrap();
+        sim.set_paused(false);
         let handles = sim.cells.clone();
         let robot = sim.robot;
         let before: Vec<_> = sim.physics.soft_bodies[handles[0]]
@@ -764,13 +904,10 @@ mod lbm_runtime_tests {
                 .zip(sim.physics.soft_bodies[sim.cells[0]].particle_velocities())
                 .collect();
             let steps_before = sim.snapshot().steps;
+            let snapshot_time_before = sim.snapshot().time;
             let time_before = sim.lbm_stats().unwrap().elapsed_fluid_time;
-            let failure = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
-                sim.single_step(MoveInput::default())
-            }))
-            .unwrap_err();
-            let message = failure.downcast_ref::<String>().unwrap();
-            assert!(message.contains("reset required"));
+            let failure = sim.try_single_step(MoveInput::default()).unwrap_err();
+            assert!(failure.contains("reset required"));
             assert_eq!(
                 robot_before,
                 (
@@ -786,6 +923,7 @@ mod lbm_runtime_tests {
                     .collect::<Vec<_>>()
             );
             assert_eq!(steps_before, sim.snapshot().steps);
+            assert_eq!(snapshot_time_before, sim.snapshot().time);
             assert_eq!(time_before, sim.lbm_stats().unwrap().elapsed_fluid_time);
             sim.reset();
             assert_eq!(sim.world_map().unwrap().spawn, [24., 24.]);

@@ -468,6 +468,13 @@ impl LbmWindow {
     }
     pub fn snapshot_diagnostics(&self) -> LbmResult<Diagnostics> {
         let f = self.field()?;
+        self.diagnostics_from_field(&f)
+    }
+    /// Calculate diagnostics from an already-read field without a GPU readback.
+    pub fn diagnostics_from_field(&self, f: &[[f32; 4]]) -> LbmResult<Diagnostics> {
+        if f.len() != self.geometry.solid.len() {
+            return Err("invalid field length".into());
+        }
         let mut lo = f32::INFINITY;
         let mut hi = f32::NEG_INFINITY;
         let mut speed = 0_f32;
@@ -515,6 +522,13 @@ impl LbmWindow {
             software_adapter: self.software,
             adapter_name: self.adapter_name.clone(),
         })
+    }
+    pub fn opening_targets(&self) -> Vec<f32> {
+        self.geometry
+            .openings
+            .iter()
+            .map(|o| o.outward_flow)
+            .collect()
     }
     /// Copy overlapping populations exactly; initialize newly exposed cells from
     /// `initial` and replace the mask and opening metadata for the new window.

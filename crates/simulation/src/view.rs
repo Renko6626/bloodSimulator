@@ -22,4 +22,33 @@ pub struct Snapshot {
     /// Per-edge flow rates in a world map; empty in the original loop lab.
     pub branch_flows: Vec<f32>,
     pub fluid: Option<crate::FluidStats>,
+    pub lbm: Option<LbmSnapshot>,
+    /// Diagnostic calculation error, if the cached field is invalid.
+    pub lbm_status: Option<String>,
+}
+
+/// Cached local-fluid diagnostics, expressed in world coordinates.
+#[derive(Clone, Debug)]
+pub struct LbmSnapshot {
+    pub profile: String,
+    pub origin_blocks: [i32; 2],
+    pub bounds: [[f32; 2]; 2],
+    pub opening_targets: Vec<f32>,
+    pub opening_fluxes: Vec<f32>,
+    pub opening_residuals: Vec<f32>,
+    pub density_min: f32,
+    pub density_max: f32,
+    pub mass: f32,
+    pub region_switches: usize,
+    pub overlap_error: f32,
+    pub center: [f32; 3],
+    pub warmup: Vec<[f32; 3]>,
+    pub lattice_steps_per_substep: usize,
+    pub lattice_dt: f32,
+    pub elapsed_fluid_time: f64,
+    pub coupling_ms: f64,
+    pub lbm_ms: f64,
+    pub rapier_ms: f64,
+    pub adapter_name: String,
+    pub software_adapter: bool,
 }
