@@ -1,0 +1,4 @@
+
+thread 'main' (889734) panicked at crates/simulation/src/circulation/graph.rs:94:9:
+pump edge needs a return path through the flow graph
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

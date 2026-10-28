@@ -1,0 +1,151 @@
+// D2Q9 shifted populations g=f-w. Orthogonal raw-moment MRT, Guo force.
+struct Params { nx:u32, ny:u32, periodic_y:u32, omega:f32, force:vec2<f32>, scale:f32, pad:f32 }
+@group(0) @binding(0) var<uniform> p:Params;
+@group(0) @binding(1) var<storage,read_write> src:array<f32>;
+@group(0) @binding(2) var<storage,read_write> dst:array<f32>;
+@group(0) @binding(3) var<storage,read_write> output:array<vec4<f32>>;
+@group(0) @binding(4) var<storage,read> mask:array<u32>;
+const C=array<vec2<i32>,9>(vec2(0,0),vec2(1,0),vec2(0,1),vec2(-1,0),vec2(0,-1),vec2(1,1),vec2(-1,1),vec2(-1,-1),vec2(1,-1));
+const W=array<f32,9>(4./9.,1./9.,1./9.,1./9.,1./9.,1./36.,1./36.,1./36.,1./36.);
+const OPP=array<u32,9>(0,3,4,1,2,7,8,5,6);
+@compute @workgroup_size(128)
+fn collide_stream(@builtin(global_invocation_id) id:vec3<u32>) {
+ let i=id.x;let n=p.nx*p.ny;if(i>=n){return;}
+ if(mask[i]!=0u){return;}
+ var f:array<f32,9>;var drho=0.;var j=vec2(0.);
+ for(var q=0u;q<9u;q++){f[q]=src[q*n+i];drho+=f[q];j+=vec2<f32>(C[q])*f[q];}
+ let rho=1.+drho;let u=(j+0.5*p.force)/rho;
+ var d:array<f32,9>;var z:array<f32,9>;
+ for(var q=0u;q<9u;q++){
+  let cv=vec2<f32>(C[q]);let cu=dot(cv,u);
+  let eq=W[q]*(drho+rho*(3.*cu+4.5*cu*cu-1.5*dot(u,u)));
+  d[q]=f[q]-eq;z[q]=W[q]*dot(3.*(cv-u)+9.*cu*cv,p.force);
+ }
+ var dm:array<f32,9>;
+ dm[0]=-(0.)*((1.0*d[0]) + (1.0*d[1]) + (1.0*d[2]) + (1.0*d[3]) + (1.0*d[4]) + (1.0*d[5]) + (1.0*d[6]) + (1.0*d[7]) + (1.0*d[8]))+(1.-0.5*(0.))*((1.0*z[0]) + (1.0*z[1]) + (1.0*z[2]) + (1.0*z[3]) + (1.0*z[4]) + (1.0*z[5]) + (1.0*z[6]) + (1.0*z[7]) + (1.0*z[8]));
+ dm[1]=-(1.1)*((-4.0*d[0]) + (-1.0*d[1]) + (-1.0*d[2]) + (-1.0*d[3]) + (-1.0*d[4]) + (2.0*d[5]) + (2.0*d[6]) + (2.0*d[7]) + (2.0*d[8]))+(1.-0.5*(1.1))*((-4.0*z[0]) + (-1.0*z[1]) + (-1.0*z[2]) + (-1.0*z[3]) + (-1.0*z[4]) + (2.0*z[5]) + (2.0*z[6]) + (2.0*z[7]) + (2.0*z[8]));
+ dm[2]=-(1.)*((4.0*d[0]) + (-2.0*d[1]) + (-2.0*d[2]) + (-2.0*d[3]) + (-2.0*d[4]) + (1.0*d[5]) + (1.0*d[6]) + (1.0*d[7]) + (1.0*d[8]))+(1.-0.5*(1.))*((4.0*z[0]) + (-2.0*z[1]) + (-2.0*z[2]) + (-2.0*z[3]) + (-2.0*z[4]) + (1.0*z[5]) + (1.0*z[6]) + (1.0*z[7]) + (1.0*z[8]));
+ dm[3]=-(0.)*((1.0*d[1]) + (-1.0*d[3]) + (1.0*d[5]) + (-1.0*d[6]) + (-1.0*d[7]) + (1.0*d[8]))+(1.-0.5*(0.))*((1.0*z[1]) + (-1.0*z[3]) + (1.0*z[5]) + (-1.0*z[6]) + (-1.0*z[7]) + (1.0*z[8]));
+ dm[4]=-(1.2)*((-2.0*d[1]) + (2.0*d[3]) + (1.0*d[5]) + (-1.0*d[6]) + (-1.0*d[7]) + (1.0*d[8]))+(1.-0.5*(1.2))*((-2.0*z[1]) + (2.0*z[3]) + (1.0*z[5]) + (-1.0*z[6]) + (-1.0*z[7]) + (1.0*z[8]));
+ dm[5]=-(0.)*((1.0*d[2]) + (-1.0*d[4]) + (1.0*d[5]) + (1.0*d[6]) + (-1.0*d[7]) + (-1.0*d[8]))+(1.-0.5*(0.))*((1.0*z[2]) + (-1.0*z[4]) + (1.0*z[5]) + (1.0*z[6]) + (-1.0*z[7]) + (-1.0*z[8]));
+ dm[6]=-(1.2)*((-2.0*d[2]) + (2.0*d[4]) + (1.0*d[5]) + (1.0*d[6]) + (-1.0*d[7]) + (-1.0*d[8]))+(1.-0.5*(1.2))*((-2.0*z[2]) + (2.0*z[4]) + (1.0*z[5]) + (1.0*z[6]) + (-1.0*z[7]) + (-1.0*z[8]));
+ dm[7]=-(p.omega)*((1.0*d[1]) + (-1.0*d[2]) + (1.0*d[3]) + (-1.0*d[4]))+(1.-0.5*(p.omega))*((1.0*z[1]) + (-1.0*z[2]) + (1.0*z[3]) + (-1.0*z[4]));
+ dm[8]=-(p.omega)*((1.0*d[5]) + (-1.0*d[6]) + (1.0*d[7]) + (-1.0*d[8]))+(1.-0.5*(p.omega))*((1.0*z[5]) + (-1.0*z[6]) + (1.0*z[7]) + (-1.0*z[8]));
+ var post:array<f32,9>;
+ post[0]=f[0]+(1.0/9.0*dm[0]) + (-4.0/36.0*dm[1]) + (4.0/36.0*dm[2]);
+ post[1]=f[1]+(1.0/9.0*dm[0]) + (-1.0/36.0*dm[1]) + (-2.0/36.0*dm[2]) + (1.0/6.0*dm[3]) + (-2.0/12.0*dm[4]) + (1.0/4.0*dm[7]);
+ post[2]=f[2]+(1.0/9.0*dm[0]) + (-1.0/36.0*dm[1]) + (-2.0/36.0*dm[2]) + (1.0/6.0*dm[5]) + (-2.0/12.0*dm[6]) + (-1.0/4.0*dm[7]);
+ post[3]=f[3]+(1.0/9.0*dm[0]) + (-1.0/36.0*dm[1]) + (-2.0/36.0*dm[2]) + (-1.0/6.0*dm[3]) + (2.0/12.0*dm[4]) + (1.0/4.0*dm[7]);
+ post[4]=f[4]+(1.0/9.0*dm[0]) + (-1.0/36.0*dm[1]) + (-2.0/36.0*dm[2]) + (-1.0/6.0*dm[5]) + (2.0/12.0*dm[6]) + (-1.0/4.0*dm[7]);
+ post[5]=f[5]+(1.0/9.0*dm[0]) + (2.0/36.0*dm[1]) + (1.0/36.0*dm[2]) + (1.0/6.0*dm[3]) + (1.0/12.0*dm[4]) + (1.0/6.0*dm[5]) + (1.0/12.0*dm[6]) + (1.0/4.0*dm[8]);
+ post[6]=f[6]+(1.0/9.0*dm[0]) + (2.0/36.0*dm[1]) + (1.0/36.0*dm[2]) + (-1.0/6.0*dm[3]) + (-1.0/12.0*dm[4]) + (1.0/6.0*dm[5]) + (1.0/12.0*dm[6]) + (-1.0/4.0*dm[8]);
+ post[7]=f[7]+(1.0/9.0*dm[0]) + (2.0/36.0*dm[1]) + (1.0/36.0*dm[2]) + (-1.0/6.0*dm[3]) + (-1.0/12.0*dm[4]) + (-1.0/6.0*dm[5]) + (-1.0/12.0*dm[6]) + (1.0/4.0*dm[8]);
+ post[8]=f[8]+(1.0/9.0*dm[0]) + (2.0/36.0*dm[1]) + (1.0/36.0*dm[2]) + (1.0/6.0*dm[3]) + (1.0/12.0*dm[4]) + (-1.0/6.0*dm[5]) + (-1.0/12.0*dm[6]) + (-1.0/4.0*dm[8]);
+
+ for(var q=0u;q<9u;q++){
+  let x=i32(i%p.nx)+C[q].x;var y=i32(i/p.nx)+C[q].y; if(p.pad==3. || p.pad==4. || p.pad==6. || p.pad==7. || p.pad==9.) {y=(y+i32(p.ny))%i32(p.ny);}
+  if(p.pad==1. && (x<0 || x>=i32(p.nx)) && y>=0 && y<i32(p.ny)) { let dest=u32(y)*p.nx+u32((x+i32(p.nx))%i32(p.nx)); if(mask[dest]!=0u){dst[OPP[q]*n+i]=post[q];}else{dst[q*n+dest]=post[q];} }
+  else if(x<0 || x>=i32(p.nx) || y<0 || y>=i32(p.ny)) { dst[OPP[q]*n+i]=post[q]; }
+  else { let dest=u32(y)*p.nx+u32(x); if(mask[dest]!=0u){dst[OPP[q]*n+i]=post[q];} else {dst[q*n+dest]=post[q];} }
+ }
+}
+@compute @workgroup_size(128)
+fn macros(@builtin(global_invocation_id) id:vec3<u32>){
+ let i=id.x;let n=p.nx*p.ny;if(i>=n){return;}
+ var drho=0.;var j=vec2(0.);
+ for(var q=0u;q<9u;q++){let f=src[q*n+i];drho+=f;j+=vec2<f32>(C[q])*f;}
+ let rho=1.+drho;let u=(j+0.5*p.force)/rho*p.scale;
+ output[i]=vec4(rho,u,drho);
+}
+
+// Research-only: velocity from fully streamed, non-boundary fluid cells.
+fn fd_velocity(i:u32)->vec2<f32>{
+ let count=p.nx*p.ny;var drho=0.;var j=vec2(0.);
+ for(var q=0u;q<9u;q++){let g=src[q*count+i];drho+=g;j+=vec2<f32>(C[q])*g;}
+ return (j+0.5*p.force)/(1.+drho);
+}
+fn fd_index(x:vec2<i32>)->u32{
+ let y=(x.y+i32(p.ny))%i32(p.ny);return u32(y)*p.nx+u32(x.x);
+}
+fn fd_same(x:vec2<i32>,side:f32)->bool{
+ if(x.x<0 || x.x>=i32(p.nx)){return false;}
+ if((p.pad!=7. && p.pad!=9.) && (x.y<0 || x.y>=i32(p.ny))){return false;}
+ return boundary[fd_index(x)].x==side;
+}
+@group(0) @binding(5) var<storage,read> boundary:array<vec4<f32>>;
+@compute @workgroup_size(128)
+fn reconstruct(@builtin(global_invocation_id) id:vec3<u32>) {
+ let i=id.x; let count=p.nx*p.ny; if(p.pad==1. || i>=count || boundary[i].x==0.) {return;}
+ var n=vec2<i32>(1,0);
+ switch u32(boundary[i].x) {
+  case 2u: {n=vec2(-1,0);}
+  case 3u: {n=vec2(0,1);}
+  case 4u: {n=vec2(0,-1);}
+  default: {}
+ }
+ let t=vec2(-n.y,n.x);
+ var axial=0u; var plus=0u; var minus=0u; var tangent=0u; var tangent_opp=0u;
+ var a=0.; var b=0.;
+ for(var q=0u;q<9u;q++) {
+  let cn=dot(C[q],n); let ct=dot(C[q],t);
+  let f=src[q*count+i]+W[q];
+  if(cn==0) {a+=f; if(ct==1){tangent=q;} if(ct == -1){tangent_opp=q;}}
+  if(cn == -1) {b+=f;}
+  if(cn==1) {if(ct==0){axial=q;} else if(ct==1){plus=q;} else {minus=q;}}
+ }
+ let u=boundary[i].yz; let un=dot(u,vec2<f32>(n)); let ut=dot(u,vec2<f32>(t));
+ let force_n=dot(p.force,vec2<f32>(n)); let ft=dot(p.force,vec2<f32>(t));
+ let pressure_out=((p.pad==2. || p.pad==4.) && boundary[i].x==2.);
+ let rho=select((a+2.*b-0.5*force_n)/(1.-un),1.,pressure_out);
+ if(p.pad==7. || p.pad==8. || p.pad==9. || p.pad==10.){
+  let x=vec2<i32>(i32(i%p.nx),i32(i/p.nx));let i1=fd_index(x+n);let i2=fd_index(x+2*n);
+  let dn=(-3.*u+4.*fd_velocity(i1)-fd_velocity(i2))*0.5;
+  let side=boundary[i].x;var dt=vec2(0.);
+  if(fd_same(x+t,side) && fd_same(x-t,side)){dt=(boundary[fd_index(x+t)].yz-boundary[fd_index(x-t)].yz)*0.5;}
+  else if(fd_same(x+t,side) && fd_same(x+2*t,side)){dt=(-3.*u+4.*boundary[fd_index(x+t)].yz-boundary[fd_index(x+2*t)].yz)*0.5;}
+  else if(fd_same(x-t,side) && fd_same(x-2*t,side)){dt=(3.*u-4.*boundary[fd_index(x-t)].yz+boundary[fd_index(x-2*t)].yz)*0.5;}
+  else if(fd_same(x+t,side)){dt=boundary[fd_index(x+t)].yz-u;}
+  else if(fd_same(x-t,side)){dt=u-boundary[fd_index(x-t)].yz;}
+  let dx=f32(n.x)*dn+f32(t.x)*dt;let dy=f32(n.y)*dn+f32(t.y)*dt;
+  var r=rho;
+  if(p.pad==9. || p.pad==10.){r=1.;for(var q=0u;q<9u;q++){r+=src[q*count+i1];}}
+  let div=dx.x+dy.y;let dev=dx.x-dy.y;
+  let pxx=-r/3.*(div/1.1+dev/p.omega)-u.x*p.force.x;
+  let pyy=-r/3.*(div/1.1-dev/p.omega)-u.y*p.force.y;
+  let pxy=-r/(3.*p.omega)*(dy.x+dx.y)-0.5*(u.x*p.force.y+u.y*p.force.x);
+  for(var q=0u;q<9u;q++){
+   let cv=vec2<f32>(C[q]);let cu=dot(cv,u);
+   let eq=W[q]*((r-1.)+r*(3.*cu+4.5*cu*cu-1.5*dot(u,u)));
+   src[q*count+i]=eq+4.5*W[q]*((cv.x*cv.x-1./3.)*pxx+(cv.y*cv.y-1./3.)*pyy+2.*cv.x*cv.y*pxy)-1.5*W[q]*dot(cv,p.force);
+  }
+  return;
+ }
+ let kn=select(rho*un-0.5*force_n,rho-a-2.*b,pressure_out); let kt=rho*ut-0.5*ft;
+ let d=src[tangent*count+i]+W[tangent]-src[tangent_opp*count+i]-W[tangent_opp];
+ src[axial*count+i]=src[OPP[axial]*count+i]+W[OPP[axial]]+2.*kn/3.-W[axial];
+ src[plus*count+i]=src[OPP[plus]*count+i]+W[OPP[plus]]+kn/6.+(kt-d)/2.-W[plus];
+ src[minus*count+i]=src[OPP[minus]*count+i]+W[OPP[minus]]+kn/6.-(kt-d)/2.-W[minus];
+ // Diagnostic control: project outlet non-equilibrium onto second-order stress only.
+ if((p.pad==5. || p.pad==6.) && boundary[i].x==2.) {
+  var neq:array<f32,9>; var stress=vec3(0.);
+  for(var q=0u;q<9u;q++) {
+   let cv=vec2<f32>(C[q]);let cu=dot(cv,u);
+   let eq=W[q]*((rho-1.)+rho*(3.*cu+4.5*cu*cu-1.5*dot(u,u)));
+   neq[q]=src[q*count+i]-eq;
+   stress+=vec3(cv.x*cv.x,cv.y*cv.y,cv.x*cv.y)*neq[q];
+  }
+  for(var q=0u;q<9u;q++) {
+   let cv=vec2<f32>(C[q]);let cu=dot(cv,u);
+   let eq=W[q]*((rho-1.)+rho*(3.*cu+4.5*cu*cu-1.5*dot(u,u)));
+   src[q*count+i]=eq+4.5*W[q]*((cv.x*cv.x-1./3.)*stress.x+(cv.y*cv.y-1./3.)*stress.y+2.*cv.x*cv.y*stress.z);
+  }
+ }
+
+}
+
+@group(0) @binding(6) var<storage,read> kicks:array<vec2<f32>>;
+@compute @workgroup_size(128)
+fn apply_kicks(@builtin(global_invocation_id) id:vec3<u32>) {
+ let i=id.x; let n=p.nx*p.ny; if(i>=n || mask[i]!=0u){return;}
+ for(var q=0u;q<9u;q++){src[q*n+i]+=3.*W[q]*dot(vec2<f32>(C[q]), kicks[i]);}
+}

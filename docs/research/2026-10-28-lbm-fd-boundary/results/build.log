@@ -1,0 +1,547 @@
+warning: methods `world_bounds` and `origin_cell_offset_from` are never used
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/mod.rs:56:12
+   |
+54 | impl WindowSpec {
+   | --------------- methods in this implementation
+55 |     /// Lower-left and upper-right bounds in world units.
+56 |     pub fn world_bounds(self) -> [[f32; 2]; 2] {
+   |            ^^^^^^^^^^^^
+...
+64 |     pub fn origin_cell_offset_from(self, previous: Self) -> [i64; 2] {
+   |            ^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: variants `Bottom` and `Top` are never constructed
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/mod.rs:78:5
+   |
+75 | pub enum WindowSide {
+   |          ---------- variants in this enum
+...
+78 |     Bottom,
+   |     ^^^^^^
+79 |     Top,
+   |     ^^^
+   |
+   = note: `WindowSide` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: enum `LocalSampleStatus` is never used
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/mod.rs:96:10
+   |
+96 | pub enum LocalSampleStatus {
+   |          ^^^^^^^^^^^^^^^^^
+
+warning: struct `FluidSample` is never constructed
+   --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/mod.rs:106:12
+    |
+106 | pub struct FluidSample {
+    |            ^^^^^^^^^^^
+
+warning: struct `LocalSample` is never constructed
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:32:12
+   |
+32 | pub struct LocalSample {
+   |            ^^^^^^^^^^^
+
+warning: field `max_speed` is never read
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:41:9
+   |
+38 | pub struct Diagnostics {
+   |            ----------- field in this struct
+...
+41 |     pub max_speed: f32,
+   |         ^^^^^^^^^
+   |
+   = note: `Diagnostics` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `gpu_kernel_ms` is never read
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:75:9
+   |
+61 | pub struct LbmWorkStats {
+   |            ------------ field in this struct
+...
+75 |     pub gpu_kernel_ms: Option<f64>,
+   |         ^^^^^^^^^^^^^
+   |
+   = note: `LbmWorkStats` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: fields `mask`, `kicks`, and `kick_pipeline` are never read
+   --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:90:5
+    |
+ 78 | pub struct LbmWindow {
+    |            --------- fields in this struct
+...
+ 90 |     mask: wgpu::Buffer,
+    |     ^^^^
+...
+ 99 |     kicks: wgpu::Buffer,
+    |     ^^^^^
+100 |     kick_pipeline: wgpu::ComputePipeline,
+    |     ^^^^^^^^^^^^^
+
+warning: multiple methods are never used
+   --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:337:12
+    |
+102 | impl LbmWindow {
+    | -------------- methods in this implementation
+...
+337 |     pub fn reset_work_stats(&self) {
+    |            ^^^^^^^^^^^^^^^^
+...
+340 |     pub fn work_stats(&self) -> LbmWorkStats {
+    |            ^^^^^^^^^^
+...
+410 |     pub fn spec(&self) -> WindowSpec {
+    |            ^^^^
+...
+413 |     pub fn geometry(&self) -> &WindowGeometry {
+    |            ^^^^^^^^
+...
+417 |     pub fn apply_kicks(&mut self, kicks: &[[f32; 2]]) -> LbmResult<()> {
+    |            ^^^^^^^^^^^
+...
+546 |     pub fn sample(&self, position: [f32; 2]) -> LbmResult<LocalSample> {
+    |            ^^^^^^
+...
+639 |     pub fn opening_targets(&self) -> Vec<f32> {
+    |            ^^^^^^^^^^^^^^^
+...
+648 |     pub fn shift_to(
+    |            ^^^^^^^^
+
+warning: 9 warnings emitted
+
+warning: methods `world_bounds` and `origin_cell_offset_from` are never used
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/mod.rs:56:12
+   |
+54 | impl WindowSpec {
+   | --------------- methods in this implementation
+55 |     /// Lower-left and upper-right bounds in world units.
+56 |     pub fn world_bounds(self) -> [[f32; 2]; 2] {
+   |            ^^^^^^^^^^^^
+...
+64 |     pub fn origin_cell_offset_from(self, previous: Self) -> [i64; 2] {
+   |            ^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: variants `Bottom` and `Top` are never constructed
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/mod.rs:78:5
+   |
+75 | pub enum WindowSide {
+   |          ---------- variants in this enum
+...
+78 |     Bottom,
+   |     ^^^^^^
+79 |     Top,
+   |     ^^^
+   |
+   = note: `WindowSide` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: enum `LocalSampleStatus` is never used
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/mod.rs:96:10
+   |
+96 | pub enum LocalSampleStatus {
+   |          ^^^^^^^^^^^^^^^^^
+
+warning: struct `FluidSample` is never constructed
+   --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/mod.rs:106:12
+    |
+106 | pub struct FluidSample {
+    |            ^^^^^^^^^^^
+
+warning: struct `LocalSample` is never constructed
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:32:12
+   |
+32 | pub struct LocalSample {
+   |            ^^^^^^^^^^^
+
+warning: fields `density_min`, `density_max`, `max_speed`, and `mass` are never read
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:39:9
+   |
+38 | pub struct Diagnostics {
+   |            ----------- fields in this struct
+39 |     pub density_min: f32,
+   |         ^^^^^^^^^^^
+40 |     pub density_max: f32,
+   |         ^^^^^^^^^^^
+41 |     pub max_speed: f32,
+   |         ^^^^^^^^^
+42 |     pub mass: f32,
+   |         ^^^^
+   |
+   = note: `Diagnostics` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `gpu_kernel_ms` is never read
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:75:9
+   |
+61 | pub struct LbmWorkStats {
+   |            ------------ field in this struct
+...
+75 |     pub gpu_kernel_ms: Option<f64>,
+   |         ^^^^^^^^^^^^^
+   |
+   = note: `LbmWorkStats` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: fields `populations`, `mask`, `kicks`, and `kick_pipeline` are never read
+   --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:87:5
+    |
+ 78 | pub struct LbmWindow {
+    |            --------- fields in this struct
+...
+ 87 |     populations: [wgpu::Buffer; 2],
+    |     ^^^^^^^^^^^
+...
+ 90 |     mask: wgpu::Buffer,
+    |     ^^^^
+...
+ 99 |     kicks: wgpu::Buffer,
+    |     ^^^^^
+100 |     kick_pipeline: wgpu::ComputePipeline,
+    |     ^^^^^^^^^^^^^
+
+warning: multiple methods are never used
+   --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:330:12
+    |
+102 | impl LbmWindow {
+    | -------------- methods in this implementation
+...
+330 |     pub fn diagnostic_seed(&mut self, values: &[f32]) {
+    |            ^^^^^^^^^^^^^^^
+...
+337 |     pub fn reset_work_stats(&self) {
+    |            ^^^^^^^^^^^^^^^^
+...
+340 |     pub fn work_stats(&self) -> LbmWorkStats {
+    |            ^^^^^^^^^^
+...
+368 |     pub fn diagnostic_populations(&self) -> Vec<f32> {
+    |            ^^^^^^^^^^^^^^^^^^^^^^
+...
+410 |     pub fn spec(&self) -> WindowSpec {
+    |            ^^^^
+...
+413 |     pub fn geometry(&self) -> &WindowGeometry {
+    |            ^^^^^^^^
+...
+417 |     pub fn apply_kicks(&mut self, kicks: &[[f32; 2]]) -> LbmResult<()> {
+    |            ^^^^^^^^^^^
+...
+546 |     pub fn sample(&self, position: [f32; 2]) -> LbmResult<LocalSample> {
+    |            ^^^^^^
+...
+639 |     pub fn opening_targets(&self) -> Vec<f32> {
+    |            ^^^^^^^^^^^^^^^
+...
+648 |     pub fn shift_to(
+    |            ^^^^^^^^
+
+warning: 9 warnings emitted
+
+warning: methods `world_bounds` and `origin_cell_offset_from` are never used
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/mod.rs:56:12
+   |
+54 | impl WindowSpec {
+   | --------------- methods in this implementation
+55 |     /// Lower-left and upper-right bounds in world units.
+56 |     pub fn world_bounds(self) -> [[f32; 2]; 2] {
+   |            ^^^^^^^^^^^^
+...
+64 |     pub fn origin_cell_offset_from(self, previous: Self) -> [i64; 2] {
+   |            ^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: enum `LocalSampleStatus` is never used
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/mod.rs:96:10
+   |
+96 | pub enum LocalSampleStatus {
+   |          ^^^^^^^^^^^^^^^^^
+
+warning: struct `FluidSample` is never constructed
+   --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/mod.rs:106:12
+    |
+106 | pub struct FluidSample {
+    |            ^^^^^^^^^^^
+
+warning: struct `LocalSample` is never constructed
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:32:12
+   |
+32 | pub struct LocalSample {
+   |            ^^^^^^^^^^^
+
+warning: fields `density_min`, `density_max`, `max_speed`, `mass`, and `software_adapter` are never read
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:39:9
+   |
+38 | pub struct Diagnostics {
+   |            ----------- fields in this struct
+39 |     pub density_min: f32,
+   |         ^^^^^^^^^^^
+40 |     pub density_max: f32,
+   |         ^^^^^^^^^^^
+41 |     pub max_speed: f32,
+   |         ^^^^^^^^^
+42 |     pub mass: f32,
+   |         ^^^^
+43 |     pub opening_fluxes: Vec<f32>,
+44 |     pub software_adapter: bool,
+   |         ^^^^^^^^^^^^^^^^
+   |
+   = note: `Diagnostics` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `gpu_kernel_ms` is never read
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:75:9
+   |
+61 | pub struct LbmWorkStats {
+   |            ------------ field in this struct
+...
+75 |     pub gpu_kernel_ms: Option<f64>,
+   |         ^^^^^^^^^^^^^
+   |
+   = note: `LbmWorkStats` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: fields `populations`, `mask`, `kicks`, and `kick_pipeline` are never read
+   --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:87:5
+    |
+ 78 | pub struct LbmWindow {
+    |            --------- fields in this struct
+...
+ 87 |     populations: [wgpu::Buffer; 2],
+    |     ^^^^^^^^^^^
+...
+ 90 |     mask: wgpu::Buffer,
+    |     ^^^^
+...
+ 99 |     kicks: wgpu::Buffer,
+    |     ^^^^^
+100 |     kick_pipeline: wgpu::ComputePipeline,
+    |     ^^^^^^^^^^^^^
+
+warning: multiple methods are never used
+   --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:330:12
+    |
+102 | impl LbmWindow {
+    | -------------- methods in this implementation
+...
+330 |     pub fn diagnostic_seed(&mut self, values: &[f32]) {
+    |            ^^^^^^^^^^^^^^^
+...
+337 |     pub fn reset_work_stats(&self) {
+    |            ^^^^^^^^^^^^^^^^
+...
+340 |     pub fn work_stats(&self) -> LbmWorkStats {
+    |            ^^^^^^^^^^
+...
+368 |     pub fn diagnostic_populations(&self) -> Vec<f32> {
+    |            ^^^^^^^^^^^^^^^^^^^^^^
+...
+410 |     pub fn spec(&self) -> WindowSpec {
+    |            ^^^^
+...
+413 |     pub fn geometry(&self) -> &WindowGeometry {
+    |            ^^^^^^^^
+...
+417 |     pub fn apply_kicks(&mut self, kicks: &[[f32; 2]]) -> LbmResult<()> {
+    |            ^^^^^^^^^^^
+...
+546 |     pub fn sample(&self, position: [f32; 2]) -> LbmResult<LocalSample> {
+    |            ^^^^^^
+...
+639 |     pub fn opening_targets(&self) -> Vec<f32> {
+    |            ^^^^^^^^^^^^^^^
+...
+648 |     pub fn shift_to(
+    |            ^^^^^^^^
+
+warning: 8 warnings emitted
+
+warning: methods `world_bounds` and `origin_cell_offset_from` are never used
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/mod.rs:56:12
+   |
+54 | impl WindowSpec {
+   | --------------- methods in this implementation
+55 |     /// Lower-left and upper-right bounds in world units.
+56 |     pub fn world_bounds(self) -> [[f32; 2]; 2] {
+   |            ^^^^^^^^^^^^
+...
+64 |     pub fn origin_cell_offset_from(self, previous: Self) -> [i64; 2] {
+   |            ^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: enum `LocalSampleStatus` is never used
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/mod.rs:96:10
+   |
+96 | pub enum LocalSampleStatus {
+   |          ^^^^^^^^^^^^^^^^^
+
+warning: struct `FluidSample` is never constructed
+   --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/mod.rs:106:12
+    |
+106 | pub struct FluidSample {
+    |            ^^^^^^^^^^^
+
+warning: struct `StepInput` is never constructed
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:28:12
+   |
+28 | pub struct StepInput {
+   |            ^^^^^^^^^
+
+warning: struct `LocalSample` is never constructed
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:32:12
+   |
+32 | pub struct LocalSample {
+   |            ^^^^^^^^^^^
+
+warning: struct `Diagnostics` is never constructed
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:38:12
+   |
+38 | pub struct Diagnostics {
+   |            ^^^^^^^^^^^
+
+warning: multiple fields are never read
+  --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:62:9
+   |
+61 | pub struct LbmWorkStats {
+   |            ------------ fields in this struct
+62 |     pub lattice_steps: u64,
+   |         ^^^^^^^^^^^^^
+63 |     pub dispatches: u64,
+   |         ^^^^^^^^^^
+64 |     pub submissions: u64,
+   |         ^^^^^^^^^^^
+65 |     pub upload_calls: u64,
+   |         ^^^^^^^^^^^^
+66 |     pub upload_bytes: u64,
+   |         ^^^^^^^^^^^^
+67 |     pub readback_calls: u64,
+   |         ^^^^^^^^^^^^^^
+68 |     pub readback_bytes: u64,
+   |         ^^^^^^^^^^^^^^
+69 |     pub upload_ms: f64,
+   |         ^^^^^^^^^
+70 |     pub encoding_ms: f64,
+   |         ^^^^^^^^^^^
+71 |     pub submission_ms: f64,
+   |         ^^^^^^^^^^^^^
+72 |     /// Includes waiting for previously queued GPU work; not kernel execution time.
+73 |     pub readback_wait_ms: f64,
+   |         ^^^^^^^^^^^^^^^^
+74 |     pub readback_decode_ms: f64,
+   |         ^^^^^^^^^^^^^^^^^^
+75 |     pub gpu_kernel_ms: Option<f64>,
+   |         ^^^^^^^^^^^^^
+   |
+   = note: `LbmWorkStats` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: multiple fields are never read
+   --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:79:5
+    |
+ 78 | pub struct LbmWindow {
+    |            --------- fields in this struct
+ 79 |     work: Cell<LbmWorkStats>,
+    |     ^^^^
+ 80 |     spec: WindowSpec,
+    |     ^^^^
+ 81 |     config: WindowConfig,
+    |     ^^^^^^
+ 82 |     geometry: WindowGeometry,
+    |     ^^^^^^^^
+ 83 |     device: wgpu::Device,
+    |     ^^^^^^
+ 84 |     queue: wgpu::Queue,
+    |     ^^^^^
+ 85 |     adapter_name: String,
+    |     ^^^^^^^^^^^^
+ 86 |     software: bool,
+    |     ^^^^^^^^
+ 87 |     populations: [wgpu::Buffer; 2],
+    |     ^^^^^^^^^^^
+ 88 |     current: usize,
+    |     ^^^^^^^
+ 89 |     uniform: wgpu::Buffer,
+    |     ^^^^^^^
+ 90 |     mask: wgpu::Buffer,
+    |     ^^^^
+ 91 |     boundary: wgpu::Buffer,
+    |     ^^^^^^^^
+ 92 |     boundary_pipeline: wgpu::ComputePipeline,
+    |     ^^^^^^^^^^^^^^^^^
+ 93 |     output: wgpu::Buffer,
+    |     ^^^^^^
+ 94 |     readback: wgpu::Buffer,
+    |     ^^^^^^^^
+ 95 |     groups: [wgpu::BindGroup; 2],
+    |     ^^^^^^
+ 96 |     collide: wgpu::ComputePipeline,
+    |     ^^^^^^^
+ 97 |     macros: wgpu::ComputePipeline,
+    |     ^^^^^^
+ 98 |     force: [f32; 2],
+    |     ^^^^^
+ 99 |     kicks: wgpu::Buffer,
+    |     ^^^^^
+100 |     kick_pipeline: wgpu::ComputePipeline,
+    |     ^^^^^^^^^^^^^
+
+warning: multiple methods are never used
+   --> /data/sunyunbo/.codex/worktrees/8d56/bloodSimulator/docs/research/2026-10-28-lbm-fd-boundary/src/lbm/gpu.rs:330:12
+    |
+102 | impl LbmWindow {
+    | -------------- methods in this implementation
+...
+330 |     pub fn diagnostic_seed(&mut self, values: &[f32]) {
+    |            ^^^^^^^^^^^^^^^
+...
+337 |     pub fn reset_work_stats(&self) {
+    |            ^^^^^^^^^^^^^^^^
+...
+340 |     pub fn work_stats(&self) -> LbmWorkStats {
+    |            ^^^^^^^^^^
+...
+343 |     fn record(&self, f: impl FnOnce(&mut LbmWorkStats)) {
+    |        ^^^^^^
+...
+348 |     fn upload(&self, buffer: &wgpu::Buffer, data: &[u8]) {
+    |        ^^^^^^
+...
+357 |     fn submit(&self, encoder: wgpu::CommandEncoder) {
+    |        ^^^^^^
+...
+368 |     pub fn diagnostic_populations(&self) -> Vec<f32> {
+    |            ^^^^^^^^^^^^^^^^^^^^^^
+...
+397 |     pub fn set_opening_profiles(&mut self, flows: &[f32], profiles: &[Vec<f32>]) -> LbmResult<()> {
+    |            ^^^^^^^^^^^^^^^^^^^^
+...
+410 |     pub fn spec(&self) -> WindowSpec {
+    |            ^^^^
+...
+413 |     pub fn geometry(&self) -> &WindowGeometry {
+    |            ^^^^^^^^
+...
+417 |     pub fn apply_kicks(&mut self, kicks: &[[f32; 2]]) -> LbmResult<()> {
+    |            ^^^^^^^^^^^
+...
+446 |     pub fn advance(&mut self, input: StepInput) -> LbmResult<()> {
+    |            ^^^^^^^
+...
+497 |     pub fn field(&self) -> LbmResult<Vec<[f32; 4]>> {
+    |            ^^^^^
+...
+546 |     pub fn sample(&self, position: [f32; 2]) -> LbmResult<LocalSample> {
+    |            ^^^^^^
+...
+582 |     pub fn snapshot_diagnostics(&self) -> LbmResult<Diagnostics> {
+    |            ^^^^^^^^^^^^^^^^^^^^
+...
+587 |     pub fn diagnostics_from_field(&self, f: &[[f32; 4]]) -> LbmResult<Diagnostics> {
+    |            ^^^^^^^^^^^^^^^^^^^^^^
+...
+639 |     pub fn opening_targets(&self) -> Vec<f32> {
+    |            ^^^^^^^^^^^^^^^
+...
+648 |     pub fn shift_to(
+    |            ^^^^^^^^
+
+warning: 9 warnings emitted

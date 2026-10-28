@@ -1,0 +1,12 @@
+FD_STENCIL_OK opening_cells=48 inward_depth=2
+adapter="llvmpipe (LLVM 15.0.7, 256 bits)" software=true initial_mass=4608
+mode=8 fine=true frozen=false dt=0.0011904762 tau=0.50285715
+measure frame=0 target=18.529297 flux=[-18.529295, 18.529295] velocity_error=0.0000009536743 mass=4607.9932524433 mass_rel=-1.4643135115e-6
+frame=0 lo=0.9978483 at=[0,107] hi=1.0021645 at=[191,84] maxu=4.7969027 at=[14,95] ulat=0.022842394
+measure frame=1 target=18.877647 flux=[-18.877645, 18.877644] velocity_error=0.0000014305115 mass=4607.9780689199 mass_rel=-4.7593489841e-6
+frame=1 lo=0.99593306 at=[0,107] hi=1.0040998 at=[191,84] maxu=4.961837 at=[26,95] ulat=0.023627795
+measure frame=2 target=19.220503 flux=[-19.220499, 19.220499] velocity_error=0.0000009536743 mass=4607.9534879474 mass_rel=-1.0093761416e-5
+frame=2 lo=0.99437195 at=[0,107] hi=1.0056779 at=[191,84] maxu=5.1257277 at=[38,95] ulat=0.024408229
+measure frame=3 target=19.55246 flux=[-19.55246, 19.55246] velocity_error=0.0000009536743 mass=4607.9190721300 mass_rel=-1.7562471789e-5
+frame=3 lo=0.9941256 at=[0,107] hi=1.0058374 at=[191,84] maxu=5.292046 at=[144,95] ulat=0.02520022
+COMPLETE

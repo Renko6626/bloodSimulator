@@ -1,0 +1,13 @@
+FD_STENCIL_OK opening_cells=64 inward_depth=2
+mode=7 profile=Coarse dt=0.0020833334 tau=0.50125 adapter="llvmpipe (LLVM 15.0.7, 256 bits)" software=true seed=docs/research/2026-10-28-lbm-fd-boundary/results/baseline-mode.bin
+step=0 amplitude=1.0000067964e-6 total_l2=1.2154427859e-5 rho=[0.9999986,1.0000013] mass=1024 flux=[-84.47999, 84.47999]
+step=10 amplitude=1.5885428335e-7 total_l2=4.8001165592e-6 rho=[0.9999999,1.0000004] mass=1024 flux=[-84.47999, 84.47999]
+step=20 amplitude=9.9908569878e-8 total_l2=3.5778547815e-6 rho=[1,1.0000001] mass=1024 flux=[-84.47999, 84.47999]
+step=30 amplitude=7.0060860063e-8 total_l2=3.0254691014e-6 rho=[1,1.0000001] mass=1024 flux=[-84.47999, 84.47999]
+step=40 amplitude=5.2252475064e-8 total_l2=2.7765907561e-6 rho=[1,1.0000001] mass=1024 flux=[-84.47999, 84.47999]
+step=50 amplitude=3.9800738573e-8 total_l2=2.6567117681e-6 rho=[1,1.0000001] mass=1024 flux=[-84.47999, 84.47999]
+step=60 amplitude=3.1122777065e-8 total_l2=2.5569432842e-6 rho=[1.0000001,1.0000002] mass=1024.0001 flux=[-84.47999, 84.47999]
+step=70 amplitude=2.5007185142e-8 total_l2=2.6404637436e-6 rho=[1.0000001,1.0000002] mass=1024.0001 flux=[-84.47999, 84.47999]
+step=80 amplitude=2.0693513893e-8 total_l2=2.7687721790e-6 rho=[1.0000001,1.0000002] mass=1024.0001 flux=[-84.47999, 84.47999]
+step=90 amplitude=1.7394576491e-8 total_l2=2.9083292242e-6 rho=[1.0000001,1.0000002] mass=1024.0001 flux=[-84.47999, 84.47999]
+step=100 amplitude=1.4931068950e-8 total_l2=3.0640126998e-6 rho=[1.0000001,1.0000002] mass=1024.0001 flux=[-84.47999, 84.47999]

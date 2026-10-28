@@ -1,0 +1,50 @@
+Executed archive command: docs/research/2026-10-28-lbm-fd-boundary/run.sh -> exit 0
+Final build.log normalization: removed trailing blank line only; no numerical rerun.
+shell syntax: PASS
+rustfmt: PASS
+experiment whitespace: PASS
+src/diag.rs: OK
+src/eigen_gpu.rs: OK
+src/geometry.rs: OK
+src/pure.rs: OK
+src/eigen.py: OK
+src/lbm/gpu.rs: OK
+src/lbm/lbm.wgsl: OK
+src/lbm/mod.rs: OK
+src/lbm/model.rs: OK
+bin/diag: OK
+bin/eigen_gpu: OK
+bin/geometry: OK
+bin/pure: OK
+analyze.py: OK
+build.sh: OK
+run.sh: OK
+results/build.log: OK
+results/diagonal-setup-failed.log: OK
+results/diagonal-stencil.log: OK
+results/eigen-baseline.log: OK
+results/eigen-fd-coarse.log: OK
+results/eigen-fd.log: OK
+results/forced-moments.log: OK
+results/fork-coarse.log: OK
+results/fork-fine.log: OK
+results/spectrum.log: OK
+results/straight-coarse.log: OK
+results/straight-fine.log: OK
+results/summary.log: OK
+results/spectrum.json: OK
+results/summary.json: OK
+results/baseline-mode.bin: OK
+results/coarse-fd-worst.bin: OK
+results/coarse-fd_rho1-worst.bin: OK
+results/coarse-velocity-worst.bin: OK
+results/fine-fd-worst.bin: OK
+results/fine-fd_rho1-worst.bin: OK
+results/fine-velocity-worst.bin: OK
+results/environment.txt: OK
+/data/sunyunbo/www/bloodSimulator/target/release/deps/libwgpu-5a7ee29f61bc02e0.rlib: OK
+/data/sunyunbo/www/bloodSimulator/target/release/deps/libbytemuck-40ae7fd0291dbddd.rlib: OK
+/data/sunyunbo/www/bloodSimulator/target/release/deps/libpollster-17ad20f61a6070c7.rlib: OK
+/data/sunyunbo/www/bloodSimulator/target/release/deps/libblood_fluid_gpu-2c48bc0f8179894e.rlib: OK
+/data/sunyunbo/www/bloodSimulator/target/release/deps/libsimulation-b9a5802a0c6a13dc.rlib: OK
+manifest checks: PASS

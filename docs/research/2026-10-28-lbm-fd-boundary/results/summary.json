@@ -1,0 +1,91 @@
+{
+  "spectra": {
+    "fine-velocity": {
+      "radius": 1.0643227814091074,
+      "nonzero_ky_radius": 1.0643227814091074,
+      "max_k": 12
+    },
+    "fine-fd": {
+      "radius": 0.9999999999999927,
+      "nonzero_ky_radius": 0.9970429479774539,
+      "max_k": 0
+    },
+    "fine-fd_rho1": {
+      "radius": 1.0000000000000013,
+      "nonzero_ky_radius": 0.9970247073004965,
+      "max_k": 0
+    },
+    "coarse-velocity": {
+      "radius": 1.069017291691234,
+      "nonzero_ky_radius": 1.069017291691234,
+      "max_k": 12
+    },
+    "coarse-fd": {
+      "radius": 0.9999999999999997,
+      "nonzero_ky_radius": 0.9985316323451698,
+      "max_k": 0
+    },
+    "coarse-fd_rho1": {
+      "radius": 0.9999999999999988,
+      "nonzero_ky_radius": 0.9985316323451696,
+      "max_k": 0
+    }
+  },
+  "cases": {
+    "straight-fine": {
+      "frames": 160,
+      "rho_min": 0.9555325,
+      "rho_max": 1.0451314,
+      "max_lattice_speed": 0.04292709,
+      "max_velocity_error_world": 1.1920929e-06,
+      "max_flux_error_world": 5.000000001587068e-06,
+      "mass_rel_min": -0.00024229531622,
+      "mass_rel_max": 0.0010030606808,
+      "mass_rel_final": 0.00067156736071
+    },
+    "straight-coarse": {
+      "frames": 160,
+      "rho_min": 0.9750874,
+      "rho_max": 1.0243366,
+      "max_lattice_speed": 0.03382204,
+      "max_velocity_error_world": 9.536743e-07,
+      "max_flux_error_world": 4.000000000559112e-06,
+      "mass_rel_min": -0.00018973944689,
+      "mass_rel_max": 0.00060124662059,
+      "mass_rel_final": 0.00059304940027
+    },
+    "fork-fine": {
+      "frames": 160,
+      "rho_min": 0.94133455,
+      "rho_max": 1.0478976,
+      "max_lattice_speed": 0.09118936,
+      "max_velocity_error_world": 2.3841858e-06,
+      "max_flux_error_world": 5.999999999062311e-06,
+      "mass_rel_min": -0.00034525514026,
+      "mass_rel_max": 0.0014120817253,
+      "mass_rel_final": -0.00016148670804
+    },
+    "fork-coarse": {
+      "frames": 160,
+      "rho_min": 0.9434584,
+      "rho_max": 1.0669252,
+      "max_lattice_speed": 0.078689836,
+      "max_velocity_error_world": 1.4305115e-06,
+      "max_flux_error_world": 5.000000001587068e-06,
+      "mass_rel_min": -0.00029420787306,
+      "mass_rel_max": 0.0013659495068,
+      "mass_rel_final": 0.00086856485414
+    },
+    "forced-moments": {
+      "frames": 4,
+      "rho_min": 0.9941256,
+      "rho_max": 1.0058374,
+      "max_lattice_speed": 0.02520022,
+      "max_velocity_error_world": 1.4305115e-06,
+      "max_flux_error_world": 4.000000000559112e-06,
+      "mass_rel_min": -1.7562471789e-05,
+      "mass_rel_max": -1.4643135115e-06,
+      "mass_rel_final": -1.7562471789e-05
+    }
+  }
+}

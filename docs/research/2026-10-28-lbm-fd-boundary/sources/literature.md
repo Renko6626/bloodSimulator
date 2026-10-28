@@ -1,0 +1,9 @@
+# Sources and scope (2026-10-28)
+
+Primary sources read online:
+
+1. [Wissocq et al., 2017](https://arxiv.org/html/1701.07734), §2 regularized adaptation, Eqs.8,9,41–44. FD obtains stress from second-order finite differences, distinct from stress recovered locally by bounceback. Its experiments combine CBC and regularized BGK. We borrow the gradient idea only; its reported stability does not establish stability of prescribed-flow MRT+Guo here. HTML Eq.9 appears to omit one power of cs in its denominator: use the moment-normalized D2Q9 Hermite projection 1/(2 cs^4), verified directly by quadrature.
+2. [Latt et al., Phys Rev E 77, 056703 (2008)](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.77.056703), author manuscript [PDF](https://www.researchgate.net/profile/Michel-Deville/publication/37466580_Straight_velocity_boundaries_in_the_lattice_Boltzmann_method/links/0c96051d3ed653c38e000000/Straight-velocity-boundaries-in-the-lattice-Boltzmann-method.pdf): §III.A Eq.27 density from known populations applies throughout their comparison; §IV.D BC4 reconstructs every population from FD strain with second-order normal/tangential stencils. Scope is straight lattice-aligned boundaries with BGK. Local moment consistency does not imply global mass conservation. These motivate primary closure and diagnostics, not a guarantee for existing low tau MRT.
+3. [Guo, Zheng, Shi (2002), PRE 65, 046308](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.046308), [abstract](https://pubmed.ncbi.nlm.nih.gov/12006014/): discrete forcing effects matter. Current production collision already uses MRT-projected Guo forcing. Our half-force moment correction is derived from that existing algebra, not claimed to be a formula quoted from the abstract.
+
+Experimental MRT trace/deviatoric and force adaptation is our leading-order derivation, recorded in the plan. No cited source validates the complete proposed operator at this project's tau, walls or geometry.
