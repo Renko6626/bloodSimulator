@@ -157,6 +157,7 @@ mod probe {
                 let mut lbm = Vec::new();
                 let mut rapier = Vec::new();
                 let mut emitted = 0;
+                let mut first_warmup_time = None;
                 for frame in 0..warmup + frames + 24 {
                     let previous_robot = sim.snapshot().robot;
                     let start = Instant::now();
@@ -241,11 +242,14 @@ mod probe {
                             snap.robot
                         ));
                     }
+                    let substep_dt = (config.dt / config.substeps as f32) as f64;
+                    if first_warmup_time.is_none() && !l.warmup.is_empty() {
+                        first_warmup_time =
+                            Some(s.elapsed_fluid_time - (l.warmup.len() - 1) as f64 * substep_dt);
+                    }
                     for index in emitted..l.warmup.len() {
                         let d = l.warmup[index];
-                        let time = s.elapsed_fluid_time
-                            - (l.warmup.len() - 1 - index) as f64
-                                * (config.dt / config.substeps as f32) as f64;
+                        let time = first_warmup_time.unwrap() + index as f64 * substep_dt;
                         writeln!(
                             warmup_out,
                             "{},{:?},{},{},{},{},{},{},{},{},{},{}",
