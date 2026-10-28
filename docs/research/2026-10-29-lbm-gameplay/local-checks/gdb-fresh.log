@@ -1,0 +1,32 @@
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+[Detaching after vfork from child process 930418]
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+Initialize godot-rust (API v4.7.stable.official, runtime v4.7.1.stable.official, safeguards balanced)
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+Thread 1 "godot" received signal SIGSEGV, Segmentation fault.
+0x0000000001c7697f in ?? ()
+#0  0x0000000001c7697f in ?? ()
+#1  0x0000000001c781d4 in ?? ()
+#2  0x0000000001c80955 in ?? ()
+#3  0x0000000004e661dd in ?? ()
+#4  0x000000000495d7c4 in ?? ()
+#5  0x000000000042d456 in ?? ()
+#6  0x00007ffff7c29d90 in __libc_start_call_main (main=main@entry=0x42c260, argc=argc@entry=7, argv=argv@entry=0x7fffffffc938) at ../sysdeps/nptl/libc_start_call_main.h:58
+#7  0x00007ffff7c29e40 in __libc_start_main_impl (main=0x42c260, argc=7, argv=0x7fffffffc938, init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=0x7fffffffc928) at ../csu/libc-start.c:392
+#8  0x000000000048712a in ?? ()

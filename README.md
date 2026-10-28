@@ -12,13 +12,14 @@
 
 局部 Stokes 原型已接入 faer 联合 LU，并提供两块固定重叠区域：加载时预分解，玩家进入上方相邻管段时切换，复用点力历史和原 Rapier 物体。默认世界保持解析血流，`--local-stokes` 显式开启双区验证。十二物理节点保留，解析驱动采用此前确认的六次采样。
 
-**Stokes 性能研究仍暂停，LBM 可选路径已接入选定算法。** 当前选定 D2Q9 MRT＋Guo、LSQ-FD 给定速度边界和帧末平均密度控制，物理含义与限制见 [LBM 流体模型与算法](docs/physics/lbm-fluid.md)。固定分叉的 RTX 3060 10000 帧实验已完成，控制路径纯流体 p95 约 2.10 ms；这不代表完整游戏或任意开口几何已经验收。默认世界仍用解析流体。
+**Stokes 性能研究仍暂停，LBM 可选路径已接入选定算法。** 当前选定 D2Q9 MRT＋Guo、LSQ-FD 给定速度边界和帧末平均密度控制，物理含义与限制见 [LBM 流体模型与算法](docs/physics/lbm-fluid.md)。固定分叉的 RTX 3060 10000 帧纯流体实验已完成；后续已接入可玩的分叉验证场，包含真实机器人、72 个红细胞及窗口迁移。完整模拟步 p95 约 12 ms，但本轮 Godot/Xorg 含绘制回放的帧间隔 p95 约 70–71 ms，尚未达到 60 FPS，见[机械耦合与游戏实测](docs/research/2026-10-29-lbm-gameplay/README.md)。默认世界仍用解析流体。
 
 上一阶段 Stokes 模型、实验与未决问题见[流体实验阶段记录](docs/research/2026-10-27-fluid-checkpoint.md)。其 GPU 回放约 46–184 ms／次属于另一种算法；CPU LU 继续作为显式局部 Stokes 默认后端。
 
 保留模块化求解器、分段 profiling 和已验证的回读缓冲复用。云实例已停止。历史实验与复现入口见[研究索引](docs/research/README.md)；旧报告中的后续建议不代表继续执行的安排。
 
 - [当前状态与待办](docs/STATUS.md)：统一维护阶段结论、下一步优先级与待确认事项。
+- [LBM 验证场与游戏性能](docs/research/2026-10-29-lbm-gameplay/README.md)：启动方法、实卡负载、渲染差距与原始数据。
 - [LBM 物理文档](docs/physics/lbm-fluid.md)：所用方程、边界算法、密度控制、质量与动量补偿及适用范围。
 - [流体研究索引](docs/research/README.md)：按测量时点保留的 Stokes、GPU、Rayon、LBM 实验与原始数据。
 - [世界小地图设计](docs/superpowers/specs/2026-10-22-world-small-map-design.md)与[实施记录](docs/superpowers/plans/2026-10-22-world-small-map.md)：已确认的地图、流速、镜头与实现限制。
@@ -99,11 +100,11 @@ LBM 桥接功能默认关闭。显式构建并请求局部 LBM：
 
 ```bash
 bash scripts/build.sh --features lbm-gpu
-godot --path godot -- --local-lbm --lbm-profile=fine
+godot --path godot -- --local-lbm --lbm-validation --lbm-profile=fine
 # 也可显式选择 coarse；省略 profile 时使用暂定的 fine
 ```
 
-游戏运行只接受硬件 GPU；软件适配器仅用于显式 Rust 功能诊断，不用于选择发布精度。当前默认小地图出生位置的开口缺少所需直线缓冲，LBM 启动会报错并退出，尚不能作为完整游戏运行。下一步应在满足几何约束的地图探针上验证开口和窗口迁移，再确定游戏地图接入方式。`--local-lbm` 与 `--local-stokes` 不能同时使用；构建未启用功能或启动失败时不会自动回退。运行中发生模拟错误会暂停并记录诊断，需要检查后重置。
+游戏运行只接受硬件 GPU；软件适配器仅用于显式 Rust 功能诊断，不用于选择发布精度。`--lbm-validation` 进入已实现的分叉验证场，正常 WASD、暂停、单步、重置可用；指定往返路线的实卡耦合与迁移已测，任意漫游不在验证范围。省略该参数仍选择默认小地图，其出生位置开口缺少所需直线缓冲，会报错退出。开发命令默认构建 debug，报告中的性能使用 release。`--local-lbm` 与 `--local-stokes` 不能同时使用；构建未启用功能或启动失败时不会自动回退。运行中发生模拟错误会暂停并记录诊断，需要检查后重置。
 
 `GODOT_BIN` 可指定 Godot 可执行文件。首次构建需要联网下载 Rust 依赖。世界探针输出各管段间的下游通行记录、移动距离、面积偏差、越界与求解耗时；单回路模式保留逐细胞圈数统计。结果与限制见本轮实施记录。
 

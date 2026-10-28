@@ -1,0 +1,6 @@
+hold frame=0 robot=[24.003494, 24.002113] active=72 contacts=0 rho=[0.9915376,1.0067201]
+hold frame=120 robot=[24.039932, 24.013077] active=72 contacts=2 rho=[0.9903064,1.0116333]
+hold frame=240 robot=[24.030407, 24.005178] active=72 contacts=43 rho=[0.9784759,1.0205411]
+move frame=0 robot=[24.003494, 24.002113] active=72 contacts=0 rho=[0.9915376,1.0067201]
+move frame=120 robot=[18.538973, 24.059456] active=72 contacts=52 rho=[0.99028385,1.0116109]
+move frame=240 robot=[11.238703, 24.02435] active=56 contacts=39 rho=[0.9760564,1.038163]

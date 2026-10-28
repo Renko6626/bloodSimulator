@@ -1,0 +1,8 @@
+config=Config { dt: 0.016666668, substeps: 2, cell_count: 72, cell_radius: 0.7, cell_vertices: 12, cell_frequency: 12.0, cell_area_frequency: 30.0, cell_damping: 0.5, cell_drag: 20.0, robot_speed: 4.0, robot_flow: 0.08, pressure: 12.605889, viscosity: 0.05, pulse_hz: 1.2 }
+route=hold(24,24); move x10↔28 y24, 720-frame legs; no respawn
+mechanical guards=finite; area ratio 0.5..1.5; node signed wall <=0.3; robot center signed wall <=-0.55
+hold adapter=NVIDIA GeForce RTX 3060 software=false initial_rates=[18.529295, 10.55135, 7.9779463, 10.55135, 7.9779463, 18.529295, 18.529295] initial_quality=Quality { finite: true, area_ratio_min: 0.99991786, area_ratio_max: 1.0000632, node_wall_max: -0.54999924, robot_wall: -3.0, nearby_cells: 29, cell_displacement_mean: 0.0, cell_displacement_max: 0.0 } preflight=origins(0,0),(-1,0)
+hold completed_steps=270 min_x=24 max_x=24.047218 region_switches=0 result=Ok(())
+move adapter=NVIDIA GeForce RTX 3060 software=false initial_rates=[18.529295, 10.55135, 7.9779463, 10.55135, 7.9779463, 18.529295, 18.529295] initial_quality=Quality { finite: true, area_ratio_min: 0.99991786, area_ratio_max: 1.0000632, node_wall_max: -0.54999924, robot_wall: -3.0, nearby_cells: 29, cell_displacement_mean: 0.0, cell_displacement_max: 0.0 } preflight=origins(0,0),(-1,0)
+move completed_steps=270 min_x=10.05063 max_x=24.046783 region_switches=1 result=Ok(())
+COMPLETE

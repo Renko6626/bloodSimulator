@@ -1,0 +1,97 @@
+{
+  "godot-headless-move.csv": {
+    "probe_rows": 3720,
+    "godot_rows": 720,
+    "matched_prefix_rows": 720,
+    "f32_mismatches": {
+      "robot_x": 0,
+      "robot_y": 0,
+      "active_cells": 0,
+      "nearby_cells8": 0,
+      "soft_contacts": 0,
+      "density_min": 0,
+      "density_max": 0,
+      "density_sum": 0,
+      "area_ratio_min": 0,
+      "area_ratio_max": 0,
+      "node_wall_max": 0,
+      "region_switches": 0
+    }
+  },
+  "godot-hold.csv": {
+    "probe_rows": 3720,
+    "godot_rows": 3720,
+    "matched_prefix_rows": 3720,
+    "f32_mismatches": {
+      "robot_x": 0,
+      "robot_y": 0,
+      "active_cells": 0,
+      "nearby_cells8": 0,
+      "soft_contacts": 0,
+      "density_min": 0,
+      "density_max": 0,
+      "density_sum": 0,
+      "area_ratio_min": 0,
+      "area_ratio_max": 0,
+      "node_wall_max": 0,
+      "region_switches": 0
+    }
+  },
+  "godot-move.csv": {
+    "probe_rows": 3720,
+    "godot_rows": 3720,
+    "matched_prefix_rows": 3720,
+    "f32_mismatches": {
+      "robot_x": 0,
+      "robot_y": 0,
+      "active_cells": 0,
+      "nearby_cells8": 0,
+      "soft_contacts": 0,
+      "density_min": 0,
+      "density_max": 0,
+      "density_sum": 0,
+      "area_ratio_min": 0,
+      "area_ratio_max": 0,
+      "node_wall_max": 0,
+      "region_switches": 0
+    }
+  },
+  "godot-no-draw-move.csv": {
+    "probe_rows": 3720,
+    "godot_rows": 720,
+    "matched_prefix_rows": 720,
+    "f32_mismatches": {
+      "robot_x": 0,
+      "robot_y": 0,
+      "active_cells": 0,
+      "nearby_cells8": 0,
+      "soft_contacts": 0,
+      "density_min": 0,
+      "density_max": 0,
+      "density_sum": 0,
+      "area_ratio_min": 0,
+      "area_ratio_max": 0,
+      "node_wall_max": 0,
+      "region_switches": 0
+    }
+  },
+  "godot-vblank-off-move.csv": {
+    "probe_rows": 3720,
+    "godot_rows": 720,
+    "matched_prefix_rows": 720,
+    "f32_mismatches": {
+      "robot_x": 0,
+      "robot_y": 0,
+      "active_cells": 0,
+      "nearby_cells8": 0,
+      "soft_contacts": 0,
+      "density_min": 0,
+      "density_max": 0,
+      "density_sum": 0,
+      "area_ratio_min": 0,
+      "area_ratio_max": 0,
+      "node_wall_max": 0,
+      "region_switches": 0
+    }
+  }
+}

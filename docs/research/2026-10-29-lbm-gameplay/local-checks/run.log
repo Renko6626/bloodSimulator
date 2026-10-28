@@ -1,0 +1,2 @@
+hold frame=0 robot=[24.003494, 24.002113] active=72 contacts=0 rho=[0.9915376,1.0067201]
+FAILED frame 1: injected_original_step_failure; missing LBM snapshot: Some("LBM sampling cache awaits frame finish")

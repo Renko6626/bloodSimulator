@@ -1,0 +1,13 @@
+{
+  "id": 58133143,
+  "gpu_name": "RTX 3060",
+  "cur_state": "stopped",
+  "actual_status": "exited",
+  "intended_status": "stopped",
+  "public_ipaddr": "125.240.239.50",
+  "ssh_host": "ssh4.vast.ai",
+  "ssh_port": 23646,
+  "ports": null,
+  "dph_total": 0.07111111111111111,
+  "status_msg": "success, running vastai/pytorch_cuda-12.8.1-auto/jupyter"
+}

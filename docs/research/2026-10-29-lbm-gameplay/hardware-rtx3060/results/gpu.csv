@@ -1,0 +1,2 @@
+name, driver_version, memory.total [MiB], pci.bus_id
+NVIDIA GeForce RTX 3060, 580.173.02, 12288 MiB, 00000000:03:00.0

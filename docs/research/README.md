@@ -1,5 +1,7 @@
 # 流体研究索引
 
+最新：[LBM 可玩分叉场与机械耦合实卡测量](2026-10-29-lbm-gameplay/README.md)。真实72细胞、玩家往返、5次移窗的运行检查完成；Rust模拟步约12ms p95，Godot默认GL回放约70–71ms p95，性能问题与控制实验完整保留。默认地图仍不支持，实例已停机。
+
 2026-10-29 进展：用户已阶段性批准 LSQ-FD 给定速度边界与帧末平均密度控制，并确认接入现有可选 LBM 路径。当前算法见 [物理文档](../physics/lbm-fluid.md)，实施状态见 [接入计划](../superpowers/plans/2026-10-29-lbm-integration.md)。下方 2026-10-28 及更早条目保留历史口径。
 
 - [LSQ-FD 斜管与分叉候选](2026-10-28-lbm-fd-boundary/lsq-candidate/README.md)：五个选定几何、采样与梯度验证。

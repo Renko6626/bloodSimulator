@@ -94,6 +94,8 @@ pub struct Simulation {
     elapsed_time: f32,
     paused: bool,
     solve_ms: f64,
+    #[cfg(feature = "lbm-gpu")]
+    validation_scene: bool,
     local_fluid: Option<LocalRegions>,
     #[cfg(feature = "lbm-gpu")]
     lbm: Option<crate::fluid::lbm_coupling::LbmCoupling>,
@@ -143,10 +145,27 @@ impl Simulation {
     }
 
     #[cfg(feature = "lbm-gpu")]
+    pub fn new_lbm_validation(config: Config, options: crate::LbmOptions) -> Result<Self, String> {
+        let map = crate::lbm_validation::map();
+        let centers = crate::lbm_validation::centers(&map, &config);
+        let mut sim = Self::new_lbm_world_seeded(config, options, map, Some(centers))?;
+        sim.validation_scene = true;
+        Ok(sim)
+    }
+    #[cfg(feature = "lbm-gpu")]
     pub fn new_lbm_world_with_map(
         config: Config,
         options: crate::LbmOptions,
         map: MapDefinition,
+    ) -> Result<Self, String> {
+        Self::new_lbm_world_seeded(config, options, map, None)
+    }
+    #[cfg(feature = "lbm-gpu")]
+    fn new_lbm_world_seeded(
+        config: Config,
+        options: crate::LbmOptions,
+        map: MapDefinition,
+        centers: Option<Vec<Vector>>,
     ) -> Result<Self, String> {
         if !config.dt.is_finite()
             || config.dt <= 0.
@@ -160,7 +179,7 @@ impl Simulation {
         let network = GraphNetwork::new(&map, config.viscosity);
         let flow = network.solve(config.pressure);
         let lbm = crate::fluid::lbm_coupling::LbmCoupling::new(&map, &flow, &config, options)?;
-        let mut sim = Self::build(
+        let mut sim = Self::build_seeded(
             config,
             Environment::World {
                 map,
@@ -168,6 +187,7 @@ impl Simulation {
                 network,
                 flow,
             },
+            centers,
         );
         sim.lbm = Some(lbm);
         Ok(sim)
@@ -226,6 +246,9 @@ impl Simulation {
     }
 
     fn build(config: Config, environment: Environment) -> Self {
+        Self::build_seeded(config, environment, None)
+    }
+    fn build_seeded(config: Config, environment: Environment, seed: Option<Vec<Vector>>) -> Self {
         assert!(config.dt.is_finite() && config.dt > 0.0 && config.substeps > 0);
         let mut physics = PhysicsWorld::new();
         physics.gravity = Vector::ZERO;
@@ -247,7 +270,7 @@ impl Simulation {
             Environment::World { map, geometry, .. } => (
                 geometry.walls.clone(),
                 Vector::from_array(map.spawn),
-                world_cell_centers(map, &config),
+                seed.unwrap_or_else(|| world_cell_centers(map, &config)),
             ),
         };
         for contour in &walls {
@@ -282,6 +305,8 @@ impl Simulation {
             elapsed_time: 0.,
             paused: false,
             solve_ms: 0.0,
+            #[cfg(feature = "lbm-gpu")]
+            validation_scene: false,
             local_fluid: None,
             #[cfg(feature = "lbm-gpu")]
             lbm: None,
@@ -365,7 +390,11 @@ impl Simulation {
         options.profile = profile;
         let map = self.world_map().ok_or("LBM world is unavailable")?.clone();
         let paused = self.paused;
-        let mut replacement = Self::new_lbm_world_with_map(self.config.clone(), options, map)?;
+        let mut replacement = if self.validation_scene {
+            Self::new_lbm_validation(self.config.clone(), options)?
+        } else {
+            Self::new_lbm_world_with_map(self.config.clone(), options, map)?
+        };
         replacement.paused = paused;
         *self = replacement;
         Ok(())

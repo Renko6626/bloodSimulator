@@ -1,0 +1,15 @@
+
+X.Org X Server 1.21.1.11
+X Protocol Version 11, Revision 0
+Current Operating System: Linux efc6cccb51b6 5.15.0-186-generic #196-Ubuntu SMP Sat Jun 20 16:09:34 UTC 2026 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-5.15.0-186-generic root=UUID=7b5eafc1-f2d4-4255-a864-3679e23a0681 ro
+xorg-server 2:21.1.12-1ubuntu1.9 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.42.2
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/workspace/lbm-gameplay-20261029/display/Xorg.99.log", Time: Wed Oct 28 21:12:49 2026
+(++) Using config file: "/workspace/lbm-gameplay-20261029/display/xorg.conf"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"

@@ -1,0 +1,4 @@
+Frozen source archive: 73 source files match final working source byte-for-byte.
+Four complete main cases: 3720 sequential frames each, 3600 measured, all recorded mechanics finite.
+Run exit codes: zero except documented initial editor import 134.
+Instance 58133143: stopped/exited confirmed.

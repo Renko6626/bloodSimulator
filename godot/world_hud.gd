@@ -16,6 +16,7 @@ var flows: Label
 var pause_button: Button
 var step_button: Button
 var pressure: HSlider
+var pressure_label: Label
 var speed: HSlider
 var drag: HSlider
 var flow_toggle: CheckButton
@@ -134,6 +135,8 @@ func _button(parent: Node, value: String, action: Callable) -> Button:
 
 func _slider(parent: Node, name: String, low: float, high: float, initial: float) -> HSlider:
 	var label := _add_label(parent, "%s  %.1f" % [name, initial], 13, MUTED)
+	if name == "Pump pressure":
+		pressure_label = label
 	var slider := HSlider.new()
 	slider.min_value = low
 	slider.max_value = high
@@ -143,3 +146,8 @@ func _slider(parent: Node, name: String, low: float, high: float, initial: float
 	slider.value_changed.connect(func(value: float): label.text = "%s  %.1f" % [name, value])
 	parent.add_child(slider)
 	return slider
+
+
+func set_pressure_display(value: float) -> void:
+	pressure.set_value_no_signal(value)
+	pressure_label.text = "Pump pressure  %.1f" % value

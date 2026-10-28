@@ -208,3 +208,6 @@ LSQ 缓解了斜管壁附近轴向差分缺少流体采样的问题，但不保�
 算法实验证据来自 [均值控制研究](../research/2026-10-29-lbm-mean-density/README.md) 和上述长测。正式化已在 `feat/lbm-lsq-integration` 实现，依据 [已确认方案](../superpowers/specs/2026-10-29-lbm-integration-preparation.md) 与 [实施记录](../superpowers/plans/2026-10-29-lbm-integration.md)。本机相关 CPU 与软件 GPU 功能检查覆盖权重、边界矩、均值修正、缓存、帧尾调度和窗口迁移；simulation 与 Godot bridge 的 feature 开/关编译、格式检查通过。具体命令见实施记录。本轮没有重跑 RTX 长测、完整 Godot 游戏或 UI 交互；本机功能检查不替代这些验收。
 
 正式职责：[stencil.rs](../../crates/fluid-gpu/src/lbm/stencil.rs) 生成权重，[lbm.wgsl](../../crates/fluid-gpu/src/lbm/lbm.wgsl) 与 [gpu.rs](../../crates/fluid-gpu/src/lbm/gpu.rs) 执行数值算法；[streaming_window.rs](../../crates/simulation/src/fluid/streaming_window.rs) 管理窗口与缓存，[lbm_coupling.rs](../../crates/simulation/src/fluid/lbm_coupling.rs) 管理机械交换，[runtime.rs](../../crates/simulation/src/runtime.rs) 安排帧尾调用。研究目录保留冻结源码与数据，不能把其中的诊断开关或离线权重文件当作正式运行依赖。
+
+
+后续已完成 [LBM 游戏验证场实测](../research/2026-10-29-lbm-gameplay/README.md)：现有机械耦合接入72个真实红细胞与机器人，固定/移动各60秒测量、移动5次移窗，运行守卫通过；所记录Rust与Godot状态在f32精度下一致。这补充了选定场景的机械运行证据，不是严格封堵、动量守恒或广泛精度验收。Godot/Xorg整体帧间隔p95约70–71ms，性能尚未达60FPS；原2.10ms纯流体预算不能外推为游戏帧率。

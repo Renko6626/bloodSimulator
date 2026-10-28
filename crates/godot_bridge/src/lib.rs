@@ -14,6 +14,7 @@ unsafe impl ExtensionLibrary for BloodSimulator {}
 struct BloodLab {
     simulation: Simulation,
     error: Option<String>,
+    validation_initial_centers: Option<Vec<[f32; 2]>>,
     base: Base<RefCounted>,
 }
 
@@ -23,6 +24,7 @@ impl IRefCounted for BloodLab {
         Self {
             simulation: Simulation::default(),
             error: None,
+            validation_initial_centers: None,
             base,
         }
     }
@@ -37,16 +39,24 @@ impl BloodLab {
     #[func]
     fn use_world(&mut self) {
         self.simulation = Simulation::new_world(self.simulation.config.clone());
+        self.validation_initial_centers = None;
     }
 
     #[func]
     fn use_local_world(&mut self) {
         self.simulation = Simulation::new_local_world(self.simulation.config.clone());
+        self.validation_initial_centers = None;
     }
 
     #[func]
     fn use_lbm_world(&mut self, profile: GString) -> bool {
         let result = self.create_lbm_world(&profile.to_string());
+        self.record_result(result)
+    }
+
+    #[func]
+    fn use_lbm_validation(&mut self, profile: GString) -> bool {
+        let result = self.create_lbm_validation(&profile.to_string());
         self.record_result(result)
     }
 
@@ -140,6 +150,7 @@ impl BloodLab {
     #[func]
     fn snapshot(&self) -> VarDictionary {
         let state = self.simulation.snapshot();
+        let validation = self.validation_snapshot(&state);
         let cells: Array<PackedVector2Array> = state.cells.iter().map(|p| points(p)).collect();
         let arrows: Array<PackedVector2Array> = state
             .arrows
@@ -169,6 +180,7 @@ impl BloodLab {
         }).unwrap_or_default();
         vdict! {
             "lbm" => &lbm,
+            "validation" => &validation,
             "lbm_status" => state.lbm_status.as_deref().unwrap_or(""),
             "error" => self.error.as_deref().unwrap_or(""),
             "robot" => Vector2::new(state.robot[0], state.robot[1]),
@@ -223,11 +235,54 @@ impl BloodLab {
             ..Default::default()
         };
         self.simulation = Simulation::new_lbm_world(self.simulation.config.clone(), options)?;
+        self.validation_initial_centers = None;
         Ok(())
     }
     #[cfg(not(feature = "lbm-gpu"))]
     fn create_lbm_world(&mut self, _profile: &str) -> Result<(), String> {
         Err("LBM unavailable: build godot_bridge with the lbm-gpu feature".into())
+    }
+    #[cfg(feature = "lbm-gpu")]
+    fn create_lbm_validation(&mut self, profile: &str) -> Result<(), String> {
+        let options = simulation::LbmOptions {
+            profile: Self::profile(profile)?,
+            ..Default::default()
+        };
+        self.simulation =
+            Simulation::new_lbm_validation(simulation::lbm_validation::config(), options)?;
+        self.validation_initial_centers = Some(simulation::lbm_validation::cell_centers(
+            &self.simulation.snapshot(),
+        ));
+        Ok(())
+    }
+    #[cfg(not(feature = "lbm-gpu"))]
+    fn create_lbm_validation(&mut self, _profile: &str) -> Result<(), String> {
+        Err("LBM unavailable: build godot_bridge with the lbm-gpu feature".into())
+    }
+    #[cfg(feature = "lbm-gpu")]
+    fn validation_snapshot(&self, state: &simulation::Snapshot) -> VarDictionary {
+        let Some(initial) = &self.validation_initial_centers else {
+            return VarDictionary::new();
+        };
+        let q = simulation::lbm_validation::quality(
+            state,
+            self.simulation.world_map().unwrap(),
+            &self.simulation.config,
+            initial,
+        );
+        let s = self.simulation.lbm_stats().unwrap();
+        let w = self.simulation.lbm_work_stats().unwrap();
+        vdict! {"finite"=>q.finite,"area_ratio_min"=>q.area_ratio_min,"area_ratio_max"=>q.area_ratio_max,
+        "node_wall_max"=>q.node_wall_max,"robot_wall"=>q.robot_wall,"nearby_cells8"=>q.nearby_cells as i64,
+        "cell_displacement_mean"=>q.cell_displacement_mean,"cell_displacement_max"=>q.cell_displacement_max,
+        "guard_error"=>simulation::lbm_validation::guard(q).err().unwrap_or_default(),
+        "active_cells"=>s.active_cell_count as i64,"marker_force"=>s.max_cell_marker_force,"prepare_ms"=>s.prepare_ms,
+        "lattice_steps"=>w.lattice_steps as i64,"dispatches"=>w.dispatches as i64,"submissions"=>w.submissions as i64,
+        "readback_calls"=>w.readback_calls as i64,"readback_bytes"=>w.readback_bytes as i64,"readback_wait_ms"=>w.readback_wait_ms}
+    }
+    #[cfg(not(feature = "lbm-gpu"))]
+    fn validation_snapshot(&self, _state: &simulation::Snapshot) -> VarDictionary {
+        VarDictionary::new()
     }
     #[cfg(feature = "lbm-gpu")]
     fn reset_profile(&mut self, profile: &str) -> Result<(), String> {

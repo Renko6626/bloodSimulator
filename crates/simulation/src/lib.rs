@@ -5,6 +5,8 @@ mod cell;
 pub mod circulation;
 mod config;
 mod fluid;
+#[cfg(feature = "lbm-gpu")]
+pub mod lbm_validation;
 pub mod map;
 mod robot;
 mod runtime;

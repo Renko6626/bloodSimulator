@@ -1,0 +1,3 @@
+input/source.tar.gz: OK
+input/lbm_gameplay_probe: OK
+input/libgodot_bridge.so: OK
