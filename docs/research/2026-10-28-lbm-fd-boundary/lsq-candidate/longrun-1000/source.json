@@ -1,0 +1,12 @@
+{
+  "base_commit": "e08b8b0a71acc7627b2912df7d266406ecdbcbdb",
+  "case": "fork_a",
+  "profile": "Fine",
+  "frames_requested": 1000,
+  "source_changes": [
+    "module path only",
+    "frame limit 160 to 1000"
+  ],
+  "simulation_seconds_requested": 16.666666666666668,
+  "lattice_steps_requested": 14000
+}

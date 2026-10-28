@@ -1,0 +1,185 @@
+{
+  "complete": true,
+  "completed_frames": 1000,
+  "lattice_steps_completed": 14000,
+  "simulated_seconds_completed": 16.666666666666668,
+  "rho_min": 0.9565817,
+  "rho_max": 1.043419,
+  "max_lattice": 0.068306156,
+  "max_velocity_error": 1.1920929e-06,
+  "max_flux_error": 5.722046e-06,
+  "mass_rel_min": -0.00011013866038,
+  "mass_rel_max": 0.00099377396694,
+  "final": {
+    "frame": 999,
+    "rho_min": 0.97201324,
+    "rho_max": 1.0154927,
+    "mass_rel": 0.00080394658926,
+    "max_lattice": 0.0227752,
+    "velocity_error": 9.536743e-07,
+    "flux_error": 2.861023e-06
+  },
+  "original_160_frame_lines_match": true,
+  "cycles": [
+    {
+      "first_frame": 0,
+      "frames": 50,
+      "mean_mass_rel": 1.74968440816e-05,
+      "rho_min": 0.9875046,
+      "rho_max": 1.0116224,
+      "max_lattice": 0.027727889
+    },
+    {
+      "first_frame": 50,
+      "frames": 50,
+      "mean_mass_rel": 7.37015011389648e-05,
+      "rho_min": 0.9764471,
+      "rho_max": 1.0191065,
+      "max_lattice": 0.033570163
+    },
+    {
+      "first_frame": 100,
+      "frames": 50,
+      "mean_mass_rel": 0.00017468743130680202,
+      "rho_min": 0.9687423,
+      "rho_max": 1.0292042,
+      "max_lattice": 0.047618404
+    },
+    {
+      "first_frame": 150,
+      "frames": 50,
+      "mean_mass_rel": 0.00029155648184978604,
+      "rho_min": 0.9642741,
+      "rho_max": 1.0350245,
+      "max_lattice": 0.05813704
+    },
+    {
+      "first_frame": 200,
+      "frames": 50,
+      "mean_mass_rel": 0.0003937078794322,
+      "rho_min": 0.95815223,
+      "rho_max": 1.0397475,
+      "max_lattice": 0.06712184
+    },
+    {
+      "first_frame": 250,
+      "frames": 50,
+      "mean_mass_rel": 0.00046126632332399995,
+      "rho_min": 0.9565817,
+      "rho_max": 1.043419,
+      "max_lattice": 0.068306156
+    },
+    {
+      "first_frame": 300,
+      "frames": 50,
+      "mean_mass_rel": 0.000492185466636,
+      "rho_min": 0.95934606,
+      "rho_max": 1.0426015,
+      "max_lattice": 0.061716065
+    },
+    {
+      "first_frame": 350,
+      "frames": 50,
+      "mean_mass_rel": 0.0004999880212706,
+      "rho_min": 0.96485984,
+      "rho_max": 1.0385008,
+      "max_lattice": 0.05063029
+    },
+    {
+      "first_frame": 400,
+      "frames": 50,
+      "mean_mass_rel": 0.0005053144903264,
+      "rho_min": 0.9703194,
+      "rho_max": 1.0325378,
+      "max_lattice": 0.04334317
+    },
+    {
+      "first_frame": 450,
+      "frames": 50,
+      "mean_mass_rel": 0.000524187814515,
+      "rho_min": 0.9720802,
+      "rho_max": 1.029373,
+      "max_lattice": 0.04599342
+    },
+    {
+      "first_frame": 500,
+      "frames": 50,
+      "mean_mass_rel": 0.0005629258586613999,
+      "rho_min": 0.96948254,
+      "rho_max": 1.0291135,
+      "max_lattice": 0.046248566
+    },
+    {
+      "first_frame": 550,
+      "frames": 50,
+      "mean_mass_rel": 0.000619130692793,
+      "rho_min": 0.96547854,
+      "rho_max": 1.0283033,
+      "max_lattice": 0.046337124
+    },
+    {
+      "first_frame": 600,
+      "frames": 50,
+      "mean_mass_rel": 0.000683993475822,
+      "rho_min": 0.961956,
+      "rho_max": 1.0328593,
+      "max_lattice": 0.04650286
+    },
+    {
+      "first_frame": 650,
+      "frames": 50,
+      "mean_mass_rel": 0.0007458289662500001,
+      "rho_min": 0.9603757,
+      "rho_max": 1.0362474,
+      "max_lattice": 0.05251413
+    },
+    {
+      "first_frame": 700,
+      "frames": 50,
+      "mean_mass_rel": 0.0007944476716864001,
+      "rho_min": 0.9602956,
+      "rho_max": 1.0377836,
+      "max_lattice": 0.054582242
+    },
+    {
+      "first_frame": 750,
+      "frames": 50,
+      "mean_mass_rel": 0.0008258472107905999,
+      "rho_min": 0.9615866,
+      "rho_max": 1.0373989,
+      "max_lattice": 0.05256811
+    },
+    {
+      "first_frame": 800,
+      "frames": 50,
+      "mean_mass_rel": 0.0008435557001812,
+      "rho_min": 0.9646513,
+      "rho_max": 1.0354289,
+      "max_lattice": 0.047660857
+    },
+    {
+      "first_frame": 850,
+      "frames": 50,
+      "mean_mass_rel": 0.0008558827196682001,
+      "rho_min": 0.96832216,
+      "rho_max": 1.0324575,
+      "max_lattice": 0.04143989
+    },
+    {
+      "first_frame": 900,
+      "frames": 50,
+      "mean_mass_rel": 0.0008717931180528,
+      "rho_min": 0.9713017,
+      "rho_max": 1.0294102,
+      "max_lattice": 0.041722845
+    },
+    {
+      "first_frame": 950,
+      "frames": 50,
+      "mean_mass_rel": 0.0008978411459837999,
+      "rho_min": 0.97201324,
+      "rho_max": 1.0274452,
+      "max_lattice": 0.042445593
+    }
+  ]
+}
