@@ -85,6 +85,7 @@ impl StreamingWindow {
     /// Call exactly once at the start of each fixed physics step.
     pub fn begin_frame(&mut self) {
         self.shifted = false;
+        self.window.reset_work_stats();
     }
     /// Update current targets even when no migration is required.
     pub fn maybe_shift(
@@ -184,6 +185,9 @@ impl StreamingWindow {
             self.window.diagnostics_from_field(&self.field)?,
             self.window.opening_targets(),
         ))
+    }
+    pub fn work_stats(&self) -> blood_fluid_gpu::lbm::LbmWorkStats {
+        self.window.work_stats()
     }
     pub fn profile(&self) -> GridProfile {
         self.window.spec().profile

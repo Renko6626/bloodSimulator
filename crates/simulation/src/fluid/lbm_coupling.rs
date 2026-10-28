@@ -32,6 +32,11 @@ pub struct LbmStats {
     pub coupling_ms: f64,
     pub lbm_ms: f64,
     pub rapier_ms: f64,
+    pub prepare_ms: f64,
+    /// Peak force magnitude for an individual cell marker, in world impulse per game time.
+    pub max_cell_marker_force: f32,
+    /// Maximum number of distinct cells with at least one supported marker in a substep.
+    pub active_cell_count: usize,
 }
 pub(crate) struct LbmCoupling {
     pub window: StreamingWindow,
@@ -101,7 +106,10 @@ impl LbmCoupling {
         flow: &GraphFlow,
         position: Vector,
     ) -> Result<(), String> {
-        self.window.maybe_shift(map, flow, position.to_array())?;
+        let started = Instant::now();
+        let result = self.window.maybe_shift(map, flow, position.to_array());
+        self.stats.prepare_ms += started.elapsed().as_secs_f64() * 1000.;
+        result?;
         Ok(())
     }
     /// Returns the supported local weight and local velocity; solids have neither drive.
@@ -181,7 +189,7 @@ impl LbmCoupling {
         Ok(())
     }
     pub(crate) fn exchange(
-        &self,
+        &mut self,
         map: &MapDefinition,
         world: &mut PhysicsWorld,
         cells: &[SoftBodyHandle],
@@ -195,7 +203,7 @@ impl LbmCoupling {
         let conversion = self.window.lattice_dt() / (h * h * h);
         // Collect every marker before any impulses are applied.
         let mut markers = Vec::new();
-        for &handle in cells {
+        for (cell_index, &handle) in cells.iter().enumerate() {
             let b = &world.soft_bodies[handle];
             let count = b.num_particles();
             let center = b.particle_positions().sum::<Vector>() / count as f32;
@@ -203,7 +211,7 @@ impl LbmCoupling {
             for k in 0..4 {
                 let node = k * count / 4;
                 markers.push((
-                    Some((handle, node)),
+                    Some((handle, node, cell_index)),
                     (b.particle_position(node) + center) * 0.5,
                     (b.particle_velocity(node) + mean) * 0.5,
                 ));
@@ -213,6 +221,7 @@ impl LbmCoupling {
         for offset in [Vector::X, Vector::Y, -Vector::X, -Vector::Y] {
             markers.push((None, b.translation() + offset * 0.425, b.linvel()));
         }
+        let mut active = vec![false; cells.len()];
         for (owner, p, v) in markers {
             let (weight, u, valid) = self.local(map, p);
             if !valid || weight == 0. {
@@ -220,7 +229,10 @@ impl LbmCoupling {
             }
             let (_, weights) = self.window.supported_weights(p.to_array())?;
             let impulse = (u - v) * (0.25 / 4. * (drag / 20.) * dt * weight);
-            if let Some((handle, node)) = owner {
+            if let Some((handle, node, cell_index)) = owner {
+                active[cell_index] = true;
+                self.stats.max_cell_marker_force =
+                    self.stats.max_cell_marker_force.max(impulse.length() / dt);
                 let b = &mut world.soft_bodies[handle];
                 let count = b.num_particles();
                 for i in 0..count {
@@ -238,6 +250,10 @@ impl LbmCoupling {
                 kicks[i][1] -= impulse.y * w * conversion;
             }
         }
+        self.stats.active_cell_count = self
+            .stats
+            .active_cell_count
+            .max(active.into_iter().filter(|v| *v).count());
         Ok(kicks)
     }
 }

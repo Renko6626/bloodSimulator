@@ -178,6 +178,12 @@ impl Simulation {
         self.lbm.as_ref().map(|f| &f.stats)
     }
 
+    /// Cached per-frame GPU work accounting; reading this does not submit GPU work.
+    #[cfg(feature = "lbm-gpu")]
+    pub fn lbm_work_stats(&self) -> Option<blood_fluid_gpu::lbm::LbmWorkStats> {
+        self.lbm.as_ref().map(|f| f.window.work_stats())
+    }
+
     /// Sample the composed LBM/background field in world space when LBM is active.
     #[cfg(feature = "lbm-gpu")]
     pub fn sample_world(&self, position: [f32; 2]) -> Option<blood_fluid_gpu::lbm::FluidSample> {
@@ -391,6 +397,9 @@ impl Simulation {
             lbm.stats.coupling_ms = 0.;
             lbm.stats.lbm_ms = 0.;
             lbm.stats.rapier_ms = 0.;
+            lbm.stats.prepare_ms = 0.;
+            lbm.stats.max_cell_marker_force = 0.;
+            lbm.stats.active_cell_count = 0;
         }
         let dt = self.config.dt / self.config.substeps as f32;
         self.physics.integration_parameters.dt = dt;

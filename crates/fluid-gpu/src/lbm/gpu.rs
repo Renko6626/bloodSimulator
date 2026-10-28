@@ -1,6 +1,6 @@
 use super::{LocalSampleStatus, OpeningSpec, WindowOrigin, WindowSide, WindowSpec, model};
 use bytemuck::{Pod, Zeroable};
-use std::sync::mpsc;
+use std::{cell::Cell, sync::mpsc, time::Instant};
 use wgpu::util::DeviceExt;
 
 pub type LbmResult<T> = Result<T, String>;
@@ -56,7 +56,27 @@ struct Params {
     pad: f32,
 }
 
+/// Actual operations issued since the last frame reset; durations are CPU wall milliseconds.
+#[derive(Clone, Copy, Debug, Default)]
+pub struct LbmWorkStats {
+    pub lattice_steps: u64,
+    pub dispatches: u64,
+    pub submissions: u64,
+    pub upload_calls: u64,
+    pub upload_bytes: u64,
+    pub readback_calls: u64,
+    pub readback_bytes: u64,
+    pub upload_ms: f64,
+    pub encoding_ms: f64,
+    pub submission_ms: f64,
+    /// Includes waiting for previously queued GPU work; not kernel execution time.
+    pub readback_wait_ms: f64,
+    pub readback_decode_ms: f64,
+    pub gpu_kernel_ms: Option<f64>,
+}
+
 pub struct LbmWindow {
+    work: Cell<LbmWorkStats>,
     spec: WindowSpec,
     config: WindowConfig,
     geometry: WindowGeometry,
@@ -249,6 +269,7 @@ impl LbmWindow {
         let macros = pipeline("macros");
         let boundary_pipeline = pipeline("reconstruct");
         Ok(Self {
+            work: Cell::new(LbmWorkStats::default()),
             spec,
             config,
             geometry,
@@ -271,6 +292,37 @@ impl LbmWindow {
             kicks,
             kick_pipeline,
         })
+    }
+    pub fn reset_work_stats(&self) {
+        self.work.set(LbmWorkStats::default());
+    }
+    pub fn work_stats(&self) -> LbmWorkStats {
+        self.work.get()
+    }
+    fn record(&self, f: impl FnOnce(&mut LbmWorkStats)) {
+        let mut stats = self.work.get();
+        f(&mut stats);
+        self.work.set(stats);
+    }
+    fn upload(&self, buffer: &wgpu::Buffer, data: &[u8]) {
+        let start = Instant::now();
+        self.queue.write_buffer(buffer, 0, data);
+        self.record(|s| {
+            s.upload_calls += 1;
+            s.upload_bytes += data.len() as u64;
+            s.upload_ms += start.elapsed().as_secs_f64() * 1000.;
+        });
+    }
+    fn submit(&self, encoder: wgpu::CommandEncoder) {
+        let start = Instant::now();
+        let command = encoder.finish();
+        self.record(|s| s.encoding_ms += start.elapsed().as_secs_f64() * 1000.);
+        let start = Instant::now();
+        self.queue.submit([command]);
+        self.record(|s| {
+            s.submissions += 1;
+            s.submission_ms += start.elapsed().as_secs_f64() * 1000.;
+        });
     }
     #[cfg(test)]
     pub(super) fn populations_for_test(&self) -> Vec<f32> {
@@ -311,8 +363,7 @@ impl LbmWindow {
             opening.outward_flow = flow;
         }
         let data = boundary_profiles(self.spec, self.config, &geometry, Some(profiles))?;
-        self.queue
-            .write_buffer(&self.boundary, 0, bytemuck::cast_slice(&data));
+        self.upload(&self.boundary, bytemuck::cast_slice(&data));
         self.geometry = geometry;
         Ok(())
     }
@@ -328,8 +379,8 @@ impl LbmWindow {
         if kicks.len() != n || kicks.iter().flatten().any(|v| !v.is_finite()) {
             return Err("invalid momentum kicks".into());
         }
-        self.queue
-            .write_buffer(&self.kicks, 0, bytemuck::cast_slice(kicks));
+        self.upload(&self.kicks, bytemuck::cast_slice(kicks));
+        let encoding_started = Instant::now();
         let mut encoder = self
             .device
             .create_command_encoder(&wgpu::CommandEncoderDescriptor {
@@ -344,7 +395,11 @@ impl LbmWindow {
             pass.set_bind_group(0, &self.groups[self.current], &[]);
             pass.dispatch_workgroups((n as u32).div_ceil(128), 1, 1);
         }
-        self.queue.submit([encoder.finish()]);
+        self.record(|s| {
+            s.encoding_ms += encoding_started.elapsed().as_secs_f64() * 1000.;
+            s.dispatches += 1;
+        });
+        self.submit(encoder);
         Ok(())
     }
     /// Advance exactly one lattice step of `config.dt` game-time units.
@@ -353,11 +408,11 @@ impl LbmWindow {
             return Err("nonfinite acceleration".into());
         }
         self.force = input.acceleration;
-        self.queue.write_buffer(
+        self.upload(
             &self.uniform,
-            0,
             bytemuck::bytes_of(&params(self.spec, self.config, self.force)),
         );
+        let encoding_started = Instant::now();
         let mut encoder = self
             .device
             .create_command_encoder(&wgpu::CommandEncoderDescriptor {
@@ -390,12 +445,18 @@ impl LbmWindow {
                 1,
             );
         }
-        self.queue.submit([encoder.finish()]);
+        self.record(|s| {
+            s.encoding_ms += encoding_started.elapsed().as_secs_f64() * 1000.;
+            s.dispatches += 2;
+            s.lattice_steps += 1;
+        });
+        self.submit(encoder);
         Ok(())
     }
     /// Snapshot row-major [density, velocity_x, velocity_y, reserved] values.
     pub fn field(&self) -> LbmResult<Vec<[f32; 4]>> {
         let n = self.spec.profile.cells_per_side().pow(2);
+        let encoding_started = Instant::now();
         let mut encoder = self
             .device
             .create_command_encoder(&wgpu::CommandEncoderDescriptor {
@@ -411,7 +472,16 @@ impl LbmWindow {
             pass.dispatch_workgroups(n.div_ceil(128), 1, 1);
         }
         encoder.copy_buffer_to_buffer(&self.output, 0, &self.readback, 0, u64::from(n) * 16);
-        self.queue.submit([encoder.finish()]);
+        self.record(|s| {
+            s.encoding_ms += encoding_started.elapsed().as_secs_f64() * 1000.;
+            s.dispatches += 1;
+        });
+        self.submit(encoder);
+        let wait_started = Instant::now();
+        self.record(|s| {
+            s.readback_calls += 1;
+            s.readback_bytes += u64::from(n) * 16;
+        });
         let (tx, rx) = mpsc::channel();
         self.readback
             .slice(..)
@@ -424,10 +494,13 @@ impl LbmWindow {
         rx.recv()
             .map_err(|e| e.to_string())?
             .map_err(|e| e.to_string())?;
+        self.record(|s| s.readback_wait_ms += wait_started.elapsed().as_secs_f64() * 1000.);
+        let decode_started = Instant::now();
         let data = self.readback.slice(..).get_mapped_range();
         let result = bytemuck::cast_slice::<u8, [f32; 4]>(&data).to_vec();
         drop(data);
         self.readback.unmap();
+        self.record(|s| s.readback_decode_ms += decode_started.elapsed().as_secs_f64() * 1000.);
         Ok(result)
     }
     pub fn sample(&self, position: [f32; 2]) -> LbmResult<LocalSample> {
@@ -547,9 +620,9 @@ impl LbmWindow {
         let boundary_data = boundary_profiles(new, self.config, &geometry, None)?;
         let data = initial_populations(new, self.config, &initial, self.force);
         let target = 1 - self.current;
-        self.queue
-            .write_buffer(&self.populations[target], 0, bytemuck::cast_slice(&data));
+        self.upload(&self.populations[target], bytemuck::cast_slice(&data));
         let [dx, dy] = new.origin_cell_offset_from(self.spec);
+        let encoding_started = Instant::now();
         let mut encoder = self
             .device
             .create_command_encoder(&wgpu::CommandEncoderDescriptor {
@@ -574,12 +647,13 @@ impl LbmWindow {
                 }
             }
         }
-        self.queue.submit([encoder.finish()]);
+        self.record(|s| {
+            s.encoding_ms += encoding_started.elapsed().as_secs_f64() * 1000.;
+        });
+        self.submit(encoder);
         let masks: Vec<u32> = geometry.solid.iter().map(|&x| u32::from(x)).collect();
-        self.queue
-            .write_buffer(&self.mask, 0, bytemuck::cast_slice(&masks));
-        self.queue
-            .write_buffer(&self.boundary, 0, bytemuck::cast_slice(&boundary_data));
+        self.upload(&self.mask, bytemuck::cast_slice(&masks));
+        self.upload(&self.boundary, bytemuck::cast_slice(&boundary_data));
         self.current = target;
         self.spec = new;
         self.geometry = geometry;
