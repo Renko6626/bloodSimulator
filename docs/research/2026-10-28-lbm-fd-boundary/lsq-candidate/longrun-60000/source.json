@@ -1,0 +1,13 @@
+{
+  "base_commit": "17af7347858fdb6334157d618d11d338f62c3e19",
+  "case": "fork_a",
+  "profile": "Fine",
+  "frames_requested": 60000,
+  "source_changes": [
+    "frame limit 1000 to 60000 relative to longrun-1000"
+  ],
+  "simulation_seconds_requested": 1000,
+  "lattice_steps_requested": 840000,
+  "created_utc": "2026-10-28T11:42:05.845157+00:00",
+  "mass_correction": false
+}

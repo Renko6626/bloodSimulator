@@ -1,0 +1,11 @@
+--- longrun-1000/geometry.rs
++++ longrun-60000/geometry.rs
+@@ -220,7 +220,7 @@
+         return;
+     }
+     let initial_mass = geometry.solid.iter().filter(|s| !**s).count() as f64;
+-    for frame in 0..1000 {
++    for frame in 0..60000 {
+         let mut next = flow.clone();
+         let pulse = 1. + 0.15 * (std::f32::consts::TAU * 1.2 * frame as f32 / 60.).sin();
+         for q in &mut next.rates {

@@ -1,0 +1,25 @@
+shell syntax: PASS
+Rust harness formatting: PASS
+Python syntax / provenance-only frames change / completion / 160+1000 frame prefixes: PASS
+Observed positive consecutive cycle increments: 1199 of 1199
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/longrun-60000/geometry.rs: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/longrun-60000/geometry: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/longrun-60000/run.sh: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/src/lbm/gpu.rs: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/src/lbm/lbm.wgsl: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/src/lbm/lsq_io.rs: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/src/lbm/mod.rs: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/src/lbm/model.rs: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/results/fork_a-fine.geom.weights: OK
+60000-run source/binary/numerical module/weight SHA: PASS
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/longrun-1000/geometry.rs: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/longrun-1000/geometry: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/longrun-1000/run.sh: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/src/lbm/gpu.rs: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/src/lbm/lbm.wgsl: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/src/lbm/lsq_io.rs: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/src/lbm/mod.rs: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/src/lbm/model.rs: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/results/fork_a-fine.geom.weights: OK
+previous 1000-run source/binary/numerical module/weight SHA unchanged: PASS
+staged whitespace: PASS

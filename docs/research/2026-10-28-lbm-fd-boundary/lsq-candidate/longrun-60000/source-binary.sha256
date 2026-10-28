@@ -1,0 +1,9 @@
+5ee8e6f2148fa703f5ab6ae8cf881ff6d1b9a104fc04a5fd25f56ec26728721f  docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/longrun-60000/geometry.rs
+129eaae157073d85175840c4bf73b9325c1f8933b2f592d7f9cc8cf7cc9c1a97  docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/longrun-60000/geometry
+85351b636afeacedd93d4cc3f29ee27e23349d8716b29a164fc73f862d50617e  docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/longrun-60000/run.sh
+9aa60baad20bb004089814ef31cee2353e3298314608e203366da417015d5e8d  docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/src/lbm/gpu.rs
+02dace454dddbf15c045f93f86a4ed7f7b8e61703f39213eeec2bb45e29f0b49  docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/src/lbm/lbm.wgsl
+5161e70afa911044e3ad1b83d1810fc772819e49075a6f2ecac96131c6f751bf  docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/src/lbm/lsq_io.rs
+6d131842ce9e4befbd6c5d6fd53de459bd92ebee5178e61c619cef74fdd411f3  docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/src/lbm/mod.rs
+145f42c10bb76ddea1e74e82642326da615f1dc741167b763cead32eb783ac48  docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/src/lbm/model.rs
+e21eb598e213825428efcd7b04636d8989c1931a92d4e29a1ade680f654cd37b  docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/results/fork_a-fine.geom.weights
