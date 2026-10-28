@@ -92,6 +92,16 @@ cargo run --locked -p simulation --example circulation_probe -- 72 60 world
 cargo run --locked -p simulation --example circulation_probe -- 72 60
 ```
 
+LBM 桥接功能默认关闭。显式构建并请求局部 LBM：
+
+```bash
+bash scripts/build.sh --features lbm-gpu
+godot --path godot -- --local-lbm --lbm-profile=fine
+# 也可显式选择 coarse；省略 profile 时使用暂定的 fine
+```
+
+游戏运行只接受硬件 GPU；软件适配器仅用于显式 Rust 功能诊断，不用于选择发布精度。当前默认小地图出生位置的开口缺少所需直线缓冲，LBM 启动会报错并退出，尚不能作为完整游戏运行。下一步应在满足几何约束的地图探针上验证开口和窗口迁移，再确定游戏地图接入方式。`--local-lbm` 与 `--local-stokes` 不能同时使用；构建未启用功能或启动失败时不会自动回退。运行中发生模拟错误会暂停并记录诊断，需要检查后重置。
+
 `GODOT_BIN` 可指定 Godot 可执行文件。首次构建需要联网下载 Rust 依赖。世界探针输出各管段间的下游通行记录、移动距离、面积偏差、越界与求解耗时；单回路模式保留逐细胞圈数统计。结果与限制见本轮实施记录。
 
 | 操作 | 按键 / 控件 |

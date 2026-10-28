@@ -23,7 +23,29 @@ var font := ThemeDB.fallback_font
 
 func _ready() -> void:
 	hud = $HUDLayer/HUD
-	if OS.get_cmdline_user_args().has("--local-stokes"):
+	var args := OS.get_cmdline_user_args()
+	var use_lbm := args.has("--local-lbm")
+	var use_stokes := args.has("--local-stokes")
+	var profile := "fine"
+	var profile_given := false
+	for arg in args:
+		if arg.begins_with("--lbm-profile="):
+			if profile_given:
+				_startup_error("LBM profile specified more than once")
+				return
+			profile = arg.trim_prefix("--lbm-profile=")
+			profile_given = true
+	if use_lbm and use_stokes:
+		_startup_error("Choose either --local-lbm or --local-stokes")
+		return
+	if profile_given and not use_lbm:
+		_startup_error("--lbm-profile requires --local-lbm")
+		return
+	if use_lbm:
+		if not simulation.use_lbm_world(profile):
+			_startup_error(simulation.snapshot().get("error", "LBM startup failed"))
+			return
+	elif use_stokes:
 		simulation.use_local_world()
 	else:
 		simulation.use_world()
@@ -40,6 +62,12 @@ func _ready() -> void:
 	hud.collision_changed.connect(_collision_changed)
 	_refresh()
 	camera.position = state.robot * SCALE
+
+
+func _startup_error(message: String) -> void:
+	push_error("Startup failed: " + message)
+	set_physics_process(false)
+	get_tree().quit(1)
 
 
 func _build_floor(floor: PackedVector2Array) -> void:

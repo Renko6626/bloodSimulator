@@ -7,6 +7,10 @@ rust-version.workspace = true
 [lib]
 crate-type = ["cdylib"]
 
+[features]
+default = []
+lbm-gpu = ["simulation/lbm-gpu"]
+
 [dependencies]
 godot.workspace = true
 simulation = { path = "../simulation" }
