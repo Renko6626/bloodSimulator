@@ -1,5 +1,7 @@
 # LBM streaming window probe
 
+**Current next steps (2026-10-28):** investigate prescribed-velocity boundary reconstruction through gradient-based regularization (FD), followed by non-equilibrium extrapolation (NEQ/eNEQ). See the [session note](boundary-next-steps.md) for scope and the minimal comparison sequence; no repair has yet been validated.
+
 **2026-10-28 hardware update:** the reviewed production probe was run on RTX 3060. All ten cases failed before completing the hold; no migration occurred and no performance/profile acceptance is available. A fresh independent Sol high investigator reproduced the failure without mechanics and confirmed an unstable prescribed-velocity outlet mode at the selected low lattice viscosity. See the [hardware record](hardware-rtx3060-20261028/README.md), [independent causal investigation](hardware-rtx3060-20261028/independent-investigation.md), and [verified stop state](hardware-rtx3060-20261028/final-stop-status.json). The production solver was not modified by that investigation.
 
 The production simulation runs a closed-loop straight or fork fixture, with a robot and 0 or 72 total cells, Fine or Coarse. A small subset compares outer bands 2/4 and fork distances 8/16 from the window's right opening. World window size is 48×48, block size is 16×16. Pressure is the game configuration default, 12, with its ordinary pulse and default velocity bound 10. The 72 cells are distributed around the loop; `active_cells` counts the maximum with valid local marker support in a substep.
