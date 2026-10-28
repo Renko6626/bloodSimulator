@@ -157,6 +157,7 @@ impl StreamingWindow {
             self.window.advance(input)?;
         }
         self.field = self.window.field()?;
+        self.window.diagnostics_from_field(&self.field)?;
         if let Some(baseline) = &self.baseline {
             self.diagnostics.warmup.push(delta(baseline, &self.field));
             if self.diagnostics.warmup.len() >= WARMUP_STEPS {
@@ -343,6 +344,37 @@ mod tests {
                 .0,
             LocalSampleStatus::OutsideWindow
         );
+    }
+
+    #[test]
+    #[ignore = "explicit software-adapter functional diagnostic"]
+    fn invalid_gpu_macrostate_returns_error_from_batch() {
+        let (map, flow) = fixture(false);
+        let mut window = StreamingWindow::new(
+            &map,
+            &flow,
+            [24., 24.],
+            GridProfile::Coarse,
+            WindowConfig {
+                dt: 0.01,
+                viscosity: 0.1,
+                allow_software: true,
+            },
+        )
+        .unwrap();
+        let n = GridProfile::Coarse.cells_per_side() as usize;
+        let mut kicks = vec![[0., 0.]; n * n];
+        kicks[48 * n + 48] = [f32::MAX, f32::MAX];
+        window.apply_kicks(&kicks).unwrap();
+        let error = window
+            .advance_batch(
+                StepInput {
+                    acceleration: [0., 0.],
+                },
+                1,
+            )
+            .unwrap_err();
+        assert!(error.contains("invalid fluid state"), "{error}");
     }
 
     #[test]

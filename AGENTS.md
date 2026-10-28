@@ -2,9 +2,9 @@
 
 ## 当前流体路线（2026-10-28）
 
-用户已明确：GPU LBM 方案靠谱，会被应用于游戏。当前统一决策入口为 [GPU LBM 阶段决策](docs/research/2026-10-27-ns-lbm/lbm-decision.md)。已确认 Rust＋wgpu／WGSL、D2Q9 MRT＋Guo 外力；首批实卡实验已完成，正式游戏尚未接入。
+用户已确认 Rust＋wgpu／WGSL、D2Q9 MRT＋Guo 外力路线。正式工程已有默认关闭的 `simulation/lbm-gpu` 可选路径、48×48 移动窗口和 Godot 桥接；默认游戏仍使用解析流体。任务 1–6 已实现，任务 7 的实卡参数及首发配置验证仍待完成，见 [实施计划](docs/superpowers/plans/2026-10-28-lbm-streaming-window.md) 和 [实验记录](docs/research/2026-10-28-lbm-streaming-window/README.md)。
 
-后续以如何应用 LBM 为出发点。模拟域、开放边界、网格及游戏接口尚待确认；GPU NS 对照不再作为确定采用 LBM 的前置条件。本次只记录阶段决定，不自动启动实验、云实例或接入。下方暂停约定针对上一阶段 Stokes／GPU 性能研究，不覆盖已经明确恢复并完成的 NS／LBM 首批实验。
+默认 `small_world` 在当前 LBM 开口几何下不支持；默认压力下测试叉口的 Fine 配置出现无效流体状态，不能视为已支持。此前实卡研究证据不等于正式游戏或该工况验收。GPU NS 对照不再是 LBM 采用的前置条件。下方 Stokes 暂停约定仍有效。
 
 ## 上一阶段 Stokes 研究暂停
 

@@ -1,6 +1,6 @@
 # LBM Dynamic Window Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** 将已验证的 GPU D2Q9 MRT＋Guo LBM 从独立研究原型接入正式 Rust simulation，使玩家附近维持一个可按 16×16 区块移动的 3×3、48×48 流体窗口，同时由全局解析血管网络继续提供背景流量。
 
@@ -51,15 +51,15 @@
 - Consumes: `docs/superpowers/specs/2026-10-28-lbm-streaming-window-design.md`, research `model.rs`/`lbm.wgsl` behavior.
 - Produces: `GridProfile::{Fine,Coarse}`, `WindowOrigin`, `WindowSpec`, `OpeningSpec`, `FluidSample`, and a crate boundary that later tasks can implement without importing research paths.
 
-- [ ] **Step 1: Write the boundary decision and contract test**
+- [x] **Step 1: Write the boundary decision and contract test**
   - Pin the approved crate owner, feature/default behavior, GPU initialization error behavior, and the ownership of `GridProfile`, `WindowOrigin`, and opening metadata.
   - Test that Fine/Coarse map to 48×48 world bounds and 192×192/96×96 cells, and that shifting one logical block produces 64/32 lattice-cell offsets.
-- [ ] **Step 2: Run the focused contract test and workspace check**
+- [x] **Step 2: Run the focused contract test and workspace check**
   - Run `cargo test --offline --locked -p <selected-crate> <contract-test>` and `cargo check --offline --locked -p simulation`.
   - Expected: the new test fails before implementation, then passes after the minimal contract types are added.
-- [ ] **Step 3: Record the boundary and dependency decision**
+- [x] **Step 3: Record the boundary and dependency decision**
   - Document why the selected crate preserves existing Stokes ownership, how simulation calls it, and how software adapters are restricted to functional checks.
-- [ ] **Step 4: Run `git diff --check`**
+- [x] **Step 4: Run `git diff --check`**
 
 ### Task 2: Build the Production LBM Window Core
 
@@ -72,17 +72,17 @@
 - Consumes: `WindowSpec`, `GridProfile`, `OpeningSpec`, wall/opening masks, background initialization fields.
 - Produces: `LbmWindow::new(spec, initial, geometry)`, `advance(step_input)`, `sample(world_position)`, `snapshot_diagnostics()`, and `shift_to(new_origin, initial_strip)`; no Rapier or Godot types.
 
-- [ ] **Step 1: Add failing tests for model invariants**
+- [x] **Step 1: Add failing tests for model invariants**
   - Test shifted D2Q9 populations preserve finite positive density on a uniform background, zero-force equilibrium remains stationary, and Fine/Coarse coordinate transforms agree in world space within the documented tolerance.
-- [ ] **Step 2: Port the existing MRT/Guo core without changing its equations**
+- [x] **Step 2: Port the existing MRT/Guo core without changing its equations**
   - Preserve shifted populations `f_i-w_i`, the current orthogonal raw-moment matrix, conservation-mode relaxation rates, half-force velocity, and Guo `(I-S/2)` source treatment.
   - Keep `f32` GPU state and a CPU f64 reference only for diagnostics/tests; do not copy the research crate into production by path.
-- [ ] **Step 3: Add persistent window metadata and integer-overlap shift**
+- [x] **Step 3: Add persistent window metadata and integer-overlap shift**
   - Store origin, profile, dimensions, mask, opening descriptors, ping-pong populations, and macro output together.
   - Implement overlap copy by lattice-cell offset; initialize only exposed strips from the supplied background state.
-- [ ] **Step 4: Add focused GPU/software smoke coverage**
+- [x] **Step 4: Add focused GPU/software smoke coverage**
   - Use the existing `--allow-software` style only for finite-state/coordinate checks; reject software adapters for performance commands.
-- [ ] **Step 5: Run focused tests and formatting**
+- [x] **Step 5: Run focused tests and formatting**
   - Run `cargo test --offline --locked -p <selected-crate> lbm`, `cargo fmt --check`, and `git diff --check`.
 
 ### Task 3: Implement Geometry-Derived Walls and Fixed-Flow Openings
@@ -96,18 +96,18 @@
 - Consumes: `MapDefinition`, `GraphFlow`, `WindowSpec`, `GridProfile`.
 - Produces: `WindowGeometry { mask, openings, background_field }`, with each opening carrying world endpoints, outward normal, signed target flux, tangent, and background profile parameters.
 
-- [ ] **Step 1: Write failing geometry tests**
+- [x] **Step 1: Write failing geometry tests**
   - For a straight tube, assert two independent openings with opposite signed flux and no fluid support outside the tube.
   - For a single fork, assert branch openings are separate and signed fluxes sum to zero; assert non-opening perimeter cells are wall cells.
-- [ ] **Step 2: Implement map-to-window rasterization**
+- [x] **Step 2: Implement map-to-window rasterization**
   - Derive fluid mask from the existing shared map geometry, preserving world coordinates and avoiding a second wall definition.
   - Reject a connected fluid window that has no usable opening instead of silently adding a periodic edge.
-- [ ] **Step 3: Implement background initialization**
+- [x] **Step 3: Implement background initialization**
   - Convert GraphFlow’s segment flow and tangent into the chosen 2D background profile for the window’s grid spacing; keep the circular-network/2D-grid mapping explicit and testable.
-- [ ] **Step 4: Implement open-boundary reconstruction**
+- [x] **Step 4: Implement open-boundary reconstruction**
   - Apply target integral flux through unknown incoming populations while allowing the interior LBM to evolve; never rewrite the complete opening with equilibrium every step.
   - Keep mass/flux correction local to the opening and report residuals.
-- [ ] **Step 5: Run numerical checks**
+- [x] **Step 5: Run numerical checks**
   - Run the straight-tube analytic profile, zero-pressure/zero-flow, and fork signed-flux tests. Expected: finite density, wall no-through-flow, opening flux within the selected tolerance, and no periodic cross-opening transport.
 
 ### Task 4: Add Window Movement and Background Handoff
@@ -121,14 +121,14 @@
 - Consumes: `WindowGeometry`, `LbmWindow`, `WindowOrigin`, `GraphFlow`.
 - Produces: `StreamingWindow::{active_origin, bounds, sample, begin_frame, maybe_shift}` and migration diagnostics (`region_switches`, overlap error, center continuity, strip warmup state).
 
-- [ ] **Step 1: Write failing shift tests**
+- [x] **Step 1: Write failing shift tests**
   - Start from a deterministic spatial population field, shift one block in x/y, assert overlap values are copied at the exact integer offset and exposed strips are initialized from the current background flow.
   - Assert no second shift occurs in one physics step and that origin stays block-aligned.
-- [ ] **Step 2: Implement overlap reuse**
+- [x] **Step 2: Implement overlap reuse**
   - Rebuild only metadata/mask/openings for the new origin; preserve the old state in the overlap; clear/init the exposed strip.
-- [ ] **Step 3: Add warmup and diagnostic capture**
+- [x] **Step 3: Add warmup and diagnostic capture**
   - Record center-region velocity/density/momentum deltas for a bounded number of steps after migration; do not add an automatic recovery queue.
-- [ ] **Step 4: Validate fixed straight-tube and fork migrations**
+- [x] **Step 4: Validate fixed straight-tube and fork migrations**
   - Run a short trajectory with one block shift and compare the center region against an unshifted reference over the same physical time. Report, rather than hide, any transient above the chosen tolerance.
 
 ### Task 5: Integrate Rapier Sampling, Mixing, and Single-Step Ordering
@@ -143,19 +143,19 @@
 - Consumes: `StreamingWindow`, `GraphFlow`, Rapier world/body handles.
 - Produces: `FluidSample { velocity, local_weight, valid }`, `LocalFluid::sample_world`, and runtime config for grid profile/window size/transition width.
 
-- [ ] **Step 1: Write failing runtime/coupling tests**
+- [x] **Step 1: Write failing runtime/coupling tests**
   - Assert a cell and robot keep the same Rapier handles across a window move.
   - Assert outside-window sampling uses analytic velocity, inside sampling uses LBM, and the transition band is continuous and scales local feedback once.
   - Assert `prepare -> drive/advect -> LBM advance -> Rapier step` remains the only body-step order and no local preparation moves a body.
-- [ ] **Step 2: Implement world-coordinate sampling**
+- [x] **Step 2: Implement world-coordinate sampling**
   - Convert markers through the active window origin/profile; sample local macro velocity only where the geometry says fluid support exists.
   - Use analytic GraphFlow sampling outside support and a compact smooth transition weight in the configured outer band.
-- [ ] **Step 3: Integrate cell and robot feedback**
+- [x] **Step 3: Integrate cell and robot feedback**
   - Keep Rapier handles and world coordinates unchanged; apply local LBM reaction only with the local weight, and analytic cell driving only with the complementary weight.
   - Preserve the current four-marker permeable model and explicit one-way global-flow decision.
-- [ ] **Step 4: Integrate block-aligned migration into `Simulation::step_inner`**
+- [x] **Step 4: Integrate block-aligned migration into `Simulation::step_inner`**
   - Trigger at most one migration at a fixed-step boundary after the player crosses the selected block threshold; update the active window before the next substep.
-- [ ] **Step 5: Run focused simulation tests**
+- [x] **Step 5: Run focused simulation tests**
   - Run `cargo test --offline --locked -p simulation fluid:: runtime::` (or exact filtered tests), then `cargo fmt --check` and `git diff --check`.
 
 ### Task 6: Add Configuration, Snapshot Diagnostics, and Explicit GPU Runtime Selection
@@ -170,17 +170,19 @@
 - Consumes: `GridProfile`, migration diagnostics, local field stats.
 - Produces: reset-time profile selection, snapshot fields for active bounds/profile/migration/flux diagnostics, and a clear runtime error or fallback when no usable GPU adapter exists.
 
-- [ ] **Step 1: Add failing configuration/snapshot tests**
+- [x] **Step 1: Add failing configuration/snapshot tests**
   - Assert reset preserves the selected `Fine`/`Coarse` profile and snapshot reports the active bounds/profile without exposing wgpu handles.
   - Assert software-adapter policy is distinguishable between functional checks and performance/runtime selection.
-- [ ] **Step 2: Implement config and snapshot plumbing**
+- [x] **Step 2: Implement config and snapshot plumbing**
   - Keep the first user-facing controls explicit and reset-scoped; do not add automatic runtime LOD or UI-specific solver state.
-- [ ] **Step 3: Keep Godot bridge data-only**
+- [x] **Step 3: Keep Godot bridge data-only**
   - Convert profile, bounds, active opening/flux diagnostics and migration counters only; Godot must not advance or own LBM state.
-- [ ] **Step 4: Run existing bridge and simulation checks**
+- [x] **Step 4: Run existing bridge and simulation checks**
   - Run `cargo test --offline --locked -p simulation`, `cargo check --offline --locked -p godot_bridge`, and the project’s existing `scripts/check.sh` if available.
 
 ### Task 7: Run Parameter Experiments and Decide the First Shipping Profile
+
+本地功能矩阵和探针已准备；默认压力下叉口 Fine 出现无效流体状态，作为不支持工况保留。实卡性能、缓冲与首发配置决定仍待验证。见 [实验记录](../../research/2026-10-28-lbm-streaming-window/README.md)。
 
 **Files:**
 - Create: a focused experiment entry under `crates/simulation/examples/` or the approved existing probe location
@@ -191,7 +193,7 @@
 - Consumes: the production window API, representative straight-tube/fork geometry, 0/representative cells, Fine/Coarse profiles.
 - Produces: measured values for buffer sensitivity, transition width, migration transient, strip warmup, GPU/Rapier/full-step p95, and a recommendation for initial profile.
 
-- [ ] **Step 1: Define the minimal experiment matrix**
+- [x] **Step 1: Define the minimal experiment matrix**
   - Fixed 48×48 straight tube: no cells and representative cells, Fine/Coarse.
   - One ordinary fork: same profiles and cell load.
   - One block migration: compare center-region speed/density/momentum and cell force before/after migration.

@@ -94,6 +94,13 @@ mod probe {
             File::create(format!("{path}.migration.csv")).map_err(|e| e.to_string())?,
         );
         writeln!(warmup_out, "case,profile,cells,band,feature_offset,frame,physical_time,substep_time,entry,density_delta,velocity_delta,momentum_delta").unwrap();
+        let mut status_out =
+            BufWriter::new(File::create(format!("{path}.status.csv")).map_err(|e| e.to_string())?);
+        writeln!(
+            status_out,
+            "case,profile,cells,band,feature_offset,status,completed_frames,error"
+        )
+        .unwrap();
         let mut cases = Vec::new();
         for fork in [false, true] {
             for profile in [GridProfile::Fine, GridProfile::Coarse] {
@@ -113,6 +120,7 @@ mod probe {
         }
         let mut failures = 0;
         for (fork, profile, cells, band, offset) in cases {
+            let mut completed_frames = 0;
             let result = (|| -> Result<(), String> {
                 let config = Config {
                     cell_count: cells,
@@ -171,7 +179,8 @@ mod probe {
                     } else {
                         MoveInput::default()
                     };
-                    sim.try_tick(input)?;
+                    sim.try_tick(input)
+                        .map_err(|e| format!("frame={frame} phase={phase}: {e}"))?;
                     let step_ms = start.elapsed().as_secs_f64() * 1000.;
                     let snap = sim.snapshot();
                     if let Some(error) = &snap.lbm_status {
@@ -331,6 +340,7 @@ mod probe {
                         rapier.push(s.rapier_ms);
                     }
                     writeln!(out,"{},{:?},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}", if fork {"fork"}else{"straight"},profile,cells,band,offset,config.pressure,phase,frame,s.elapsed_fluid_time,snap.robot[0],snap.robot[1],l.bounds[0][0],l.bounds[0][1],l.bounds[1][0],l.bounds[1][1],s.active_cell_count,l.adapter_name.replace(','," "),l.software_adapter,!functional && !l.software_adapter,values(&l.opening_targets),values(&l.opening_fluxes),l.density_min,l.density_max,l.mass,l.region_switches,l.overlap_error,l.center[0],l.center[1],l.center[2],s.max_cell_marker_force,s.lattice_dt,s.lattice_steps_per_substep,w.lattice_steps,w.dispatches,w.submissions,w.upload_calls,w.upload_bytes,w.readback_calls,w.readback_bytes,w.upload_ms,w.encoding_ms,w.submission_ms,w.readback_wait_ms,w.readback_decode_ms,s.prepare_ms,s.coupling_ms,s.lbm_ms,s.rapier_ms,step_ms).map_err(|e|e.to_string())?;
+                    completed_frames += 1;
                 }
                 eprintln!(
                     "case={} profile={:?} cells={} band={} offset={} p95_step_ms={} p95_coupling_ms={} p95_lbm_wait_inclusive_ms={} p95_rapier_ms={} functional={}",
@@ -347,6 +357,24 @@ mod probe {
                 );
                 Ok(())
             })();
+            let (status, message) = match &result {
+                Ok(()) => ("complete", String::new()),
+                Err(error) => ("failed", error.replace([',', '\n', '\r'], " ")),
+            };
+            writeln!(
+                status_out,
+                "{},{:?},{},{},{},{},{},{}",
+                if fork { "fork" } else { "straight" },
+                profile,
+                cells,
+                band,
+                offset,
+                status,
+                completed_frames,
+                message
+            )
+            .map_err(|e| e.to_string())?;
+            status_out.flush().map_err(|e| e.to_string())?;
             if let Err(error) = result {
                 failures += 1;
                 eprintln!(
@@ -363,6 +391,7 @@ mod probe {
         out.flush().map_err(|e| e.to_string())?;
         reference_out.flush().map_err(|e| e.to_string())?;
         warmup_out.flush().map_err(|e| e.to_string())?;
+        status_out.flush().map_err(|e| e.to_string())?;
         if failures != 0 {
             return Err(format!("{failures} cases failed; output incomplete"));
         }

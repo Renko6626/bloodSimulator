@@ -1,0 +1,11 @@
+case,profile,cells,band,feature_offset,status,completed_frames,error
+straight,Fine,0,4,0,complete,30,
+straight,Fine,72,4,0,complete,30,
+straight,Coarse,0,4,0,complete,30,
+straight,Coarse,72,4,0,complete,30,
+fork,Fine,0,4,0,failed,16,frame=16 phase=move diagnostic: invalid fluid state
+fork,Fine,72,4,0,failed,16,frame=16 phase=move diagnostic: invalid fluid state
+fork,Coarse,0,4,0,complete,30,
+fork,Coarse,72,4,0,complete,30,
+straight,Coarse,72,2,0,complete,30,
+fork,Coarse,0,4,8,complete,30,
