@@ -1,0 +1,11 @@
+{
+  "source_commit": "7727c605c6000dd0e3ad6cbf413b3b17f4f3c1c4",
+  "build_location": "local Linux x86_64",
+  "build_command": "cargo build --offline --locked --release -p simulation --features lbm-gpu --example lbm_window_probe",
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n",
+  "binary_sha256": "b8820925769fa307b77b41a5fd168effc7b658cb92db259fdb7d8446cc827cf3",
+  "binary_bytes": 10731176,
+  "required_glibc_max": "2.35",
+  "remote_glibc_verified": "2.39",
+  "recorded_utc": "2026-10-28T07:38:53.318733+00:00"
+}

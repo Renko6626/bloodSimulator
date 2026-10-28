@@ -1,0 +1,11 @@
+{
+  "source_commit": "7727c605c6000dd0e3ad6cbf413b3b17f4f3c1c4",
+  "archive_sha256": "f162236a0c8a0bf1680ff593d07a7b6244db4292c6a8b42447355c3968174e4e",
+  "archive_bytes": 105901,
+  "source_paths": [
+    "Cargo.toml",
+    "Cargo.lock",
+    "crates"
+  ],
+  "note": "Committed production workspace sources only; excludes archived research data and environment files."
+}

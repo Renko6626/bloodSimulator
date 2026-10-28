@@ -1,0 +1,11 @@
+case,profile,cells,band,feature_offset,status,completed_frames,error
+straight,Fine,0,4,0,failed,17,frame=17 phase=warmup: LBM advance failed; frame may be partially advanced: invalid fluid state
+straight,Fine,72,4,0,failed,18,frame=18 phase=warmup: LBM advance failed; frame may be partially advanced: invalid fluid state
+straight,Coarse,0,4,0,failed,43,frame=43 phase=hold: LBM advance failed; frame may be partially advanced: invalid fluid state
+straight,Coarse,72,4,0,failed,43,frame=43 phase=hold: LBM advance failed; frame may be partially advanced: invalid fluid state
+fork,Fine,0,4,0,failed,16,frame=16 phase=warmup: LBM advance failed; frame may be partially advanced: invalid fluid state
+fork,Fine,72,4,0,failed,16,frame=16 phase=warmup: LBM advance failed; frame may be partially advanced: invalid fluid state
+fork,Coarse,0,4,0,failed,35,frame=35 phase=hold: LBM advance failed; frame may be partially advanced: invalid fluid state
+fork,Coarse,72,4,0,failed,35,frame=35 phase=hold: LBM advance failed; frame may be partially advanced: invalid fluid state
+straight,Coarse,72,2,0,failed,43,frame=43 phase=hold: LBM advance failed; frame may be partially advanced: invalid fluid state
+fork,Coarse,0,4,8,failed,37,frame=37 phase=hold: LBM advance failed; frame may be partially advanced: invalid fluid state

@@ -1,0 +1,1 @@
+Linux 30fdad1ed142 5.15.0-179-generic #189-Ubuntu SMP Tue May 5 18:20:56 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux

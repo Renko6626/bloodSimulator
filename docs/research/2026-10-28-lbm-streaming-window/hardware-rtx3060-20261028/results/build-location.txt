@@ -1,0 +1,1 @@
+Locally release-built reviewed source, transferred binary hash verified

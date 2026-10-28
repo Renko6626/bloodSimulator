@@ -182,7 +182,7 @@
 
 ### Task 7: Run Parameter Experiments and Decide the First Shipping Profile
 
-本地功能矩阵和探针已准备；默认压力下叉口 Fine 出现无效流体状态，作为不支持工况保留。实卡性能、缓冲与首发配置决定仍待验证。见 [实验记录](../../research/2026-10-28-lbm-streaming-window/README.md)。
+本轮 RTX 3060 实卡已经执行：10 个案例全部在完成前失败，没有迁移发生，不能给出有效完整性能 p95 或首发 profile。全新独立 Sol high 调查确认当前低 lattice 黏度下，固定速度出口存在增长的横向边界模；已保留纯流体复现、单变量控制和定量模式注入证据，生产求解器未改。见 [实卡与独立调查记录](../../research/2026-10-28-lbm-streaming-window/hardware-rtx3060-20261028/README.md)。后续须先确认稳定出口方案，再恢复未通过的性能／配置验收。
 
 **Files:**
 - Create: a focused experiment entry under `crates/simulation/examples/` or the approved existing probe location
@@ -200,10 +200,13 @@
   - Vary only the buffer/transition values needed to choose a first configuration; do not expand to full-map or special chambers.
 - [ ] **Step 2: Run numerical and performance measurements**
   - Count all lattice steps, upload/encode/wait/readback, coupling, Rapier, and full-step p95. Use software only for functional checks and a physical GPU for performance.
-- [ ] **Step 3: Analyze and record the decision**
+  - 已执行源码 `7727c60` 的 RTX 3060 矩阵，取得 303 行失败前完整帧记录；10／10 案例失败，有效完整性能测量仍被出口稳定性阻塞。
+- [x] **Step 3: Analyze and record the decision**
   - State whether Fine is viable, whether Coarse is the fallback, whether 16-unit buffering and the tested transition are adequate, and which cases remain unsupported.
-- [ ] **Step 4: Run final relevant checks**
+  - 本轮决定：当前 Fine、Coarse 均未通过，不选取首发 profile，也不认定缓冲或混合带已验收；固定密度出口仅作因果控制，不能未经确认改变各开口精确流量契约。
+- [x] **Step 4: Run final relevant checks**
   - Re-run only the focused tests affected by any concrete repairs, plus `git diff --check`; do not claim full-game acceptance from research probes.
+  - 本次生产数值代码没有改动；核对原始 18 文件与源码／二进制哈希、归档独立复现源码和日志、检查文档差异与链接。实例已确认 stopped／exited。
 
 ## Self-Review
 

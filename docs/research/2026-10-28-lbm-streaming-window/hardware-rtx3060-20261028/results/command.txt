@@ -1,0 +1,1 @@
+lbm_window_probe --warmup 20 --frames 720 --output results/hardware.csv

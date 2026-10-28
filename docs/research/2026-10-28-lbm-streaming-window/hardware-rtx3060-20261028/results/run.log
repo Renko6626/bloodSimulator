@@ -1,0 +1,11 @@
+FAILED case=straight profile=Fine cells=0 band=4 offset=0: frame=17 phase=warmup: LBM advance failed; frame may be partially advanced: invalid fluid state
+FAILED case=straight profile=Fine cells=72 band=4 offset=0: frame=18 phase=warmup: LBM advance failed; frame may be partially advanced: invalid fluid state
+FAILED case=straight profile=Coarse cells=0 band=4 offset=0: frame=43 phase=hold: LBM advance failed; frame may be partially advanced: invalid fluid state
+FAILED case=straight profile=Coarse cells=72 band=4 offset=0: frame=43 phase=hold: LBM advance failed; frame may be partially advanced: invalid fluid state
+FAILED case=fork profile=Fine cells=0 band=4 offset=0: frame=16 phase=warmup: LBM advance failed; frame may be partially advanced: invalid fluid state
+FAILED case=fork profile=Fine cells=72 band=4 offset=0: frame=16 phase=warmup: LBM advance failed; frame may be partially advanced: invalid fluid state
+FAILED case=fork profile=Coarse cells=0 band=4 offset=0: frame=35 phase=hold: LBM advance failed; frame may be partially advanced: invalid fluid state
+FAILED case=fork profile=Coarse cells=72 band=4 offset=0: frame=35 phase=hold: LBM advance failed; frame may be partially advanced: invalid fluid state
+FAILED case=straight profile=Coarse cells=72 band=2 offset=0: frame=43 phase=hold: LBM advance failed; frame may be partially advanced: invalid fluid state
+FAILED case=fork profile=Coarse cells=0 band=4 offset=8: frame=37 phase=hold: LBM advance failed; frame may be partially advanced: invalid fluid state
+10 cases failed; output incomplete

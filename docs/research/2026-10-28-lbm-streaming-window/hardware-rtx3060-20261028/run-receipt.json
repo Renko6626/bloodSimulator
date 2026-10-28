@@ -1,0 +1,24 @@
+{
+  "instance_id": 57988490,
+  "user_ssh_endpoint": "ssh7.vast.ai:11787",
+  "direct_endpoint": "124.60.192.12:35018",
+  "source_commit": "7727c605c6000dd0e3ad6cbf413b3b17f4f3c1c4",
+  "result_bundle_sha256": "746ab096427437fa42e2fe8ecc63246c23da3b6d61bd3bf3fdb71ff386e76e8c",
+  "all_internal_files_verified": 18,
+  "binary_built": "local locked release build; transferred SHA256 verified",
+  "quoted_usd_per_hour": 0.07777777777777778,
+  "previous_setup_attempts": [
+    {
+      "stage": "default SSH identity rejected",
+      "actual_experiment_started": false,
+      "stop_verified": true
+    },
+    {
+      "stage": "remote rustc not installed",
+      "actual_experiment_started": false,
+      "result_bundle_checksum_manually_verified": true,
+      "stop_verified": true
+    }
+  ],
+  "scope": "No numerical equations, profile choices or game geometry modified during this run; no alternate instance rented or destroyed."
+}
