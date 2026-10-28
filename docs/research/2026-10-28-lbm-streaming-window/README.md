@@ -1,6 +1,6 @@
 # LBM streaming window probe
 
-**Current next steps (2026-10-28):** investigate prescribed-velocity boundary reconstruction through gradient-based regularization (FD), followed by non-equilibrium extrapolation (NEQ/eNEQ). See the [session note](boundary-next-steps.md) for scope and the minimal comparison sequence; no repair has yet been validated.
+**Historical plan (2026-10-28):** the initial FD and NEQ/eNEQ comparison routes are preserved in the [session note](boundary-next-steps.md). Subsequent LSQ-FD and mean-density control were integrated and exercised in the [2026-10-29 gameplay experiment](../2026-10-29-lbm-gameplay/README.md); consult that report for current evidence and limitations. The failed datasets below retain their original interpretation.
 
 **2026-10-28 hardware update:** the reviewed production probe was run on RTX 3060. All ten cases failed before completing the hold; no migration occurred and no performance/profile acceptance is available. A fresh independent Sol high investigator reproduced the failure without mechanics and confirmed an unstable prescribed-velocity outlet mode at the selected low lattice viscosity. See the [hardware record](hardware-rtx3060-20261028/README.md), [independent causal investigation](hardware-rtx3060-20261028/independent-investigation.md), and [verified stop state](hardware-rtx3060-20261028/final-stop-status.json). The production solver was not modified by that investigation.
 

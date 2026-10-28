@@ -1,5 +1,7 @@
 # 项目工作约定
 
+2026-10-29 阶段归档：用户明确要求整理、提交推送，并合并到 `main`。本会话的 FD/LSQ 研究、均值控制、可玩验证场和实卡证据一并归档；当前状态以 [docs/STATUS.md](docs/STATUS.md) 为入口。保存工作不授权自动开始下一轮优化或云实验。
+
 ## 当前流体路线（2026-10-29）
 
 用户已确认 Rust＋wgpu／WGSL、D2Q9 MRT＋Guo 外力路线，并阶段性批准 LSQ-FD 给定速度边界与帧末平均密度控制，确认按推荐方案接入现有可选 `simulation/lbm-gpu` 路径。本轮已在 `feat/lbm-lsq-integration` 实现：`blood-fluid-gpu` 复用已有 faer 0.24.4 运行时生成权重，simulation 显式帧末修正并刷新缓存；不扩大 Godot/snapshot 接口，默认游戏仍用解析流。状态与检查见 [接入计划](docs/superpowers/plans/2026-10-29-lbm-integration.md)，算法见 [物理文档](docs/physics/lbm-fluid.md)。

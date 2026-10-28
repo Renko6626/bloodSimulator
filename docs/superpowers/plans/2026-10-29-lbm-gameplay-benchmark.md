@@ -40,3 +40,7 @@
 - Rust probe及Godot的固定/移动四个主案例各3720总帧/3600测量帧，全部exit0、COMPLETE；Godot采用真实NVIDIA OpenGL/Xorg显示，截图已查看。三个有界控制各720总帧全部exit0。原始结果与报告见[实测报告](../../research/2026-10-29-lbm-gameplay/README.md)。
 - 当前整体游戏性能未通过60FPS目标：Godot默认绘制帧间隔p95约70–71ms；不隐藏负面结果、不据此擅自更换渲染架构。首次headless editor导入exit134已独立复现，cached import及gameplay正常，根因未明。
 - 结果全部取回并通过SHA，实例58133143确认stopped/exited。保留分支和磁盘，不自动合并/推送，不追加云端实验。
+
+## 阶段归档
+
+用户后续明确要求“阶段性保存整理，提交推送”，并指定“合并到 main”。本轮归档包含旧工作区遗留的 FD/NEQ 初始研究笔记，保留为历史计划并链接当前结果；实现和实验数据不改。验证文档链接、源码与实测冻结包一致性及结果 SHA 后，以 main 为合并和推送目标，不重新启动 GPU 或追加实验。
