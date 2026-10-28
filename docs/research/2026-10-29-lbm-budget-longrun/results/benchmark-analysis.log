@@ -1,0 +1,274 @@
+{
+  "input_sha256": "6e8d43a4f7fdafde6ae4d525961a3b5efeca98845e784c112f3e5ce9d5950be7",
+  "measured_frames_per_mode": 500,
+  "warmup_frames_per_mode": 100,
+  "percentile_definition": "nearest-rank ceil(.95*n)-1",
+  "modes": {
+    "uncorrected": {
+      "timings": {
+        "total_wall_ms": {
+          "avg": 1.47454862,
+          "median": 1.409192,
+          "p95": 1.637094,
+          "max": 3.125661
+        },
+        "budget_60hz_percent": {
+          "avg": 8.84729172,
+          "median": 8.455152,
+          "p95": 9.822564,
+          "max": 18.753966
+        },
+        "profile_ms": {
+          "avg": 0.084621646,
+          "median": 0.078153,
+          "p95": 0.118245,
+          "max": 0.194984
+        },
+        "enqueue_first7_cpu_ms": {
+          "avg": 0.26363395,
+          "median": 0.253626,
+          "p95": 0.310169,
+          "max": 0.346419
+        },
+        "field1_wall_ms": {
+          "avg": 0.38874586,
+          "median": 0.3818905,
+          "p95": 0.456801,
+          "max": 0.507954
+        },
+        "enqueue_second7_cpu_ms": {
+          "avg": 0.31449085200000004,
+          "median": 0.259314,
+          "p95": 0.392439,
+          "max": 1.748337
+        },
+        "raw_read_wall_ms": {
+          "avg": 0.0,
+          "median": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "cpu_mean_ms": {
+          "avg": 0.0,
+          "median": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "normalization_enqueue_cpu_ms": {
+          "avg": 0.0,
+          "median": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "field2_wall_ms": {
+          "avg": 0.317672432,
+          "median": 0.3177065,
+          "p95": 0.36086,
+          "max": 0.430383
+        },
+        "field_validity_cpu_ms": {
+          "avg": 0.104876452,
+          "median": 0.0940325,
+          "p95": 0.165848,
+          "max": 0.237862
+        },
+        "upload_cpu_ms": {
+          "avg": 0.107816814,
+          "median": 0.101937,
+          "p95": 0.133088,
+          "max": 0.187487
+        },
+        "encoding_cpu_ms": {
+          "avg": 0.295228918,
+          "median": 0.284341,
+          "p95": 0.33512,
+          "max": 0.379469
+        },
+        "submission_cpu_ms": {
+          "avg": 0.26752727800000003,
+          "median": 0.220335,
+          "p95": 0.275115,
+          "max": 1.620739
+        },
+        "readback_wait_wall_ms": {
+          "avg": 0.556441944,
+          "median": 0.556975,
+          "p95": 0.615202,
+          "max": 0.676838
+        },
+        "readback_decode_cpu_ms": {
+          "avg": 0.087622146,
+          "median": 0.080072,
+          "p95": 0.128492,
+          "max": 0.17499
+        }
+      },
+      "counts": {
+        "lattice_steps": {
+          "min": 14,
+          "max": 14
+        },
+        "dispatches": {
+          "min": 30,
+          "max": 30
+        },
+        "submissions": {
+          "min": 16,
+          "max": 16
+        },
+        "upload_calls": {
+          "min": 15,
+          "max": 15
+        },
+        "upload_bytes": {
+          "min": 590272,
+          "max": 590272
+        },
+        "readback_calls": {
+          "min": 2,
+          "max": 2
+        },
+        "readback_bytes": {
+          "min": 1179648,
+          "max": 1179648
+        }
+      }
+    },
+    "mean_controlled": {
+      "timings": {
+        "total_wall_ms": {
+          "avg": 1.89811932,
+          "median": 1.8030115,
+          "p95": 2.097623,
+          "max": 3.215842
+        },
+        "budget_60hz_percent": {
+          "avg": 11.388715920000001,
+          "median": 10.818069000000001,
+          "p95": 12.585738,
+          "max": 19.295052
+        },
+        "profile_ms": {
+          "avg": 0.08005265199999999,
+          "median": 0.07735,
+          "p95": 0.095281,
+          "max": 0.185928
+        },
+        "enqueue_first7_cpu_ms": {
+          "avg": 0.28082818800000003,
+          "median": 0.2496835,
+          "p95": 0.309402,
+          "max": 1.716546
+        },
+        "field1_wall_ms": {
+          "avg": 0.384896908,
+          "median": 0.38851650000000004,
+          "p95": 0.419314,
+          "max": 0.492524
+        },
+        "enqueue_second7_cpu_ms": {
+          "avg": 0.287363378,
+          "median": 0.2531505,
+          "p95": 0.378629,
+          "max": 1.641538
+        },
+        "raw_read_wall_ms": {
+          "avg": 0.44312504,
+          "median": 0.4220385,
+          "p95": 0.566353,
+          "max": 0.583571
+        },
+        "cpu_mean_ms": {
+          "avg": 0.12741188,
+          "median": 0.1006715,
+          "p95": 0.255557,
+          "max": 0.271055
+        },
+        "normalization_enqueue_cpu_ms": {
+          "avg": 0.041843780000000004,
+          "median": 0.0350865,
+          "p95": 0.051044,
+          "max": 1.373655
+        },
+        "field2_wall_ms": {
+          "avg": 0.15210337799999998,
+          "median": 0.146115,
+          "p95": 0.182869,
+          "max": 0.230431
+        },
+        "field_validity_cpu_ms": {
+          "avg": 0.099501098,
+          "median": 0.093892,
+          "p95": 0.128072,
+          "max": 0.184416
+        },
+        "upload_cpu_ms": {
+          "avg": 0.109807556,
+          "median": 0.1065735,
+          "p95": 0.125191,
+          "max": 0.174932
+        },
+        "encoding_cpu_ms": {
+          "avg": 0.31011447600000003,
+          "median": 0.2995685,
+          "p95": 0.353993,
+          "max": 0.415998
+        },
+        "submission_cpu_ms": {
+          "avg": 0.29680109800000004,
+          "median": 0.24141,
+          "p95": 0.299803,
+          "max": 1.657465
+        },
+        "readback_wait_wall_ms": {
+          "avg": 0.7052809539999999,
+          "median": 0.711563,
+          "p95": 0.754019,
+          "max": 0.795198
+        },
+        "readback_decode_cpu_ms": {
+          "avg": 0.191240348,
+          "median": 0.16809449999999998,
+          "p95": 0.273962,
+          "max": 0.318814
+        }
+      },
+      "counts": {
+        "lattice_steps": {
+          "min": 14,
+          "max": 14
+        },
+        "dispatches": {
+          "min": 31,
+          "max": 31
+        },
+        "submissions": {
+          "min": 18,
+          "max": 18
+        },
+        "upload_calls": {
+          "min": 16,
+          "max": 16
+        },
+        "upload_bytes": {
+          "min": 590288,
+          "max": 590288
+        },
+        "readback_calls": {
+          "min": 3,
+          "max": 3
+        },
+        "readback_bytes": {
+          "min": 2506752,
+          "max": 2506752
+        }
+      }
+    }
+  },
+  "combined_overhead_ms": {
+    "avg": 0.42357069999999997,
+    "median": 0.3938195,
+    "p95": 0.46052899999999997,
+    "max": 0.09018099999999984
+  }
+}

@@ -1,0 +1,49 @@
+Fresh benchmark build exit0; local smoke1frame per mode only (2total).
+RTX3060 benchmark:2fresh modes,100warmup+500measured each; long:old frozen binary10000frames per window once.
+shell syntax: PASS
+Rust formatting: PASS
+Provenance resolver: remote long-source/ maps to unchanged prior mean-density/src/; no numerical rerun.
+Python syntax / unchanged WGSL / all uploaded inputs and old long binary identity: PASS
+Benchmark500+500 metadata/counts /10000paired completeness / all1000prefixes / original moment and field limits: PASS
+Longrun observed max compensation budget residual: 2.842170943040401e-14
+Instance58133143 stopped/exited: CONFIRMED
+docs/research/2026-10-29-lbm-budget-longrun/src/main.rs: OK
+docs/research/2026-10-29-lbm-budget-longrun/src/lbm/gpu.rs: OK
+docs/research/2026-10-29-lbm-budget-longrun/src/lbm/lbm.wgsl: OK
+docs/research/2026-10-29-lbm-budget-longrun/src/lbm/lsq_io.rs: OK
+docs/research/2026-10-29-lbm-budget-longrun/src/lbm/mod.rs: OK
+docs/research/2026-10-29-lbm-budget-longrun/src/lbm/model.rs: OK
+docs/research/2026-10-29-lbm-budget-longrun/build.sh: OK
+docs/research/2026-10-29-lbm-budget-longrun/bin/budget_bench: OK
+docs/research/2026-10-29-lbm-mean-density/bin/mean_density: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/results/fork_a-fine.geom.weights: OK
+Frozen source/binaries/weight SHA: PASS
+results/bench-exit-code.txt: OK
+results/bench-finished-utc.txt: OK
+results/bench-started-utc.txt: OK
+results/bench.log: OK
+results/bench/frames.csv: OK
+results/glibc.txt: OK
+results/gpu-after.csv: OK
+results/gpu-before.csv: OK
+results/input-verification.txt: OK
+results/loadavg-after.txt: OK
+results/loadavg-before.txt: OK
+results/long-exit-code.txt: OK
+results/long-finished-utc.txt: OK
+results/long-started-utc.txt: OK
+results/long.log: OK
+results/long/baseline-final.bin: OK
+results/long/baseline.csv: OK
+results/long/comparison.csv: OK
+results/long/controlled-post-final.bin: OK
+results/long/controlled-pre-final.bin: OK
+results/long/controlled.csv: OK
+results/long/corrections.csv: OK
+results/long/force-check.csv: OK
+results/long/snapshot-layout.txt: OK
+results/uname.txt: OK
+results/vulkan-stderr.txt: OK
+results/vulkan.txt: OK
+Retrieved27GPU result SHA: PASS
+staged whitespace: PASS

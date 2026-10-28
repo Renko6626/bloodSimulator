@@ -1,0 +1,5 @@
+BENCH mode=uncorrected fixture=fork_a Fine n=192 lattice_steps_per_frame=14 warmup=100 measured=500 h=0.25 dt=0.0011904762 nu=.05 adapter="NVIDIA GeForce RTX 3060" software=false synchronization=two_field_readbacks init_excluded=true
+BENCH_COMPLETE mode=uncorrected
+BENCH mode=mean_controlled fixture=fork_a Fine n=192 lattice_steps_per_frame=14 warmup=100 measured=500 h=0.25 dt=0.0011904762 nu=.05 adapter="NVIDIA GeForce RTX 3060" software=false synchronization=two_field_readbacks init_excluded=true
+BENCH_COMPLETE mode=mean_controlled
+COMPLETE

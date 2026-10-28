@@ -1,0 +1,10 @@
+c62b1108927bd432e8642520127d9767333ea66e16ec04c78d2edebafe0d59fb  docs/research/2026-10-29-lbm-budget-longrun/src/main.rs
+eaacb5e85b8db18ed3bfe40f26542678cc7ddc479dfcf9923ae1c6d589a30050  docs/research/2026-10-29-lbm-budget-longrun/src/lbm/gpu.rs
+5f5c223ec2fcedff4824b087e6626de82b712be6a260006c14f0d0aed6cb0627  docs/research/2026-10-29-lbm-budget-longrun/src/lbm/lbm.wgsl
+5161e70afa911044e3ad1b83d1810fc772819e49075a6f2ecac96131c6f751bf  docs/research/2026-10-29-lbm-budget-longrun/src/lbm/lsq_io.rs
+6d131842ce9e4befbd6c5d6fd53de459bd92ebee5178e61c619cef74fdd411f3  docs/research/2026-10-29-lbm-budget-longrun/src/lbm/mod.rs
+145f42c10bb76ddea1e74e82642326da615f1dc741167b763cead32eb783ac48  docs/research/2026-10-29-lbm-budget-longrun/src/lbm/model.rs
+7b9b77e07bde3a30dc012a3d3be9afd851799992e7f0e3bb72467483eb4a42d6  docs/research/2026-10-29-lbm-budget-longrun/build.sh
+9c6920144d24cd02af9d7de68d12127350966ce2472d0ddf10c5371143029ac2  docs/research/2026-10-29-lbm-budget-longrun/bin/budget_bench
+2c451ec2b3090af4db77f98184a8c26fb20bde76c3a3fc28195d97032ca7351e  docs/research/2026-10-29-lbm-mean-density/bin/mean_density
+e21eb598e213825428efcd7b04636d8989c1931a92d4e29a1ade680f654cd37b  docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/results/fork_a-fine.geom.weights

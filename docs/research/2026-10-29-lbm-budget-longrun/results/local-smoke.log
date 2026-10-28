@@ -1,0 +1,5 @@
+BENCH mode=uncorrected fixture=fork_a Fine n=192 lattice_steps_per_frame=14 warmup=0 measured=1 h=0.25 dt=0.0011904762 nu=.05 adapter="llvmpipe (LLVM 15.0.7, 256 bits)" software=true synchronization=two_field_readbacks init_excluded=true
+BENCH_COMPLETE mode=uncorrected
+BENCH mode=mean_controlled fixture=fork_a Fine n=192 lattice_steps_per_frame=14 warmup=0 measured=1 h=0.25 dt=0.0011904762 nu=.05 adapter="llvmpipe (LLVM 15.0.7, 256 bits)" software=true synchronization=two_field_readbacks init_excluded=true
+BENCH_COMPLETE mode=mean_controlled
+COMPLETE
