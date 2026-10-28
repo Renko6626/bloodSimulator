@@ -1,0 +1,16 @@
+case=fork_a profile=Fine frames=500 n=192 h=0.25 dt=0.0011904762 nu=0.05 tau=0.50285715 D=1 adapter="NVIDIA GeForce RTX 3060" software=false reference_adapter=Some("NVIDIA GeForce RTX 3060")
+fluid_cells=7141 initial_shifted_sum=-6.61777734833890463e-7 initial_mass=7.14099999933822255e3
+control frame=0 bitwise_equal=true differing=0 max_abs=0.000e0
+control frame=1 bitwise_equal=true differing=0 max_abs=0.000e0
+control frame=2 bitwise_equal=true differing=0 max_abs=0.000e0
+frame=49 mass_rel=-9.4472811518e-5 cumulative_bulk=1.854106e-7 reconstruct=-6.746305e-1 jn2=-6.608056e-1 chain=-1.396641e-2 compatibility=1.414705e-4 closure=-2.220e-16
+frame=99 mass_rel=-9.8269564358e-5 cumulative_bulk=1.100629e-6 reconstruct=-7.017441e-1 jn2=-6.638814e-1 chain=-3.813009e-2 compatibility=2.674332e-4 closure=-2.887e-15
+frame=149 mass_rel=-1.4362958121e-5 cumulative_bulk=2.372748e-6 reconstruct=-1.025683e-1 jn2=-5.662466e-2 chain=-4.635071e-2 compatibility=4.071125e-4 closure=-2.887e-15
+frame=199 mass_rel=1.1986040057e-4 cumulative_bulk=9.826013e-7 reconstruct=8.559221e-1 jn2=9.077620e-1 chain=-5.237718e-2 compatibility=5.372980e-4 closure=-1.554e-15
+frame=249 mass_rel=2.5836039215e-4 cumulative_bulk=7.009530e-7 reconstruct=1.844951e0 jn2=1.908168e0 chain=-6.389811e-2 compatibility=6.809437e-4 closure=-2.887e-15
+frame=299 mass_rel=3.6377913023e-4 cumulative_bulk=8.102358e-8 reconstruct=2.597747e0 jn2=2.675069e0 chain=-7.813690e-2 compatibility=8.141483e-4 closure=-7.994e-15
+frame=349 mass_rel=4.1943011581e-4 cumulative_bulk=-7.245070e-7 reconstruct=2.995151e0 jn2=3.083410e0 chain=-8.919960e-2 compatibility=9.403347e-4 closure=-7.994e-15
+frame=399 mass_rel=4.3257423330e-4 cumulative_bulk=-2.214333e-6 reconstruct=3.089015e0 jn2=3.182427e0 chain=-9.445276e-2 compatibility=1.040114e-3 closure=-7.994e-15
+frame=449 mass_rel=4.2604691161e-4 cumulative_bulk=-3.690269e-6 reconstruct=3.042405e0 jn2=3.138404e0 chain=-9.713285e-2 compatibility=1.133223e-3 closure=-7.994e-15
+frame=499 mass_rel=4.2395958574e-4 cumulative_bulk=-4.676751e-6 reconstruct=3.027500e0 jn2=3.127544e0 chain=-1.013103e-1 compatibility=1.266733e-3 closure=-7.994e-15
+COMPLETE

@@ -1,0 +1,16 @@
+build.sh: OK
+fork_a-fine.geom.weights: OK
+mass_budget: OK
+run-hardware.sh: OK
+src/accounting.rs: OK
+src/lbm/gpu.rs: OK
+src/lbm/lbm.wgsl: OK
+src/lbm/lsq_io.rs: OK
+src/lbm/mod.rs: OK
+src/lbm/model.rs: OK
+src/main.rs: OK
+src/reference_lbm/gpu.rs: OK
+src/reference_lbm/lbm.wgsl: OK
+src/reference_lbm/lsq_io.rs: OK
+src/reference_lbm/mod.rs: OK
+src/reference_lbm/model.rs: OK

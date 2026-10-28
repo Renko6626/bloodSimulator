@@ -1,0 +1,8 @@
+{
+  "id": 58133143,
+  "public_ip": "125.240.239.50",
+  "ssh_port": 30782,
+  "remote_dir": "/workspace/lbm-mass-budget-20261029",
+  "previous_instance": 57988490,
+  "previous_start": "resources_unavailable; queued start cancelled; stopped/exited"
+}

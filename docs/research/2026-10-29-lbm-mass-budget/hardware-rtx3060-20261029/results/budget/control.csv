@@ -1,0 +1,4 @@
+frame,same_adapter,bitwise_equal,differing_populations,max_abs_difference,instrumented_fnv64,reference_fnv64
+0,true,true,0,0.00000000000000000e0,0139c19f93e876de,0139c19f93e876de
+1,true,true,0,0.00000000000000000e0,d7bbb77601d715b7,d7bbb77601d715b7
+2,true,true,0,0.00000000000000000e0,500981c347b3ee38,500981c347b3ee38

@@ -1,0 +1,7 @@
+case=fork_a profile=Fine frames=3 n=192 h=0.25 dt=0.0011904762 nu=0.05 tau=0.50285715 D=1 adapter="llvmpipe (LLVM 15.0.7, 256 bits)" software=true reference_adapter=Some("llvmpipe (LLVM 15.0.7, 256 bits)")
+fluid_cells=7141 initial_shifted_sum=-6.61777734833890463e-7 initial_mass=7.14099999933822255e3
+control frame=0 bitwise_equal=true differing=0 max_abs=0.000e0
+control frame=1 bitwise_equal=true differing=0 max_abs=0.000e0
+control frame=2 bitwise_equal=true differing=0 max_abs=0.000e0
+frame=2 mass_rel=1.4895078804e-6 cumulative_bulk=7.998212e-7 reconstruct=1.063578e-2 jn2=1.501227e-2 chain=-4.405737e-3 compatibility=2.924237e-5 closure=0.000e0
+COMPLETE

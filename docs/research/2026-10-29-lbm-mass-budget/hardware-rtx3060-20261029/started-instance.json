@@ -1,0 +1,94 @@
+{
+  "id": 58133143,
+  "gpu_name": "RTX 3060",
+  "cur_state": "running",
+  "actual_status": "running",
+  "intended_status": "running",
+  "public_ipaddr": "125.240.239.50",
+  "ssh_host": "ssh4.vast.ai",
+  "ssh_port": 23646,
+  "ports": {
+    "10100/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "30712"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "30712"
+      }
+    ],
+    "10200/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "30707"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "30707"
+      }
+    ],
+    "1111/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "30770"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "30770"
+      }
+    ],
+    "22/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "30782"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "30782"
+      }
+    ],
+    "30758/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "30758"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "30758"
+      }
+    ],
+    "6006/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "30767"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "30767"
+      }
+    ],
+    "8080/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "30753"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "30753"
+      }
+    ],
+    "8384/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "30777"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "30777"
+      }
+    ]
+  },
+  "dph_total": 0.07111111111111111,
+  "status_msg": "success, running vastai/pytorch_cuda-12.8.1-auto/jupyter"
+}

@@ -1,0 +1,15 @@
+22bacce1659c45bffb6a8febb040c126eb3825ac87da569a28d5efedcf015081  docs/research/2026-10-29-lbm-mass-budget/src/accounting.rs
+10f06a82d855093a49dffb71ae4ee2456a6422265df87fb59ee40a239f4bae19  docs/research/2026-10-29-lbm-mass-budget/src/main.rs
+04c7cc1b1a088fef4e8b486bd8fc6ce26a7445108d6575320d9da4e5c6cbda26  docs/research/2026-10-29-lbm-mass-budget/src/lbm/gpu.rs
+06f14714c9b879b363d41c11b7354635b31cc2bf05f6238c3f89381591b6770f  docs/research/2026-10-29-lbm-mass-budget/src/lbm/lbm.wgsl
+5161e70afa911044e3ad1b83d1810fc772819e49075a6f2ecac96131c6f751bf  docs/research/2026-10-29-lbm-mass-budget/src/lbm/lsq_io.rs
+6d131842ce9e4befbd6c5d6fd53de459bd92ebee5178e61c619cef74fdd411f3  docs/research/2026-10-29-lbm-mass-budget/src/lbm/mod.rs
+145f42c10bb76ddea1e74e82642326da615f1dc741167b763cead32eb783ac48  docs/research/2026-10-29-lbm-mass-budget/src/lbm/model.rs
+9aa60baad20bb004089814ef31cee2353e3298314608e203366da417015d5e8d  docs/research/2026-10-29-lbm-mass-budget/src/reference_lbm/gpu.rs
+02dace454dddbf15c045f93f86a4ed7f7b8e61703f39213eeec2bb45e29f0b49  docs/research/2026-10-29-lbm-mass-budget/src/reference_lbm/lbm.wgsl
+5161e70afa911044e3ad1b83d1810fc772819e49075a6f2ecac96131c6f751bf  docs/research/2026-10-29-lbm-mass-budget/src/reference_lbm/lsq_io.rs
+6d131842ce9e4befbd6c5d6fd53de459bd92ebee5178e61c619cef74fdd411f3  docs/research/2026-10-29-lbm-mass-budget/src/reference_lbm/mod.rs
+145f42c10bb76ddea1e74e82642326da615f1dc741167b763cead32eb783ac48  docs/research/2026-10-29-lbm-mass-budget/src/reference_lbm/model.rs
+71cbd38322b1f9592b4ac3788e8efbfbc1e71dd80223e36f7e80c4920279e980  docs/research/2026-10-29-lbm-mass-budget/build.sh
+8a25ce17167353c99a6a404de7da229eabaea6dba615d9036e2da1ae993866d5  docs/research/2026-10-29-lbm-mass-budget/bin/mass_budget
+e21eb598e213825428efcd7b04636d8989c1931a92d4e29a1ade680f654cd37b  docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/results/fork_a-fine.geom.weights

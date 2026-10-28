@@ -1,0 +1,40 @@
+Fresh local build exit0; local smoke3frames and final finite-guard smoke1frame exit0. No local long run.
+Hardware RTX3060:500frames/7000steps/21000opening rows/3control rows; exit0 COMPLETE. No repeat.
+shell syntax: PASS
+Rust formatting: PASS
+Python syntax / original numerical text / identical reference / uploaded source identity: PASS
+Hardware ledger completeness / same-device bits / placeholder mapping / budget closure: PASS
+Final instance58133143 state stopped/exited: CONFIRMED
+Observed cumulative budget residual: 9.769962616701378e-15
+docs/research/2026-10-29-lbm-mass-budget/src/accounting.rs: OK
+docs/research/2026-10-29-lbm-mass-budget/src/main.rs: OK
+docs/research/2026-10-29-lbm-mass-budget/src/lbm/gpu.rs: OK
+docs/research/2026-10-29-lbm-mass-budget/src/lbm/lbm.wgsl: OK
+docs/research/2026-10-29-lbm-mass-budget/src/lbm/lsq_io.rs: OK
+docs/research/2026-10-29-lbm-mass-budget/src/lbm/mod.rs: OK
+docs/research/2026-10-29-lbm-mass-budget/src/lbm/model.rs: OK
+docs/research/2026-10-29-lbm-mass-budget/src/reference_lbm/gpu.rs: OK
+docs/research/2026-10-29-lbm-mass-budget/src/reference_lbm/lbm.wgsl: OK
+docs/research/2026-10-29-lbm-mass-budget/src/reference_lbm/lsq_io.rs: OK
+docs/research/2026-10-29-lbm-mass-budget/src/reference_lbm/mod.rs: OK
+docs/research/2026-10-29-lbm-mass-budget/src/reference_lbm/model.rs: OK
+docs/research/2026-10-29-lbm-mass-budget/build.sh: OK
+docs/research/2026-10-29-lbm-mass-budget/bin/mass_budget: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/results/fork_a-fine.geom.weights: OK
+Frozen source/binary/weight SHA: PASS
+results/budget/control.csv: OK
+results/budget/frames.csv: OK
+results/budget/openings.csv: OK
+results/budget/steps.csv: OK
+results/exit-code.txt: OK
+results/finished-utc.txt: OK
+results/glibc.txt: OK
+results/gpu.csv: OK
+results/input-verification.txt: OK
+results/run.log: OK
+results/started-utc.txt: OK
+results/uname.txt: OK
+results/vulkan-stderr.txt: OK
+results/vulkan.txt: OK
+Retrieved hardware results SHA: PASS
+staged whitespace: PASS
