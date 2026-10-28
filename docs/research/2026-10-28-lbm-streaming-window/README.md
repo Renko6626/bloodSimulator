@@ -1,24 +1,39 @@
 # LBM streaming window probe
 
-The probe runs the production simulation with a robot in a closed loop. The matrix covers straight and fork geometry, Fine and Coarse, 0 and 72 total cells, plus Coarse cases for a 2-unit transition band and an opening 8 rather than 16 units from the fork. The window is 48×48 and blocks are 16×16. The feature distance is measured from the initial right window edge to the fork on the centerline; motion changes this distance. The starting robot is at x=31.98 and ordinary rightward movement crosses a block boundary. The 72 cells are distributed along the loop; `active_cells` is the actual maximum number with valid marker support in a substep.
+The production simulation runs a closed-loop straight or fork fixture, with a robot and 0 or 72 total cells, Fine or Coarse. A small subset compares outer bands 2/4 and fork distances 8/16 from the window's right opening. World window size is 48×48, block size is 16×16. Pressure is the game configuration default, 12, with its ordinary pulse and default velocity bound 10. The 72 cells are distributed around the loop; `active_cells` counts the maximum with valid local marker support in a substep.
 
-`functional.csv` contains three frames per case on llvmpipe. `functional.csv.reference.csv` compares two zero-cell public StreamingWindows, with a fixed window and one moving by one block according to the robot's previous-frame position. Both receive the same graph flow and advance to the same physical time; these reference windows do not include the robot's coupling. Their migration can occur one substep/frame later than the production window. The center comparison samples their common valid region. At 0.05 game-time seconds all reported reference deltas were zero; this short horizon does not establish transient or buffer adequacy. The first frame has no movement input to capture the pre-migration force; subsequent frames use ordinary movement. `region_switches` is cumulative. Per-frame marker-force values allow comparing the migration frame and subsequent frames, but a three-frame check is not a stability assessment.
+Each case holds the robot near its spawn by ordinary movement input during warmup and the measurement interval. The window must not shift during this interval: if it does, the case fails. The geometry remains fixed, so the opening-to-fork distances remain 8 or 16 throughout the hold. After the hold, 16 frames of rightward input and eight post-movement frames capture one warmed migration, including the pre-migration rows. The input controller and robot coupling are part of this workload. Timing p95 values use hold frames only; migration rows have separate phase labels and work counters. `region_switches` is cumulative.
 
-The software adapter is **not** a hardware measurement. Fine viability, Coarse fallback, 2 versus 4 transition width, 8 versus 16 buffer distance, strip warmup, and long-term migration transient remain pending real hardware and a long enough physical horizon for boundary influence. The fixtures use pressure 0.01 and do not validate the default small_world, which remains unsupported. The captured lattice density sum is dimensionless, not physical mass; it is resolution dependent. Wait-inclusive CPU stage timings and work counters are not GPU kernel times; constituent durations overlap and cannot be added to their enclosing stages or their p95 values.
+`functional.csv` and companions are an **incomplete, failing** short-horizon diagnostic dataset: two warmup plus four hold frames and up to 24 migration/post frames on llvmpipe. The fork/Fine cases failed after the shift at default pressure; an isolated follow-up also fails while held, before any migration. Eight other cases completed. These results do not support hardware performance or shipping acceptance. The probe continues after individual case errors but returns a nonzero exit code and reports every failure; the failing frame has no production CSV row. Preserve the stderr log with any run.
 
-## Reproduce on authorized hardware
+`functional.csv.migration.csv` exports the first eight cached post-shift substep deltas against the **pre-shift baseline**, including frame and calculated substep end time; they include ordinary fluid evolution and are not migration-only errors. The `immediate_center_*` and `overlap_error` fields in the main CSV describe the immediate overlap copy, not later evolution. No extra GPU readback is issued for these observations. `functional.csv.reference.csv` compares zero-cell Coarse public StreamingWindows: the moving window follows the robot's previous-frame position while the reference remains fixed. Both receive the same graph flow and reach equal physical time; neither includes robot coupling, and the shift can lag production by one frame. Thus the reference is not a cell-loaded production comparison.
 
-Use a reviewed committed source revision, Rust and a supported GPU driver. These commands only build and run locally; they do not start a cloud instance or read credentials. The timeout bounds the run, and a timeout or error leaves an incomplete CSV that must not be treated as a result. Increase the frame count for the propagation horizon when the physical travel time warrants it; 120 measured frames alone does not establish it.
+The sampled fork/Fine instability exceeds the configured speed bound: in a held run cached-grid max speed increased from 8.26 at frame 10 to 14.94 at frame 12 and 142.60 at frame 15, followed by `invalid fluid state` at frame 16. This lower-bound speed scan uses the public cache sampler, not a GPU readback. The robot remained near the vessel center; migration is not necessary for this reproduction. The underlying numerical cause remains unconfirmed. The default small_world is unsupported. Fine viability, fallback, buffer, transition width, strip warmup, and long-term behavior are unresolved.
+
+The CSV density sum is dimensionless and resolution-dependent, not physical mass. All timings are CPU wall measurements; the LBM stage includes waiting, GPU kernel time is unavailable, and stages overlap. Never add their independent p95 values.
+
+## Source bundle and proposed hardware command
+
+Do not run paid hardware until the representative-pressure instability is understood and the experiment is reviewed. These commands do not start an instance or read credentials. On the reviewed clean source checkout, create an archive and a separate manifest; transfer **both** files by the authorized method:
 
 ```sh
-set -o pipefail
-mkdir -p results/lbm-window
-git rev-parse HEAD > results/lbm-window/source-commit.txt
-git status --short > results/lbm-window/source-status.txt
-cargo build --locked --release -p simulation --features lbm-gpu --example lbm_window_probe
-timeout 3600 target/release/examples/lbm_window_probe --warmup 20 --frames 120 --output results/lbm-window/hardware.csv 2>&1 | tee results/lbm-window/run.log
+set -euo pipefail
+git diff --quiet
+git diff --cached --quiet
+git rev-parse HEAD > /tmp/lbm-window-source-commit.txt
+git archive --format=tar HEAD | gzip > /tmp/lbm-window-source.tar.gz
 ```
 
-The binary rejects software adapters in this mode. Record the exact command, GPU/driver and exit status alongside the output; the CSV records adapter and measurement mode. The summaries print independent nearest-rank p95 values from measurement frames for full step, coupling, wait-inclusive LBM stage and Rapier. They are not summed. Include warmup rows when examining migration. The companion reference CSV reports zero-cell same-time differences, subject to the scheduling and coupling limitations above.
+On the execution machine, with both files in the current directory, extract to an empty directory and retain the manifest alongside the results. A source archive has no `.git`; do not use `git rev-parse` there. Supply the source archive and manifest paths as appropriate for the transfer.
 
-For a clean source bundle after committing the probe, run `git archive --format=tar HEAD | gzip > /tmp/lbm-window-source.tar.gz`; transfer the archive by the separately authorized method and retain the recorded commit and commands with the results. Archived instance identifiers do not establish current availability or price.
+```sh
+set -euo pipefail
+mkdir -p lbm-window-source results/lbm-window
+tar -xzf lbm-window-source.tar.gz -C lbm-window-source
+cp lbm-window-source-commit.txt results/lbm-window/source-commit.txt
+cd lbm-window-source
+cargo build --locked --release -p simulation --features lbm-gpu --example lbm_window_probe
+timeout 3600 target/release/examples/lbm_window_probe --warmup 20 --frames 720 --output ../results/lbm-window/hardware.csv 2>&1 | tee ../results/lbm-window/run.log
+```
+
+The 720-frame hold spans 12 game-time seconds. As a planning scale, the straight fixture's nominal flow of approximately 18.5 across a 12-unit opening gives mean speed approximately 1.54 units per game second, so 8 and 16 units correspond to roughly 5.2 and 10.4 seconds of advection. Fork speeds and transient propagation differ; this estimate is not proof the boundary influence has reached every sampled location. Review measured flux and the full time series before drawing a buffer conclusion. The binary rejects software adapters in hardware mode. Record GPU/driver and command exit status; timeout, any failed case, or incomplete output invalidates acceptance. The command reports separate nearest-rank p95 values for hold-frame full step, coupling, wait-inclusive LBM stage and Rapier.
