@@ -1,0 +1,7 @@
+case,frame,physical_time,shifted,overlap_error,center_density_delta,center_velocity_delta,center_momentum_delta,sample_count
+straight,0,0.01666666753590107,false,0,0,0,0,288
+straight,1,0.03333333507180214,false,0,0,0,0,288
+straight,2,0.05000000260770321,true,0,0,0,0,288
+fork,0,0.01666666753590107,false,0,0,0,0,300
+fork,1,0.03333333507180214,false,0,0,0,0,300
+fork,2,0.05000000260770321,true,0,0,0,0,300
