@@ -1,0 +1,1 @@
+{"geometry_sha256": "36a1c8ee234ba54e1c4ff8ac93cf1561dea0b79cee6dfb7642cd56418459f775", "radius": 4, "openings": 78, "samples_min": 12, "samples_max": 28, "condition_max": 23.436867704265826, "weight_l1_max": 2.131566118765236, "axial_unsupported": 2, "wall_crossings_rejected": 8}

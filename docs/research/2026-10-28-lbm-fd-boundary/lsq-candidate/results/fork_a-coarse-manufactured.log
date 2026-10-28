@@ -1,0 +1,4 @@
+case=fork_a profile=Coarse n=96 dt=0.0020833334 tau=0.50125 openings=[OpeningSpec { side: Left, cells: 42..54, direction: [1.0, 0.0], outward_flow: -18.529297, background_speed: 4.632324 }, OpeningSpec { side: Right, cells: 65..78, direction: [0.89442724, 0.44721362], outward_flow: 12.970508, background_speed: 3.242627 }, OpeningSpec { side: Top, cells: 18..31, direction: [-0.44721362, 0.89442724], outward_flow: 5.5587893, background_speed: 1.3896974 }]
+adapter="llvmpipe (LLVM 15.0.7, 256 bits)" software=true
+MANUFACTURED quadratic=false opening_cells=38 max_absolute_gradient_error=2.3246684577e-9 tolerance=5e-8
+MANUFACTURED quadratic=true opening_cells=38 max_absolute_gradient_error=2.4519977160e-9 tolerance=5e-8

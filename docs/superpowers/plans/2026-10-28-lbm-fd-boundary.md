@@ -51,3 +51,24 @@ A decaying projection is insufficient: inspect full spectra and total disturbanc
 - Validation scope: existing research diagnostics plus source/style/manifest checks, no permanent test additions or full workspace rebuild.
 - Scope correction: one duplicate final archive execution occurred after formatting to align binary provenance; it added no cases or acceptance requirement. The lead instructed no further numerical reruns; none followed.
 - Final review: self-review of source, spectra, logs and bounds; no additional agent was authorized. No merge/push.
+
+## Approved follow-up: bounded LSQ-FD candidate
+
+User approved a finite-neighborhood local-fit candidate after asking about general vessel angles. Work stays in `lsq-candidate/`; original FD sources/results remain immutable. No production API, geometry rule, velocity source, density closure, MRT/Guo or parameter changes. Openings must still lie on individual straight branches, not through junctions.
+
+- Fixed radius **4 lattice cells**, Euclidean disk, one-sided domain clipping. Include visible interior fluid centers and immutable target velocities on the same opening. Reject any source-to-sample segment whose supercover crosses a solid; never sample another wall-separated vessel or read live boundary populations.
+- For each component fit `u(s,z)-ub = a*s+b*z+c*s²/2+d*s*z+e*z²/2`, with `(s,z)=(delta.n,delta.t)/4`. ub is exact supplied boundary velocity. Distance weight `1/(1+|delta|²)`. CPU NumPy SVD/lstsq precomputes derivative weights; GPU sums weights times `(uj-ub)`.
+- Require actual rank5 with relative singular-value cutoff1e-12 and normalized design condition≤1000. This is a declared research conditioning bound, not a physical stability theorem. No larger-radius retries, lower-order fallback, clamping or regularization. Rank/condition failure is explicitly unsupported.
+- Store geometry identity (dimensions, periodic diagnostic flag, mask and opening-side map) in weight artifact; constructor must compare exact identity before loading. One research-only read-only GPU buffer holds per-cell ranges and sample indices/derivative weights. Geometry changes require regeneration; time-varying targets reuse weights.
+- FD references remain Latt2008 BC4 and Wissocq2017. LSQ polynomial adaptation is our experiment, not either paper's validated MRT boundary. NumPy official `lstsq` documentation supports SVD rank/singular-value handling; blocked PMC7605305 was not used as evidence.
+
+Ownership: new `lsq-candidate/src/lbm/` isolated copy and diagnostic harness; `weights.py`, build/run scripts and new raw artifacts. Original production and prior experiment files are not numerically modified.
+
+Small matrix, stop on actual failure rather than tune: diagonal45 Fine/Coarse160frames; two asymmetric non45-degree forks Coarse160frames, then one representative forkFine only if Coarse stays viable. Flow scale18.529297, 15%1.2Hz pulse, unchanged nu/dt; prescribed balanced branch split0.7/0.3 and0.35/0.65. Existing production rasterizer must accept every geometry unchanged. Each lattice step checks positive finite rho/u; frame-end logs include velocity/flux errors, mass and extrema. Candidate-gradient path validates analytic linear and quadratic vector fields with absolute derivative error≤5e-8 lattice units. A32² old eigenmode100-step total-norm comparison against original FD is a bounded non-regression/control, not a full spectral proof.
+
+- [x] Implement geometry export/precomputed finite-neighborhood weights and GPU gradient path.
+- [x] Format then build once; inspect geometry/rank/visibility statistics and real-shader polynomial diagnostic.
+- [x] Run the bounded numerical matrix; preserve failures and do not scan parameters.
+- [x] Archive scoped results, commands/source hashes and commit experiment only.
+
+LSQ follow-up ledger: all five predeclared160-frame cases completed on llvmpipe; ten actual-shader manufactured-field checks passed; one old-mode100-step comparison and geometry-mismatch rejection recorded. No numerical source changed after build, no numeric rerun for command/docs/hash alignment. Old FD source/results remained unchanged. Results are finite functional evidence, not full-spectrum/angle/accuracy acceptance.

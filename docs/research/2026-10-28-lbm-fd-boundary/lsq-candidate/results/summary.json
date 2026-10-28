@@ -1,0 +1,132 @@
+{
+  "diagonal45-fine": {
+    "frames": 160,
+    "rho_min": 0.955487,
+    "rho_max": 1.053656,
+    "max_lattice": 0.044146948,
+    "mass_rel_min": -0.00022563649756,
+    "mass_rel_max": 0.0010719016943,
+    "mass_rel_final": 0.00031081423544,
+    "max_boundary_velocity_error": 9.536743e-07,
+    "max_flux_error": 3.8146973e-06,
+    "manufactured_errors": [
+      4.7020876082e-09,
+      2.5675035431e-09
+    ],
+    "stencil": {
+      "geometry_sha256": "5101585393292a792e119f1ff40829d4a09b0aab65c79859557bbabb55e26065",
+      "radius": 4,
+      "openings": 66,
+      "samples_min": 7,
+      "samples_max": 28,
+      "condition_max": 84.67940750641058,
+      "weight_l1_max": 7.147190771202734,
+      "axial_unsupported": 4,
+      "wall_crossings_rejected": 8
+    }
+  },
+  "diagonal45-coarse": {
+    "frames": 160,
+    "rho_min": 0.95829195,
+    "rho_max": 1.0414798,
+    "max_lattice": 0.036564752,
+    "mass_rel_min": -0.00016051051172,
+    "mass_rel_max": 0.00080573418448,
+    "mass_rel_final": 0.00080573418448,
+    "max_boundary_velocity_error": 7.1525574e-07,
+    "max_flux_error": 5.722046e-06,
+    "manufactured_errors": [
+      1.1459633242e-09,
+      4.3819454731e-09
+    ],
+    "stencil": {
+      "geometry_sha256": "c4a7065b071be5dcd6236ed8327374d16592311601e3da5906a85ed7cf651c45",
+      "radius": 4,
+      "openings": 34,
+      "samples_min": 7,
+      "samples_max": 28,
+      "condition_max": 84.67940750641058,
+      "weight_l1_max": 7.147190771202734,
+      "axial_unsupported": 4,
+      "wall_crossings_rejected": 8
+    }
+  },
+  "fork_a-coarse": {
+    "frames": 160,
+    "rho_min": 0.9806132,
+    "rho_max": 1.018546,
+    "max_lattice": 0.029463235,
+    "mass_rel_min": -7.3638463881e-05,
+    "mass_rel_max": 0.0002709762745,
+    "mass_rel_final": 0.00021809641136,
+    "max_boundary_velocity_error": 9.536743e-07,
+    "max_flux_error": 3.8146973e-06,
+    "manufactured_errors": [
+      2.3246684577e-09,
+      2.451997716e-09
+    ],
+    "stencil": {
+      "geometry_sha256": "dd80ebaf2bf8fe563bde8bf75615b2de7c2ae221564d25f8ce234d3a513436a3",
+      "radius": 4,
+      "openings": 38,
+      "samples_min": 12,
+      "samples_max": 28,
+      "condition_max": 23.436867704265826,
+      "weight_l1_max": 2.131566118765236,
+      "axial_unsupported": 2,
+      "wall_crossings_rejected": 8
+    }
+  },
+  "fork_b-coarse": {
+    "frames": 160,
+    "rho_min": 0.97146964,
+    "rho_max": 1.0303313,
+    "max_lattice": 0.037393972,
+    "mass_rel_min": -7.9032297592e-05,
+    "mass_rel_max": 0.00039749494863,
+    "mass_rel_final": 0.00039749494863,
+    "max_boundary_velocity_error": 9.536743e-07,
+    "max_flux_error": 3.8146973e-06,
+    "manufactured_errors": [
+      1.4661054593e-09,
+      2.5852386898e-09
+    ],
+    "stencil": {
+      "geometry_sha256": "be85ae3d50f6c9b08c733da6b6e23757d1e29ea6c79ce4615d74d780e582b976",
+      "radius": 4,
+      "openings": 36,
+      "samples_min": 14,
+      "samples_max": 28,
+      "condition_max": 17.671308181686374,
+      "weight_l1_max": 2.1329514453933323,
+      "axial_unsupported": 0,
+      "wall_crossings_rejected": 3
+    }
+  },
+  "fork_a-fine": {
+    "frames": 160,
+    "rho_min": 0.9687423,
+    "rho_max": 1.0350245,
+    "max_lattice": 0.047618404,
+    "mass_rel_min": -0.00011013866038,
+    "mass_rel_max": 0.00044391468497,
+    "mass_rel_final": 0.00032335821241,
+    "max_boundary_velocity_error": 1.1920929e-06,
+    "max_flux_error": 5.722046e-06,
+    "manufactured_errors": [
+      3.2287061913e-09,
+      3.8817233872e-09
+    ],
+    "stencil": {
+      "geometry_sha256": "36a1c8ee234ba54e1c4ff8ac93cf1561dea0b79cee6dfb7642cd56418459f775",
+      "radius": 4,
+      "openings": 78,
+      "samples_min": 12,
+      "samples_max": 28,
+      "condition_max": 23.436867704265826,
+      "weight_l1_max": 2.131566118765236,
+      "axial_unsupported": 2,
+      "wall_crossings_rejected": 8
+    }
+  }
+}
