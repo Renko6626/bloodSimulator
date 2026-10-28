@@ -1,0 +1,10 @@
+3dd1b4df4227b8d11167f2e0b0be3921de4d7264c2cda8592ba04f78fbab50c2  docs/research/2026-10-29-lbm-mean-density/src/main.rs
+85efcb126e44d3bc5439a4eaf370e6867a5da5fc072c55a3b7a1bf11442a8929  docs/research/2026-10-29-lbm-mean-density/src/observe.rs
+838a51571cf49b2f0e2877dbf6b56ed98978f88ef21d1e01487a5d38188b61e5  docs/research/2026-10-29-lbm-mean-density/src/lbm/gpu.rs
+5f5c223ec2fcedff4824b087e6626de82b712be6a260006c14f0d0aed6cb0627  docs/research/2026-10-29-lbm-mean-density/src/lbm/lbm.wgsl
+5161e70afa911044e3ad1b83d1810fc772819e49075a6f2ecac96131c6f751bf  docs/research/2026-10-29-lbm-mean-density/src/lbm/lsq_io.rs
+6d131842ce9e4befbd6c5d6fd53de459bd92ebee5178e61c619cef74fdd411f3  docs/research/2026-10-29-lbm-mean-density/src/lbm/mod.rs
+145f42c10bb76ddea1e74e82642326da615f1dc741167b763cead32eb783ac48  docs/research/2026-10-29-lbm-mean-density/src/lbm/model.rs
+5efabb3755fdb56419dbe97b1d632cbbcabef8328373434f7a863b4b73d8d221  docs/research/2026-10-29-lbm-mean-density/build.sh
+2c451ec2b3090af4db77f98184a8c26fb20bde76c3a3fc28195d97032ca7351e  docs/research/2026-10-29-lbm-mean-density/bin/mean_density
+e21eb598e213825428efcd7b04636d8989c1931a92d4e29a1ade680f654cd37b  docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/results/fork_a-fine.geom.weights

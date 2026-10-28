@@ -1,0 +1,23 @@
+force_moment_check mean_before=1.0199999809642653 delta=0.01999998 force=[0.02, -0.01] density_residual=2.099e-9 velocity_change=7.150e-10 stress_change=5.347e-10 passed=true
+case=fork_a Fine frames=1000 paired=true same_initial_bits=true adapter="NVIDIA GeForce RTX 3060" software=false n=192 h=0.25 dt=0.0011904762 nu=0.05 tau=0.50285715 fluid_cells=7141 initial_mass=7.14099999933822255e3
+frame=49 baseline_mean=0.9999055270958181 controlled_mean=0.9999999999960779 removed_cumulative=-6.74587561e-1 budget=0.000e0 instant_du=6.748e-10 paired_velocity_rel_max=6.14249e-5 guardrail_breaches=0
+frame=99 baseline_mean=0.9999017303429785 controlled_mean=1.0000000000146843 removed_cumulative=-7.01509399e-1 budget=0.000e0 instant_du=8.052e-10 paired_velocity_rel_max=1.72105e-4 guardrail_breaches=0
+frame=149 baseline_mean=0.9999856369492077 controlled_mean=1.0000000000142073 removed_cumulative=-1.02054046e-1 budget=0.000e0 instant_du=7.733e-10 paired_velocity_rel_max=2.11424e-4 guardrail_breaches=0
+frame=199 baseline_mean=1.0001198603078818 controlled_mean=1.000000000005453 removed_cumulative=8.56641756e-1 budget=0.000e0 instant_du=6.493e-10 paired_velocity_rel_max=2.63390e-4 guardrail_breaches=0
+frame=249 baseline_mean=1.000258360299456 controlled_mean=1.00000000002163 removed_cumulative=1.84568808e0 budget=0.000e0 instant_du=9.482e-10 paired_velocity_rel_max=3.41657e-4 guardrail_breaches=0
+frame=299 baseline_mean=1.0003637790375233 controlled_mean=1.0000000000125935 removed_cumulative=2.59833307e0 budget=0.000e0 instant_du=8.981e-10 paired_velocity_rel_max=3.82408e-4 guardrail_breaches=0
+frame=349 baseline_mean=1.0004194300231026 controlled_mean=0.9999999999839202 removed_cumulative=2.99556797e0 budget=0.000e0 instant_du=8.247e-10 paired_velocity_rel_max=4.22225e-4 guardrail_breaches=0
+frame=399 baseline_mean=1.0004325741405902 controlled_mean=1.0000000000355314 removed_cumulative=3.08935351e0 budget=0.000e0 instant_du=7.478e-10 paired_velocity_rel_max=4.06321e-4 guardrail_breaches=0
+frame=449 baseline_mean=1.0004260468188957 controlled_mean=1.0000000000420235 removed_cumulative=3.04272301e0 budget=0.000e0 instant_du=5.971e-10 paired_velocity_rel_max=3.35331e-4 guardrail_breaches=0
+frame=499 baseline_mean=1.0004239594930306 controlled_mean=1.0000000000361295 removed_cumulative=3.02783052e0 budget=0.000e0 instant_du=5.728e-10 paired_velocity_rel_max=2.93949e-4 guardrail_breaches=0
+frame=549 baseline_mean=1.000443615745145 controlled_mean=1.0000000000414888 removed_cumulative=3.16822245e0 budget=0.000e0 instant_du=5.802e-10 paired_velocity_rel_max=2.54111e-4 guardrail_breaches=0
+frame=599 baseline_mean=1.0004924615921251 controlled_mean=1.0000000000722893 removed_cumulative=3.51700230e0 budget=0.000e0 instant_du=6.584e-10 paired_velocity_rel_max=2.09876e-4 guardrail_breaches=0
+frame=649 baseline_mean=1.0005648211599065 controlled_mean=1.0000000000137612 removed_cumulative=4.03365032e0 budget=0.000e0 instant_du=7.417e-10 paired_velocity_rel_max=1.85679e-4 guardrail_breaches=0
+frame=699 baseline_mean=1.0006447065604989 controlled_mean=1.000000000015011 removed_cumulative=4.60395563e0 budget=0.000e0 instant_du=8.064e-10 paired_velocity_rel_max=1.73766e-4 guardrail_breaches=0
+frame=749 baseline_mean=1.0007137567136648 controlled_mean=1.0000000000368532 removed_cumulative=5.09685823e0 budget=0.000e0 instant_du=9.632e-10 paired_velocity_rel_max=1.67236e-4 guardrail_breaches=0
+frame=799 baseline_mean=1.0007605022408037 controlled_mean=0.9999999999811414 removed_cumulative=5.43050184e0 budget=0.000e0 instant_du=9.524e-10 paired_velocity_rel_max=1.61300e-4 guardrail_breaches=0
+frame=849 baseline_mean=1.000783813928556 controlled_mean=0.999999999951834 removed_cumulative=5.59687500e0 budget=0.000e0 instant_du=8.284e-10 paired_velocity_rel_max=1.55980e-4 guardrail_breaches=0
+frame=899 baseline_mean=1.0007908507560663 controlled_mean=0.9999999999680722 removed_cumulative=5.64708566e0 budget=0.000e0 instant_du=9.550e-10 paired_velocity_rel_max=1.58340e-4 guardrail_breaches=0
+frame=949 baseline_mean=1.000793344918629 controlled_mean=1.0000000001904947 removed_cumulative=5.66492554e0 budget=0.000e0 instant_du=5.181e-10 paired_velocity_rel_max=1.76493e-4 guardrail_breaches=0
+frame=999 baseline_mean=1.0008034972958912 controlled_mean=1.0000000000423335 removed_cumulative=5.73747801e0 budget=0.000e0 instant_du=8.533e-10 paired_velocity_rel_max=2.03158e-4 guardrail_breaches=0
+COMPLETE guardrail_breaches=0

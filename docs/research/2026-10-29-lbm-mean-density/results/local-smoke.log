@@ -1,0 +1,4 @@
+force_moment_check mean_before=1.0199999809642653 delta=0.01999998 force=[0.02, -0.01] density_residual=2.099e-9 velocity_change=7.150e-10 stress_change=5.347e-10 passed=true
+case=fork_a Fine frames=2 paired=true same_initial_bits=true adapter="llvmpipe (LLVM 15.0.7, 256 bits)" software=true n=192 h=0.25 dt=0.0011904762 nu=0.05 tau=0.50285715 fluid_cells=7141 initial_mass=7.14099999933822255e3
+frame=1 baseline_mean=1.0000002900892853 controlled_mean=0.9999999999967434 removed_cumulative=2.07182422e-3 budget=0.000e0 instant_du=7.168e-10 paired_velocity_rel_max=2.14376e-7 guardrail_breaches=0
+COMPLETE guardrail_breaches=0

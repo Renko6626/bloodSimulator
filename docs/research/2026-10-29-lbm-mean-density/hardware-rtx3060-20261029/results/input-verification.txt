@@ -1,0 +1,11 @@
+build.sh: OK
+fork_a-fine.geom.weights: OK
+mean_density: OK
+run-hardware.sh: OK
+src/lbm/gpu.rs: OK
+src/lbm/lbm.wgsl: OK
+src/lbm/lsq_io.rs: OK
+src/lbm/mod.rs: OK
+src/lbm/model.rs: OK
+src/main.rs: OK
+src/observe.rs: OK

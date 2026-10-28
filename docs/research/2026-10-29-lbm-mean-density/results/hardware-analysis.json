@@ -1,0 +1,217 @@
+{
+  "case": "fork_a Fine",
+  "frames_per_window": 1000,
+  "lattice_steps_per_window": 14000,
+  "reference_density": 1.0,
+  "adapter": "NVIDIA GeForce RTX 3060",
+  "software": false,
+  "baseline": {
+    "final": {
+      "frame": 999.0,
+      "mean_rho": 1.0008034972958912,
+      "rho_min": 0.9720127387554385,
+      "rho_max": 1.0154922011424787,
+      "max_lattice": 0.02277521477440802,
+      "mass_change": 5.737774851736335,
+      "mass_rel": 0.000803497388638576,
+      "velocity_error_world": 4.853920145819757e-07,
+      "volume_flux_error": 1.2729279568191032e-06
+    },
+    "mean_residual_max": 0.0009933380403570613,
+    "rho_min": 0.9565815187525004,
+    "rho_max": 1.0434187649516389,
+    "max_lattice": {
+      "value": 0.06830614295996458,
+      "frame": 261
+    },
+    "max_velocity_error_world": {
+      "value": 6.29198076751436e-07,
+      "frame": 866
+    },
+    "max_volume_flux_error": {
+      "value": 1.738142671570131e-06,
+      "frame": 168
+    }
+  },
+  "controlled": {
+    "final": {
+      "frame": 999.0,
+      "mean_rho": 1.0000000000423335,
+      "rho_min": 0.9712344575091265,
+      "rho_max": 1.0146745376405306,
+      "max_lattice": 0.02277778637798931,
+      "mass_change": 9.640810585409554e-07,
+      "mass_rel": 1.350064498852121e-10,
+      "velocity_error_world": 4.257399783824667e-07,
+      "volume_flux_error": 1.3954039523866868e-06,
+      "solver_delta": -0.0025068313764435857,
+      "removed_mass": -0.0025068851772864775,
+      "cum_solver_delta": 5.737478971587381,
+      "cum_removed_mass": 5.737478007506322,
+      "budget_residual": 0.0
+    },
+    "mean_residual_max": 2.1197466004707621e-10,
+    "rho_min": 0.9562746075680479,
+    "rho_max": 1.04276102501899,
+    "max_lattice": {
+      "value": 0.06831404614789507,
+      "frame": 261
+    },
+    "max_velocity_error_world": {
+      "value": 7.208210952569516e-07,
+      "frame": 578
+    },
+    "max_volume_flux_error": {
+      "value": 1.8614553578544246e-06,
+      "frame": 470
+    }
+  },
+  "instantaneous": {
+    "mean_residual": {
+      "value": 2.1197466004707621e-10,
+      "frame": 398
+    },
+    "density_shift_residual": {
+      "value": 2.1186679077800363e-09,
+      "frame": 193
+    },
+    "velocity_change": {
+      "value": 2.0316691474211656e-09,
+      "frame": 186
+    },
+    "neqstress_component_change": {
+      "value": 1.5822271622230322e-09,
+      "frame": 232
+    }
+  },
+  "max_abs_removal_error": 1.5136972066898124e-06,
+  "maximum_abs_delta_f32": 4.0995455492520705e-05,
+  "positive_mass_removed": 44.68197142202495,
+  "positive_mass_added": 38.94449341451863,
+  "net_mass_removed": 5.737478007506322,
+  "net_mass_removed_h2D": 0.35859237546914513,
+  "cumulative_budget_residual_max": 0.0,
+  "regions": {
+    "global": {
+      "peaks": {
+        "velocity_rel_l2": {
+          "value": 0.0003459124769801764,
+          "frame": 344
+        },
+        "velocity_abs_rms_lattice": {
+          "value": 3.3721784340250455e-06,
+          "frame": 346
+        },
+        "velocity_abs_max_lattice": {
+          "value": 5.168620609586686e-05,
+          "frame": 341
+        },
+        "demeaned_rho_rel_l2": {
+          "value": 0.001195950447904317,
+          "frame": 882
+        },
+        "demeaned_rho_abs_rms": {
+          "value": 1.5272705024639437e-05,
+          "frame": 773
+        },
+        "demeaned_rho_abs_max": {
+          "value": 3.0993581429661354e-05,
+          "frame": 771
+        },
+        "neqstress_rel_l2": {
+          "value": 0.0011419426111758581,
+          "frame": 392
+        },
+        "neqstress_abs_rms": {
+          "value": 7.751856850875246e-07,
+          "frame": 762
+        },
+        "neqstress_abs_max": {
+          "value": 1.1855108219823157e-05,
+          "frame": 327
+        }
+      },
+      "final": {
+        "velocity_rel_l2": 0.0001471590835366366,
+        "velocity_abs_rms_lattice": 1.5172513626393037e-06,
+        "velocity_abs_max_lattice": 4.837663554997338e-06,
+        "demeaned_rho_rel_l2": 0.0008955217410079769,
+        "demeaned_rho_abs_rms": 1.195556690219362e-05,
+        "demeaned_rho_abs_max": 2.5233236713217977e-05,
+        "neqstress_rel_l2": 0.0008030817123932224,
+        "neqstress_abs_rms": 4.587914349081152e-07,
+        "neqstress_abs_max": 3.5125399300616564e-06
+      },
+      "guardrail_breach_frames": []
+    },
+    "central": {
+      "peaks": {
+        "velocity_rel_l2": {
+          "value": 0.0005509938027922008,
+          "frame": 344
+        },
+        "velocity_abs_rms_lattice": {
+          "value": 5.8381943676733114e-06,
+          "frame": 345
+        },
+        "velocity_abs_max_lattice": {
+          "value": 5.168620609586686e-05,
+          "frame": 341
+        },
+        "demeaned_rho_rel_l2": {
+          "value": 0.001332382736492928,
+          "frame": 881
+        },
+        "demeaned_rho_abs_rms": {
+          "value": 5.2633086302401764e-06,
+          "frame": 723
+        },
+        "demeaned_rho_abs_max": {
+          "value": 1.4885267808129043e-05,
+          "frame": 772
+        },
+        "neqstress_rel_l2": {
+          "value": 0.0014088309512396847,
+          "frame": 393
+        },
+        "neqstress_abs_rms": {
+          "value": 1.2704869357060914e-06,
+          "frame": 328
+        },
+        "neqstress_abs_max": {
+          "value": 1.1855108219823157e-05,
+          "frame": 327
+        }
+      },
+      "final": {
+        "velocity_rel_l2": 0.00020315843912399115,
+        "velocity_abs_rms_lattice": 2.0603809870730023e-06,
+        "velocity_abs_max_lattice": 4.837663554997338e-06,
+        "demeaned_rho_rel_l2": 0.0009015759195582206,
+        "demeaned_rho_abs_rms": 4.493903535729176e-06,
+        "demeaned_rho_abs_max": 1.231175612637081e-05,
+        "neqstress_rel_l2": 0.000791807526363274,
+        "neqstress_abs_rms": 5.873504223122201e-07,
+        "neqstress_abs_max": 3.5125399300616564e-06
+      },
+      "guardrail_breach_frames": []
+    }
+  },
+  "force_check": {
+    "mean_before": 1.0199999809642653,
+    "delta_f32": 0.019999980926513672,
+    "force_x_lattice": 0.019999999552965164,
+    "force_y_lattice": -0.009999999776482582,
+    "mean_after": 0.999999999241552,
+    "density_shift_residual": 2.0991137716919184e-09,
+    "velocity_change": 7.149558807786202e-10,
+    "guo_corrected_neqstress_change": 5.347294929980775e-10,
+    "passed": true
+  },
+  "predeclared": {
+    "instantaneous_absolute": 5e-07,
+    "paired_velocity_rel_l2": 0.05,
+    "paired_demeaned_rho_rel_l2": 0.05,
+    "paired_neqstress_rel_l2": 0.1
+  }
+}

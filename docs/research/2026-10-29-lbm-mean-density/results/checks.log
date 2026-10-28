@@ -1,0 +1,40 @@
+Fresh local build exit0; local2-frame pair plus single Guo moment-only check exit0. No repeat.
+Hardware RTX3060:1000frames per fresh window,28000total lattice steps; exit0 COMPLETE guardrail_breaches0.
+shell syntax: PASS
+Rust formatting: PASS
+Python syntax / original collision-stream-LSQ text / uploaded source identity: PASS
+Paired1000 completeness / all1000 actual correction moment checks / Guo offset check / field guardrails: PASS
+Actual compensation ledger residual max: 0.0
+Instance58133143 stopped/exited: CONFIRMED
+docs/research/2026-10-29-lbm-mean-density/src/main.rs: OK
+docs/research/2026-10-29-lbm-mean-density/src/observe.rs: OK
+docs/research/2026-10-29-lbm-mean-density/src/lbm/gpu.rs: OK
+docs/research/2026-10-29-lbm-mean-density/src/lbm/lbm.wgsl: OK
+docs/research/2026-10-29-lbm-mean-density/src/lbm/lsq_io.rs: OK
+docs/research/2026-10-29-lbm-mean-density/src/lbm/mod.rs: OK
+docs/research/2026-10-29-lbm-mean-density/src/lbm/model.rs: OK
+docs/research/2026-10-29-lbm-mean-density/build.sh: OK
+docs/research/2026-10-29-lbm-mean-density/bin/mean_density: OK
+docs/research/2026-10-28-lbm-fd-boundary/lsq-candidate/results/fork_a-fine.geom.weights: OK
+Frozen source/binary/weight SHA: PASS
+results/exit-code.txt: OK
+results/finished-utc.txt: OK
+results/glibc.txt: OK
+results/gpu.csv: OK
+results/input-verification.txt: OK
+results/paired/baseline-final.bin: OK
+results/paired/baseline.csv: OK
+results/paired/comparison.csv: OK
+results/paired/controlled-post-final.bin: OK
+results/paired/controlled-pre-final.bin: OK
+results/paired/controlled.csv: OK
+results/paired/corrections.csv: OK
+results/paired/force-check.csv: OK
+results/paired/snapshot-layout.txt: OK
+results/run.log: OK
+results/started-utc.txt: OK
+results/uname.txt: OK
+results/vulkan-stderr.txt: OK
+results/vulkan.txt: OK
+Retrieved hardware result SHA: PASS
+staged whitespace: PASS

@@ -1,0 +1,7 @@
+{
+  "id": 58133143,
+  "public_ip": "125.240.239.50",
+  "ssh_port": 30782,
+  "remote_dir": "/workspace/lbm-mean-density-20261029",
+  "reused_existing_instance": true
+}
