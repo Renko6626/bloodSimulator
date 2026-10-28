@@ -1,4 +1,4 @@
-use super::{LocalSampleStatus, OpeningSpec, WindowOrigin, WindowSide, WindowSpec, model};
+use super::{LocalSampleStatus, OpeningSpec, WindowOrigin, WindowSide, WindowSpec, model, stencil};
 use bytemuck::{Pod, Zeroable};
 use std::{cell::Cell, sync::mpsc, time::Instant};
 use wgpu::util::DeviceExt;
@@ -75,6 +75,17 @@ pub struct LbmWorkStats {
     pub gpu_kernel_ms: Option<f64>,
 }
 
+/// Frame-end control requests in lattice-sum units. These are requested changes,
+/// not measured post-pass conservation residuals or mechanical reaction impulses.
+#[derive(Clone, Copy, Debug, Default)]
+pub struct MeanDensityControl {
+    pub mean_density_before: f64,
+    pub density_offset: f32,
+    pub requested_mass_change: f64,
+    pub requested_momentum_change: [f64; 2],
+    pub fluid_cells: usize,
+}
+
 pub struct LbmWindow {
     work: Cell<LbmWorkStats>,
     spec: WindowSpec,
@@ -93,6 +104,10 @@ pub struct LbmWindow {
     output: wgpu::Buffer,
     readback: wgpu::Buffer,
     groups: [wgpu::BindGroup; 2],
+    layout: wgpu::BindGroupLayout,
+    fit: wgpu::Buffer,
+    density_uniform: wgpu::Buffer,
+    density_pipeline: wgpu::ComputePipeline,
     collide: wgpu::ComputePipeline,
     macros: wgpu::ComputePipeline,
     force: [f32; 2],
@@ -115,6 +130,8 @@ impl LbmWindow {
         }
         let n = spec.profile.cells_per_side() as usize;
         validate(n, &initial, &geometry)?;
+        let boundary_data = boundary_profiles(spec, config, &geometry, None)?;
+        let fit_data = stencil::build(n, &geometry.solid, &boundary_data)?;
         let instance = wgpu::Instance::new(&wgpu::InstanceDescriptor {
             backends: wgpu::Backends::from_env().unwrap_or(wgpu::Backends::PRIMARY),
             ..Default::default()
@@ -163,7 +180,6 @@ impl LbmWindow {
             bytemuck::cast_slice(&masks),
             wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_DST,
         );
-        let boundary_data = boundary_profiles(spec, config, &geometry, None)?;
         let boundary = make(
             "lbm-boundaries",
             bytemuck::cast_slice(&boundary_data),
@@ -173,6 +189,16 @@ impl LbmWindow {
             "lbm-kicks",
             bytemuck::cast_slice(&vec![[0_f32; 2]; n * n]),
             wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_DST,
+        );
+        let fit = make(
+            "lbm-fit",
+            bytemuck::cast_slice(&fit_data),
+            wgpu::BufferUsages::STORAGE,
+        );
+        let density_uniform = make(
+            "lbm-density-control",
+            bytemuck::cast_slice(&[0_f32; 4]),
+            wgpu::BufferUsages::UNIFORM | wgpu::BufferUsages::COPY_DST,
         );
         let output = device.create_buffer(&wgpu::BufferDescriptor {
             label: Some("lbm-output"),
@@ -186,12 +212,12 @@ impl LbmWindow {
             usage: wgpu::BufferUsages::MAP_READ | wgpu::BufferUsages::COPY_DST,
             mapped_at_creation: false,
         });
-        let entries: Vec<_> = (0..7)
+        let entries: Vec<_> = (0..9)
             .map(|binding| wgpu::BindGroupLayoutEntry {
                 binding,
                 visibility: wgpu::ShaderStages::COMPUTE,
                 ty: wgpu::BindingType::Buffer {
-                    ty: if binding == 0 {
+                    ty: if binding == 0 || binding == 8 {
                         wgpu::BufferBindingType::Uniform
                     } else {
                         wgpu::BufferBindingType::Storage {
@@ -208,43 +234,18 @@ impl LbmWindow {
             label: Some("lbm-layout"),
             entries: &entries,
         });
-        let group = |i: usize| {
-            device.create_bind_group(&wgpu::BindGroupDescriptor {
-                label: Some("lbm-group"),
-                layout: &layout,
-                entries: &[
-                    wgpu::BindGroupEntry {
-                        binding: 0,
-                        resource: uniform.as_entire_binding(),
-                    },
-                    wgpu::BindGroupEntry {
-                        binding: 1,
-                        resource: populations[i].as_entire_binding(),
-                    },
-                    wgpu::BindGroupEntry {
-                        binding: 2,
-                        resource: populations[1 - i].as_entire_binding(),
-                    },
-                    wgpu::BindGroupEntry {
-                        binding: 3,
-                        resource: output.as_entire_binding(),
-                    },
-                    wgpu::BindGroupEntry {
-                        binding: 4,
-                        resource: mask.as_entire_binding(),
-                    },
-                    wgpu::BindGroupEntry {
-                        binding: 5,
-                        resource: boundary.as_entire_binding(),
-                    },
-                    wgpu::BindGroupEntry {
-                        binding: 6,
-                        resource: kicks.as_entire_binding(),
-                    },
-                ],
-            })
-        };
-        let groups = [group(0), group(1)];
+        let groups = make_groups(
+            &device,
+            &layout,
+            &uniform,
+            &populations,
+            &output,
+            &mask,
+            &boundary,
+            &kicks,
+            &fit,
+            &density_uniform,
+        );
         let pl = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
             label: Some("lbm-pipeline-layout"),
             bind_group_layouts: &[&layout],
@@ -268,6 +269,7 @@ impl LbmWindow {
         let collide = pipeline("collide_stream");
         let macros = pipeline("macros");
         let boundary_pipeline = pipeline("reconstruct");
+        let density_pipeline = pipeline("remove_mean_offset");
         Ok(Self {
             work: Cell::new(LbmWorkStats::default()),
             spec,
@@ -286,6 +288,10 @@ impl LbmWindow {
             output,
             readback,
             groups,
+            layout,
+            fit,
+            density_uniform,
+            density_pipeline,
             collide,
             macros,
             force: [0.; 2],
@@ -326,6 +332,9 @@ impl LbmWindow {
     }
     #[cfg(test)]
     pub(super) fn populations_for_test(&self) -> Vec<f32> {
+        self.populations().unwrap()
+    }
+    fn populations(&self) -> LbmResult<Vec<f32>> {
         let size = u64::from(self.spec.profile.cells_per_side().pow(2)) * 9 * 4;
         let read = self.device.create_buffer(&wgpu::BufferDescriptor {
             label: None,
@@ -333,24 +342,117 @@ impl LbmWindow {
             usage: wgpu::BufferUsages::COPY_DST | wgpu::BufferUsages::MAP_READ,
             mapped_at_creation: false,
         });
+        let encoding_started = Instant::now();
         let mut encoder = self
             .device
             .create_command_encoder(&wgpu::CommandEncoderDescriptor { label: None });
         encoder.copy_buffer_to_buffer(&self.populations[self.current], 0, &read, 0, size);
-        self.queue.submit([encoder.finish()]);
+        self.record(|s| {
+            s.encoding_ms += encoding_started.elapsed().as_secs_f64() * 1000.;
+            s.readback_calls += 1;
+            s.readback_bytes += size;
+        });
+        self.submit(encoder);
+        let wait_started = Instant::now();
         let (tx, rx) = mpsc::channel();
         read.slice(..).map_async(wgpu::MapMode::Read, move |r| {
             let _ = tx.send(r);
         });
         self.device
             .poll(wgpu::PollType::wait_indefinitely())
-            .unwrap();
-        rx.recv().unwrap().unwrap();
+            .map_err(|e| e.to_string())?;
+        rx.recv()
+            .map_err(|e| e.to_string())?
+            .map_err(|e| e.to_string())?;
+        self.record(|s| s.readback_wait_ms += wait_started.elapsed().as_secs_f64() * 1000.);
+        let decode_started = Instant::now();
         let data = read.slice(..).get_mapped_range();
         let result = bytemuck::cast_slice::<u8, f32>(&data).to_vec();
         drop(data);
         read.unmap();
-        result
+        self.record(|s| s.readback_decode_ms += decode_started.elapsed().as_secs_f64() * 1000.);
+        Ok(result)
+    }
+    /// Remove one spatially uniform density offset while preserving local Guo
+    /// velocity and equilibrium-relative second moments in ideal arithmetic.
+    /// Caller must schedule this once per game frame and refresh its field cache.
+    pub fn control_mean_density(&self) -> LbmResult<MeanDensityControl> {
+        let raw = self.populations()?;
+        let count = self.geometry.solid.len();
+        let force = params(self.spec, self.config, self.force).force;
+        let mut cells = 0;
+        let mut shifted = 0_f64;
+        let mut velocity_sum = [0_f64; 2];
+        let mut min_rho = f64::INFINITY;
+        for i in 0..count {
+            if self.geometry.solid[i] {
+                continue;
+            }
+            let mut drho = 0.;
+            let mut j = [0_f64; 2];
+            for q in 0..9 {
+                let g = f64::from(raw[q * count + i]);
+                drho += g;
+                j[0] += f64::from(model::C[q][0]) * g;
+                j[1] += f64::from(model::C[q][1]) * g;
+            }
+            let rho = 1. + drho;
+            if !rho.is_finite() || rho <= 0. || j.iter().any(|v| !v.is_finite()) {
+                return Err("invalid fluid state before mean-density control".into());
+            }
+            cells += 1;
+            shifted += drho;
+            min_rho = min_rho.min(rho);
+            for k in 0..2 {
+                velocity_sum[k] += (j[k] + 0.5 * f64::from(force[k])) / rho;
+            }
+        }
+        if cells == 0 {
+            return Err("window has no fluid cells".into());
+        }
+        let mean = 1. + shifted / cells as f64;
+        let delta = (mean - 1.) as f32;
+        if !delta.is_finite() || min_rho - f64::from(delta) <= 0. {
+            return Err("nonpositive density after mean-density control".into());
+        }
+        self.remove_mean_offset(delta);
+        Ok(MeanDensityControl {
+            mean_density_before: mean,
+            density_offset: delta,
+            requested_mass_change: -f64::from(delta) * cells as f64,
+            requested_momentum_change: velocity_sum.map(|u| -f64::from(delta) * u),
+            fluid_cells: cells,
+        })
+    }
+    fn remove_mean_offset(&self, delta: f32) {
+        self.upload(
+            &self.density_uniform,
+            bytemuck::cast_slice(&[delta, 0., 0., 0.]),
+        );
+        let start = Instant::now();
+        let mut encoder = self
+            .device
+            .create_command_encoder(&wgpu::CommandEncoderDescriptor {
+                label: Some("lbm-density-control"),
+            });
+        {
+            let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
+                label: Some("lbm-density-control"),
+                timestamp_writes: None,
+            });
+            pass.set_pipeline(&self.density_pipeline);
+            pass.set_bind_group(0, &self.groups[self.current], &[]);
+            pass.dispatch_workgroups(
+                self.spec.profile.cells_per_side().pow(2).div_ceil(128),
+                1,
+                1,
+            );
+        }
+        self.record(|s| {
+            s.dispatches += 1;
+            s.encoding_ms += start.elapsed().as_secs_f64() * 1000.;
+        });
+        self.submit(encoder);
     }
     /// Supply outward normal velocities for each opening cell, in world units.
     /// Each profile must integrate to its corresponding outward flow target.
@@ -618,6 +720,14 @@ impl LbmWindow {
         let n = self.spec.profile.cells_per_side() as usize;
         validate(n, &initial, &geometry)?;
         let boundary_data = boundary_profiles(new, self.config, &geometry, None)?;
+        let fit_data = stencil::build(n, &geometry.solid, &boundary_data)?;
+        let fit = self
+            .device
+            .create_buffer_init(&wgpu::util::BufferInitDescriptor {
+                label: Some("lbm-fit"),
+                contents: bytemuck::cast_slice(&fit_data),
+                usage: wgpu::BufferUsages::STORAGE,
+            });
         let data = initial_populations(new, self.config, &initial, self.force);
         let target = 1 - self.current;
         self.upload(&self.populations[target], bytemuck::cast_slice(&data));
@@ -654,6 +764,19 @@ impl LbmWindow {
         let masks: Vec<u32> = geometry.solid.iter().map(|&x| u32::from(x)).collect();
         self.upload(&self.mask, bytemuck::cast_slice(&masks));
         self.upload(&self.boundary, bytemuck::cast_slice(&boundary_data));
+        self.fit = fit;
+        self.groups = make_groups(
+            &self.device,
+            &self.layout,
+            &self.uniform,
+            &self.populations,
+            &self.output,
+            &self.mask,
+            &self.boundary,
+            &self.kicks,
+            &self.fit,
+            &self.density_uniform,
+        );
         self.current = target;
         self.spec = new;
         self.geometry = geometry;
@@ -798,4 +921,45 @@ fn boundary_profiles(
         }
     }
     Ok(data)
+}
+
+#[allow(clippy::too_many_arguments)]
+fn make_groups(
+    device: &wgpu::Device,
+    layout: &wgpu::BindGroupLayout,
+    uniform: &wgpu::Buffer,
+    populations: &[wgpu::Buffer; 2],
+    output: &wgpu::Buffer,
+    mask: &wgpu::Buffer,
+    boundary: &wgpu::Buffer,
+    kicks: &wgpu::Buffer,
+    fit: &wgpu::Buffer,
+    density: &wgpu::Buffer,
+) -> [wgpu::BindGroup; 2] {
+    std::array::from_fn(|i| {
+        let buffers = [
+            uniform,
+            &populations[i],
+            &populations[1 - i],
+            output,
+            mask,
+            boundary,
+            kicks,
+            fit,
+            density,
+        ];
+        let entries: Vec<_> = buffers
+            .iter()
+            .enumerate()
+            .map(|(binding, b)| wgpu::BindGroupEntry {
+                binding: binding as u32,
+                resource: b.as_entire_binding(),
+            })
+            .collect();
+        device.create_bind_group(&wgpu::BindGroupDescriptor {
+            label: Some("lbm-group"),
+            layout,
+            entries: &entries,
+        })
+    })
 }

@@ -89,6 +89,7 @@ version = "0.1.0"
 dependencies = [
  "blood-fluid",
  "bytemuck",
+ "faer",
  "pollster",
  "serde",
  "serde_json",

@@ -12,11 +12,14 @@
 
 局部 Stokes 原型已接入 faer 联合 LU，并提供两块固定重叠区域：加载时预分解，玩家进入上方相邻管段时切换，复用点力历史和原 Rapier 物体。默认世界保持解析血流，`--local-stokes` 显式开启双区验证。十二物理节点保留，解析驱动采用此前确认的六次采样。
 
-**流体性能研究已阶段性暂停。** 当前模型、近似、核心算法、实验结果和未解决问题统一见[流体实验阶段记录](docs/research/2026-10-27-fluid-checkpoint.md)。GPU 候选虽能收敛，RTX 3060 最近回放仍约 46–184 ms／次，未达到实时游戏要求；CPU LU 继续作为显式局部默认后端。
+**Stokes 性能研究仍暂停，LBM 可选路径已接入选定算法。** 当前选定 D2Q9 MRT＋Guo、LSQ-FD 给定速度边界和帧末平均密度控制，物理含义与限制见 [LBM 流体模型与算法](docs/physics/lbm-fluid.md)。固定分叉的 RTX 3060 10000 帧实验已完成，控制路径纯流体 p95 约 2.10 ms；这不代表完整游戏或任意开口几何已经验收。默认世界仍用解析流体。
+
+上一阶段 Stokes 模型、实验与未决问题见[流体实验阶段记录](docs/research/2026-10-27-fluid-checkpoint.md)。其 GPU 回放约 46–184 ms／次属于另一种算法；CPU LU 继续作为显式局部 Stokes 默认后端。
 
 保留模块化求解器、分段 profiling 和已验证的回读缓冲复用。云实例已停止。历史实验与复现入口见[研究索引](docs/research/README.md)；旧报告中的后续建议不代表继续执行的安排。
 
 - [当前状态与待办](docs/STATUS.md)：统一维护阶段结论、下一步优先级与待确认事项。
+- [LBM 物理文档](docs/physics/lbm-fluid.md)：所用方程、边界算法、密度控制、质量与动量补偿及适用范围。
 - [流体研究索引](docs/research/README.md)：按测量时点保留的 Stokes、GPU、Rayon、LBM 实验与原始数据。
 - [世界小地图设计](docs/superpowers/specs/2026-10-22-world-small-map-design.md)与[实施记录](docs/superpowers/plans/2026-10-22-world-small-map.md)：已确认的地图、流速、镜头与实现限制。
 - [整体架构](docs/superpowers/specs/2026-10-21-world-architecture-design.md)与[玩法设计草案](docs/superpowers/specs/2026-10-19-blood-simulator-design.md)。

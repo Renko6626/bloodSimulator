@@ -58,34 +58,44 @@ fn macros(@builtin(global_invocation_id) id:vec3<u32>){
 }
 
 @group(0) @binding(5) var<storage,read> boundary:array<vec4<f32>>;
+fn fluid_velocity(i:u32)->vec2<f32>{
+ let count=p.nx*p.ny;var drho=0.;var j=vec2(0.);
+ for(var q=0u;q<9u;q++){let g=src[q*count+i];drho+=g;j+=vec2<f32>(C[q])*g;}
+ return (j+0.5*p.force)/(1.+drho);
+}
+struct FitSample {index:u32,kind:u32,wn:f32,wt:f32}
+@group(0) @binding(7) var<storage,read> fit:array<FitSample>;
+fn lsq_gradient(i:u32)->vec4<f32>{
+ let h=fit[i];let ub=boundary[i].yz;var dn=vec2(0.);var dt=vec2(0.);
+ for(var k=0u;k<h.kind;k++){
+  let sample=fit[h.index+k];var uj=vec2(0.);
+  if(sample.kind==1u){uj=boundary[sample.index].yz;}else{uj=fluid_velocity(sample.index);}
+  dn+=sample.wn*(uj-ub);dt+=sample.wt*(uj-ub);
+ }
+ return vec4(dn,dt);
+}
 @compute @workgroup_size(128)
 fn reconstruct(@builtin(global_invocation_id) id:vec3<u32>) {
- let i=id.x; let count=p.nx*p.ny; if(i>=count || boundary[i].x==0.) {return;}
+ let i=id.x;let count=p.nx*p.ny;if(i>=count || boundary[i].x==0.){return;}
  var n=vec2<i32>(1,0);
- switch u32(boundary[i].x) {
-  case 2u: {n=vec2(-1,0);}
-  case 3u: {n=vec2(0,1);}
-  case 4u: {n=vec2(0,-1);}
-  default: {}
+ switch u32(boundary[i].x){case 2u:{n=vec2(-1,0);}case 3u:{n=vec2(0,1);}case 4u:{n=vec2(0,-1);}default:{}}
+ let t=vec2(-n.y,n.x);var a=0.;var b=0.;
+ for(var q=0u;q<9u;q++){
+  let cn=dot(C[q],n);let f=src[q*count+i]+W[q];
+  if(cn==0){a+=f;}if(cn == -1){b+=f;}
  }
- let t=vec2(-n.y,n.x);
- var axial=0u; var plus=0u; var minus=0u; var tangent=0u; var tangent_opp=0u;
- var a=0.; var b=0.;
- for(var q=0u;q<9u;q++) {
-  let cn=dot(C[q],n); let ct=dot(C[q],t);
-  let f=src[q*count+i]+W[q];
-  if(cn==0) {a+=f; if(ct==1){tangent=q;} if(ct == -1){tangent_opp=q;}}
-  if(cn == -1) {b+=f;}
-  if(cn==1) {if(ct==0){axial=q;} else if(ct==1){plus=q;} else {minus=q;}}
+ let u=boundary[i].yz;let un=dot(u,vec2<f32>(n));
+ let rho=(a+2.*b-0.5*dot(p.force,vec2<f32>(n)))/(1.-un);
+ let g=lsq_gradient(i);let dx=f32(n.x)*g.xy+f32(t.x)*g.zw;let dy=f32(n.y)*g.xy+f32(t.y)*g.zw;
+ let div=dx.x+dy.y;let dev=dx.x-dy.y;
+ let pxx=-rho/3.*(div/1.1+dev/p.omega)-u.x*p.force.x;
+ let pyy=-rho/3.*(div/1.1-dev/p.omega)-u.y*p.force.y;
+ let pxy=-rho/(3.*p.omega)*(dy.x+dx.y)-0.5*(u.x*p.force.y+u.y*p.force.x);
+ for(var q=0u;q<9u;q++){
+  let cv=vec2<f32>(C[q]);let cu=dot(cv,u);
+  let eq=W[q]*((rho-1.)+rho*(3.*cu+4.5*cu*cu-1.5*dot(u,u)));
+  src[q*count+i]=eq+4.5*W[q]*((cv.x*cv.x-1./3.)*pxx+(cv.y*cv.y-1./3.)*pyy+2.*cv.x*cv.y*pxy)-1.5*W[q]*dot(cv,p.force);
  }
- let u=boundary[i].yz; let un=dot(u,vec2<f32>(n)); let ut=dot(u,vec2<f32>(t));
- let force_n=dot(p.force,vec2<f32>(n)); let ft=dot(p.force,vec2<f32>(t));
- let rho=(a+2.*b-0.5*force_n)/(1.-un);
- let kn=rho*un-0.5*force_n; let kt=rho*ut-0.5*ft;
- let d=src[tangent*count+i]+W[tangent]-src[tangent_opp*count+i]-W[tangent_opp];
- src[axial*count+i]=src[OPP[axial]*count+i]+W[OPP[axial]]+2.*kn/3.-W[axial];
- src[plus*count+i]=src[OPP[plus]*count+i]+W[OPP[plus]]+kn/6.+(kt-d)/2.-W[plus];
- src[minus*count+i]=src[OPP[minus]*count+i]+W[OPP[minus]]+kn/6.-(kt-d)/2.-W[minus];
 }
 
 @group(0) @binding(6) var<storage,read> kicks:array<vec2<f32>>;
@@ -93,4 +103,17 @@ fn reconstruct(@builtin(global_invocation_id) id:vec3<u32>) {
 fn apply_kicks(@builtin(global_invocation_id) id:vec3<u32>) {
  let i=id.x; let n=p.nx*p.ny; if(i>=n || mask[i]!=0u){return;}
  for(var q=0u;q<9u;q++){src[q*n+i]+=3.*W[q]*dot(vec2<f32>(C[q]), kicks[i]);}
+}
+
+@group(0) @binding(8) var<uniform> density_control:vec4<f32>;
+@compute @workgroup_size(128)
+fn remove_mean_offset(@builtin(global_invocation_id) id:vec3<u32>){
+ let i=id.x;let n=p.nx*p.ny;if(i>=n || mask[i]!=0u){return;}
+ var drho=0.;var j=vec2(0.);
+ for(var q=0u;q<9u;q++){let g=src[q*n+i];drho+=g;j+=vec2<f32>(C[q])*g;}
+ let rho=1.+drho;let u=(j+0.5*p.force)/rho;
+ for(var q=0u;q<9u;q++){
+  let cu=dot(vec2<f32>(C[q]),u);
+  src[q*n+i]-=density_control.x*W[q]*(1.+3.*cu+4.5*cu*cu-1.5*dot(u,u));
+ }
 }

@@ -403,7 +403,9 @@ impl Simulation {
         }
         let dt = self.config.dt / self.config.substeps as f32;
         self.physics.integration_parameters.dt = dt;
-        for _ in 0..self.config.substeps {
+        for substep in 0..self.config.substeps {
+            #[cfg(not(feature = "lbm-gpu"))]
+            let _ = substep;
             #[cfg(feature = "lbm-gpu")]
             if let (Some(lbm), Environment::World { map, flow, .. }) =
                 (&mut self.lbm, &self.environment)
@@ -499,6 +501,7 @@ impl Simulation {
                     self.robot,
                     dt,
                     self.config.cell_drag,
+                    substep + 1 == self.config.substeps,
                 )
                 .map_err(|e| format!("LBM advance failed; frame may be partially advanced: {e}"))?;
             }
@@ -509,6 +512,12 @@ impl Simulation {
             if let Some(lbm) = &mut self.lbm {
                 lbm.stats.rapier_ms += rapier_started.elapsed().as_secs_f64() * 1000.;
             }
+        }
+        #[cfg(feature = "lbm-gpu")]
+        if let Some(lbm) = &mut self.lbm {
+            lbm.finish_frame().map_err(|e| {
+                format!("LBM frame finish failed; frame may be partially advanced: {e}")
+            })?;
         }
         self.steps += 1;
         self.elapsed_time += self.config.dt;
@@ -889,11 +898,20 @@ mod lbm_runtime_tests {
         assert!(valid && (w - 0.15625).abs() < 1e-5);
         assert_eq!(lbm.local(map, Vector::new(15., 24.)).0, 0.);
         assert!(!lbm.local(map, Vector::new(24., 30.)).2);
+        // Restore the initial window so the frame readback budget excludes migration.
+        sim.try_reset().unwrap();
         sim.set_paused(true);
         sim.tick(MoveInput::default());
         assert_eq!(sim.snapshot().steps, 0);
         sim.single_step(MoveInput::default());
         assert_eq!(sim.snapshot().steps, 1);
+        let window = &sim.lbm.as_ref().unwrap().window;
+        assert!(window.density_control().is_some());
+        // Two mechanical batches: one intermediate field, raw control read, final field.
+        assert_eq!(window.work_stats().readback_calls, 3);
+        let (diagnostics, _) = window.cached_diagnostics().unwrap();
+        assert!(diagnostics.density_min > 0.);
+        assert!(sim.lbm.as_mut().unwrap().window.finish_frame().is_err());
         assert!((sim.lbm_stats().unwrap().elapsed_fluid_time - sim.config.dt as f64).abs() < 1e-7);
         sim.tick(MoveInput::default());
         assert_eq!(sim.snapshot().steps, 1);

@@ -28,6 +28,9 @@ pub struct StreamingWindow {
     field: Vec<[f32; 4]>,
     dt: f32,
     shifted: bool,
+    frame_open: bool,
+    field_pending: bool,
+    density_control: Option<blood_fluid_gpu::lbm::MeanDensityControl>,
     baseline: Option<Vec<(usize, [f32; 4])>>,
     pub diagnostics: MigrationDiagnostics,
 }
@@ -72,6 +75,9 @@ impl StreamingWindow {
             field,
             dt: config.dt,
             shifted: false,
+            frame_open: false,
+            field_pending: false,
+            density_control: None,
             baseline: None,
             diagnostics: MigrationDiagnostics::default(),
         })
@@ -84,6 +90,8 @@ impl StreamingWindow {
     }
     /// Call exactly once at the start of each fixed physics step.
     pub fn begin_frame(&mut self) {
+        self.frame_open = true;
+        self.density_control = None;
         self.shifted = false;
         self.window.reset_work_stats();
     }
@@ -94,6 +102,9 @@ impl StreamingWindow {
         flow: &GraphFlow,
         position: [f32; 2],
     ) -> Result<bool, String> {
+        if self.field_pending {
+            return Err("finish deferred LBM frame before prepare".into());
+        }
         let origin = origin_for(position)?;
         let old = self.window.spec();
         if !self.shifted && origin != old.origin {
@@ -150,14 +161,59 @@ impl StreamingWindow {
     }
     /// Advance a bounded number of lattice steps with one shared readback.
     pub fn advance_batch(&mut self, input: StepInput, count: usize) -> Result<(), String> {
+        self.advance_batch_inner(input, count, false)
+    }
+    /// Last mechanical batch only: finish_frame must refresh the cache before reuse.
+    pub(crate) fn advance_batch_deferred(
+        &mut self,
+        input: StepInput,
+        count: usize,
+    ) -> Result<(), String> {
+        if !self.frame_open {
+            return Err("LBM frame has not begun".into());
+        }
+        self.advance_batch_inner(input, count, true)
+    }
+    fn advance_batch_inner(
+        &mut self,
+        input: StepInput,
+        count: usize,
+        defer: bool,
+    ) -> Result<(), String> {
+        if self.field_pending {
+            return Err("finish deferred LBM frame before advancing".into());
+        }
         if count == 0 || count > 1024 {
             return Err("invalid lattice step count".into());
         }
         for _ in 0..count {
             self.window.advance(input)?;
         }
-        self.field = self.window.field()?;
-        self.window.diagnostics_from_field(&self.field)?;
+        if defer {
+            self.field_pending = true;
+            Ok(())
+        } else {
+            self.refresh_field()
+        }
+    }
+    /// Exactly one control per explicitly begun game frame, after its last batch.
+    pub(crate) fn finish_frame(&mut self) -> Result<(), String> {
+        if !self.frame_open || !self.field_pending {
+            return Err("LBM frame finish requires one pending final batch".into());
+        }
+        let control = self.window.control_mean_density()?;
+        self.density_control = Some(control);
+        self.frame_open = false;
+        self.refresh_field()
+    }
+    pub fn density_control(&self) -> Option<blood_fluid_gpu::lbm::MeanDensityControl> {
+        self.density_control
+    }
+    fn refresh_field(&mut self) -> Result<(), String> {
+        let field = self.window.field()?;
+        self.window.diagnostics_from_field(&field)?;
+        self.field = field;
+        self.field_pending = false;
         if let Some(baseline) = &self.baseline {
             self.diagnostics.warmup.push(delta(baseline, &self.field));
             if self.diagnostics.warmup.len() >= WARMUP_STEPS {
@@ -182,6 +238,9 @@ impl StreamingWindow {
     pub fn cached_diagnostics(
         &self,
     ) -> Result<(blood_fluid_gpu::lbm::Diagnostics, Vec<f32>), String> {
+        if self.field_pending {
+            return Err("LBM sampling cache awaits frame finish".into());
+        }
         Ok((
             self.window.diagnostics_from_field(&self.field)?,
             self.window.opening_targets(),
@@ -205,6 +264,9 @@ impl StreamingWindow {
         &self,
         position: [f32; 2],
     ) -> Result<(LocalSampleStatus, Vec<(usize, f32)>), String> {
+        if self.field_pending {
+            return Err("LBM sampling cache awaits frame finish".into());
+        }
         supported_weights(
             position,
             self.bounds()[0],
@@ -417,6 +479,58 @@ mod tests {
             assert!((x.density - y.density).abs() < 1e-6);
             assert!((x.velocity[0] - y.velocity[0]).abs() < 1e-6);
             assert!((x.velocity[1] - y.velocity[1]).abs() < 1e-6);
+        }
+    }
+    #[test]
+    #[ignore = "explicit software-adapter functional diagnostic"]
+    fn deferred_batch_requires_finish_and_refreshes_cache() {
+        let (map, flow) = fixture(false);
+        let mut window = StreamingWindow::new(
+            &map,
+            &flow,
+            [24., 24.],
+            GridProfile::Coarse,
+            WindowConfig {
+                dt: 0.01,
+                viscosity: 0.1,
+                allow_software: true,
+            },
+        )
+        .unwrap();
+        assert!(window.finish_frame().is_err());
+        window.begin_frame();
+        window
+            .advance_batch_deferred(
+                StepInput {
+                    acceleration: [0., 0.],
+                },
+                2,
+            )
+            .unwrap();
+        assert!(window.sample([24., 24.]).is_err());
+        assert!(window.cached_diagnostics().is_err());
+        assert!(window.maybe_shift(&map, &flow, [40., 24.]).is_err());
+        window.finish_frame().unwrap();
+        assert_eq!(window.work_stats().readback_calls, 2);
+        assert!(window.sample([24., 24.]).unwrap().density > 0.);
+        assert_eq!(window.field, window.window.field().unwrap());
+        assert!(window.finish_frame().is_err());
+        window.begin_frame();
+        assert!(window.maybe_shift(&map, &flow, [40., 24.]).unwrap());
+        window
+            .advance_batch_deferred(
+                StepInput {
+                    acceleration: [0., 0.],
+                },
+                2,
+            )
+            .unwrap();
+        window.finish_frame().unwrap();
+        assert_eq!(window.field, window.window.field().unwrap());
+        assert!(window.density_control().is_some());
+        let (d, targets) = window.cached_diagnostics().unwrap();
+        for (q, t) in d.opening_fluxes.iter().zip(targets) {
+            assert!((q - t).abs() < 1e-4);
         }
     }
     fn fixture(fork: bool) -> (MapDefinition, GraphFlow) {

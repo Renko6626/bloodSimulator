@@ -105,6 +105,7 @@ pub struct FluidSample {
 
 mod gpu;
 mod model;
+mod stencil;
 pub use gpu::*;
 
 #[cfg(test)]

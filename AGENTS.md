@@ -1,10 +1,12 @@
 # 项目工作约定
 
-## 当前流体路线（2026-10-28）
+## 当前流体路线（2026-10-29）
 
-用户已确认 Rust＋wgpu／WGSL、D2Q9 MRT＋Guo 外力路线。正式工程已有默认关闭的 `simulation/lbm-gpu` 可选路径、48×48 移动窗口和 Godot 桥接；默认游戏仍使用解析流体。任务 1–6 已实现；任务 7 的本轮实卡实验已执行，但 10 个案例全部失败，首发配置未通过验收，见 [实施计划](docs/superpowers/plans/2026-10-28-lbm-streaming-window.md) 和 [实卡与独立调查记录](docs/research/2026-10-28-lbm-streaming-window/hardware-rtx3060-20261028/README.md)。
+用户已确认 Rust＋wgpu／WGSL、D2Q9 MRT＋Guo 外力路线，并阶段性批准 LSQ-FD 给定速度边界与帧末平均密度控制，确认按推荐方案接入现有可选 `simulation/lbm-gpu` 路径。本轮已在 `feat/lbm-lsq-integration` 实现：`blood-fluid-gpu` 复用已有 faer 0.24.4 运行时生成权重，simulation 显式帧末修正并刷新缓存；不扩大 Godot/snapshot 接口，默认游戏仍用解析流。状态与检查见 [接入计划](docs/superpowers/plans/2026-10-29-lbm-integration.md)，算法见 [物理文档](docs/physics/lbm-fluid.md)。
 
-默认 `small_world` 在当前 LBM 开口几何下不支持。独立 Sol high 调查确认：当前低 lattice 黏度下，固定速度出口重建存在增长的横向边界模；移除全部机械耦合仍能复现实卡失败。Fine 和 Coarse 均不能据本轮结果视为可用首发配置。固定密度出口仅作为稳定性因果控制，不能未经确认替换精确流量边界；生产数值代码未改。此前周期边界实卡研究不等于正式开口窗口验收。实例 `57988490` 已取回并核对结果后停止，确认 stopped／exited。GPU NS 对照不再是 LBM 采用的前置条件，下方 Stokes 暂停约定仍有效。
+RTX 3060 上固定 `fork_a Fine` 的 10000 帧均值控制实验已完成，纯流体 p95 约 2.10 ms；这是固定几何、无机械的证据，不是完整游戏验收。均值控制持续补偿质量并改变总流体动量，不代表边界自动守恒。旧固定速度重建的实卡失败与因果调查保留为历史负例，见 [原记录](docs/research/2026-10-28-lbm-streaming-window/hardware-rtx3060-20261028/README.md)。固定密度出口仍只是旧因果控制，不替换给定速度/流量契约。
+
+默认 `small_world`、开口切分叉、角点、弯曲/歧义和近切向开口限制未放宽；不得据选定斜管案例声称任意斜率都可用。完整机械耦合、移窗长程、绝对压力响应和物理精度尚未验收。GPU NS 对照不再是采用 LBM 的前置条件，下方 Stokes 暂停约定仍有效。最近实验实例 `58133143` 已取回结果并确认 stopped／exited；本轮模块准备不自动追加云实验。
 
 ## 上一阶段 Stokes 研究暂停
 

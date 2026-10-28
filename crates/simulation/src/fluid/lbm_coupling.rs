@@ -171,21 +171,31 @@ impl LbmCoupling {
         robot: RigidBodyHandle,
         dt: f32,
         drag: f32,
+        last_batch: bool,
     ) -> Result<(), String> {
         let started = Instant::now();
         let kicks = self.exchange(map, world, cells, robot, dt, drag)?;
         self.stats.coupling_ms += started.elapsed().as_secs_f64() * 1000.;
         let started = Instant::now();
         self.window.apply_kicks(&kicks)?;
-        self.window.advance_batch(
-            StepInput {
-                acceleration: [0., 0.],
-            },
-            self.stats.lattice_steps_per_substep,
-        )?;
+        let input = StepInput {
+            acceleration: [0., 0.],
+        };
+        let count = self.stats.lattice_steps_per_substep;
+        if last_batch {
+            self.window.advance_batch_deferred(input, count)?;
+        } else {
+            self.window.advance_batch(input, count)?;
+        }
         self.stats.lbm_ms += started.elapsed().as_secs_f64() * 1000.;
         self.stats.elapsed_fluid_time +=
             self.stats.lattice_dt as f64 * self.stats.lattice_steps_per_substep as f64;
+        Ok(())
+    }
+    pub fn finish_frame(&mut self) -> Result<(), String> {
+        let started = Instant::now();
+        self.window.finish_frame()?;
+        self.stats.lbm_ms += started.elapsed().as_secs_f64() * 1000.;
         Ok(())
     }
     pub(crate) fn exchange(

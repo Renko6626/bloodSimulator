@@ -1,6 +1,6 @@
 #[cfg(test)]
 use super::WindowSpec;
-const C: [[f32; 2]; 9] = [
+pub(super) const C: [[f32; 2]; 9] = [
     [0., 0.],
     [1., 0.],
     [0., 1.],

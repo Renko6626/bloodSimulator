@@ -225,7 +225,7 @@ fn reference_collision(f: [f64; 9], force: [f64; 2], omega: f64) -> [f64; 9] {
 
 #[test]
 #[ignore = "explicit software-adapter functional diagnostic"]
-fn lbm_opening_flux_and_known_populations() {
+fn lbm_opening_flux_and_all_population_reconstruction() {
     let spec = WindowSpec {
         origin: WindowOrigin {
             block_x: 0,
@@ -322,12 +322,36 @@ fn lbm_opening_flux_and_known_populations() {
     let actual = open.populations_for_test();
     let reference = closed.populations_for_test();
     let i = 48 * n;
-    for q in [0, 2, 3, 4, 6, 7] {
-        assert!(
-            (actual[q * n * n + i] - reference[q * n * n + i]).abs() < 1e-7,
-            "known q={q}"
-        );
-    }
+    // The streamed known populations still close rho, but LSQ-FD regularizes all nine.
+    let weights = [
+        4. / 9.,
+        1. / 9.,
+        1. / 9.,
+        1. / 9.,
+        1. / 9.,
+        1. / 36.,
+        1. / 36.,
+        1. / 36.,
+        1. / 36.,
+    ];
+    let a: f32 = [0, 2, 4]
+        .iter()
+        .map(|&q| reference[q * n * n + i] + weights[q])
+        .sum();
+    let b: f32 = [3, 6, 7]
+        .iter()
+        .map(|&q| reference[q * n * n + i] + weights[q])
+        .sum();
+    let force_x = 0.01 * config.dt * config.dt / spec.profile.cell_spacing();
+    let expected_rho =
+        (a + 2. * b - 0.5 * force_x) / (1. - 0.1 * config.dt / spec.profile.cell_spacing());
+    let actual_rho = 1. + (0..9).map(|q| actual[q * n * n + i]).sum::<f32>();
+    assert!((actual_rho - expected_rho).abs() < 2e-7);
+    assert!(
+        [0, 2, 3, 4, 6, 7]
+            .iter()
+            .any(|&q| (actual[q * n * n + i] - reference[q * n * n + i]).abs() > 1e-7)
+    );
     let d = open.snapshot_diagnostics().unwrap();
     for (a, b) in d.opening_fluxes.iter().zip(flows) {
         assert!((a - b).abs() < 1e-4, "flux {a} vs {b}");
@@ -508,6 +532,32 @@ fn lbm_shift_xy_preserves_populations_and_initializes_changed_strip() {
     for (dx, dy) in [(1, 0), (0, 1)] {
         let mut w = LbmWindow::new(spec, config, initial.clone(), geometry.clone()).unwrap();
         let before = w.populations_for_test();
+        let mut narrow = WindowGeometry {
+            solid: vec![true; n * n],
+            openings: vec![OpeningSpec {
+                side: WindowSide::Left,
+                cells: 48..49,
+                direction: [1., 0.],
+                outward_flow: 0.,
+                background_speed: 0.,
+            }],
+        };
+        for x in 0..n {
+            narrow.solid[48 * n + x] = false;
+        }
+        let error = w
+            .shift_to(
+                WindowOrigin {
+                    block_x: dx,
+                    block_y: dy,
+                },
+                changed.clone(),
+                narrow,
+            )
+            .unwrap_err();
+        assert!(error.contains("unsupported LSQ"));
+        assert_eq!(w.spec(), spec);
+        assert_eq!(w.populations_for_test(), before);
         let shifted_spec = WindowSpec {
             origin: WindowOrigin {
                 block_x: dx,
@@ -588,4 +638,135 @@ fn lbm_kick_changes_gpu_momentum() {
         (p[1] - 0.05).abs() < 1e-5 && (p[2] + 0.1).abs() < 1e-5,
         "{p:?}"
     );
+}
+
+#[test]
+#[ignore = "explicit software-adapter functional diagnostic"]
+fn lbm_mean_density_control_preserves_guo_moments() {
+    let spec = WindowSpec {
+        origin: WindowOrigin {
+            block_x: 0,
+            block_y: 0,
+        },
+        profile: GridProfile::Coarse,
+    };
+    let n = spec.profile.cells_per_side() as usize;
+    let config = WindowConfig {
+        dt: 0.01,
+        viscosity: 0.1,
+        allow_software: true,
+    };
+    let mut solid = vec![false; n * n];
+    solid[0] = true;
+    let initial = InitialField {
+        density: (0..n * n).map(|i| 1.02 + 0.001 * (i % 7) as f32).collect(),
+        velocity: vec![[0.12, -0.08]; n * n],
+    };
+    let mut window = LbmWindow::new(
+        spec,
+        config,
+        initial,
+        WindowGeometry {
+            solid: solid.clone(),
+            openings: vec![],
+        },
+    )
+    .unwrap();
+    let acceleration = [1., -2.];
+    window.advance(StepInput { acceleration }).unwrap();
+    let before = window.populations_for_test();
+    let control = window.control_mean_density().unwrap();
+    assert!(control.density_offset > 0.01);
+    let after = window.populations_for_test();
+    let f =
+        acceleration.map(|a| f64::from(a * config.dt * config.dt / spec.profile.cell_spacing()));
+    let c = [
+        [0., 0.],
+        [1., 0.],
+        [0., 1.],
+        [-1., 0.],
+        [0., -1.],
+        [1., 1.],
+        [-1., 1.],
+        [-1., -1.],
+        [1., -1.],
+    ];
+    let w = [
+        4. / 9.,
+        1. / 9.,
+        1. / 9.,
+        1. / 9.,
+        1. / 9.,
+        1. / 36.,
+        1. / 36.,
+        1. / 36.,
+        1. / 36.,
+    ];
+    // Independent raw-moment observables, including the Guo half-force stress.
+    let moment = |raw: &[f32], i: usize| {
+        let mut rho = 1.;
+        let mut j = [0.; 2];
+        let mut pi = [1. / 3., 1. / 3., 0.];
+        for q in 0..9 {
+            let g = f64::from(raw[q * n * n + i]);
+            rho += g;
+            for k in 0..2 {
+                j[k] += c[q][k] * g;
+            }
+            pi[0] += c[q][0] * c[q][0] * g;
+            pi[1] += c[q][1] * c[q][1] * g;
+            pi[2] += c[q][0] * c[q][1] * g;
+        }
+        let u = [(j[0] + f[0] / 2.) / rho, (j[1] + f[1] / 2.) / rho];
+        let stress = [
+            pi[0] - rho * (1. / 3. + u[0] * u[0]) + u[0] * f[0],
+            pi[1] - rho * (1. / 3. + u[1] * u[1]) + u[1] * f[1],
+            pi[2] - rho * u[0] * u[1] + (u[0] * f[1] + u[1] * f[0]) / 2.,
+        ];
+        (rho, u, stress, j)
+    };
+    let mut mass_change = 0.;
+    let mut momentum_change = [0.; 2];
+    for i in 0..n * n {
+        if solid[i] {
+            for q in 0..9 {
+                assert_eq!(before[q * n * n + i], after[q * n * n + i]);
+            }
+            continue;
+        }
+        let (r, u, stress, j) = moment(&before, i);
+        let (r2, u2, s2, j2) = moment(&after, i);
+        assert!((r2 - r + f64::from(control.density_offset)).abs() < 1e-8);
+        for k in 0..2 {
+            assert!((u2[k] - u[k]).abs() < 1e-8);
+            momentum_change[k] += j2[k] - j[k];
+        }
+        for k in 0..3 {
+            assert!((s2[k] - stress[k]).abs() < 1e-8);
+        }
+        mass_change += r2 - r;
+        // Independent equilibrium difference also checks all directions.
+        for q in 0..9 {
+            let cu = c[q][0] * u[0] + c[q][1] * u[1];
+            let expected = -f64::from(control.density_offset)
+                * w[q]
+                * (1. + 3. * cu + 4.5 * cu * cu - 1.5 * (u[0] * u[0] + u[1] * u[1]));
+            assert!(
+                (f64::from(after[q * n * n + i] - before[q * n * n + i]) - expected).abs() < 1e-8
+            );
+        }
+    }
+    assert!((mass_change - control.requested_mass_change).abs() < 1e-5);
+    for k in 0..2 {
+        assert!((momentum_change[k] - control.requested_momentum_change[k]).abs() < 1e-5);
+    }
+    let field = window.field().unwrap();
+    let mean = field
+        .iter()
+        .enumerate()
+        .filter(|(i, _)| !solid[*i])
+        .map(|(_, p)| f64::from(p[0]))
+        .sum::<f64>()
+        / control.fluid_cells as f64;
+    assert!((mean - 1.).abs() < 1e-7);
 }

@@ -1,5 +1,13 @@
 # 流体研究索引
 
+2026-10-29 进展：用户已阶段性批准 LSQ-FD 给定速度边界与帧末平均密度控制，并确认接入现有可选 LBM 路径。当前算法见 [物理文档](../physics/lbm-fluid.md)，实施状态见 [接入计划](../superpowers/plans/2026-10-29-lbm-integration.md)。下方 2026-10-28 及更早条目保留历史口径。
+
+- [LSQ-FD 斜管与分叉候选](2026-10-28-lbm-fd-boundary/lsq-candidate/README.md)：五个选定几何、采样与梯度验证。
+- [未控制 60000 帧](2026-10-28-lbm-fd-boundary/lsq-candidate/longrun-60000/README.md)：没有爆炸，但质量周期均值持续增长。
+- [短程质量预算](2026-10-29-lbm-mass-budget/README.md)：区分体积通量、质量通量和重建项。
+- [帧末均值控制](2026-10-29-lbm-mean-density/README.md)：1000 帧成对实验、瞬时矩与补偿账目。
+- [RTX 3060 预算与 10000 帧](2026-10-29-lbm-budget-longrun/README.md)：纯流体性能、长程场差与限制。
+
 更新：2026-10-28。**GPU LBM 首批实验已完成，用户已确定采用并将其应用于游戏。** 当前决定与待定接入事项见[LBM 阶段决策](2026-10-27-ns-lbm/lbm-decision.md)。 整体目标、路线取舍和阶段安排见[本轮路线图](2026-10-27-ns-lbm/roadmap.md)，第一批 CPU NS 物理基线与 192²／256² 性能实验已完成，见[结果报告](2026-10-27-ns-lbm/ns-results.md)；当前完整方域实现仍超出实时预算。[Vast CPU profile](2026-10-27-ns-lbm/profile/README.md)已定位插值权重与三次串行求解热点，云端结果已取回且实例停止。
 
 上一阶段 Stokes／GPU 性能研究已暂停，现有代码、结果与未决问题见[流体实验阶段记录](2026-10-27-fluid-checkpoint.md)。该记录保留上一阶段交接信息；[状态与待办](../STATUS.md)已同步本次采用决定；本轮研究安排以新路线图及后续阶段文档为准。
