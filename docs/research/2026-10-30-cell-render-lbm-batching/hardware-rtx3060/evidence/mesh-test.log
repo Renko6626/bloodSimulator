@@ -1,0 +1,9 @@
+Initialize godot-rust (API v4.7.stable.official, runtime v4.7.1.stable.official, safeguards balanced)
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+libxkbcommon.so.0: cannot open shared object file: No such file or directory
+OpenGL API 3.3.0 NVIDIA 535.309.01 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3060
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3577)
+
+CELL_MESH_TEST PASS: concavity, GPU vertex/index updates, node count and empty input

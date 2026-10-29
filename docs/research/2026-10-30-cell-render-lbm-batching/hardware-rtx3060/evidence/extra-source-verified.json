@@ -1,0 +1,12 @@
+{
+  "hud-only": {
+    "godot/world.gd": "d7029fbce3f1f66b53bffe328a1b4f0acee9f926dc4ef1595cbb6e19486b914e",
+    "godot/world_hud.gd": "0635356f90bc38afd754fbff5478032f997ebe4f90f214e2c19a05b36da384ec",
+    "target/debug/libgodot_bridge.so": "69deadd806c1abc93f3c84deb3948e0565c89ca350cc50c2ce2de6bec3f32ec6"
+  },
+  "mesh-only": {
+    "godot/world.gd": "5d963889a8a30b0d872ec4020d76d8fcf570f041fa9eef6b5ac553f765289354",
+    "godot/world_hud.gd": "b6e4f00a374be7234623e4253c9c7450f0c5a9c94a36e9c3224339306c32d18b",
+    "target/debug/libgodot_bridge.so": "69deadd806c1abc93f3c84deb3948e0565c89ca350cc50c2ce2de6bec3f32ec6"
+  }
+}

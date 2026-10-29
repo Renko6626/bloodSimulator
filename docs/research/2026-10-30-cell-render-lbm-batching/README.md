@@ -2,6 +2,8 @@
 
 2026-10-30。用户确认[推荐设计](../../superpowers/specs/2026-10-30-cell-render-lbm-batching-design.md)，在当前feat/godot-static-background分支实施；用户随后要求阶段性提交推送，本次纳入归档，优化实施未启动云实例。基线d0dfa07，已有研究与脏文档保留。步骤见[计划](../../superpowers/plans/2026-10-30-cell-render-lbm-batching.md)。
 
+用户随后明确安排实卡复测，现已完成：[RTX3060往返对照](hardware-rtx3060/README.md)。本轮旧版/新版合并均值14.578→11.973ms、p95 18.092→14.684ms；主测有整帧收益，单因素精确归因仍受频率/主机波动限制。下方本地测量结论保留原口径。
+
 ## 实现
 
 - Godot每个可见细胞复用一个ArrayMesh，外层与0.48内层放在同一surface，通过顶点色保留原配色。每帧对真实轮廓原生剖分一次，两层共用拓扑；更新顶点，仅剖分改变时更新索引，节点数/颜色改变时重建该槽位。已核对2D顶点stride8、小网格索引stride2及实际GL缓冲更新。
@@ -66,4 +68,4 @@ DISPLAY=<X-display> LIBGL_ALWAYS_SOFTWARE=1 godot --path godot --audio-driver Du
 
 独立只读审阅未发现Critical/Important；[审阅记录](review.md)保留结论与未覆盖项。独立基线的第一次空缓存editor导入退出134，缓存重试0；与此前已知异常一致，根因仍未解决，不能将重试写作修复。主项目本轮scripts/check.sh及GL回放退出0。
 
-尚未做RTX3060端到端复测、全路径画面覆盖或人工键鼠手感验收。没有再次启动Vast实例；此前实例仍按上一轮收尾记录停止。没有自动改GPU归约、机械步数、读回依赖或渲染后端。
+本地实现阶段当时尚未做RTX3060复测；用户随后另行安排的硬件结果见上方链接，实例已再次确认停止。全路径画面覆盖、人工键鼠手感和开启vsync的桌面帧节奏仍未验收。没有改GPU归约、机械步数、读回依赖或渲染后端。

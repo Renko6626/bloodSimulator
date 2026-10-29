@@ -1,0 +1,2 @@
+name, uuid, driver_version, pstate, clocks.current.graphics [MHz], clocks.current.memory [MHz]
+NVIDIA GeForce RTX 3060, GPU-642d63fc-0725-ccb8-1530-4715c978a0ed, 535.309.01, P8, 210 MHz, 405 MHz

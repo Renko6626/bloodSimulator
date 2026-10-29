@@ -42,6 +42,8 @@ CPU解析流各60秒回放：Local软体28–55个、生成66/退休68、最大�
 
 用户明确确认推荐方案并留当前分支实施。World可见细胞复用双层填色ArrayMesh＋原抗锯齿轮廓，真实凹形每帧剖分一次；snapshot/软体模型不改。HUD统计10Hz、控件状态立即更新。LBM一机械批次一encoder/submit，Fine普通帧14步/33dispatch/3读回不变，submit20→8；420步软件GPU移动回放含一次移窗通过。本机默认场景World绘图1.496→1.348ms、draw calls147→126，792000世界像素相同，但整帧未测出改善，不代表RTX/FPS验收。极薄/深凹处内层/轮廓层叠差别列为Minor，不泛称所有形变像素一致。现有检查与独立审阅通过，用户随后要求阶段性提交推送，本次纳入归档；优化实施未启动云实例。后续描边合批、自定义shader、GPU归约/读回调整和实卡实验需另行安排。见[报告](docs/research/2026-10-30-cell-render-lbm-batching/README.md)。
 
+用户随后明确要求先推送25e29e4，再做实卡复测。该轮已完成：同轮RTX3060旧/新各两次3600步，整帧合并均值14.578→11.973ms、p95 18.092→14.684ms，99.31%间隔≤16.7ms；仍有28ms尾帧，仅覆盖该验证场。分项短测频率和主机成本变化，不能精确分摊Mesh/HUD/LBM收益。120个原始文件核对，58263433再次stopped/exited；GPU UUID与前轮不同，禁止直接跨轮相减归因。见[硬件结果](docs/research/2026-10-30-cell-render-lbm-batching/hardware-rtx3060/README.md)。本轮未改产品代码，不自动追加优化或云实验。
+
 ## 上一阶段 Stokes 研究暂停
 
 2026-10-27，用户要求阶段性暂停 Stokes／GPU 性能研究。当前统一交接文档是 [流体实验阶段记录](docs/research/2026-10-27-fluid-checkpoint.md)。

@@ -1,0 +1,8 @@
+baseline-a exit=0
+candidate-a exit=0
+render-only exit=0
+lbm-only exit=0
+candidate-b exit=0
+baseline-b exit=0
+hud-only exit=0
+mesh-only exit=0

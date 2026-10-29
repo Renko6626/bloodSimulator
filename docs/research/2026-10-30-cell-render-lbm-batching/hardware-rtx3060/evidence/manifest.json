@@ -1,0 +1,38 @@
+{
+  "baseline_commit": "d0dfa07",
+  "candidate_commit": "25e29e4",
+  "instance_id": 58263433,
+  "record_start_utc": "2026-10-29T17:02:10.397475+00:00",
+  "candidate_library_sha256": "5c496a4f4843fb4be23daede5a570eb769625b8c5a600dc89dcb2a1756ca6576",
+  "baseline_library_sha256": "69deadd806c1abc93f3c84deb3948e0565c89ca350cc50c2ce2de6bec3f32ec6",
+  "candidate_godot_sha256": {
+    "godot/blood_simulator.gdextension": "f3abe955a76f5b51cf1257bfeb0fa60c44a29d52ef7fc417c03d429035ade9a4",
+    "godot/blood_simulator.gdextension.uid": "20395fbe1bfc26ed108f3fe753060bc1bab562fcde42abe279da93ce247c2e37",
+    "godot/lab.gd": "5014f291a8b60d4b3ce0b8ae3e088d399149097af4eb9bdad534f0a3e5ca8333",
+    "godot/lab.gd.uid": "df57185cdfc6e7e56c56e4f488e083847d0665c2d5c2bd9354eaf247a1dfc300",
+    "godot/lab.tscn": "96c4f38ba79699990526c13c457b1b83a78d492f44546b1357089805f822f33a",
+    "godot/project.godot": "73f709f441d99ff55535009d30d638586b50185f7d16cd419fccdeb68f4d8fed",
+    "godot/tests/world_cell_mesh_test.gd": "0a61753b611d12b5764a56093a2f8c78663f8a47c8432973aa775c143d7d053b",
+    "godot/tests/world_cell_mesh_test.gd.uid": "41162f5fa3a93d2848644a5854511e0f7ddd44ba9930ace8da4effec1236d66a",
+    "godot/world.gd": "5d963889a8a30b0d872ec4020d76d8fcf570f041fa9eef6b5ac553f765289354",
+    "godot/world.gd.uid": "5c40bb72f00f95e9ed7a71cb6d08a87c1a679f2f07deccf41260dd41f6f26a6a",
+    "godot/world.tscn": "c41c65639dc79705097c78a183f7bc3c1bc3890109036728a43bfc9edcda9d26",
+    "godot/world_background.gd": "fbc10e3a9368c93885b415f647656f83cc94a79394ad2e0a2fea05150435b432",
+    "godot/world_background.gd.uid": "31c5580d68103b2527a50cdc6472a04834e1e289a8712ee5059e0de2864ea20d",
+    "godot/world_background_painter.gd": "e1a6a6b86464e218b24b9457db95260e56b0eb3ce8598d0dd3da3021d161764b",
+    "godot/world_background_painter.gd.uid": "b5a3c23a39a057e71e525dfd1da76c5d4844149809a26240abe09042fdb32509",
+    "godot/world_cell_mesh.gd": "060e786b21b844da155dae1a3149f9bc8109a5333e5120b6a8c891f82cff3be3",
+    "godot/world_cell_mesh.gd.uid": "b1c45770cea7ed4f58884eb59b6156c92ed4a919cfc80b280fd4afb8a18e1e8f",
+    "godot/world_hud.gd": "0635356f90bc38afd754fbff5478032f997ebe4f90f214e2c19a05b36da384ec",
+    "godot/world_hud.gd.uid": "0e0949e733ebcf48b7e89027b18afa32e25f328412e1a9296934cb203cecbb0d"
+  },
+  "main_cases": [
+    "baseline-a3600",
+    "candidate-a3600",
+    "render-only1200",
+    "lbm-only1200",
+    "candidate-b3600",
+    "baseline-b3600"
+  ],
+  "note": "Production libraries/scripts; Local LBM Fine14steps;render-only includes Mesh and HUD10Hz;no GPU query or artificial clock changes"
+}

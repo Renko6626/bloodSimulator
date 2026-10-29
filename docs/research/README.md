@@ -1,5 +1,7 @@
 # 流体研究索引
 
+[优化后RTX3060复测](2026-10-30-cell-render-lbm-batching/hardware-rtx3060/README.md)：25e29e4推送后同轮往返对照，整帧14.58→11.97ms、p95 18.09→14.68ms；分项精确归因受环境波动限制，原始结果已取回，实例停止。
+
 [2026-10-30阶段交接](2026-10-30-performance-checkpoint.md)：本次提交范围、验证记录和保留事项。
 
 [细胞动态网格与LBM合批](2026-10-30-cell-render-lbm-batching/README.md)：可见细胞复用双层填色Mesh、保留原AA轮廓，HUD10Hz；普通Fine帧submit20→8，14步/33dispatch/3读回不变。软件GPU实际移窗/运行检查通过，默认世界截图像素一致；绘图CPU约降10%，尚无端到端提速或RTX证据，未启动云实例。

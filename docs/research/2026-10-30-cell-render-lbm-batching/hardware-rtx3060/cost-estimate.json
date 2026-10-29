@@ -1,0 +1,8 @@
+{
+  "conservative_start_utc": "2026-10-29T17:01:20+00:00",
+  "confirmed_stopped_by_utc": "2026-10-29T17:17:52.853774+00:00",
+  "estimated_running_seconds": 992.853774,
+  "hourly_usd": 0.07111111111111111,
+  "estimated_hourly_component_usd": 0.0196119264,
+  "excludes": "Storage and network; estimate only, not an invoice"
+}
