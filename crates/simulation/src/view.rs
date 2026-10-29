@@ -11,6 +11,7 @@ pub struct FlowArrow {
 pub struct Snapshot {
     pub robot: [f32; 2],
     pub cells: Vec<Vec<[f32; 2]>>,
+    pub population: Option<CellPopulationSnapshot>,
     pub arrows: Vec<FlowArrow>,
     pub steps: u64,
     pub time: f32,
@@ -51,4 +52,16 @@ pub struct LbmSnapshot {
     pub rapier_ms: f64,
     pub adapter_name: String,
     pub software_adapter: bool,
+}
+
+/// Quantities in local-cell mode. Abstract stock includes far traffic and any
+/// near-field fractions/blocked stock; it is counted exactly once.
+#[derive(Clone, Debug)]
+pub struct CellPopulationSnapshot {
+    pub total_count: usize,
+    pub detailed_count: usize,
+    pub abstract_count: f64,
+    pub spawned_this_frame: usize,
+    pub retired_this_frame: usize,
+    pub exchange_ms: f64,
 }

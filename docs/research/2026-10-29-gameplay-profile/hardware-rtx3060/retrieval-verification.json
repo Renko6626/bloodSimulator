@@ -1,0 +1,13 @@
+{
+  "bundle_sha256": "b2aaeadf9f76627748eafce367b8e7405472da07d3fa128e3a06e0ac6e9f87da",
+  "bundle_remote_hash_matches": true,
+  "experiment_result_hashes_all_match": true,
+  "matching_files": 154,
+  "mismatches": [
+    "display/Xorg.99-fixed.log"
+  ],
+  "note": "Xorg was still running during packaging and continued writing its log between manifest creation and tar. All result files match. Absolute display module symlink was skipped on extraction.",
+  "archive_only_files": [
+    "results/syscalls.log"
+  ]
+}

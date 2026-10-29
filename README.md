@@ -30,6 +30,8 @@
 
 全景截图只调整了观察镜头；游戏默认跟随机器人。
 
+后续已接入静态血管纹理缓存、细胞视野剔除和显式 `--local-cells` 近场软体/远场数量模式。默认仍为全量软体；本机解析流60秒回放的模拟步均值6.335→3.755ms，不能外推为RTX/LBM或完整游戏FPS改善。当前可复现入口、原始记录和剩余验证见[性能阶段交接](docs/research/2026-10-29-performance-checkpoint.md)。
+
 ## 游戏方向
 
 - 2D 抽象血管网络，保留心脏与核心器官的循环关系，空间尺度按玩法压缩。
@@ -82,6 +84,9 @@ godot --editor --path godot
 
 # 启动双区域 Stokes 原型（先构建扩展）
 godot --path godot -- --local-stokes
+
+# 近场真实软体、远场数量；默认不启用，不与local-stokes组合
+godot --path godot -- --local-cells
 
 # 单独启动原单回路实验场
 godot --path godot res://lab.tscn

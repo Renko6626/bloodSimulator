@@ -46,14 +46,18 @@ fn run() -> Result<(), String> {
     }
     let output = get("--output", "lbm-gameplay-results");
     create_dir_all(&output).map_err(|e| e.to_string())?;
-    let config = fixture::config();
+    let local_cells = args.iter().any(|s| s == "--local-cells");
+    let mut config = fixture::config();
+    if local_cells {
+        config.cell_mode = simulation::CellSimulationMode::Local(Default::default());
+    }
     let map = fixture::map();
     let options = LbmOptions {
         allow_software: software,
         ..Default::default()
     };
     let mut status = File::create(format!("{output}/status.txt")).map_err(|e| e.to_string())?;
-    writeln!(status,"config={config:?}\nroute=hold(24,24); move x10↔28 y24, 720-frame legs; no respawn\nmechanical guards=finite; area ratio 0.5..1.5; node signed wall <=0.3; robot center signed wall <=-0.55").map_err(|e|e.to_string())?;
+    writeln!(status,"config={config:?}\nroute=hold(24,24); move x10↔28 y24, 720-frame legs; local_cells={local_cells}\nmechanical guards=finite; area ratio 0.5..1.5; node signed wall <=0.3; robot center signed wall <=-0.55").map_err(|e|e.to_string())?;
     for moving in [false, true] {
         let name = if moving { "move" } else { "hold" };
         if case != "both" && case != name {
@@ -86,7 +90,7 @@ fn run() -> Result<(), String> {
         let mut out = BufWriter::new(
             File::create(format!("{output}/{name}.csv")).map_err(|e| e.to_string())?,
         );
-        writeln!(out,"phase,frame,time,input_x,input_y,robot_x,robot_y,active_cells,nearby_cells8,soft_contacts,cell_speed_mean,cell_speed_max,cell_displacement_mean,cell_displacement_max,area_ratio_min,area_ratio_max,node_wall_max,robot_wall,finite,density_min,density_max,density_sum,targets,fluxes,residual_max,branch_flows,region_switches,origin_x,origin_y,overlap_error,marker_force,prepare_ms,coupling_ms,lbm_ms,rapier_ms,step_wall_ms,snapshot_ms,quality_ms,lattice_steps,dispatches,submissions,readback_calls,readback_bytes,readback_wait_ms").map_err(|e|e.to_string())?;
+        writeln!(out,"phase,frame,time,input_x,input_y,robot_x,robot_y,active_cells,nearby_cells8,soft_contacts,cell_speed_mean,cell_speed_max,cell_displacement_mean,cell_displacement_max,area_ratio_min,area_ratio_max,node_wall_max,robot_wall,finite,density_min,density_max,density_sum,targets,fluxes,residual_max,branch_flows,region_switches,origin_x,origin_y,overlap_error,marker_force,prepare_ms,coupling_ms,lbm_ms,rapier_ms,step_wall_ms,snapshot_ms,quality_ms,lattice_steps,dispatches,submissions,readback_calls,readback_bytes,readback_wait_ms,total_cells,detailed_cells,abstract_cells,spawned,retired,cell_exchange_ms").map_err(|e|e.to_string())?;
         let mut last_region_switches = initial_lbm.region_switches;
         let mut previous = initial;
         let mut previous_centers = initial_centers.clone();
@@ -102,15 +106,35 @@ fn run() -> Result<(), String> {
                 let snapshot = sim.snapshot();
                 let snapshot_ms = start.elapsed().as_secs_f64() * 1000.;
                 let start = Instant::now();
-                let q = fixture::quality(&snapshot, &map, &config, &initial_centers);
+                let q = fixture::quality(
+                    &snapshot,
+                    &map,
+                    &config,
+                    if local_cells { &[] } else { &initial_centers },
+                );
                 let centers = fixture::cell_centers(&snapshot);
                 let speeds: Vec<f32> = centers
                     .iter()
+                    .take(if local_cells { 0 } else { centers.len() })
                     .zip(&previous_centers)
                     .map(|(a, b)| ((a[0] - b[0]).hypot(a[1] - b[1])) / config.dt)
                     .collect();
-                let speed_mean = speeds.iter().sum::<f32>() / speeds.len().max(1) as f32;
-                let speed_max = speeds.into_iter().fold(0_f32, f32::max);
+                let tracked = |v: f32| {
+                    if local_cells {
+                        String::new()
+                    } else {
+                        v.to_string()
+                    }
+                };
+                let measured = |v: f32| {
+                    if snapshot.cells.is_empty() {
+                        String::new()
+                    } else {
+                        v.to_string()
+                    }
+                };
+                let speed_mean = tracked(speeds.iter().sum::<f32>() / speeds.len().max(1) as f32);
+                let speed_max = tracked(speeds.into_iter().fold(0_f32, f32::max));
                 let quality_ms = start.elapsed().as_secs_f64() * 1000.;
                 min_x = min_x.min(snapshot.robot[0]);
                 max_x = max_x.max(snapshot.robot[0]);
@@ -141,7 +165,27 @@ fn run() -> Result<(), String> {
                     .iter()
                     .map(|v| v.abs())
                     .fold(0_f32, f32::max);
-                writeln!(out,"{},{frame},{},{},{},{},{},{},{},{},{speed_mean},{speed_max},{},{},{},{},{},{},{},{},{},{},{},{},{residual},{},{},{},{},{},{},{},{},{},{},{wall_ms},{snapshot_ms},{quality_ms},{},{},{},{},{},{}",if frame<warmup{"warmup"}else{"measure"},snapshot.time,input.x,input.y,snapshot.robot[0],snapshot.robot[1],s.active_cell_count,q.nearby_cells,snapshot.soft_contacts,q.cell_displacement_mean,q.cell_displacement_max,q.area_ratio_min,q.area_ratio_max,q.node_wall_max,q.robot_wall,q.finite,l.density_min,l.density_max,l.mass,values(&l.opening_targets),values(&l.opening_fluxes),values(&snapshot.branch_flows),l.region_switches,l.origin_blocks[0],l.origin_blocks[1],l.overlap_error,s.max_cell_marker_force,s.prepare_ms,s.coupling_ms,s.lbm_ms,s.rapier_ms,w.lattice_steps,w.dispatches,w.submissions,w.readback_calls,w.readback_bytes,w.readback_wait_ms).map_err(|e|e.to_string())?;
+                write!(out,"{},{frame},{},{},{},{},{},{},{},{},{speed_mean},{speed_max},{},{},{},{},{},{},{},{},{},{},{},{},{residual},{},{},{},{},{},{},{},{},{},{},{wall_ms},{snapshot_ms},{quality_ms},{},{},{},{},{},{}",if frame<warmup{"warmup"}else{"measure"},snapshot.time,input.x,input.y,snapshot.robot[0],snapshot.robot[1],s.active_cell_count,q.nearby_cells,snapshot.soft_contacts,tracked(q.cell_displacement_mean),tracked(q.cell_displacement_max),measured(q.area_ratio_min),measured(q.area_ratio_max),measured(q.node_wall_max),q.robot_wall,q.finite,l.density_min,l.density_max,l.mass,values(&l.opening_targets),values(&l.opening_fluxes),values(&snapshot.branch_flows),l.region_switches,l.origin_blocks[0],l.origin_blocks[1],l.overlap_error,s.max_cell_marker_force,s.prepare_ms,s.coupling_ms,s.lbm_ms,s.rapier_ms,w.lattice_steps,w.dispatches,w.submissions,w.readback_calls,w.readback_bytes,w.readback_wait_ms).map_err(|e|e.to_string())?;
+                if let Some(p) = &snapshot.population {
+                    writeln!(
+                        out,
+                        ",{},{},{},{},{},{}",
+                        p.total_count,
+                        p.detailed_count,
+                        p.abstract_count,
+                        p.spawned_this_frame,
+                        p.retired_this_frame,
+                        p.exchange_ms
+                    )
+                    .map_err(|e| e.to_string())?;
+                    if (p.detailed_count as f64 + p.abstract_count - p.total_count as f64).abs()
+                        > 1e-6
+                    {
+                        return Err(format!("frame {frame}: population quantity mismatch {p:?}"));
+                    }
+                } else {
+                    writeln!(out, ",,,,,,").map_err(|e| e.to_string())?;
+                }
                 if let Err(e) = step {
                     return Err(format!("frame {frame}: {e}"));
                 }

@@ -1,0 +1,93 @@
+{
+  "id": 58212504,
+  "gpu_name": "RTX 3060",
+  "cur_state": "running",
+  "actual_status": "running",
+  "intended_status": "running",
+  "public_ipaddr": "124.60.192.12",
+  "ssh_host": "ssh6.vast.ai",
+  "ssh_port": 21088,
+  "ports": {
+    "10100/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "32628"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "32628"
+      }
+    ],
+    "10200/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "32672"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "32672"
+      }
+    ],
+    "1111/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "32656"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "32656"
+      }
+    ],
+    "22/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "32650"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "32650"
+      }
+    ],
+    "32624/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "32624"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "32624"
+      }
+    ],
+    "6006/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "32608"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "32608"
+      }
+    ],
+    "8080/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "32620"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "32620"
+      }
+    ],
+    "8384/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "32678"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "32678"
+      }
+    ]
+  },
+  "dph_total": 0.08177777777777778
+}

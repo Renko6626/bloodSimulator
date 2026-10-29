@@ -1,0 +1,8 @@
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   Compiling blood-fluid v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/fluid)
+   Compiling blood-fluid-gpu v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/fluid-gpu)
+   Compiling simulation v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/simulation)
+    Finished `release` profile [optimized] target(s) in 6.01s
+     Running `target/release/examples/lbm_gameplay_probe --frames 2 --warmup 0 --case hold --allow-software --functional --local-cells --output /tmp/sunyunbo/blood-population-window/lbm-local`
+hold frame=0 robot=[24.003494, 24.002113] active=72 contacts=0 rho=[0.9915376,1.0067201]

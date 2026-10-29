@@ -34,6 +34,18 @@ fn main() {
         .map(|s| s.parse().expect("duration must be a number"))
         .unwrap_or(60.0);
     assert!(count > 0 && seconds.is_finite() && seconds > 0.0);
+    if args
+        .get(3)
+        .is_some_and(|mode| mode == "population" || mode == "population-full")
+    {
+        population_probe(
+            count,
+            seconds,
+            args[3] == "population",
+            args.get(4).map(String::as_str),
+        );
+        return;
+    }
     let config = Config {
         cell_count: count,
         ..Config::default()
@@ -206,4 +218,161 @@ fn main() {
             fluid_iterations as f64 / steps as f64
         );
     }
+}
+
+/// Compare real world mechanics using the same ordinary MoveInput route. CSV
+/// reports instantaneous local shape/contact quality, never individual paths.
+fn population_probe(count: usize, seconds: f32, local: bool, output: Option<&str>) {
+    use std::{
+        fs::File,
+        io::{BufWriter, Write},
+    };
+    let config = Config {
+        cell_count: count,
+        cell_mode: if local {
+            simulation::CellSimulationMode::Local(Default::default())
+        } else {
+            simulation::CellSimulationMode::Full
+        },
+        ..Default::default()
+    };
+    let rest_area = 0.5
+        * config.cell_vertices as f32
+        * config.cell_radius.powi(2)
+        * (std::f32::consts::TAU / config.cell_vertices as f32).sin();
+    let mut sim = Simulation::new_world(config.clone());
+    let steps = (seconds / config.dt).ceil() as usize;
+    // Follow centerlines through the upper arm and the return route. This is
+    // feedback through robot::drive, with no simulated body teleports.
+    let route = [0, 1, 2, 3, 7, 8, 9, 10, 11];
+    let map = sim.world_map().unwrap();
+    let mut waypoints = vec![Vector::from_array(map.spawn)];
+    for edge in route {
+        let length = map.edge_length(edge);
+        let samples = (length / 1.5).ceil() as usize;
+        let start = if edge == 0 {
+            map.project_edge(edge, Vector::from_array(map.spawn)).along
+        } else {
+            0.
+        };
+        for n in 1..=samples {
+            waypoints.push(map.edge_point(
+                edge,
+                start + (length - start) * n as f32 / samples as f32,
+                0.,
+            ));
+        }
+    }
+    let mut target = 1;
+    let mut csv = output.map(|path| BufWriter::new(File::create(path).expect("create CSV")));
+    if let Some(out) = &mut csv {
+        writeln!(out,"frame,time,robot_x,robot_y,route_waypoint,total_cells,detailed_cells,abstract_cells,quantity_error,spawned,retired,cell_exchange_ms,solve_ms,snapshot_ms,soft_contacts,area_ratio_min,area_ratio_max,node_wall_max,robot_wall").unwrap();
+    }
+    let mut state = sim.snapshot();
+    let mut solve = Vec::new();
+    let mut snapshots = Vec::new();
+    let mut exchange = Vec::new();
+    let mut handoff_solve = Vec::new();
+    let (mut spawned, mut retired, mut contact_frames) = (0, 0, 0);
+    let (mut min_detailed, mut max_detailed) = (state.cells.len(), state.cells.len());
+    let (mut quantity_error, mut max_area_error, mut max_wall) = (0_f64, 0_f32, f32::NEG_INFINITY);
+    for frame in 0..steps {
+        let position = Vector::from_array(state.robot);
+        if (waypoints[target] - position).length() < 0.7 && target + 1 < waypoints.len() {
+            target += 1;
+        }
+        let movement = ((waypoints[target] - position) * 2.).clamp_length_max(1.);
+        sim.tick(MoveInput {
+            x: movement.x,
+            y: movement.y,
+        });
+        let start = Instant::now();
+        state = sim.snapshot();
+        let snapshot_ms = start.elapsed().as_secs_f64() * 1000.;
+        assert!(state.robot.iter().all(|v| v.is_finite()));
+        let (abstract_count, births, deaths, exchange_ms) = state
+            .population
+            .as_ref()
+            .map(|p| {
+                (
+                    p.abstract_count,
+                    p.spawned_this_frame,
+                    p.retired_this_frame,
+                    p.exchange_ms,
+                )
+            })
+            .unwrap_or((0., 0, 0, 0.));
+        let error = (state.cells.len() as f64 + abstract_count - count as f64).abs();
+        assert!(
+            error < 1e-6,
+            "frame {frame}: cell quantity mismatch {error}"
+        );
+        quantity_error = quantity_error.max(error);
+        min_detailed = min_detailed.min(state.cells.len());
+        max_detailed = max_detailed.max(state.cells.len());
+        spawned += births;
+        retired += deaths;
+        contact_frames += usize::from(state.soft_contacts > 0);
+        if births + deaths > 0 {
+            handoff_solve.push(state.solve_ms);
+        }
+        solve.push(state.solve_ms);
+        snapshots.push(snapshot_ms);
+        exchange.push(exchange_ms);
+        let (mut area_min, mut area_max, mut wall_max) = (f32::INFINITY, 0_f32, f32::NEG_INFINITY);
+        let map = sim.world_map().unwrap();
+        for cell in &state.cells {
+            let ratio = area(cell) / rest_area;
+            area_min = area_min.min(ratio);
+            area_max = area_max.max(ratio);
+            max_area_error = max_area_error.max((ratio - 1.).abs());
+            for p in cell {
+                assert!(
+                    p.iter().all(|v| v.is_finite()),
+                    "frame {frame}: nonfinite cell"
+                );
+                wall_max = wall_max.max(map.signed_distance(Vector::from_array(*p)));
+            }
+        }
+        max_wall = max_wall.max(wall_max);
+        if let Some(out) = &mut csv {
+            let measured = |v: f32| {
+                if state.cells.is_empty() {
+                    String::new()
+                } else {
+                    v.to_string()
+                }
+            };
+            writeln!(out,"{frame},{},{},{},{target},{count},{},{abstract_count},{error},{births},{deaths},{exchange_ms},{},{snapshot_ms},{},{},{},{},{}",
+                state.time,state.robot[0],state.robot[1],state.cells.len(),state.solve_ms,state.soft_contacts,
+                measured(area_min),measured(area_max),measured(wall_max),map.signed_distance(Vector::from_array(state.robot))).unwrap();
+        }
+    }
+    if let Some(out) = &mut csv {
+        out.flush().unwrap();
+    }
+    let report = |label: &str, mut values: Vec<f64>| {
+        if values.is_empty() {
+            println!("{label}: no observed frames");
+            return;
+        }
+        values.sort_by(f64::total_cmp);
+        println!(
+            "{label} mean/p95/max={:.6}/{:.6}/{:.6}ms n={}",
+            values.iter().sum::<f64>() / values.len() as f64,
+            values[(values.len() * 95).div_ceil(100) - 1],
+            values[values.len() - 1],
+            values.len()
+        );
+    };
+    println!(
+        "population local={local} total={count} detailed={min_detailed}..{max_detailed} simulated={}s robot={:?} waypoint={target}/{} spawned={spawned} retired={retired} max_quantity_error={quantity_error:.3e} contact_frames={contact_frames}/{steps} max_area_error={max_area_error:.6} max_node_wall={max_wall:.6}",
+        state.time,
+        state.robot,
+        waypoints.len()
+    );
+    report("solve", solve);
+    report("snapshot", snapshots);
+    report("cell_exchange", exchange);
+    report("handoff_solve", handoff_solve);
 }

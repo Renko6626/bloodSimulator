@@ -1,0 +1,7 @@
+    Finished `release` profile [optimized] target(s) in 0.12s
+     Running `target/release/examples/circulation_probe 72 60 population /tmp/sunyunbo/blood-population-window/final-cpu-local.csv`
+population local=true total=72 detailed=28..55 simulated=59.999256s robot=[-23.971136, -0.0029769484] waypoint=167/168 spawned=66 retired=68 max_quantity_error=2.842e-14 contact_frames=3227/3600 max_area_error=0.041270 max_node_wall=-0.096775
+solve mean/p95/max=3.755303/4.684485/45.503784ms n=3600
+snapshot mean/p95/max=0.426061/0.618316/0.902471ms n=3600
+cell_exchange mean/p95/max=0.027580/0.038230/0.425370ms n=3600
+handoff_solve mean/p95/max=4.033103/4.990503/7.372840ms n=117

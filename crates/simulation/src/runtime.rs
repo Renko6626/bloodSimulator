@@ -1,5 +1,6 @@
 use crate::{
-    Config, FlowArrow, Snapshot, cell,
+    CellSimulationMode, Config, FlowArrow, Snapshot, cell,
+    cell_population::CellPopulation,
     circulation::{
         self, Flow, Network,
         graph::{self, GraphFlow, GraphNetwork},
@@ -89,6 +90,7 @@ pub struct Simulation {
     environment: Environment,
     robot: RigidBodyHandle,
     cells: Vec<SoftBodyHandle>,
+    population: Option<CellPopulation>,
     walls: Vec<Vec<[f32; 2]>>,
     steps: u64,
     elapsed_time: f32,
@@ -110,6 +112,11 @@ impl Default for Simulation {
 impl Simulation {
     /// Original closed-loop physics experiment.
     pub fn new(config: Config) -> Self {
+        assert_eq!(
+            config.cell_mode,
+            CellSimulationMode::Full,
+            "local cells require a world map"
+        );
         let vessel = Vessel::default();
         let network = Network::new(&vessel, config.viscosity);
         let flow = network.solve(config.pressure);
@@ -225,6 +232,11 @@ impl Simulation {
     }
 
     pub fn new_local_world_with_options(config: Config, options: crate::LocalFluidOptions) -> Self {
+        assert_eq!(
+            config.cell_mode,
+            CellSimulationMode::Full,
+            "local cells are not supported by local Stokes"
+        );
         let mut sim = Self::new_world(config);
         let Environment::World { map, network, .. } = &sim.environment else {
             unreachable!()
@@ -290,16 +302,31 @@ impl Simulation {
             }
         }
         let robot = robot::insert(&mut physics, spawn);
-        let cells = centers
-            .into_iter()
-            .map(|center| cell::insert(&mut physics, center, &config))
-            .collect();
+        let mut population = match (&environment, config.cell_mode) {
+            (Environment::World { map, .. }, CellSimulationMode::Local(options)) => {
+                let mut population = CellPopulation::new(map, spawn, options);
+                population.total_count = centers.len();
+                Some(population)
+            }
+            _ => None,
+        };
+        let mut cells = Vec::new();
+        for center in centers {
+            if let (Some(pop), Environment::World { map, .. }) = (&mut population, &environment) {
+                if !pop.contains(center) {
+                    pop.deposit(map, center, 1.);
+                    continue;
+                }
+            }
+            cells.push(cell::insert(&mut physics, center, &config));
+        }
         Self {
             config,
             physics,
             environment,
             robot,
             cells,
+            population,
             walls,
             steps: 0,
             elapsed_time: 0.,
@@ -416,6 +443,7 @@ impl Simulation {
         let pressure = self.config.pressure
             * (1.0 + 0.15 * (std::f32::consts::TAU * self.config.pulse_hz * time).sin());
         self.environment.update(pressure);
+        self.update_cell_population();
         if let Some(fluid) = &mut self.local_fluid {
             fluid.begin_frame();
             fluid.prepare_pressure(pressure);
@@ -553,6 +581,64 @@ impl Simulation {
         Ok(())
     }
 
+    /// Frame-boundary exchange only. Runtime remains the sole owner of active
+    /// Rapier handles; aggregate traffic never contributes LBM markers.
+    fn update_cell_population(&mut self) {
+        let (Some(pop), Environment::World { map, flow, .. }) =
+            (&mut self.population, &self.environment)
+        else {
+            return;
+        };
+        let started = Instant::now();
+        pop.spawned = 0;
+        pop.retired = 0;
+        let center = self.physics.bodies[self.robot].translation();
+        pop.repartition(map, center);
+        let half = pop.options.retention_half_extent;
+        self.cells.retain(|&handle| {
+            let body = &self.physics.soft_bodies[handle];
+            let (min, max) = cell_bounds(body);
+            let outside = max.x < center.x - half
+                || min.x > center.x + half
+                || max.y < center.y - half
+                || min.y > center.y + half;
+            if outside {
+                pop.deposit(map, fluid::center(body), 1.);
+                self.physics.remove_soft_body(handle);
+                pop.retired += 1;
+            }
+            !outside
+        });
+        if pop.advance(map, flow, self.config.dt as f64) {
+            let radius = self.config.cell_radius;
+            for (edge, interval, position) in pop.candidates(map, flow, radius) {
+                if map.signed_distance(position) > -radius - 0.16
+                    || (position - center).length() < radius + 0.85 + 0.5
+                    || self.cells.iter().any(|&handle| {
+                        let (min, max) = cell_bounds(&self.physics.soft_bodies[handle]);
+                        let separation = (min - position).max(position - max).max(Vector::ZERO);
+                        separation.length() < radius + 0.3
+                    })
+                {
+                    continue;
+                }
+                if !pop.materialize(edge, interval) {
+                    continue;
+                }
+                let handle = cell::insert(&mut self.physics, position, &self.config);
+                let body = &mut self.physics.soft_bodies[handle];
+                for i in 0..body.num_particles() {
+                    body.set_particle_velocity(
+                        i,
+                        self.environment.velocity_at(body.particle_position(i)),
+                    );
+                }
+                self.cells.push(handle);
+            }
+        }
+        pop.exchange_ms = started.elapsed().as_secs_f64() * 1000.;
+    }
+
     pub fn snapshot(&self) -> Snapshot {
         let soft_contacts = self
             .cells
@@ -649,6 +735,17 @@ impl Simulation {
                         .collect()
                 })
                 .collect(),
+            population: self
+                .population
+                .as_ref()
+                .map(|p| crate::CellPopulationSnapshot {
+                    total_count: p.total_count,
+                    detailed_count: self.cells.len(),
+                    abstract_count: p.abstract_count(),
+                    spawned_this_frame: p.spawned,
+                    retired_this_frame: p.retired,
+                    exchange_ms: p.exchange_ms,
+                }),
             arrows,
             steps: self.steps,
             time: self.elapsed_time,
@@ -665,6 +762,18 @@ impl Simulation {
             lbm_status,
         }
     }
+}
+
+fn cell_bounds(body: &SoftBody) -> (Vector, Vector) {
+    let (mut min, mut max) = (
+        Vector::splat(f32::INFINITY),
+        Vector::splat(f32::NEG_INFINITY),
+    );
+    for position in body.particle_positions() {
+        min = min.min(position);
+        max = max.max(position);
+    }
+    (min - Vector::splat(0.07), max + Vector::splat(0.07))
 }
 
 #[cfg(feature = "lbm-gpu")]
@@ -1064,5 +1173,118 @@ mod lbm_runtime_tests {
                 assert!(error.contains("opening"), "unexpected failure: {error}");
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod population_tests {
+    use super::*;
+    use crate::{CellPopulationOptions, CellSimulationMode};
+
+    fn seeded() -> Simulation {
+        let config = Config {
+            cell_mode: CellSimulationMode::Local(CellPopulationOptions::default()),
+            pressure: 0.,
+            robot_flow: 0.,
+            cell_count: 11,
+            ..Default::default()
+        };
+        let map = MapDefinition {
+            nodes: vec![[-100., 0.], [100., 0.]],
+            edges: vec![crate::map::VesselEdge {
+                from: 0,
+                to: 1,
+                half_width: 3.,
+                centerline: vec![[-100., 0.], [100., 0.]],
+            }],
+            pump_edge: 0,
+            spawn: [0., 0.],
+            landmarks: vec![],
+        };
+        let geometry = map.build_geometry(0.2);
+        let network = GraphNetwork::new(&map, config.viscosity);
+        let flow = network.solve(0.);
+        let mut centers = vec![Vector::new(-80., 0.); 10];
+        centers.push(Vector::new(5., 0.));
+        Simulation::build_seeded(
+            config,
+            Environment::World {
+                map,
+                geometry,
+                network,
+                flow,
+            },
+            Some(centers),
+        )
+    }
+    fn assert_total(sim: &Simulation) {
+        let state = sim.snapshot();
+        let count = state.population.unwrap();
+        assert_eq!(count.detailed_count, state.cells.len());
+        assert_eq!(count.total_count, 11);
+        assert!((count.abstract_count + state.cells.len() as f64 - 11.).abs() < 1e-10);
+        assert_eq!(sim.physics.soft_bodies.len(), sim.cells.len());
+    }
+    #[test]
+    fn real_bodies_retire_and_spawn_without_losing_quantity() {
+        let mut sim = seeded();
+        assert_eq!(sim.cells.len(), 1);
+        assert_total(&sim);
+        let retired_handle = sim.cells[0];
+        sim.physics.bodies[sim.robot].set_translation(Vector::new(-70., 0.), true);
+        sim.update_cell_population();
+        assert!(sim.cells.is_empty());
+        assert!(sim.physics.soft_bodies.get(retired_handle).is_none());
+        assert_total(&sim);
+        for _ in 0..12 {
+            sim.update_cell_population();
+        }
+        assert!(!sim.cells.is_empty());
+        assert!(sim.cells.len() < 11); // Crowding leaves stock unmaterialized.
+        for &handle in &sim.cells {
+            let p = fluid::center(&sim.physics.soft_bodies[handle]);
+            assert!((p.x + 70.).abs() > 32. && (p.x + 70.).abs() <= 36.);
+        }
+        assert_total(&sim);
+        let blocked_stock = sim.population.as_ref().unwrap().abstract_count();
+        let count = sim.cells.len();
+        for _ in 0..120 {
+            sim.update_cell_population();
+        }
+        assert_eq!(sim.cells.len(), count);
+        assert_eq!(
+            sim.population.as_ref().unwrap().abstract_count(),
+            blocked_stock
+        );
+        assert_total(&sim);
+    }
+    #[test]
+    fn pause_single_step_and_reset_keep_local_mode_and_initial_distribution() {
+        let mut sim = Simulation::new_world(Config {
+            cell_mode: CellSimulationMode::Local(CellPopulationOptions::default()),
+            pressure: 0.,
+            ..Default::default()
+        });
+        let initial = sim.snapshot();
+        assert!(initial.cells.len() < sim.config.cell_count);
+        let initial_stock = initial.population.unwrap().abstract_count;
+        sim.set_paused(true);
+        for _ in 0..24 {
+            sim.tick(MoveInput::default());
+        }
+        assert_eq!(sim.steps, 0);
+        assert_eq!(
+            sim.snapshot().population.unwrap().abstract_count,
+            initial_stock
+        );
+        sim.single_step(MoveInput::default());
+        assert_eq!(sim.steps, 1);
+        sim.reset();
+        let reset = sim.snapshot();
+        assert!(reset.paused);
+        assert_eq!(reset.steps, 0);
+        assert_eq!(reset.cells, initial.cells);
+        assert_eq!(reset.population.unwrap().abstract_count, initial_stock);
+        assert!(matches!(sim.config.cell_mode, CellSimulationMode::Local(_)));
     }
 }

@@ -95,7 +95,11 @@ func _build_panel() -> void:
 func update_state(state: Dictionary) -> void:
 	pause_button.text = "Resume [Space]" if state.paused else "Pause [Space]"
 	step_button.disabled = not state.paused
-	stats.text = "Cells                  %d\nTime                   %.1f s\nSolve / step           %.2f ms\nSoft contacts          %d\n\nPressure drop          %.2f\nPump flow              %.2f\nMean speed             %.2f" % [state.cells.size(), state.time, state.solve_ms, state.soft_contacts, state.pressure_drop, state.flow_rate, state.mean_speed]
+	var population: Dictionary = state.get("population", {})
+	var cell_text := "Cells                  %d" % state.cells.size()
+	if not population.is_empty():
+		cell_text = "Detailed cells         %d\nUnmaterialized         %.2f\nTotal cells            %d" % [population.detailed_count, population.abstract_count, population.total_count]
+	stats.text = cell_text + "\nTime                   %.1f s\nSolve / step           %.2f ms\nSoft contacts          %d\n\nPressure drop          %.2f\nPump flow              %.2f\nMean speed             %.2f" % [state.time, state.solve_ms, state.soft_contacts, state.pressure_drop, state.flow_rate, state.mean_speed]
 	var lines := PackedStringArray()
 	for i in state.branch_flows.size():
 		lines.append("Vessel %02d             %7.2f" % [i + 1, state.branch_flows[i]])

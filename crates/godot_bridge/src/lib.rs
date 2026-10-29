@@ -36,6 +36,16 @@ fn points(source: &[[f32; 2]]) -> PackedVector2Array {
 
 #[godot_api]
 impl BloodLab {
+    /// Configure the next world creation/reset; called before startup factory.
+    #[func]
+    fn configure_local_cells(&mut self, enabled: bool) {
+        self.simulation.config.cell_mode = if enabled {
+            simulation::CellSimulationMode::Local(simulation::CellPopulationOptions::default())
+        } else {
+            simulation::CellSimulationMode::Full
+        };
+    }
+
     #[func]
     fn use_world(&mut self) {
         self.simulation = Simulation::new_world(self.simulation.config.clone());
@@ -178,7 +188,22 @@ impl BloodLab {
                 "adapter_name" => d.adapter_name.as_str(), "software_adapter" => d.software_adapter,
             }
         }).unwrap_or_default();
+        let population = state
+            .population
+            .as_ref()
+            .map(|p| {
+                vdict! {
+                    "total_count" => p.total_count as i64,
+                    "detailed_count" => p.detailed_count as i64,
+                    "abstract_count" => p.abstract_count,
+                    "spawned" => p.spawned_this_frame as i64,
+                    "retired" => p.retired_this_frame as i64,
+                    "exchange_ms" => p.exchange_ms,
+                }
+            })
+            .unwrap_or_default();
         vdict! {
+            "population" => &population,
             "lbm" => &lbm,
             "validation" => &validation,
             "lbm_status" => state.lbm_status.as_deref().unwrap_or(""),
@@ -248,8 +273,9 @@ impl BloodLab {
             profile: Self::profile(profile)?,
             ..Default::default()
         };
-        self.simulation =
-            Simulation::new_lbm_validation(simulation::lbm_validation::config(), options)?;
+        let mut config = simulation::lbm_validation::config();
+        config.cell_mode = self.simulation.config.cell_mode;
+        self.simulation = Simulation::new_lbm_validation(config, options)?;
         self.validation_initial_centers = Some(simulation::lbm_validation::cell_centers(
             &self.simulation.snapshot(),
         ));
@@ -268,17 +294,25 @@ impl BloodLab {
             state,
             self.simulation.world_map().unwrap(),
             &self.simulation.config,
-            initial,
+            if state.population.is_some() {
+                &[]
+            } else {
+                initial
+            },
         );
         let s = self.simulation.lbm_stats().unwrap();
         let w = self.simulation.lbm_work_stats().unwrap();
-        vdict! {"finite"=>q.finite,"area_ratio_min"=>q.area_ratio_min,"area_ratio_max"=>q.area_ratio_max,
+        let mut result = vdict! {"finite"=>q.finite,"area_ratio_min"=>q.area_ratio_min,"area_ratio_max"=>q.area_ratio_max,
         "node_wall_max"=>q.node_wall_max,"robot_wall"=>q.robot_wall,"nearby_cells8"=>q.nearby_cells as i64,
-        "cell_displacement_mean"=>q.cell_displacement_mean,"cell_displacement_max"=>q.cell_displacement_max,
         "guard_error"=>simulation::lbm_validation::guard(q).err().unwrap_or_default(),
         "active_cells"=>s.active_cell_count as i64,"marker_force"=>s.max_cell_marker_force,"prepare_ms"=>s.prepare_ms,
         "lattice_steps"=>w.lattice_steps as i64,"dispatches"=>w.dispatches as i64,"submissions"=>w.submissions as i64,
-        "readback_calls"=>w.readback_calls as i64,"readback_bytes"=>w.readback_bytes as i64,"readback_wait_ms"=>w.readback_wait_ms}
+        "readback_calls"=>w.readback_calls as i64,"readback_bytes"=>w.readback_bytes as i64,"readback_wait_ms"=>w.readback_wait_ms};
+        if state.population.is_none() {
+            result.set("cell_displacement_mean", q.cell_displacement_mean);
+            result.set("cell_displacement_max", q.cell_displacement_max);
+        }
+        result
     }
     #[cfg(not(feature = "lbm-gpu"))]
     fn validation_snapshot(&self, _state: &simulation::Snapshot) -> VarDictionary {

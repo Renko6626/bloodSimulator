@@ -110,6 +110,7 @@ pub fn movement(moving: bool, frame: usize, warmup: usize, position: [f32; 2]) -
 }
 #[derive(Clone, Copy, Debug)]
 pub struct Quality {
+    pub cell_count: usize,
     pub finite: bool,
     pub area_ratio_min: f32,
     pub area_ratio_max: f32,
@@ -131,6 +132,7 @@ pub fn quality(
         * (std::f32::consts::TAU / config.cell_vertices as f32).sin();
     let robot = Vector::from_array(snapshot.robot);
     let mut result = Quality {
+        cell_count: snapshot.cells.len(),
         finite: robot.is_finite(),
         area_ratio_min: f32::INFINITY,
         area_ratio_max: 0.,
@@ -181,10 +183,11 @@ pub fn cell_centers(snapshot: &Snapshot) -> Vec<[f32; 2]> {
 }
 pub fn guard(q: Quality) -> Result<(), String> {
     if !q.finite
-        || !q.area_ratio_min.is_finite()
-        || q.area_ratio_min < 0.5
-        || q.area_ratio_max > 1.5
-        || q.node_wall_max > 0.3
+        || (q.cell_count > 0
+            && (!q.area_ratio_min.is_finite()
+                || q.area_ratio_min < 0.5
+                || q.area_ratio_max > 1.5
+                || q.node_wall_max > 0.3))
         || q.robot_wall > -0.55
     {
         return Err(format!("invalid validation mechanics: {q:?}"));
@@ -194,6 +197,21 @@ pub fn guard(q: Quality) -> Result<(), String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn empty_detailed_window_checks_robot_without_claiming_cell_quality() {
+        let config = Config {
+            cell_count: 0,
+            ..Default::default()
+        };
+        let sim = crate::Simulation::new_world(config.clone());
+        let mut snapshot = sim.snapshot();
+        let q = quality(&snapshot, sim.world_map().unwrap(), &config, &[]);
+        assert_eq!(q.cell_count, 0);
+        assert!(guard(q).is_ok());
+        snapshot.robot[0] = f32::NAN;
+        assert!(guard(quality(&snapshot, sim.world_map().unwrap(), &config, &[])).is_err());
+    }
+
     #[test]
     #[ignore = "explicit software-adapter validation-scene reset check"]
     fn validation_reset_preserves_seed_and_current_pressure() {

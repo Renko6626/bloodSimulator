@@ -1,0 +1,15 @@
+   Compiling simulation v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/simulation)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.83s
+     Running unittests src/lib.rs (target/debug/deps/simulation-a5a5aa16d7dad985)
+
+running 7 tests
+test cell_population::tests::births_prioritize_the_inflow_side_for_either_flow_direction ... ok
+test cell_population::tests::junction_distributes_outgoing_quantity_by_flow ... ok
+test cell_population::tests::stopped_flow_preserves_stock ... ok
+test cell_population::tests::transfer_uses_old_stock_and_only_one_edge_per_update ... ok
+test cell_population::tests::separated_far_intervals_do_not_bypass_near_region ... ok
+test runtime::population_tests::real_bodies_retire_and_spawn_without_losing_quantity ... ok
+test runtime::population_tests::pause_single_step_and_reset_keep_local_mode_and_initial_distribution ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 9 filtered out; finished in 0.34s
+

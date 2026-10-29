@@ -1,0 +1,7 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+ENGINE=4.7.1-stable (official)
+UPDATE_ONCE=1 CLEAR_ONCE=2
+render_loop_getter=true
+CACHE small_world origin=(-901.0, -421.0) size=(2244, 1217) rgba8_mib=10.4177398681641
+CACHE lbm_validation origin=(-1290.0, 244.0) size=(3780, 3206) rgba8_mib=46.2290954589844

@@ -1,6 +1,14 @@
 # 流体研究索引
 
-最新：[LBM 可玩分叉场与机械耦合实卡测量](2026-10-29-lbm-gameplay/README.md)。真实72细胞、玩家往返、5次移窗的运行检查完成；Rust模拟步约12ms p95，Godot默认GL回放约70–71ms p95，性能问题与控制实验完整保留。默认地图仍不支持，实例已停机。
+本阶段[性能交接](2026-10-29-performance-checkpoint.md)统一记录profiling、绘制优化、细胞窗口、运行方法及未验收项；用户已安排在 `feat/godot-static-background` 提交推送。
+
+[细胞群体窗口](2026-10-29-cell-population-window/README.md)已按确认方案接入显式 `--local-cells`；CPU真实交接、总量账、LBM软件短测和Godot初始截图完成。本机解析流均值6.335→3.755ms，不代表实卡或完整游戏FPS；默认Full保留。
+
+[静态血管背景缓存](2026-10-29-static-background/README.md)已接入并完成本地检查/截图，原物理和动态画法保留；实卡性能对照尚未执行。
+
+此前：[游戏帧成本定位](2026-10-29-gameplay-profile/README.md)。World 绘图/抗锯齿与 GPU 等待、降频对照完成；微秒级 tick 桥接不能解释几十毫秒差距。该轮定位未修改正式物理与渲染代码，新实例已确认停止；后续实施见上方记录。
+
+此前：[LBM 可玩分叉场与机械耦合实卡测量](2026-10-29-lbm-gameplay/README.md)。真实72细胞、玩家往返、5次移窗的运行检查完成；Rust模拟步约12ms p95，Godot默认GL回放约70–71ms p95，性能问题与控制实验完整保留。默认地图仍不支持，实例已停机。
 
 2026-10-29 进展：用户已阶段性批准 LSQ-FD 给定速度边界与帧末平均密度控制，并确认接入现有可选 LBM 路径。当前算法见 [物理文档](../physics/lbm-fluid.md)，实施状态见 [接入计划](../superpowers/plans/2026-10-29-lbm-integration.md)。下方 2026-10-28 及更早条目保留历史口径。
 

@@ -1,0 +1,39 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.12s
+     Running unittests src/lib.rs (target/debug/deps/simulation-411ad0eda30f0d5b)
+
+running 32 tests
+test cell_population::tests::junction_distributes_outgoing_quantity_by_flow ... ok
+test cell_population::tests::births_prioritize_the_inflow_side_for_either_flow_direction ... ok
+test cell_population::tests::transfer_uses_old_stock_and_only_one_edge_per_update ... ok
+test cell_population::tests::stopped_flow_preserves_stock ... ok
+test circulation::graph::tests::series_parallel_loop_obeys_pressures_conservation_and_scaling ... ok
+test fluid::lbm_geometry::tests::map_fork_profiles_drive_gpu ... ignored, explicit software-adapter functional diagnostic
+test fluid::streaming_window::tests::batched_advance_matches_individual_steps ... ignored, explicit software-adapter functional diagnostic
+test fluid::streaming_window::tests::deferred_batch_requires_finish_and_refreshes_cache ... ignored, explicit software-adapter functional diagnostic
+test fluid::streaming_window::tests::invalid_gpu_macrostate_returns_error_from_batch ... ignored, explicit software-adapter functional diagnostic
+test fluid::streaming_window::tests::streaming_window_migration_reference ... ignored, explicit software-adapter functional diagnostic
+test cell_population::tests::separated_far_intervals_do_not_bypass_near_region ... ok
+test fluid::streaming_window::tests::streaming_window_block_alignment ... ok
+test circulation::graph::tests::velocity_is_static_without_head_and_smooth_near_junction ... ok
+test fluid::streaming_window::tests::supported_bilinear_weights_exclude_solids_and_outside ... ok
+test lbm_validation::tests::validation_reset_preserves_seed_and_current_pressure ... ignored, explicit software-adapter validation-scene reset check
+test fluid::lbm_geometry::tests::accepts_interior_bends_with_straight_opening_buffers ... ok
+test runtime::lbm_runtime_tests::default_map_lbm_boundary_is_explicit ... ignored, explicit software-adapter functional diagnostic
+test runtime::lbm_runtime_tests::lbm_exchange_conserves_momentum_and_weights_once ... ignored, explicit software-adapter functional diagnostic
+test runtime::lbm_runtime_tests::lbm_runtime_prepare_pause_and_time ... ignored, explicit software-adapter functional diagnostic
+test fluid::lbm_geometry::tests::rejects_isolated_and_curved_openings ... ok
+test lbm_validation::tests::graph_flow_and_local_seed_are_explicit ... ok
+test fluid::lbm_geometry::tests::straight_and_fork_flux_on_both_grids ... ok
+test runtime::population_tests::real_bodies_retire_and_spawn_without_losing_quantity ... ok
+test fluid::tests::equal_open_pressures_rest_and_closed_component_is_rejected ... ok
+test cell::tests::compressed_cell_preserves_area_and_recovers_after_release ... ok
+test fluid::tests::open_channel_matches_poiseuille_and_preserves_pressure_reference ... ok
+test lbm_validation::tests::empty_detailed_window_checks_robot_without_claiming_cell_quality ... ok
+test map::tests::fork_has_open_shared_floor_and_boundary ... ok
+test runtime::population_tests::pause_single_step_and_reset_keep_local_mode_and_initial_distribution ... ok
+test fluid::tests::real_fork_conserves_opening_flux_and_solves_true_stokes_residuals ... ok
+test runtime::region_tests::reset_preserves_explicit_solver_and_grid_options ... ok
+test runtime::region_tests::region_handoff_reuses_bodies_and_preparation_applies_no_impulse ... ok
+
+test result: ok. 23 passed; 0 failed; 9 ignored; 0 measured; 0 filtered out; finished in 4.94s
+

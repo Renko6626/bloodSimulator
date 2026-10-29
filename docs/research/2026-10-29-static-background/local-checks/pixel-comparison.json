@@ -1,0 +1,14 @@
+{
+  "small_world": {
+    "world_region": "x0..999,y0..799; timing HUD excluded",
+    "mean_absolute_channel_difference_0_255": 0.029074583333333334,
+    "pixels_max_channel_difference_over_16": 1,
+    "world_pixels": 800000
+  },
+  "lbm_validation": {
+    "world_region": "x0..999,y0..799; timing HUD excluded",
+    "mean_absolute_channel_difference_0_255": 0.04608541666666666,
+    "pixels_max_channel_difference_over_16": 400,
+    "world_pixels": 800000
+  }
+}

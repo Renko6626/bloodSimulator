@@ -24,6 +24,11 @@ var font := ThemeDB.fallback_font
 
 
 func _ready() -> void:
+	if OS.get_cmdline_user_args().has("--local-cells"):
+		push_error("--local-cells requires the world scene")
+		set_physics_process(false)
+		get_tree().quit(1)
+		return
 	walls = simulation.geometry()
 	_build_panel()
 	_refresh()

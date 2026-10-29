@@ -2,20 +2,16 @@ extends Node2D
 ## Rust owns simulation and collision. This node renders its world-space snapshot.
 
 const SCALE := 24.0
-const INK := Color("dbe8ee")
-const MUTED := Color("8b9daa")
-const WALL := Color("72545c")
+const Background = preload("res://world_background.gd")
 const FLOW := Color(0.4, 0.8, 0.77, 0.5)
 
-@onready var floor_mesh: MeshInstance2D = $Floor
-@onready var landmark_backgrounds: Node2D = $LandmarkBackgrounds
+@onready var background: Background = $StaticBackground
 @onready var camera: Camera2D = $Camera
 var hud
 
 var simulation := BloodLab.new()
 var state: Dictionary = {}
 var wall_segments := PackedVector2Array()
-var landmarks: Array = []
 var show_flow := false
 var show_collision := false
 var font := ThemeDB.fallback_font
@@ -38,6 +34,7 @@ func _ready() -> void:
 	var args := OS.get_cmdline_user_args()
 	var use_lbm := args.has("--local-lbm")
 	var use_stokes := args.has("--local-stokes")
+	var local_cells := args.has("--local-cells")
 	var validation := args.has("--lbm-validation")
 	var profile := "fine"
 	var profile_given := false
@@ -74,6 +71,10 @@ func _ready() -> void:
 	if profile_given and not use_lbm:
 		_startup_error("--lbm-profile requires --local-lbm")
 		return
+	if local_cells and use_stokes:
+		_startup_error("--local-cells supports world and LBM; local Stokes is unavailable")
+		return
+	simulation.configure_local_cells(local_cells)
 	if use_lbm:
 		var created: bool = simulation.use_lbm_validation(profile) if validation else simulation.use_lbm_world(profile)
 		if not created:
@@ -84,10 +85,11 @@ func _ready() -> void:
 	else:
 		simulation.use_world()
 	var geometry: Dictionary = simulation.world_geometry()
-	landmarks = geometry.get("landmarks", [])
 	_build_walls(geometry.get("walls", []))
-	_build_landmark_backgrounds()
-	_build_floor(geometry.get("floor", PackedVector2Array()))
+	var background_error := background.configure(geometry, SCALE, font)
+	if not background_error.is_empty():
+		_startup_error(background_error)
+		return
 	hud.pause_requested.connect(_toggle_pause)
 	hud.step_requested.connect(_single_step)
 	hud.reset_requested.connect(_reset)
@@ -108,41 +110,11 @@ func _startup_error(message: String) -> void:
 	get_tree().quit(1)
 
 
-func _build_floor(floor: PackedVector2Array) -> void:
-	var vertices := PackedVector3Array()
-	vertices.resize(floor.size())
-	for i in floor.size():
-		vertices[i] = Vector3(floor[i].x * SCALE, floor[i].y * SCALE, 0.0)
-	var arrays := []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = vertices
-	var mesh := ArrayMesh.new()
-	if vertices.size() > 0:
-		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-	floor_mesh.mesh = mesh
-	floor_mesh.modulate = Color("34272b")
-
-
 func _build_walls(walls: Array) -> void:
 	for wall in walls:
 		for i in range(wall.size() - 1):
 			wall_segments.append(wall[i] * SCALE)
 			wall_segments.append(wall[i + 1] * SCALE)
-
-
-func _build_landmark_backgrounds() -> void:
-	for landmark in landmarks:
-		var position: Vector2 = landmark.position * SCALE
-		var half_size: Vector2 = landmark.size * SCALE * 0.5
-		var background := Polygon2D.new()
-		background.polygon = PackedVector2Array([
-			position + Vector2(-half_size.x, -half_size.y),
-			position + Vector2(half_size.x, -half_size.y),
-			position + Vector2(half_size.x, half_size.y),
-			position + Vector2(-half_size.x, half_size.y),
-		])
-		background.color = Color("222b30")
-		landmark_backgrounds.add_child(background)
 
 
 func _physics_process(_delta: float) -> void:
@@ -246,15 +218,8 @@ func _scaled(source: PackedVector2Array) -> PackedVector2Array:
 func _draw() -> void:
 	if state.is_empty():
 		return
-	for landmark in landmarks:
-		var position: Vector2 = landmark.position * SCALE
-		var size: Vector2 = landmark.size * SCALE
-		draw_rect(Rect2(position - size * 0.5, size), Color("52616a"), false, 2.0)
-		draw_string(font, position + Vector2(-size.x * 0.42, -size.y * 0.28), landmark.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 20, INK)
-	if not wall_segments.is_empty():
-		draw_multiline(wall_segments, WALL, 2.0, true)
-		if show_collision:
-			draw_multiline(wall_segments, Color("f3d59b"), 0.16 * SCALE, true)
+	if show_collision and not wall_segments.is_empty():
+		draw_multiline(wall_segments, Color("f3d59b"), 0.16 * SCALE, true)
 	if show_flow:
 		for arrow in state.arrows:
 			var start: Vector2 = arrow[0] * SCALE
@@ -266,10 +231,18 @@ func _draw() -> void:
 			var direction := velocity.normalized()
 			draw_line(end, end - direction.rotated(0.5) * 5.0, FLOW, 1.5, true)
 			draw_line(end, end - direction.rotated(-0.5) * 5.0, FLOW, 1.5, true)
+	var local_view: Rect2 = get_global_transform_with_canvas().affine_inverse() * get_viewport_rect()
+	var visible_cells := Rect2(local_view.position / SCALE, local_view.size / SCALE).grow(8.0 / SCALE)
 	for i in state.cells.size():
-		var contour := _scaled(state.cells[i])
-		if contour.size() < 3:
+		var cell: PackedVector2Array = state.cells[i]
+		if cell.size() < 3:
 			continue
+		var cell_bounds := Rect2(cell[0], Vector2.ZERO)
+		for point in cell:
+			cell_bounds = cell_bounds.expand(point)
+		if not visible_cells.intersects(cell_bounds, true):
+			continue
+		var contour := _scaled(cell)
 		var center := Vector2.ZERO
 		for point in contour:
 			center += point
@@ -311,7 +284,7 @@ func _begin_benchmark() -> void:
 		"cell_center_speed_mean", "cell_center_speed_max", "cell_displacement_mean", "cell_displacement_max", "area_ratio_min", "area_ratio_max", "node_wall_max", "robot_wall", "finite",
 		"density_min", "density_max", "density_sum", "targets", "fluxes", "region_switches", "origin_x", "origin_y", "overlap_error", "branch_flows",
 		"prepare_ms", "coupling_ms", "lbm_ms", "rapier_ms", "step_wall_ms", "tick_wall_ms", "snapshot_refresh_ms", "physics_callback_before_csv_ms",
-		"lattice_steps", "dispatches", "submissions", "readback_calls", "readback_bytes", "readback_wait_ms"
+		"lattice_steps", "dispatches", "submissions", "readback_calls", "readback_bytes", "readback_wait_ms", "total_cells", "detailed_cells", "abstract_cells", "spawned", "retired", "cell_exchange_ms"
 	]))
 	render_file.store_csv_line(PackedStringArray(["process_frame", "physics_frame", "render_interval_ms", "draw_calls_previous_frame", "display_server", "rendering_method", "process_callback_before_csv_ms"]))
 	print("LBM_GAMEPLAY_BENCH mode=", benchmark, " warmup=", benchmark_warmup, " frames=", benchmark_frames, " renderer=", RenderingServer.get_current_rendering_method(), " display=", DisplayServer.get_name(), " adapter=", state.lbm.get("adapter_name", ""), " software=", state.lbm.get("software_adapter", true))
@@ -327,22 +300,26 @@ func _joined(values: Array) -> String:
 func _benchmark_row(movement: Vector2, tick_ms: float, snapshot_ms: float, callback_ms: float) -> void:
 	var l: Dictionary = state.get("lbm", {})
 	var q: Dictionary = state.get("validation", {})
+	var population: Dictionary = state.get("population", {})
 	var centers := _cell_centers()
 	var speed_sum := 0.0
 	var speed_max := 0.0
-	for i in centers.size():
-		var speed := centers[i].distance_to(previous_centers[i]) * 60.0
-		speed_sum += speed
-		speed_max = maxf(speed_max, speed)
+	if population.is_empty():
+		for i in centers.size():
+			var speed := centers[i].distance_to(previous_centers[i]) * 60.0
+			speed_sum += speed
+			speed_max = maxf(speed_max, speed)
 	previous_centers = centers
 	var values: Array = [
 		"warmup" if benchmark_frame < benchmark_warmup else "measure", benchmark_frame, state.time, movement.x, movement.y, state.robot.x, state.robot.y,
-		q.get("active_cells", 0), q.get("nearby_cells8", 0), state.soft_contacts, speed_sum / max(1, centers.size()), speed_max,
-		q.get("cell_displacement_mean", 0), q.get("cell_displacement_max", 0), q.get("area_ratio_min", 0), q.get("area_ratio_max", 0), q.get("node_wall_max", 0), q.get("robot_wall", 0), q.get("finite", false),
+		q.get("active_cells", 0), q.get("nearby_cells8", 0), state.soft_contacts, speed_sum / max(1, centers.size()) if population.is_empty() else "", speed_max if population.is_empty() else "",
+		q.get("cell_displacement_mean", ""), q.get("cell_displacement_max", ""), q.get("area_ratio_min", 0) if not centers.is_empty() else "", q.get("area_ratio_max", 0) if not centers.is_empty() else "", q.get("node_wall_max", 0) if not centers.is_empty() else "", q.get("robot_wall", 0), q.get("finite", false),
 		l.get("density_min", 0), l.get("density_max", 0), l.get("mass", 0), _joined(l.get("opening_targets", [])), _joined(l.get("opening_fluxes", [])),
 		l.get("region_switches", 0), l.get("origin_blocks", Vector2i.ZERO).x, l.get("origin_blocks", Vector2i.ZERO).y, l.get("overlap_error", 0), _joined(state.branch_flows),
 		q.get("prepare_ms", 0), l.get("coupling_ms", 0), l.get("lbm_ms", 0), l.get("rapier_ms", 0), state.solve_ms, tick_ms, snapshot_ms, callback_ms,
-		q.get("lattice_steps", 0), q.get("dispatches", 0), q.get("submissions", 0), q.get("readback_calls", 0), q.get("readback_bytes", 0), q.get("readback_wait_ms", 0)
+		q.get("lattice_steps", 0), q.get("dispatches", 0), q.get("submissions", 0), q.get("readback_calls", 0), q.get("readback_bytes", 0), q.get("readback_wait_ms", 0),
+		population.get("total_count", ""), population.get("detailed_count", ""), population.get("abstract_count", ""),
+		population.get("spawned", ""), population.get("retired", ""), population.get("exchange_ms", "")
 	]
 	var fields := PackedStringArray()
 	for value in values:
@@ -354,6 +331,8 @@ func _benchmark_row(movement: Vector2, tick_ms: float, snapshot_ms: float, callb
 		failure = state.get("lbm_status", "")
 	if failure.is_empty():
 		failure = q.get("guard_error", "")
+	if not population.is_empty() and absf(float(population.detailed_count) + float(population.abstract_count) - float(population.total_count)) > 0.000001:
+		failure = "cell population quantity mismatch"
 	for residual in l.get("opening_residuals", []):
 		if absf(residual) > 0.001:
 			failure = "opening flux residual exceeds 0.001"

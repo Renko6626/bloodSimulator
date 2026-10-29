@@ -1,0 +1,6 @@
+Initialize godot-rust (API v4.7.stable.official, runtime v4.7.1.stable.official, safeguards balanced)
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3577)
+

@@ -1,0 +1,5 @@
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Finished `release` profile [optimized] target(s) in 0.97s
+     Running `target/release/examples/lbm_gameplay_probe --frames 2 --warmup 0 --case hold --allow-software --functional --output /tmp/sunyunbo/blood-population-window/lbm-full`
+hold frame=0 robot=[24.003494, 24.002113] active=72 contacts=0 rho=[0.9915376,1.0067201]

@@ -1,0 +1,8 @@
+   Compiling simulation v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/simulation)
+    Finished `release` profile [optimized] target(s) in 3.00s
+     Running `target/release/examples/circulation_probe 72 60 population-full /tmp/sunyunbo/blood-population-window/final-cpu-full.csv`
+population local=false total=72 detailed=72..72 simulated=59.999256s robot=[-23.971165, -0.003001975] waypoint=167/168 spawned=0 retired=0 max_quantity_error=0.000e0 contact_frames=3417/3600 max_area_error=0.041270 max_node_wall=-0.097762
+solve mean/p95/max=6.334876/7.552073/95.867468ms n=3600
+snapshot mean/p95/max=0.514404/0.641777/1.109252ms n=3600
+cell_exchange mean/p95/max=0.000000/0.000000/0.000000ms n=3600
+handoff_solve: no observed frames

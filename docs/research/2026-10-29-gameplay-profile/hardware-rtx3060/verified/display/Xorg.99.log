@@ -1,0 +1,199 @@
+[4067799.042] 
+X.Org X Server 1.21.1.11
+X Protocol Version 11, Revision 0
+[4067799.042] Current Operating System: Linux 2c2fba33e41c 5.15.0-160-generic #170-Ubuntu SMP Wed Oct 1 10:06:56 UTC 2025 x86_64
+[4067799.042] Kernel command line: BOOT_IMAGE=/boot/vmlinuz-5.15.0-160-generic root=UUID=a8632cd6-71e0-484d-926a-94cc7057fa58 ro
+[4067799.042] xorg-server 2:21.1.12-1ubuntu1.9 (For technical support please see http://www.ubuntu.com/support) 
+[4067799.042] Current version of pixman: 0.42.2
+[4067799.042] 	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+[4067799.042] Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+[4067799.042] (++) Log file: "/workspace/lbm-profile-20261029/display/Xorg.99.log", Time: Thu Oct 29 07:53:55 2026
+[4067799.042] (++) Using config file: "/workspace/lbm-profile-20261029/display/xorg.conf"
+[4067799.042] (==) Using system config directory "/usr/share/X11/xorg.conf.d"
+[4067799.048] (==) ServerLayout "ExperimentLayout"
+[4067799.048] (**) |-->Screen "ExperimentScreen" (0)
+[4067799.048] (**) |   |-->Monitor "<default monitor>"
+[4067799.048] (**) |   |-->Device "ExperimentGPU"
+[4067799.048] (==) No monitor specified for screen "ExperimentScreen".
+	Using a default monitor configuration.
+[4067799.048] (**) Option "AutoAddDevices" "False"
+[4067799.048] (**) Option "AutoAddGPU" "False"
+[4067799.048] (**) Allowing byte-swapped clients
+[4067799.048] (**) Not automatically adding devices
+[4067799.048] (==) Automatically enabling devices
+[4067799.048] (**) Not automatically adding GPU devices
+[4067799.048] (==) Automatically binding GPU devices
+[4067799.048] (==) Max clients allowed: 256, resource mask: 0x1fffff
+[4067799.048] (WW) The directory "/usr/share/fonts/X11/misc" does not exist.
+[4067799.048] 	Entry deleted from font path.
+[4067799.048] (WW) The directory "/usr/share/fonts/X11/cyrillic" does not exist.
+[4067799.048] 	Entry deleted from font path.
+[4067799.048] (WW) The directory "/usr/share/fonts/X11/100dpi/" does not exist.
+[4067799.048] 	Entry deleted from font path.
+[4067799.048] (WW) The directory "/usr/share/fonts/X11/75dpi/" does not exist.
+[4067799.048] 	Entry deleted from font path.
+[4067799.048] (WW) The directory "/usr/share/fonts/X11/Type1" does not exist.
+[4067799.048] 	Entry deleted from font path.
+[4067799.048] (WW) The directory "/usr/share/fonts/X11/100dpi" does not exist.
+[4067799.048] 	Entry deleted from font path.
+[4067799.048] (WW) The directory "/usr/share/fonts/X11/75dpi" does not exist.
+[4067799.048] 	Entry deleted from font path.
+[4067799.048] (==) FontPath set to:
+	built-ins
+[4067799.048] (++) ModulePath set to "/opt/nvidia-drivers/lib64,/usr/lib/xorg/modules"
+[4067799.048] (==) |-->Input Device "<default pointer>"
+[4067799.048] (==) |-->Input Device "<default keyboard>"
+[4067799.048] (==) The core pointer device wasn't specified explicitly in the layout.
+	Using the default mouse configuration.
+[4067799.048] (==) The core keyboard device wasn't specified explicitly in the layout.
+	Using the default keyboard configuration.
+[4067799.048] (II) Loader magic: 0x55a9d6137020
+[4067799.048] (II) Module ABI versions:
+[4067799.048] 	X.Org ANSI C Emulation: 0.4
+[4067799.048] 	X.Org Video Driver: 25.2
+[4067799.048] 	X.Org XInput driver : 24.4
+[4067799.048] 	X.Org Server Extension : 10.0
+[4067799.048] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[4067799.049] (II) xfree86: Adding drm device (/dev/dri/card0)
+[4067799.049] (II) Platform probe for /sys/devices/pci0000:00/0000:00:02.0/0000:03:00.0/drm/card0
+[4067799.060] (--) PCI:*(3@0:0:0) 10de:2503:10de:1522 rev 161, Mem @ 0xfa000000/16777216, 0xe0000000/268435456, 0xf0000000/33554432, I/O @ 0x0000e000/128, BIOS @ 0x????????/131072
+[4067799.060] (II) LoadModule: "glx"
+[4067799.060] (II) Loading /usr/lib/xorg/modules/extensions/libglx.so
+[4067799.061] (II) Module glx: vendor="X.Org Foundation"
+[4067799.061] 	compiled for 1.21.1.11, module version = 1.0.0
+[4067799.061] 	ABI class: X.Org Server Extension, version 10.0
+[4067799.061] (II) LoadModule: "nvidia"
+[4067799.061] (II) Loading /opt/nvidia-drivers/lib64/nvidia_drv.so
+[4067799.066] (II) Module nvidia: vendor="NVIDIA Corporation"
+[4067799.066] 	compiled for 1.6.99.901, module version = 1.0.0
+[4067799.066] 	Module class: X.Org Video Driver
+[4067799.066] (II) LoadModule: "mouse"
+[4067799.067] (WW) Warning, couldn't open module mouse
+[4067799.067] (EE) Failed to load module "mouse" (module does not exist, 0)
+[4067799.067] (II) LoadModule: "kbd"
+[4067799.067] (WW) Warning, couldn't open module kbd
+[4067799.067] (EE) Failed to load module "kbd" (module does not exist, 0)
+[4067799.067] (II) NVIDIA dlloader X Driver  570.195.03  Sat Sep 20 00:39:17 UTC 2025
+[4067799.067] (II) NVIDIA Unified Driver for all Supported NVIDIA GPUs
+[4067799.068] (II) Loading sub module "fb"
+[4067799.068] (II) LoadModule: "fb"
+[4067799.068] (II) Module "fb" already built-in
+[4067799.068] (II) Loading sub module "wfb"
+[4067799.068] (II) LoadModule: "wfb"
+[4067799.068] (II) Loading /usr/lib/xorg/modules/libwfb.so
+[4067799.068] (II) Module wfb: vendor="X.Org Foundation"
+[4067799.068] 	compiled for 1.21.1.11, module version = 1.0.0
+[4067799.068] 	ABI class: X.Org ANSI C Emulation, version 0.4
+[4067799.069] (WW) VGA arbiter: cannot open kernel arbiter, no multi-card support
+[4067799.069] (**) NVIDIA(0): Depth 24, (--) framebuffer bpp 32
+[4067799.069] (==) NVIDIA(0): RGB weight 888
+[4067799.069] (==) NVIDIA(0): Default visual is TrueColor
+[4067799.069] (==) NVIDIA(0): Using gamma correction (1.0, 1.0, 1.0)
+[4067799.069] (II) Applying OutputClass "nvidia" options to /dev/dri/card0
+[4067799.069] (**) NVIDIA(0): Option "AllowEmptyInitialConfiguration" "True"
+[4067799.069] (**) NVIDIA(0): Option "UseDisplayDevice" "None"
+[4067799.069] (**) NVIDIA(0): Enabling 2D acceleration
+[4067799.070] (**) NVIDIA(0): Option "UseDisplayDevice" set to "none"; enabling NoScanout
+[4067799.070] (**) NVIDIA(0):     mode
+[4067799.070] (II) Loading sub module "glxserver_nvidia"
+[4067799.070] (II) LoadModule: "glxserver_nvidia"
+[4067799.070] (WW) Warning, couldn't open module glxserver_nvidia
+[4067799.070] (EE) NVIDIA: Failed to load module "glxserver_nvidia" (module does not exist, 0)
+[4067799.070] (EE) NVIDIA(0): Failed to initialize the GLX module; please check in your X
+[4067799.070] (EE) NVIDIA(0):     log file that the GLX module has been loaded in your X
+[4067799.070] (EE) NVIDIA(0):     server, and that the module is the NVIDIA GLX module.  If
+[4067799.070] (EE) NVIDIA(0):     you continue to encounter problems, Please try
+[4067799.070] (EE) NVIDIA(0):     reinstalling the NVIDIA driver.
+[4067799.070] (II) NVIDIA: The X server does not support PRIME Render Offload.
+[4067799.096] (II) NVIDIA(0): NVIDIA GPU NVIDIA GeForce RTX 3060 (GA106-A) at PCI:3:0:0
+[4067799.096] (II) NVIDIA(0):     (GPU-0)
+[4067799.096] (--) NVIDIA(0): Memory: 12582912 kBytes
+[4067799.096] (--) NVIDIA(0): VideoBIOS: 94.06.14.00.f4
+[4067799.096] (II) NVIDIA(0): Detected PCI Express Link width: 16X
+[4067799.096] (II) NVIDIA(0): Validated MetaModes:
+[4067799.096] (II) NVIDIA(0):     "NULL"
+[4067799.096] (**) NVIDIA(0): Virtual screen size configured to be 1280 x 800
+[4067799.096] (WW) NVIDIA(0): Unable to get display device for DPI computation.
+[4067799.096] (==) NVIDIA(0): DPI set to (75, 75); computed from built-in default
+[4067799.100] (II) NVIDIA: Reserving 24576.00 MB of virtual memory for indirect memory
+[4067799.100] (II) NVIDIA:     access.
+[4067799.121] (II) NVIDIA(0): ACPI: failed to connect to the ACPI event daemon; the daemon
+[4067799.121] (II) NVIDIA(0):     may not be running or the "AcpidSocketPath" X
+[4067799.121] (II) NVIDIA(0):     configuration option may not be set correctly.  When the
+[4067799.121] (II) NVIDIA(0):     ACPI event daemon is available, the NVIDIA X driver will
+[4067799.121] (II) NVIDIA(0):     try to use it to receive ACPI event notifications.  For
+[4067799.121] (II) NVIDIA(0):     details, please see the "ConnectToAcpid" and
+[4067799.121] (II) NVIDIA(0):     "AcpidSocketPath" X configuration options in Appendix B: X
+[4067799.121] (II) NVIDIA(0):     Config Options in the README.
+[4067799.156] (II) NVIDIA(0): Setting mode "NULL"
+[4067799.187] (==) NVIDIA(0): Disabling shared memory pixmaps
+[4067799.187] (==) NVIDIA(0): Backing store enabled
+[4067799.187] (==) NVIDIA(0): Silken mouse enabled
+[4067799.187] (==) NVIDIA(0): DPMS enabled
+[4067799.187] (II) Loading sub module "dri2"
+[4067799.187] (II) LoadModule: "dri2"
+[4067799.187] (II) Module "dri2" already built-in
+[4067799.187] (II) NVIDIA(0): [DRI2] Setup complete
+[4067799.187] (II) NVIDIA(0): [DRI2]   VDPAU driver: nvidia
+[4067799.187] (II) Initializing extension Generic Event Extension
+[4067799.187] (II) Initializing extension SHAPE
+[4067799.187] (II) Initializing extension MIT-SHM
+[4067799.187] (II) Initializing extension XInputExtension
+[4067799.188] (II) Initializing extension XTEST
+[4067799.188] (II) Initializing extension BIG-REQUESTS
+[4067799.188] (II) Initializing extension SYNC
+[4067799.188] (II) Initializing extension XKEYBOARD
+[4067799.188] (II) Initializing extension XC-MISC
+[4067799.188] (II) Initializing extension SECURITY
+[4067799.188] (II) Initializing extension XFIXES
+[4067799.188] (II) Initializing extension RENDER
+[4067799.188] (II) Initializing extension RANDR
+[4067799.188] (II) Initializing extension COMPOSITE
+[4067799.189] (II) Initializing extension DAMAGE
+[4067799.189] (II) Initializing extension MIT-SCREEN-SAVER
+[4067799.189] (II) Initializing extension DOUBLE-BUFFER
+[4067799.189] (II) Initializing extension RECORD
+[4067799.189] (II) Initializing extension DPMS
+[4067799.189] (II) Initializing extension Present
+[4067799.189] (II) Initializing extension DRI3
+[4067799.189] (II) Initializing extension X-Resource
+[4067799.189] (II) Initializing extension XVideo
+[4067799.189] (II) Initializing extension XVideo-MotionCompensation
+[4067799.189] (II) Initializing extension SELinux
+[4067799.189] (II) SELinux: Disabled on system
+[4067799.189] (II) Initializing extension GLX
+[4067799.189] (II) AIGLX: Screen 0 is not DRI2 capable
+[4067799.362] (II) IGLX: Loaded and initialized swrast
+[4067799.362] (II) GLX: Initialized DRISWRAST GL provider for screen 0
+[4067799.362] (II) Initializing extension XFree86-VidModeExtension
+[4067799.362] (II) Initializing extension XFree86-DGA
+[4067799.362] (II) Initializing extension XFree86-DRI
+[4067799.362] (II) Initializing extension DRI2
+[4067799.362] (II) Initializing extension NV-GLX
+[4067799.362] (II) Initializing extension NV-CONTROL
+[4067799.383] (II) LoadModule: "mouse"
+[4067799.383] (WW) Warning, couldn't open module mouse
+[4067799.383] (EE) Failed to load module "mouse" (module does not exist, 0)
+[4067799.383] (EE) No input driver matching `mouse'
+[4067799.383] (II) Falling back to input driver `libinput'
+[4067799.383] (II) LoadModule: "libinput"
+[4067799.384] (WW) Warning, couldn't open module libinput
+[4067799.384] (EE) Failed to load module "libinput" (module does not exist, 0)
+[4067799.384] (II) LoadModule: "kbd"
+[4067799.384] (WW) Warning, couldn't open module kbd
+[4067799.384] (EE) Failed to load module "kbd" (module does not exist, 0)
+[4067799.384] (EE) No input driver matching `kbd'
+[4067799.384] (II) Falling back to input driver `libinput'
+[4067799.384] (II) LoadModule: "libinput"
+[4067799.384] (WW) Warning, couldn't open module libinput
+[4067799.384] (EE) Failed to load module "libinput" (module does not exist, 0)
+[4067799.415] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[4067809.423] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[4067819.434] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[4067829.444] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[4067839.454] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[4067848.824] (II) NVIDIA(GPU-0): Deleting GPU-0
+[4067848.824] (II) Server terminated successfully (0). Closing log file.

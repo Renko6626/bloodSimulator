@@ -1,0 +1,11 @@
+Hit:1 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64  InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu noble InRelease
+Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Hit:4 http://security.ubuntu.com/ubuntu noble-security InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+Get:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1740 kB]
+Get:7 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2172 kB]
+Get:8 http://archive.ubuntu.com/ubuntu noble-updates/universe i386 Packages [1426 kB]
+Fetched 5464 kB in 5s (1109 kB/s)
+Reading package lists...
+W: https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/InRelease: Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.

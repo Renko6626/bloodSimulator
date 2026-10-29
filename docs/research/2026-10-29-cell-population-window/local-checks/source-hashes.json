@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-29T10:28:04.473801+00:00",
+  "base_commit": "41057e347ce93189b81eb91651e562e48880bd60",
+  "branch": "feat/godot-static-background",
+  "uncommitted_implementation": true,
+  "cpu": "Intel Xeon Gold 6330 CPU @ 2.00GHz",
+  "physics_threads": 4,
+  "gpu_for_checks": "llvmpipe LLVM 15.0.7 software only",
+  "source_sha256": {
+    "crates/simulation/src/cell_population.rs": "d0cc0162409094b45a05ddbdb5b4426426f30cca227717e1f898370e71310498",
+    "crates/simulation/src/runtime.rs": "81d80bf290f6bd4e4fd9cba37fadcbc08a8859fe81bee5eba6137263ea9c5113",
+    "crates/simulation/src/config.rs": "bd04d9e0e88d709d90db5d766eef0c8429ce4b184e23a5301fff62f975673ece",
+    "crates/simulation/src/view.rs": "a4141c00525d8ed93c9fbb58a758ce9f435b29a3fd8b1e3c0ad3641187182331",
+    "crates/simulation/src/lib.rs": "2983962e30b113b94c27477d6600e02220a2eb8dd0224fd8a2af522b881db252",
+    "crates/simulation/src/lbm_validation.rs": "197430d3cd4170febfd62d26df8f8fd164746bff2d11f9fe82068e2e038eae5f",
+    "crates/simulation/examples/circulation_probe.rs": "548d41ee8bf9b6938377d0e9adc2ae97fa73722118563962154c6a897949caba",
+    "crates/simulation/examples/lbm_gameplay_probe.rs": "07d5a862d8895a3e412c863388f52e61d472f4fc73c1e896ade79f0633b81918",
+    "crates/godot_bridge/src/lib.rs": "2618aac212f83169d8556c6096d5f433a15bb6ae82792949ad1a55b96ad3c313",
+    "godot/world.gd": "d7029fbce3f1f66b53bffe328a1b4f0acee9f926dc4ef1595cbb6e19486b914e",
+    "godot/world_hud.gd": "b6e4f00a374be7234623e4253c9c7450f0c5a9c94a36e9c3224339306c32d18b",
+    "godot/lab.gd": "5014f291a8b60d4b3ce0b8ae3e088d399149097af4eb9bdad534f0a3e5ca8333"
+  },
+  "binary_sha256": {
+    "target/release/examples/circulation_probe": "f546860c45ba2fdbbd9565e3690933447d0c95ee480e0e52e843b27df8fac147",
+    "target/release/examples/lbm_gameplay_probe": "99de35cfa9b2d751d9b5d3319528d1ebfe6e04a13357dd4319980972496dfdb7",
+    "target/debug/libgodot_bridge.so": "adf3976b93fc6c0ea07d50b7ff1256b332dc9c2893f46ac016374fcdb30bfac7"
+  },
+  "cpu_order": [
+    "Full 3600 frames",
+    "Local 3600 frames"
+  ],
+  "cpu_warmup_discarded": 0,
+  "cloud_instances_started": false
+}

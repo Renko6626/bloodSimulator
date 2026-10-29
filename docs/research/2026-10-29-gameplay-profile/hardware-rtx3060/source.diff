@@ -1,0 +1,354 @@
+--- a/crates/simulation/src/runtime.rs
++++ b/crates/simulation/src/runtime.rs
+@@ -408,10 +408,17 @@
+         let started = Instant::now();
+         let result = crate::threading::install(|| self.step_inner(input));
+         self.solve_ms = started.elapsed().as_secs_f64() * 1000.0;
++        #[cfg(feature = "lbm-gpu")]
++        if std::env::var_os("BLOOD_PROFILE").is_some() {
++            if let (Some(s), Some(w)) = (self.lbm_stats(), self.lbm_work_stats()) {
++                eprintln!("PROFILE_STEP frame={} total_ms={:.6} prepare_ms={:.6} coupling_ms={:.6} lbm_ms={:.6} rapier_ms={:.6} upload_ms={:.6} encoding_ms={:.6} submit_ms={:.6} wait_ms={:.6} decode_ms={:.6}", self.steps-1, self.solve_ms, s.prepare_ms, s.coupling_ms, s.lbm_ms, s.rapier_ms, w.upload_ms, w.encoding_ms, w.submission_ms, w.readback_wait_ms, w.readback_decode_ms);
++            }
++        }
+         result
+     }
+ 
+     fn step_inner(&mut self, input: MoveInput) -> Result<(), String> {
++        let profile_inner = Instant::now();
+         let time = self.steps as f32 * self.config.dt;
+         let pressure = self.config.pressure
+             * (1.0 + 0.15 * (std::f32::consts::TAU * self.config.pulse_hz * time).sin());
+@@ -472,6 +479,7 @@
+                 );
+                 flow_velocity = composed_velocity(sample);
+             }
++            let profile_advection = Instant::now();
+             robot::drive(
+                 &mut self.physics.bodies[self.robot],
+                 input,
+@@ -508,6 +516,9 @@
+                     |position| self.environment.velocity_at(position),
+                 );
+             }
++            if std::env::var_os("BLOOD_PROFILE").is_some() {
++                eprintln!("PROFILE_ADVECTION frame={} ms={:.6}", self.steps, profile_advection.elapsed().as_secs_f64()*1000.);
++            }
+             if let Some(fluid) = &mut self.local_fluid {
+                 fluid
+                     .advance(
+@@ -548,6 +559,9 @@
+                 format!("LBM frame finish failed; frame may be partially advanced: {e}")
+             })?;
+         }
++        if std::env::var_os("BLOOD_PROFILE").is_some() {
++            eprintln!("PROFILE_INNER frame={} inner_ms={:.6}", self.steps, profile_inner.elapsed().as_secs_f64()*1000.);
++        }
+         self.steps += 1;
+         self.elapsed_time += self.config.dt;
+         Ok(())
+--- a/crates/godot_bridge/src/lib.rs
++++ b/crates/godot_bridge/src/lib.rs
+@@ -149,7 +149,9 @@
+ 
+     #[func]
+     fn snapshot(&self) -> VarDictionary {
++        let profile_start = std::time::Instant::now();
+         let state = self.simulation.snapshot();
++        let profile_snapshot_ms = profile_start.elapsed().as_secs_f64()*1000.;
+         let validation = self.validation_snapshot(&state);
+         let cells: Array<PackedVector2Array> = state.cells.iter().map(|p| points(p)).collect();
+         let arrows: Array<PackedVector2Array> = state
+@@ -178,6 +180,9 @@
+                 "adapter_name" => d.adapter_name.as_str(), "software_adapter" => d.software_adapter,
+             }
+         }).unwrap_or_default();
++        if std::env::var_os("BLOOD_PROFILE").is_some() {
++            eprintln!("PROFILE_SNAPSHOT frame={} sim_ms={:.6} before_return_ms={:.6}", state.steps, profile_snapshot_ms, profile_start.elapsed().as_secs_f64()*1000.);
++        }
+         vdict! {
+             "lbm" => &lbm,
+             "validation" => &validation,
+@@ -232,6 +237,7 @@
+     fn create_lbm_world(&mut self, profile: &str) -> Result<(), String> {
+         let options = simulation::LbmOptions {
+             profile: Self::profile(profile)?,
++            allow_software: std::env::var_os("BLOOD_ALLOW_SOFTWARE").is_some(),
+             ..Default::default()
+         };
+         self.simulation = Simulation::new_lbm_world(self.simulation.config.clone(), options)?;
+@@ -246,6 +252,7 @@
+     fn create_lbm_validation(&mut self, profile: &str) -> Result<(), String> {
+         let options = simulation::LbmOptions {
+             profile: Self::profile(profile)?,
++            allow_software: std::env::var_os("BLOOD_ALLOW_SOFTWARE").is_some(),
+             ..Default::default()
+         };
+         self.simulation =
+--- a/crates/fluid-gpu/src/lbm/gpu.rs
++++ b/crates/fluid-gpu/src/lbm/gpu.rs
+@@ -86,7 +86,50 @@
+     pub fluid_cells: usize,
+ }
+ 
++struct ProfileQueries {
++    query: wgpu::QuerySet,
++    resolve: wgpu::Buffer,
++    read: wgpu::Buffer,
++    used: Cell<u32>,
++    period: f64,
++}
++impl ProfileQueries {
++    fn new(device: &wgpu::Device, queue: &wgpu::Queue) -> Self {
++        let query = device.create_query_set(&wgpu::QuerySetDescriptor { label: Some("profile"), ty: wgpu::QueryType::Timestamp, count: 128 });
++        let buffer = |usage| device.create_buffer(&wgpu::BufferDescriptor { label: Some("profile"), size: 1024, usage, mapped_at_creation: false });
++        Self { query, resolve: buffer(wgpu::BufferUsages::QUERY_RESOLVE | wgpu::BufferUsages::COPY_SRC), read: buffer(wgpu::BufferUsages::COPY_DST | wgpu::BufferUsages::MAP_READ), used: Cell::new(0), period: queue.get_timestamp_period() as f64 }
++    }
++    fn writes(&self) -> wgpu::ComputePassTimestampWrites<'_> {
++        let i = self.used.get();
++        assert!(i+2 <= 128, "profile query capacity exceeded");
++        self.used.set(i+2);
++        wgpu::ComputePassTimestampWrites { query_set: &self.query, beginning_of_pass_write_index: Some(i), end_of_pass_write_index: Some(i+1) }
++    }
++    fn resolve(&self, encoder: &mut wgpu::CommandEncoder) {
++        let n = self.used.get();
++        if n > 0 {
++            encoder.resolve_query_set(&self.query, 0..n, &self.resolve, 0);
++            encoder.copy_buffer_to_buffer(&self.resolve, 0, &self.read, 0, u64::from(n)*8);
++        }
++    }
++    fn map(&self) {
++        if self.used.get() > 0 {
++            self.read.slice(..).map_async(wgpu::MapMode::Read, |r| r.expect("profile map"));
++        }
++    }
++    fn report(&self, kind: &str) {
++        let n = self.used.replace(0) as usize;
++        if n == 0 { return; }
++        let data = self.read.slice(..).get_mapped_range();
++        let ticks: &[u64] = bytemuck::cast_slice(&data);
++        let sum: u64 = ticks[..n].chunks_exact(2).map(|p| p[1].wrapping_sub(p[0])).sum();
++        eprintln!("PROFILE_GPU kind={} passes={} kernels_ms={:.6} span_ms={:.6}", kind, n/2, sum as f64*self.period/1e6, ticks[n-1].wrapping_sub(ticks[0]) as f64*self.period/1e6);
++        drop(data);
++        self.read.unmap();
++    }
++}
+ pub struct LbmWindow {
++    profile_queries: Option<ProfileQueries>,
+     work: Cell<LbmWorkStats>,
+     spec: WindowSpec,
+     config: WindowConfig,
+@@ -147,9 +190,12 @@
+         if software && !config.allow_software {
+             return Err("software adapter is only allowed for functional diagnostics".into());
+         }
++        let profiling = std::env::var_os("BLOOD_GPU_PROFILE").is_some();
++        let features = if profiling { wgpu::Features::TIMESTAMP_QUERY } else { wgpu::Features::empty() };
++        if !adapter.features().contains(features) { return Err("timestamp queries unavailable".into()); }
+         let (device, queue) = pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor {
+             label: Some("lbm-window"),
+-            required_features: wgpu::Features::empty(),
++            required_features: features,
+             required_limits: wgpu::Limits::default(),
+             ..Default::default()
+         }))
+@@ -270,7 +316,9 @@
+         let macros = pipeline("macros");
+         let boundary_pipeline = pipeline("reconstruct");
+         let density_pipeline = pipeline("remove_mean_offset");
++        let profile_queries = profiling.then(|| ProfileQueries::new(&device, &queue));
+         Ok(Self {
++            profile_queries,
+             work: Cell::new(LbmWorkStats::default()),
+             spec,
+             config,
+@@ -352,8 +400,10 @@
+             s.readback_calls += 1;
+             s.readback_bytes += size;
+         });
++        if let Some(q) = &self.profile_queries { q.resolve(&mut encoder); }
+         self.submit(encoder);
+         let wait_started = Instant::now();
++        if let Some(q) = &self.profile_queries { q.map(); }
+         let (tx, rx) = mpsc::channel();
+         read.slice(..).map_async(wgpu::MapMode::Read, move |r| {
+             let _ = tx.send(r);
+@@ -365,6 +415,7 @@
+             .map_err(|e| e.to_string())?
+             .map_err(|e| e.to_string())?;
+         self.record(|s| s.readback_wait_ms += wait_started.elapsed().as_secs_f64() * 1000.);
++        if let Some(q) = &self.profile_queries { q.report("readback"); }
+         let decode_started = Instant::now();
+         let data = read.slice(..).get_mapped_range();
+         let result = bytemuck::cast_slice::<u8, f32>(&data).to_vec();
+@@ -438,7 +489,7 @@
+         {
+             let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
+                 label: Some("lbm-density-control"),
+-                timestamp_writes: None,
++                timestamp_writes: self.profile_queries.as_ref().map(ProfileQueries::writes),
+             });
+             pass.set_pipeline(&self.density_pipeline);
+             pass.set_bind_group(0, &self.groups[self.current], &[]);
+@@ -491,7 +542,7 @@
+         {
+             let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
+                 label: Some("lbm-kicks"),
+-                timestamp_writes: None,
++                timestamp_writes: self.profile_queries.as_ref().map(ProfileQueries::writes),
+             });
+             pass.set_pipeline(&self.kick_pipeline);
+             pass.set_bind_group(0, &self.groups[self.current], &[]);
+@@ -523,7 +574,7 @@
+         {
+             let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
+                 label: Some("lbm-step"),
+-                timestamp_writes: None,
++                timestamp_writes: self.profile_queries.as_ref().map(ProfileQueries::writes),
+             });
+             pass.set_pipeline(&self.collide);
+             pass.set_bind_group(0, &self.groups[self.current], &[]);
+@@ -537,7 +588,7 @@
+         {
+             let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
+                 label: Some("lbm-openings"),
+-                timestamp_writes: None,
++                timestamp_writes: self.profile_queries.as_ref().map(ProfileQueries::writes),
+             });
+             pass.set_pipeline(&self.boundary_pipeline);
+             pass.set_bind_group(0, &self.groups[self.current], &[]);
+@@ -567,7 +618,7 @@
+         {
+             let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
+                 label: Some("lbm-macros"),
+-                timestamp_writes: None,
++                timestamp_writes: self.profile_queries.as_ref().map(ProfileQueries::writes),
+             });
+             pass.set_pipeline(&self.macros);
+             pass.set_bind_group(0, &self.groups[self.current], &[]);
+@@ -578,8 +629,10 @@
+             s.encoding_ms += encoding_started.elapsed().as_secs_f64() * 1000.;
+             s.dispatches += 1;
+         });
++        if let Some(q) = &self.profile_queries { q.resolve(&mut encoder); }
+         self.submit(encoder);
+         let wait_started = Instant::now();
++        if let Some(q) = &self.profile_queries { q.map(); }
+         self.record(|s| {
+             s.readback_calls += 1;
+             s.readback_bytes += u64::from(n) * 16;
+@@ -597,6 +650,7 @@
+             .map_err(|e| e.to_string())?
+             .map_err(|e| e.to_string())?;
+         self.record(|s| s.readback_wait_ms += wait_started.elapsed().as_secs_f64() * 1000.);
++        if let Some(q) = &self.profile_queries { q.report("readback"); }
+         let decode_started = Instant::now();
+         let data = self.readback.slice(..).get_mapped_range();
+         let result = bytemuck::cast_slice::<u8, [f32; 4]>(&data).to_vec();
+--- a/godot/world.gd
++++ b/godot/world.gd
+@@ -27,6 +27,13 @@
+ var benchmark_file: FileAccess
+ var render_file: FileAccess
+ var previous_render_usec := 0
++var profile_draw_ms := 0.0
++var profile_physics_ms := 0.0
++var profile_csv_ms := 0.0
++var profile_refresh_ms := 0.0
++var profile_hud_ms := 0.0
++var profile_trace: FileAccess
++var profile_visual := "full"
+ var screenshot_path := ""
+ var screenshot_started := false
+ var previous_centers: Array[Vector2] = []
+@@ -36,6 +43,12 @@
+ func _ready() -> void:
+ 	hud = $HUDLayer/HUD
+ 	var args := OS.get_cmdline_user_args()
++	if OS.has_environment("BLOOD_PROFILE"):
++		profile_trace = FileAccess.open(OS.get_environment("BLOOD_PROFILE") + ".gd.csv", FileAccess.WRITE)
++		profile_trace.store_csv_line(PackedStringArray(["physics_frame", "draw_script_ms", "physics_callback_ms", "physics_csv_ms", "snapshot_bridge_ms", "hud_ms", "process_monitor_ms", "physics_monitor_ms"]))
++		profile_visual = OS.get_environment("BLOOD_PROFILE_VISUAL")
++		if profile_visual == "no-hud":
++			hud.hide()
+ 	var use_lbm := args.has("--local-lbm")
+ 	var use_stokes := args.has("--local-stokes")
+ 	var validation := args.has("--lbm-validation")
+@@ -159,6 +172,7 @@
+ 		if not screenshot_path.is_empty() and not screenshot_started and benchmark_frame == mini(60, int(benchmark_warmup / 2)):
+ 			screenshot_started = true
+ 			_capture_benchmark_screenshot()
++	profile_physics_ms = (Time.get_ticks_usec() - started) / 1000.0
+ 
+ 
+ func _process(_delta: float) -> void:
+@@ -167,6 +181,9 @@
+ 	var started := Time.get_ticks_usec()
+ 	var interval_ms := 0.0 if previous_render_usec == 0 else (started - previous_render_usec) / 1000.0
+ 	previous_render_usec = started
++	if profile_trace != null:
++		profile_trace.store_csv_line(PackedStringArray([str(benchmark_frame), str(profile_draw_ms), str(profile_physics_ms), str(profile_csv_ms), str(profile_refresh_ms), str(profile_hud_ms), str(Performance.get_monitor(Performance.TIME_PROCESS)*1000.0), str(Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS)*1000.0)]))
++		profile_draw_ms = 0.0
+ 	render_file.store_csv_line(PackedStringArray([
+ 		str(Engine.get_process_frames()), str(benchmark_frame), str(interval_ms),
+ 		str(RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_TOTAL_DRAW_CALLS_IN_FRAME)),
+@@ -229,9 +246,14 @@
+ 
+ 
+ func _refresh() -> void:
++	var profile_started := Time.get_ticks_usec()
+ 	state = simulation.snapshot()
++	profile_refresh_ms = (Time.get_ticks_usec() - profile_started) / 1000.0
++	profile_started = Time.get_ticks_usec()
+ 	camera.position = state.robot * SCALE
+-	hud.update_state(state)
++	if profile_visual != "no-hud":
++		hud.update_state(state)
++	profile_hud_ms = (Time.get_ticks_usec() - profile_started) / 1000.0
+ 	queue_redraw()
+ 
+ 
+@@ -244,6 +266,10 @@
+ 
+ 
+ func _draw() -> void:
++	var profile_started := Time.get_ticks_usec()
++	if profile_visual == "no-world":
++		profile_draw_ms = 0.0
++		return
+ 	if state.is_empty():
+ 		return
+ 	for landmark in landmarks:
+@@ -288,6 +314,8 @@
+ 	draw_circle(robot, 0.85 * SCALE, Color("aaaaae"))
+ 	draw_arc(robot, 0.85 * SCALE, 0.0, TAU, 32, Color("e0e0e2"), 1.5, true)
+ 
++	profile_draw_ms = (Time.get_ticks_usec() - profile_started) / 1000.0
++
+ 
+ func _cell_centers() -> Array[Vector2]:
+ 	var centers: Array[Vector2] = []
+@@ -325,6 +353,7 @@
+ 
+ 
+ func _benchmark_row(movement: Vector2, tick_ms: float, snapshot_ms: float, callback_ms: float) -> void:
++	var profile_started := Time.get_ticks_usec()
+ 	var l: Dictionary = state.get("lbm", {})
+ 	var q: Dictionary = state.get("validation", {})
+ 	var centers := _cell_centers()
+@@ -348,6 +377,7 @@
+ 	for value in values:
+ 		fields.append(str(value))
+ 	benchmark_file.store_csv_line(fields)
++	profile_csv_ms = (Time.get_ticks_usec() - profile_started) / 1000.0
+ 	benchmark_frame += 1
+ 	var failure: String = state.get("error", "")
+ 	if failure.is_empty():
+@@ -362,6 +392,8 @@
+ 			failure = "route did not produce an actual migration"
+ 		benchmark_file.flush()
+ 		render_file.flush()
++		if profile_trace != null:
++			profile_trace.flush()
+ 		var status := FileAccess.open(benchmark_output + ".status.txt", FileAccess.WRITE)
+ 		if status != null:
+ 			status.store_string("COMPLETE" if failure.is_empty() else "FAILED " + failure)

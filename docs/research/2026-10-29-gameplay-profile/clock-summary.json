@@ -1,0 +1,48 @@
+{
+  "no-aa": {
+    "samples": 135,
+    "pstates": {
+      "P8": 102,
+      "P0": 23,
+      "P5": 10
+    },
+    "clock_min_mhz": 210.0,
+    "clock_max_mhz": 1807.0,
+    "clock_median_mhz": 307.0
+  },
+  "normal-repeat": {
+    "samples": 234,
+    "pstates": {
+      "P8": 192,
+      "P0": 22,
+      "P5": 20
+    },
+    "clock_min_mhz": 210.0,
+    "clock_max_mhz": 1807.0,
+    "clock_median_mhz": 210.0
+  },
+  "no-world-long": {
+    "samples": 179,
+    "pstates": {
+      "P8": 7,
+      "P0": 20,
+      "P3": 5,
+      "P5": 147
+    },
+    "clock_min_mhz": 210.0,
+    "clock_max_mhz": 1807.0,
+    "clock_median_mhz": 705.0
+  },
+  "probe-long": {
+    "samples": 136,
+    "pstates": {
+      "P8": 2,
+      "P0": 20,
+      "P3": 3,
+      "P5": 111
+    },
+    "clock_min_mhz": 450.0,
+    "clock_max_mhz": 1807.0,
+    "clock_median_mhz": 600.0
+  }
+}
