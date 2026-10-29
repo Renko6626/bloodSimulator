@@ -1,0 +1,8 @@
+   Compiling venial v0.6.1
+   Compiling godot-codegen v0.5.5
+   Compiling godot-macros v0.5.5
+   Compiling godot-ffi v0.5.5
+   Compiling godot-core v0.5.5
+   Compiling godot v0.5.5
+   Compiling godot_bridge v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/godot_bridge)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 25.72s

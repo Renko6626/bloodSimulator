@@ -1,0 +1,12 @@
+{
+  "compared_rect": [
+    0,
+    0,
+    990,
+    800
+  ],
+  "compared_pixels": 792000,
+  "changed_pixels": 0,
+  "max_channel_difference": 0,
+  "note": "HUD excluded; both screenshot steps120/robot equal, 10Hz HUD wallclock samples differ"
+}

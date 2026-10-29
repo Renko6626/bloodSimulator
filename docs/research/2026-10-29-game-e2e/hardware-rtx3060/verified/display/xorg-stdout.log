@@ -1,0 +1,15 @@
+
+X.Org X Server 1.21.1.4
+X Protocol Version 11, Revision 0
+Current Operating System: Linux 08301baaba7e 5.15.0-181-generic #191-Ubuntu SMP Fri May 22 19:09:02 UTC 2026 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-5.15.0-181-generic root=UUID=5e570e5f-dc05-4643-81ec-579aa5565f27 ro quiet splash pcie_aspm=off vt.handoff=7
+xorg-server 2:21.1.4-2ubuntu1.7~22.04.16 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.40.0
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/workspace/blood-game-e2e/display/Xorg.log", Time: Thu Oct 29 14:57:52 2026
+(++) Using config file: "/workspace/blood-game-e2e/display/xorg.conf"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"

@@ -1047,6 +1047,10 @@ mod lbm_runtime_tests {
         assert!(window.density_control().is_some());
         // Two mechanical batches: one intermediate field, raw control read, final field.
         assert_eq!(window.work_stats().readback_calls, 3);
+        assert_eq!(window.work_stats().submissions, 8);
+        // This fixture uses Coarse (8 lattice steps); Fine uses 14/33.
+        assert_eq!(window.work_stats().lattice_steps, 8);
+        assert_eq!(window.work_stats().dispatches, 21);
         let (diagnostics, _) = window.cached_diagnostics().unwrap();
         assert!(diagnostics.density_min > 0.);
         assert!(sim.lbm.as_mut().unwrap().window.finish_frame().is_err());

@@ -1,0 +1,12 @@
+{
+  "id": 58212504,
+  "gpu_name": "RTX 3060",
+  "cur_state": "stopped",
+  "actual_status": "exited",
+  "intended_status": "stopped",
+  "public_ipaddr": "124.60.192.12",
+  "ssh_host": "ssh6.vast.ai",
+  "ssh_port": 21088,
+  "ports": null,
+  "dph_total": 0.08177777777777778
+}

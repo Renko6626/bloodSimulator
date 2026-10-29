@@ -3,6 +3,7 @@ extends Node2D
 
 const SCALE := 24.0
 const Background = preload("res://world_background.gd")
+const CellMesh = preload("res://world_cell_mesh.gd")
 const FLOW := Color(0.4, 0.8, 0.77, 0.5)
 
 @onready var background: Background = $StaticBackground
@@ -23,6 +24,7 @@ var benchmark_output := ""
 var benchmark_file: FileAccess
 var render_file: FileAccess
 var previous_render_usec := 0
+var cell_meshes: Array[CellMesh] = []
 var screenshot_path := ""
 var screenshot_started := false
 var previous_centers: Array[Vector2] = []
@@ -207,16 +209,8 @@ func _refresh() -> void:
 	queue_redraw()
 
 
-func _scaled(source: PackedVector2Array) -> PackedVector2Array:
-	var result := PackedVector2Array()
-	result.resize(source.size())
-	for i in source.size():
-		result[i] = source[i] * SCALE
-	return result
-
-
 func _draw() -> void:
-	if state.is_empty():
+	if state.is_empty() or DisplayServer.get_name() == "headless" or not RenderingServer.is_render_loop_enabled():
 		return
 	if show_collision and not wall_segments.is_empty():
 		draw_multiline(wall_segments, Color("f3d59b"), 0.16 * SCALE, true)
@@ -233,6 +227,7 @@ func _draw() -> void:
 			draw_line(end, end - direction.rotated(-0.5) * 5.0, FLOW, 1.5, true)
 	var local_view: Rect2 = get_global_transform_with_canvas().affine_inverse() * get_viewport_rect()
 	var visible_cells := Rect2(local_view.position / SCALE, local_view.size / SCALE).grow(8.0 / SCALE)
+	cell_meshes.resize(state.cells.size())
 	for i in state.cells.size():
 		var cell: PackedVector2Array = state.cells[i]
 		if cell.size() < 3:
@@ -242,21 +237,15 @@ func _draw() -> void:
 			cell_bounds = cell_bounds.expand(point)
 		if not visible_cells.intersects(cell_bounds, true):
 			continue
-		var contour := _scaled(cell)
-		var center := Vector2.ZERO
-		for point in contour:
-			center += point
-		center /= contour.size()
-		draw_colored_polygon(contour, Color("bc754e") if i == 0 else Color("ae4c5b"))
-		var closed := contour.duplicate()
-		closed.append(contour[0])
-		draw_polyline(closed, Color("d28189"), 1.0, true)
-		var inner := PackedVector2Array()
-		for point in contour:
-			inner.append(center + (point - center) * 0.48)
-		draw_colored_polygon(inner, Color("6f293e"))
+		if cell_meshes[i] == null:
+			cell_meshes[i] = CellMesh.new()
+		var drawing := cell_meshes[i]
+		if not drawing.update(cell, SCALE, Color("bc754e") if i == 0 else Color("ae4c5b")):
+			continue
+		draw_mesh(drawing.mesh, null)
+		draw_polyline(drawing.closed_contour, Color("d28189"), 1.0, true)
 		if show_collision:
-			draw_polyline(closed, Color("f3d59b"), 0.14 * SCALE, true)
+			draw_polyline(drawing.closed_contour, Color("f3d59b"), 0.14 * SCALE, true)
 	var robot: Vector2 = state.robot * SCALE
 	draw_circle(robot, 0.85 * SCALE, Color("aaaaae"))
 	draw_arc(robot, 0.85 * SCALE, 0.0, TAU, 32, Color("e0e0e2"), 1.5, true)

@@ -1,0 +1,5 @@
+baseline-lbm exit=0
+current-lbm-full exit=0
+current-lbm-local exit=0
+current-world-full exit=0
+current-world-local exit=0

@@ -1,0 +1,4 @@
+    Blocking waiting for file lock on build directory
+    Checking simulation v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/simulation)
+    Checking godot_bridge v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/godot_bridge)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.52s

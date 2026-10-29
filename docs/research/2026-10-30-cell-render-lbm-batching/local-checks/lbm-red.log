@@ -1,0 +1,21 @@
+   Compiling simulation v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/simulation)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.37s
+     Running unittests src/lib.rs (target/debug/deps/simulation-411ad0eda30f0d5b)
+
+running 1 test
+
+thread 'fluid::streaming_window::tests::batched_advance_matches_individual_steps' (3153474) panicked at crates/simulation/src/fluid/streaming_window.rs:473:13:
+assertion `left == right` failed
+  left: 5
+ right: 2
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test fluid::streaming_window::tests::batched_advance_matches_individual_steps ... FAILED
+
+failures:
+
+failures:
+    fluid::streaming_window::tests::batched_advance_matches_individual_steps
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 31 filtered out; finished in 0.62s
+
+error: test failed, to rerun pass `-p simulation --lib`

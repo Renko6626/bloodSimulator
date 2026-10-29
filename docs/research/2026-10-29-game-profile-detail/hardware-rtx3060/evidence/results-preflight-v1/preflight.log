@@ -1,0 +1,2263 @@
+Initialize godot-rust (API v4.7.stable.official, runtime v4.7.1.stable.official, safeguards balanced)
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+libxkbcommon.so.0: cannot open shared object file: No such file or directory
+OpenGL API 3.3.0 NVIDIA 535.309.01 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3060
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3577)
+
+PROFILE_GPU kind=readback passes=1 kernels_ms=0.009600 span_ms=0.009600
+PROFILE_READBACK kind=field wait_ms=0.946262 decode_ms=0.081585
+PROFILE_SNAPSHOT frame=0 sim_ms=0.662658 before_return_ms=0.988065
+LBM_GAMEPLAY_BENCH mode=move warmup=120 frames=30 renderer=gl_compatibility display=X11 adapter=NVIDIA GeForce RTX 3060 software=false
+PROFILE_BEGIN frame=0
+PROFILE_ADVECTION frame=0 ms=0.541169
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.320736 span_ms=2.046304
+PROFILE_READBACK kind=field wait_ms=0.108808 decode_ms=0.384354
+PROFILE_CACHE read_ms=0.641483 host_ms=0.126376
+PROFILE_ADVECTION frame=0 ms=0.526266
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.312928 span_ms=0.901696
+PROFILE_READBACK kind=raw wait_ms=0.165836 decode_ms=0.957834
+PROFILE_MEAN reduce_ms=0.228625 correction_submit_ms=0.085483
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013952 span_ms=0.086784
+PROFILE_READBACK kind=field wait_ms=0.118180 decode_ms=0.108850
+PROFILE_CACHE read_ms=0.339354 host_ms=0.120236
+PROFILE_INNER frame=0 inner_ms=17.794678
+PROFILE_STEP frame=0 total_ms=18.099908 prepare_ms=1.129699 coupling_ms=0.581611 lbm_ms=6.390228 rapier_ms=8.562324 upload_ms=1.353195 encoding_ms=2.271023 submit_ms=0.849197 wait_ms=0.392824 decode_ms=1.451038
+PROFILE_SNAPSHOT frame=1 sim_ms=0.361003 before_return_ms=0.678968
+PROFILE_BEGIN frame=1
+PROFILE_ADVECTION frame=1 ms=0.568328
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.325088 span_ms=0.703808
+PROFILE_READBACK kind=field wait_ms=0.104297 decode_ms=0.426363
+PROFILE_CACHE read_ms=0.658590 host_ms=0.121414
+PROFILE_ADVECTION frame=1 ms=0.525974
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317568 span_ms=0.552992
+PROFILE_READBACK kind=raw wait_ms=0.160295 decode_ms=0.986199
+PROFILE_MEAN reduce_ms=0.228436 correction_submit_ms=0.087840
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014400 span_ms=0.097504
+PROFILE_READBACK kind=field wait_ms=0.130708 decode_ms=0.109829
+PROFILE_CACHE read_ms=0.365743 host_ms=0.120599
+PROFILE_INNER frame=1 inner_ms=9.560113
+PROFILE_STEP frame=1 total_ms=9.630146 prepare_ms=0.863393 coupling_ms=0.427188 lbm_ms=4.704530 rapier_ms=2.396233 upload_ms=0.716538 encoding_ms=1.026677 submit_ms=0.736605 wait_ms=0.395300 decode_ms=1.522391
+PROFILE_SNAPSHOT frame=2 sim_ms=0.365315 before_return_ms=0.663550
+PROFILE_BEGIN frame=2
+PROFILE_ADVECTION frame=2 ms=0.531503
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324672 span_ms=0.707584
+PROFILE_READBACK kind=field wait_ms=0.127748 decode_ms=0.112202
+PROFILE_CACHE read_ms=0.354317 host_ms=0.121105
+PROFILE_ADVECTION frame=2 ms=0.527634
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317632 span_ms=0.549344
+PROFILE_READBACK kind=raw wait_ms=0.199921 decode_ms=0.904094
+PROFILE_MEAN reduce_ms=0.226541 correction_submit_ms=0.084219
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014656 span_ms=0.097120
+PROFILE_READBACK kind=field wait_ms=0.126387 decode_ms=0.082291
+PROFILE_CACHE read_ms=0.334320 host_ms=0.120849
+PROFILE_INNER frame=2 inner_ms=8.115053
+PROFILE_STEP frame=2 total_ms=8.168192 prepare_ms=0.268554 coupling_ms=0.282398 lbm_ms=4.229897 rapier_ms=2.224268 upload_ms=0.445567 encoding_ms=1.007373 submit_ms=0.635181 wait_ms=0.454056 decode_ms=1.098587
+PROFILE_SNAPSHOT frame=3 sim_ms=0.357573 before_return_ms=0.658604
+PROFILE_BEGIN frame=3
+PROFILE_ADVECTION frame=3 ms=0.531319
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324800 span_ms=0.529024
+PROFILE_READBACK kind=field wait_ms=0.152005 decode_ms=0.096105
+PROFILE_CACHE read_ms=0.380926 host_ms=0.121048
+PROFILE_ADVECTION frame=3 ms=0.526471
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316000 span_ms=0.564864
+PROFILE_READBACK kind=raw wait_ms=0.202402 decode_ms=0.320217
+PROFILE_MEAN reduce_ms=0.227935 correction_submit_ms=0.082015
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013216 span_ms=0.088256
+PROFILE_READBACK kind=field wait_ms=0.122026 decode_ms=0.092218
+PROFILE_CACHE read_ms=0.330626 host_ms=0.121131
+PROFILE_INNER frame=3 inner_ms=7.401554
+PROFILE_STEP frame=3 total_ms=7.451731 prepare_ms=0.231475 coupling_ms=0.301643 lbm_ms=3.506998 rapier_ms=2.254577 upload_ms=0.379432 encoding_ms=0.903751 submit_ms=0.631832 wait_ms=0.476433 decode_ms=0.508540
+PROFILE_SNAPSHOT frame=4 sim_ms=0.364503 before_return_ms=0.680399
+PROFILE_BEGIN frame=4
+PROFILE_ADVECTION frame=4 ms=0.527336
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324416 span_ms=0.511040
+PROFILE_READBACK kind=field wait_ms=0.131357 decode_ms=0.082786
+PROFILE_CACHE read_ms=0.343166 host_ms=0.121318
+PROFILE_ADVECTION frame=4 ms=0.527121
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314880 span_ms=0.565856
+PROFILE_READBACK kind=raw wait_ms=0.231568 decode_ms=0.254396
+PROFILE_MEAN reduce_ms=0.273453 correction_submit_ms=0.081452
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014400 span_ms=0.098528
+PROFILE_READBACK kind=field wait_ms=0.130075 decode_ms=0.083443
+PROFILE_CACHE read_ms=0.339371 host_ms=0.121207
+PROFILE_INNER frame=4 inner_ms=7.448164
+PROFILE_STEP frame=4 total_ms=7.500293 prepare_ms=0.233587 coupling_ms=0.286525 lbm_ms=3.518724 rapier_ms=2.303775 upload_ms=0.372077 encoding_ms=0.910241 submit_ms=0.630367 wait_ms=0.493000 decode_ms=0.420625
+PROFILE_SNAPSHOT frame=5 sim_ms=0.376145 before_return_ms=0.691151
+PROFILE_BEGIN frame=5
+PROFILE_ADVECTION frame=5 ms=0.526891
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321504 span_ms=0.524512
+PROFILE_READBACK kind=field wait_ms=0.131636 decode_ms=0.082925
+PROFILE_CACHE read_ms=0.332996 host_ms=0.121070
+PROFILE_ADVECTION frame=5 ms=0.528415
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317472 span_ms=0.561376
+PROFILE_READBACK kind=raw wait_ms=0.208374 decode_ms=0.176977
+PROFILE_MEAN reduce_ms=0.228424 correction_submit_ms=0.083976
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014496 span_ms=0.087200
+PROFILE_READBACK kind=field wait_ms=0.117773 decode_ms=0.093363
+PROFILE_CACHE read_ms=0.334954 host_ms=0.121068
+PROFILE_INNER frame=5 inner_ms=7.249679
+PROFILE_STEP frame=5 total_ms=7.299169 prepare_ms=0.232272 coupling_ms=0.284759 lbm_ms=3.321577 rapier_ms=2.305474 upload_ms=0.398370 encoding_ms=0.881695 submit_ms=0.634272 wait_ms=0.457783 decode_ms=0.353265
+PROFILE_SNAPSHOT frame=6 sim_ms=0.366315 before_return_ms=0.679270
+PROFILE_BEGIN frame=6
+PROFILE_ADVECTION frame=6 ms=0.526889
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321760 span_ms=0.502912
+PROFILE_READBACK kind=field wait_ms=0.146804 decode_ms=0.083618
+PROFILE_CACHE read_ms=0.348599 host_ms=0.121253
+PROFILE_ADVECTION frame=6 ms=0.538849
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317120 span_ms=0.548608
+PROFILE_READBACK kind=raw wait_ms=0.242211 decode_ms=0.252869
+PROFILE_MEAN reduce_ms=0.291584 correction_submit_ms=0.080277
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013248 span_ms=0.107552
+PROFILE_READBACK kind=field wait_ms=0.127676 decode_ms=0.083980
+PROFILE_CACHE read_ms=0.348241 host_ms=0.121009
+PROFILE_INNER frame=6 inner_ms=7.475097
+PROFILE_STEP frame=6 total_ms=7.526067 prepare_ms=0.232943 coupling_ms=0.302095 lbm_ms=3.530422 rapier_ms=2.290995 upload_ms=0.371444 encoding_ms=0.888097 submit_ms=0.644080 wait_ms=0.516691 decode_ms=0.420467
+PROFILE_SNAPSHOT frame=7 sim_ms=0.383132 before_return_ms=0.694871
+PROFILE_BEGIN frame=7
+PROFILE_ADVECTION frame=7 ms=0.527127
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323264 span_ms=0.515136
+PROFILE_READBACK kind=field wait_ms=0.124925 decode_ms=0.084748
+PROFILE_CACHE read_ms=0.325249 host_ms=0.120932
+PROFILE_ADVECTION frame=7 ms=0.526725
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317568 span_ms=0.544128
+PROFILE_READBACK kind=raw wait_ms=0.223822 decode_ms=0.172440
+PROFILE_MEAN reduce_ms=0.231187 correction_submit_ms=0.086604
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014304 span_ms=0.090688
+PROFILE_READBACK kind=field wait_ms=0.157269 decode_ms=0.117435
+PROFILE_CACHE read_ms=0.432940 host_ms=0.264515
+PROFILE_INNER frame=7 inner_ms=7.473145
+PROFILE_STEP frame=7 total_ms=7.524764 prepare_ms=0.240320 coupling_ms=0.286278 lbm_ms=3.557216 rapier_ms=2.285323 upload_ms=0.379541 encoding_ms=0.876959 submit_ms=0.638429 wait_ms=0.506016 decode_ms=0.374623
+PROFILE_SNAPSHOT frame=8 sim_ms=0.356693 before_return_ms=0.661656
+PROFILE_BEGIN frame=8
+PROFILE_ADVECTION frame=8 ms=0.526956
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324608 span_ms=0.515648
+PROFILE_READBACK kind=field wait_ms=0.127246 decode_ms=0.086383
+PROFILE_CACHE read_ms=0.323273 host_ms=0.120800
+PROFILE_ADVECTION frame=8 ms=0.527160
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315872 span_ms=0.548608
+PROFILE_READBACK kind=raw wait_ms=0.218080 decode_ms=0.178811
+PROFILE_MEAN reduce_ms=0.227657 correction_submit_ms=0.079840
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013760 span_ms=0.084928
+PROFILE_READBACK kind=field wait_ms=0.126149 decode_ms=0.096177
+PROFILE_CACHE read_ms=0.340474 host_ms=0.121036
+PROFILE_INNER frame=8 inner_ms=7.234805
+PROFILE_STEP frame=8 total_ms=7.284922 prepare_ms=0.234511 coupling_ms=0.286865 lbm_ms=3.320586 rapier_ms=2.284689 upload_ms=0.385325 encoding_ms=0.889117 submit_ms=0.626738 wait_ms=0.471475 decode_ms=0.361371
+PROFILE_SNAPSHOT frame=9 sim_ms=0.364312 before_return_ms=0.668594
+PROFILE_BEGIN frame=9
+PROFILE_ADVECTION frame=9 ms=0.571807
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323328 span_ms=0.495168
+PROFILE_READBACK kind=field wait_ms=0.133141 decode_ms=0.085733
+PROFILE_CACHE read_ms=0.329226 host_ms=0.120951
+PROFILE_ADVECTION frame=9 ms=0.525764
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314528 span_ms=0.575584
+PROFILE_READBACK kind=raw wait_ms=0.235321 decode_ms=0.256251
+PROFILE_MEAN reduce_ms=0.261776 correction_submit_ms=0.091490
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014400 span_ms=0.100736
+PROFILE_READBACK kind=field wait_ms=0.126527 decode_ms=0.086578
+PROFILE_CACHE read_ms=0.340235 host_ms=0.121031
+PROFILE_INNER frame=9 inner_ms=7.472910
+PROFILE_STEP frame=9 total_ms=7.522810 prepare_ms=0.234915 coupling_ms=0.289002 lbm_ms=3.512213 rapier_ms=2.284119 upload_ms=0.379084 encoding_ms=0.896941 submit_ms=0.649119 wait_ms=0.494989 decode_ms=0.428562
+PROFILE_SNAPSHOT frame=10 sim_ms=0.368713 before_return_ms=0.672569
+PROFILE_BEGIN frame=10
+PROFILE_ADVECTION frame=10 ms=0.527129
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324032 span_ms=0.509824
+PROFILE_READBACK kind=field wait_ms=0.132900 decode_ms=0.086195
+PROFILE_CACHE read_ms=0.335017 host_ms=0.144821
+PROFILE_ADVECTION frame=10 ms=0.526554
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316768 span_ms=0.577152
+PROFILE_READBACK kind=raw wait_ms=0.195296 decode_ms=0.174533
+PROFILE_MEAN reduce_ms=0.228070 correction_submit_ms=0.081938
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014240 span_ms=0.088192
+PROFILE_READBACK kind=field wait_ms=0.119822 decode_ms=0.097474
+PROFILE_CACHE read_ms=0.332855 host_ms=0.121027
+PROFILE_INNER frame=10 inner_ms=7.302679
+PROFILE_STEP frame=10 total_ms=7.352902 prepare_ms=0.241398 coupling_ms=0.297928 lbm_ms=3.343741 rapier_ms=2.314688 upload_ms=0.382128 encoding_ms=0.897538 submit_ms=0.645872 wait_ms=0.448018 decode_ms=0.358202
+PROFILE_SNAPSHOT frame=11 sim_ms=0.359277 before_return_ms=0.661995
+PROFILE_BEGIN frame=11
+PROFILE_ADVECTION frame=11 ms=0.528336
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322368 span_ms=0.579968
+PROFILE_READBACK kind=field wait_ms=0.135506 decode_ms=0.090546
+PROFILE_CACHE read_ms=0.361325 host_ms=0.120831
+PROFILE_ADVECTION frame=11 ms=0.527098
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317472 span_ms=0.560224
+PROFILE_READBACK kind=raw wait_ms=0.204817 decode_ms=0.242907
+PROFILE_MEAN reduce_ms=0.315064 correction_submit_ms=0.080153
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014496 span_ms=0.103520
+PROFILE_READBACK kind=field wait_ms=0.126009 decode_ms=0.084654
+PROFILE_CACHE read_ms=0.349565 host_ms=0.120624
+PROFILE_INNER frame=11 inner_ms=7.486854
+PROFILE_STEP frame=11 total_ms=7.536625 prepare_ms=0.250244 coupling_ms=0.285407 lbm_ms=3.582929 rapier_ms=2.261057 upload_ms=0.392828 encoding_ms=0.917908 submit_ms=0.661156 wait_ms=0.466332 decode_ms=0.418107
+PROFILE_SNAPSHOT frame=12 sim_ms=0.369996 before_return_ms=0.672092
+PROFILE_BEGIN frame=12
+PROFILE_ADVECTION frame=12 ms=0.527228
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323328 span_ms=0.480000
+PROFILE_READBACK kind=field wait_ms=0.121520 decode_ms=0.092791
+PROFILE_CACHE read_ms=0.344034 host_ms=0.120766
+PROFILE_ADVECTION frame=12 ms=0.525995
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.313504 span_ms=0.545600
+PROFILE_READBACK kind=raw wait_ms=0.211208 decode_ms=0.174145
+PROFILE_MEAN reduce_ms=0.226178 correction_submit_ms=0.083240
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014240 span_ms=0.088800
+PROFILE_READBACK kind=field wait_ms=0.148865 decode_ms=0.116295
+PROFILE_CACHE read_ms=0.420806 host_ms=0.258913
+PROFILE_INNER frame=12 inner_ms=7.389548
+PROFILE_STEP frame=12 total_ms=7.439751 prepare_ms=0.229968 coupling_ms=0.281897 lbm_ms=3.509015 rapier_ms=2.266024 upload_ms=0.365074 encoding_ms=0.859996 submit_ms=0.626246 wait_ms=0.481593 decode_ms=0.383231
+PROFILE_SNAPSHOT frame=13 sim_ms=0.358606 before_return_ms=0.656004
+PROFILE_BEGIN frame=13
+PROFILE_ADVECTION frame=13 ms=0.526686
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324000 span_ms=0.500576
+PROFILE_READBACK kind=field wait_ms=0.133149 decode_ms=0.087651
+PROFILE_CACHE read_ms=0.328865 host_ms=0.120782
+PROFILE_ADVECTION frame=13 ms=0.526074
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316160 span_ms=0.560864
+PROFILE_READBACK kind=raw wait_ms=0.219653 decode_ms=0.205199
+PROFILE_MEAN reduce_ms=0.229181 correction_submit_ms=0.081278
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014240 span_ms=0.090496
+PROFILE_READBACK kind=field wait_ms=0.159509 decode_ms=0.095574
+PROFILE_CACHE read_ms=0.372891 host_ms=0.120960
+PROFILE_INNER frame=13 inner_ms=7.269877
+PROFILE_STEP frame=13 total_ms=7.320369 prepare_ms=0.237269 coupling_ms=0.284611 lbm_ms=3.365326 rapier_ms=2.276637 upload_ms=0.373918 encoding_ms=0.879508 submit_ms=0.627767 wait_ms=0.512311 decode_ms=0.388424
+PROFILE_SNAPSHOT frame=14 sim_ms=0.359148 before_return_ms=0.654515
+PROFILE_BEGIN frame=14
+PROFILE_ADVECTION frame=14 ms=0.526579
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322560 span_ms=0.503040
+PROFILE_READBACK kind=field wait_ms=0.125921 decode_ms=0.083465
+PROFILE_CACHE read_ms=0.319474 host_ms=0.120787
+PROFILE_ADVECTION frame=14 ms=0.526185
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314912 span_ms=0.540864
+PROFILE_READBACK kind=raw wait_ms=0.206371 decode_ms=0.171009
+PROFILE_MEAN reduce_ms=0.228684 correction_submit_ms=0.078273
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014208 span_ms=0.084768
+PROFILE_READBACK kind=field wait_ms=0.154131 decode_ms=0.116679
+PROFILE_CACHE read_ms=0.422744 host_ms=0.286915
+PROFILE_INNER frame=14 inner_ms=7.370397
+PROFILE_STEP frame=14 total_ms=7.418584 prepare_ms=0.244485 coupling_ms=0.287649 lbm_ms=3.507307 rapier_ms=2.225589 upload_ms=0.377824 encoding_ms=0.876716 submit_ms=0.613301 wait_ms=0.486423 decode_ms=0.371153
+PROFILE_SNAPSHOT frame=15 sim_ms=0.357097 before_return_ms=0.653998
+PROFILE_BEGIN frame=15
+PROFILE_ADVECTION frame=15 ms=0.529745
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322784 span_ms=0.495936
+PROFILE_READBACK kind=field wait_ms=0.129898 decode_ms=0.083275
+PROFILE_CACHE read_ms=0.326329 host_ms=0.120860
+PROFILE_ADVECTION frame=15 ms=0.538550
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315936 span_ms=0.550528
+PROFILE_READBACK kind=raw wait_ms=0.209176 decode_ms=0.172459
+PROFILE_MEAN reduce_ms=0.229673 correction_submit_ms=0.079794
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013984 span_ms=0.086080
+PROFILE_READBACK kind=field wait_ms=0.152920 decode_ms=0.116344
+PROFILE_CACHE read_ms=0.420803 host_ms=0.261043
+PROFILE_INNER frame=15 inner_ms=7.375430
+PROFILE_STEP frame=15 total_ms=7.431010 prepare_ms=0.232410 coupling_ms=0.285547 lbm_ms=3.483085 rapier_ms=2.253250 upload_ms=0.369178 encoding_ms=0.863307 submit_ms=0.624108 wait_ms=0.491994 decode_ms=0.372078
+PROFILE_SNAPSHOT frame=16 sim_ms=0.369618 before_return_ms=0.673220
+PROFILE_BEGIN frame=16
+PROFILE_ADVECTION frame=16 ms=0.525785
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.326048 span_ms=0.503904
+PROFILE_READBACK kind=field wait_ms=0.130817 decode_ms=0.083364
+PROFILE_CACHE read_ms=0.323185 host_ms=0.120655
+PROFILE_ADVECTION frame=16 ms=0.537835
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317088 span_ms=0.535584
+PROFILE_READBACK kind=raw wait_ms=0.208354 decode_ms=0.170554
+PROFILE_MEAN reduce_ms=0.228241 correction_submit_ms=0.078982
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013568 span_ms=0.093024
+PROFILE_READBACK kind=field wait_ms=0.119545 decode_ms=0.085028
+PROFILE_CACHE read_ms=0.336610 host_ms=0.120927
+PROFILE_INNER frame=16 inner_ms=7.132945
+PROFILE_STEP frame=16 total_ms=7.183286 prepare_ms=0.233086 coupling_ms=0.285702 lbm_ms=3.256479 rapier_ms=2.241423 upload_ms=0.369627 encoding_ms=0.869495 submit_ms=0.626746 wait_ms=0.458716 decode_ms=0.338946
+PROFILE_SNAPSHOT frame=17 sim_ms=0.367948 before_return_ms=0.668424
+PROFILE_BEGIN frame=17
+PROFILE_ADVECTION frame=17 ms=0.527567
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321856 span_ms=0.473632
+PROFILE_READBACK kind=field wait_ms=0.124418 decode_ms=0.084445
+PROFILE_CACHE read_ms=0.327607 host_ms=0.120752
+PROFILE_ADVECTION frame=17 ms=0.538907
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315456 span_ms=0.553248
+PROFILE_READBACK kind=raw wait_ms=0.207352 decode_ms=0.170392
+PROFILE_MEAN reduce_ms=0.229126 correction_submit_ms=0.082879
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013824 span_ms=0.091296
+PROFILE_READBACK kind=field wait_ms=0.133850 decode_ms=0.085568
+PROFILE_CACHE read_ms=0.348515 host_ms=0.121098
+PROFILE_INNER frame=17 inner_ms=7.187047
+PROFILE_STEP frame=17 total_ms=7.236063 prepare_ms=0.235667 coupling_ms=0.284784 lbm_ms=3.251866 rapier_ms=2.295248 upload_ms=0.370470 encoding_ms=0.876918 submit_ms=0.605125 wait_ms=0.465620 decode_ms=0.340405
+PROFILE_SNAPSHOT frame=18 sim_ms=0.364674 before_return_ms=0.748930
+PROFILE_BEGIN frame=18
+PROFILE_ADVECTION frame=18 ms=0.526864
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323264 span_ms=0.494176
+PROFILE_READBACK kind=field wait_ms=0.136462 decode_ms=0.083370
+PROFILE_CACHE read_ms=0.328261 host_ms=0.120854
+PROFILE_ADVECTION frame=18 ms=0.526788
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315008 span_ms=0.550752
+PROFILE_READBACK kind=raw wait_ms=0.204115 decode_ms=0.171355
+PROFILE_MEAN reduce_ms=0.228491 correction_submit_ms=0.079705
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014080 span_ms=0.088032
+PROFILE_READBACK kind=field wait_ms=0.126207 decode_ms=0.094654
+PROFILE_CACHE read_ms=0.337001 host_ms=0.120754
+PROFILE_INNER frame=18 inner_ms=7.192254
+PROFILE_STEP frame=18 total_ms=7.240726 prepare_ms=0.232629 coupling_ms=0.285359 lbm_ms=3.269327 rapier_ms=2.297057 upload_ms=0.368431 encoding_ms=0.875637 submit_ms=0.611043 wait_ms=0.466784 decode_ms=0.349379
+PROFILE_SNAPSHOT frame=19 sim_ms=0.356656 before_return_ms=0.656322
+PROFILE_BEGIN frame=19
+PROFILE_ADVECTION frame=19 ms=0.527917
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323776 span_ms=0.497728
+PROFILE_READBACK kind=field wait_ms=0.133113 decode_ms=0.083466
+PROFILE_CACHE read_ms=0.327442 host_ms=0.120803
+PROFILE_ADVECTION frame=19 ms=0.526490
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316576 span_ms=0.549152
+PROFILE_READBACK kind=raw wait_ms=0.208246 decode_ms=0.170811
+PROFILE_MEAN reduce_ms=0.227234 correction_submit_ms=0.079257
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014432 span_ms=0.093408
+PROFILE_READBACK kind=field wait_ms=0.128956 decode_ms=0.095485
+PROFILE_CACHE read_ms=0.345919 host_ms=0.132887
+PROFILE_INNER frame=19 inner_ms=7.211500
+PROFILE_STEP frame=19 total_ms=7.260918 prepare_ms=0.232895 coupling_ms=0.283784 lbm_ms=3.279861 rapier_ms=2.306923 upload_ms=0.366429 encoding_ms=0.881958 submit_ms=0.612617 wait_ms=0.470315 decode_ms=0.349762
+PROFILE_SNAPSHOT frame=20 sim_ms=0.357254 before_return_ms=0.671048
+PROFILE_BEGIN frame=20
+PROFILE_ADVECTION frame=20 ms=0.526444
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323200 span_ms=0.513280
+PROFILE_READBACK kind=field wait_ms=0.118140 decode_ms=0.082559
+PROFILE_CACHE read_ms=0.310471 host_ms=0.120706
+PROFILE_ADVECTION frame=20 ms=0.526891
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317600 span_ms=0.560864
+PROFILE_READBACK kind=raw wait_ms=0.204578 decode_ms=0.170123
+PROFILE_MEAN reduce_ms=0.228724 correction_submit_ms=0.078856
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014048 span_ms=0.090944
+PROFILE_READBACK kind=field wait_ms=0.153983 decode_ms=0.116683
+PROFILE_CACHE read_ms=0.428513 host_ms=0.280373
+PROFILE_INNER frame=20 inner_ms=7.398957
+PROFILE_STEP frame=20 total_ms=7.448048 prepare_ms=0.243183 coupling_ms=0.284277 lbm_ms=3.511163 rapier_ms=2.253119 upload_ms=0.376442 encoding_ms=0.885341 submit_ms=0.616590 wait_ms=0.476701 decode_ms=0.369365
+PROFILE_SNAPSHOT frame=21 sim_ms=0.359568 before_return_ms=0.658961
+PROFILE_BEGIN frame=21
+PROFILE_ADVECTION frame=21 ms=0.525947
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323008 span_ms=0.500960
+PROFILE_READBACK kind=field wait_ms=0.148673 decode_ms=0.115389
+PROFILE_CACHE read_ms=0.409881 host_ms=0.271459
+PROFILE_ADVECTION frame=21 ms=0.525911
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315424 span_ms=0.556960
+PROFILE_READBACK kind=raw wait_ms=0.201840 decode_ms=0.171929
+PROFILE_MEAN reduce_ms=0.228062 correction_submit_ms=0.079328
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014592 span_ms=0.098368
+PROFILE_READBACK kind=field wait_ms=0.129579 decode_ms=0.084767
+PROFILE_CACHE read_ms=0.355984 host_ms=0.120907
+PROFILE_INNER frame=21 inner_ms=7.380746
+PROFILE_STEP frame=21 total_ms=7.430599 prepare_ms=0.232297 coupling_ms=0.283536 lbm_ms=3.515404 rapier_ms=2.244894 upload_ms=0.367493 encoding_ms=0.898255 submit_ms=0.611064 wait_ms=0.480092 decode_ms=0.372085
+PROFILE_SNAPSHOT frame=22 sim_ms=0.363800 before_return_ms=0.668842
+PROFILE_BEGIN frame=22
+PROFILE_ADVECTION frame=22 ms=0.525716
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323008 span_ms=0.478720
+PROFILE_READBACK kind=field wait_ms=0.142087 decode_ms=0.083151
+PROFILE_CACHE read_ms=0.345993 host_ms=0.120986
+PROFILE_ADVECTION frame=22 ms=0.525972
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.313632 span_ms=0.561152
+PROFILE_READBACK kind=raw wait_ms=0.228296 decode_ms=0.268857
+PROFILE_MEAN reduce_ms=0.262724 correction_submit_ms=0.081491
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014400 span_ms=0.088960
+PROFILE_READBACK kind=field wait_ms=0.135499 decode_ms=0.082231
+PROFILE_CACHE read_ms=0.335550 host_ms=0.120553
+PROFILE_INNER frame=22 inner_ms=7.390029
+PROFILE_STEP frame=22 total_ms=7.449739 prepare_ms=0.232273 coupling_ms=0.284843 lbm_ms=3.475630 rapier_ms=2.291511 upload_ms=0.368965 encoding_ms=0.880501 submit_ms=0.618998 wait_ms=0.505882 decode_ms=0.434239
+PROFILE_SNAPSHOT frame=23 sim_ms=0.358625 before_return_ms=0.665802
+PROFILE_BEGIN frame=23
+PROFILE_ADVECTION frame=23 ms=0.527365
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323712 span_ms=0.488448
+PROFILE_READBACK kind=field wait_ms=0.123817 decode_ms=0.081474
+PROFILE_CACHE read_ms=0.313127 host_ms=0.121001
+PROFILE_ADVECTION frame=23 ms=0.527518
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317024 span_ms=0.544480
+PROFILE_READBACK kind=raw wait_ms=0.229226 decode_ms=0.172909
+PROFILE_MEAN reduce_ms=0.239681 correction_submit_ms=0.080455
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013344 span_ms=0.091072
+PROFILE_READBACK kind=field wait_ms=0.138287 decode_ms=0.082734
+PROFILE_CACHE read_ms=0.335127 host_ms=0.120469
+PROFILE_INNER frame=23 inner_ms=7.199814
+PROFILE_STEP frame=23 total_ms=7.248643 prepare_ms=0.229972 coupling_ms=0.283924 lbm_ms=3.271050 rapier_ms=2.304248 upload_ms=0.370684 encoding_ms=0.860454 submit_ms=0.613304 wait_ms=0.491330 decode_ms=0.337117
+PROFILE_SNAPSHOT frame=24 sim_ms=0.357228 before_return_ms=0.656843
+PROFILE_BEGIN frame=24
+PROFILE_ADVECTION frame=24 ms=0.526838
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324192 span_ms=0.497056
+PROFILE_READBACK kind=field wait_ms=0.123764 decode_ms=0.081988
+PROFILE_CACHE read_ms=0.322611 host_ms=0.120917
+PROFILE_ADVECTION frame=24 ms=0.527320
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315744 span_ms=0.541280
+PROFILE_READBACK kind=raw wait_ms=0.203198 decode_ms=0.175145
+PROFILE_MEAN reduce_ms=0.226923 correction_submit_ms=0.081374
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014464 span_ms=0.087616
+PROFILE_READBACK kind=field wait_ms=0.138413 decode_ms=0.096240
+PROFILE_CACHE read_ms=0.349989 host_ms=0.120769
+PROFILE_INNER frame=24 inner_ms=7.166111
+PROFILE_STEP frame=24 total_ms=7.221069 prepare_ms=0.228582 coupling_ms=0.284068 lbm_ms=3.267435 rapier_ms=2.278812 upload_ms=0.366336 encoding_ms=0.869386 submit_ms=0.616918 wait_ms=0.465375 decode_ms=0.353373
+PROFILE_SNAPSHOT frame=25 sim_ms=0.359848 before_return_ms=0.659151
+PROFILE_BEGIN frame=25
+PROFILE_ADVECTION frame=25 ms=0.526590
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.320896 span_ms=0.472832
+PROFILE_READBACK kind=field wait_ms=0.152601 decode_ms=0.089064
+PROFILE_CACHE read_ms=0.367356 host_ms=0.120786
+PROFILE_ADVECTION frame=25 ms=0.526663
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316544 span_ms=0.544064
+PROFILE_READBACK kind=raw wait_ms=0.221663 decode_ms=0.221757
+PROFILE_MEAN reduce_ms=0.228319 correction_submit_ms=0.082107
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013504 span_ms=0.086016
+PROFILE_READBACK kind=field wait_ms=0.127705 decode_ms=0.084231
+PROFILE_CACHE read_ms=0.335051 host_ms=0.120843
+PROFILE_INNER frame=25 inner_ms=7.270813
+PROFILE_STEP frame=25 total_ms=7.320218 prepare_ms=0.231751 coupling_ms=0.284872 lbm_ms=3.337384 rapier_ms=2.310764 upload_ms=0.366290 encoding_ms=0.872910 submit_ms=0.602982 wait_ms=0.501969 decode_ms=0.395052
+PROFILE_SNAPSHOT frame=26 sim_ms=0.356739 before_return_ms=0.655090
+PROFILE_BEGIN frame=26
+PROFILE_ADVECTION frame=26 ms=0.526165
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321984 span_ms=0.493536
+PROFILE_READBACK kind=field wait_ms=0.133582 decode_ms=0.082098
+PROFILE_CACHE read_ms=0.323989 host_ms=0.120713
+PROFILE_ADVECTION frame=26 ms=0.527136
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316384 span_ms=0.566976
+PROFILE_READBACK kind=raw wait_ms=0.229887 decode_ms=0.183534
+PROFILE_MEAN reduce_ms=0.227139 correction_submit_ms=0.080689
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014496 span_ms=0.086080
+PROFILE_READBACK kind=field wait_ms=0.134812 decode_ms=0.094150
+PROFILE_CACHE read_ms=0.343575 host_ms=0.120704
+PROFILE_INNER frame=26 inner_ms=7.246257
+PROFILE_STEP frame=26 total_ms=7.295092 prepare_ms=0.238342 coupling_ms=0.284179 lbm_ms=3.314744 rapier_ms=2.302130 upload_ms=0.375142 encoding_ms=0.865543 submit_ms=0.636800 wait_ms=0.498281 decode_ms=0.359782
+PROFILE_SNAPSHOT frame=27 sim_ms=0.357129 before_return_ms=0.657216
+PROFILE_BEGIN frame=27
+PROFILE_ADVECTION frame=27 ms=0.526266
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322080 span_ms=0.488736
+PROFILE_READBACK kind=field wait_ms=0.136381 decode_ms=0.081975
+PROFILE_CACHE read_ms=0.326298 host_ms=0.120836
+PROFILE_ADVECTION frame=27 ms=0.526847
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316736 span_ms=0.543200
+PROFILE_READBACK kind=raw wait_ms=0.210853 decode_ms=0.169563
+PROFILE_MEAN reduce_ms=0.227182 correction_submit_ms=0.080326
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014048 span_ms=0.084864
+PROFILE_READBACK kind=field wait_ms=0.130821 decode_ms=0.094051
+PROFILE_CACHE read_ms=0.338039 host_ms=0.120741
+PROFILE_INNER frame=27 inner_ms=7.212191
+PROFILE_STEP frame=27 total_ms=7.260923 prepare_ms=0.232277 coupling_ms=0.283588 lbm_ms=3.250973 rapier_ms=2.338954 upload_ms=0.368453 encoding_ms=0.860325 submit_ms=0.613632 wait_ms=0.478055 decode_ms=0.345589
+PROFILE_SNAPSHOT frame=28 sim_ms=0.357429 before_return_ms=0.654678
+PROFILE_BEGIN frame=28
+PROFILE_ADVECTION frame=28 ms=0.526249
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.325184 span_ms=0.473376
+PROFILE_READBACK kind=field wait_ms=0.151037 decode_ms=0.131720
+PROFILE_CACHE read_ms=0.458259 host_ms=0.234966
+PROFILE_ADVECTION frame=28 ms=0.526464
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315840 span_ms=0.548448
+PROFILE_READBACK kind=raw wait_ms=0.213555 decode_ms=0.171490
+PROFILE_MEAN reduce_ms=0.226724 correction_submit_ms=0.079438
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014400 span_ms=0.086464
+PROFILE_READBACK kind=field wait_ms=0.164019 decode_ms=0.082490
+PROFILE_CACHE read_ms=0.360490 host_ms=0.131382
+PROFILE_INNER frame=28 inner_ms=7.464295
+PROFILE_STEP frame=28 total_ms=7.515314 prepare_ms=0.234730 coupling_ms=0.283276 lbm_ms=3.523380 rapier_ms=2.318303 upload_ms=0.369296 encoding_ms=0.862142 submit_ms=0.609744 wait_ms=0.528611 decode_ms=0.385700
+PROFILE_SNAPSHOT frame=29 sim_ms=0.358133 before_return_ms=0.656932
+PROFILE_BEGIN frame=29
+PROFILE_ADVECTION frame=29 ms=0.527025
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321600 span_ms=0.503456
+PROFILE_READBACK kind=field wait_ms=0.134004 decode_ms=0.089484
+PROFILE_CACHE read_ms=0.338733 host_ms=0.120715
+PROFILE_ADVECTION frame=29 ms=0.525913
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315136 span_ms=0.551488
+PROFILE_READBACK kind=raw wait_ms=0.230103 decode_ms=0.286649
+PROFILE_MEAN reduce_ms=0.227231 correction_submit_ms=0.081502
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014304 span_ms=0.086944
+PROFILE_READBACK kind=field wait_ms=0.137188 decode_ms=0.083622
+PROFILE_CACHE read_ms=0.333487 host_ms=0.120747
+PROFILE_INNER frame=29 inner_ms=7.335526
+PROFILE_STEP frame=29 total_ms=7.383806 prepare_ms=0.232587 coupling_ms=0.284229 lbm_ms=3.412783 rapier_ms=2.304631 upload_ms=0.368796 encoding_ms=0.860736 submit_ms=0.631615 wait_ms=0.501295 decode_ms=0.459755
+PROFILE_SNAPSHOT frame=30 sim_ms=0.359920 before_return_ms=0.668267
+PROFILE_BEGIN frame=30
+PROFILE_ADVECTION frame=30 ms=0.526834
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322624 span_ms=0.501376
+PROFILE_READBACK kind=field wait_ms=0.129103 decode_ms=0.088899
+PROFILE_CACHE read_ms=0.331227 host_ms=0.120888
+PROFILE_ADVECTION frame=30 ms=0.525867
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.320096 span_ms=0.540224
+PROFILE_READBACK kind=raw wait_ms=0.204653 decode_ms=0.216174
+PROFILE_MEAN reduce_ms=0.226297 correction_submit_ms=0.080470
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014112 span_ms=0.086496
+PROFILE_READBACK kind=field wait_ms=0.124199 decode_ms=0.121039
+PROFILE_CACHE read_ms=0.358085 host_ms=0.120796
+PROFILE_INNER frame=30 inner_ms=7.222110
+PROFILE_STEP frame=30 total_ms=7.270807 prepare_ms=0.233124 coupling_ms=0.285167 lbm_ms=3.322968 rapier_ms=2.279211 upload_ms=0.370832 encoding_ms=0.858899 submit_ms=0.620593 wait_ms=0.457955 decode_ms=0.426112
+PROFILE_SNAPSHOT frame=31 sim_ms=0.359146 before_return_ms=0.679649
+PROFILE_BEGIN frame=31
+PROFILE_ADVECTION frame=31 ms=0.538533
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323680 span_ms=0.487584
+PROFILE_READBACK kind=field wait_ms=0.125438 decode_ms=0.087507
+PROFILE_CACHE read_ms=0.320558 host_ms=0.120939
+PROFILE_ADVECTION frame=31 ms=0.526552
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315648 span_ms=0.548736
+PROFILE_READBACK kind=raw wait_ms=0.213217 decode_ms=0.222271
+PROFILE_MEAN reduce_ms=0.227191 correction_submit_ms=0.079781
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014560 span_ms=0.086720
+PROFILE_READBACK kind=field wait_ms=0.128039 decode_ms=0.110487
+PROFILE_CACHE read_ms=0.362144 host_ms=0.120733
+PROFILE_INNER frame=31 inner_ms=7.336210
+PROFILE_STEP frame=31 total_ms=7.387542 prepare_ms=0.225264 coupling_ms=0.286014 lbm_ms=3.328108 rapier_ms=2.378965 upload_ms=0.368492 encoding_ms=0.853456 submit_ms=0.620828 wait_ms=0.466694 decode_ms=0.420265
+PROFILE_SNAPSHOT frame=32 sim_ms=0.358794 before_return_ms=0.658651
+PROFILE_BEGIN frame=32
+PROFILE_ADVECTION frame=32 ms=0.526205
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324640 span_ms=0.471936
+PROFILE_READBACK kind=field wait_ms=0.111984 decode_ms=0.112427
+PROFILE_CACHE read_ms=0.342301 host_ms=0.121068
+PROFILE_ADVECTION frame=32 ms=0.526458
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314176 span_ms=0.541280
+PROFILE_READBACK kind=raw wait_ms=0.223066 decode_ms=0.541104
+PROFILE_MEAN reduce_ms=0.237614 correction_submit_ms=0.081468
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013888 span_ms=0.087872
+PROFILE_READBACK kind=field wait_ms=0.155277 decode_ms=0.082315
+PROFILE_CACHE read_ms=0.352719 host_ms=0.120821
+PROFILE_INNER frame=32 inner_ms=7.578038
+PROFILE_STEP frame=32 total_ms=7.637125 prepare_ms=0.228795 coupling_ms=0.284946 lbm_ms=3.675861 rapier_ms=2.286576 upload_ms=0.376763 encoding_ms=0.847631 submit_ms=0.606279 wait_ms=0.490327 decode_ms=0.735846
+PROFILE_SNAPSHOT frame=33 sim_ms=0.369061 before_return_ms=0.698975
+PROFILE_BEGIN frame=33
+PROFILE_ADVECTION frame=33 ms=0.526111
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322432 span_ms=0.472032
+PROFILE_READBACK kind=field wait_ms=0.149010 decode_ms=0.081312
+PROFILE_CACHE read_ms=0.347415 host_ms=0.120879
+PROFILE_ADVECTION frame=33 ms=0.550475
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316704 span_ms=0.536544
+PROFILE_READBACK kind=raw wait_ms=0.202738 decode_ms=0.173075
+PROFILE_MEAN reduce_ms=0.227175 correction_submit_ms=0.079204
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014592 span_ms=0.088672
+PROFILE_READBACK kind=field wait_ms=0.120738 decode_ms=0.092775
+PROFILE_CACHE read_ms=0.330960 host_ms=0.120501
+PROFILE_INNER frame=33 inner_ms=7.184699
+PROFILE_STEP frame=33 total_ms=7.232083 prepare_ms=0.229148 coupling_ms=0.285982 lbm_ms=3.232730 rapier_ms=2.307072 upload_ms=0.370194 encoding_ms=0.858633 submit_ms=0.602527 wait_ms=0.472486 decode_ms=0.347162
+PROFILE_SNAPSHOT frame=34 sim_ms=0.363272 before_return_ms=0.663780
+PROFILE_BEGIN frame=34
+PROFILE_ADVECTION frame=34 ms=0.525462
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324448 span_ms=0.472800
+PROFILE_READBACK kind=field wait_ms=0.161261 decode_ms=0.081742
+PROFILE_CACHE read_ms=0.350811 host_ms=0.120839
+PROFILE_ADVECTION frame=34 ms=0.526575
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315680 span_ms=0.546944
+PROFILE_READBACK kind=raw wait_ms=0.203327 decode_ms=0.176100
+PROFILE_MEAN reduce_ms=0.229114 correction_submit_ms=0.079553
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013888 span_ms=0.086912
+PROFILE_READBACK kind=field wait_ms=0.169418 decode_ms=0.092319
+PROFILE_CACHE read_ms=0.374795 host_ms=0.120716
+PROFILE_INNER frame=34 inner_ms=7.199555
+PROFILE_STEP frame=34 total_ms=7.246586 prepare_ms=0.239429 coupling_ms=0.286408 lbm_ms=3.300436 rapier_ms=2.268071 upload_ms=0.367905 encoding_ms=0.851598 submit_ms=0.598231 wait_ms=0.534006 decode_ms=0.350161
+PROFILE_SNAPSHOT frame=35 sim_ms=0.356505 before_return_ms=0.656823
+PROFILE_BEGIN frame=35
+PROFILE_ADVECTION frame=35 ms=0.526776
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324256 span_ms=0.473088
+PROFILE_READBACK kind=field wait_ms=0.116117 decode_ms=0.080840
+PROFILE_CACHE read_ms=0.315777 host_ms=0.121079
+PROFILE_ADVECTION frame=35 ms=0.526819
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315776 span_ms=0.531808
+PROFILE_READBACK kind=raw wait_ms=0.202593 decode_ms=0.177343
+PROFILE_MEAN reduce_ms=0.227330 correction_submit_ms=0.079286
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014368 span_ms=0.086752
+PROFILE_READBACK kind=field wait_ms=0.128297 decode_ms=0.093599
+PROFILE_CACHE read_ms=0.340852 host_ms=0.120775
+PROFILE_INNER frame=35 inner_ms=7.150823
+PROFILE_STEP frame=35 total_ms=7.201041 prepare_ms=0.230151 coupling_ms=0.287273 lbm_ms=3.213428 rapier_ms=2.309822 upload_ms=0.369097 encoding_ms=0.844685 submit_ms=0.613629 wait_ms=0.447007 decode_ms=0.351782
+PROFILE_SNAPSHOT frame=36 sim_ms=0.359055 before_return_ms=0.656123
+PROFILE_BEGIN frame=36
+PROFILE_ADVECTION frame=36 ms=0.526343
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324096 span_ms=0.472000
+PROFILE_READBACK kind=field wait_ms=0.160641 decode_ms=0.081477
+PROFILE_CACHE read_ms=0.349053 host_ms=0.120904
+PROFILE_ADVECTION frame=36 ms=0.526489
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.319136 span_ms=0.543744
+PROFILE_READBACK kind=raw wait_ms=0.224431 decode_ms=0.254340
+PROFILE_MEAN reduce_ms=0.305441 correction_submit_ms=0.091104
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013664 span_ms=0.110400
+PROFILE_READBACK kind=field wait_ms=0.126297 decode_ms=0.082594
+PROFILE_CACHE read_ms=0.335551 host_ms=0.120948
+PROFILE_INNER frame=36 inner_ms=7.393769
+PROFILE_STEP frame=36 total_ms=7.441669 prepare_ms=0.229137 coupling_ms=0.285182 lbm_ms=3.482759 rapier_ms=2.291015 upload_ms=0.378693 encoding_ms=0.854853 submit_ms=0.607567 wait_ms=0.511369 decode_ms=0.418411
+PROFILE_SNAPSHOT frame=37 sim_ms=0.359043 before_return_ms=0.685713
+PROFILE_BEGIN frame=37
+PROFILE_ADVECTION frame=37 ms=0.526578
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321952 span_ms=0.472128
+PROFILE_READBACK kind=field wait_ms=0.143126 decode_ms=0.082097
+PROFILE_CACHE read_ms=0.331378 host_ms=0.120926
+PROFILE_ADVECTION frame=37 ms=0.525996
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317632 span_ms=0.540160
+PROFILE_READBACK kind=raw wait_ms=0.204266 decode_ms=0.172320
+PROFILE_MEAN reduce_ms=0.229047 correction_submit_ms=0.090563
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014432 span_ms=0.092800
+PROFILE_READBACK kind=field wait_ms=0.130117 decode_ms=0.082513
+PROFILE_CACHE read_ms=0.339450 host_ms=0.120930
+PROFILE_INNER frame=37 inner_ms=7.210512
+PROFILE_STEP frame=37 total_ms=7.263158 prepare_ms=0.230219 coupling_ms=0.287551 lbm_ms=3.242263 rapier_ms=2.344755 upload_ms=0.389782 encoding_ms=0.843711 submit_ms=0.594963 wait_ms=0.477509 decode_ms=0.336930
+PROFILE_SNAPSHOT frame=38 sim_ms=0.357771 before_return_ms=0.666746
+PROFILE_BEGIN frame=38
+PROFILE_ADVECTION frame=38 ms=0.526937
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323296 span_ms=0.472384
+PROFILE_READBACK kind=field wait_ms=0.114037 decode_ms=0.081451
+PROFILE_CACHE read_ms=0.311758 host_ms=0.120976
+PROFILE_ADVECTION frame=38 ms=0.526708
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317216 span_ms=0.540320
+PROFILE_READBACK kind=raw wait_ms=0.204207 decode_ms=0.190311
+PROFILE_MEAN reduce_ms=0.228041 correction_submit_ms=0.080253
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013536 span_ms=0.085760
+PROFILE_READBACK kind=field wait_ms=0.130062 decode_ms=0.082520
+PROFILE_CACHE read_ms=0.327734 host_ms=0.131248
+PROFILE_INNER frame=38 inner_ms=7.191434
+PROFILE_STEP frame=38 total_ms=7.239944 prepare_ms=0.228586 coupling_ms=0.284544 lbm_ms=3.235864 rapier_ms=2.336248 upload_ms=0.367468 encoding_ms=0.857730 submit_ms=0.608782 wait_ms=0.448306 decode_ms=0.354282
+PROFILE_SNAPSHOT frame=39 sim_ms=0.356078 before_return_ms=0.657277
+PROFILE_BEGIN frame=39
+PROFILE_ADVECTION frame=39 ms=0.526066
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321632 span_ms=0.471584
+PROFILE_READBACK kind=field wait_ms=0.141359 decode_ms=0.081646
+PROFILE_CACHE read_ms=0.330162 host_ms=0.120920
+PROFILE_ADVECTION frame=39 ms=0.526791
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315840 span_ms=0.543360
+PROFILE_READBACK kind=raw wait_ms=0.204638 decode_ms=0.175755
+PROFILE_MEAN reduce_ms=0.239668 correction_submit_ms=0.081454
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013792 span_ms=0.092160
+PROFILE_READBACK kind=field wait_ms=0.145109 decode_ms=0.113979
+PROFILE_CACHE read_ms=0.413776 host_ms=0.265956
+PROFILE_INNER frame=39 inner_ms=7.395459
+PROFILE_STEP frame=39 total_ms=7.444933 prepare_ms=0.229889 coupling_ms=0.286519 lbm_ms=3.467298 rapier_ms=2.305333 upload_ms=0.369259 encoding_ms=0.848704 submit_ms=0.602143 wait_ms=0.491106 decode_ms=0.371380
+PROFILE_SNAPSHOT frame=40 sim_ms=0.358250 before_return_ms=0.656797
+PROFILE_BEGIN frame=40
+PROFILE_ADVECTION frame=40 ms=0.526412
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324192 span_ms=0.471872
+PROFILE_READBACK kind=field wait_ms=0.142605 decode_ms=0.081811
+PROFILE_CACHE read_ms=0.330759 host_ms=0.121176
+PROFILE_ADVECTION frame=40 ms=0.526637
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316256 span_ms=0.534272
+PROFILE_READBACK kind=raw wait_ms=0.203793 decode_ms=0.186761
+PROFILE_MEAN reduce_ms=0.227504 correction_submit_ms=0.081212
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014560 span_ms=0.087648
+PROFILE_READBACK kind=field wait_ms=0.127231 decode_ms=0.082774
+PROFILE_CACHE read_ms=0.332041 host_ms=0.131450
+PROFILE_INNER frame=40 inner_ms=7.153178
+PROFILE_STEP frame=40 total_ms=7.202350 prepare_ms=0.229205 coupling_ms=0.284620 lbm_ms=3.244446 rapier_ms=2.288790 upload_ms=0.368487 encoding_ms=0.853748 submit_ms=0.591413 wait_ms=0.473629 decode_ms=0.351346
+PROFILE_SNAPSHOT frame=41 sim_ms=0.357849 before_return_ms=0.658317
+PROFILE_BEGIN frame=41
+PROFILE_ADVECTION frame=41 ms=0.526244
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322272 span_ms=0.471168
+PROFILE_READBACK kind=field wait_ms=0.172939 decode_ms=0.114635
+PROFILE_CACHE read_ms=0.430587 host_ms=0.265484
+PROFILE_ADVECTION frame=41 ms=0.525903
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317600 span_ms=0.532448
+PROFILE_READBACK kind=raw wait_ms=0.201575 decode_ms=0.174988
+PROFILE_MEAN reduce_ms=0.228579 correction_submit_ms=0.079671
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014304 span_ms=0.085440
+PROFILE_READBACK kind=field wait_ms=0.163868 decode_ms=0.114557
+PROFILE_CACHE read_ms=0.432084 host_ms=0.258676
+PROFILE_INNER frame=41 inner_ms=7.676994
+PROFILE_STEP frame=41 total_ms=7.725663 prepare_ms=0.229132 coupling_ms=0.285705 lbm_ms=3.723695 rapier_ms=2.337346 upload_ms=0.367009 encoding_ms=0.849548 submit_ms=0.598214 wait_ms=0.538382 decode_ms=0.404180
+PROFILE_SNAPSHOT frame=42 sim_ms=0.355903 before_return_ms=0.653661
+PROFILE_BEGIN frame=42
+PROFILE_ADVECTION frame=42 ms=0.527117
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323456 span_ms=0.472128
+PROFILE_READBACK kind=field wait_ms=0.139856 decode_ms=0.081298
+PROFILE_CACHE read_ms=0.332618 host_ms=0.120840
+PROFILE_ADVECTION frame=42 ms=0.526023
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.318592 span_ms=0.535552
+PROFILE_READBACK kind=raw wait_ms=0.201341 decode_ms=0.175398
+PROFILE_MEAN reduce_ms=0.229731 correction_submit_ms=0.082270
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014432 span_ms=0.087456
+PROFILE_READBACK kind=field wait_ms=0.153676 decode_ms=0.114658
+PROFILE_CACHE read_ms=0.422725 host_ms=0.272914
+PROFILE_INNER frame=42 inner_ms=7.360854
+PROFILE_STEP frame=42 total_ms=7.409010 prepare_ms=0.229919 coupling_ms=0.285530 lbm_ms=3.477112 rapier_ms=2.265904 upload_ms=0.368788 encoding_ms=0.846151 submit_ms=0.611775 wait_ms=0.494873 decode_ms=0.371354
+PROFILE_SNAPSHOT frame=43 sim_ms=0.357988 before_return_ms=0.658315
+PROFILE_BEGIN frame=43
+PROFILE_ADVECTION frame=43 ms=0.526496
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324448 span_ms=0.486784
+PROFILE_READBACK kind=field wait_ms=0.127460 decode_ms=0.080566
+PROFILE_CACHE read_ms=0.321282 host_ms=0.121165
+PROFILE_ADVECTION frame=43 ms=0.525644
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316704 span_ms=0.537888
+PROFILE_READBACK kind=raw wait_ms=0.204284 decode_ms=0.175902
+PROFILE_MEAN reduce_ms=0.228810 correction_submit_ms=0.080292
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014400 span_ms=0.085952
+PROFILE_READBACK kind=field wait_ms=0.117852 decode_ms=0.092178
+PROFILE_CACHE read_ms=0.323397 host_ms=0.120579
+PROFILE_INNER frame=43 inner_ms=7.133386
+PROFILE_STEP frame=43 total_ms=7.189169 prepare_ms=0.231038 coupling_ms=0.286451 lbm_ms=3.223740 rapier_ms=2.288248 upload_ms=0.370322 encoding_ms=0.856444 submit_ms=0.609571 wait_ms=0.449596 decode_ms=0.348646
+PROFILE_SNAPSHOT frame=44 sim_ms=0.356849 before_return_ms=0.655810
+PROFILE_BEGIN frame=44
+PROFILE_ADVECTION frame=44 ms=0.526733
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323424 span_ms=0.472832
+PROFILE_READBACK kind=field wait_ms=0.140064 decode_ms=0.082120
+PROFILE_CACHE read_ms=0.333713 host_ms=0.120743
+PROFILE_ADVECTION frame=44 ms=0.526656
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317472 span_ms=0.543776
+PROFILE_READBACK kind=raw wait_ms=0.203895 decode_ms=0.175361
+PROFILE_MEAN reduce_ms=0.227512 correction_submit_ms=0.080347
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014016 span_ms=0.090240
+PROFILE_READBACK kind=field wait_ms=0.126271 decode_ms=0.093571
+PROFILE_CACHE read_ms=0.338091 host_ms=0.120860
+PROFILE_INNER frame=44 inner_ms=7.164509
+PROFILE_STEP frame=44 total_ms=7.213969 prepare_ms=0.229993 coupling_ms=0.283379 lbm_ms=3.234650 rapier_ms=2.314310 upload_ms=0.367995 encoding_ms=0.857352 submit_ms=0.597568 wait_ms=0.470230 decode_ms=0.351052
+PROFILE_SNAPSHOT frame=45 sim_ms=0.356167 before_return_ms=0.656620
+PROFILE_BEGIN frame=45
+PROFILE_ADVECTION frame=45 ms=0.526532
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321664 span_ms=0.491392
+PROFILE_READBACK kind=field wait_ms=0.112996 decode_ms=0.081224
+PROFILE_CACHE read_ms=0.319817 host_ms=0.120905
+PROFILE_ADVECTION frame=45 ms=0.526182
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316864 span_ms=0.540128
+PROFILE_READBACK kind=raw wait_ms=0.208272 decode_ms=0.174575
+PROFILE_MEAN reduce_ms=0.228670 correction_submit_ms=0.081027
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014880 span_ms=0.086752
+PROFILE_READBACK kind=field wait_ms=0.128134 decode_ms=0.092900
+PROFILE_CACHE read_ms=0.334980 host_ms=0.120710
+PROFILE_INNER frame=45 inner_ms=7.177610
+PROFILE_STEP frame=45 total_ms=7.226280 prepare_ms=0.228969 coupling_ms=0.283465 lbm_ms=3.242150 rapier_ms=2.321015 upload_ms=0.379301 encoding_ms=0.851824 submit_ms=0.620934 wait_ms=0.449402 decode_ms=0.348699
+PROFILE_SNAPSHOT frame=46 sim_ms=0.356813 before_return_ms=0.656248
+PROFILE_BEGIN frame=46
+PROFILE_ADVECTION frame=46 ms=0.526837
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321376 span_ms=0.503808
+PROFILE_READBACK kind=field wait_ms=0.150084 decode_ms=0.080511
+PROFILE_CACHE read_ms=0.343503 host_ms=0.121034
+PROFILE_ADVECTION frame=46 ms=0.526303
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314304 span_ms=0.542112
+PROFILE_READBACK kind=raw wait_ms=0.203035 decode_ms=0.175792
+PROFILE_MEAN reduce_ms=0.227457 correction_submit_ms=0.080188
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014080 span_ms=0.087040
+PROFILE_READBACK kind=field wait_ms=0.128284 decode_ms=0.081903
+PROFILE_CACHE read_ms=0.335851 host_ms=0.120811
+PROFILE_INNER frame=46 inner_ms=7.219561
+PROFILE_STEP frame=46 total_ms=7.267873 prepare_ms=0.230078 coupling_ms=0.283961 lbm_ms=3.276374 rapier_ms=2.327523 upload_ms=0.368992 encoding_ms=0.877065 submit_ms=0.610566 wait_ms=0.481403 decode_ms=0.338206
+PROFILE_SNAPSHOT frame=47 sim_ms=0.358671 before_return_ms=0.658834
+PROFILE_BEGIN frame=47
+PROFILE_ADVECTION frame=47 ms=0.526339
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321952 span_ms=0.486368
+PROFILE_READBACK kind=field wait_ms=0.124354 decode_ms=0.080569
+PROFILE_CACHE read_ms=0.317899 host_ms=0.120998
+PROFILE_ADVECTION frame=47 ms=0.526970
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315200 span_ms=0.540032
+PROFILE_READBACK kind=raw wait_ms=0.200893 decode_ms=0.175332
+PROFILE_MEAN reduce_ms=0.226998 correction_submit_ms=0.079428
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013792 span_ms=0.087808
+PROFILE_READBACK kind=field wait_ms=0.128806 decode_ms=0.082621
+PROFILE_CACHE read_ms=0.327510 host_ms=0.131513
+PROFILE_INNER frame=47 inner_ms=7.157517
+PROFILE_STEP frame=47 total_ms=7.213432 prepare_ms=0.232968 coupling_ms=0.285382 lbm_ms=3.248350 rapier_ms=2.282452 upload_ms=0.383404 encoding_ms=0.859388 submit_ms=0.614457 wait_ms=0.454053 decode_ms=0.338522
+PROFILE_SNAPSHOT frame=48 sim_ms=0.358208 before_return_ms=0.657366
+PROFILE_BEGIN frame=48
+PROFILE_ADVECTION frame=48 ms=0.527010
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.320768 span_ms=0.497472
+PROFILE_READBACK kind=field wait_ms=0.123982 decode_ms=0.080999
+PROFILE_CACHE read_ms=0.317278 host_ms=0.120959
+PROFILE_ADVECTION frame=48 ms=0.526126
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316064 span_ms=0.541280
+PROFILE_READBACK kind=raw wait_ms=0.228391 decode_ms=0.255405
+PROFILE_MEAN reduce_ms=0.268175 correction_submit_ms=0.081429
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013024 span_ms=0.084928
+PROFILE_READBACK kind=field wait_ms=0.134121 decode_ms=0.082073
+PROFILE_CACHE read_ms=0.331255 host_ms=0.120600
+PROFILE_INNER frame=48 inner_ms=7.386759
+PROFILE_STEP frame=48 total_ms=7.435156 prepare_ms=0.229501 coupling_ms=0.285432 lbm_ms=3.431424 rapier_ms=2.338092 upload_ms=0.369686 encoding_ms=0.865080 submit_ms=0.615260 wait_ms=0.486494 decode_ms=0.418477
+PROFILE_SNAPSHOT frame=49 sim_ms=0.357555 before_return_ms=0.658857
+PROFILE_BEGIN frame=49
+PROFILE_ADVECTION frame=49 ms=0.526255
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321152 span_ms=0.486208
+PROFILE_READBACK kind=field wait_ms=0.146921 decode_ms=0.114120
+PROFILE_CACHE read_ms=0.413967 host_ms=0.260130
+PROFILE_ADVECTION frame=49 ms=0.526370
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315904 span_ms=0.557792
+PROFILE_READBACK kind=raw wait_ms=0.217778 decode_ms=0.173773
+PROFILE_MEAN reduce_ms=0.227576 correction_submit_ms=0.079988
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013696 span_ms=0.085312
+PROFILE_READBACK kind=field wait_ms=0.147569 decode_ms=0.114400
+PROFILE_CACHE read_ms=0.415333 host_ms=0.258656
+PROFILE_INNER frame=49 inner_ms=7.669650
+PROFILE_STEP frame=49 total_ms=7.718734 prepare_ms=0.229781 coupling_ms=0.285460 lbm_ms=3.749563 rapier_ms=2.303386 upload_ms=0.369199 encoding_ms=0.866623 submit_ms=0.622688 wait_ms=0.512268 decode_ms=0.402293
+PROFILE_SNAPSHOT frame=50 sim_ms=0.357035 before_return_ms=0.657282
+PROFILE_BEGIN frame=50
+PROFILE_ADVECTION frame=50 ms=0.535750
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.325216 span_ms=0.474432
+PROFILE_READBACK kind=field wait_ms=0.168630 decode_ms=0.081360
+PROFILE_CACHE read_ms=0.357641 host_ms=0.121135
+PROFILE_ADVECTION frame=50 ms=0.526900
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316384 span_ms=0.545920
+PROFILE_READBACK kind=raw wait_ms=0.202773 decode_ms=0.178672
+PROFILE_MEAN reduce_ms=0.228010 correction_submit_ms=0.078778
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014272 span_ms=0.085376
+PROFILE_READBACK kind=field wait_ms=0.127708 decode_ms=0.092117
+PROFILE_CACHE read_ms=0.334192 host_ms=0.120664
+PROFILE_INNER frame=50 inner_ms=7.191186
+PROFILE_STEP frame=50 total_ms=7.238977 prepare_ms=0.228774 coupling_ms=0.286069 lbm_ms=3.266045 rapier_ms=2.294226 upload_ms=0.388307 encoding_ms=0.848695 submit_ms=0.590348 wait_ms=0.499111 decode_ms=0.352149
+PROFILE_SNAPSHOT frame=51 sim_ms=0.357745 before_return_ms=0.656343
+PROFILE_BEGIN frame=51
+PROFILE_ADVECTION frame=51 ms=0.537727
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323904 span_ms=0.471168
+PROFILE_READBACK kind=field wait_ms=0.146830 decode_ms=0.081958
+PROFILE_CACHE read_ms=0.345249 host_ms=0.121092
+PROFILE_ADVECTION frame=51 ms=0.526899
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316544 span_ms=0.551040
+PROFILE_READBACK kind=raw wait_ms=0.203697 decode_ms=0.176341
+PROFILE_MEAN reduce_ms=0.228343 correction_submit_ms=0.079483
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014272 span_ms=0.086272
+PROFILE_READBACK kind=field wait_ms=0.129460 decode_ms=0.092971
+PROFILE_CACHE read_ms=0.337467 host_ms=0.120846
+PROFILE_INNER frame=51 inner_ms=7.160342
+PROFILE_STEP frame=51 total_ms=7.209043 prepare_ms=0.229283 coupling_ms=0.285701 lbm_ms=3.261353 rapier_ms=2.266514 upload_ms=0.380008 encoding_ms=0.844843 submit_ms=0.618164 wait_ms=0.479987 decode_ms=0.351270
+PROFILE_SNAPSHOT frame=52 sim_ms=0.356274 before_return_ms=0.656241
+PROFILE_BEGIN frame=52
+PROFILE_ADVECTION frame=52 ms=0.537602
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322304 span_ms=0.471104
+PROFILE_READBACK kind=field wait_ms=0.139138 decode_ms=0.081104
+PROFILE_CACHE read_ms=0.326587 host_ms=0.120959
+PROFILE_ADVECTION frame=52 ms=0.526463
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316192 span_ms=0.555616
+PROFILE_READBACK kind=raw wait_ms=0.205412 decode_ms=0.174107
+PROFILE_MEAN reduce_ms=0.227440 correction_submit_ms=0.079282
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013952 span_ms=0.087136
+PROFILE_READBACK kind=field wait_ms=0.126538 decode_ms=0.092302
+PROFILE_CACHE read_ms=0.333554 host_ms=0.120758
+PROFILE_INNER frame=52 inner_ms=7.095460
+PROFILE_STEP frame=52 total_ms=7.146619 prepare_ms=0.228643 coupling_ms=0.287056 lbm_ms=3.236251 rapier_ms=2.226850 upload_ms=0.378824 encoding_ms=0.848390 submit_ms=0.603459 wait_ms=0.471088 decode_ms=0.347513
+PROFILE_SNAPSHOT frame=53 sim_ms=0.357193 before_return_ms=0.656225
+PROFILE_BEGIN frame=53
+PROFILE_ADVECTION frame=53 ms=0.526598
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323264 span_ms=0.494336
+PROFILE_READBACK kind=field wait_ms=0.124180 decode_ms=0.081306
+PROFILE_CACHE read_ms=0.313703 host_ms=0.121070
+PROFILE_ADVECTION frame=53 ms=0.526096
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315392 span_ms=0.537376
+PROFILE_READBACK kind=raw wait_ms=0.233306 decode_ms=0.176264
+PROFILE_MEAN reduce_ms=0.226914 correction_submit_ms=0.079876
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013632 span_ms=0.085376
+PROFILE_READBACK kind=field wait_ms=0.126514 decode_ms=0.081996
+PROFILE_CACHE read_ms=0.333357 host_ms=0.120717
+PROFILE_INNER frame=53 inner_ms=7.213806
+PROFILE_STEP frame=53 total_ms=7.262190 prepare_ms=0.238789 coupling_ms=0.286533 lbm_ms=3.280654 rapier_ms=2.291862 upload_ms=0.391475 encoding_ms=0.850006 submit_ms=0.621277 wait_ms=0.484000 decode_ms=0.339566
+PROFILE_SNAPSHOT frame=54 sim_ms=0.359015 before_return_ms=0.658662
+PROFILE_BEGIN frame=54
+PROFILE_ADVECTION frame=54 ms=0.526301
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324992 span_ms=0.473568
+PROFILE_READBACK kind=field wait_ms=0.169645 decode_ms=0.081582
+PROFILE_CACHE read_ms=0.358772 host_ms=0.121006
+PROFILE_ADVECTION frame=54 ms=0.526554
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315904 span_ms=0.535584
+PROFILE_READBACK kind=raw wait_ms=0.202823 decode_ms=0.176468
+PROFILE_MEAN reduce_ms=0.228621 correction_submit_ms=0.080376
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013664 span_ms=0.085152
+PROFILE_READBACK kind=field wait_ms=0.127927 decode_ms=0.092834
+PROFILE_CACHE read_ms=0.334924 host_ms=0.120817
+PROFILE_INNER frame=54 inner_ms=7.157925
+PROFILE_STEP frame=54 total_ms=7.205746 prepare_ms=0.229604 coupling_ms=0.298377 lbm_ms=3.253214 rapier_ms=2.274137 upload_ms=0.377744 encoding_ms=0.845910 submit_ms=0.590255 wait_ms=0.500395 decode_ms=0.350884
+PROFILE_SNAPSHOT frame=55 sim_ms=0.356092 before_return_ms=0.656451
+PROFILE_BEGIN frame=55
+PROFILE_ADVECTION frame=55 ms=0.527078
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323040 span_ms=0.486112
+PROFILE_READBACK kind=field wait_ms=0.121688 decode_ms=0.080979
+PROFILE_CACHE read_ms=0.311091 host_ms=0.120979
+PROFILE_ADVECTION frame=55 ms=0.526968
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314496 span_ms=0.541600
+PROFILE_READBACK kind=raw wait_ms=0.206090 decode_ms=0.175988
+PROFILE_MEAN reduce_ms=0.227571 correction_submit_ms=0.080396
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014144 span_ms=0.085888
+PROFILE_READBACK kind=field wait_ms=0.129461 decode_ms=0.092578
+PROFILE_CACHE read_ms=0.335365 host_ms=0.120851
+PROFILE_INNER frame=55 inner_ms=7.164073
+PROFILE_STEP frame=55 total_ms=7.211763 prepare_ms=0.229690 coupling_ms=0.295561 lbm_ms=3.230872 rapier_ms=2.305191 upload_ms=0.370683 encoding_ms=0.849253 submit_ms=0.617639 wait_ms=0.457239 decode_ms=0.349545
+PROFILE_SNAPSHOT frame=56 sim_ms=0.358117 before_return_ms=0.656901
+PROFILE_BEGIN frame=56
+PROFILE_ADVECTION frame=56 ms=0.527573
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322496 span_ms=0.471200
+PROFILE_READBACK kind=field wait_ms=0.141246 decode_ms=0.081310
+PROFILE_CACHE read_ms=0.329737 host_ms=0.121082
+PROFILE_ADVECTION frame=56 ms=0.526136
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316800 span_ms=0.537408
+PROFILE_READBACK kind=raw wait_ms=0.201102 decode_ms=0.174398
+PROFILE_MEAN reduce_ms=0.227528 correction_submit_ms=0.079758
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014080 span_ms=0.085440
+PROFILE_READBACK kind=field wait_ms=0.119676 decode_ms=0.092667
+PROFILE_CACHE read_ms=0.326485 host_ms=0.120591
+PROFILE_INNER frame=56 inner_ms=7.123341
+PROFILE_STEP frame=56 total_ms=7.170560 prepare_ms=0.230001 coupling_ms=0.296180 lbm_ms=3.212941 rapier_ms=2.280784 upload_ms=0.369683 encoding_ms=0.842496 submit_ms=0.602774 wait_ms=0.462024 decode_ms=0.348375
+PROFILE_SNAPSHOT frame=57 sim_ms=0.359482 before_return_ms=0.659108
+PROFILE_BEGIN frame=57
+PROFILE_ADVECTION frame=57 ms=0.526476
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.320160 span_ms=0.484256
+PROFILE_READBACK kind=field wait_ms=0.123409 decode_ms=0.080121
+PROFILE_CACHE read_ms=0.310844 host_ms=0.120866
+PROFILE_ADVECTION frame=57 ms=0.525889
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317728 span_ms=0.533664
+PROFILE_READBACK kind=raw wait_ms=0.217145 decode_ms=0.176495
+PROFILE_MEAN reduce_ms=0.228220 correction_submit_ms=0.078863
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013728 span_ms=0.085600
+PROFILE_READBACK kind=field wait_ms=0.119201 decode_ms=0.093155
+PROFILE_CACHE read_ms=0.327482 host_ms=0.120486
+PROFILE_INNER frame=57 inner_ms=7.186191
+PROFILE_STEP frame=57 total_ms=7.234703 prepare_ms=0.230026 coupling_ms=0.297348 lbm_ms=3.229640 rapier_ms=2.327935 upload_ms=0.369967 encoding_ms=0.844748 submit_ms=0.610463 wait_ms=0.459755 decode_ms=0.349771
+PROFILE_SNAPSHOT frame=58 sim_ms=0.367277 before_return_ms=0.676699
+PROFILE_BEGIN frame=58
+PROFILE_ADVECTION frame=58 ms=0.527696
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322880 span_ms=0.469376
+PROFILE_READBACK kind=field wait_ms=0.149009 decode_ms=0.081959
+PROFILE_CACHE read_ms=0.336546 host_ms=0.121026
+PROFILE_ADVECTION frame=58 ms=0.526244
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315648 span_ms=0.538336
+PROFILE_READBACK kind=raw wait_ms=0.206551 decode_ms=0.175992
+PROFILE_MEAN reduce_ms=0.228275 correction_submit_ms=0.079263
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014112 span_ms=0.088416
+PROFILE_READBACK kind=field wait_ms=0.128410 decode_ms=0.082562
+PROFILE_CACHE read_ms=0.337627 host_ms=0.120834
+PROFILE_INNER frame=58 inner_ms=7.213115
+PROFILE_STEP frame=58 total_ms=7.260123 prepare_ms=0.230287 coupling_ms=0.298224 lbm_ms=3.231730 rapier_ms=2.350231 upload_ms=0.368601 encoding_ms=0.853572 submit_ms=0.587800 wait_ms=0.483970 decode_ms=0.340513
+PROFILE_SNAPSHOT frame=59 sim_ms=0.356451 before_return_ms=0.665804
+PROFILE_BEGIN frame=59
+PROFILE_ADVECTION frame=59 ms=0.526325
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324896 span_ms=0.473024
+PROFILE_READBACK kind=field wait_ms=0.138619 decode_ms=0.081907
+PROFILE_CACHE read_ms=0.326347 host_ms=0.121130
+PROFILE_ADVECTION frame=59 ms=0.526780
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316160 span_ms=0.540800
+PROFILE_READBACK kind=raw wait_ms=0.234906 decode_ms=0.174450
+PROFILE_MEAN reduce_ms=0.229241 correction_submit_ms=0.080484
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014560 span_ms=0.087552
+PROFILE_READBACK kind=field wait_ms=0.127705 decode_ms=0.092350
+PROFILE_CACHE read_ms=0.335695 host_ms=0.120834
+PROFILE_INNER frame=59 inner_ms=7.152303
+PROFILE_STEP frame=59 total_ms=7.201844 prepare_ms=0.230222 coupling_ms=0.296871 lbm_ms=3.259030 rapier_ms=2.262249 upload_ms=0.380156 encoding_ms=0.847228 submit_ms=0.594456 wait_ms=0.501230 decode_ms=0.348707
+PROFILE_SNAPSHOT frame=60 sim_ms=0.357044 before_return_ms=0.657811
+PROFILE_BEGIN frame=60
+PROFILE_ADVECTION frame=60 ms=0.526100
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324384 span_ms=0.473024
+PROFILE_READBACK kind=field wait_ms=0.168078 decode_ms=0.081068
+PROFILE_CACHE read_ms=0.355891 host_ms=0.121154
+PROFILE_ADVECTION frame=60 ms=0.527482
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315072 span_ms=0.538464
+PROFILE_READBACK kind=raw wait_ms=0.212882 decode_ms=0.175513
+PROFILE_MEAN reduce_ms=0.228430 correction_submit_ms=0.080797
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014432 span_ms=0.088000
+PROFILE_READBACK kind=field wait_ms=0.118824 decode_ms=0.081836
+PROFILE_CACHE read_ms=0.327520 host_ms=0.120656
+PROFILE_INNER frame=60 inner_ms=7.198249
+PROFILE_STEP frame=60 total_ms=7.256513 prepare_ms=0.228974 coupling_ms=0.284477 lbm_ms=3.271121 rapier_ms=2.311563 upload_ms=0.366878 encoding_ms=0.864432 submit_ms=0.588118 wait_ms=0.499784 decode_ms=0.338417
+PROFILE_SNAPSHOT frame=61 sim_ms=0.359746 before_return_ms=0.658749
+PROFILE_BEGIN frame=61
+PROFILE_ADVECTION frame=61 ms=0.526252
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322528 span_ms=0.495712
+PROFILE_READBACK kind=field wait_ms=0.123101 decode_ms=0.081213
+PROFILE_CACHE read_ms=0.313646 host_ms=0.120918
+PROFILE_ADVECTION frame=61 ms=0.525858
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316128 span_ms=0.535680
+PROFILE_READBACK kind=raw wait_ms=0.200255 decode_ms=0.174536
+PROFILE_MEAN reduce_ms=0.228153 correction_submit_ms=0.080547
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014464 span_ms=0.087392
+PROFILE_READBACK kind=field wait_ms=0.130612 decode_ms=0.092895
+PROFILE_CACHE read_ms=0.338273 host_ms=0.120615
+PROFILE_INNER frame=61 inner_ms=7.219554
+PROFILE_STEP frame=61 total_ms=7.269456 prepare_ms=0.229814 coupling_ms=0.299090 lbm_ms=3.235555 rapier_ms=2.353136 upload_ms=0.370289 encoding_ms=0.862858 submit_ms=0.606118 wait_ms=0.453968 decode_ms=0.348644
+PROFILE_SNAPSHOT frame=62 sim_ms=0.357848 before_return_ms=0.666721
+PROFILE_BEGIN frame=62
+PROFILE_ADVECTION frame=62 ms=0.527039
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321376 span_ms=0.473312
+PROFILE_READBACK kind=field wait_ms=0.111317 decode_ms=0.081687
+PROFILE_CACHE read_ms=0.310822 host_ms=0.121178
+PROFILE_ADVECTION frame=62 ms=0.538337
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314848 span_ms=0.535296
+PROFILE_READBACK kind=raw wait_ms=0.229820 decode_ms=0.254379
+PROFILE_MEAN reduce_ms=0.253248 correction_submit_ms=0.079256
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013632 span_ms=0.085408
+PROFILE_READBACK kind=field wait_ms=0.135356 decode_ms=0.082191
+PROFILE_CACHE read_ms=0.331558 host_ms=0.120714
+PROFILE_INNER frame=62 inner_ms=7.311438
+PROFILE_STEP frame=62 total_ms=7.361792 prepare_ms=0.228878 coupling_ms=0.285782 lbm_ms=3.372938 rapier_ms=2.305630 upload_ms=0.367616 encoding_ms=0.851881 submit_ms=0.608708 wait_ms=0.476493 decode_ms=0.418257
+PROFILE_SNAPSHOT frame=63 sim_ms=0.375055 before_return_ms=0.673779
+PROFILE_BEGIN frame=63
+PROFILE_ADVECTION frame=63 ms=0.526504
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.325984 span_ms=0.478272
+PROFILE_READBACK kind=field wait_ms=0.112755 decode_ms=0.081420
+PROFILE_CACHE read_ms=0.313954 host_ms=0.121275
+PROFILE_ADVECTION frame=63 ms=0.538856
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317696 span_ms=0.542208
+PROFILE_READBACK kind=raw wait_ms=0.201286 decode_ms=0.176265
+PROFILE_MEAN reduce_ms=0.227417 correction_submit_ms=0.078814
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013408 span_ms=0.087104
+PROFILE_READBACK kind=field wait_ms=0.128090 decode_ms=0.092635
+PROFILE_CACHE read_ms=0.337291 host_ms=0.120843
+PROFILE_INNER frame=63 inner_ms=7.155035
+PROFILE_STEP frame=63 total_ms=7.203425 prepare_ms=0.230273 coupling_ms=0.284799 lbm_ms=3.218657 rapier_ms=2.302923 upload_ms=0.369555 encoding_ms=0.857834 submit_ms=0.616152 wait_ms=0.442131 decode_ms=0.350320
+PROFILE_SNAPSHOT frame=64 sim_ms=0.364755 before_return_ms=0.664743
+PROFILE_BEGIN frame=64
+PROFILE_ADVECTION frame=64 ms=0.526091
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324864 span_ms=0.474496
+PROFILE_READBACK kind=field wait_ms=0.113186 decode_ms=0.080930
+PROFILE_CACHE read_ms=0.311728 host_ms=0.121035
+PROFILE_ADVECTION frame=64 ms=0.538851
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316928 span_ms=0.538944
+PROFILE_READBACK kind=raw wait_ms=0.202527 decode_ms=0.174112
+PROFILE_MEAN reduce_ms=0.227705 correction_submit_ms=0.079573
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014336 span_ms=0.085184
+PROFILE_READBACK kind=field wait_ms=0.128942 decode_ms=0.092489
+PROFILE_CACHE read_ms=0.336027 host_ms=0.120689
+PROFILE_INNER frame=64 inner_ms=7.174344
+PROFILE_STEP frame=64 total_ms=7.221275 prepare_ms=0.229120 coupling_ms=0.284186 lbm_ms=3.211011 rapier_ms=2.332000 upload_ms=0.369279 encoding_ms=0.866618 submit_ms=0.599680 wait_ms=0.444655 decode_ms=0.347531
+PROFILE_SNAPSHOT frame=65 sim_ms=0.358321 before_return_ms=0.667961
+PROFILE_BEGIN frame=65
+PROFILE_ADVECTION frame=65 ms=0.526467
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323808 span_ms=0.472128
+PROFILE_READBACK kind=field wait_ms=0.166651 decode_ms=0.081209
+PROFILE_CACHE read_ms=0.355589 host_ms=0.121079
+PROFILE_ADVECTION frame=65 ms=0.527180
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315104 span_ms=0.546688
+PROFILE_READBACK kind=raw wait_ms=0.204974 decode_ms=0.173236
+PROFILE_MEAN reduce_ms=0.226775 correction_submit_ms=0.080152
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014048 span_ms=0.086432
+PROFILE_READBACK kind=field wait_ms=0.129346 decode_ms=0.082106
+PROFILE_CACHE read_ms=0.346568 host_ms=0.120947
+PROFILE_INNER frame=65 inner_ms=7.227848
+PROFILE_STEP frame=65 total_ms=7.282949 prepare_ms=0.230141 coupling_ms=0.297638 lbm_ms=3.275608 rapier_ms=2.317056 upload_ms=0.370801 encoding_ms=0.865176 submit_ms=0.596428 wait_ms=0.500971 decode_ms=0.336551
+PROFILE_SNAPSHOT frame=66 sim_ms=0.356287 before_return_ms=0.656013
+PROFILE_BEGIN frame=66
+PROFILE_ADVECTION frame=66 ms=0.526223
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.325632 span_ms=0.486816
+PROFILE_READBACK kind=field wait_ms=0.122840 decode_ms=0.080856
+PROFILE_CACHE read_ms=0.310560 host_ms=0.121079
+PROFILE_ADVECTION frame=66 ms=0.527165
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315712 span_ms=0.543360
+PROFILE_READBACK kind=raw wait_ms=0.205271 decode_ms=0.176606
+PROFILE_MEAN reduce_ms=0.229242 correction_submit_ms=0.080387
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014880 span_ms=0.086944
+PROFILE_READBACK kind=field wait_ms=0.126221 decode_ms=0.082833
+PROFILE_CACHE read_ms=0.334173 host_ms=0.120832
+PROFILE_INNER frame=66 inner_ms=7.229504
+PROFILE_STEP frame=66 total_ms=7.277644 prepare_ms=0.230479 coupling_ms=0.295668 lbm_ms=3.234442 rapier_ms=2.364997 upload_ms=0.372041 encoding_ms=0.854101 submit_ms=0.616121 wait_ms=0.454332 decode_ms=0.340295
+PROFILE_SNAPSHOT frame=67 sim_ms=0.358460 before_return_ms=0.667807
+PROFILE_BEGIN frame=67
+PROFILE_ADVECTION frame=67 ms=0.526228
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322976 span_ms=0.472576
+PROFILE_READBACK kind=field wait_ms=0.170278 decode_ms=0.081117
+PROFILE_CACHE read_ms=0.359085 host_ms=0.120879
+PROFILE_ADVECTION frame=67 ms=0.526333
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314272 span_ms=0.544960
+PROFILE_READBACK kind=raw wait_ms=0.204863 decode_ms=0.176922
+PROFILE_MEAN reduce_ms=0.227041 correction_submit_ms=0.080155
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014304 span_ms=0.085920
+PROFILE_READBACK kind=field wait_ms=0.130889 decode_ms=0.092154
+PROFILE_CACHE read_ms=0.345251 host_ms=0.120692
+PROFILE_INNER frame=67 inner_ms=7.265237
+PROFILE_STEP frame=67 total_ms=7.313009 prepare_ms=0.229659 coupling_ms=0.296212 lbm_ms=3.278370 rapier_ms=2.359740 upload_ms=0.370142 encoding_ms=0.862516 submit_ms=0.595227 wait_ms=0.506030 decode_ms=0.350193
+PROFILE_SNAPSHOT frame=68 sim_ms=0.359180 before_return_ms=0.669483
+PROFILE_BEGIN frame=68
+PROFILE_ADVECTION frame=68 ms=0.525725
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323104 span_ms=0.488768
+PROFILE_READBACK kind=field wait_ms=0.123060 decode_ms=0.081760
+PROFILE_CACHE read_ms=0.312583 host_ms=0.121098
+PROFILE_ADVECTION frame=68 ms=0.526825
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316832 span_ms=0.537600
+PROFILE_READBACK kind=raw wait_ms=0.203661 decode_ms=0.175550
+PROFILE_MEAN reduce_ms=0.227586 correction_submit_ms=0.081573
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013600 span_ms=0.086496
+PROFILE_READBACK kind=field wait_ms=0.119805 decode_ms=0.092498
+PROFILE_CACHE read_ms=0.328124 host_ms=0.120817
+PROFILE_INNER frame=68 inner_ms=7.168634
+PROFILE_STEP frame=68 total_ms=7.217533 prepare_ms=0.228990 coupling_ms=0.296203 lbm_ms=3.222205 rapier_ms=2.319491 upload_ms=0.369923 encoding_ms=0.865440 submit_ms=0.602111 wait_ms=0.446526 decode_ms=0.349808
+PROFILE_SNAPSHOT frame=69 sim_ms=0.357565 before_return_ms=0.678638
+PROFILE_BEGIN frame=69
+PROFILE_ADVECTION frame=69 ms=0.526404
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321888 span_ms=0.485792
+PROFILE_READBACK kind=field wait_ms=0.122729 decode_ms=0.081825
+PROFILE_CACHE read_ms=0.312688 host_ms=0.120826
+PROFILE_ADVECTION frame=69 ms=0.538499
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314176 span_ms=0.546336
+PROFILE_READBACK kind=raw wait_ms=0.200690 decode_ms=0.178001
+PROFILE_MEAN reduce_ms=0.229051 correction_submit_ms=0.081110
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014048 span_ms=0.087808
+PROFILE_READBACK kind=field wait_ms=0.120482 decode_ms=0.092490
+PROFILE_CACHE read_ms=0.329481 host_ms=0.121123
+PROFILE_INNER frame=69 inner_ms=7.229396
+PROFILE_STEP frame=69 total_ms=7.278921 prepare_ms=0.231083 coupling_ms=0.285234 lbm_ms=3.233173 rapier_ms=2.360141 upload_ms=0.372958 encoding_ms=0.865125 submit_ms=0.609811 wait_ms=0.443901 decode_ms=0.352316
+PROFILE_SNAPSHOT frame=70 sim_ms=0.357635 before_return_ms=0.665376
+PROFILE_BEGIN frame=70
+PROFILE_ADVECTION frame=70 ms=0.527079
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324256 span_ms=0.489600
+PROFILE_READBACK kind=field wait_ms=0.121529 decode_ms=0.080967
+PROFILE_CACHE read_ms=0.311514 host_ms=0.121082
+PROFILE_ADVECTION frame=70 ms=0.539046
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.318848 span_ms=0.544992
+PROFILE_READBACK kind=raw wait_ms=0.220271 decode_ms=0.174222
+PROFILE_MEAN reduce_ms=0.228396 correction_submit_ms=0.079301
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014656 span_ms=0.086496
+PROFILE_READBACK kind=field wait_ms=0.142387 decode_ms=0.113783
+PROFILE_CACHE read_ms=0.409613 host_ms=0.258530
+PROFILE_INNER frame=70 inner_ms=7.464174
+PROFILE_STEP frame=70 total_ms=7.512536 prepare_ms=0.229434 coupling_ms=0.285724 lbm_ms=3.481606 rapier_ms=2.348686 upload_ms=0.370270 encoding_ms=0.872575 submit_ms=0.605714 wait_ms=0.484187 decode_ms=0.368972
+PROFILE_SNAPSHOT frame=71 sim_ms=0.366690 before_return_ms=0.668516
+PROFILE_BEGIN frame=71
+PROFILE_ADVECTION frame=71 ms=0.525875
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323104 span_ms=0.490432
+PROFILE_READBACK kind=field wait_ms=0.125253 decode_ms=0.081188
+PROFILE_CACHE read_ms=0.314333 host_ms=0.120983
+PROFILE_ADVECTION frame=71 ms=0.538250
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315744 span_ms=0.543936
+PROFILE_READBACK kind=raw wait_ms=0.201996 decode_ms=0.174419
+PROFILE_MEAN reduce_ms=0.227138 correction_submit_ms=0.079092
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013472 span_ms=0.085472
+PROFILE_READBACK kind=field wait_ms=0.128538 decode_ms=0.092531
+PROFILE_CACHE read_ms=0.335593 host_ms=0.120642
+PROFILE_INNER frame=71 inner_ms=7.201874
+PROFILE_STEP frame=71 total_ms=7.252840 prepare_ms=0.228908 coupling_ms=0.283555 lbm_ms=3.229019 rapier_ms=2.340812 upload_ms=0.369056 encoding_ms=0.857292 submit_ms=0.617178 wait_ms=0.455787 decode_ms=0.348138
+PROFILE_SNAPSHOT frame=72 sim_ms=0.367433 before_return_ms=0.667385
+PROFILE_BEGIN frame=72
+PROFILE_ADVECTION frame=72 ms=0.526890
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322656 span_ms=0.488384
+PROFILE_READBACK kind=field wait_ms=0.147684 decode_ms=0.081289
+PROFILE_CACHE read_ms=0.337175 host_ms=0.120877
+PROFILE_ADVECTION frame=72 ms=0.526587
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317216 span_ms=0.544544
+PROFILE_READBACK kind=raw wait_ms=0.237089 decode_ms=0.173440
+PROFILE_MEAN reduce_ms=0.227838 correction_submit_ms=0.079079
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014592 span_ms=0.085696
+PROFILE_READBACK kind=field wait_ms=0.127493 decode_ms=0.082569
+PROFILE_CACHE read_ms=0.348111 host_ms=0.120960
+PROFILE_INNER frame=72 inner_ms=7.268870
+PROFILE_STEP frame=72 total_ms=7.317086 prepare_ms=0.228906 coupling_ms=0.282911 lbm_ms=3.297675 rapier_ms=2.351668 upload_ms=0.370130 encoding_ms=0.868247 submit_ms=0.604153 wait_ms=0.512266 decode_ms=0.337298
+PROFILE_SNAPSHOT frame=73 sim_ms=0.357644 before_return_ms=0.658377
+PROFILE_BEGIN frame=73
+PROFILE_ADVECTION frame=73 ms=0.526682
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323232 span_ms=0.472640
+PROFILE_READBACK kind=field wait_ms=0.136007 decode_ms=0.080886
+PROFILE_CACHE read_ms=0.324210 host_ms=0.120994
+PROFILE_ADVECTION frame=73 ms=0.527100
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315360 span_ms=0.548096
+PROFILE_READBACK kind=raw wait_ms=0.205822 decode_ms=0.177130
+PROFILE_MEAN reduce_ms=0.228603 correction_submit_ms=0.079357
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014432 span_ms=0.085152
+PROFILE_READBACK kind=field wait_ms=0.120830 decode_ms=0.100723
+PROFILE_CACHE read_ms=0.339764 host_ms=0.131281
+PROFILE_INNER frame=73 inner_ms=7.220351
+PROFILE_STEP frame=73 total_ms=7.269093 prepare_ms=0.233875 coupling_ms=0.281562 lbm_ms=3.249161 rapier_ms=2.348983 upload_ms=0.370381 encoding_ms=0.863740 submit_ms=0.596372 wait_ms=0.462659 decode_ms=0.358739
+PROFILE_SNAPSHOT frame=74 sim_ms=0.359425 before_return_ms=0.659184
+PROFILE_BEGIN frame=74
+PROFILE_ADVECTION frame=74 ms=0.526271
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323872 span_ms=0.472672
+PROFILE_READBACK kind=field wait_ms=0.179542 decode_ms=0.081203
+PROFILE_CACHE read_ms=0.368064 host_ms=0.120614
+PROFILE_ADVECTION frame=74 ms=0.527240
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316064 span_ms=0.545536
+PROFILE_READBACK kind=raw wait_ms=0.206133 decode_ms=0.174798
+PROFILE_MEAN reduce_ms=0.227479 correction_submit_ms=0.079524
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014176 span_ms=0.087936
+PROFILE_READBACK kind=field wait_ms=0.142352 decode_ms=0.092867
+PROFILE_CACHE read_ms=0.355889 host_ms=0.120695
+PROFILE_INNER frame=74 inner_ms=7.276965
+PROFILE_STEP frame=74 total_ms=7.325485 prepare_ms=0.232577 coupling_ms=0.282713 lbm_ms=3.295571 rapier_ms=2.359255 upload_ms=0.370623 encoding_ms=0.865927 submit_ms=0.595476 wait_ms=0.528027 decode_ms=0.348868
+PROFILE_SNAPSHOT frame=75 sim_ms=0.355757 before_return_ms=0.655958
+PROFILE_BEGIN frame=75
+PROFILE_ADVECTION frame=75 ms=0.526433
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323744 span_ms=0.486784
+PROFILE_READBACK kind=field wait_ms=0.123870 decode_ms=0.081578
+PROFILE_CACHE read_ms=0.314484 host_ms=0.121219
+PROFILE_ADVECTION frame=75 ms=0.526491
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.318688 span_ms=0.545024
+PROFILE_READBACK kind=raw wait_ms=0.204772 decode_ms=0.177034
+PROFILE_MEAN reduce_ms=0.229104 correction_submit_ms=0.092993
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013952 span_ms=0.094144
+PROFILE_READBACK kind=field wait_ms=0.159729 decode_ms=0.114768
+PROFILE_CACHE read_ms=0.431445 host_ms=0.270179
+PROFILE_INNER frame=75 inner_ms=7.491295
+PROFILE_STEP frame=75 total_ms=7.548159 prepare_ms=0.232896 coupling_ms=0.283385 lbm_ms=3.499888 rapier_ms=2.367761 upload_ms=0.371342 encoding_ms=0.880162 submit_ms=0.611079 wait_ms=0.488371 decode_ms=0.373380
+PROFILE_SNAPSHOT frame=76 sim_ms=0.357342 before_return_ms=0.657415
+PROFILE_BEGIN frame=76
+PROFILE_ADVECTION frame=76 ms=0.526583
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324160 span_ms=0.472832
+PROFILE_READBACK kind=field wait_ms=0.114859 decode_ms=0.082045
+PROFILE_CACHE read_ms=0.313529 host_ms=0.120806
+PROFILE_ADVECTION frame=76 ms=0.527364
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317120 span_ms=0.540960
+PROFILE_READBACK kind=raw wait_ms=0.215334 decode_ms=0.176746
+PROFILE_MEAN reduce_ms=0.227657 correction_submit_ms=0.079395
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013472 span_ms=0.098368
+PROFILE_READBACK kind=field wait_ms=0.128664 decode_ms=0.093441
+PROFILE_CACHE read_ms=0.354469 host_ms=0.120564
+PROFILE_INNER frame=76 inner_ms=7.156009
+PROFILE_STEP frame=76 total_ms=7.206203 prepare_ms=0.231556 coupling_ms=0.282091 lbm_ms=3.243031 rapier_ms=2.291725 upload_ms=0.379148 encoding_ms=0.851119 submit_ms=0.614585 wait_ms=0.458857 decode_ms=0.352232
+PROFILE_SNAPSHOT frame=77 sim_ms=0.357100 before_return_ms=0.655519
+PROFILE_BEGIN frame=77
+PROFILE_ADVECTION frame=77 ms=0.526417
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323584 span_ms=0.471488
+PROFILE_READBACK kind=field wait_ms=0.114196 decode_ms=0.081037
+PROFILE_CACHE read_ms=0.312256 host_ms=0.120706
+PROFILE_ADVECTION frame=77 ms=0.526613
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315712 span_ms=0.554784
+PROFILE_READBACK kind=raw wait_ms=0.211640 decode_ms=0.175035
+PROFILE_MEAN reduce_ms=0.228646 correction_submit_ms=0.080083
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014368 span_ms=0.100608
+PROFILE_READBACK kind=field wait_ms=0.129010 decode_ms=0.082834
+PROFILE_CACHE read_ms=0.354648 host_ms=0.120774
+PROFILE_INNER frame=77 inner_ms=7.206396
+PROFILE_STEP frame=77 total_ms=7.256571 prepare_ms=0.231261 coupling_ms=0.281769 lbm_ms=3.254605 rapier_ms=2.332553 upload_ms=0.368922 encoding_ms=0.880695 submit_ms=0.612608 wait_ms=0.454846 decode_ms=0.338906
+PROFILE_SNAPSHOT frame=78 sim_ms=0.356997 before_return_ms=0.657033
+PROFILE_BEGIN frame=78
+PROFILE_ADVECTION frame=78 ms=0.526797
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323360 span_ms=0.484448
+PROFILE_READBACK kind=field wait_ms=0.123405 decode_ms=0.081658
+PROFILE_CACHE read_ms=0.313262 host_ms=0.120764
+PROFILE_ADVECTION frame=78 ms=0.527091
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315936 span_ms=0.543392
+PROFILE_READBACK kind=raw wait_ms=0.218657 decode_ms=0.176474
+PROFILE_MEAN reduce_ms=0.228284 correction_submit_ms=0.090294
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013856 span_ms=0.093728
+PROFILE_READBACK kind=field wait_ms=0.129761 decode_ms=0.091964
+PROFILE_CACHE read_ms=0.340791 host_ms=0.120832
+PROFILE_INNER frame=78 inner_ms=7.260694
+PROFILE_STEP frame=78 total_ms=7.309450 prepare_ms=0.232628 coupling_ms=0.282568 lbm_ms=3.264476 rapier_ms=2.373524 upload_ms=0.372423 encoding_ms=0.865036 submit_ms=0.616844 wait_ms=0.471823 decode_ms=0.350096
+PROFILE_SNAPSHOT frame=79 sim_ms=0.358536 before_return_ms=0.656683
+PROFILE_BEGIN frame=79
+PROFILE_ADVECTION frame=79 ms=0.527714
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321792 span_ms=0.492800
+PROFILE_READBACK kind=field wait_ms=0.121153 decode_ms=0.082003
+PROFILE_CACHE read_ms=0.311604 host_ms=0.120876
+PROFILE_ADVECTION frame=79 ms=0.527572
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316832 span_ms=0.544512
+PROFILE_READBACK kind=raw wait_ms=0.204931 decode_ms=0.166948
+PROFILE_MEAN reduce_ms=0.240340 correction_submit_ms=0.081305
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014048 span_ms=0.092608
+PROFILE_READBACK kind=field wait_ms=0.135773 decode_ms=0.082625
+PROFILE_CACHE read_ms=0.346097 host_ms=0.120526
+PROFILE_INNER frame=79 inner_ms=7.245729
+PROFILE_STEP frame=79 total_ms=7.295918 prepare_ms=0.234541 coupling_ms=0.282637 lbm_ms=3.259743 rapier_ms=2.360151 upload_ms=0.372356 encoding_ms=0.877538 submit_ms=0.607352 wait_ms=0.461857 decode_ms=0.331576
+PROFILE_SNAPSHOT frame=80 sim_ms=0.357197 before_return_ms=0.661845
+PROFILE_BEGIN frame=80
+PROFILE_ADVECTION frame=80 ms=0.529471
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322400 span_ms=0.524960
+PROFILE_READBACK kind=field wait_ms=0.123978 decode_ms=0.081009
+PROFILE_CACHE read_ms=0.311856 host_ms=0.120797
+PROFILE_ADVECTION frame=80 ms=0.526671
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316960 span_ms=0.549984
+PROFILE_READBACK kind=raw wait_ms=0.212381 decode_ms=0.175962
+PROFILE_MEAN reduce_ms=0.227106 correction_submit_ms=0.081857
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014144 span_ms=0.089312
+PROFILE_READBACK kind=field wait_ms=0.129650 decode_ms=0.082354
+PROFILE_CACHE read_ms=0.339345 host_ms=0.120720
+PROFILE_INNER frame=80 inner_ms=7.286583
+PROFILE_STEP frame=80 total_ms=7.337813 prepare_ms=0.252203 coupling_ms=0.282680 lbm_ms=3.295133 rapier_ms=2.346629 upload_ms=0.384456 encoding_ms=0.894836 submit_ms=0.617001 wait_ms=0.466009 decode_ms=0.339325
+PROFILE_SNAPSHOT frame=81 sim_ms=0.359232 before_return_ms=0.661528
+PROFILE_BEGIN frame=81
+PROFILE_ADVECTION frame=81 ms=0.526363
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324896 span_ms=0.494528
+PROFILE_READBACK kind=field wait_ms=0.156415 decode_ms=0.081136
+PROFILE_CACHE read_ms=0.347569 host_ms=0.121164
+PROFILE_ADVECTION frame=81 ms=0.526000
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315104 span_ms=0.553856
+PROFILE_READBACK kind=raw wait_ms=0.205562 decode_ms=0.176024
+PROFILE_MEAN reduce_ms=0.226163 correction_submit_ms=0.081790
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014240 span_ms=0.089344
+PROFILE_READBACK kind=field wait_ms=0.127379 decode_ms=0.092897
+PROFILE_CACHE read_ms=0.338317 host_ms=0.120638
+PROFILE_INNER frame=81 inner_ms=7.298704
+PROFILE_STEP frame=81 total_ms=7.348847 prepare_ms=0.233472 coupling_ms=0.282716 lbm_ms=3.295380 rapier_ms=2.378316 upload_ms=0.373237 encoding_ms=0.882419 submit_ms=0.616448 wait_ms=0.489356 decode_ms=0.350057
+PROFILE_SNAPSHOT frame=82 sim_ms=0.357387 before_return_ms=0.659028
+PROFILE_BEGIN frame=82
+PROFILE_ADVECTION frame=82 ms=0.526472
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323872 span_ms=0.492832
+PROFILE_READBACK kind=field wait_ms=0.137532 decode_ms=0.081074
+PROFILE_CACHE read_ms=0.333490 host_ms=0.120855
+PROFILE_ADVECTION frame=82 ms=0.527295
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316736 span_ms=0.543872
+PROFILE_READBACK kind=raw wait_ms=0.203496 decode_ms=0.188543
+PROFILE_MEAN reduce_ms=0.228278 correction_submit_ms=0.080480
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.012896 span_ms=0.091904
+PROFILE_READBACK kind=field wait_ms=0.166323 decode_ms=0.083116
+PROFILE_CACHE read_ms=0.370300 host_ms=0.120490
+PROFILE_INNER frame=82 inner_ms=7.291951
+PROFILE_STEP frame=82 total_ms=7.338757 prepare_ms=0.231514 coupling_ms=0.281897 lbm_ms=3.307176 rapier_ms=2.363664 upload_ms=0.370719 encoding_ms=0.876272 submit_ms=0.607084 wait_ms=0.507351 decode_ms=0.352733
+PROFILE_SNAPSHOT frame=83 sim_ms=0.356591 before_return_ms=0.655465
+PROFILE_BEGIN frame=83
+PROFILE_ADVECTION frame=83 ms=0.527597
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321152 span_ms=0.487808
+PROFILE_READBACK kind=field wait_ms=0.170732 decode_ms=0.081263
+PROFILE_CACHE read_ms=0.361439 host_ms=0.120871
+PROFILE_ADVECTION frame=83 ms=0.527196
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314944 span_ms=0.538432
+PROFILE_READBACK kind=raw wait_ms=0.197871 decode_ms=0.190498
+PROFILE_MEAN reduce_ms=0.228032 correction_submit_ms=0.084629
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013920 span_ms=0.086624
+PROFILE_READBACK kind=field wait_ms=0.167163 decode_ms=0.082256
+PROFILE_CACHE read_ms=0.374577 host_ms=0.120808
+PROFILE_INNER frame=83 inner_ms=7.308883
+PROFILE_STEP frame=83 total_ms=7.359501 prepare_ms=0.232634 coupling_ms=0.282994 lbm_ms=3.333930 rapier_ms=2.347783 upload_ms=0.370787 encoding_ms=0.867940 submit_ms=0.608817 wait_ms=0.535766 decode_ms=0.354017
+PROFILE_SNAPSHOT frame=84 sim_ms=0.357356 before_return_ms=0.660455
+PROFILE_BEGIN frame=84
+PROFILE_ADVECTION frame=84 ms=0.526967
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324640 span_ms=0.488512
+PROFILE_READBACK kind=field wait_ms=0.148789 decode_ms=0.113004
+PROFILE_CACHE read_ms=0.406764 host_ms=0.275324
+PROFILE_ADVECTION frame=84 ms=0.525846
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316800 span_ms=0.543744
+PROFILE_READBACK kind=raw wait_ms=0.203580 decode_ms=0.175529
+PROFILE_MEAN reduce_ms=0.227527 correction_submit_ms=0.080723
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014208 span_ms=0.087296
+PROFILE_READBACK kind=field wait_ms=0.128280 decode_ms=0.092727
+PROFILE_CACHE read_ms=0.336282 host_ms=0.120700
+PROFILE_INNER frame=84 inner_ms=7.497932
+PROFILE_STEP frame=84 total_ms=7.547646 prepare_ms=0.232899 coupling_ms=0.280453 lbm_ms=3.520056 rapier_ms=2.362247 upload_ms=0.371332 encoding_ms=0.873523 submit_ms=0.613778 wait_ms=0.480649 decode_ms=0.381260
+PROFILE_SNAPSHOT frame=85 sim_ms=0.358951 before_return_ms=0.659440
+PROFILE_BEGIN frame=85
+PROFILE_ADVECTION frame=85 ms=0.527237
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324256 span_ms=0.484608
+PROFILE_READBACK kind=field wait_ms=0.123424 decode_ms=0.081318
+PROFILE_CACHE read_ms=0.313224 host_ms=0.131189
+PROFILE_ADVECTION frame=85 ms=0.527173
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315936 span_ms=0.544224
+PROFILE_READBACK kind=raw wait_ms=0.191791 decode_ms=0.174564
+PROFILE_MEAN reduce_ms=0.227363 correction_submit_ms=0.086211
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013344 span_ms=0.095968
+PROFILE_READBACK kind=field wait_ms=0.162479 decode_ms=0.082649
+PROFILE_CACHE read_ms=0.374250 host_ms=0.120940
+PROFILE_INNER frame=85 inner_ms=7.243211
+PROFILE_STEP frame=85 total_ms=7.292267 prepare_ms=0.231019 coupling_ms=0.281610 lbm_ms=3.291778 rapier_ms=2.335333 upload_ms=0.370606 encoding_ms=0.868195 submit_ms=0.624278 wait_ms=0.477694 decode_ms=0.338531
+PROFILE_SNAPSHOT frame=86 sim_ms=0.357158 before_return_ms=0.656310
+PROFILE_BEGIN frame=86
+PROFILE_ADVECTION frame=86 ms=0.527482
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323296 span_ms=0.474272
+PROFILE_READBACK kind=field wait_ms=0.135529 decode_ms=0.081002
+PROFILE_CACHE read_ms=0.333473 host_ms=0.131546
+PROFILE_ADVECTION frame=86 ms=0.527399
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316992 span_ms=0.545088
+PROFILE_READBACK kind=raw wait_ms=0.206298 decode_ms=0.175351
+PROFILE_MEAN reduce_ms=0.228241 correction_submit_ms=0.080450
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013952 span_ms=0.087072
+PROFILE_READBACK kind=field wait_ms=0.129465 decode_ms=0.092587
+PROFILE_CACHE read_ms=0.337011 host_ms=0.120951
+PROFILE_INNER frame=86 inner_ms=7.257966
+PROFILE_STEP frame=86 total_ms=7.307346 prepare_ms=0.230922 coupling_ms=0.284127 lbm_ms=3.277068 rapier_ms=2.355381 upload_ms=0.368883 encoding_ms=0.883610 submit_ms=0.601909 wait_ms=0.471292 decode_ms=0.348940
+PROFILE_SNAPSHOT frame=87 sim_ms=0.357847 before_return_ms=0.656160
+PROFILE_BEGIN frame=87
+PROFILE_ADVECTION frame=87 ms=0.526617
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.320448 span_ms=0.487168
+PROFILE_READBACK kind=field wait_ms=0.151977 decode_ms=0.081778
+PROFILE_CACHE read_ms=0.341788 host_ms=0.120993
+PROFILE_ADVECTION frame=87 ms=0.527418
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316928 span_ms=0.544096
+PROFILE_READBACK kind=raw wait_ms=0.236449 decode_ms=0.175937
+PROFILE_MEAN reduce_ms=0.227859 correction_submit_ms=0.080512
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014368 span_ms=0.088160
+PROFILE_READBACK kind=field wait_ms=0.130543 decode_ms=0.082267
+PROFILE_CACHE read_ms=0.329686 host_ms=0.120578
+PROFILE_INNER frame=87 inner_ms=7.324928
+PROFILE_STEP frame=87 total_ms=7.374005 prepare_ms=0.231510 coupling_ms=0.285227 lbm_ms=3.288088 rapier_ms=2.412867 upload_ms=0.370020 encoding_ms=0.868996 submit_ms=0.604601 wait_ms=0.518969 decode_ms=0.339982
+PROFILE_SNAPSHOT frame=88 sim_ms=0.420352 before_return_ms=0.719124
+PROFILE_BEGIN frame=88
+PROFILE_ADVECTION frame=88 ms=0.528527
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321344 span_ms=0.486624
+PROFILE_READBACK kind=field wait_ms=0.153042 decode_ms=0.091987
+PROFILE_CACHE read_ms=0.359050 host_ms=0.120928
+PROFILE_ADVECTION frame=88 ms=0.526991
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317760 span_ms=0.548192
+PROFILE_READBACK kind=raw wait_ms=0.206970 decode_ms=0.173436
+PROFILE_MEAN reduce_ms=0.227560 correction_submit_ms=0.079574
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013344 span_ms=0.085280
+PROFILE_READBACK kind=field wait_ms=0.125179 decode_ms=0.092792
+PROFILE_CACHE read_ms=0.333450 host_ms=0.120730
+PROFILE_INNER frame=88 inner_ms=7.264849
+PROFILE_STEP frame=88 total_ms=7.312805 prepare_ms=0.232880 coupling_ms=0.282937 lbm_ms=3.283237 rapier_ms=2.360625 upload_ms=0.381149 encoding_ms=0.862337 submit_ms=0.607180 wait_ms=0.485191 decode_ms=0.358215
+PROFILE_SNAPSHOT frame=89 sim_ms=0.359654 before_return_ms=0.660166
+PROFILE_BEGIN frame=89
+PROFILE_ADVECTION frame=89 ms=0.529582
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.325632 span_ms=0.474240
+PROFILE_READBACK kind=field wait_ms=0.164400 decode_ms=0.082303
+PROFILE_CACHE read_ms=0.353327 host_ms=0.130429
+PROFILE_ADVECTION frame=89 ms=0.527127
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315488 span_ms=0.545184
+PROFILE_READBACK kind=raw wait_ms=0.201734 decode_ms=0.176346
+PROFILE_MEAN reduce_ms=0.226989 correction_submit_ms=0.081087
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013312 span_ms=0.087680
+PROFILE_READBACK kind=field wait_ms=0.160230 decode_ms=0.114847
+PROFILE_CACHE read_ms=0.429389 host_ms=0.245602
+PROFILE_INNER frame=89 inner_ms=7.481980
+PROFILE_STEP frame=89 total_ms=7.530686 prepare_ms=0.230908 coupling_ms=0.283488 lbm_ms=3.493807 rapier_ms=2.368700 upload_ms=0.369431 encoding_ms=0.866635 submit_ms=0.594542 wait_ms=0.526364 decode_ms=0.373496
+PROFILE_SNAPSHOT frame=90 sim_ms=0.358627 before_return_ms=0.659591
+PROFILE_BEGIN frame=90
+PROFILE_ADVECTION frame=90 ms=0.525824
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323936 span_ms=0.489856
+PROFILE_READBACK kind=field wait_ms=0.126918 decode_ms=0.081448
+PROFILE_CACHE read_ms=0.320574 host_ms=0.121013
+PROFILE_ADVECTION frame=90 ms=0.527482
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.313600 span_ms=0.540384
+PROFILE_READBACK kind=raw wait_ms=0.229892 decode_ms=0.255773
+PROFILE_MEAN reduce_ms=0.299637 correction_submit_ms=0.081609
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013888 span_ms=0.096064
+PROFILE_READBACK kind=field wait_ms=0.128797 decode_ms=0.082465
+PROFILE_CACHE read_ms=0.335441 host_ms=0.120960
+PROFILE_INNER frame=90 inner_ms=7.435861
+PROFILE_STEP frame=90 total_ms=7.484676 prepare_ms=0.231089 coupling_ms=0.283593 lbm_ms=3.477895 rapier_ms=2.342179 upload_ms=0.370094 encoding_ms=0.878733 submit_ms=0.608290 wait_ms=0.485607 decode_ms=0.419686
+PROFILE_SNAPSHOT frame=91 sim_ms=0.358431 before_return_ms=0.660041
+PROFILE_BEGIN frame=91
+PROFILE_ADVECTION frame=91 ms=0.527574
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324512 span_ms=0.509120
+PROFILE_READBACK kind=field wait_ms=0.123111 decode_ms=0.081343
+PROFILE_CACHE read_ms=0.318244 host_ms=0.121020
+PROFILE_ADVECTION frame=91 ms=0.527049
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314080 span_ms=0.543584
+PROFILE_READBACK kind=raw wait_ms=0.203231 decode_ms=0.174959
+PROFILE_MEAN reduce_ms=0.228046 correction_submit_ms=0.080886
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014144 span_ms=0.084672
+PROFILE_READBACK kind=field wait_ms=0.138195 decode_ms=0.092503
+PROFILE_CACHE read_ms=0.343762 host_ms=0.120678
+PROFILE_INNER frame=91 inner_ms=7.211098
+PROFILE_STEP frame=91 total_ms=7.260017 prepare_ms=0.231683 coupling_ms=0.285039 lbm_ms=3.266010 rapier_ms=2.323828 upload_ms=0.379726 encoding_ms=0.879027 submit_ms=0.603622 wait_ms=0.464537 decode_ms=0.348805
+PROFILE_SNAPSHOT frame=92 sim_ms=0.356922 before_return_ms=0.655231
+PROFILE_BEGIN frame=92
+PROFILE_ADVECTION frame=92 ms=0.526129
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.326464 span_ms=0.503488
+PROFILE_READBACK kind=field wait_ms=0.122718 decode_ms=0.081653
+PROFILE_CACHE read_ms=0.319327 host_ms=0.121271
+PROFILE_ADVECTION frame=92 ms=0.527267
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316736 span_ms=0.541664
+PROFILE_READBACK kind=raw wait_ms=0.207777 decode_ms=0.173557
+PROFILE_MEAN reduce_ms=0.226895 correction_submit_ms=0.080846
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013056 span_ms=0.085792
+PROFILE_READBACK kind=field wait_ms=0.126708 decode_ms=0.092459
+PROFILE_CACHE read_ms=0.334584 host_ms=0.120803
+PROFILE_INNER frame=92 inner_ms=7.179421
+PROFILE_STEP frame=92 total_ms=7.229092 prepare_ms=0.230912 coupling_ms=0.283871 lbm_ms=3.254974 rapier_ms=2.307129 upload_ms=0.368980 encoding_ms=0.871254 submit_ms=0.619803 wait_ms=0.457203 decode_ms=0.347669
+PROFILE_SNAPSHOT frame=93 sim_ms=0.357256 before_return_ms=0.655230
+PROFILE_BEGIN frame=93
+PROFILE_ADVECTION frame=93 ms=0.528185
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324544 span_ms=0.485824
+PROFILE_READBACK kind=field wait_ms=0.122392 decode_ms=0.091593
+PROFILE_CACHE read_ms=0.327385 host_ms=0.120901
+PROFILE_ADVECTION frame=93 ms=0.527121
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314848 span_ms=0.540256
+PROFILE_READBACK kind=raw wait_ms=0.206857 decode_ms=0.174506
+PROFILE_MEAN reduce_ms=0.228261 correction_submit_ms=0.081491
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014144 span_ms=0.086912
+PROFILE_READBACK kind=field wait_ms=0.159097 decode_ms=0.082079
+PROFILE_CACHE read_ms=0.367359 host_ms=0.120761
+PROFILE_INNER frame=93 inner_ms=7.240131
+PROFILE_STEP frame=93 total_ms=7.287732 prepare_ms=0.231161 coupling_ms=0.284615 lbm_ms=3.278955 rapier_ms=2.341183 upload_ms=0.369460 encoding_ms=0.859312 submit_ms=0.612393 wait_ms=0.488346 decode_ms=0.348178
+PROFILE_SNAPSHOT frame=94 sim_ms=0.357288 before_return_ms=0.657252
+PROFILE_BEGIN frame=94
+PROFILE_ADVECTION frame=94 ms=0.526848
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324544 span_ms=0.493120
+PROFILE_READBACK kind=field wait_ms=0.125542 decode_ms=0.092882
+PROFILE_CACHE read_ms=0.331070 host_ms=0.120812
+PROFILE_ADVECTION frame=94 ms=0.527842
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316032 span_ms=0.540768
+PROFILE_READBACK kind=raw wait_ms=0.201885 decode_ms=0.175925
+PROFILE_MEAN reduce_ms=0.228302 correction_submit_ms=0.080823
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014400 span_ms=0.085792
+PROFILE_READBACK kind=field wait_ms=0.128838 decode_ms=0.093282
+PROFILE_CACHE read_ms=0.342623 host_ms=0.120584
+PROFILE_INNER frame=94 inner_ms=7.253683
+PROFILE_STEP frame=94 total_ms=7.303392 prepare_ms=0.232129 coupling_ms=0.284596 lbm_ms=3.265849 rapier_ms=2.367011 upload_ms=0.371065 encoding_ms=0.866069 submit_ms=0.611205 wait_ms=0.456265 decode_ms=0.362089
+PROFILE_SNAPSHOT frame=95 sim_ms=0.357307 before_return_ms=0.654780
+PROFILE_BEGIN frame=95
+PROFILE_ADVECTION frame=95 ms=0.527688
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.325824 span_ms=0.476192
+PROFILE_READBACK kind=field wait_ms=0.139122 decode_ms=0.121085
+PROFILE_CACHE read_ms=0.380930 host_ms=0.121219
+PROFILE_ADVECTION frame=95 ms=0.527339
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317600 span_ms=0.546976
+PROFILE_READBACK kind=raw wait_ms=0.208306 decode_ms=0.172438
+PROFILE_MEAN reduce_ms=0.226997 correction_submit_ms=0.081285
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014144 span_ms=0.085280
+PROFILE_READBACK kind=field wait_ms=0.117644 decode_ms=0.092500
+PROFILE_CACHE read_ms=0.323887 host_ms=0.120941
+PROFILE_INNER frame=95 inner_ms=7.244496
+PROFILE_STEP frame=95 total_ms=7.292555 prepare_ms=0.231899 coupling_ms=0.284518 lbm_ms=3.282086 rapier_ms=2.340148 upload_ms=0.378569 encoding_ms=0.859105 submit_ms=0.603680 wait_ms=0.465072 decode_ms=0.386023
+PROFILE_SNAPSHOT frame=96 sim_ms=0.357641 before_return_ms=0.657446
+PROFILE_BEGIN frame=96
+PROFILE_ADVECTION frame=96 ms=0.528109
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323040 span_ms=0.500192
+PROFILE_READBACK kind=field wait_ms=0.146100 decode_ms=0.080908
+PROFILE_CACHE read_ms=0.349172 host_ms=0.121158
+PROFILE_ADVECTION frame=96 ms=0.528576
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315712 span_ms=0.544960
+PROFILE_READBACK kind=raw wait_ms=0.232035 decode_ms=0.255014
+PROFILE_MEAN reduce_ms=0.306322 correction_submit_ms=0.091699
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013952 span_ms=0.087072
+PROFILE_READBACK kind=field wait_ms=0.127143 decode_ms=0.082798
+PROFILE_CACHE read_ms=0.325424 host_ms=0.120550
+PROFILE_INNER frame=96 inner_ms=7.475993
+PROFILE_STEP frame=96 total_ms=7.527039 prepare_ms=0.232044 coupling_ms=0.287329 lbm_ms=3.514312 rapier_ms=2.335993 upload_ms=0.372118 encoding_ms=0.861912 submit_ms=0.633914 wait_ms=0.505278 decode_ms=0.418720
+PROFILE_SNAPSHOT frame=97 sim_ms=0.359252 before_return_ms=0.659544
+PROFILE_BEGIN frame=97
+PROFILE_ADVECTION frame=97 ms=0.528458
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323808 span_ms=0.491552
+PROFILE_READBACK kind=field wait_ms=0.125190 decode_ms=0.081056
+PROFILE_CACHE read_ms=0.319355 host_ms=0.121025
+PROFILE_ADVECTION frame=97 ms=0.528161
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.313728 span_ms=0.543840
+PROFILE_READBACK kind=raw wait_ms=0.215823 decode_ms=0.175404
+PROFILE_MEAN reduce_ms=0.228842 correction_submit_ms=0.082361
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013888 span_ms=0.087424
+PROFILE_READBACK kind=field wait_ms=0.125734 decode_ms=0.082680
+PROFILE_CACHE read_ms=0.334196 host_ms=0.120857
+PROFILE_INNER frame=97 inner_ms=7.238331
+PROFILE_STEP frame=97 total_ms=7.286665 prepare_ms=0.232297 coupling_ms=0.285222 lbm_ms=3.263369 rapier_ms=2.350463 upload_ms=0.373017 encoding_ms=0.863212 submit_ms=0.620662 wait_ms=0.466747 decode_ms=0.339140
+PROFILE_SNAPSHOT frame=98 sim_ms=0.356963 before_return_ms=0.656844
+PROFILE_BEGIN frame=98
+PROFILE_ADVECTION frame=98 ms=0.527382
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323584 span_ms=0.490240
+PROFILE_READBACK kind=field wait_ms=0.124513 decode_ms=0.081362
+PROFILE_CACHE read_ms=0.314567 host_ms=0.131769
+PROFILE_ADVECTION frame=98 ms=0.528102
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.318624 span_ms=0.546048
+PROFILE_READBACK kind=raw wait_ms=0.205220 decode_ms=0.177020
+PROFILE_MEAN reduce_ms=0.227426 correction_submit_ms=0.080421
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014240 span_ms=0.086560
+PROFILE_READBACK kind=field wait_ms=0.118652 decode_ms=0.083016
+PROFILE_CACHE read_ms=0.327360 host_ms=0.120709
+PROFILE_INNER frame=98 inner_ms=7.214195
+PROFILE_STEP frame=98 total_ms=7.268637 prepare_ms=0.230799 coupling_ms=0.284770 lbm_ms=3.249788 rapier_ms=2.344253 upload_ms=0.367374 encoding_ms=0.873075 submit_ms=0.607553 wait_ms=0.448385 decode_ms=0.341398
+PROFILE_SNAPSHOT frame=99 sim_ms=0.358292 before_return_ms=0.658055
+PROFILE_BEGIN frame=99
+PROFILE_ADVECTION frame=99 ms=0.527062
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.320672 span_ms=0.486656
+PROFILE_READBACK kind=field wait_ms=0.125139 decode_ms=0.081459
+PROFILE_CACHE read_ms=0.315082 host_ms=0.131121
+PROFILE_ADVECTION frame=99 ms=0.527437
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.318336 span_ms=0.548896
+PROFILE_READBACK kind=raw wait_ms=0.204340 decode_ms=0.174416
+PROFILE_MEAN reduce_ms=0.229034 correction_submit_ms=0.081338
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013632 span_ms=0.087648
+PROFILE_READBACK kind=field wait_ms=0.153778 decode_ms=0.093106
+PROFILE_CACHE read_ms=0.363090 host_ms=0.120601
+PROFILE_INNER frame=99 inner_ms=7.216628
+PROFILE_STEP frame=99 total_ms=7.265669 prepare_ms=0.231528 coupling_ms=0.284263 lbm_ms=3.292465 rapier_ms=2.304904 upload_ms=0.369963 encoding_ms=0.863242 submit_ms=0.623632 wait_ms=0.483257 decode_ms=0.348981
+PROFILE_SNAPSHOT frame=100 sim_ms=0.357060 before_return_ms=0.664848
+PROFILE_BEGIN frame=100
+PROFILE_ADVECTION frame=100 ms=0.528282
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324800 span_ms=0.491328
+PROFILE_READBACK kind=field wait_ms=0.136636 decode_ms=0.081315
+PROFILE_CACHE read_ms=0.327547 host_ms=0.131057
+PROFILE_ADVECTION frame=100 ms=0.527692
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.313984 span_ms=0.545568
+PROFILE_READBACK kind=raw wait_ms=0.214069 decode_ms=0.178482
+PROFILE_MEAN reduce_ms=0.227951 correction_submit_ms=0.080934
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014048 span_ms=0.087328
+PROFILE_READBACK kind=field wait_ms=0.154580 decode_ms=0.114334
+PROFILE_CACHE read_ms=0.422436 host_ms=0.260294
+PROFILE_INNER frame=100 inner_ms=7.507589
+PROFILE_STEP frame=100 total_ms=7.557502 prepare_ms=0.231967 coupling_ms=0.285959 lbm_ms=3.523777 rapier_ms=2.360245 upload_ms=0.371065 encoding_ms=0.872033 submit_ms=0.621655 wait_ms=0.505285 decode_ms=0.374131
+PROFILE_SNAPSHOT frame=101 sim_ms=0.358880 before_return_ms=0.657382
+PROFILE_BEGIN frame=101
+PROFILE_ADVECTION frame=101 ms=0.527766
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321728 span_ms=0.487904
+PROFILE_READBACK kind=field wait_ms=0.142129 decode_ms=0.080947
+PROFILE_CACHE read_ms=0.335721 host_ms=0.121238
+PROFILE_ADVECTION frame=101 ms=0.526684
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314816 span_ms=0.538688
+PROFILE_READBACK kind=raw wait_ms=0.206081 decode_ms=0.176600
+PROFILE_MEAN reduce_ms=0.228524 correction_submit_ms=0.081206
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014624 span_ms=0.087584
+PROFILE_READBACK kind=field wait_ms=0.129419 decode_ms=0.082642
+PROFILE_CACHE read_ms=0.337618 host_ms=0.120607
+PROFILE_INNER frame=101 inner_ms=7.250416
+PROFILE_STEP frame=101 total_ms=7.298502 prepare_ms=0.231204 coupling_ms=0.285088 lbm_ms=3.257682 rapier_ms=2.372823 upload_ms=0.368386 encoding_ms=0.861872 submit_ms=0.607887 wait_ms=0.477629 decode_ms=0.340189
+PROFILE_SNAPSHOT frame=102 sim_ms=0.359128 before_return_ms=0.659243
+PROFILE_BEGIN frame=102
+PROFILE_ADVECTION frame=102 ms=0.527828
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323424 span_ms=0.493920
+PROFILE_READBACK kind=field wait_ms=0.134164 decode_ms=0.091087
+PROFILE_CACHE read_ms=0.339134 host_ms=0.120649
+PROFILE_ADVECTION frame=102 ms=0.527373
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316768 span_ms=0.537568
+PROFILE_READBACK kind=raw wait_ms=0.205696 decode_ms=0.176167
+PROFILE_MEAN reduce_ms=0.228189 correction_submit_ms=0.080979
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013216 span_ms=0.085888
+PROFILE_READBACK kind=field wait_ms=0.127276 decode_ms=0.093104
+PROFILE_CACHE read_ms=0.334048 host_ms=0.120792
+PROFILE_INNER frame=102 inner_ms=7.219691
+PROFILE_STEP frame=102 total_ms=7.268450 prepare_ms=0.231847 coupling_ms=0.284821 lbm_ms=3.261223 rapier_ms=2.337151 upload_ms=0.369620 encoding_ms=0.856535 submit_ms=0.616430 wait_ms=0.467136 decode_ms=0.360358
+PROFILE_SNAPSHOT frame=103 sim_ms=0.357284 before_return_ms=0.657124
+PROFILE_BEGIN frame=103
+PROFILE_ADVECTION frame=103 ms=0.528217
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322016 span_ms=0.488160
+PROFILE_READBACK kind=field wait_ms=0.124368 decode_ms=0.081070
+PROFILE_CACHE read_ms=0.314311 host_ms=0.131528
+PROFILE_ADVECTION frame=103 ms=0.528399
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317184 span_ms=0.541024
+PROFILE_READBACK kind=raw wait_ms=0.206834 decode_ms=0.175182
+PROFILE_MEAN reduce_ms=0.227435 correction_submit_ms=0.080995
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013888 span_ms=0.088000
+PROFILE_READBACK kind=field wait_ms=0.150834 decode_ms=0.114695
+PROFILE_CACHE read_ms=0.420459 host_ms=0.258596
+PROFILE_INNER frame=103 inner_ms=7.464169
+PROFILE_STEP frame=103 total_ms=7.513281 prepare_ms=0.231837 coupling_ms=0.284297 lbm_ms=3.488098 rapier_ms=2.353628 upload_ms=0.368924 encoding_ms=0.869303 submit_ms=0.601897 wait_ms=0.482036 decode_ms=0.370947
+PROFILE_SNAPSHOT frame=104 sim_ms=0.357049 before_return_ms=0.655823
+PROFILE_BEGIN frame=104
+PROFILE_ADVECTION frame=104 ms=0.528171
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.325120 span_ms=0.498784
+PROFILE_READBACK kind=field wait_ms=0.124491 decode_ms=0.080885
+PROFILE_CACHE read_ms=0.317247 host_ms=0.131292
+PROFILE_ADVECTION frame=104 ms=0.528096
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317984 span_ms=0.538272
+PROFILE_READBACK kind=raw wait_ms=0.205572 decode_ms=0.174715
+PROFILE_MEAN reduce_ms=0.227065 correction_submit_ms=0.080524
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014240 span_ms=0.088000
+PROFILE_READBACK kind=field wait_ms=0.128251 decode_ms=0.082465
+PROFILE_CACHE read_ms=0.327333 host_ms=0.131375
+PROFILE_INNER frame=104 inner_ms=7.227444
+PROFILE_STEP frame=104 total_ms=7.276908 prepare_ms=0.231546 coupling_ms=0.283409 lbm_ms=3.262323 rapier_ms=2.332466 upload_ms=0.369433 encoding_ms=0.861200 submit_ms=0.621998 wait_ms=0.458314 decode_ms=0.338065
+PROFILE_SNAPSHOT frame=105 sim_ms=0.357649 before_return_ms=0.656577
+PROFILE_BEGIN frame=105
+PROFILE_ADVECTION frame=105 ms=0.528090
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323744 span_ms=0.473216
+PROFILE_READBACK kind=field wait_ms=0.187540 decode_ms=0.082193
+PROFILE_CACHE read_ms=0.381404 host_ms=0.120826
+PROFILE_ADVECTION frame=105 ms=0.527204
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316128 span_ms=0.538816
+PROFILE_READBACK kind=raw wait_ms=0.202800 decode_ms=0.177550
+PROFILE_MEAN reduce_ms=0.230406 correction_submit_ms=0.080310
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014592 span_ms=0.087808
+PROFILE_READBACK kind=field wait_ms=0.138154 decode_ms=0.092540
+PROFILE_CACHE read_ms=0.346494 host_ms=0.120556
+PROFILE_INNER frame=105 inner_ms=7.325539
+PROFILE_STEP frame=105 total_ms=7.380263 prepare_ms=0.231884 coupling_ms=0.284472 lbm_ms=3.297810 rapier_ms=2.405559 upload_ms=0.369132 encoding_ms=0.866473 submit_ms=0.587820 wait_ms=0.528494 decode_ms=0.352283
+PROFILE_SNAPSHOT frame=106 sim_ms=0.363345 before_return_ms=0.661047
+PROFILE_BEGIN frame=106
+PROFILE_ADVECTION frame=106 ms=0.527565
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.325088 span_ms=0.473152
+PROFILE_READBACK kind=field wait_ms=0.126695 decode_ms=0.081048
+PROFILE_CACHE read_ms=0.339625 host_ms=0.120826
+PROFILE_ADVECTION frame=106 ms=0.527229
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317344 span_ms=0.536224
+PROFILE_READBACK kind=raw wait_ms=0.226152 decode_ms=0.256618
+PROFILE_MEAN reduce_ms=0.265216 correction_submit_ms=0.080085
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013440 span_ms=0.096448
+PROFILE_READBACK kind=field wait_ms=0.127074 decode_ms=0.082290
+PROFILE_CACHE read_ms=0.334916 host_ms=0.120887
+PROFILE_INNER frame=106 inner_ms=7.388960
+PROFILE_STEP frame=106 total_ms=7.437363 prepare_ms=0.232400 coupling_ms=0.283150 lbm_ms=3.426641 rapier_ms=2.342950 upload_ms=0.371946 encoding_ms=0.852113 submit_ms=0.631133 wait_ms=0.479921 decode_ms=0.419956
+PROFILE_SNAPSHOT frame=107 sim_ms=0.359242 before_return_ms=0.658441
+PROFILE_BEGIN frame=107
+PROFILE_ADVECTION frame=107 ms=0.527232
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.325632 span_ms=0.503488
+PROFILE_READBACK kind=field wait_ms=0.121386 decode_ms=0.081136
+PROFILE_CACHE read_ms=0.318273 host_ms=0.120808
+PROFILE_ADVECTION frame=107 ms=0.528668
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316480 span_ms=0.541824
+PROFILE_READBACK kind=raw wait_ms=0.207659 decode_ms=0.175168
+PROFILE_MEAN reduce_ms=0.229264 correction_submit_ms=0.080660
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013728 span_ms=0.086688
+PROFILE_READBACK kind=field wait_ms=0.155561 decode_ms=0.082476
+PROFILE_CACHE read_ms=0.364631 host_ms=0.120592
+PROFILE_INNER frame=107 inner_ms=7.243762
+PROFILE_STEP frame=107 total_ms=7.293292 prepare_ms=0.232381 coupling_ms=0.284878 lbm_ms=3.283686 rapier_ms=2.335952 upload_ms=0.369413 encoding_ms=0.873759 submit_ms=0.615122 wait_ms=0.484606 decode_ms=0.338780
+PROFILE_SNAPSHOT frame=108 sim_ms=0.359140 before_return_ms=0.657307
+PROFILE_BEGIN frame=108
+PROFILE_ADVECTION frame=108 ms=0.527324
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.325184 span_ms=0.508576
+PROFILE_READBACK kind=field wait_ms=0.122106 decode_ms=0.081938
+PROFILE_CACHE read_ms=0.317858 host_ms=0.120826
+PROFILE_ADVECTION frame=108 ms=0.528228
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315520 span_ms=0.543296
+PROFILE_READBACK kind=raw wait_ms=0.198617 decode_ms=0.171860
+PROFILE_MEAN reduce_ms=0.227382 correction_submit_ms=0.080754
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013824 span_ms=0.087744
+PROFILE_READBACK kind=field wait_ms=0.126023 decode_ms=0.082299
+PROFILE_CACHE read_ms=0.335148 host_ms=0.120755
+PROFILE_INNER frame=108 inner_ms=7.212482
+PROFILE_STEP frame=108 total_ms=7.263845 prepare_ms=0.232600 coupling_ms=0.284642 lbm_ms=3.251034 rapier_ms=2.339532 upload_ms=0.372499 encoding_ms=0.883610 submit_ms=0.610185 wait_ms=0.446746 decode_ms=0.336097
+PROFILE_SNAPSHOT frame=109 sim_ms=0.358144 before_return_ms=0.659303
+PROFILE_BEGIN frame=109
+PROFILE_ADVECTION frame=109 ms=0.529001
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321440 span_ms=0.530432
+PROFILE_READBACK kind=field wait_ms=0.117633 decode_ms=0.080808
+PROFILE_CACHE read_ms=0.309332 host_ms=0.120897
+PROFILE_ADVECTION frame=109 ms=0.527578
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316800 span_ms=0.542208
+PROFILE_READBACK kind=raw wait_ms=0.192345 decode_ms=0.165671
+PROFILE_MEAN reduce_ms=0.229066 correction_submit_ms=0.080250
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014720 span_ms=0.088928
+PROFILE_READBACK kind=field wait_ms=0.148096 decode_ms=0.114411
+PROFILE_CACHE read_ms=0.418640 host_ms=0.249555
+PROFILE_INNER frame=109 inner_ms=7.486594
+PROFILE_STEP frame=109 total_ms=7.535900 prepare_ms=0.244464 coupling_ms=0.284770 lbm_ms=3.474113 rapier_ms=2.376916 upload_ms=0.381590 encoding_ms=0.889138 submit_ms=0.626767 wait_ms=0.458074 decode_ms=0.360890
+PROFILE_SNAPSHOT frame=110 sim_ms=0.359760 before_return_ms=0.665661
+PROFILE_BEGIN frame=110
+PROFILE_ADVECTION frame=110 ms=0.528407
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323040 span_ms=0.502368
+PROFILE_READBACK kind=field wait_ms=0.123514 decode_ms=0.081244
+PROFILE_CACHE read_ms=0.317179 host_ms=0.120734
+PROFILE_ADVECTION frame=110 ms=0.528342
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315808 span_ms=0.545344
+PROFILE_READBACK kind=raw wait_ms=0.207060 decode_ms=0.173120
+PROFILE_MEAN reduce_ms=0.227924 correction_submit_ms=0.080293
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014272 span_ms=0.087712
+PROFILE_READBACK kind=field wait_ms=0.123671 decode_ms=0.082768
+PROFILE_CACHE read_ms=0.333416 host_ms=0.120869
+PROFILE_INNER frame=110 inner_ms=7.233456
+PROFILE_STEP frame=110 total_ms=7.281835 prepare_ms=0.231611 coupling_ms=0.286466 lbm_ms=3.255026 rapier_ms=2.353717 upload_ms=0.369247 encoding_ms=0.885440 submit_ms=0.606849 wait_ms=0.454245 decode_ms=0.337132
+PROFILE_SNAPSHOT frame=111 sim_ms=0.356472 before_return_ms=0.654101
+PROFILE_BEGIN frame=111
+PROFILE_ADVECTION frame=111 ms=0.527934
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323264 span_ms=0.500480
+PROFILE_READBACK kind=field wait_ms=0.121221 decode_ms=0.081159
+PROFILE_CACHE read_ms=0.320283 host_ms=0.120884
+PROFILE_ADVECTION frame=111 ms=0.528805
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316288 span_ms=0.539904
+PROFILE_READBACK kind=raw wait_ms=0.230504 decode_ms=0.253722
+PROFILE_MEAN reduce_ms=0.262607 correction_submit_ms=0.080783
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014080 span_ms=0.086816
+PROFILE_READBACK kind=field wait_ms=0.172554 decode_ms=0.082333
+PROFILE_CACHE read_ms=0.369094 host_ms=0.120588
+PROFILE_INNER frame=111 inner_ms=7.430776
+PROFILE_STEP frame=111 total_ms=7.479977 prepare_ms=0.231072 coupling_ms=0.285189 lbm_ms=3.472135 rapier_ms=2.336448 upload_ms=0.369199 encoding_ms=0.880102 submit_ms=0.604399 wait_ms=0.524279 decode_ms=0.417214
+PROFILE_SNAPSHOT frame=112 sim_ms=0.359131 before_return_ms=0.659056
+PROFILE_BEGIN frame=112
+PROFILE_ADVECTION frame=112 ms=0.527106
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321280 span_ms=0.496736
+PROFILE_READBACK kind=field wait_ms=0.124632 decode_ms=0.080851
+PROFILE_CACHE read_ms=0.318285 host_ms=0.120607
+PROFILE_ADVECTION frame=112 ms=0.528205
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315584 span_ms=0.548128
+PROFILE_READBACK kind=raw wait_ms=0.224245 decode_ms=0.177653
+PROFILE_MEAN reduce_ms=0.228442 correction_submit_ms=0.080672
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013696 span_ms=0.085760
+PROFILE_READBACK kind=field wait_ms=0.128946 decode_ms=0.092784
+PROFILE_CACHE read_ms=0.336272 host_ms=0.120797
+PROFILE_INNER frame=112 inner_ms=7.271930
+PROFILE_STEP frame=112 total_ms=7.320898 prepare_ms=0.231178 coupling_ms=0.285502 lbm_ms=3.277324 rapier_ms=2.372916 upload_ms=0.370665 encoding_ms=0.867915 submit_ms=0.619758 wait_ms=0.477823 decode_ms=0.351288
+PROFILE_SNAPSHOT frame=113 sim_ms=0.356634 before_return_ms=0.656136
+PROFILE_BEGIN frame=113
+PROFILE_ADVECTION frame=113 ms=0.528024
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.320352 span_ms=0.497760
+PROFILE_READBACK kind=field wait_ms=0.121572 decode_ms=0.081910
+PROFILE_CACHE read_ms=0.316475 host_ms=0.121025
+PROFILE_ADVECTION frame=113 ms=0.528080
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316992 span_ms=0.539008
+PROFILE_READBACK kind=raw wait_ms=0.204511 decode_ms=0.177658
+PROFILE_MEAN reduce_ms=0.227256 correction_submit_ms=0.080500
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014400 span_ms=0.086528
+PROFILE_READBACK kind=field wait_ms=0.136282 decode_ms=0.082110
+PROFILE_CACHE read_ms=0.332253 host_ms=0.120405
+PROFILE_INNER frame=113 inner_ms=7.248455
+PROFILE_STEP frame=113 total_ms=7.296535 prepare_ms=0.231837 coupling_ms=0.283106 lbm_ms=3.243410 rapier_ms=2.384215 upload_ms=0.369936 encoding_ms=0.880956 submit_ms=0.598553 wait_ms=0.462365 decode_ms=0.341678
+PROFILE_SNAPSHOT frame=114 sim_ms=0.355706 before_return_ms=0.654746
+PROFILE_BEGIN frame=114
+PROFILE_ADVECTION frame=114 ms=0.526814
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322816 span_ms=0.498816
+PROFILE_READBACK kind=field wait_ms=0.120966 decode_ms=0.080985
+PROFILE_CACHE read_ms=0.316897 host_ms=0.120970
+PROFILE_ADVECTION frame=114 ms=0.528381
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314400 span_ms=0.541344
+PROFILE_READBACK kind=raw wait_ms=0.207879 decode_ms=0.176222
+PROFILE_MEAN reduce_ms=0.226658 correction_submit_ms=0.080919
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014400 span_ms=0.088256
+PROFILE_READBACK kind=field wait_ms=0.129536 decode_ms=0.082214
+PROFILE_CACHE read_ms=0.327995 host_ms=0.131251
+PROFILE_INNER frame=114 inner_ms=7.265883
+PROFILE_STEP frame=114 total_ms=7.314583 prepare_ms=0.231479 coupling_ms=0.282954 lbm_ms=3.252789 rapier_ms=2.393847 upload_ms=0.369593 encoding_ms=0.867379 submit_ms=0.616948 wait_ms=0.458381 decode_ms=0.339421
+PROFILE_SNAPSHOT frame=115 sim_ms=0.358819 before_return_ms=0.658805
+PROFILE_BEGIN frame=115
+PROFILE_ADVECTION frame=115 ms=0.527756
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323840 span_ms=0.472256
+PROFILE_READBACK kind=field wait_ms=0.133742 decode_ms=0.091140
+PROFILE_CACHE read_ms=0.336210 host_ms=0.120837
+PROFILE_ADVECTION frame=115 ms=0.527661
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316736 span_ms=0.541120
+PROFILE_READBACK kind=raw wait_ms=0.202272 decode_ms=0.176867
+PROFILE_MEAN reduce_ms=0.228570 correction_submit_ms=0.080728
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014208 span_ms=0.087168
+PROFILE_READBACK kind=field wait_ms=0.127614 decode_ms=0.092746
+PROFILE_CACHE read_ms=0.335077 host_ms=0.120706
+PROFILE_INNER frame=115 inner_ms=7.199126
+PROFILE_STEP frame=115 total_ms=7.247065 prepare_ms=0.231827 coupling_ms=0.284195 lbm_ms=3.246088 rapier_ms=2.332337 upload_ms=0.370804 encoding_ms=0.864767 submit_ms=0.589291 wait_ms=0.463628 decode_ms=0.360753
+PROFILE_SNAPSHOT frame=116 sim_ms=0.357795 before_return_ms=0.656046
+PROFILE_BEGIN frame=116
+PROFILE_ADVECTION frame=116 ms=0.528770
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.325088 span_ms=0.475520
+PROFILE_READBACK kind=field wait_ms=0.161407 decode_ms=0.082933
+PROFILE_CACHE read_ms=0.351419 host_ms=0.130701
+PROFILE_ADVECTION frame=116 ms=0.527443
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.313600 span_ms=0.548512
+PROFILE_READBACK kind=raw wait_ms=0.205112 decode_ms=0.170115
+PROFILE_MEAN reduce_ms=0.234428 correction_submit_ms=0.080682
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014496 span_ms=0.087648
+PROFILE_READBACK kind=field wait_ms=0.128004 decode_ms=0.093781
+PROFILE_CACHE read_ms=0.337707 host_ms=0.120687
+PROFILE_INNER frame=116 inner_ms=7.290807
+PROFILE_STEP frame=116 total_ms=7.339907 prepare_ms=0.231798 coupling_ms=0.284370 lbm_ms=3.290588 rapier_ms=2.378777 upload_ms=0.370304 encoding_ms=0.864037 submit_ms=0.607493 wait_ms=0.494523 decode_ms=0.346829
+PROFILE_SNAPSHOT frame=117 sim_ms=0.358181 before_return_ms=0.672788
+PROFILE_BEGIN frame=117
+PROFILE_ADVECTION frame=117 ms=0.532337
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322752 span_ms=0.527840
+PROFILE_READBACK kind=field wait_ms=0.123219 decode_ms=0.081017
+PROFILE_CACHE read_ms=0.316625 host_ms=0.120788
+PROFILE_ADVECTION frame=117 ms=0.526530
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.313952 span_ms=0.554720
+PROFILE_READBACK kind=raw wait_ms=0.181355 decode_ms=0.159090
+PROFILE_MEAN reduce_ms=0.228620 correction_submit_ms=0.081953
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014336 span_ms=0.093728
+PROFILE_READBACK kind=field wait_ms=0.127702 decode_ms=0.093052
+PROFILE_CACHE read_ms=0.342332 host_ms=0.120631
+PROFILE_INNER frame=117 inner_ms=7.343444
+PROFILE_STEP frame=117 total_ms=7.395826 prepare_ms=0.256405 coupling_ms=0.287805 lbm_ms=3.271780 rapier_ms=2.418101 upload_ms=0.384809 encoding_ms=0.895690 submit_ms=0.636448 wait_ms=0.432276 decode_ms=0.333159
+PROFILE_SNAPSHOT frame=118 sim_ms=0.362959 before_return_ms=0.686559
+PROFILE_BEGIN frame=118
+PROFILE_ADVECTION frame=118 ms=0.528114
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.320768 span_ms=0.518720
+PROFILE_READBACK kind=field wait_ms=0.124818 decode_ms=0.081577
+PROFILE_CACHE read_ms=0.319199 host_ms=0.120820
+PROFILE_ADVECTION frame=118 ms=0.527937
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317344 span_ms=0.561312
+PROFILE_READBACK kind=raw wait_ms=0.198027 decode_ms=0.169353
+PROFILE_MEAN reduce_ms=0.228067 correction_submit_ms=0.080509
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013792 span_ms=0.088320
+PROFILE_READBACK kind=field wait_ms=0.120345 decode_ms=0.083415
+PROFILE_CACHE read_ms=0.321376 host_ms=0.131102
+PROFILE_INNER frame=118 inner_ms=7.274027
+PROFILE_STEP frame=118 total_ms=7.323077 prepare_ms=0.240567 coupling_ms=0.284816 lbm_ms=3.275374 rapier_ms=2.367462 upload_ms=0.372899 encoding_ms=0.885051 submit_ms=0.638119 wait_ms=0.443190 decode_ms=0.334345
+PROFILE_SNAPSHOT frame=119 sim_ms=0.357864 before_return_ms=0.658251
+PROFILE_BEGIN frame=119
+PROFILE_ADVECTION frame=119 ms=0.528928
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323008 span_ms=0.504352
+PROFILE_READBACK kind=field wait_ms=0.124115 decode_ms=0.082756
+PROFILE_CACHE read_ms=0.320733 host_ms=0.120931
+PROFILE_ADVECTION frame=119 ms=0.528557
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316704 span_ms=0.539200
+PROFILE_READBACK kind=raw wait_ms=0.220692 decode_ms=0.174072
+PROFILE_MEAN reduce_ms=0.228628 correction_submit_ms=0.081344
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013600 span_ms=0.095296
+PROFILE_READBACK kind=field wait_ms=0.127554 decode_ms=0.083227
+PROFILE_CACHE read_ms=0.334178 host_ms=0.131532
+PROFILE_INNER frame=119 inner_ms=7.314051
+PROFILE_STEP frame=119 total_ms=7.362577 prepare_ms=0.233199 coupling_ms=0.285977 lbm_ms=3.289112 rapier_ms=2.397217 upload_ms=0.370575 encoding_ms=0.888253 submit_ms=0.608201 wait_ms=0.472361 decode_ms=0.340055
+PROFILE_SNAPSHOT frame=120 sim_ms=0.357948 before_return_ms=0.658314
+PROFILE_BEGIN frame=120
+PROFILE_ADVECTION frame=120 ms=0.541014
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322144 span_ms=0.509760
+PROFILE_READBACK kind=field wait_ms=0.127448 decode_ms=0.081525
+PROFILE_CACHE read_ms=0.320198 host_ms=0.121099
+PROFILE_ADVECTION frame=120 ms=0.527687
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315744 span_ms=0.557600
+PROFILE_READBACK kind=raw wait_ms=0.217577 decode_ms=0.173348
+PROFILE_MEAN reduce_ms=0.227128 correction_submit_ms=0.079903
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013888 span_ms=0.087168
+PROFILE_READBACK kind=field wait_ms=0.121958 decode_ms=0.092998
+PROFILE_CACHE read_ms=0.330701 host_ms=0.120854
+PROFILE_INNER frame=120 inner_ms=7.295288
+PROFILE_STEP frame=120 total_ms=7.346191 prepare_ms=0.234230 coupling_ms=0.286757 lbm_ms=3.285575 rapier_ms=2.368117 upload_ms=0.372938 encoding_ms=0.873152 submit_ms=0.635658 wait_ms=0.466983 decode_ms=0.347871
+PROFILE_SNAPSHOT frame=121 sim_ms=0.359992 before_return_ms=0.662020
+PROFILE_BEGIN frame=121
+PROFILE_ADVECTION frame=121 ms=0.527599
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322944 span_ms=0.505024
+PROFILE_READBACK kind=field wait_ms=0.154360 decode_ms=0.081414
+PROFILE_CACHE read_ms=0.348655 host_ms=0.121013
+PROFILE_ADVECTION frame=121 ms=0.527122
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314656 span_ms=0.539520
+PROFILE_READBACK kind=raw wait_ms=0.203457 decode_ms=0.173156
+PROFILE_MEAN reduce_ms=0.228398 correction_submit_ms=0.080477
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014496 span_ms=0.086976
+PROFILE_READBACK kind=field wait_ms=0.158475 decode_ms=0.081753
+PROFILE_CACHE read_ms=0.354823 host_ms=0.131249
+PROFILE_INNER frame=121 inner_ms=7.334646
+PROFILE_STEP frame=121 total_ms=7.384393 prepare_ms=0.231673 coupling_ms=0.284736 lbm_ms=3.310148 rapier_ms=2.403753 upload_ms=0.369808 encoding_ms=0.871459 submit_ms=0.616031 wait_ms=0.516292 decode_ms=0.336323
+PROFILE_SNAPSHOT frame=122 sim_ms=0.370304 before_return_ms=0.670209
+PROFILE_BEGIN frame=122
+PROFILE_ADVECTION frame=122 ms=0.527066
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323296 span_ms=0.505440
+PROFILE_READBACK kind=field wait_ms=0.124886 decode_ms=0.081443
+PROFILE_CACHE read_ms=0.318223 host_ms=0.120780
+PROFILE_ADVECTION frame=122 ms=0.526936
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.318688 span_ms=0.535712
+PROFILE_READBACK kind=raw wait_ms=0.208454 decode_ms=0.175145
+PROFILE_MEAN reduce_ms=0.227900 correction_submit_ms=0.080529
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014400 span_ms=0.093344
+PROFILE_READBACK kind=field wait_ms=0.125833 decode_ms=0.083168
+PROFILE_CACHE read_ms=0.341675 host_ms=0.120721
+PROFILE_INNER frame=122 inner_ms=7.247043
+PROFILE_STEP frame=122 total_ms=7.296509 prepare_ms=0.232158 coupling_ms=0.285234 lbm_ms=3.260546 rapier_ms=2.365942 upload_ms=0.377389 encoding_ms=0.874010 submit_ms=0.610067 wait_ms=0.459173 decode_ms=0.339756
+PROFILE_SNAPSHOT frame=123 sim_ms=0.358801 before_return_ms=0.657738
+PROFILE_BEGIN frame=123
+PROFILE_ADVECTION frame=123 ms=0.527934
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324032 span_ms=0.505536
+PROFILE_READBACK kind=field wait_ms=0.125412 decode_ms=0.081513
+PROFILE_CACHE read_ms=0.320693 host_ms=0.120949
+PROFILE_ADVECTION frame=123 ms=0.526589
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.318144 span_ms=0.546464
+PROFILE_READBACK kind=raw wait_ms=0.203928 decode_ms=0.173488
+PROFILE_MEAN reduce_ms=0.226591 correction_submit_ms=0.079551
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014688 span_ms=0.094048
+PROFILE_READBACK kind=field wait_ms=0.119342 decode_ms=0.092610
+PROFILE_CACHE read_ms=0.328343 host_ms=0.120783
+PROFILE_INNER frame=123 inner_ms=7.265366
+PROFILE_STEP frame=123 total_ms=7.314572 prepare_ms=0.231149 coupling_ms=0.285185 lbm_ms=3.255728 rapier_ms=2.388265 upload_ms=0.369052 encoding_ms=0.876452 submit_ms=0.618588 wait_ms=0.448682 decode_ms=0.347611
+PROFILE_SNAPSHOT frame=124 sim_ms=0.358854 before_return_ms=0.657516
+PROFILE_BEGIN frame=124
+PROFILE_ADVECTION frame=124 ms=0.528023
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322784 span_ms=0.507680
+PROFILE_READBACK kind=field wait_ms=0.124770 decode_ms=0.081483
+PROFILE_CACHE read_ms=0.319080 host_ms=0.120837
+PROFILE_ADVECTION frame=124 ms=0.527565
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314848 span_ms=0.540192
+PROFILE_READBACK kind=raw wait_ms=0.205093 decode_ms=0.176336
+PROFILE_MEAN reduce_ms=0.228980 correction_submit_ms=0.083708
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014560 span_ms=0.088608
+PROFILE_READBACK kind=field wait_ms=0.127916 decode_ms=0.082024
+PROFILE_CACHE read_ms=0.337029 host_ms=0.120749
+PROFILE_INNER frame=124 inner_ms=7.234174
+PROFILE_STEP frame=124 total_ms=7.283698 prepare_ms=0.232533 coupling_ms=0.285070 lbm_ms=3.264939 rapier_ms=2.346338 upload_ms=0.382903 encoding_ms=0.863274 submit_ms=0.618716 wait_ms=0.457779 decode_ms=0.339843
+PROFILE_SNAPSHOT frame=125 sim_ms=0.356602 before_return_ms=0.655957
+PROFILE_BEGIN frame=125
+PROFILE_ADVECTION frame=125 ms=0.528863
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321408 span_ms=0.500896
+PROFILE_READBACK kind=field wait_ms=0.124464 decode_ms=0.081511
+PROFILE_CACHE read_ms=0.317946 host_ms=0.120988
+PROFILE_ADVECTION frame=125 ms=0.527927
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.319168 span_ms=0.541504
+PROFILE_READBACK kind=raw wait_ms=0.226467 decode_ms=0.176527
+PROFILE_MEAN reduce_ms=0.227447 correction_submit_ms=0.081099
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014464 span_ms=0.086944
+PROFILE_READBACK kind=field wait_ms=0.125090 decode_ms=0.082522
+PROFILE_CACHE read_ms=0.333173 host_ms=0.120503
+PROFILE_INNER frame=125 inner_ms=7.269726
+PROFILE_STEP frame=125 total_ms=7.319421 prepare_ms=0.230611 coupling_ms=0.285409 lbm_ms=3.271554 rapier_ms=2.376195 upload_ms=0.378166 encoding_ms=0.872370 submit_ms=0.604809 wait_ms=0.476021 decode_ms=0.340560
+PROFILE_SNAPSHOT frame=126 sim_ms=0.356560 before_return_ms=0.656572
+PROFILE_BEGIN frame=126
+PROFILE_ADVECTION frame=126 ms=0.526907
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323712 span_ms=0.473376
+PROFILE_READBACK kind=field wait_ms=0.119734 decode_ms=0.080766
+PROFILE_CACHE read_ms=0.320893 host_ms=0.120985
+PROFILE_ADVECTION frame=126 ms=0.528624
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.313216 span_ms=0.541536
+PROFILE_READBACK kind=raw wait_ms=0.204241 decode_ms=0.176436
+PROFILE_MEAN reduce_ms=0.227514 correction_submit_ms=0.081164
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014432 span_ms=0.090624
+PROFILE_READBACK kind=field wait_ms=0.124364 decode_ms=0.082472
+PROFILE_CACHE read_ms=0.335345 host_ms=0.120743
+PROFILE_INNER frame=126 inner_ms=7.249452
+PROFILE_STEP frame=126 total_ms=7.298953 prepare_ms=0.232798 coupling_ms=0.285908 lbm_ms=3.229640 rapier_ms=2.395866 upload_ms=0.368622 encoding_ms=0.855942 submit_ms=0.616669 wait_ms=0.448339 decode_ms=0.339674
+PROFILE_SNAPSHOT frame=127 sim_ms=0.356854 before_return_ms=0.656463
+PROFILE_BEGIN frame=127
+PROFILE_ADVECTION frame=127 ms=0.527417
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322944 span_ms=0.490048
+PROFILE_READBACK kind=field wait_ms=0.162249 decode_ms=0.113775
+PROFILE_CACHE read_ms=0.429826 host_ms=0.256635
+PROFILE_ADVECTION frame=127 ms=0.527894
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.317696 span_ms=0.540160
+PROFILE_READBACK kind=raw wait_ms=0.205916 decode_ms=0.173393
+PROFILE_MEAN reduce_ms=0.227613 correction_submit_ms=0.080575
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014112 span_ms=0.087200
+PROFILE_READBACK kind=field wait_ms=0.127967 decode_ms=0.092956
+PROFILE_CACHE read_ms=0.341076 host_ms=0.120900
+PROFILE_INNER frame=127 inner_ms=7.502805
+PROFILE_STEP frame=127 total_ms=7.550865 prepare_ms=0.231083 coupling_ms=0.283750 lbm_ms=3.489522 rapier_ms=2.393449 upload_ms=0.368212 encoding_ms=0.860843 submit_ms=0.610979 wait_ms=0.496132 decode_ms=0.380124
+PROFILE_SNAPSHOT frame=128 sim_ms=0.356974 before_return_ms=0.654894
+PROFILE_BEGIN frame=128
+PROFILE_ADVECTION frame=128 ms=0.527544
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323040 span_ms=0.507328
+PROFILE_READBACK kind=field wait_ms=0.123295 decode_ms=0.080788
+PROFILE_CACHE read_ms=0.320349 host_ms=0.121051
+PROFILE_ADVECTION frame=128 ms=0.528498
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316352 span_ms=0.544064
+PROFILE_READBACK kind=raw wait_ms=0.204277 decode_ms=0.175186
+PROFILE_MEAN reduce_ms=0.228459 correction_submit_ms=0.080848
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013472 span_ms=0.087232
+PROFILE_READBACK kind=field wait_ms=0.150935 decode_ms=0.115148
+PROFILE_CACHE read_ms=0.427088 host_ms=0.258314
+PROFILE_INNER frame=128 inner_ms=7.482635
+PROFILE_STEP frame=128 total_ms=7.531162 prepare_ms=0.231909 coupling_ms=0.283632 lbm_ms=3.489781 rapier_ms=2.371689 upload_ms=0.370945 encoding_ms=0.873176 submit_ms=0.627855 wait_ms=0.478507 decode_ms=0.371122
+PROFILE_SNAPSHOT frame=129 sim_ms=0.357248 before_return_ms=0.654243
+PROFILE_BEGIN frame=129
+PROFILE_ADVECTION frame=129 ms=0.527445
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321088 span_ms=0.505600
+PROFILE_READBACK kind=field wait_ms=0.122549 decode_ms=0.082312
+PROFILE_CACHE read_ms=0.317124 host_ms=0.120766
+PROFILE_ADVECTION frame=129 ms=0.527865
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314432 span_ms=0.538784
+PROFILE_READBACK kind=raw wait_ms=0.197003 decode_ms=0.171936
+PROFILE_MEAN reduce_ms=0.227492 correction_submit_ms=0.080470
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013824 span_ms=0.087904
+PROFILE_READBACK kind=field wait_ms=0.127732 decode_ms=0.082333
+PROFILE_CACHE read_ms=0.335234 host_ms=0.120735
+PROFILE_INNER frame=129 inner_ms=7.418199
+PROFILE_STEP frame=129 total_ms=7.469470 prepare_ms=0.232117 coupling_ms=0.283831 lbm_ms=3.242498 rapier_ms=2.555115 upload_ms=0.369667 encoding_ms=0.873759 submit_ms=0.614752 wait_ms=0.447284 decode_ms=0.336581
+PROFILE_SNAPSHOT frame=130 sim_ms=0.357294 before_return_ms=0.657964
+PROFILE_BEGIN frame=130
+PROFILE_ADVECTION frame=130 ms=0.526933
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321792 span_ms=0.506944
+PROFILE_READBACK kind=field wait_ms=0.124339 decode_ms=0.081526
+PROFILE_CACHE read_ms=0.318295 host_ms=0.120886
+PROFILE_ADVECTION frame=130 ms=0.527732
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.318880 span_ms=0.541920
+PROFILE_READBACK kind=raw wait_ms=0.206395 decode_ms=0.179679
+PROFILE_MEAN reduce_ms=0.227404 correction_submit_ms=0.080743
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013632 span_ms=0.087264
+PROFILE_READBACK kind=field wait_ms=0.120732 decode_ms=0.083067
+PROFILE_CACHE read_ms=0.329687 host_ms=0.120948
+PROFILE_INNER frame=130 inner_ms=7.440780
+PROFILE_STEP frame=130 total_ms=7.490115 prepare_ms=0.231621 coupling_ms=0.283328 lbm_ms=3.256029 rapier_ms=2.565807 upload_ms=0.368987 encoding_ms=0.874694 submit_ms=0.615802 wait_ms=0.451466 decode_ms=0.344272
+PROFILE_SNAPSHOT frame=131 sim_ms=0.356493 before_return_ms=0.653435
+PROFILE_BEGIN frame=131
+PROFILE_ADVECTION frame=131 ms=0.527462
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322848 span_ms=0.500128
+PROFILE_READBACK kind=field wait_ms=0.124661 decode_ms=0.081080
+PROFILE_CACHE read_ms=0.319831 host_ms=0.121021
+PROFILE_ADVECTION frame=131 ms=0.527903
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.313952 span_ms=0.546624
+PROFILE_READBACK kind=raw wait_ms=0.202673 decode_ms=0.173919
+PROFILE_MEAN reduce_ms=0.228216 correction_submit_ms=0.080971
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013440 span_ms=0.087232
+PROFILE_READBACK kind=field wait_ms=0.128045 decode_ms=0.082774
+PROFILE_CACHE read_ms=0.326773 host_ms=0.130741
+PROFILE_INNER frame=131 inner_ms=7.442986
+PROFILE_STEP frame=131 total_ms=7.497792 prepare_ms=0.231392 coupling_ms=0.283736 lbm_ms=3.256933 rapier_ms=2.564267 upload_ms=0.369154 encoding_ms=0.871232 submit_ms=0.621244 wait_ms=0.455379 decode_ms=0.337773
+PROFILE_SNAPSHOT frame=132 sim_ms=0.356280 before_return_ms=0.655994
+PROFILE_BEGIN frame=132
+PROFILE_ADVECTION frame=132 ms=0.528939
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321984 span_ms=0.510368
+PROFILE_READBACK kind=field wait_ms=0.121304 decode_ms=0.082168
+PROFILE_CACHE read_ms=0.316616 host_ms=0.120974
+PROFILE_ADVECTION frame=132 ms=0.527812
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316640 span_ms=0.540096
+PROFILE_READBACK kind=raw wait_ms=0.196473 decode_ms=0.163635
+PROFILE_MEAN reduce_ms=0.228651 correction_submit_ms=0.080453
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014240 span_ms=0.088704
+PROFILE_READBACK kind=field wait_ms=0.115746 decode_ms=0.092854
+PROFILE_CACHE read_ms=0.325901 host_ms=0.120789
+PROFILE_INNER frame=132 inner_ms=7.292990
+PROFILE_STEP frame=132 total_ms=7.342743 prepare_ms=0.237210 coupling_ms=0.283707 lbm_ms=3.238083 rapier_ms=2.427362 upload_ms=0.375811 encoding_ms=0.888853 submit_ms=0.609750 wait_ms=0.433523 decode_ms=0.338657
+PROFILE_SNAPSHOT frame=133 sim_ms=0.359188 before_return_ms=0.674795
+PROFILE_BEGIN frame=133
+PROFILE_ADVECTION frame=133 ms=0.530876
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323808 span_ms=0.537984
+PROFILE_READBACK kind=field wait_ms=0.141773 decode_ms=0.082191
+PROFILE_CACHE read_ms=0.337598 host_ms=0.121038
+PROFILE_ADVECTION frame=133 ms=0.528842
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315328 span_ms=0.564704
+PROFILE_READBACK kind=raw wait_ms=0.175051 decode_ms=0.155448
+PROFILE_MEAN reduce_ms=0.228054 correction_submit_ms=0.081533
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013760 span_ms=0.090752
+PROFILE_READBACK kind=field wait_ms=0.127435 decode_ms=0.082074
+PROFILE_CACHE read_ms=0.329126 host_ms=0.131216
+PROFILE_INNER frame=133 inner_ms=7.390909
+PROFILE_STEP frame=133 total_ms=7.442384 prepare_ms=0.262379 coupling_ms=0.298212 lbm_ms=3.303398 rapier_ms=2.415780 upload_ms=0.394303 encoding_ms=0.915953 submit_ms=0.631591 wait_ms=0.444259 decode_ms=0.319713
+PROFILE_SNAPSHOT frame=134 sim_ms=0.359606 before_return_ms=0.679504
+PROFILE_BEGIN frame=134
+PROFILE_ADVECTION frame=134 ms=0.540803
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.325024 span_ms=0.505760
+PROFILE_READBACK kind=field wait_ms=0.154137 decode_ms=0.081679
+PROFILE_CACHE read_ms=0.344168 host_ms=0.120816
+PROFILE_ADVECTION frame=134 ms=0.527565
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314880 span_ms=0.573920
+PROFILE_READBACK kind=raw wait_ms=0.198297 decode_ms=0.169761
+PROFILE_MEAN reduce_ms=0.227109 correction_submit_ms=0.081648
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014560 span_ms=0.092352
+PROFILE_READBACK kind=field wait_ms=0.119136 decode_ms=0.092772
+PROFILE_CACHE read_ms=0.333530 host_ms=0.120618
+PROFILE_INNER frame=134 inner_ms=7.343438
+PROFILE_STEP frame=134 total_ms=7.393748 prepare_ms=0.234529 coupling_ms=0.284856 lbm_ms=3.304172 rapier_ms=2.397252 upload_ms=0.374612 encoding_ms=0.887545 submit_ms=0.639863 wait_ms=0.471570 decode_ms=0.344212
+PROFILE_SNAPSHOT frame=135 sim_ms=0.357149 before_return_ms=0.654507
+PROFILE_BEGIN frame=135
+PROFILE_ADVECTION frame=135 ms=0.539361
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324064 span_ms=0.506848
+PROFILE_READBACK kind=field wait_ms=0.124773 decode_ms=0.081733
+PROFILE_CACHE read_ms=0.316887 host_ms=0.120597
+PROFILE_ADVECTION frame=135 ms=0.527328
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316000 span_ms=0.559328
+PROFILE_READBACK kind=raw wait_ms=0.215011 decode_ms=0.174940
+PROFILE_MEAN reduce_ms=0.227230 correction_submit_ms=0.080611
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.012800 span_ms=0.086752
+PROFILE_READBACK kind=field wait_ms=0.125337 decode_ms=0.092376
+PROFILE_CACHE read_ms=0.334543 host_ms=0.120931
+PROFILE_INNER frame=135 inner_ms=7.358794
+PROFILE_STEP frame=135 total_ms=7.408182 prepare_ms=0.231198 coupling_ms=0.285230 lbm_ms=3.281978 rapier_ms=2.440508 upload_ms=0.370069 encoding_ms=0.881866 submit_ms=0.629236 wait_ms=0.465121 decode_ms=0.349049
+PROFILE_SNAPSHOT frame=136 sim_ms=0.356553 before_return_ms=0.656208
+PROFILE_BEGIN frame=136
+PROFILE_ADVECTION frame=136 ms=0.538922
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322976 span_ms=0.472640
+PROFILE_READBACK kind=field wait_ms=0.112231 decode_ms=0.081599
+PROFILE_CACHE read_ms=0.312080 host_ms=0.120971
+PROFILE_ADVECTION frame=136 ms=0.528487
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314336 span_ms=0.563936
+PROFILE_READBACK kind=raw wait_ms=0.240021 decode_ms=0.253754
+PROFILE_MEAN reduce_ms=0.280478 correction_submit_ms=0.082078
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014368 span_ms=0.087808
+PROFILE_READBACK kind=field wait_ms=0.132747 decode_ms=0.082635
+PROFILE_CACHE read_ms=0.331304 host_ms=0.120840
+PROFILE_INNER frame=136 inner_ms=7.518203
+PROFILE_STEP frame=136 total_ms=7.570004 prepare_ms=0.231677 coupling_ms=0.283249 lbm_ms=3.456401 rapier_ms=2.426565 upload_ms=0.372104 encoding_ms=0.886716 submit_ms=0.611294 wait_ms=0.484999 decode_ms=0.417988
+PROFILE_SNAPSHOT frame=137 sim_ms=0.357237 before_return_ms=0.656826
+PROFILE_BEGIN frame=137
+PROFILE_ADVECTION frame=137 ms=0.549738
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323168 span_ms=0.492992
+PROFILE_READBACK kind=field wait_ms=0.129718 decode_ms=0.081127
+PROFILE_CACHE read_ms=0.321018 host_ms=0.120964
+PROFILE_ADVECTION frame=137 ms=0.527402
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316096 span_ms=0.557728
+PROFILE_READBACK kind=raw wait_ms=0.211693 decode_ms=0.174109
+PROFILE_MEAN reduce_ms=0.228641 correction_submit_ms=0.080447
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014368 span_ms=0.086784
+PROFILE_READBACK kind=field wait_ms=0.163041 decode_ms=0.081907
+PROFILE_CACHE read_ms=0.360010 host_ms=0.120888
+PROFILE_INNER frame=137 inner_ms=7.405699
+PROFILE_STEP frame=137 total_ms=7.455237 prepare_ms=0.233319 coupling_ms=0.283554 lbm_ms=3.293457 rapier_ms=2.463958 upload_ms=0.369244 encoding_ms=0.876257 submit_ms=0.619164 wait_ms=0.504452 decode_ms=0.337143
+PROFILE_SNAPSHOT frame=138 sim_ms=0.358512 before_return_ms=0.655022
+PROFILE_BEGIN frame=138
+PROFILE_ADVECTION frame=138 ms=0.538357
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321280 span_ms=0.488896
+PROFILE_READBACK kind=field wait_ms=0.123925 decode_ms=0.082095
+PROFILE_CACHE read_ms=0.315855 host_ms=0.120996
+PROFILE_ADVECTION frame=138 ms=0.528421
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315968 span_ms=0.555136
+PROFILE_READBACK kind=raw wait_ms=0.202561 decode_ms=0.176007
+PROFILE_MEAN reduce_ms=0.228054 correction_submit_ms=0.081683
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014624 span_ms=0.086944
+PROFILE_READBACK kind=field wait_ms=0.149404 decode_ms=0.114023
+PROFILE_CACHE read_ms=0.417342 host_ms=0.258997
+PROFILE_INNER frame=138 inner_ms=7.551330
+PROFILE_STEP frame=138 total_ms=7.600601 prepare_ms=0.230302 coupling_ms=0.287587 lbm_ms=3.492393 rapier_ms=2.420368 upload_ms=0.381642 encoding_ms=0.873448 submit_ms=0.604698 wait_ms=0.475890 decode_ms=0.372125
+PROFILE_SNAPSHOT frame=139 sim_ms=0.357478 before_return_ms=0.668607
+PROFILE_BEGIN frame=139
+PROFILE_ADVECTION frame=139 ms=0.538657
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.325824 span_ms=0.480960
+PROFILE_READBACK kind=field wait_ms=0.143841 decode_ms=0.081623
+PROFILE_CACHE read_ms=0.333785 host_ms=0.121110
+PROFILE_ADVECTION frame=139 ms=0.528726
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316608 span_ms=0.560352
+PROFILE_READBACK kind=raw wait_ms=0.205232 decode_ms=0.175372
+PROFILE_MEAN reduce_ms=0.227313 correction_submit_ms=0.079692
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013760 span_ms=0.084448
+PROFILE_READBACK kind=field wait_ms=0.126975 decode_ms=0.092989
+PROFILE_CACHE read_ms=0.333233 host_ms=0.120658
+PROFILE_INNER frame=139 inner_ms=7.322178
+PROFILE_STEP frame=139 total_ms=7.370469 prepare_ms=0.230616 coupling_ms=0.286320 lbm_ms=3.265989 rapier_ms=2.418135 upload_ms=0.371134 encoding_ms=0.881935 submit_ms=0.601286 wait_ms=0.476048 decode_ms=0.349984
+PROFILE_SNAPSHOT frame=140 sim_ms=0.357837 before_return_ms=0.655529
+PROFILE_BEGIN frame=140
+PROFILE_ADVECTION frame=140 ms=0.538187
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323328 span_ms=0.475968
+PROFILE_READBACK kind=field wait_ms=0.130255 decode_ms=0.080988
+PROFILE_CACHE read_ms=0.327726 host_ms=0.120919
+PROFILE_ADVECTION frame=140 ms=0.528855
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.312960 span_ms=0.565216
+PROFILE_READBACK kind=raw wait_ms=0.204878 decode_ms=0.176602
+PROFILE_MEAN reduce_ms=0.228782 correction_submit_ms=0.080346
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.012992 span_ms=0.085888
+PROFILE_READBACK kind=field wait_ms=0.171353 decode_ms=0.092548
+PROFILE_CACHE read_ms=0.380105 host_ms=0.120721
+PROFILE_INNER frame=140 inner_ms=7.364923
+PROFILE_STEP frame=140 total_ms=7.412959 prepare_ms=0.230137 coupling_ms=0.286772 lbm_ms=3.308081 rapier_ms=2.419444 upload_ms=0.370331 encoding_ms=0.876527 submit_ms=0.617579 wait_ms=0.506486 decode_ms=0.350138
+PROFILE_SNAPSHOT frame=141 sim_ms=0.356446 before_return_ms=0.651773
+PROFILE_BEGIN frame=141
+PROFILE_ADVECTION frame=141 ms=0.538199
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.322816 span_ms=0.498464
+PROFILE_READBACK kind=field wait_ms=0.125435 decode_ms=0.080653
+PROFILE_CACHE read_ms=0.315063 host_ms=0.121024
+PROFILE_ADVECTION frame=141 ms=0.530237
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.313440 span_ms=0.557184
+PROFILE_READBACK kind=raw wait_ms=0.199622 decode_ms=0.175836
+PROFILE_MEAN reduce_ms=0.227760 correction_submit_ms=0.080407
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013728 span_ms=0.086880
+PROFILE_READBACK kind=field wait_ms=0.147504 decode_ms=0.093314
+PROFILE_CACHE read_ms=0.355867 host_ms=0.120682
+PROFILE_INNER frame=141 inner_ms=7.378716
+PROFILE_STEP frame=141 total_ms=7.426819 prepare_ms=0.230601 coupling_ms=0.286770 lbm_ms=3.283491 rapier_ms=2.455524 upload_ms=0.391668 encoding_ms=0.868152 submit_ms=0.615093 wait_ms=0.472561 decode_ms=0.349803
+PROFILE_SNAPSHOT frame=142 sim_ms=0.356684 before_return_ms=0.654769
+PROFILE_BEGIN frame=142
+PROFILE_ADVECTION frame=142 ms=0.538204
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323200 span_ms=0.478784
+PROFILE_READBACK kind=field wait_ms=0.117466 decode_ms=0.080783
+PROFILE_CACHE read_ms=0.314828 host_ms=0.121110
+PROFILE_ADVECTION frame=142 ms=0.527599
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316160 span_ms=0.561216
+PROFILE_READBACK kind=raw wait_ms=0.197236 decode_ms=0.173449
+PROFILE_MEAN reduce_ms=0.228933 correction_submit_ms=0.081193
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014048 span_ms=0.086656
+PROFILE_READBACK kind=field wait_ms=0.125499 decode_ms=0.092712
+PROFILE_CACHE read_ms=0.334464 host_ms=0.120671
+PROFILE_INNER frame=142 inner_ms=7.339869
+PROFILE_STEP frame=142 total_ms=7.390984 prepare_ms=0.230962 coupling_ms=0.286693 lbm_ms=3.245535 rapier_ms=2.457442 upload_ms=0.369698 encoding_ms=0.891957 submit_ms=0.607516 wait_ms=0.440201 decode_ms=0.346944
+PROFILE_SNAPSHOT frame=143 sim_ms=0.359382 before_return_ms=0.655285
+PROFILE_BEGIN frame=143
+PROFILE_ADVECTION frame=143 ms=0.539602
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324256 span_ms=0.531008
+PROFILE_READBACK kind=field wait_ms=0.125080 decode_ms=0.081200
+PROFILE_CACHE read_ms=0.317046 host_ms=0.120936
+PROFILE_ADVECTION frame=143 ms=0.528200
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.314144 span_ms=0.558912
+PROFILE_READBACK kind=raw wait_ms=0.199911 decode_ms=0.171127
+PROFILE_MEAN reduce_ms=0.227936 correction_submit_ms=0.081121
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013376 span_ms=0.088064
+PROFILE_READBACK kind=field wait_ms=0.120552 decode_ms=0.102474
+PROFILE_CACHE read_ms=0.338251 host_ms=0.120698
+PROFILE_INNER frame=143 inner_ms=7.368811
+PROFILE_STEP frame=143 total_ms=7.418306 prepare_ms=0.234270 coupling_ms=0.286172 lbm_ms=3.288661 rapier_ms=2.436651 upload_ms=0.380645 encoding_ms=0.898637 submit_ms=0.623091 wait_ms=0.445543 decode_ms=0.354801
+PROFILE_SNAPSHOT frame=144 sim_ms=0.358721 before_return_ms=0.654657
+PROFILE_BEGIN frame=144
+PROFILE_ADVECTION frame=144 ms=0.537917
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.320672 span_ms=0.492896
+PROFILE_READBACK kind=field wait_ms=0.133649 decode_ms=0.081662
+PROFILE_CACHE read_ms=0.329378 host_ms=0.121124
+PROFILE_ADVECTION frame=144 ms=0.527346
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.318272 span_ms=0.559520
+PROFILE_READBACK kind=raw wait_ms=0.205603 decode_ms=0.176722
+PROFILE_MEAN reduce_ms=0.227715 correction_submit_ms=0.080213
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014112 span_ms=0.087776
+PROFILE_READBACK kind=field wait_ms=0.127065 decode_ms=0.092833
+PROFILE_CACHE read_ms=0.336809 host_ms=0.120695
+PROFILE_INNER frame=144 inner_ms=7.346216
+PROFILE_STEP frame=144 total_ms=7.395553 prepare_ms=0.230828 coupling_ms=0.286386 lbm_ms=3.280462 rapier_ms=2.429289 upload_ms=0.368991 encoding_ms=0.882525 submit_ms=0.619565 wait_ms=0.466317 decode_ms=0.351217
+PROFILE_SNAPSHOT frame=145 sim_ms=0.372854 before_return_ms=0.669619
+PROFILE_BEGIN frame=145
+PROFILE_ADVECTION frame=145 ms=0.538504
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.324704 span_ms=0.492288
+PROFILE_READBACK kind=field wait_ms=0.125064 decode_ms=0.081119
+PROFILE_CACHE read_ms=0.318202 host_ms=0.121019
+PROFILE_ADVECTION frame=145 ms=0.528580
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.315392 span_ms=0.559168
+PROFILE_READBACK kind=raw wait_ms=0.198882 decode_ms=0.176613
+PROFILE_MEAN reduce_ms=0.228397 correction_submit_ms=0.081749
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.013920 span_ms=0.088864
+PROFILE_READBACK kind=field wait_ms=0.119819 decode_ms=0.082382
+PROFILE_CACHE read_ms=0.319048 host_ms=0.131524
+PROFILE_INNER frame=145 inner_ms=7.366282
+PROFILE_STEP frame=145 total_ms=7.416759 prepare_ms=0.231986 coupling_ms=0.285981 lbm_ms=3.255035 rapier_ms=2.471904 upload_ms=0.370739 encoding_ms=0.888588 submit_ms=0.613107 wait_ms=0.443765 decode_ms=0.340114
+PROFILE_SNAPSHOT frame=146 sim_ms=0.360674 before_return_ms=0.658839
+PROFILE_BEGIN frame=146
+PROFILE_ADVECTION frame=146 ms=0.539901
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323552 span_ms=0.486304
+PROFILE_READBACK kind=field wait_ms=0.149796 decode_ms=0.081060
+PROFILE_CACHE read_ms=0.338182 host_ms=0.120962
+PROFILE_ADVECTION frame=146 ms=0.528546
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316128 span_ms=1.909984
+PROFILE_READBACK kind=raw wait_ms=0.194626 decode_ms=0.557870
+PROFILE_MEAN reduce_ms=0.252232 correction_submit_ms=0.086442
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014400 span_ms=0.103680
+PROFILE_READBACK kind=field wait_ms=0.119128 decode_ms=0.269797
+PROFILE_CACHE read_ms=0.517587 host_ms=0.122300
+PROFILE_INNER frame=146 inner_ms=9.904622
+PROFILE_STEP frame=146 total_ms=9.957076 prepare_ms=0.230137 coupling_ms=0.283740 lbm_ms=5.282276 rapier_ms=2.983178 upload_ms=0.397666 encoding_ms=1.877823 submit_ms=1.008317 wait_ms=0.463550 decode_ms=0.908727
+PROFILE_SNAPSHOT frame=147 sim_ms=0.457491 before_return_ms=0.970804
+PROFILE_BEGIN frame=147
+PROFILE_ADVECTION frame=147 ms=0.530523
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323296 span_ms=0.691456
+PROFILE_READBACK kind=field wait_ms=0.121646 decode_ms=0.080579
+PROFILE_CACHE read_ms=0.311794 host_ms=0.120767
+PROFILE_ADVECTION frame=147 ms=0.528561
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.316640 span_ms=0.566400
+PROFILE_READBACK kind=raw wait_ms=0.199529 decode_ms=0.175070
+PROFILE_MEAN reduce_ms=0.241466 correction_submit_ms=0.081492
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014496 span_ms=0.092928
+PROFILE_READBACK kind=field wait_ms=0.150073 decode_ms=0.092817
+PROFILE_CACHE read_ms=0.360005 host_ms=0.120817
+PROFILE_INNER frame=147 inner_ms=7.978374
+PROFILE_STEP frame=147 total_ms=8.029687 prepare_ms=0.433439 coupling_ms=0.378648 lbm_ms=3.512335 rapier_ms=2.540263 upload_ms=0.387765 encoding_ms=0.953347 submit_ms=0.751597 wait_ms=0.471248 decode_ms=0.348466
+PROFILE_SNAPSHOT frame=148 sim_ms=0.359023 before_return_ms=0.678506
+PROFILE_BEGIN frame=148
+PROFILE_ADVECTION frame=148 ms=0.528709
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.321888 span_ms=0.515328
+PROFILE_READBACK kind=field wait_ms=0.153213 decode_ms=0.113865
+PROFILE_CACHE read_ms=0.410738 host_ms=0.274463
+PROFILE_ADVECTION frame=148 ms=0.527550
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.313888 span_ms=0.556576
+PROFILE_READBACK kind=raw wait_ms=0.230475 decode_ms=0.175499
+PROFILE_MEAN reduce_ms=0.228951 correction_submit_ms=0.084482
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014240 span_ms=0.086496
+PROFILE_READBACK kind=field wait_ms=0.136109 decode_ms=0.082710
+PROFILE_CACHE read_ms=0.344549 host_ms=0.120800
+PROFILE_INNER frame=148 inner_ms=7.714902
+PROFILE_STEP frame=148 total_ms=7.763709 prepare_ms=0.230472 coupling_ms=0.282061 lbm_ms=3.594192 rapier_ms=2.502126 upload_ms=0.375465 encoding_ms=0.892372 submit_ms=0.619108 wait_ms=0.519797 decode_ms=0.372074
+PROFILE_SNAPSHOT frame=149 sim_ms=0.360150 before_return_ms=0.658960
+PROFILE_BEGIN frame=149
+PROFILE_ADVECTION frame=149 ms=0.527908
+PROFILE_GPU kind=readback passes=16 kernels_ms=0.323456 span_ms=0.514656
+PROFILE_READBACK kind=field wait_ms=0.124243 decode_ms=0.080913
+PROFILE_CACHE read_ms=0.332530 host_ms=0.120745
+PROFILE_ADVECTION frame=149 ms=0.529718
+PROFILE_GPU kind=readback passes=15 kernels_ms=0.318208 span_ms=0.579712
+PROFILE_READBACK kind=raw wait_ms=0.215018 decode_ms=0.178064
+PROFILE_MEAN reduce_ms=0.227520 correction_submit_ms=0.081210
+PROFILE_GPU kind=readback passes=2 kernels_ms=0.014560 span_ms=0.089088
+PROFILE_READBACK kind=field wait_ms=0.126342 decode_ms=0.081864
+PROFILE_CACHE read_ms=0.335766 host_ms=0.120672
+PROFILE_INNER frame=149 inner_ms=7.452734
+PROFILE_STEP frame=149 total_ms=7.502547 prepare_ms=0.231138 coupling_ms=0.283543 lbm_ms=3.321751 rapier_ms=2.509324 upload_ms=0.373410 encoding_ms=0.905953 submit_ms=0.635965 wait_ms=0.465603 decode_ms=0.340841
+PROFILE_SNAPSHOT frame=150 sim_ms=0.358822 before_return_ms=0.674112
+LBM_GAMEPLAY_BENCH_END frames=150 robot=(22.20431, 24.03449) shifts=0 error=

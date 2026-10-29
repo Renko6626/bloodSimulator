@@ -1,0 +1,17 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.14s
+     Running unittests src/lib.rs (target/debug/deps/simulation-411ad0eda30f0d5b)
+
+running 3 tests
+default map LBM window rejected: unsupported opening without straight buffer
+test runtime::lbm_runtime_tests::default_map_lbm_boundary_is_explicit ... ok
+test runtime::lbm_runtime_tests::lbm_exchange_conserves_momentum_and_weights_once ... ok
+test runtime::lbm_runtime_tests::lbm_runtime_prepare_pause_and_time ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 29 filtered out; finished in 2.86s
+
+     Running tests/experiment.rs (target/debug/deps/experiment-d558e127e5d76d3a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.00s
+

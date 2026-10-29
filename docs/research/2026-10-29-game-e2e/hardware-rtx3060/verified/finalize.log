@@ -1,0 +1,4 @@
+/workspace/blood-game-e2e/finalize.sh: line 8:  6683 Illegal instruction     ./godot-bin --headless --path "$project/godot" --editor --import --quit > "$project.import-first.log" 2>&1
+/workspace/blood-game-e2e/finalize.sh: line 8:  7249 Illegal instruction     ./godot-bin --headless --path "$project/godot" --editor --import --quit > "$project.import-first.log" 2>&1
+/workspace/blood-game-e2e/finalize.sh: line 8:  7834 Illegal instruction     ./godot-bin --headless --path "$project/godot" --editor --import --quit > "$project.import-first.log" 2>&1
+SETUP_COMPLETE

@@ -1,0 +1,20 @@
+    Blocking waiting for file lock on build directory
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.41s
+     Running unittests src/lib.rs (target/debug/deps/simulation-411ad0eda30f0d5b)
+
+running 4 tests
+test fluid::streaming_window::tests::invalid_gpu_macrostate_returns_error_from_batch ... ok
+test fluid::streaming_window::tests::deferred_batch_requires_finish_and_refreshes_cache ... ok
+fork=false migration vs fixed: ContinuityDelta { density: 0.0, velocity: 0.0, momentum: 0.0 }, warmup [ContinuityDelta { density: 0.00073707104, velocity: 0.037522033, momentum: 0.037440322 }, ContinuityDelta { density: 0.0010998249, velocity: 0.01828589, momentum: 0.018142914 }, ContinuityDelta { density: 0.0012210608, velocity: 0.048467856, momentum: 0.048345897 }, ContinuityDelta { density: 0.001180768, velocity: 0.034985904, momentum: 0.03486649 }, ContinuityDelta { density: 0.0011309385, velocity: 0.047559578, momentum: 0.04744576 }, ContinuityDelta { density: 0.0011048913, velocity: 0.038633943, momentum: 0.038512714 }, ContinuityDelta { density: 0.0010253191, velocity: 0.045767296, momentum: 0.045666587 }, ContinuityDelta { density: 0.0010482669, velocity: 0.037488822, momentum: 0.037385367 }]
+test fluid::streaming_window::tests::batched_advance_matches_individual_steps ... ok
+fork=true migration vs fixed: ContinuityDelta { density: 0.0, velocity: 0.0, momentum: 0.0 }, warmup [ContinuityDelta { density: 0.0007234812, velocity: 0.03773396, momentum: 0.037655298 }, ContinuityDelta { density: 0.0010558367, velocity: 0.018308101, momentum: 0.018173525 }, ContinuityDelta { density: 0.0011349916, velocity: 0.04823431, momentum: 0.048123073 }, ContinuityDelta { density: 0.0011080503, velocity: 0.033546735, momentum: 0.033439614 }, ContinuityDelta { density: 0.0011815429, velocity: 0.046836596, momentum: 0.046745475 }, ContinuityDelta { density: 0.0011693239, velocity: 0.035857685, momentum: 0.035759054 }, ContinuityDelta { density: 0.001231432, velocity: 0.044610348, momentum: 0.044535276 }, ContinuityDelta { density: 0.0012617111, velocity: 0.03457823, momentum: 0.034494575 }]
+test fluid::streaming_window::tests::streaming_window_migration_reference ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 28 filtered out; finished in 1.93s
+
+     Running tests/experiment.rs (target/debug/deps/experiment-d558e127e5d76d3a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.00s
+

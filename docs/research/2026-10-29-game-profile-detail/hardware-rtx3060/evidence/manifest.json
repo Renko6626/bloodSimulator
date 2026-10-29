@@ -1,0 +1,34 @@
+{
+  "base_commit": "d0dfa07",
+  "instance_id": 58263433,
+  "source_sha256": {
+    "crates/simulation/src/runtime.rs": "2f0d7886798f2ecce50c58aa632a75adc600b21afb80390d8fad95ae46a74c0a",
+    "crates/simulation/src/fluid/streaming_window.rs": "20ec9a702b499824a2dbdce458c2b8481bda8451dac18a32c73366367536de2e",
+    "crates/fluid-gpu/src/lbm/gpu.rs": "dd395b77fbdbf68f3cc9c90f79faacf894256ea63566b59a451f9fdbc1406ea0",
+    "crates/godot_bridge/src/lib.rs": "4005e6e39fed6d3ab6529b719ea0fd5b53370f53b4151535be9729c14d5c5596",
+    "godot/world.gd": "40bba93d53f836e7520955f66b48742c922b8a70140335db13e7e60a92659761"
+  },
+  "instrumented_library_sha256": "7cfb64b1f890883665a0c588c4d7338869cf6421da4c6fd3bf8c326324a5463b",
+  "production_library_sha256": "69deadd806c1abc93f3c84deb3948e0565c89ca350cc50c2ce2de6bec3f32ec6",
+  "godot_gpu_time_is_delayed": true,
+  "production_godot_sha256": {
+    "godot/world_background.gd": "fbc10e3a9368c93885b415f647656f83cc94a79394ad2e0a2fea05150435b432",
+    "godot/world.gd.uid": "5c40bb72f00f95e9ed7a71cb6d08a87c1a679f2f07deccf41260dd41f6f26a6a",
+    "godot/lab.gd.uid": "df57185cdfc6e7e56c56e4f488e083847d0665c2d5c2bd9354eaf247a1dfc300",
+    "godot/world_hud.gd": "b6e4f00a374be7234623e4253c9c7450f0c5a9c94a36e9c3224339306c32d18b",
+    "godot/world_background_painter.gd": "e1a6a6b86464e218b24b9457db95260e56b0eb3ce8598d0dd3da3021d161764b",
+    "godot/world_hud.gd.uid": "0e0949e733ebcf48b7e89027b18afa32e25f328412e1a9296934cb203cecbb0d",
+    "godot/world_background.gd.uid": "31c5580d68103b2527a50cdc6472a04834e1e289a8712ee5059e0de2864ea20d",
+    "godot/world_background_painter.gd.uid": "b5a3c23a39a057e71e525dfd1da76c5d4844149809a26240abe09042fdb32509",
+    "godot/blood_simulator.gdextension": "f3abe955a76f5b51cf1257bfeb0fa60c44a29d52ef7fc417c03d429035ade9a4",
+    "godot/project.godot": "73f709f441d99ff55535009d30d638586b50185f7d16cd419fccdeb68f4d8fed",
+    "godot/blood_simulator.gdextension.uid": "20395fbe1bfc26ed108f3fe753060bc1bab562fcde42abe279da93ce247c2e37",
+    "godot/world.tscn": "c41c65639dc79705097c78a183f7bc3c1bc3890109036728a43bfc9edcda9d26",
+    "godot/world.gd": "d7029fbce3f1f66b53bffe328a1b4f0acee9f926dc4ef1595cbb6e19486b914e",
+    "godot/lab.gd": "5014f291a8b60d4b3ce0b8ae3e088d399149097af4eb9bdad534f0a3e5ca8333",
+    "godot/lab.tscn": "96c4f38ba79699990526c13c457b1b83a78d492f44546b1357089805f822f33a"
+  },
+  "godot_sha256": "32f8d7596c4b41185512b1c49d69f2da3be018fd784a53e349fa92a98a97bcde",
+  "godot_url": "https://github.com/godotengine/godot-builds/releases/download/4.7.1-stable/Godot_v4.7.1-stable_linux.x86_64.zip",
+  "phases_world_sha256": "d09585d5b6377895e6be2a6ec50d1a5cf83ff879b74d7a9b2ca2635601164660"
+}

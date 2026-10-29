@@ -1,0 +1,7 @@
+config=Config { dt: 0.016666668, substeps: 2, cell_count: 0, cell_mode: Full, cell_radius: 0.7, cell_vertices: 12, cell_frequency: 12.0, cell_area_frequency: 30.0, cell_damping: 0.5, cell_drag: 0.0, robot_speed: 4.0, robot_flow: 0.0, pressure: 12.605889, viscosity: 0.05, pulse_hz: 1.2 }
+route=hold(24,24); move x10↔28 y24, 720-frame legs; local_cells=false
+mechanical guards=finite; area ratio 0.5..1.5; node signed wall <=0.3; robot center signed wall <=-0.55
+DIAGNOSTIC lattice_dt=0.0011904762 steps_per_substep=7 mechanical_dt=0.008333334 viscosity=0.05 velocity_bound=10
+hold adapter=llvmpipe (LLVM 15.0.7, 256 bits) software=true initial_rates=[18.529295, 10.55135, 7.9779463, 10.55135, 7.9779463, 18.529295, 18.529295] initial_quality=Quality { cell_count: 0, finite: true, area_ratio_min: inf, area_ratio_max: 0.0, node_wall_max: -inf, robot_wall: -3.0, nearby_cells: 0, cell_displacement_mean: 0.0, cell_displacement_max: 0.0 } preflight=origins(0,0),(-1,0)
+hold completed_steps=720 min_x=24 max_x=24 region_switches=0 result=Ok(())
+COMPLETE

@@ -1,0 +1,4 @@
+   Compiling blood-fluid-gpu v0.1.0 (/tmp/sunyunbo/game-profile-detail-20261029/instrumented/crates/fluid-gpu)
+   Compiling simulation v0.1.0 (/tmp/sunyunbo/game-profile-detail-20261029/instrumented/crates/simulation)
+   Compiling godot_bridge v0.1.0 (/tmp/sunyunbo/game-profile-detail-20261029/instrumented/crates/godot_bridge)
+    Finished `release` profile [optimized] target(s) in 6.04s

@@ -1,0 +1,287 @@
+[107732.323] 
+X.Org X Server 1.21.1.4
+X Protocol Version 11, Revision 0
+[107732.323] Current Operating System: Linux 08301baaba7e 5.15.0-181-generic #191-Ubuntu SMP Fri May 22 19:09:02 UTC 2026 x86_64
+[107732.323] Kernel command line: BOOT_IMAGE=/boot/vmlinuz-5.15.0-181-generic root=UUID=5e570e5f-dc05-4643-81ec-579aa5565f27 ro quiet splash pcie_aspm=off vt.handoff=7
+[107732.323] xorg-server 2:21.1.4-2ubuntu1.7~22.04.16 (For technical support please see http://www.ubuntu.com/support) 
+[107732.323] Current version of pixman: 0.40.0
+[107732.323] 	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+[107732.323] Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+[107732.323] (++) Log file: "/workspace/blood-game-e2e/display/Xorg.log", Time: Thu Oct 29 14:57:52 2026
+[107732.323] (++) Using config file: "/workspace/blood-game-e2e/display/xorg.conf"
+[107732.323] (==) Using system config directory "/usr/share/X11/xorg.conf.d"
+[107732.324] (==) ServerLayout "ExperimentLayout"
+[107732.324] (**) |-->Screen "ExperimentScreen" (0)
+[107732.324] (**) |   |-->Monitor "<default monitor>"
+[107732.324] (**) |   |-->Device "ExperimentGPU"
+[107732.324] (==) No monitor specified for screen "ExperimentScreen".
+	Using a default monitor configuration.
+[107732.324] (**) Option "AutoAddDevices" "False"
+[107732.324] (**) Option "AutoAddGPU" "False"
+[107732.324] (**) Not automatically adding devices
+[107732.324] (==) Automatically enabling devices
+[107732.324] (**) Not automatically adding GPU devices
+[107732.324] (==) Automatically binding GPU devices
+[107732.324] (==) Max clients allowed: 256, resource mask: 0x1fffff
+[107732.324] (WW) The directory "/usr/share/fonts/X11/misc" does not exist.
+[107732.324] 	Entry deleted from font path.
+[107732.324] (WW) The directory "/usr/share/fonts/X11/cyrillic" does not exist.
+[107732.324] 	Entry deleted from font path.
+[107732.324] (WW) The directory "/usr/share/fonts/X11/100dpi/" does not exist.
+[107732.324] 	Entry deleted from font path.
+[107732.324] (WW) The directory "/usr/share/fonts/X11/75dpi/" does not exist.
+[107732.324] 	Entry deleted from font path.
+[107732.324] (WW) The directory "/usr/share/fonts/X11/Type1" does not exist.
+[107732.324] 	Entry deleted from font path.
+[107732.324] (WW) The directory "/usr/share/fonts/X11/100dpi" does not exist.
+[107732.324] 	Entry deleted from font path.
+[107732.324] (WW) The directory "/usr/share/fonts/X11/75dpi" does not exist.
+[107732.324] 	Entry deleted from font path.
+[107732.324] (==) FontPath set to:
+	built-ins
+[107732.324] (++) ModulePath set to "/workspace/blood-game-e2e/display/modules,/usr/lib/xorg/modules"
+[107732.324] (==) |-->Input Device "<default pointer>"
+[107732.324] (==) |-->Input Device "<default keyboard>"
+[107732.324] (==) The core pointer device wasn't specified explicitly in the layout.
+	Using the default mouse configuration.
+[107732.324] (==) The core keyboard device wasn't specified explicitly in the layout.
+	Using the default keyboard configuration.
+[107732.324] (II) Loader magic: 0x562dd26ec020
+[107732.324] (II) Module ABI versions:
+[107732.324] 	X.Org ANSI C Emulation: 0.4
+[107732.324] 	X.Org Video Driver: 25.2
+[107732.324] 	X.Org XInput driver : 24.4
+[107732.324] 	X.Org Server Extension : 10.0
+[107732.324] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107732.326] (II) xfree86: Adding drm device (/dev/dri/card0)
+[107732.326] (II) Platform probe for /sys/devices/pci0000:00/0000:00:02.0/0000:02:00.0/drm/card0
+[107732.326] (II) xfree86: Adding drm device (/dev/dri/card1)
+[107732.326] (II) Platform probe for /sys/devices/pci0000:00/0000:00:03.0/0000:03:00.0/drm/card1
+[107732.327] (II) xfree86: Adding drm device (/dev/dri/card2)
+[107732.327] (II) Platform probe for /sys/devices/pci0000:80/0000:80:02.0/0000:83:00.0/drm/card2
+[107732.385] (--) PCI:*(2@0:0:0) 10de:2503:1458:407b rev 161, Mem @ 0xc6000000/16777216, 0x383800000000/17179869184, 0x383c00000000/33554432, I/O @ 0x00007000/128, BIOS @ 0x????????/524288
+[107732.385] (--) PCI: (3@0:0:0) 10de:2503:1458:407b rev 161, Mem @ 0xc4000000/16777216, 0x383000000000/17179869184, 0x383400000000/33554432, I/O @ 0x00006000/128, BIOS @ 0x????????/524288
+[107732.385] (--) PCI: (131@0:0:0) 10de:2503:1458:407b rev 161, Mem @ 0xfa000000/16777216, 0x387800000000/17179869184, 0x387c00000000/33554432, I/O @ 0x0000f000/128, BIOS @ 0x????????/524288
+[107732.385] (II) LoadModule: "glx"
+[107732.385] (II) Loading /usr/lib/xorg/modules/extensions/libglx.so
+[107732.387] (EE) Failed to load /usr/lib/xorg/modules/extensions/libglx.so: /usr/lib/x86_64-linux-gnu/libGL.so.1: undefined symbol: _glapi_tls_Current
+[107732.387] (EE) Failed to load module "glx" (loader failed, 0)
+[107732.387] (II) LoadModule: "nvidia"
+[107732.387] (II) Loading /workspace/blood-game-e2e/display/modules/drivers/nvidia_drv.so
+[107732.387] (II) Module nvidia: vendor="NVIDIA Corporation"
+[107732.387] 	compiled for 1.6.99.901, module version = 1.0.0
+[107732.387] 	Module class: X.Org Video Driver
+[107732.387] (II) LoadModule: "mouse"
+[107732.387] (WW) Warning, couldn't open module mouse
+[107732.387] (EE) Failed to load module "mouse" (module does not exist, 0)
+[107732.387] (II) LoadModule: "kbd"
+[107732.387] (WW) Warning, couldn't open module kbd
+[107732.387] (EE) Failed to load module "kbd" (module does not exist, 0)
+[107732.388] (II) NVIDIA dlloader X Driver  535.309.01  Wed Mar 25 15:24:20 UTC 2026
+[107732.388] (II) NVIDIA Unified Driver for all Supported NVIDIA GPUs
+[107732.388] (II) Loading sub module "fb"
+[107732.388] (II) LoadModule: "fb"
+[107732.388] (II) Module "fb" already built-in
+[107732.388] (II) Loading sub module "wfb"
+[107732.388] (II) LoadModule: "wfb"
+[107732.388] (II) Loading /usr/lib/xorg/modules/libwfb.so
+[107732.388] (II) Module wfb: vendor="X.Org Foundation"
+[107732.388] 	compiled for 1.21.1.4, module version = 1.0.0
+[107732.388] 	ABI class: X.Org ANSI C Emulation, version 0.4
+[107732.388] (WW) VGA arbiter: cannot open kernel arbiter, no multi-card support
+[107732.388] (**) NVIDIA(0): Depth 24, (--) framebuffer bpp 32
+[107732.388] (==) NVIDIA(0): RGB weight 888
+[107732.388] (==) NVIDIA(0): Default visual is TrueColor
+[107732.388] (==) NVIDIA(0): Using gamma correction (1.0, 1.0, 1.0)
+[107732.388] (II) Applying OutputClass "nvidia" options to /dev/dri/card2
+[107732.388] (**) NVIDIA(0): Option "AllowEmptyInitialConfiguration" "True"
+[107732.388] (**) NVIDIA(0): Option "UseDisplayDevice" "None"
+[107732.388] (**) NVIDIA(0): Enabling 2D acceleration
+[107732.388] (**) NVIDIA(0): Option "UseDisplayDevice" set to "none"; enabling NoScanout
+[107732.388] (**) NVIDIA(0):     mode
+[107732.388] (II) Loading sub module "glxserver_nvidia"
+[107732.388] (II) LoadModule: "glxserver_nvidia"
+[107732.389] (II) Loading /workspace/blood-game-e2e/display/modules/extensions/libglxserver_nvidia.so
+[107732.397] (II) Module glxserver_nvidia: vendor="NVIDIA Corporation"
+[107732.397] 	compiled for 1.6.99.901, module version = 1.0.0
+[107732.397] 	Module class: X.Org Server Extension
+[107732.397] (II) NVIDIA GLX Module  535.309.01  Wed Mar 25 15:25:32 UTC 2026
+[107732.397] (II) NVIDIA: The X server supports PRIME Render Offload.
+[107732.398] (II) NVIDIA(0): NVIDIA GPU NVIDIA GeForce RTX 3060 (GA106-A) at PCI:131:0:0
+[107732.398] (II) NVIDIA(0):     (GPU-0)
+[107732.398] (--) NVIDIA(0): Memory: 12582912 kBytes
+[107732.398] (--) NVIDIA(0): VideoBIOS: 94.06.14.40.b2
+[107732.399] (II) NVIDIA(0): Detected PCI Express Link width: 16X
+[107732.399] (II) NVIDIA(0): Validated MetaModes:
+[107732.399] (II) NVIDIA(0):     "NULL"
+[107732.399] (**) NVIDIA(0): Virtual screen size configured to be 1280 x 800
+[107732.399] (WW) NVIDIA(0): Unable to get display device for DPI computation.
+[107732.399] (==) NVIDIA(0): DPI set to (75, 75); computed from built-in default
+[107732.399] (EE) NVIDIA(GPU-1): Failed to initialize the NVIDIA GPU at PCI:2:0:0.  Please
+[107732.399] (EE) NVIDIA(GPU-1):     check your system's kernel log for additional error
+[107732.399] (EE) NVIDIA(GPU-1):     messages and refer to Chapter 8: Common Problems in the
+[107732.399] (EE) NVIDIA(GPU-1):     README for additional information.
+[107732.399] (EE) NVIDIA(GPU-1): Failed to initialize the NVIDIA graphics device!
+[107732.399] (EE) NVIDIA(GPU-2): Failed to initialize the NVIDIA GPU at PCI:3:0:0.  Please
+[107732.399] (EE) NVIDIA(GPU-2):     check your system's kernel log for additional error
+[107732.399] (EE) NVIDIA(GPU-2):     messages and refer to Chapter 8: Common Problems in the
+[107732.399] (EE) NVIDIA(GPU-2):     README for additional information.
+[107732.399] (EE) NVIDIA(GPU-2): Failed to initialize the NVIDIA graphics device!
+[107732.399] (II) NVIDIA(GPU-1): Deleting GPU-1
+[107732.399] (II) NVIDIA(GPU-2): Renaming GPU-2 to GPU-1
+[107732.399] (II) NVIDIA(GPU-1): Deleting GPU-1
+[107732.399] (II) NVIDIA: Reserving 24576.00 MB of virtual memory for indirect memory
+[107732.399] (II) NVIDIA:     access.
+[107732.404] (II) NVIDIA(0): ACPI: failed to connect to the ACPI event daemon; the daemon
+[107732.404] (II) NVIDIA(0):     may not be running or the "AcpidSocketPath" X
+[107732.404] (II) NVIDIA(0):     configuration option may not be set correctly.  When the
+[107732.404] (II) NVIDIA(0):     ACPI event daemon is available, the NVIDIA X driver will
+[107732.404] (II) NVIDIA(0):     try to use it to receive ACPI event notifications.  For
+[107732.404] (II) NVIDIA(0):     details, please see the "ConnectToAcpid" and
+[107732.404] (II) NVIDIA(0):     "AcpidSocketPath" X configuration options in Appendix B: X
+[107732.404] (II) NVIDIA(0):     Config Options in the README.
+[107732.441] (II) NVIDIA(0): Setting mode "NULL"
+[107732.447] (==) NVIDIA(0): Disabling shared memory pixmaps
+[107732.447] (==) NVIDIA(0): Backing store enabled
+[107732.447] (==) NVIDIA(0): Silken mouse enabled
+[107732.448] (==) NVIDIA(0): DPMS enabled
+[107732.448] (II) Loading sub module "dri2"
+[107732.448] (II) LoadModule: "dri2"
+[107732.448] (II) Module "dri2" already built-in
+[107732.448] (II) NVIDIA(0): [DRI2] Setup complete
+[107732.448] (II) NVIDIA(0): [DRI2]   VDPAU driver: nvidia
+[107732.448] (II) Initializing extension Generic Event Extension
+[107732.448] (II) Initializing extension SHAPE
+[107732.448] (II) Initializing extension MIT-SHM
+[107732.448] (II) Initializing extension XInputExtension
+[107732.448] (II) Initializing extension XTEST
+[107732.448] (II) Initializing extension BIG-REQUESTS
+[107732.449] (II) Initializing extension SYNC
+[107732.449] (II) Initializing extension XKEYBOARD
+[107732.449] (II) Initializing extension XC-MISC
+[107732.449] (II) Initializing extension SECURITY
+[107732.449] (II) Initializing extension XFIXES
+[107732.449] (II) Initializing extension RENDER
+[107732.449] (II) Initializing extension RANDR
+[107732.449] (II) Initializing extension COMPOSITE
+[107732.449] (II) Initializing extension DAMAGE
+[107732.450] (II) Initializing extension MIT-SCREEN-SAVER
+[107732.450] (II) Initializing extension DOUBLE-BUFFER
+[107732.450] (II) Initializing extension RECORD
+[107732.450] (II) Initializing extension DPMS
+[107732.450] (II) Initializing extension Present
+[107732.450] (II) Initializing extension DRI3
+[107732.450] (II) Initializing extension X-Resource
+[107732.450] (II) Initializing extension XVideo
+[107732.450] (II) Initializing extension XVideo-MotionCompensation
+[107732.450] (II) Initializing extension SELinux
+[107732.450] (II) SELinux: Disabled on system
+[107732.450] (II) Initializing extension GLX
+[107732.450] (II) Initializing extension GLX
+[107732.450] (II) Indirect GLX disabled.
+[107732.450] (II) Initializing extension XFree86-VidModeExtension
+[107732.451] (II) Initializing extension XFree86-DGA
+[107732.451] (II) Initializing extension XFree86-DRI
+[107732.451] (II) Initializing extension DRI2
+[107732.451] (II) Initializing extension NV-GLX
+[107732.451] (II) Initializing extension NV-CONTROL
+[107732.482] (II) LoadModule: "mouse"
+[107732.483] (WW) Warning, couldn't open module mouse
+[107732.483] (EE) Failed to load module "mouse" (module does not exist, 0)
+[107732.483] (EE) No input driver matching `mouse'
+[107732.483] (II) Falling back to input driver `libinput'
+[107732.483] (II) LoadModule: "libinput"
+[107732.483] (WW) Warning, couldn't open module libinput
+[107732.483] (EE) Failed to load module "libinput" (module does not exist, 0)
+[107732.483] (II) LoadModule: "kbd"
+[107732.483] (WW) Warning, couldn't open module kbd
+[107732.483] (EE) Failed to load module "kbd" (module does not exist, 0)
+[107732.483] (EE) No input driver matching `kbd'
+[107732.483] (II) Falling back to input driver `libinput'
+[107732.483] (II) LoadModule: "libinput"
+[107732.483] (WW) Warning, couldn't open module libinput
+[107732.483] (EE) Failed to load module "libinput" (module does not exist, 0)
+[107732.501] (II) config/udev: Adding drm device (/dev/dri/card0)
+[107732.501] (II) xfree86: Adding drm device (/dev/dri/card0)
+[107732.501] (II) Platform probe for /sys/devices/pci0000:00/0000:00:02.0/0000:02:00.0/drm/card0
+[107732.503] (II) config/udev: Adding drm device (/dev/dri/card1)
+[107732.503] (II) xfree86: Adding drm device (/dev/dri/card1)
+[107732.503] (II) Platform probe for /sys/devices/pci0000:00/0000:00:03.0/0000:03:00.0/drm/card1
+[107732.513] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107742.520] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107752.530] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107762.540] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107772.550] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107782.560] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107792.571] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107802.581] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107812.591] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107822.601] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107832.611] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107842.621] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107852.632] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107862.642] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107872.652] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107882.662] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107892.672] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107902.682] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107912.692] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107922.703] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107932.708] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107942.718] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107952.728] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107962.738] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107972.749] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107982.759] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[107992.769] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108002.779] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108012.781] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108022.791] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108032.801] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108042.811] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108052.822] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108062.832] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108072.842] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108082.852] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108092.862] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108102.873] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108112.873] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108122.873] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108132.874] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108142.874] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108152.874] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108162.874] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108172.874] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108182.874] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108192.874] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108202.874] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108212.874] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108222.874] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108232.874] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108242.874] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108252.874] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108262.874] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108272.874] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108282.883] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108292.893] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108302.900] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108312.910] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108322.918] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108332.919] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108342.929] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108352.939] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108362.945] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108372.956] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108382.966] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108392.976] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108402.987] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108412.997] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108423.007] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108433.012] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108443.022] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108453.032] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108463.043] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[108473.053] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)

@@ -1,5 +1,15 @@
 # 流体研究索引
 
+[2026-10-30阶段交接](2026-10-30-performance-checkpoint.md)：本次提交范围、验证记录和保留事项。
+
+[细胞动态网格与LBM合批](2026-10-30-cell-render-lbm-batching/README.md)：可见细胞复用双层填色Mesh、保留原AA轮廓，HUD10Hz；普通Fine帧submit20→8，14步/33dispatch/3读回不变。软件GPU实际移窗/运行检查通过，默认世界截图像素一致；绘图CPU约降10%，尚无端到端提速或RTX证据，未启动云实例。
+
+[LBM与完整帧进一步分解](2026-10-29-game-profile-detail/README.md)：动态绘图、物理后延迟处理和渲染跨度已分开；三次读回及独立GPU时间戳保存。连续回放有15–21ms波动，未改生产代码、未给旧101ms尖峰定因；结果已取回，实例再次停止。
+
+[新版本端到端实卡复测](2026-10-29-game-e2e/README.md)：同机旧版LBM约49ms→新版约17ms前缀均值；新版60秒LBM p95仍约18–20ms，默认解析流窗口地图固定回放p95约6.6ms。实际窗口交接/移窗、截图与原始数据保存，实例58263433已停止；不代表完整战斗游戏验收。
+
+[LBM步长预算试验](2026-10-29-lbm-timestep-relaxation/README.md)：用户确认后，在诊断副本比较14/10步。软件固定/移动与无反馈控制均能运行，但流场差异显著，生产默认未改，不作为RTX性能或相同精度证据。
+
 本阶段[性能交接](2026-10-29-performance-checkpoint.md)统一记录profiling、绘制优化、细胞窗口、运行方法及未验收项；用户已安排在 `feat/godot-static-background` 提交推送。
 
 [细胞群体窗口](2026-10-29-cell-population-window/README.md)已按确认方案接入显式 `--local-cells`；CPU真实交接、总量账、LBM软件短测和Godot初始截图完成。本机解析流均值6.335→3.755ms，不代表实卡或完整游戏FPS；默认Full保留。

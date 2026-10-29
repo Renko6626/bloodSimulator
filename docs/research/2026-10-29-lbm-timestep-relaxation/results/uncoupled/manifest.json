@@ -1,0 +1,33 @@
+{
+  "base": "d0dfa07ddbdd7da1c5f3820be649fea68114a499",
+  "software_only": true,
+  "production_defaults_changed": false,
+  "frames": 600,
+  "warmup": 120,
+  "cases": [
+    "hold"
+  ],
+  "uncoupled": true,
+  "builds": {
+    "baseline": {
+      "budget": 0.05,
+      "binary_sha256": "971ecf277055735015d322df36816ec92b6119a0807c40bdf80411e3eee73998",
+      "source_sha256": {
+        "crates/simulation/src/fluid/lbm_coupling.rs": "04b26ec14e3799082714b4099e9f2d444356f7295fc6ad185073aa482c254f8e",
+        "crates/simulation/src/runtime.rs": "1ab1a010f434ea1380e7b88a3a9cef3f60cb672af6f501701767e729dd2e3210",
+        "crates/simulation/examples/lbm_gameplay_probe.rs": "bc94f1d10269ff98b6d21c26fe0fd7ce4cd7cd66c3c87485f8b23fe6d83999fa"
+      },
+      "run_exit": 0
+    },
+    "candidate": {
+      "budget": 0.07,
+      "binary_sha256": "a576b042abc7d5f736522726d52d8d5c9ef1a51eddb026161dcd9b13d83f055c",
+      "source_sha256": {
+        "crates/simulation/src/fluid/lbm_coupling.rs": "530e8381d298dd179c2c950020e246a068788214186f5672f4e4c600cde9c0d4",
+        "crates/simulation/src/runtime.rs": "1ab1a010f434ea1380e7b88a3a9cef3f60cb672af6f501701767e729dd2e3210",
+        "crates/simulation/examples/lbm_gameplay_probe.rs": "bc94f1d10269ff98b6d21c26fe0fd7ce4cd7cd66c3c87485f8b23fe6d83999fa"
+      },
+      "run_exit": 0
+    }
+  }
+}

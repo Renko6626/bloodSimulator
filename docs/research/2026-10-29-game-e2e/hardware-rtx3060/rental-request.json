@@ -1,0 +1,17 @@
+{
+  "offer": 58071522,
+  "offer_dph_total": 0.06888888888888889,
+  "request": {
+    "client_id": "me",
+    "image": "nvidia/cuda:12.2.2-base-ubuntu22.04",
+    "disk": 16,
+    "runtype": "ssh_direc ssh_proxy",
+    "label": "blood-game-e2e-20261029",
+    "cancel_unavail": true,
+    "force": false,
+    "env": {
+      "NVIDIA_DRIVER_CAPABILITIES": "all"
+    }
+  },
+  "run_budget_usd": 1
+}

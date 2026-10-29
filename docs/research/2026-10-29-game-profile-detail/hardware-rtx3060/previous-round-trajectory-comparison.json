@@ -1,0 +1,15 @@
+{
+  "previous": "docs/research/2026-10-29-game-e2e/hardware-rtx3060/verified/results/current-lbm-local.csv",
+  "current": "docs/research/2026-10-29-game-profile-detail/hardware-rtx3060/evidence/results/production.csv",
+  "frames": 3720,
+  "max_abs_differences": {
+    "robot_x": 0.0,
+    "robot_y": 0.0,
+    "density_min": 0.0,
+    "density_max": 0.0,
+    "density_sum": 0.0,
+    "detailed_cells": 0.0,
+    "abstract_cells": 0.0,
+    "region_switches": 0.0
+  }
+}

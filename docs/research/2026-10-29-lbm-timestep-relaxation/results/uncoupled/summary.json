@@ -1,0 +1,176 @@
+{
+  "scope": "software functional comparison; coupled difference, not analytic error or hardware performance",
+  "runs": {
+    "baseline-hold": {
+      "rows": 720,
+      "lattice_steps_per_frame": 14,
+      "density_range": [
+        0.96035904,
+        1.040153
+      ],
+      "area_ratio_range": null,
+      "max_node_wall": null,
+      "max_robot_wall": -3.0,
+      "max_flux_residual": 5.722046e-06,
+      "max_marker_force": 0.0,
+      "contact_frames": 0,
+      "region_switches": 0,
+      "final_robot": [
+        24.0,
+        24.0
+      ],
+      "sampled_max_world_speed": 13.169523708737618,
+      "sampled_max_lattice_speed": 0.06271201766065532,
+      "measure_dispatches": [
+        33
+      ],
+      "measure_submissions": [
+        20
+      ],
+      "measure_readback_calls": [
+        3
+      ],
+      "software_diagnostic_lbm_ms": {
+        "mean": 26.50293346,
+        "p95": 30.394702000000002,
+        "max": 75.817479
+      },
+      "mean_rho_at_samples": {
+        "119": 1.0000000013919619,
+        "239": 1.0000000005853522,
+        "359": 0.9999999994146478,
+        "479": 0.999999999815152,
+        "599": 1.0000000000630163,
+        "719": 1.0000000003206835
+      }
+    },
+    "candidate-hold": {
+      "rows": 720,
+      "lattice_steps_per_frame": 10,
+      "density_range": [
+        0.97705597,
+        1.0214305
+      ],
+      "area_ratio_range": null,
+      "max_node_wall": null,
+      "max_robot_wall": -3.0,
+      "max_flux_residual": 5.722046e-06,
+      "max_marker_force": 0.0,
+      "contact_frames": 0,
+      "region_switches": 0,
+      "final_robot": [
+        24.0,
+        24.0
+      ],
+      "sampled_max_world_speed": 5.56514541928263,
+      "sampled_max_lattice_speed": 0.0371009694618842,
+      "measure_dispatches": [
+        25
+      ],
+      "measure_submissions": [
+        16
+      ],
+      "measure_readback_calls": [
+        3
+      ],
+      "software_diagnostic_lbm_ms": {
+        "mean": 21.573284211666667,
+        "p95": 24.189157,
+        "max": 84.09826799999999
+      },
+      "mean_rho_at_samples": {
+        "119": 0.9999999996050973,
+        "239": 0.9999999998221537,
+        "359": 1.000000000112029,
+        "479": 1.0000000002338607,
+        "599": 0.9999999998669654,
+        "719": 0.999999999887971
+      }
+    }
+  },
+  "comparisons": {
+    "hold": {
+      "frames": [
+        {
+          "frame": 119,
+          "common_cells": 7141,
+          "baseline_cells": 7141,
+          "candidate_cells": 7141,
+          "velocity_rms_difference": 2.5573944660036116,
+          "velocity_relative_l2": 0.6152870705286351,
+          "velocity_max_difference": 11.11786915124572,
+          "rho_rms_difference": 0.01190650025735231,
+          "rho_max_difference": 0.025149599999999994,
+          "node_displacement": null,
+          "cell_center_displacement": null
+        },
+        {
+          "frame": 239,
+          "common_cells": 7141,
+          "baseline_cells": 7141,
+          "candidate_cells": 7141,
+          "velocity_rms_difference": 2.3671818130554314,
+          "velocity_relative_l2": 1.2175183811412578,
+          "velocity_max_difference": 14.142534007509042,
+          "rho_rms_difference": 0.011405762736265116,
+          "rho_max_difference": 0.020545429999999976,
+          "node_displacement": null,
+          "cell_center_displacement": null
+        },
+        {
+          "frame": 359,
+          "common_cells": 7141,
+          "baseline_cells": 7141,
+          "candidate_cells": 7141,
+          "velocity_rms_difference": 2.637355770259361,
+          "velocity_relative_l2": 0.7018120281387358,
+          "velocity_max_difference": 13.15911638281373,
+          "rho_rms_difference": 0.008339833332388183,
+          "rho_max_difference": 0.015169099999999935,
+          "node_displacement": null,
+          "cell_center_displacement": null
+        },
+        {
+          "frame": 479,
+          "common_cells": 7141,
+          "baseline_cells": 7141,
+          "candidate_cells": 7141,
+          "velocity_rms_difference": 1.485705056104958,
+          "velocity_relative_l2": 0.4787216623382401,
+          "velocity_max_difference": 5.468519638132299,
+          "rho_rms_difference": 0.007569122812076733,
+          "rho_max_difference": 0.014124799999999937,
+          "node_displacement": null,
+          "cell_center_displacement": null
+        },
+        {
+          "frame": 599,
+          "common_cells": 7141,
+          "baseline_cells": 7141,
+          "candidate_cells": 7141,
+          "velocity_rms_difference": 1.3839690719872553,
+          "velocity_relative_l2": 0.7083617278745847,
+          "velocity_max_difference": 7.229318558321497,
+          "rho_rms_difference": 0.021542988206232162,
+          "rho_max_difference": 0.044948100000000046,
+          "node_displacement": null,
+          "cell_center_displacement": null
+        },
+        {
+          "frame": 719,
+          "common_cells": 7141,
+          "baseline_cells": 7141,
+          "candidate_cells": 7141,
+          "velocity_rms_difference": 1.5338536195372745,
+          "velocity_relative_l2": 0.41299018875210025,
+          "velocity_max_difference": 8.273001217207462,
+          "rho_rms_difference": 0.016123196081116883,
+          "rho_max_difference": 0.03469960000000005,
+          "node_displacement": null,
+          "cell_center_displacement": null
+        }
+      ],
+      "final_robot_distance": 0.0
+    }
+  }
+}

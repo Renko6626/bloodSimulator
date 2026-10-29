@@ -10,6 +10,9 @@ signal collision_changed(value: bool)
 
 const INK := Color("dbe8ee")
 const MUTED := Color("8b9daa")
+const STATS_INTERVAL_USEC := 100_000
+
+var last_stats_update_usec := -STATS_INTERVAL_USEC
 
 var stats: Label
 var flows: Label
@@ -95,6 +98,10 @@ func _build_panel() -> void:
 func update_state(state: Dictionary) -> void:
 	pause_button.text = "Resume [Space]" if state.paused else "Pause [Space]"
 	step_button.disabled = not state.paused
+	var now := Time.get_ticks_usec()
+	if now - last_stats_update_usec < STATS_INTERVAL_USEC:
+		return
+	last_stats_update_usec = now
 	var population: Dictionary = state.get("population", {})
 	var cell_text := "Cells                  %d" % state.cells.size()
 	if not population.is_empty():

@@ -1,0 +1,22 @@
+{
+  "servers/rendering/renderer_viewport.cpp": {
+    "url": "https://raw.githubusercontent.com/godotengine/godot/4.7.1-stable/servers/rendering/renderer_viewport.cpp",
+    "sha256": "e1b9638d0e817a8784dbf1a6d3971d4b081bdb8f81884ada6b794336abe11ed2",
+    "same_as_4_7": true
+  },
+  "drivers/gles3/storage/utilities.cpp": {
+    "url": "https://raw.githubusercontent.com/godotengine/godot/4.7.1-stable/drivers/gles3/storage/utilities.cpp",
+    "sha256": "8bf1c99190175b2f1aced92a27fae5bd5f360bcfa7c72a59992b13ca87b31fc4",
+    "same_as_4_7": true
+  },
+  "main/main.cpp": {
+    "url": "https://raw.githubusercontent.com/godotengine/godot/4.7.1-stable/main/main.cpp",
+    "sha256": "2fa6ef2736aa28e2feced47ca872bce1a95e3e6c56bb6002a96660a008df8992",
+    "same_as_4_7": true
+  },
+  "servers/rendering/rendering_server_default.cpp": {
+    "url": "https://raw.githubusercontent.com/godotengine/godot/4.7.1-stable/servers/rendering/rendering_server_default.cpp",
+    "sha256": "60cdf149a4cb8c8c7b49d562edcce2273e028e4a0a6cb067c7c478054a3dc3c9",
+    "same_as_4_7": true
+  }
+}

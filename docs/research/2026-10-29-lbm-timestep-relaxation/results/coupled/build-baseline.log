@@ -1,0 +1,4 @@
+   Compiling blood-fluid v0.1.0 (/tmp/sunyunbo/lbm-timestep-relaxation/baseline/crates/fluid)
+   Compiling blood-fluid-gpu v0.1.0 (/tmp/sunyunbo/lbm-timestep-relaxation/baseline/crates/fluid-gpu)
+   Compiling simulation v0.1.0 (/tmp/sunyunbo/lbm-timestep-relaxation/baseline/crates/simulation)
+    Finished `release` profile [optimized] target(s) in 6.55s

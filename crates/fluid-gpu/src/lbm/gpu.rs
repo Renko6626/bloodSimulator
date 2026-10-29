@@ -506,6 +506,13 @@ impl LbmWindow {
     }
     /// Advance exactly one lattice step of `config.dt` game-time units.
     pub fn advance(&mut self, input: StepInput) -> LbmResult<()> {
+        self.advance_batch(input, 1)
+    }
+    /// Record identical-input lattice steps in order and submit the batch once.
+    pub fn advance_batch(&mut self, input: StepInput, count: usize) -> LbmResult<()> {
+        if count == 0 || count > 1024 {
+            return Err("invalid lattice step count".into());
+        }
         if !input.acceleration.iter().all(|v| v.is_finite()) {
             return Err("nonfinite acceleration".into());
         }
@@ -520,37 +527,39 @@ impl LbmWindow {
             .create_command_encoder(&wgpu::CommandEncoderDescriptor {
                 label: Some("lbm-step"),
             });
-        {
-            let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
-                label: Some("lbm-step"),
-                timestamp_writes: None,
-            });
-            pass.set_pipeline(&self.collide);
-            pass.set_bind_group(0, &self.groups[self.current], &[]);
-            pass.dispatch_workgroups(
-                (self.spec.profile.cells_per_side().pow(2)).div_ceil(128),
-                1,
-                1,
-            );
-        }
-        self.current = 1 - self.current;
-        {
-            let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
-                label: Some("lbm-openings"),
-                timestamp_writes: None,
-            });
-            pass.set_pipeline(&self.boundary_pipeline);
-            pass.set_bind_group(0, &self.groups[self.current], &[]);
-            pass.dispatch_workgroups(
-                (self.spec.profile.cells_per_side().pow(2)).div_ceil(128),
-                1,
-                1,
-            );
+        for _ in 0..count {
+            {
+                let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
+                    label: Some("lbm-step"),
+                    timestamp_writes: None,
+                });
+                pass.set_pipeline(&self.collide);
+                pass.set_bind_group(0, &self.groups[self.current], &[]);
+                pass.dispatch_workgroups(
+                    (self.spec.profile.cells_per_side().pow(2)).div_ceil(128),
+                    1,
+                    1,
+                );
+            }
+            self.current = 1 - self.current;
+            {
+                let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
+                    label: Some("lbm-openings"),
+                    timestamp_writes: None,
+                });
+                pass.set_pipeline(&self.boundary_pipeline);
+                pass.set_bind_group(0, &self.groups[self.current], &[]);
+                pass.dispatch_workgroups(
+                    (self.spec.profile.cells_per_side().pow(2)).div_ceil(128),
+                    1,
+                    1,
+                );
+            }
         }
         self.record(|s| {
             s.encoding_ms += encoding_started.elapsed().as_secs_f64() * 1000.;
-            s.dispatches += 2;
-            s.lattice_steps += 1;
+            s.dispatches += 2 * count as u64;
+            s.lattice_steps += count as u64;
         });
         self.submit(encoder);
         Ok(())

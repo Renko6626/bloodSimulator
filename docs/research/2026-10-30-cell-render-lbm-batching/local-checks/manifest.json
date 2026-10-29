@@ -1,0 +1,18 @@
+{
+  "base_commit": "d0dfa07",
+  "render_baseline_bridge_sha256": "69deadd806c1abc93f3c84deb3948e0565c89ca350cc50c2ce2de6bec3f32ec6",
+  "render_candidate_bridge_sha256": "69deadd806c1abc93f3c84deb3948e0565c89ca350cc50c2ce2de6bec3f32ec6",
+  "new_release_bridge_sha256": "5c496a4f4843fb4be23daede5a570eb769625b8c5a600dc89dcb2a1756ca6576",
+  "product_source_sha256": {
+    "crates/fluid-gpu/src/lbm/gpu.rs": "0749203d2a48d6960dceca773da694ffe88e09eb821be106a35be1f37fe4e377",
+    "crates/simulation/src/fluid/streaming_window.rs": "8d17c19642f00e41f1f948684c7ef464b22f6128984205f6a675cbbf465b3951",
+    "crates/simulation/src/runtime.rs": "c0b3de7e86600cdd9c9f0737fb5846450abefa66765e485d8c43afbb9d2761ec",
+    "godot/world.gd": "5d963889a8a30b0d872ec4020d76d8fcf570f041fa9eef6b5ac553f765289354",
+    "godot/world_hud.gd": "0635356f90bc38afd754fbff5478032f997ebe4f90f214e2c19a05b36da384ec",
+    "godot/world_cell_mesh.gd": "060e786b21b844da155dae1a3149f9bc8109a5333e5120b6a8c891f82cff3be3",
+    "godot/tests/world_cell_mesh_test.gd": "0a61753b611d12b5764a56093a2f8c78663f8a47c8432973aa775c143d7d053b"
+  },
+  "render_source_note": "candidate-world includes only trace additions and unused old _scaled helper; rendering path matches product",
+  "render_backend": "Godot4.7.1 GL compatibility llvmpipe under Xvfb :199;1280x800;fixed-fps60;no input;HUD10Hz both",
+  "cloud_started": false
+}

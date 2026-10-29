@@ -186,9 +186,7 @@ impl StreamingWindow {
         if count == 0 || count > 1024 {
             return Err("invalid lattice step count".into());
         }
-        for _ in 0..count {
-            self.window.advance(input)?;
-        }
+        self.window.advance_batch(input, count)?;
         if defer {
             self.field_pending = true;
             Ok(())
@@ -452,9 +450,6 @@ mod tests {
             StreamingWindow::new(&map, &flow, [24., 24.], GridProfile::Coarse, config).unwrap();
         let mut b =
             StreamingWindow::new(&map, &flow, [24., 24.], GridProfile::Coarse, config).unwrap();
-        let input = StepInput {
-            acceleration: [0., 0.],
-        };
         let n = GridProfile::Coarse.cells_per_side() as usize;
         for (i, velocity) in [
             (48 * n + 48, 1.),
@@ -468,17 +463,21 @@ mod tests {
         assert!((sample.velocity[0] - 4.).abs() < 1e-6);
         // Restore cache from the unchanged GPU before comparing time advancement.
         a.field = a.window.field().unwrap();
-        a.advance_batch(input, 4).unwrap();
-        for _ in 0..4 {
-            b.advance(input).unwrap();
-        }
-        for p in [[24.25, 24.25], [20.5, 23.5], [35.25, 24.25]] {
-            let x = a.sample(p).unwrap();
-            let y = b.sample(p).unwrap();
-            assert_eq!(x.status, y.status);
-            assert!((x.density - y.density).abs() < 1e-6);
-            assert!((x.velocity[0] - y.velocity[0]).abs() < 1e-6);
-            assert!((x.velocity[1] - y.velocity[1]).abs() < 1e-6);
+        for (count, acceleration) in [(4, [0.015, -0.02]), (3, [-0.01, 0.012])] {
+            let input = StepInput { acceleration };
+            a.window.reset_work_stats();
+            a.advance_batch(input, count).unwrap();
+            // One lattice batch submission, then the existing macro-field read.
+            assert_eq!(a.work_stats().submissions, 2);
+            assert_eq!(a.work_stats().lattice_steps, count as u64);
+            for _ in 0..count {
+                b.advance(input).unwrap();
+            }
+            for (x, y) in a.field.iter().zip(&b.field) {
+                for (x, y) in x.iter().zip(y) {
+                    assert!((x - y).abs() < 1e-6);
+                }
+            }
         }
     }
     #[test]

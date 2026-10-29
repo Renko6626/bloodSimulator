@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+AssertionError: glxinfo: symbol lookup error: /usr/lib/x86_64-linux-gnu/libGL.so.1: undefined symbol: _glapi_tls_Current
+
