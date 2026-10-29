@@ -2,6 +2,8 @@
 
 更新：2026-10-30。此前阶段已归档至 `main`；当前实施分支：`feat/godot-static-background`。
 
+**性能细化暂停，会话到此结束。** 用户要求之后有必要再继续。已将LBM/Rapier优化空间判断、新版外层3.37ms未细分及后续候选写入[交接记录](research/2026-10-30-performance-checkpoint.md#暂停前的判断与后续候选)；这些不构成自动profiling、GPU归约实施或云实验授权。
+
 此前FD/LSQ、均值控制和可玩验证场已归档至main；静态血管缓存、视野剔除和细胞模拟窗口已在d0dfa07归档。用户本次要求继续阶段性提交推送，纳入步长诊断、端到端实卡证据、帧内分解，以及细胞Mesh/LBM合批实现，保存于当前分支。见[最新交接](research/2026-10-30-performance-checkpoint.md)。优化后的实卡复测、移窗prepare尖峰、首次editor导入异常等继续保留，不自动开始下一轮优化或云实验。
 
 ## 阶段状态

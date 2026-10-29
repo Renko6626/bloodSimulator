@@ -1,5 +1,7 @@
 # 项目工作约定
 
+2026-10-30 会话结束约定：用户明确要求记录LBM/Rapier优化空间判断，当前性能细化暂停，之后有必要再继续。最新判断与未实施候选见[交接记录](docs/research/2026-10-30-performance-checkpoint.md#暂停前的判断与后续候选)。不得据候选自动开始profiling、GPU均值归约、调整机械子步/细胞节点或启动云实例；实例58263433已确认stopped/exited。
+
 2026-10-29 前一阶段归档：用户曾明确要求整理、提交推送，并合并到 `main`。本会话的 FD/LSQ 研究、均值控制、可玩验证场和实卡证据一并归档；当前状态以 [docs/STATUS.md](docs/STATUS.md) 为入口。保存工作不授权自动开始下一轮优化或云实验。
 
 2026-10-30 追加阶段归档：用户明确要求提交推送本阶段研究和优化，保存于 `feat/godot-static-background`；不包含合并main或开始新实验。入口见[最新性能交接](docs/research/2026-10-30-performance-checkpoint.md)。
