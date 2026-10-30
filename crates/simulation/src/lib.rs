@@ -11,6 +11,8 @@ mod fluid;
 #[cfg(feature = "lbm-gpu")]
 pub mod lbm_validation;
 pub mod map;
+#[cfg(feature = "lbm-gpu")]
+pub mod offline_lbm;
 mod robot;
 mod runtime;
 mod threading;

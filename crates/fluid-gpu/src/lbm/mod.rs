@@ -112,6 +112,7 @@ pub struct FluidSample {
     pub status: LocalSampleStatus,
 }
 
+pub mod bake;
 mod domain;
 mod gpu;
 mod window;

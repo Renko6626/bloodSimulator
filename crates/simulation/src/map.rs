@@ -1,4 +1,5 @@
 //! A small, fixed vessel network and the shared geometry used by physics and drawing.
+pub mod fluid_asset;
 pub mod fluid_policy;
 mod geometry;
 
