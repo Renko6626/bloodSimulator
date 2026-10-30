@@ -60,6 +60,8 @@ simulation::offline_lbm提供把BakedFlow及geometry_revision/reference_pressure
 
 执行方式沿用用户已选subagent-driven：每任务sol medium实现、sol high审阅，最后新sol high整分支检查。默认游戏、器官几何、性能研究及发布流程不在交付范围。
 
+收尾：三项任务及整分支审阅均完成且通过，无Critical/Important/Minor。实际闭环、失败诊断、集中检查及未验收项见[交付记录](../../research/2026-10-31-offline-lbm-bake/README.md)。未推送或合并。
+
 
 ## Task 3 integration adjustment and final evidence
 
