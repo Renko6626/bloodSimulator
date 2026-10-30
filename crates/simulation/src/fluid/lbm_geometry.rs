@@ -255,11 +255,11 @@ pub fn opening_profiles(
 }
 
 #[cfg(test)]
-mod tests {
+pub(super) mod tests {
     use super::*;
     use crate::{circulation::Flow, map::VesselEdge};
     use blood_fluid_gpu::lbm::{GridProfile, WindowOrigin};
-    fn fixture(fork: bool, rates: Vec<f32>) -> (MapDefinition, GraphFlow) {
+    pub(crate) fn fixture(fork: bool, rates: Vec<f32>) -> (MapDefinition, GraphFlow) {
         let nodes = if fork {
             vec![[-10., 24.], [24., 24.], [58., 24.], [24., 58.]]
         } else {
