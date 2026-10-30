@@ -14,6 +14,8 @@
 
 用户进一步确认区块采用“背景流场（解析/预计算）＋LBM许可”两层策略，并审阅确认[区块流体策略设计](superpowers/specs/2026-10-30-chunk-fluid-policy-design.md)：完整3×3窗口许可与几何预检查、单窗口启停、背景与耦合统一采样；新地图二维流量换算、最大基础压差声明、预计算固定比例限制与空间交接均已确认。已按[实施计划](superpowers/plans/2026-10-30-chunk-fluid-policy.md)在 `feat/chunk-fluid-policy` 完成基础设施和显式Rust软件功能回放；默认游戏地图不变。心脏不参与LBM；预计算生成算法不由标签系统默认选定。
 
+用户随后要求提交推送并合并main，本轮已将完整实现与审阅记录（功能分支末提交`e2d2591`）快进纳入主目录`main`，无冲突或产品代码调整。合并后重新执行`cargo fmt --all --check`、`cargo test --locked -p simulation`（38单元＋5集成）及`cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`，均通过；Godot首次导入失败及既有软件回放证据保持原记录，本次未重复GPU或Godot实验。
+
 器官具体布局、腔室接入和数值参数仍未确定。区块策略600帧正常输入回放实际观察创建（87帧）→释放（375帧）→再创建（447帧），72红细胞Aggregate数量账最大误差1.4211e-14，正常白细胞保留，机械守卫及禁区reset后进入测试通过。feature测试和all-target编译通过；集中脚本首次Godot导入退出134，缓存导入及world/lab补验退出0，首次导入根因未明。完整命令、原始数据及限制见[功能交付记录](research/2026-10-30-chunk-fluid-policy/README.md)。未实施心腔/场生成或大地图内容，未测实卡FPS、物理精度与长程混合稳定性，未启动云实例。
 
 ## 固定区块加载与实体卸载（2026-10-30）
