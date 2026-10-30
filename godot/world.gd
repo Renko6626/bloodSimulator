@@ -27,6 +27,7 @@ var previous_render_usec := 0
 var cell_meshes: Array[CellMesh] = []
 var screenshot_path := ""
 var screenshot_started := false
+var heart_preview := false
 var stream_world := false
 var previous_centers: Array[Vector2] = []
 
@@ -35,7 +36,13 @@ var previous_centers: Array[Vector2] = []
 func _ready() -> void:
 	hud = $HUDLayer/HUD
 	var args := OS.get_cmdline_user_args()
-	stream_world = args.has("--stream-world")
+	heart_preview = args.has("--heart-preview")
+	if heart_preview:
+		for arg in args:
+			if arg in ["--local-lbm", "--local-stokes", "--lbm-validation"] or arg.begins_with("--lbm-profile") or arg.begins_with("--lbm-benchmark") or arg.begins_with("--lbm-screenshot"):
+				_startup_error("--heart-preview cannot be combined with LBM, Stokes, profiles or benchmarks")
+				return
+	stream_world = heart_preview or args.has("--stream-world")
 	if stream_world:
 		camera.zoom = Vector2(2.0, 2.0)
 	var use_lbm := args.has("--local-lbm")
@@ -82,7 +89,11 @@ func _ready() -> void:
 		return
 	simulation.configure_local_cells(local_cells)
 	simulation.configure_stream_world(stream_world)
-	if use_lbm:
+	if heart_preview:
+		simulation.use_heart_preview()
+		DisplayServer.window_set_title("Blood Simulator - Heart Preview")
+		hud.set_heart_preview()
+	elif use_lbm:
 		var created: bool = simulation.use_lbm_validation(profile) if validation else simulation.use_lbm_world(profile)
 		if not created:
 			_startup_error(simulation.snapshot().get("error", "LBM startup failed"))
@@ -205,7 +216,7 @@ func _parameters_changed(pressure: float, speed: float, drag: float) -> void:
 
 
 func _flow_changed(value: bool) -> void:
-	show_flow = value
+	show_flow = value and not heart_preview
 	if stream_world:
 		_refresh()
 		state = simulation.snapshot()

@@ -1,0 +1,11 @@
+preview: exit 0, expected 0
+preview-redundant: exit 0, expected 0
+reject-lbm: exit 1, expected 1
+reject-stokes: exit 1, expected 1
+reject-validation: exit 1, expected 1
+reject-profile: exit 1, expected 1
+reject-benchmark: exit 1, expected 1
+reject-benchmark-frames: exit 1, expected 1
+reject-benchmark-warmup: exit 1, expected 1
+reject-benchmark-output: exit 1, expected 1
+reject-benchmark-screenshot: exit 1, expected 1

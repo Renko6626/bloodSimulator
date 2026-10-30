@@ -67,6 +67,14 @@ impl BloodLab {
     }
 
     #[func]
+    fn use_heart_preview(&mut self) {
+        self.stream_world = true;
+        self.simulation = Simulation::new_heart_preview(self.simulation.config.clone());
+        self.validation_initial_centers = None;
+        self.error = None;
+    }
+
+    #[func]
     fn use_local_world(&mut self) {
         self.simulation = Simulation::new_local_world(self.simulation.config.clone());
         self.validation_initial_centers = None;
@@ -134,7 +142,11 @@ impl BloodLab {
 
     #[func]
     fn set_parameters(&mut self, pressure: f32, robot_speed: f32, cell_drag: f32) {
-        self.simulation.config.pressure = pressure.clamp(0.0, 30.0);
+        self.simulation.config.pressure = if self.simulation.is_heart_preview() {
+            0.0
+        } else {
+            pressure.clamp(0.0, 30.0)
+        };
         self.simulation.config.robot_speed = robot_speed.clamp(1.0, 8.0);
         self.simulation.config.cell_drag = cell_drag.clamp(0.0, 40.0);
     }

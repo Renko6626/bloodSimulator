@@ -1,0 +1,13 @@
+baseline=5e1c188302ff290c309489da18702b299317893f
+Task3 source SHA256 before commit:
+6a6ea1cb236d0aba3c6f7840f15b84b97b953768646c00d22c1f9651abe886ce  crates/simulation/src/map/chamber.rs
+cba2b0e46471f518f0276d9008b62d38d93621d0d6e66c6f1fd42203d2a5e76a  crates/simulation/src/map/heart.rs
+13557f89066f60c5992840529346fd7d776dd45c0d7c7d9bf1070dc2eb250b13  crates/simulation/src/map/geometry.rs
+cf56e6f3266c3fcb27e85232449866066e4e3d28e96e6ef09bf5a1fdf26edc1e  crates/simulation/src/runtime/heart_preview.rs
+90f881790cab8ed5f22d49d11049f0e08dbad357836d3407a33910522660526d  crates/simulation/examples/heart_preview_probe.rs
+990c929df8ddb8ac1d51ce4cc8af89e8605240dad71ee0cd4fd6d0d87800fda4  crates/godot_bridge/src/lib.rs
+076e20e374745737571a0c388e80e697428c1a3ed63ddf8337be01d4ab0ddaa7  godot/world.gd
+94ea8afc0f32712a2b0fefb42f1f59dab232b4dc968b8a5181454f2165a36b60  godot/world_hud.gd
+reference=/data/sunyunbo/www/bloodSimulator/.worktrees/heart-proportion-20261031/heart-proportion.html
+Reference used for proportions only; production source is map/heart.rs.
+reference_sha256=da02b1a046415da8d28593d798cd1ef1879a7d01063bfcc59449252659ebd893

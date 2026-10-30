@@ -1,0 +1,27 @@
+$ cargo run --locked -p simulation --example heart_preview_probe
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.12s
+     Running `target/debug/examples/heart_preview_probe`
+waypoint,x,y,wall_distance,loaded_chunks
+tricuspid_approach,49.976,62.240,-6.387,25
+right_atrium,45.052,45.180,-21.067,25
+tricuspid,48.975,77.793,-4.962,25
+right_entry,48.999,85.814,-9.352,25
+right_deep,60.971,169.799,-6.256,25
+right_actual_span=83.985
+right_return,61.997,100.190,-14.121,25
+pulmonary_valve,68.897,85.224,-4.999,25
+pulmonary_turn,77.902,65.219,-4.500,25
+pulmonary_outlet,77.998,55.192,-4.498,25
+pulmonary_interface,78.000,-11.789,-5.000,25
+lung_return,111.780,-11.999,-4.999,25
+left_atrium,111.999,44.816,-19.712,25
+mitral,106.037,77.795,-4.990,25
+left_entry,106.001,85.814,-11.162,25
+left_deep,106.000,175.755,-6.760,25
+left_actual_span=89.941
+left_return,122.955,106.183,-15.318,25
+aortic_valve,131.915,86.189,-5.000,25
+aortic_turn,149.863,65.161,-5.000,25
+aortic_interface,150.000,-3.805,-5.000,25
+min_pose=[47.53717, 65.83248],segment=tricuspid
+peak_chunks=25,minimum_actual_clearance=2.790,zero_cells=true,zero_pressure=true

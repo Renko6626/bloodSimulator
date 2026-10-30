@@ -1,0 +1,4 @@
+$ godot --headless --path godot --fixed-fps 60 --quit-after 10 -- --heart-preview --stream-world --local-cells
+Initialize godot-rust (API v4.7.stable.official, runtime v4.7.1.stable.official, safeguards strict)
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+

@@ -1,0 +1,7 @@
+DISPLAY=:2 godot --path godot -- --heart-preview
+Renderer: Godot4.7.1 OpenGL4.5 Mesa llvmpipe
+Final process PID508754; xprop -id 0x3200003 _NET_WM_PID =>508754
+DISPLAY=:2 xwd -silent -id 0x3200003 -out /tmp/heart-preview-508754.xwd
+convert /tmp/heart-preview-508754.xwd docs/research/2026-10-31-heart-geometry-preview/preview-startup.png
+No automated keys, clicks, form filling or UI workflows.
+Stopped only owned PID508754 with SIGTERM after static capture.

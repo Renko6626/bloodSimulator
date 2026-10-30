@@ -14,6 +14,11 @@ const STATS_INTERVAL_USEC := 100_000
 
 var last_stats_update_usec := -STATS_INTERVAL_USEC
 
+var heart_preview := false
+var subtitle: Label
+var map_title: Label
+var map_description: Label
+var help: Label
 var stats: Label
 var flows: Label
 var pause_button: Button
@@ -31,11 +36,11 @@ func _ready() -> void:
 	_build_panel()
 	var title := _add_label(self, "BLOOD SIMULATOR", 15, MUTED)
 	title.position = Vector2(24, 20)
-	var subtitle := _add_label(self, "World circulation", 27, INK)
+	subtitle = _add_label(self, "World circulation", 27, INK)
 	subtitle.position = Vector2(24, 46)
 	robot_status = _add_label(self, "", 18, Color("ed9f83"))
 	robot_status.position = Vector2(24, 84)
-	var help := _add_label(self, "WASD: move    J: attack    Space: pause    N: step    R: reset    F: flow    C: collision", 14, INK)
+	help = _add_label(self, "WASD: move    J: attack    Space: pause    N: step    R: reset    F: flow    C: collision", 14, INK)
 	help.anchor_top = 1.0
 	help.anchor_bottom = 1.0
 	help.offset_left = 24.0
@@ -66,8 +71,8 @@ func _build_panel() -> void:
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 7)
 	panel.add_child(box)
-	_add_label(box, "WORLD MAP", 13, MUTED)
-	_add_label(box, "Heart → two organs → heart", 17, INK)
+	map_title = _add_label(box, "WORLD MAP", 13, MUTED)
+	map_description = _add_label(box, "Heart → two organs → heart", 17, INK)
 	stats = _add_label(box, "", 13, INK)
 	stats.add_theme_constant_override("line_spacing", 2)
 	_add_label(box, "Branch flow", 13, MUTED)
@@ -123,6 +128,8 @@ func update_state(state: Dictionary) -> void:
 	var streaming: Dictionary = state.get("streaming", {})
 	if not streaming.is_empty():
 		stats.text += "\nActive / dormant       %d / %d\nLoaded chunks          %d" % [streaming.active_cells, streaming.dormant_cells, streaming.loaded_chunks]
+	if heart_preview:
+		stats.text = "Cells                  %d\nWhite cells            %d\nTime                   %.1f s\nSolve / step           %.2f ms\n\nPressure drop          %.2f\nPump flow              %.2f\nMean speed             %.2f\nLoaded chunks          %d" % [state.cells.size(), immunity.white_bodies, state.time, state.solve_ms, state.pressure_drop, state.flow_rate, state.mean_speed, streaming.get("loaded_chunks", 0)]
 	var lines := PackedStringArray()
 	for i in state.branch_flows.size():
 		lines.append("Vessel %02d             %7.2f" % [i + 1, state.branch_flows[i]])
@@ -130,6 +137,8 @@ func update_state(state: Dictionary) -> void:
 
 
 func toggle_flow() -> void:
+	if heart_preview:
+		return
 	flow_toggle.button_pressed = not flow_toggle.button_pressed
 
 
@@ -138,7 +147,7 @@ func toggle_collision() -> void:
 
 
 func _parameters_changed(_value: float) -> void:
-	parameters_changed.emit(pressure.value, speed.value, drag.value)
+	parameters_changed.emit(0.0 if heart_preview else pressure.value, speed.value, drag.value)
 
 
 func _add_label(parent: Node, value: String, size: int, color: Color) -> Label:
@@ -178,3 +187,16 @@ func _slider(parent: Node, name: String, low: float, high: float, initial: float
 func set_pressure_display(value: float) -> void:
 	pressure.set_value_no_signal(value)
 	pressure_label.text = "Pump pressure  %.1f" % value
+
+
+func set_heart_preview() -> void:
+	heart_preview = true
+	subtitle.text = "Heart geometry preview"
+	map_title.text = "HEART PREVIEW"
+	map_description.text = "Static chambers\nNo flow or cells"
+	help.text = "WASD: move    Space: pause    N: step    R: reset    C: collision"
+	set_pressure_display(0.0)
+	pressure.editable = false
+	drag.editable = false
+	flow_toggle.set_pressed_no_signal(false)
+	flow_toggle.disabled = true

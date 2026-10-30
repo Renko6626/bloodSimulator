@@ -1,0 +1,7 @@
+fmt: exit 0, elapsed 0.5s
+simulation: exit 0, elapsed 15.7s
+simulation-lbm: exit 0, elapsed 24.1s
+workspace-feature: exit 0, elapsed 1.9s
+check-script: exit 0, elapsed 24.2s
+heart-probe: exit 0, elapsed 24.6s
+final GDScript-only HUD correction: cached import exit0; headless preview load exit0; final static capture reviewed
