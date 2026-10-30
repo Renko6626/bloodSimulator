@@ -22,7 +22,13 @@ fn main() {
         .expect("region_probe <seconds> <new-output-directory>");
     std::fs::create_dir(out).expect("output must be new");
     let init = std::time::Instant::now();
-    let config = Config::default();
+    let config = Config {
+        white_cells: simulation::WhiteCellOptions {
+            count: 0,
+            ..Default::default()
+        },
+        ..Default::default()
+    };
     let dt = config.dt;
     let mut sim = Simulation::new_local_world(config);
     println!("init_ms={:.3}", init.elapsed().as_secs_f64() * 1000.0);

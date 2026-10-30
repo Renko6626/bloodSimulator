@@ -203,9 +203,13 @@ impl LocalFluid {
         cells: &[SoftBodyHandle],
         robot: RigidBodyHandle,
         drag: f32,
-        radius: f32,
+        _radius: f32,
         update: bool,
     ) -> Result<(Vec<Marker>, usize), String> {
+        if self.history.len() != cells.len() + 1 {
+            self.history.resize(cells.len() + 1, [[0.0; 2]; 4]);
+            self.history.fill([[0.0; 2]; 4]);
+        }
         let mut markers = Vec::new();
         let mut active = 0;
         for owner in 0..=cells.len() {
@@ -221,7 +225,12 @@ impl LocalFluid {
                 let b = &world.bodies[robot];
                 (b.translation(), b.linvel(), 0)
             };
-            let weight = self.weight(center, if count == 0 { 0.85 } else { radius }) as f64;
+            let body_size = if count == 0 {
+                0.85
+            } else {
+                body_radius(&world.soft_bodies[cells[owner]])
+            };
+            let weight = self.weight(center, body_size) as f64;
             if weight == 0.0 || drag == 0.0 {
                 if update {
                     self.history[owner] = [[0.0; 2]; 4];
@@ -387,4 +396,11 @@ impl LocalFluid {
 
 pub(crate) fn center(body: &SoftBody) -> Vector {
     body.particle_positions().sum::<Vector>() / body.num_particles() as f32
+}
+
+pub(crate) fn body_radius(body: &SoftBody) -> f32 {
+    let middle = center(body);
+    body.particle_positions()
+        .map(|p| p.distance(middle))
+        .fold(0.0, f32::max)
 }

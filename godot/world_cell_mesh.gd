@@ -11,9 +11,10 @@ var combined_indices := PackedInt32Array()
 var previous_triangles := PackedInt32Array()
 var previous_count := 0
 var previous_color := Color.TRANSPARENT
+var previous_inner_color := Color.TRANSPARENT
 
 
-func update(cell: PackedVector2Array, pixels_per_unit: float, color: Color) -> bool:
+func update(cell: PackedVector2Array, pixels_per_unit: float, color: Color, inner_color: Color = INNER_COLOR) -> bool:
 	var count := cell.size()
 	if count < 3:
 		closed_contour.clear()
@@ -37,7 +38,7 @@ func update(cell: PackedVector2Array, pixels_per_unit: float, color: Color) -> b
 		vertices[count + i] = center + (contour[i] - center) * INNER_SCALE
 		closed_contour[i] = contour[i]
 	closed_contour[count] = contour[0]
-	var rebuild := count != previous_count or color != previous_color
+	var rebuild := count != previous_count or color != previous_color or inner_color != previous_inner_color
 	var changed_triangles := triangles != previous_triangles
 	if rebuild or changed_triangles:
 		combined_indices.resize(triangles.size() * 2)
@@ -47,7 +48,7 @@ func update(cell: PackedVector2Array, pixels_per_unit: float, color: Color) -> b
 	if rebuild:
 		var colors := PackedColorArray()
 		colors.resize(count * 2)
-		colors.fill(INNER_COLOR)
+		colors.fill(inner_color)
 		for i in count:
 			colors[i] = color
 		var arrays := []
@@ -59,6 +60,7 @@ func update(cell: PackedVector2Array, pixels_per_unit: float, color: Color) -> b
 		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays, [], {}, Mesh.ARRAY_FLAG_USE_DYNAMIC_UPDATE)
 		previous_count = count
 		previous_color = color
+		previous_inner_color = inner_color
 	else:
 		mesh.surface_update_vertex_region(0, 0, vertices.to_byte_array())
 		if changed_triangles:

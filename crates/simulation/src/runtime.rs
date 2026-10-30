@@ -13,6 +13,11 @@ use crate::{
 use rapier2d::prelude::*;
 use std::time::Instant;
 
+mod gameplay;
+mod immunity;
+#[cfg(test)]
+mod immunity_tests;
+
 #[derive(Clone, Copy, Debug, Default)]
 pub struct MoveInput {
     pub x: f32,
@@ -89,7 +94,12 @@ pub struct Simulation {
     physics: PhysicsWorld,
     environment: Environment,
     robot: RigidBodyHandle,
-    cells: Vec<SoftBodyHandle>,
+    robot_health: f32,
+    immunity: crate::white_cell::Immunity,
+    white_cells_enabled: bool,
+    cells: Vec<cell::Cell>,
+    next_cell_id: u64,
+    attack: crate::combat::Attack,
     population: Option<CellPopulation>,
     walls: Vec<Vec<[f32; 2]>>,
     steps: u64,
@@ -135,7 +145,7 @@ impl Simulation {
         let geometry = map.build_geometry(0.2);
         let network = GraphNetwork::new(&map, config.viscosity);
         let flow = network.solve(config.pressure);
-        Self::build(
+        let mut sim = Self::build(
             config,
             Environment::World {
                 map,
@@ -143,12 +153,18 @@ impl Simulation {
                 network,
                 flow,
             },
-        )
+        );
+        sim.white_cells_enabled = true;
+        sim.seed_white_cells();
+        sim
     }
 
     #[cfg(feature = "lbm-gpu")]
     pub fn new_lbm_world(config: Config, options: crate::LbmOptions) -> Result<Self, String> {
-        Self::new_lbm_world_with_map(config, options, MapDefinition::small_world())
+        let mut sim = Self::new_lbm_world_with_map(config, options, MapDefinition::small_world())?;
+        sim.white_cells_enabled = true;
+        sim.seed_white_cells();
+        Ok(sim)
     }
 
     #[cfg(feature = "lbm-gpu")]
@@ -311,21 +327,29 @@ impl Simulation {
             _ => None,
         };
         let mut cells = Vec::new();
-        for center in centers {
+        let next_cell_id = centers.len() as u64;
+        for (id, center) in centers.into_iter().enumerate() {
             if let (Some(pop), Environment::World { map, .. }) = (&mut population, &environment) {
                 if !pop.contains(center) {
                     pop.deposit(map, center, 1.);
                     continue;
                 }
             }
-            cells.push(cell::insert(&mut physics, center, &config));
+            let body = cell::insert(&mut physics, center, &config);
+            cells.push(cell::Cell::new(id as u64, body, config.cell_health));
         }
+        let robot_health = config.robot_health;
         Self {
             config,
             physics,
             environment,
             robot,
+            robot_health,
+            immunity: crate::white_cell::Immunity::default(),
+            white_cells_enabled: false,
             cells,
+            next_cell_id,
+            attack: crate::combat::Attack::default(),
             population,
             walls,
             steps: 0,
@@ -369,7 +393,9 @@ impl Simulation {
     }
 
     pub fn set_paused(&mut self, paused: bool) {
-        self.paused = paused;
+        if paused || self.robot_health > 0.0 {
+            self.paused = paused;
+        }
     }
 
     pub fn tick(&mut self, input: MoveInput) {
@@ -379,13 +405,13 @@ impl Simulation {
         self.try_single_step(input).expect("simulation step");
     }
     pub fn try_tick(&mut self, input: MoveInput) -> Result<(), String> {
-        if !self.paused {
+        if !self.paused && self.robot_health > 0.0 {
             self.step(input)?;
         }
         Ok(())
     }
     pub fn try_single_step(&mut self, input: MoveInput) -> Result<(), String> {
-        if self.paused {
+        if self.paused && self.robot_health > 0.0 {
             self.step(input)?;
         }
         Ok(())
@@ -422,6 +448,10 @@ impl Simulation {
         } else {
             Self::new_lbm_world_with_map(self.config.clone(), options, map)?
         };
+        if self.white_cells_enabled && !replacement.white_cells_enabled {
+            replacement.white_cells_enabled = true;
+            replacement.seed_white_cells();
+        }
         replacement.paused = paused;
         *self = replacement;
         Ok(())
@@ -443,7 +473,10 @@ impl Simulation {
         let pressure = self.config.pressure
             * (1.0 + 0.15 * (std::f32::consts::TAU * self.config.pulse_hz * time).sin());
         self.environment.update(pressure);
+        self.advance_cell_lifetimes();
         self.update_cell_population();
+        self.update_white_intents();
+        let cell_bodies = self.cell_handles();
         if let Some(fluid) = &mut self.local_fluid {
             fluid.begin_frame();
             fluid.prepare_pressure(pressure);
@@ -476,37 +509,22 @@ impl Simulation {
                 fluid
                     .prepare_step(
                         &self.physics,
-                        &self.cells,
+                        &cell_bodies,
                         self.robot,
                         self.config.cell_drag,
                         self.config.cell_radius,
                     )
                     .expect("prepare local Stokes region");
             }
-            let mut flow_velocity = self
-                .environment
-                .velocity_at(self.physics.bodies[self.robot].translation());
-            if let Some(fluid) = &self.local_fluid {
-                let position = self.physics.bodies[self.robot].translation();
-                let weight = fluid.weight(position, 0.85);
-                flow_velocity = flow_velocity * (1.0 - weight) + fluid.sample(position) * weight;
-            }
-            #[cfg(feature = "lbm-gpu")]
-            if let (Some(lbm), Environment::World { map, .. }) = (&self.lbm, &self.environment) {
-                let sample = lbm.sample_world(
-                    map,
-                    self.physics.bodies[self.robot].translation(),
-                    flow_velocity,
-                );
-                flow_velocity = composed_velocity(sample);
-            }
+            let flow_velocity =
+                self.flow_velocity_at(self.physics.bodies[self.robot].translation(), 0.85);
             robot::drive(
                 &mut self.physics.bodies[self.robot],
                 input,
                 flow_velocity,
                 &self.config,
             );
-            for &handle in &self.cells {
+            for &handle in &cell_bodies {
                 #[cfg(feature = "lbm-gpu")]
                 if let (Some(lbm), Environment::World { map, .. }) = (&self.lbm, &self.environment)
                 {
@@ -526,7 +544,7 @@ impl Simulation {
                 let local_weight = self.local_fluid.as_ref().map_or(0.0, |local| {
                     local.weight(
                         fluid::center(&self.physics.soft_bodies[handle]),
-                        self.config.cell_radius,
+                        fluid::body_radius(&self.physics.soft_bodies[handle]),
                     )
                 });
                 cell::advect(
@@ -540,7 +558,7 @@ impl Simulation {
                 fluid
                     .advance(
                         &mut self.physics,
-                        &self.cells,
+                        &cell_bodies,
                         self.robot,
                         dt,
                         self.config.cell_drag,
@@ -554,7 +572,7 @@ impl Simulation {
                 lbm.advance(
                     map,
                     &mut self.physics,
-                    &self.cells,
+                    &cell_bodies,
                     self.robot,
                     dt,
                     self.config.cell_drag,
@@ -562,6 +580,7 @@ impl Simulation {
                 )
                 .map_err(|e| format!("LBM advance failed; frame may be partially advanced: {e}"))?;
             }
+            self.drive_white_cells(dt);
             #[cfg(feature = "lbm-gpu")]
             let rapier_started = Instant::now();
             self.physics.step();
@@ -576,6 +595,8 @@ impl Simulation {
                 format!("LBM frame finish failed; frame may be partially advanced: {e}")
             })?;
         }
+        self.advance_attack();
+        self.finish_white_actions();
         self.steps += 1;
         self.elapsed_time += self.config.dt;
         Ok(())
@@ -595,7 +616,12 @@ impl Simulation {
         let center = self.physics.bodies[self.robot].translation();
         pop.repartition(map, center);
         let half = pop.options.retention_half_extent;
-        self.cells.retain(|&handle| {
+        let previous_count = self.cells.len();
+        self.cells.retain(|cell| {
+            if cell.white.is_some() {
+                return true;
+            }
+            let handle = cell.body;
             let body = &self.physics.soft_bodies[handle];
             let (min, max) = cell_bounds(body);
             let outside = max.x < center.x - half
@@ -603,7 +629,11 @@ impl Simulation {
                 || max.y < center.y - half
                 || min.y > center.y + half;
             if outside {
-                pop.deposit(map, fluid::center(body), 1.);
+                if cell.dead_age.is_none() {
+                    pop.deposit(map, fluid::center(body), 1.);
+                } else {
+                    pop.total_count -= 1;
+                }
                 self.physics.remove_soft_body(handle);
                 pop.retired += 1;
             }
@@ -614,7 +644,8 @@ impl Simulation {
             for (edge, interval, position) in pop.candidates(map, flow, radius) {
                 if map.signed_distance(position) > -radius - 0.16
                     || (position - center).length() < radius + 0.85 + 0.5
-                    || self.cells.iter().any(|&handle| {
+                    || self.cells.iter().any(|cell| {
+                        let handle = cell.body;
                         let (min, max) = cell_bounds(&self.physics.soft_bodies[handle]);
                         let separation = (min - position).max(position - max).max(Vector::ZERO);
                         separation.length() < radius + 0.3
@@ -633,17 +664,26 @@ impl Simulation {
                         self.environment.velocity_at(body.particle_position(i)),
                     );
                 }
-                self.cells.push(handle);
+                self.cells.push(cell::Cell::new(
+                    self.next_cell_id,
+                    handle,
+                    self.config.cell_health,
+                ));
+                self.next_cell_id += 1;
             }
         }
         pop.exchange_ms = started.elapsed().as_secs_f64() * 1000.;
+        if previous_count != self.cells.len() || pop.retired > 0 || pop.spawned > 0 {
+            self.reset_local_cell_history();
+        }
     }
 
     pub fn snapshot(&self) -> Snapshot {
         let soft_contacts = self
             .cells
             .iter()
-            .map(|&handle| {
+            .map(|cell| {
+                let handle = cell.body;
                 let body = &self.physics.soft_bodies[handle];
                 body.edge_contact_segments(&self.physics.soft_bodies)
                     .count()
@@ -728,19 +768,76 @@ impl Simulation {
             cells: self
                 .cells
                 .iter()
-                .map(|&handle| {
+                .map(|cell| {
+                    let handle = cell.body;
                     self.physics.soft_bodies[handle]
                         .particle_positions()
                         .map(|p| p.to_array())
                         .collect()
                 })
                 .collect(),
+            cell_status: self
+                .cells
+                .iter()
+                .map(|cell| crate::CellStatus {
+                    id: cell.id,
+                    white: cell.white.is_some(),
+                    pursuing: cell.dead_age.is_none()
+                        && cell.white.as_ref().is_some_and(|w| w.is_pursuing()),
+                    contact_progress: cell.white.as_ref().map_or(0.0, |w| {
+                        (w.contact_time / self.config.white_cells.contact_warmup).min(1.0)
+                    }),
+                    call_progress: cell.white.as_ref().map_or(0.0, |w| {
+                        (w.call_time / self.config.white_cells.call_time).min(1.0)
+                    }),
+                    health: cell.health,
+                    max_health: cell.max_health,
+                    dead: cell.dead_age.is_some(),
+                    opacity: cell.opacity(&self.config)
+                        * if cell.dead_age.is_none() {
+                            cell.white.as_ref().map_or(1.0, |w| {
+                                (1.0 - w.arrival_time / crate::white_cell::ARRIVAL_TIME)
+                                    .clamp(0.0, 1.0)
+                            })
+                        } else {
+                            1.0
+                        },
+                })
+                .collect(),
+            attack: (self.attack.flash_time > 0.0).then_some(crate::AttackSnapshot {
+                center: self.attack.center.to_array(),
+                radius: self.config.attack_radius,
+                opacity: self.attack.flash_time / crate::combat::ATTACK_FLASH_TIME,
+            }),
+            immunity: crate::ImmunitySnapshot {
+                alertness: self.immunity.alertness,
+                robot_health: self.robot_health,
+                robot_max_health: self.config.robot_health,
+                white_bodies: self
+                    .cells
+                    .iter()
+                    .filter(|cell| cell.white.is_some())
+                    .count(),
+                arrival: self
+                    .immunity
+                    .arrival
+                    .as_ref()
+                    .map(|a| crate::ArrivalSnapshot {
+                        wall: a.wall.to_array(),
+                        position: a.position.to_array(),
+                        progress: 1.0 - a.remaining / crate::white_cell::ARRIVAL_TIME,
+                    }),
+            },
             population: self
                 .population
                 .as_ref()
                 .map(|p| crate::CellPopulationSnapshot {
                     total_count: p.total_count,
-                    detailed_count: self.cells.len(),
+                    detailed_count: self
+                        .cells
+                        .iter()
+                        .filter(|cell| cell.white.is_none())
+                        .count(),
                     abstract_count: p.abstract_count(),
                     spawned_this_frame: p.spawned,
                     retired_this_frame: p.retired,
@@ -851,7 +948,7 @@ mod region_tests {
         for _ in 0..8 {
             sim.tick(MoveInput::default());
         }
-        let handles = sim.cells.clone();
+        let handles = sim.cell_handles();
         let map = sim.world_map().unwrap().clone();
         let initial_bounds = sim.snapshot().fluid.unwrap().bounds;
         let upper = map.edge_point(1, map.edge_length(1) * 0.5, 0.0);
@@ -871,7 +968,7 @@ mod region_tests {
                 .unwrap()
                 .prepare_step(
                     &sim.physics,
-                    &sim.cells,
+                    &handles,
                     sim.robot,
                     sim.config.cell_drag,
                     sim.config.cell_radius,
@@ -890,7 +987,7 @@ mod region_tests {
                 "field preparation must not move or impulse cells"
             );
             assert_eq!(robot_velocity, sim.physics.bodies[sim.robot].linvel());
-            assert_eq!(handles, sim.cells);
+            assert_eq!(handles, sim.cell_handles());
             let fluid = sim.local_fluid.as_ref().unwrap();
             assert!(fluid.weight(position, 0.85) > 0.99);
             if position == upper {
@@ -999,7 +1096,7 @@ mod lbm_runtime_tests {
         assert_eq!(sim.snapshot().lbm.unwrap().profile, "Fine");
         sim.try_reset_lbm_profile(GridProfile::Coarse).unwrap();
         sim.set_paused(false);
-        let handles = sim.cells.clone();
+        let handles = sim.cell_handles();
         let robot = sim.robot;
         let before: Vec<_> = sim.physics.soft_bodies[handles[0]]
             .particle_positions()
@@ -1029,7 +1126,10 @@ mod lbm_runtime_tests {
                 sim.physics.bodies[robot].linvel()
             )
         );
-        assert_eq!(handles, sim.cells);
+        assert_eq!(
+            handles,
+            sim.cells.iter().map(|cell| cell.body).collect::<Vec<_>>()
+        );
         let (w, _, valid) = lbm.local(map, Vector::new(24., 24.));
         assert!(valid && w > 0.99);
         let (w, _, valid) = lbm.local(map, Vector::new(17., 24.));
@@ -1068,9 +1168,9 @@ mod lbm_runtime_tests {
                 sim.physics.bodies[sim.robot].translation(),
                 sim.physics.bodies[sim.robot].linvel(),
             );
-            let cell_before: Vec<_> = sim.physics.soft_bodies[sim.cells[0]]
+            let cell_before: Vec<_> = sim.physics.soft_bodies[sim.cells[0].body]
                 .particle_positions()
-                .zip(sim.physics.soft_bodies[sim.cells[0]].particle_velocities())
+                .zip(sim.physics.soft_bodies[sim.cells[0].body].particle_velocities())
                 .collect();
             let steps_before = sim.snapshot().steps;
             let snapshot_time_before = sim.snapshot().time;
@@ -1086,9 +1186,9 @@ mod lbm_runtime_tests {
             );
             assert_eq!(
                 cell_before,
-                sim.physics.soft_bodies[sim.cells[0]]
+                sim.physics.soft_bodies[sim.cells[0].body]
                     .particle_positions()
-                    .zip(sim.physics.soft_bodies[sim.cells[0]].particle_velocities())
+                    .zip(sim.physics.soft_bodies[sim.cells[0].body].particle_velocities())
                     .collect::<Vec<_>>()
             );
             assert_eq!(steps_before, sim.snapshot().steps);
@@ -1116,7 +1216,7 @@ mod lbm_runtime_tests {
             ..Default::default()
         };
         let mut sim = Simulation::new_lbm_world_with_map(config, options(), map()).unwrap();
-        let h = sim.cells[0];
+        let h = sim.cells[0].body;
         let body = &mut sim.physics.soft_bodies[h];
         let center = body.particle_positions().sum::<Vector>() / body.num_particles() as f32;
         for i in 0..body.num_particles() {
@@ -1126,6 +1226,7 @@ mod lbm_runtime_tests {
             );
             body.set_particle_velocity(i, Vector::X);
         }
+        let cell_handles = sim.cell_handles();
         let Environment::World { map, .. } = &sim.environment else {
             unreachable!()
         };
@@ -1145,7 +1246,7 @@ mod lbm_runtime_tests {
             .exchange(
                 map,
                 &mut sim.physics,
-                &sim.cells,
+                &cell_handles,
                 sim.robot,
                 dt,
                 sim.config.cell_drag,
@@ -1185,12 +1286,16 @@ mod population_tests {
     use super::*;
     use crate::{CellPopulationOptions, CellSimulationMode};
 
-    fn seeded() -> Simulation {
+    pub(super) fn seeded() -> Simulation {
         let config = Config {
             cell_mode: CellSimulationMode::Local(CellPopulationOptions::default()),
             pressure: 0.,
             robot_flow: 0.,
             cell_count: 11,
+            white_cells: crate::WhiteCellOptions {
+                count: 0,
+                ..Default::default()
+            },
             ..Default::default()
         };
         let map = MapDefinition {
@@ -1234,7 +1339,7 @@ mod population_tests {
         let mut sim = seeded();
         assert_eq!(sim.cells.len(), 1);
         assert_total(&sim);
-        let retired_handle = sim.cells[0];
+        let retired_handle = sim.cells[0].body;
         sim.physics.bodies[sim.robot].set_translation(Vector::new(-70., 0.), true);
         sim.update_cell_population();
         assert!(sim.cells.is_empty());
@@ -1245,7 +1350,7 @@ mod population_tests {
         }
         assert!(!sim.cells.is_empty());
         assert!(sim.cells.len() < 11); // Crowding leaves stock unmaterialized.
-        for &handle in &sim.cells {
+        for handle in sim.cell_handles() {
             let p = fluid::center(&sim.physics.soft_bodies[handle]);
             assert!((p.x + 70.).abs() > 32. && (p.x + 70.).abs() <= 36.);
         }

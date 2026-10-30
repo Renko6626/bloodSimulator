@@ -48,6 +48,10 @@ fn main() {
     }
     let config = Config {
         cell_count: count,
+        white_cells: simulation::WhiteCellOptions {
+            count: 0,
+            ..Default::default()
+        },
         ..Config::default()
     };
     let steps = (seconds / config.dt).ceil() as usize;
@@ -229,6 +233,10 @@ fn population_probe(count: usize, seconds: f32, local: bool, output: Option<&str
     };
     let config = Config {
         cell_count: count,
+        white_cells: simulation::WhiteCellOptions {
+            count: 0,
+            ..Default::default()
+        },
         cell_mode: if local {
             simulation::CellSimulationMode::Local(Default::default())
         } else {

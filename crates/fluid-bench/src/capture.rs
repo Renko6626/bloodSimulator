@@ -85,7 +85,16 @@ pub fn capture(out: PathBuf, case: &str, frames: usize) -> FluidResult<()> {
         },
         _ => return Err("capture case must be small64, wide96, or wide192".into()),
     };
-    let mut sim = Simulation::new_local_world_with_options(Config::default(), options);
+    let mut sim = Simulation::new_local_world_with_options(
+        Config {
+            white_cells: simulation::WhiteCellOptions {
+                count: 0,
+                ..Default::default()
+            },
+            ..Default::default()
+        },
+        options,
+    );
     let targets = [[-13., 0.], [-10., -4.], [-6., -8.], [-10., -4.], [-16., 0.]];
     let mut target = 0;
     for _ in 0..frames {

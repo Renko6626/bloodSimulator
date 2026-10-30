@@ -1,9 +1,78 @@
 use crate::Config;
 use rapier2d::prelude::*;
 
+/// Biological state is independent of the Rapier body and its current shape.
+#[derive(Clone, Debug, PartialEq)]
+pub(crate) struct Cell {
+    pub id: u64,
+    pub body: SoftBodyHandle,
+    pub health: f32,
+    pub max_health: f32,
+    pub dead_age: Option<f32>,
+    /// Only white cells carry active behavior. Ordinary red cells remain passive.
+    pub white: Option<crate::white_cell::WhiteCell>,
+}
+
+impl Cell {
+    pub fn new(id: u64, body: SoftBodyHandle, health: f32) -> Self {
+        Self {
+            id,
+            body,
+            health,
+            max_health: health,
+            dead_age: None,
+            white: None,
+        }
+    }
+
+    pub fn damage(&mut self, amount: f32) {
+        if self.dead_age.is_some() {
+            return;
+        }
+        self.health = (self.health - amount).max(0.0);
+        if self.health == 0.0 {
+            self.dead_age = Some(0.0);
+        }
+    }
+
+    /// Only change constitutive parameters; Rapier resolves the shrinking area.
+    pub fn advance_corpse(&mut self, body: &mut SoftBody, config: &Config) -> bool {
+        let Some(age) = &mut self.dead_age else {
+            return false;
+        };
+        *age += config.dt;
+        if *age >= config.corpse_lifetime {
+            return true;
+        }
+        let t = (*age / config.corpse_soften_time).min(1.0);
+        let material = body.material_mut();
+        material.edge_softness.natural_frequency =
+            config.cell_frequency + (config.corpse_edge_frequency - config.cell_frequency) * t;
+        material.bend_softness.natural_frequency =
+            config.cell_frequency + (config.corpse_bend_frequency - config.cell_frequency) * t;
+        body.set_volume_factor(1.0 + (config.corpse_area_factor - 1.0) * t);
+        false
+    }
+
+    pub fn opacity(&self, config: &Config) -> f32 {
+        self.dead_age.map_or(1.0, |age| {
+            ((config.corpse_lifetime - age) / 0.5).clamp(0.0, 1.0)
+        })
+    }
+}
+
 pub(crate) fn insert(world: &mut PhysicsWorld, center: Vector, config: &Config) -> SoftBodyHandle {
+    insert_with_radius(world, center, config.cell_radius, config)
+}
+
+pub(crate) fn insert_with_radius(
+    world: &mut PhysicsWorld,
+    center: Vector,
+    radius: f32,
+    config: &Config,
+) -> SoftBodyHandle {
     world.insert_soft_body(
-        SoftBodyBuilder::disk(center, config.cell_radius, config.cell_vertices)
+        SoftBodyBuilder::disk(center, radius, config.cell_vertices)
             .mass(1.0)
             .material(SoftBodyMaterial {
                 volume_softness: SpringCoefficients::new(config.cell_area_frequency, 1.0),

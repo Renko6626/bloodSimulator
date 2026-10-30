@@ -24,6 +24,7 @@ var speed: HSlider
 var drag: HSlider
 var flow_toggle: CheckButton
 var collision_toggle: CheckButton
+var robot_status: Label
 
 
 func _ready() -> void:
@@ -32,7 +33,9 @@ func _ready() -> void:
 	title.position = Vector2(24, 20)
 	var subtitle := _add_label(self, "World circulation", 27, INK)
 	subtitle.position = Vector2(24, 46)
-	var help := _add_label(self, "WASD / arrows: move    Space: pause    N: step    R: reset    F: flow    C: collision", 14, INK)
+	robot_status = _add_label(self, "", 18, Color("ed9f83"))
+	robot_status.position = Vector2(24, 84)
+	var help := _add_label(self, "WASD: move    J: attack    Space: pause    N: step    R: reset    F: flow    C: collision", 14, INK)
 	help.anchor_top = 1.0
 	help.anchor_bottom = 1.0
 	help.offset_left = 24.0
@@ -69,7 +72,7 @@ func _build_panel() -> void:
 	stats.add_theme_constant_override("line_spacing", 2)
 	_add_label(box, "Branch flow", 13, MUTED)
 	var flow_scroll := ScrollContainer.new()
-	flow_scroll.custom_minimum_size.y = 130.0
+	flow_scroll.custom_minimum_size.y = 80.0
 	flow_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	flow_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	box.add_child(flow_scroll)
@@ -96,8 +99,12 @@ func _build_panel() -> void:
 
 
 func update_state(state: Dictionary) -> void:
+	var immunity: Dictionary = state.immunity
+	var destroyed: bool = immunity.robot_health <= 0.0
+	robot_status.text = "Robot destroyed. Press R to reset." if destroyed else ""
+	pause_button.disabled = destroyed
 	pause_button.text = "Resume [Space]" if state.paused else "Pause [Space]"
-	step_button.disabled = not state.paused
+	step_button.disabled = not state.paused or destroyed
 	var now := Time.get_ticks_usec()
 	if now - last_stats_update_usec < STATS_INTERVAL_USEC:
 		return
@@ -106,6 +113,12 @@ func update_state(state: Dictionary) -> void:
 	var cell_text := "Cells                  %d" % state.cells.size()
 	if not population.is_empty():
 		cell_text = "Detailed cells         %d\nUnmaterialized         %.2f\nTotal cells            %d" % [population.detailed_count, population.abstract_count, population.total_count]
+	var corpses := 0
+	for cell in state.cell_status:
+		if cell.dead:
+			corpses += 1
+	cell_text += "\nCorpses                %d" % corpses
+	cell_text += "\nWhite cells            %d\nRobot HP               %.0f / %.0f\nImmune alertness       %.0f / 100" % [immunity.white_bodies, immunity.robot_health, immunity.robot_max_health, immunity.alertness]
 	stats.text = cell_text + "\nTime                   %.1f s\nSolve / step           %.2f ms\nSoft contacts          %d\n\nPressure drop          %.2f\nPump flow              %.2f\nMean speed             %.2f" % [state.time, state.solve_ms, state.soft_contacts, state.pressure_drop, state.flow_rate, state.mean_speed]
 	var lines := PackedStringArray()
 	for i in state.branch_flows.size():

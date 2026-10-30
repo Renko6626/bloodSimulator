@@ -123,6 +123,7 @@ func _physics_process(_delta: float) -> void:
 	var started := Time.get_ticks_usec()
 	var movement := _movement()
 	var tick_start := Time.get_ticks_usec()
+	simulation.set_attacking(benchmark.is_empty() and Input.is_physical_key_pressed(KEY_J))
 	simulation.tick(movement)
 	var tick_ms := (Time.get_ticks_usec() - tick_start) / 1000.0
 	var snapshot_start := Time.get_ticks_usec()
@@ -179,6 +180,7 @@ func _toggle_pause() -> void:
 
 
 func _single_step() -> void:
+	simulation.set_attacking(Input.is_physical_key_pressed(KEY_J))
 	simulation.single_step(_movement())
 	_refresh()
 
@@ -225,6 +227,19 @@ func _draw() -> void:
 			var direction := velocity.normalized()
 			draw_line(end, end - direction.rotated(0.5) * 5.0, FLOW, 1.5, true)
 			draw_line(end, end - direction.rotated(-0.5) * 5.0, FLOW, 1.5, true)
+	var attack: Dictionary = state.attack
+	if not attack.is_empty():
+		var attack_center: Vector2 = attack.center * SCALE
+		var attack_radius: float = attack.radius * SCALE
+		draw_circle(attack_center, attack_radius, Color(0.9, 0.78, 0.45, 0.12 * attack.opacity))
+		draw_arc(attack_center, attack_radius, 0.0, TAU, 40, Color(1.0, 0.85, 0.52, attack.opacity), 2.0, true)
+	var arrival: Dictionary = state.immunity.arrival
+	if not arrival.is_empty():
+		var wall: Vector2 = arrival.wall * SCALE
+		var position: Vector2 = arrival.position * SCALE
+		var fade: float = 1.0 - arrival.progress
+		draw_line(wall, position, Color(0.8, 0.88, 0.75, fade), 5.0 * fade + 1.0, true)
+		draw_arc(wall, 8.0 + 14.0 * arrival.progress, 0.0, TAU, 32, Color(0.8, 0.88, 0.75, fade), 2.0, true)
 	var local_view: Rect2 = get_global_transform_with_canvas().affine_inverse() * get_viewport_rect()
 	var visible_cells := Rect2(local_view.position / SCALE, local_view.size / SCALE).grow(8.0 / SCALE)
 	cell_meshes.resize(state.cells.size())
@@ -240,14 +255,32 @@ func _draw() -> void:
 		if cell_meshes[i] == null:
 			cell_meshes[i] = CellMesh.new()
 		var drawing := cell_meshes[i]
-		if not drawing.update(cell, SCALE, Color("bc754e") if i == 0 else Color("ae4c5b")):
+		var status: Dictionary = state.cell_status[i]
+		var color := Color("746879") if status.dead else (Color("bc754e") if status.id == 0 else Color("ae4c5b"))
+		var inner_color := Color("4a4650") if status.dead else CellMesh.INNER_COLOR
+		if status.white and not status.dead:
+			color = Color("e2b68e") if status.pursuing else Color("c8d1bd")
+			inner_color = Color("7b8778")
+		if not drawing.update(cell, SCALE, color, inner_color):
 			continue
-		draw_mesh(drawing.mesh, null)
-		draw_polyline(drawing.closed_contour, Color("d28189"), 1.0, true)
+		draw_mesh(drawing.mesh, null, Transform2D.IDENTITY, Color(1.0, 1.0, 1.0, status.opacity))
+		var outline := Color("9b899e") if status.dead else Color("d28189")
+		if status.white and not status.dead:
+			outline = Color("e3e6d9").lerp(Color("ed795d"), status.contact_progress)
+		outline.a = status.opacity
+		draw_polyline(drawing.closed_contour, outline, 1.0, true)
+		if status.white and not status.dead and status.call_progress > 0.0:
+			var center := cell_bounds.get_center() * SCALE
+			var radius := maxf(cell_bounds.size.x, cell_bounds.size.y) * SCALE * 0.5 + 5.0
+			draw_arc(center, radius, -PI * 0.5, -PI * 0.5 + TAU * status.call_progress, 32, Color("f0cf78"), 2.0, true)
+		if not status.dead and status.health < status.max_health:
+			var bar_start := Vector2(cell_bounds.get_center().x * SCALE - 10.0, cell_bounds.position.y * SCALE - 6.0)
+			draw_line(bar_start, bar_start + Vector2(20.0, 0), Color("362b31"), 3.0)
+			draw_line(bar_start, bar_start + Vector2(20.0 * status.health / status.max_health, 0), Color("efb57d"), 3.0)
 		if show_collision:
 			draw_polyline(drawing.closed_contour, Color("f3d59b"), 0.14 * SCALE, true)
 	var robot: Vector2 = state.robot * SCALE
-	draw_circle(robot, 0.85 * SCALE, Color("aaaaae"))
+	draw_circle(robot, 0.85 * SCALE, Color("aaaaae") if state.immunity.robot_health > 0.0 else Color("6b5757"))
 	draw_arc(robot, 0.85 * SCALE, 0.0, TAU, 32, Color("e0e0e2"), 1.5, true)
 
 

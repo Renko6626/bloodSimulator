@@ -40,6 +40,14 @@ impl LocalRegions {
         }
     }
 
+    /// Body membership changed: old per-owner forces no longer refer to these bodies.
+    pub(crate) fn reset_history(&mut self, cells: usize) {
+        for region in &mut self.regions {
+            region.history.resize(cells + 1, [[0.0; 2]; 4]);
+            region.history.fill([[0.0; 2]; 4]);
+        }
+    }
+
     /// Rebuild the incoming field from existing forces without touching bodies.
     /// Only advance() applies the one local reaction impulse for this substep.
     pub fn prepare_step(

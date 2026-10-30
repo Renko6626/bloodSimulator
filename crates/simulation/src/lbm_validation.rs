@@ -201,6 +201,10 @@ mod tests {
     fn empty_detailed_window_checks_robot_without_claiming_cell_quality() {
         let config = Config {
             cell_count: 0,
+            white_cells: crate::WhiteCellOptions {
+                count: 0,
+                ..Default::default()
+            },
             ..Default::default()
         };
         let sim = crate::Simulation::new_world(config.clone());

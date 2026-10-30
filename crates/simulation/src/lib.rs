@@ -4,6 +4,7 @@
 mod cell;
 mod cell_population;
 pub mod circulation;
+mod combat;
 mod config;
 mod fluid;
 #[cfg(feature = "lbm-gpu")]
@@ -14,6 +15,7 @@ mod runtime;
 mod threading;
 pub mod vessel;
 mod view;
+mod white_cell;
 
 #[cfg(feature = "lbm-gpu")]
 pub use blood_fluid_gpu::lbm::GridProfile;
@@ -25,4 +27,8 @@ pub use fluid::{FluidStats, LocalFluidOptions};
 #[cfg(feature = "lbm-gpu")]
 pub use fluid::{lbm_geometry, streaming_window};
 pub use runtime::{MoveInput, Simulation};
-pub use view::{CellPopulationSnapshot, FlowArrow, LbmSnapshot, Snapshot};
+pub use view::{
+    ArrivalSnapshot, AttackSnapshot, CellPopulationSnapshot, CellStatus, FlowArrow,
+    ImmunitySnapshot, LbmSnapshot, Snapshot,
+};
+pub use white_cell::WhiteCellOptions;

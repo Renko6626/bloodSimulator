@@ -77,6 +77,11 @@ impl BloodLab {
     }
 
     #[func]
+    fn set_attacking(&mut self, attacking: bool) {
+        self.simulation.set_attacking(attacking);
+    }
+
+    #[func]
     fn tick(&mut self, movement: Vector2) {
         let result = self.simulation.try_tick(MoveInput {
             x: movement.x,
@@ -162,6 +167,53 @@ impl BloodLab {
         let state = self.simulation.snapshot();
         let validation = self.validation_snapshot(&state);
         let cells: Array<PackedVector2Array> = state.cells.iter().map(|p| points(p)).collect();
+        let cell_status: Array<VarDictionary> = state
+            .cell_status
+            .iter()
+            .map(|cell| {
+                vdict! {
+                    "id" => cell.id as i64,
+                    "white" => cell.white,
+                    "pursuing" => cell.pursuing,
+                    "contact_progress" => cell.contact_progress,
+                    "call_progress" => cell.call_progress,
+                    "health" => cell.health,
+                    "max_health" => cell.max_health,
+                    "dead" => cell.dead,
+                    "opacity" => cell.opacity,
+                }
+            })
+            .collect();
+        let attack = state
+            .attack
+            .as_ref()
+            .map(|attack| {
+                vdict! {
+                    "center" => Vector2::new(attack.center[0], attack.center[1]),
+                    "radius" => attack.radius,
+                    "opacity" => attack.opacity,
+                }
+            })
+            .unwrap_or_default();
+        let arrival = state
+            .immunity
+            .arrival
+            .as_ref()
+            .map(|arrival| {
+                vdict! {
+                    "wall" => Vector2::new(arrival.wall[0], arrival.wall[1]),
+                    "position" => Vector2::new(arrival.position[0], arrival.position[1]),
+                    "progress" => arrival.progress,
+                }
+            })
+            .unwrap_or_default();
+        let immunity = vdict! {
+            "alertness" => state.immunity.alertness,
+            "robot_health" => state.immunity.robot_health,
+            "robot_max_health" => state.immunity.robot_max_health,
+            "white_bodies" => state.immunity.white_bodies as i64,
+            "arrival" => &arrival,
+        };
         let arrows: Array<PackedVector2Array> = state
             .arrows
             .iter()
@@ -209,7 +261,9 @@ impl BloodLab {
             "lbm_status" => state.lbm_status.as_deref().unwrap_or(""),
             "error" => self.error.as_deref().unwrap_or(""),
             "robot" => Vector2::new(state.robot[0], state.robot[1]),
-            "cells" => &cells, "arrows" => &arrows,
+            "cells" => &cells, "cell_status" => &cell_status,
+            "attack" => &attack, "arrows" => &arrows,
+            "immunity" => &immunity,
             "steps" => state.steps as i64, "time" => state.time,
             "paused" => state.paused, "solve_ms" => state.solve_ms,
             "pressure_drop" => state.flow.pressure_drop,

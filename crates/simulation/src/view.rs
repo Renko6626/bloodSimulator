@@ -11,6 +11,10 @@ pub struct FlowArrow {
 pub struct Snapshot {
     pub robot: [f32; 2],
     pub cells: Vec<Vec<[f32; 2]>>,
+    /// Biological/display metadata in exactly the same order as `cells`.
+    pub cell_status: Vec<CellStatus>,
+    pub attack: Option<AttackSnapshot>,
+    pub immunity: ImmunitySnapshot,
     pub population: Option<CellPopulationSnapshot>,
     pub arrows: Vec<FlowArrow>,
     pub steps: u64,
@@ -26,6 +30,42 @@ pub struct Snapshot {
     pub lbm: Option<LbmSnapshot>,
     /// Diagnostic calculation error, if the cached field is invalid.
     pub lbm_status: Option<String>,
+}
+
+#[derive(Clone, Debug, PartialEq)]
+pub struct CellStatus {
+    pub id: u64,
+    pub white: bool,
+    pub pursuing: bool,
+    pub contact_progress: f32,
+    pub call_progress: f32,
+    pub health: f32,
+    pub max_health: f32,
+    pub dead: bool,
+    pub opacity: f32,
+}
+
+#[derive(Clone, Debug)]
+pub struct ImmunitySnapshot {
+    pub alertness: f32,
+    pub robot_health: f32,
+    pub robot_max_health: f32,
+    pub white_bodies: usize,
+    pub arrival: Option<ArrivalSnapshot>,
+}
+
+#[derive(Clone, Debug)]
+pub struct ArrivalSnapshot {
+    pub wall: [f32; 2],
+    pub position: [f32; 2],
+    pub progress: f32,
+}
+
+#[derive(Clone, Debug)]
+pub struct AttackSnapshot {
+    pub center: [f32; 2],
+    pub radius: f32,
+    pub opacity: f32,
 }
 
 /// Cached local-fluid diagnostics, expressed in world coordinates.
