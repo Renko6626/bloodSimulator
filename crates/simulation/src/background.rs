@@ -33,8 +33,8 @@ impl PreparedBackground {
         let Some(definition) = &prepared.definition else {
             return Ok(prepared);
         };
-        if !definition.max_base_pressure.is_finite() || definition.max_base_pressure < 0.0 {
-            return Err("background maximum base pressure must be finite and nonnegative".into());
+        if !definition.max_base_pressure.is_finite() || definition.max_base_pressure <= 0.0 {
+            return Err("background maximum base pressure must be finite and positive".into());
         }
         if !config.viscosity.is_finite()
             || config.viscosity <= 0.0
@@ -599,6 +599,9 @@ mod tests {
     #[test]
     fn background_rejects_missing_ports_bad_mask_and_unsafe_policy() {
         let (map, config, flow) = fixture();
+        let mut broken = map.clone();
+        broken.fluid.as_mut().unwrap().max_base_pressure = 0.;
+        assert!(PreparedBackground::new(&broken, &config, &flow).is_err());
         let mut broken = map.clone();
         broken.fluid.as_mut().unwrap().fields[0].ports.clear();
         assert!(PreparedBackground::new(&broken, &config, &flow)

@@ -46,6 +46,10 @@ fn cover_bounds(min: Vector, max: Vector) -> impl Iterator<Item = ChunkId> {
 
 impl Simulation {
     pub fn new_streamed_world(config: Config, map: MapDefinition) -> Self {
+        assert!(
+            map.fluid.is_none(),
+            "policy maps require try_new_policy_world"
+        );
         let config = local_config(config);
         let network = GraphNetwork::new(&map, config.viscosity);
         let flow = network.solve(config.pressure);
@@ -55,6 +59,7 @@ impl Simulation {
             Environment::World {
                 map,
                 geometry: None,
+                background: None,
                 network,
                 flow,
             },
@@ -65,7 +70,6 @@ impl Simulation {
         sim
     }
 
-    #[cfg(feature = "lbm-gpu")]
     pub(super) fn enable_streaming(&mut self) {
         let center = ChunkId::at(self.physics.bodies[self.robot].translation().to_array());
         self.streaming = Some(WorldStreaming::new(center));

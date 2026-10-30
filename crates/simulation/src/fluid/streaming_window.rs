@@ -35,7 +35,7 @@ pub struct StreamingWindow {
     pub diagnostics: MigrationDiagnostics,
 }
 
-fn origin_for(position: [f32; 2]) -> Result<WindowOrigin, String> {
+pub(super) fn origin_for(position: [f32; 2]) -> Result<WindowOrigin, String> {
     let block = crate::map::CHUNK_SIZE;
     if !position.iter().all(|v| {
         v.is_finite() && *v >= (i32::MIN as f32 + 2.) * block && *v < (i32::MAX as f32 - 2.) * block
@@ -56,10 +56,16 @@ impl StreamingWindow {
         profile: GridProfile,
         config: WindowConfig,
     ) -> Result<Self, String> {
-        let spec = WindowSpec {
-            origin: origin_for(position)?,
-            profile,
-        };
+        Self::new_at(map, flow, origin_for(position)?, profile, config)
+    }
+    pub fn new_at(
+        map: &MapDefinition,
+        flow: &GraphFlow,
+        origin: WindowOrigin,
+        profile: GridProfile,
+        config: WindowConfig,
+    ) -> Result<Self, String> {
+        let spec = WindowSpec { origin, profile };
         let raster = rasterize(map, flow, spec)?;
         let mut window = LbmWindow::new(
             spec,
@@ -103,10 +109,17 @@ impl StreamingWindow {
         flow: &GraphFlow,
         position: [f32; 2],
     ) -> Result<bool, String> {
+        self.maybe_shift_to(map, flow, origin_for(position)?)
+    }
+    pub fn maybe_shift_to(
+        &mut self,
+        map: &MapDefinition,
+        flow: &GraphFlow,
+        origin: WindowOrigin,
+    ) -> Result<bool, String> {
         if self.field_pending {
             return Err("finish deferred LBM frame before prepare".into());
         }
-        let origin = origin_for(position)?;
         let old = self.window.spec();
         if !self.shifted && origin != old.origin {
             let spec = WindowSpec { origin, ..old };

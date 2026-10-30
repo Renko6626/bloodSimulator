@@ -1,7 +1,7 @@
 //! Finite-resistance exchange with the local LBM window in world coordinates.
 use super::streaming_window::StreamingWindow;
 use crate::{Config, circulation::graph::GraphFlow, map::MapDefinition};
-use blood_fluid_gpu::lbm::{GridProfile, LocalSampleStatus, StepInput, WindowConfig};
+use blood_fluid_gpu::lbm::{GridProfile, LocalSampleStatus, StepInput, WindowConfig, WindowOrigin};
 use rapier2d::prelude::*;
 use std::time::Instant;
 
@@ -43,6 +43,7 @@ pub(crate) struct LbmCoupling {
     pub options: LbmOptions,
     pub stats: LbmStats,
     mechanical_dt: f32,
+    pub frame_activation: f32,
 }
 impl LbmCoupling {
     pub fn new(
@@ -51,6 +52,19 @@ impl LbmCoupling {
         config: &Config,
         options: LbmOptions,
     ) -> Result<Self, String> {
+        Self::new_at(
+            map,
+            flow,
+            config,
+            options,
+            super::streaming_window::origin_for(map.spawn)?,
+        )
+    }
+    /// CPU-only validation also used when policy permission leaves no active window.
+    pub(crate) fn validate_options(
+        config: &Config,
+        options: &LbmOptions,
+    ) -> Result<(f32, usize, f32), String> {
         let dt = config.dt / config.substeps as f32;
         let h = options.profile.cell_spacing();
         if !dt.is_finite()
@@ -72,10 +86,20 @@ impl LbmCoupling {
             return Err("LBM lattice step count exceeds 1024".into());
         }
         let lattice_dt = dt / count as f32;
-        let window = StreamingWindow::new(
+        Ok((dt, count, lattice_dt))
+    }
+    pub fn new_at(
+        map: &MapDefinition,
+        flow: &GraphFlow,
+        config: &Config,
+        options: LbmOptions,
+        origin: WindowOrigin,
+    ) -> Result<Self, String> {
+        let (dt, count, lattice_dt) = Self::validate_options(config, &options)?;
+        let window = StreamingWindow::new_at(
             map,
             flow,
-            map.spawn,
+            origin,
             options.profile,
             WindowConfig {
                 dt: lattice_dt,
@@ -87,6 +111,7 @@ impl LbmCoupling {
             window,
             options,
             mechanical_dt: dt,
+            frame_activation: 1.,
             stats: LbmStats {
                 lattice_steps_per_substep: count,
                 lattice_dt,
@@ -112,6 +137,18 @@ impl LbmCoupling {
         result?;
         Ok(())
     }
+    pub fn prepare_at(
+        &mut self,
+        map: &MapDefinition,
+        flow: &GraphFlow,
+        origin: WindowOrigin,
+    ) -> Result<(), String> {
+        let started = Instant::now();
+        let result = self.window.maybe_shift_to(map, flow, origin);
+        self.stats.prepare_ms += started.elapsed().as_secs_f64() * 1000.;
+        result?;
+        Ok(())
+    }
     /// Returns the supported local weight and local velocity; solids have neither drive.
     pub fn local(&self, map: &MapDefinition, p: Vector) -> (f32, Vector, bool) {
         if !p.is_finite() || map.signed_distance(p) >= 0. {
@@ -131,7 +168,7 @@ impl LbmCoupling {
                     .min(max[1] - p.y);
                 let x = (d / self.options.outer_band).clamp(0., 1.);
                 (
-                    x * x * (3. - 2. * x),
+                    self.frame_activation * x * x * (3. - 2. * x),
                     Vector::from_array(sample.velocity),
                     true,
                 )

@@ -28,7 +28,7 @@ pub use fluid::lbm_coupling::{LbmOptions, LbmStats};
 pub use fluid::{FluidStats, LocalFluidOptions};
 #[cfg(feature = "lbm-gpu")]
 pub use fluid::{lbm_geometry, streaming_window};
-pub use runtime::{MoveInput, Simulation};
+pub use runtime::{MoveInput, PolicyFluidStatus, Simulation};
 pub use view::{
     ArrivalSnapshot, AttackSnapshot, CellPopulationSnapshot, CellStatus, FlowArrow,
     ImmunitySnapshot, LbmSnapshot, Snapshot,

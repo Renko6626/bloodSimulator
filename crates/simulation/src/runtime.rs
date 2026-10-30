@@ -17,7 +17,10 @@ mod gameplay;
 mod immunity;
 #[cfg(test)]
 mod immunity_tests;
+mod policy;
 mod streaming;
+pub use policy::PolicyFluidStatus;
+use policy::PolicyRuntime;
 
 #[derive(Clone, Copy, Debug, Default)]
 pub struct MoveInput {
@@ -36,6 +39,7 @@ enum Environment {
     World {
         map: MapDefinition,
         geometry: Option<MapGeometry>,
+        background: Option<crate::background::PreparedBackground>,
         network: GraphNetwork,
         flow: GraphFlow,
     },
@@ -47,7 +51,17 @@ impl Environment {
             Self::Loop { vessel, flow, .. } => {
                 circulation::sample_velocity(position, vessel, *flow)
             }
-            Self::World { map, flow, .. } => graph::sample_velocity(position, map, flow),
+            Self::World {
+                map,
+                flow,
+                background,
+                ..
+            } => match background {
+                Some(background) => {
+                    background.sample(map, flow, flow.summary.pressure_drop, position)
+                }
+                None => graph::sample_velocity(position, map, flow),
+            },
         }
     }
 
@@ -116,6 +130,7 @@ pub struct Simulation {
     #[cfg(feature = "lbm-gpu")]
     validation_scene: bool,
     local_fluid: Option<LocalRegions>,
+    policy: Option<PolicyRuntime>,
     #[cfg(feature = "lbm-gpu")]
     lbm: Option<crate::fluid::lbm_coupling::LbmCoupling>,
 }
@@ -157,6 +172,7 @@ impl Simulation {
             Environment::World {
                 map,
                 geometry: Some(geometry),
+                background: None,
                 network,
                 flow,
             },
@@ -198,6 +214,9 @@ impl Simulation {
         centers: Option<Vec<Vector>>,
         streamed: bool,
     ) -> Result<Self, String> {
+        if map.fluid.is_some() {
+            return Err("policy maps require try_new_policy_lbm_world".into());
+        }
         let config = if streamed {
             streaming::local_config(config)
         } else {
@@ -224,6 +243,7 @@ impl Simulation {
             Environment::World {
                 map,
                 geometry,
+                background: None,
                 network,
                 flow,
             },
@@ -247,10 +267,10 @@ impl Simulation {
         self.lbm.as_ref().map(|f| f.window.work_stats())
     }
 
-    /// Sample the composed LBM/background field in world space when LBM is active.
+    /// Sample the composed field; policy maps also expose background without an active window.
     #[cfg(feature = "lbm-gpu")]
     pub fn sample_world(&self, position: [f32; 2]) -> Option<blood_fluid_gpu::lbm::FluidSample> {
-        let (Some(lbm), Environment::World { map, .. }) = (&self.lbm, &self.environment) else {
+        let Environment::World { map, .. } = &self.environment else {
             return None;
         };
         let p = Vector::from_array(position);
@@ -259,7 +279,25 @@ impl Simulation {
         } else {
             Vector::ZERO
         };
-        Some(lbm.sample_world(map, p, background))
+        if let Some(lbm) = &self.lbm {
+            return Some(lbm.sample_world(map, p, background));
+        }
+        self.policy.as_ref()?;
+        let valid = p.is_finite() && map.signed_distance(p) < 0.;
+        Some(blood_fluid_gpu::lbm::FluidSample {
+            local_velocity: [0.; 2],
+            background_velocity: if valid {
+                background.to_array()
+            } else {
+                [0.; 2]
+            },
+            local_weight: 0.,
+            status: if valid {
+                blood_fluid_gpu::lbm::LocalSampleStatus::OutsideWindow
+            } else {
+                blood_fluid_gpu::lbm::LocalSampleStatus::SolidOrInvalid
+            },
+        })
     }
 
     /// Two precomputed 64² Stokes regions covering the first fork and upper arm.
@@ -393,6 +431,7 @@ impl Simulation {
             #[cfg(feature = "lbm-gpu")]
             validation_scene: false,
             local_fluid: None,
+            policy: None,
             #[cfg(feature = "lbm-gpu")]
             lbm: None,
         }
@@ -454,6 +493,9 @@ impl Simulation {
         self.try_reset().expect("reset simulation");
     }
     pub fn try_reset(&mut self) -> Result<(), String> {
+        if self.policy.is_some() {
+            return self.reset_policy(None);
+        }
         #[cfg(feature = "lbm-gpu")]
         if let Some(lbm) = &self.lbm {
             return self.try_reset_lbm_profile(lbm.options.profile);
@@ -478,6 +520,13 @@ impl Simulation {
     }
     #[cfg(feature = "lbm-gpu")]
     pub fn try_reset_lbm_profile(&mut self, profile: crate::GridProfile) -> Result<(), String> {
+        if self
+            .policy
+            .as_ref()
+            .is_some_and(|p| p.lbm_request.is_some())
+        {
+            return self.reset_policy(Some(profile));
+        }
         let lbm = self.lbm.as_ref().ok_or("LBM is not active")?;
         let mut options = lbm.options.clone();
         options.profile = profile;
@@ -501,6 +550,17 @@ impl Simulation {
         Ok(())
     }
     fn step(&mut self, input: MoveInput) -> Result<(), String> {
+        if let Environment::World {
+            background: Some(background),
+            ..
+        } = &self.environment
+        {
+            background.validate_step(&self.config)?;
+        }
+        #[cfg(feature = "lbm-gpu")]
+        if let Some(options) = self.policy.as_ref().and_then(|p| p.lbm_request.as_ref()) {
+            crate::fluid::lbm_coupling::LbmCoupling::validate_options(&self.config, options)?;
+        }
         #[cfg(feature = "lbm-gpu")]
         if let Some(lbm) = &self.lbm {
             lbm.validate_mechanical_time(&self.config)
@@ -516,16 +576,10 @@ impl Simulation {
         let time = self.steps as f32 * self.config.dt;
         let pressure = self.config.pressure
             * (1.0 + 0.15 * (std::f32::consts::TAU * self.config.pulse_hz * time).sin());
-        self.environment.update(pressure);
-        self.advance_cell_lifetimes();
-        self.update_cell_population();
-        self.update_streaming();
-        self.update_white_intents();
-        let cell_bodies = self.cell_handles();
-        if let Some(fluid) = &mut self.local_fluid {
-            fluid.begin_frame();
-            fluid.prepare_pressure(pressure);
+        if !pressure.is_finite() && self.policy.is_some() {
+            return Err("policy instantaneous pressure must be finite".into());
         }
+        self.environment.update(pressure);
         #[cfg(feature = "lbm-gpu")]
         if let Some(lbm) = &mut self.lbm {
             lbm.window.begin_frame();
@@ -536,6 +590,17 @@ impl Simulation {
             lbm.stats.max_cell_marker_force = 0.;
             lbm.stats.active_cell_count = 0;
         }
+        #[cfg(feature = "lbm-gpu")]
+        self.select_policy_frame()?;
+        self.advance_cell_lifetimes();
+        self.update_cell_population();
+        self.update_streaming();
+        self.update_white_intents();
+        let cell_bodies = self.cell_handles();
+        if let Some(fluid) = &mut self.local_fluid {
+            fluid.begin_frame();
+            fluid.prepare_pressure(pressure);
+        }
         let dt = self.config.dt / self.config.substeps as f32;
         self.physics.integration_parameters.dt = dt;
         for substep in 0..self.config.substeps {
@@ -545,10 +610,14 @@ impl Simulation {
             if let (Some(lbm), Environment::World { map, flow, .. }) =
                 (&mut self.lbm, &self.environment)
             {
-                lbm.prepare(map, flow, self.physics.bodies[self.robot].translation())
-                    .map_err(|e| {
-                        format!("LBM prepare failed; frame may be partially advanced: {e}")
-                    })?;
+                let prepared = if self.policy.is_some() {
+                    lbm.prepare_at(map, flow, lbm.window.active_origin())
+                } else {
+                    lbm.prepare(map, flow, self.physics.bodies[self.robot].translation())
+                };
+                prepared.map_err(|e| {
+                    format!("LBM prepare failed; frame may be partially advanced: {e}")
+                })?;
             }
             if let Some(fluid) = &mut self.local_fluid {
                 fluid
@@ -1400,6 +1469,7 @@ mod population_tests {
             Environment::World {
                 map,
                 geometry: Some(geometry),
+                background: None,
                 network,
                 flow,
             },
