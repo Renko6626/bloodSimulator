@@ -1,6 +1,7 @@
 //! Independent, fixed-step simulation. Distances are local cell-scale units;
 //! time is seconds, with +Y pointing down to match the experiment view.
 
+mod background;
 mod cell;
 mod cell_population;
 pub mod circulation;

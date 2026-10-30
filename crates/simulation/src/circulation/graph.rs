@@ -168,12 +168,33 @@ fn cholesky_solve(matrix: Vec<Vec<f64>>, rhs: Vec<f64>) -> Vec<f64> {
 /// Approximate Poiseuille velocity in each edge, blended once per adjacent edge
 /// near a junction. The graph is fixed; this is not a 2D fluid solve.
 pub fn sample_velocity(position: Vector, map: &MapDefinition, flow: &GraphFlow) -> Vector {
+    sample_profile(position, map, flow, None)
+}
+
+/// Planar Poiseuille profile with cross-section integral Q / depth.
+/// Junction blending shares the legacy approximation; straight pipes have no extra wall fade.
+pub fn sample_planar_velocity(
+    position: Vector,
+    map: &MapDefinition,
+    flow: &GraphFlow,
+    depth: f32,
+) -> Vector {
+    assert!(depth.is_finite() && depth > 0.0);
+    sample_profile(position, map, flow, Some(depth))
+}
+
+fn sample_profile(
+    position: Vector,
+    map: &MapDefinition,
+    flow: &GraphFlow,
+    depth: Option<f32>,
+) -> Vector {
     if map.edges.is_empty() || flow.rates.len() != map.edges.len() {
         return Vector::ZERO;
     }
     let (nearest, signed_distance) = map.nearest_edge_and_signed_distance(position);
     let nearest_projection = map.project_edge(nearest, position);
-    let mut velocity = edge_velocity(nearest, &nearest_projection, map, flow);
+    let mut velocity = edge_velocity(nearest, &nearest_projection, map, flow, depth);
     let mut best_junction = None;
     for (node_id, node) in map.nodes.iter().enumerate() {
         let radius = map
@@ -204,13 +225,20 @@ pub fn sample_velocity(position: Vector, map: &MapDefinition, flow: &GraphFlow) 
             let axial = (1.0 - path_distance / radius).clamp(0.0, 1.0);
             let weight = lateral * axial;
             if weight > 0.0 {
-                total += edge_velocity(i, &projection, map, flow) * weight;
+                total += edge_velocity(i, &projection, map, flow, depth) * weight;
                 weight_sum += weight;
             }
         }
         if weight_sum > 0.0 {
             velocity = total / weight_sum;
         }
+    }
+    if depth.is_some() {
+        return if signed_distance < 0.0 {
+            velocity
+        } else {
+            Vector::ZERO
+        };
     }
     // signed_distance is negative inside the shared union of vessel channels.
     let fade_width = map.edges[nearest].half_width * 0.25;
@@ -223,12 +251,16 @@ fn edge_velocity(
     projection: &crate::map::EdgeProjection,
     map: &MapDefinition,
     flow: &GraphFlow,
+    depth: Option<f32>,
 ) -> Vector {
     let edge = &map.edges[edge_id];
     let radius = edge.half_width;
     let profile = (1.0 - (projection.distance / radius).powi(2)).max(0.0);
-    let mean = flow.rates[edge_id] / (std::f32::consts::PI * radius * radius);
-    projection.tangent * (2.0 * mean * profile)
+    let peak = match depth {
+        Some(depth) => 3.0 * flow.rates[edge_id] / (4.0 * radius * depth),
+        None => 2.0 * (flow.rates[edge_id] / (std::f32::consts::PI * radius * radius)),
+    };
+    projection.tangent * (peak * profile)
 }
 
 fn smoothstep(t: f32) -> f32 {

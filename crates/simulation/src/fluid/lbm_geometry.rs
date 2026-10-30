@@ -4,8 +4,7 @@ use blood_fluid_gpu::lbm::{InitialField, OpeningSpec, WindowGeometry, WindowSide
 use rapier2d::prelude::Vector;
 use std::collections::VecDeque;
 
-/// Common world-space depth used to convert graph volume flow to planar flux.
-pub const EQUIVALENT_DEPTH: f32 = 1.0;
+pub use crate::background::EQUIVALENT_DEPTH;
 
 #[derive(Clone, Debug)]
 pub struct OpeningGeometry {
