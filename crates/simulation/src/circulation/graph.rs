@@ -307,6 +307,7 @@ mod tests {
             .collect();
         let map = MapDefinition {
             fluid: None,
+            chambers: vec![],
             nodes,
             edges,
             pump_edge: 4,

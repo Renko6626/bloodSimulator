@@ -1,4 +1,7 @@
 //! A small, fixed vessel network and the shared geometry used by physics and drawing.
+mod chamber;
+pub use chamber::ChamberGeometry;
+
 pub mod fluid_asset;
 pub mod fluid_policy;
 mod geometry;
@@ -78,6 +81,7 @@ pub struct MapDefinition {
     pub fluid: Option<MapFluidDefinition>,
     pub nodes: Vec<[f32; 2]>,
     pub edges: Vec<VesselEdge>,
+    pub chambers: Vec<ChamberGeometry>,
     pub pump_edge: usize,
     pub spawn: [f32; 2],
     pub landmarks: Vec<Landmark>,
@@ -173,6 +177,7 @@ impl MapDefinition {
             fluid: None,
             nodes,
             edges,
+            chambers: vec![],
             pump_edge: 11,
             spawn: [-20.0, 0.0],
             landmarks: vec![
@@ -282,13 +287,18 @@ impl MapDefinition {
         best
     }
 
-    /// Distance to the union boundary: negative inside a vessel, positive outside.
+    /// Union wall score: negative inside a vessel or chamber, positive outside.
     pub fn signed_distance(&self, position: Vector) -> f32 {
         self.edges
             .iter()
             .map(|edge| {
                 distance_to_path_squared(&edge.centerline, position).sqrt() - edge.half_width
             })
+            .chain(
+                self.chambers
+                    .iter()
+                    .map(|chamber| chamber.signed_distance(position)),
+            )
             .fold(f32::INFINITY, f32::min)
     }
 
@@ -312,6 +322,9 @@ impl MapDefinition {
             .min_by(|a, b| a.1.total_cmp(&b.1))
             .map(|(index, _)| index)
             .expect("map has at least one edge");
+        for chamber in &self.chambers {
+            signed_distance = signed_distance.min(chamber.signed_distance(position));
+        }
         (nearest, signed_distance)
     }
 }
@@ -321,9 +334,85 @@ mod tests {
     use super::*;
 
     #[test]
+    fn concave_chamber_has_signed_walls_and_closes_its_last_edge() {
+        let outline = vec![[0., 0.], [6., 0.], [6., 2.], [2., 2.], [2., 6.], [0., 6.]];
+        for boundary in [outline.clone(), outline.into_iter().rev().collect()] {
+            let chamber = ChamberGeometry::new("concave", boundary);
+            assert_eq!(chamber.bounds(), [[0., 0.], [6., 6.]]);
+            assert_eq!(chamber.signed_distance(v([1., 4.])), -1.);
+            assert_eq!(chamber.signed_distance(v([4., 4.])), 2.);
+            assert_eq!(chamber.signed_distance(v([0., 4.])), 0.);
+            assert_eq!(chamber.signed_distance(v([-1., 4.])), 1.);
+        }
+    }
+
+    #[test]
+    fn chamber_union_preserves_graph_ownership_and_shared_wall_score() {
+        let old = MapDefinition::small_world();
+        let mut map = old.clone();
+        map.chambers.push(ChamberGeometry::new(
+            "extension",
+            vec![[-22., -8.], [-14., -8.], [-14., 2.], [-22., 2.]],
+        ));
+        // Chamber-only interior, tube overlap, a former chamber edge inside the tube,
+        // a tube-only point, and tissue outside both.
+        for point in [
+            [-18., -6.],
+            [-18., 0.],
+            [-14., 0.],
+            [9., -12.],
+            [-18., -10.],
+        ] {
+            let point = v(point);
+            let (edge, score) = map.nearest_edge_and_signed_distance(point);
+            assert_eq!(edge, old.nearest_edge(point));
+            assert_eq!(score, map.signed_distance(point));
+        }
+        assert_eq!(map.signed_distance(v([-18., -6.])), -2.);
+        assert!(map.signed_distance(v([-14., 0.])) < -2.);
+        assert!(map.signed_distance(v([-18., -10.])) > 0.);
+    }
+
+    #[test]
+    fn chamber_outside_tubes_generates_floor_and_unsealed_chunk_walls() {
+        let mut map = MapDefinition::small_world();
+        map.chambers.push(ChamberGeometry::new(
+            "distant",
+            vec![[72., 68.], [104., 68.], [104., 76.], [72., 76.]],
+        ));
+        let whole = map.build_geometry(0.2);
+        assert!(whole.bounds[1][0] > 104. && whole.bounds[1][1] > 76.);
+        assert!(
+            whole
+                .floor_vertices
+                .iter()
+                .any(|p| p[0] > 90. && p[1] > 70.)
+        );
+        assert!(whole.walls.iter().flatten().any(|p| p[0] > 90.));
+        let a = map.build_chunk_geometry(ChunkId { x: 4, y: 4 });
+        let b = map.build_chunk_geometry(ChunkId { x: 5, y: 4 });
+        assert!(!a.core.floor_vertices.is_empty() && !b.core.floor_vertices.is_empty());
+        let walls: Vec<_> = a.core.walls.iter().chain(&b.core.walls).collect();
+        assert!(walls.iter().all(|segment| segment.windows(2).all(|ends| {
+            let midpoint = (v(ends[0]) + v(ends[1])) * 0.5;
+            map.signed_distance(midpoint).abs() < 0.15
+        })));
+        // The chamber crosses x=80 through open floor, with no artificial seam wall.
+        assert!(walls.iter().all(|segment| segment.iter().all(|p| {
+            (p[0] - 80.).abs() > 1e-5 || (p[1] - 68.).abs() < 1e-5 || (p[1] - 76.).abs() < 1e-5
+        })));
+        assert!(
+            walls
+                .iter()
+                .any(|segment| segment.iter().any(|p| p[0] == 80.))
+        );
+    }
+
+    #[test]
     fn fixed_chunks_share_geometry_without_sealing_the_channel() {
         let map = MapDefinition {
             fluid: None,
+            chambers: vec![],
             nodes: vec![[-40., 0.], [40., 0.]],
             edges: vec![VesselEdge {
                 from: 0,

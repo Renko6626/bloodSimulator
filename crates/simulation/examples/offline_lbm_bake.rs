@@ -79,6 +79,7 @@ fn run() -> Result<(), String> {
         .collect();
     let mut map = MapDefinition {
         fluid: None,
+        chambers: vec![],
         nodes,
         edges,
         pump_edge: 0,

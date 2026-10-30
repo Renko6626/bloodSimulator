@@ -244,6 +244,7 @@ mod tests {
     fn fixture() -> (Config, MapDefinition) {
         let nodes = vec![[-50., 24.], [100., 24.], [100., 80.], [-50., 80.]];
         let map = MapDefinition {
+            chambers: vec![],
             edges: (0..4)
                 .map(|from| {
                     let to = (from + 1) % 4;

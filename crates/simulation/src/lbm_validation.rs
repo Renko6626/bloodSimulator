@@ -31,6 +31,7 @@ pub fn map() -> MapDefinition {
         .collect();
     MapDefinition {
         fluid: None,
+        chambers: vec![],
         nodes,
         edges,
         pump_edge: 6,

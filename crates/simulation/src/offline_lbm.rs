@@ -155,6 +155,7 @@ mod tests {
         use crate::map::{MapDefinition, VesselEdge};
         let map = MapDefinition {
             fluid: None,
+            chambers: vec![],
             nodes: vec![[-10., 0.], [10., 0.]],
             edges: vec![VesselEdge {
                 from: 0,

@@ -47,6 +47,11 @@ pub(super) fn build(map: &MapDefinition, spacing: f32) -> MapGeometry {
         (map.edges
             .iter()
             .flat_map(|edge| edge.centerline.iter())
+            .chain(
+                map.chambers
+                    .iter()
+                    .flat_map(|chamber| chamber.boundary.iter()),
+            )
             .map(|p| p[0])
             .fold(f32::INFINITY, f32::min)
             - pad)
@@ -54,6 +59,11 @@ pub(super) fn build(map: &MapDefinition, spacing: f32) -> MapGeometry {
         (map.edges
             .iter()
             .flat_map(|edge| edge.centerline.iter())
+            .chain(
+                map.chambers
+                    .iter()
+                    .flat_map(|chamber| chamber.boundary.iter()),
+            )
             .map(|p| p[1])
             .fold(f32::INFINITY, f32::min)
             - pad)
@@ -64,6 +74,11 @@ pub(super) fn build(map: &MapDefinition, spacing: f32) -> MapGeometry {
         (map.edges
             .iter()
             .flat_map(|edge| edge.centerline.iter())
+            .chain(
+                map.chambers
+                    .iter()
+                    .flat_map(|chamber| chamber.boundary.iter()),
+            )
             .map(|p| p[0])
             .fold(f32::NEG_INFINITY, f32::max)
             + pad)
@@ -71,6 +86,11 @@ pub(super) fn build(map: &MapDefinition, spacing: f32) -> MapGeometry {
         (map.edges
             .iter()
             .flat_map(|edge| edge.centerline.iter())
+            .chain(
+                map.chambers
+                    .iter()
+                    .flat_map(|chamber| chamber.boundary.iter()),
+            )
             .map(|p| p[1])
             .fold(f32::NEG_INFINITY, f32::max)
             + pad)

@@ -323,6 +323,7 @@ mod tests {
     fn map(nodes: &[[f32; 2]], pairs: &[(usize, usize)]) -> MapDefinition {
         MapDefinition {
             fluid: None,
+            chambers: vec![],
             nodes: nodes.to_vec(),
             edges: pairs
                 .iter()
