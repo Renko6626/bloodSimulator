@@ -2,9 +2,12 @@
 
 本阶段在 `feat/heart-geometry-preview` 实现可探索的静态四腔几何。基于 `5f28730` 的离线 LBM 基础设施；几何提交 `e4c49df`，场景与真实输入探针提交 `5e1c188`。本阶段不烘焙或连接心腔流场，没有细胞、收缩、动态瓣膜、单向通行或正式心腔阻力模型。
 
+逐任务和最终整分支审阅均通过，无待修复发现；见[最终审阅](review.md)、[逐任务审阅](task-reviews.md)和[执行决定与交接](controller-notes.md)。工作树保留于 `/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator`，启动命令须在该工作树执行。
+
 ## 启动与范围
 
 ```sh
+cd /data/sunyunbo/.codex/worktrees/4aad/bloodSimulator
 bash scripts/build.sh
 godot --path godot -- --heart-preview
 ```
