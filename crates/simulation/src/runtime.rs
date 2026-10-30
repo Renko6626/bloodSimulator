@@ -14,6 +14,7 @@ use rapier2d::prelude::*;
 use std::time::Instant;
 
 mod gameplay;
+mod heart_preview;
 mod immunity;
 #[cfg(test)]
 mod immunity_tests;
@@ -122,6 +123,7 @@ pub struct Simulation {
     attack: crate::combat::Attack,
     population: Option<CellPopulation>,
     streaming: Option<crate::world_streaming::WorldStreaming>,
+    heart_preview: bool,
     walls: Vec<Vec<[f32; 2]>>,
     steps: u64,
     elapsed_time: f32,
@@ -423,6 +425,7 @@ impl Simulation {
             attack: crate::combat::Attack::default(),
             population,
             streaming: None,
+            heart_preview: false,
             walls,
             steps: 0,
             elapsed_time: 0.,
@@ -493,6 +496,12 @@ impl Simulation {
         self.try_reset().expect("reset simulation");
     }
     pub fn try_reset(&mut self) -> Result<(), String> {
+        if self.heart_preview {
+            let paused = self.paused;
+            *self = Self::new_heart_preview(self.config.clone());
+            self.paused = paused;
+            return Ok(());
+        }
         if self.policy.is_some() {
             return self.reset_policy(None);
         }
@@ -550,6 +559,9 @@ impl Simulation {
         Ok(())
     }
     fn step(&mut self, input: MoveInput) -> Result<(), String> {
+        if self.heart_preview {
+            self.enforce_heart_preview();
+        }
         if let Environment::World {
             background: Some(background),
             ..

@@ -1,6 +1,8 @@
 //! A small, fixed vessel network and the shared geometry used by physics and drawing.
 mod chamber;
+mod heart;
 pub use chamber::ChamberGeometry;
+pub use heart::heart_preview_route;
 
 pub mod fluid_asset;
 pub mod fluid_policy;
