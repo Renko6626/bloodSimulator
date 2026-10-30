@@ -49,10 +49,10 @@ impl CellPopulation {
     pub fn new(map: &MapDefinition, center: Vector, options: CellPopulationOptions) -> Self {
         assert!(
             options.protected_half_extent.is_finite()
-                && options.protected_half_extent > 0.
+                && options.protected_half_extent >= 0.
                 && options.activation_half_extent > options.protected_half_extent
                 && options.retention_half_extent.is_finite()
-                && options.retention_half_extent > options.activation_half_extent
+                && options.retention_half_extent >= options.activation_half_extent
                 && options.transport_interval.is_finite()
                 && options.transport_interval > 0.
         );

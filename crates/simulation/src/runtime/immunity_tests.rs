@@ -113,7 +113,7 @@ fn reinforcements_are_bounded_and_white_bodies_stay_out_of_red_stock() {
         .cells
         .iter()
         .filter(|c| c.white.is_some())
-        .map(|c| c.body)
+        .filter_map(|c| c.active_body())
         .collect();
     for handle in white_handles {
         assert!(
@@ -147,7 +147,7 @@ fn a_pursuing_white_cell_really_moves_with_zero_background_flow() {
     sim.config.white_cells.chase_speed = 3.0;
     sim.config.white_cells.call_time = 100.0;
     let white = sim.insert_white_cell(Vector::new(-8.0, 0.0));
-    let body = sim.cells[white].body;
+    let body = sim.cells[white].active_body().unwrap();
     sim.physics.bodies[sim.robot].set_translation(Vector::new(-3.0, 0.0), true);
     sim.immunity.alertness = 100.0;
     frames(&mut sim, 90);

@@ -27,6 +27,7 @@ var previous_render_usec := 0
 var cell_meshes: Array[CellMesh] = []
 var screenshot_path := ""
 var screenshot_started := false
+var stream_world := false
 var previous_centers: Array[Vector2] = []
 
 
@@ -34,6 +35,9 @@ var previous_centers: Array[Vector2] = []
 func _ready() -> void:
 	hud = $HUDLayer/HUD
 	var args := OS.get_cmdline_user_args()
+	stream_world = args.has("--stream-world")
+	if stream_world:
+		camera.zoom = Vector2(2.0, 2.0)
 	var use_lbm := args.has("--local-lbm")
 	var use_stokes := args.has("--local-stokes")
 	var local_cells := args.has("--local-cells")
@@ -73,10 +77,11 @@ func _ready() -> void:
 	if profile_given and not use_lbm:
 		_startup_error("--lbm-profile requires --local-lbm")
 		return
-	if local_cells and use_stokes:
+	if (local_cells or stream_world) and use_stokes:
 		_startup_error("--local-cells supports world and LBM; local Stokes is unavailable")
 		return
 	simulation.configure_local_cells(local_cells)
+	simulation.configure_stream_world(stream_world)
 	if use_lbm:
 		var created: bool = simulation.use_lbm_validation(profile) if validation else simulation.use_lbm_world(profile)
 		if not created:
@@ -86,12 +91,13 @@ func _ready() -> void:
 		simulation.use_local_world()
 	else:
 		simulation.use_world()
-	var geometry: Dictionary = simulation.world_geometry()
-	_build_walls(geometry.get("walls", []))
-	var background_error := background.configure(geometry, SCALE, font)
-	if not background_error.is_empty():
-		_startup_error(background_error)
-		return
+	if not stream_world:
+		var geometry: Dictionary = simulation.world_geometry()
+		_build_walls(geometry.get("walls", []))
+		var background_error := background.configure(geometry, SCALE, font)
+		if not background_error.is_empty():
+			_startup_error(background_error)
+			return
 	hud.pause_requested.connect(_toggle_pause)
 	hud.step_requested.connect(_single_step)
 	hud.reset_requested.connect(_reset)
@@ -100,6 +106,7 @@ func _ready() -> void:
 	hud.collision_changed.connect(_collision_changed)
 	_refresh()
 	camera.position = state.robot * SCALE
+	camera.reset_smoothing()
 	if validation:
 		hud.set_pressure_display(state.pressure_drop)
 	if not benchmark.is_empty():
@@ -187,6 +194,9 @@ func _single_step() -> void:
 
 func _reset() -> void:
 	simulation.reset()
+	if stream_world:
+		camera.position = simulation.snapshot().robot * SCALE
+		camera.reset_smoothing()
 	_refresh()
 
 
@@ -196,17 +206,38 @@ func _parameters_changed(pressure: float, speed: float, drag: float) -> void:
 
 func _flow_changed(value: bool) -> void:
 	show_flow = value
+	if stream_world:
+		_refresh()
+		state = simulation.snapshot()
 	queue_redraw()
 
 
 func _collision_changed(value: bool) -> void:
 	show_collision = value
+	if stream_world:
+		_refresh()
 	queue_redraw()
 
 
 func _refresh() -> void:
 	state = simulation.snapshot()
 	camera.position = state.robot * SCALE
+	if stream_world:
+		if state.steps == 0:
+			camera.reset_smoothing()
+		var center := camera.get_screen_center_position() / SCALE
+		var half := get_viewport_rect().size / (camera.zoom * SCALE * 2.0)
+		var delta: Dictionary = simulation.sync_world_view(PackedVector2Array([center - half, center + half]), show_flow)
+		if delta.has("error"):
+			_startup_error(delta.error)
+			return
+		var message := background.apply_chunk_delta(delta, SCALE, font)
+		if not message.is_empty():
+			_startup_error(message)
+			return
+		if show_collision:
+			wall_segments.clear()
+			_build_walls(simulation.geometry())
 	hud.update_state(state)
 	queue_redraw()
 

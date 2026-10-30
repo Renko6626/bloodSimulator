@@ -77,10 +77,25 @@ pub(super) fn build(map: &MapDefinition, spacing: f32) -> MapGeometry {
             / spacing,
     ]
     .map(|x| x.ceil() * spacing);
+    build_region(map, min, max, spacing)
+}
+
+pub(super) fn build_region(
+    map: &MapDefinition,
+    min: [f32; 2],
+    max: [f32; 2],
+    spacing: f32,
+) -> MapGeometry {
     let nx = ((max[0] - min[0]) / spacing).round() as usize + 1;
     let ny = ((max[1] - min[1]) / spacing).round() as usize + 1;
     let index = |x: usize, y: usize| y * nx + x;
-    let point = |x: usize, y: usize| [min[0] + x as f32 * spacing, min[1] + y as f32 * spacing];
+    let grid_min = min.map(|v| (v / spacing).round() as i32);
+    let point = |x: usize, y: usize| {
+        [
+            (grid_min[0] + x as i32) as f32 * spacing,
+            (grid_min[1] + y as i32) as f32 * spacing,
+        ]
+    };
 
     let mut values = Vec::with_capacity(nx * ny);
     for y in 0..ny {

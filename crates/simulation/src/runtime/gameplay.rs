@@ -7,16 +7,21 @@ impl Simulation {
     }
 
     pub(super) fn cell_handles(&self) -> Vec<SoftBodyHandle> {
-        self.cells.iter().map(|cell| cell.body).collect()
+        self.cells
+            .iter()
+            .filter_map(|cell| cell.active_body())
+            .collect()
     }
 
     pub(super) fn advance_cell_lifetimes(&mut self) {
         let previous_count = self.cells.len();
         self.cells.retain_mut(|cell| {
-            if !cell.advance_corpse(&mut self.physics.soft_bodies[cell.body], &self.config) {
+            if !cell.advance_corpse(&mut self.physics, &self.config) {
                 return true;
             }
-            self.physics.remove_soft_body(cell.body);
+            if let Some(handle) = cell.active_body() {
+                self.physics.remove_soft_body(handle);
+            }
             if let Some(population) = &mut self.population
                 && cell.white.is_none()
             {
@@ -39,10 +44,13 @@ impl Simulation {
             .query_pipeline_with_filter(QueryFilter::only_fixed());
         let mut hits = Vec::new();
         for cell in &mut self.cells {
+            let Some(handle) = cell.active_body() else {
+                continue;
+            };
             if cell.dead_age.is_some() {
                 continue;
             }
-            let body = &self.physics.soft_bodies[cell.body];
+            let body = &self.physics.soft_bodies[handle];
             let Some(point) = crate::combat::contact_point(body, origin, self.config.attack_radius)
             else {
                 continue;
@@ -117,7 +125,7 @@ mod tests {
     fn corpse_deflates_as_a_real_soft_body_and_is_eventually_removed() {
         let mut sim = near_cell();
         sim.cells[0].damage(100.0);
-        let handle = sim.cells[0].body;
+        let handle = sim.cells[0].active_body().unwrap();
         let original_area = sim.physics.soft_bodies[handle].volume();
         for _ in 0..60 {
             sim.tick(MoveInput::default());
@@ -142,7 +150,7 @@ mod tests {
     fn a_dead_cell_leaving_the_window_never_returns_as_live_stock() {
         let mut sim = near_cell();
         sim.cells[0].damage(100.0);
-        let body = sim.cells[0].body;
+        let body = sim.cells[0].active_body().unwrap();
         sim.physics.bodies[sim.robot].set_translation(Vector::new(-70.0, 0.0), true);
         sim.update_cell_population();
         assert!(sim.physics.soft_bodies.get(body).is_none());

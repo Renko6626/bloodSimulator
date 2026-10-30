@@ -7,6 +7,9 @@ impl Simulation {
         let robot = self.physics.bodies[self.robot].translation();
         let radius = self.immunity.sense_radius();
         for cell in &mut self.cells {
+            let Some(handle) = cell.active_body() else {
+                continue;
+            };
             let Some(white) = &mut cell.white else {
                 continue;
             };
@@ -16,7 +19,7 @@ impl Simulation {
                 white.call_time = 0.0;
                 continue;
             }
-            let center = fluid::center(&self.physics.soft_bodies[cell.body]);
+            let center = fluid::center(&self.physics.soft_bodies[handle]);
             let visible = center.distance(robot) <= radius
                 && crate::combat::clear_path(&self.physics, center, robot);
             white.think(
@@ -36,13 +39,16 @@ impl Simulation {
         let radius = self.immunity.sense_radius();
         let alertness = self.immunity.alertness;
         for cell in &mut self.cells {
+            let Some(handle) = cell.active_body() else {
+                continue;
+            };
             let Some(white) = &mut cell.white else {
                 continue;
             };
             if cell.dead_age.is_some() {
                 continue;
             }
-            let center = fluid::center(&self.physics.soft_bodies[cell.body]);
+            let center = fluid::center(&self.physics.soft_bodies[handle]);
             let sees_robot = center.distance(origin) <= radius
                 && crate::combat::clear_path(&self.physics, center, origin);
             for hit in hits {
@@ -81,7 +87,9 @@ impl Simulation {
                 continue;
             }
             let movement = white.movement;
-            let handle = cell.body;
+            let Some(handle) = cell.active_body() else {
+                continue;
+            };
             let body = &self.physics.soft_bodies[handle];
             let center = fluid::center(body);
             let target = self.flow_velocity_at(center, fluid::body_radius(body)) + movement;
@@ -102,13 +110,16 @@ impl Simulation {
         let mut damage = 0.0;
         let mut call = None;
         for cell in &mut self.cells {
+            let Some(handle) = cell.active_body() else {
+                continue;
+            };
             let Some(white) = &mut cell.white else {
                 continue;
             };
             if cell.dead_age.is_some() {
                 continue;
             }
-            let body = &self.physics.soft_bodies[cell.body];
+            let body = &self.physics.soft_bodies[handle];
             let center = fluid::center(body);
             let visible = center.distance(robot) <= radius
                 && crate::combat::clear_path(&self.physics, center, robot);
@@ -146,7 +157,9 @@ impl Simulation {
         if let Some((caller, last_seen)) = call {
             self.immunity.call_cooldown = self.config.white_cells.call_interval;
             for cell in &mut self.cells {
-                if let Some(white) = &mut cell.white {
+                if cell.active_body().is_some()
+                    && let Some(white) = &mut cell.white
+                {
                     white.call_time = 0.0;
                 }
             }
@@ -172,15 +185,32 @@ impl Simulation {
 
     pub(super) fn insert_white_cell(&mut self, position: Vector) -> usize {
         self.white_cells_enabled = true;
-        let body = cell::insert_with_radius(
-            &mut self.physics,
-            position,
-            self.config.white_cells.radius,
-            &self.config,
-        );
+        let body = if self.streaming.as_ref().is_some_and(|s| {
+            !s.center
+                .neighborhood(crate::map::SCENE_RADIUS)
+                .contains(&crate::map::ChunkId::at(position.to_array()))
+        }) {
+            cell::CellBody::Dormant(cell::DormantBody::at(
+                position,
+                self.config.white_cells.radius,
+                &self.config,
+            ))
+        } else {
+            cell::CellBody::Active(cell::insert_with_radius(
+                &mut self.physics,
+                position,
+                self.config.white_cells.radius,
+                &self.config,
+            ))
+        };
         let id = self.next_cell_id;
         self.next_cell_id += 1;
-        let mut cell = cell::Cell::new(id, body, self.config.white_cells.health);
+        let mut cell = cell::Cell::new(
+            id,
+            body,
+            self.config.white_cells.health,
+            cell::UnloadPolicy::Hibernate,
+        );
         cell.white = Some(WhiteCell::new(id));
         self.cells.push(cell);
         self.reset_local_cell_history();
@@ -261,7 +291,10 @@ impl Simulation {
             || map.nearest_edge(position) != edge
             || position.distance(self.physics.bodies[self.robot].translation()) < radius + 1.35
             || self.cells.iter().any(|cell| {
-                let (min, max) = cell_bounds(&self.physics.soft_bodies[cell.body]);
+                let Some(handle) = cell.active_body() else {
+                    return false;
+                };
+                let (min, max) = cell_bounds(&self.physics.soft_bodies[handle]);
                 let separation = (min - position).max(position - max).max(Vector::ZERO);
                 separation.length() < radius + 0.15
             })

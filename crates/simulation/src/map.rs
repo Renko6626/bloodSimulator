@@ -2,6 +2,57 @@
 mod geometry;
 
 use rapier2d::prelude::Vector;
+use std::collections::BTreeSet;
+
+pub const CHUNK_SIZE: f32 = blood_fluid::WORLD_CHUNK_SIZE as f32;
+pub const SCENE_RADIUS: i32 = 2;
+const GEOMETRY_SPACING: f32 = 0.2;
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub struct ChunkId {
+    pub x: i32,
+    pub y: i32,
+}
+
+impl ChunkId {
+    pub fn at(p: [f32; 2]) -> Self {
+        Self {
+            x: (p[0] / CHUNK_SIZE).floor() as i32,
+            y: (p[1] / CHUNK_SIZE).floor() as i32,
+        }
+    }
+    pub fn bounds(self) -> [[f32; 2]; 2] {
+        let min = [self.x as f32 * CHUNK_SIZE, self.y as f32 * CHUNK_SIZE];
+        [min, [min[0] + CHUNK_SIZE, min[1] + CHUNK_SIZE]]
+    }
+    pub fn neighborhood(self, radius: i32) -> BTreeSet<Self> {
+        (self.y - radius..=self.y + radius)
+            .flat_map(|y| (self.x - radius..=self.x + radius).map(move |x| Self { x, y }))
+            .collect()
+    }
+    pub fn scene_bounds(self) -> [[f32; 2]; 2] {
+        [
+            Self {
+                x: self.x - SCENE_RADIUS,
+                y: self.y - SCENE_RADIUS,
+            }
+            .bounds()[0],
+            Self {
+                x: self.x + SCENE_RADIUS,
+                y: self.y + SCENE_RADIUS,
+            }
+            .bounds()[1],
+        ]
+    }
+}
+
+#[derive(Clone, Debug)]
+pub struct ChunkGeometry {
+    pub id: ChunkId,
+    pub core: MapGeometry,
+    /// Includes two geometry cells of bleed for filtered background tiles.
+    pub paint: MapGeometry,
+}
 
 #[derive(Clone, Debug)]
 pub struct VesselEdge {
@@ -142,6 +193,21 @@ impl MapDefinition {
         geometry::build(self, spacing)
     }
 
+    pub fn build_chunk_geometry(&self, id: ChunkId) -> ChunkGeometry {
+        let [min, max] = id.bounds();
+        let bleed = 2. * GEOMETRY_SPACING;
+        ChunkGeometry {
+            id,
+            core: geometry::build_region(self, min, max, GEOMETRY_SPACING),
+            paint: geometry::build_region(
+                self,
+                min.map(|v| v - bleed),
+                max.map(|v| v + bleed),
+                GEOMETRY_SPACING,
+            ),
+        }
+    }
+
     pub fn edge_length(&self, edge: usize) -> f32 {
         self.edges[edge]
             .centerline
@@ -247,6 +313,37 @@ impl MapDefinition {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn fixed_chunks_share_geometry_without_sealing_the_channel() {
+        let map = MapDefinition {
+            nodes: vec![[-40., 0.], [40., 0.]],
+            edges: vec![VesselEdge {
+                from: 0,
+                to: 1,
+                centerline: vec![[-40., 0.], [40., 0.]],
+                half_width: 3.,
+            }],
+            pump_edge: 0,
+            spawn: [0., 0.],
+            landmarks: vec![],
+        };
+        assert_eq!(ChunkId::at([-0.01, 0.]), ChunkId { x: -1, y: 0 });
+        let a = map.build_chunk_geometry(ChunkId { x: -1, y: 0 });
+        let b = map.build_chunk_geometry(ChunkId { x: 0, y: 0 });
+        assert_eq!(a.core.bounds[1][0], b.core.bounds[0][0]);
+        let mut walls = a.core.walls.clone();
+        walls.extend(b.core.walls.clone());
+        assert!(
+            walls
+                .iter()
+                .all(|w| w.iter().all(|p| (p[1] - 3.).abs() < 1e-5))
+        );
+        assert!(walls.iter().any(|w| w.iter().any(|p| p[0] == 0.)));
+        let length: f32 = walls.iter().map(|w| (v(w[1]) - v(w[0])).length()).sum();
+        assert!((length - 32.).abs() < 1e-4, "wall length {length}");
+        assert_eq!(ChunkId::at([5., 5.]).neighborhood(2).len(), 25);
+    }
 
     #[test]
     fn fork_has_open_shared_floor_and_boundary() {

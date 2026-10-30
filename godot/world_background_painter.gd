@@ -16,6 +16,26 @@ var font: Font
 var content_rect := Rect2()
 
 
+func configure_chunk(chunk: Dictionary, source_landmarks: Array, scale_value: float, label_font: Font) -> void:
+	var bounds: PackedVector2Array = chunk.bounds
+	var visible := Rect2(bounds[0] * scale_value, (bounds[1] - bounds[0]) * scale_value).grow(8.0)
+	var selected: Array = []
+	for landmark in source_landmarks:
+		var position: Vector2 = landmark.position * scale_value
+		var size: Vector2 = landmark.size * scale_value
+		var rect := Rect2(position - size * 0.5, size)
+		var baseline := position + Vector2(-size.x * 0.42, -size.y * 0.28)
+		var text_size := label_font.get_string_size(landmark.name, HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE)
+		rect = rect.merge(Rect2(baseline - Vector2(0, label_font.get_ascent(FONT_SIZE)), Vector2(text_size.x, label_font.get_height(FONT_SIZE))))
+		if visible.intersects(rect, true):
+			selected.append(landmark)
+	configure({"bounds": chunk.paint_bounds, "floor": chunk.floor, "walls": chunk.walls, "landmarks": selected}, scale_value, label_font)
+
+
+func has_content() -> bool:
+	return floor_mesh != null or not wall_segments.is_empty() or not landmarks.is_empty()
+
+
 func configure(geometry: Dictionary, scale_value: float, label_font: Font) -> void:
 	pixels_per_unit = scale_value
 	font = label_font

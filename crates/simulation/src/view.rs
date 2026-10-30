@@ -9,6 +9,7 @@ pub struct FlowArrow {
 /// Dynamic display data only; stable vessel contours are retrieved separately.
 #[derive(Clone, Debug)]
 pub struct Snapshot {
+    pub streaming: Option<crate::StreamingSnapshot>,
     pub robot: [f32; 2],
     pub cells: Vec<Vec<[f32; 2]>>,
     /// Biological/display metadata in exactly the same order as `cells`.

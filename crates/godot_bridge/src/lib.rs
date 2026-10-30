@@ -13,6 +13,7 @@ unsafe impl ExtensionLibrary for BloodSimulator {}
 #[class(base=RefCounted)]
 struct BloodLab {
     simulation: Simulation,
+    stream_world: bool,
     error: Option<String>,
     validation_initial_centers: Option<Vec<[f32; 2]>>,
     base: Base<RefCounted>,
@@ -23,6 +24,7 @@ impl IRefCounted for BloodLab {
     fn init(base: Base<RefCounted>) -> Self {
         Self {
             simulation: Simulation::default(),
+            stream_world: false,
             error: None,
             validation_initial_centers: None,
             base,
@@ -36,6 +38,11 @@ fn points(source: &[[f32; 2]]) -> PackedVector2Array {
 
 #[godot_api]
 impl BloodLab {
+    #[func]
+    fn configure_stream_world(&mut self, enabled: bool) {
+        self.stream_world = enabled;
+    }
+
     /// Configure the next world creation/reset; called before startup factory.
     #[func]
     fn configure_local_cells(&mut self, enabled: bool) {
@@ -48,7 +55,14 @@ impl BloodLab {
 
     #[func]
     fn use_world(&mut self) {
-        self.simulation = Simulation::new_world(self.simulation.config.clone());
+        self.simulation = if self.stream_world {
+            Simulation::new_streamed_world(
+                self.simulation.config.clone(),
+                simulation::map::MapDefinition::small_world(),
+            )
+        } else {
+            Simulation::new_world(self.simulation.config.clone())
+        };
         self.validation_initial_centers = None;
     }
 
@@ -163,6 +177,39 @@ impl BloodLab {
     }
 
     #[func]
+    fn sync_world_view(&mut self, bounds: PackedVector2Array, show_flow: bool) -> VarDictionary {
+        if bounds.len() != 2 {
+            return vdict! { "error" => "camera bounds need two points" };
+        }
+        let result = self.simulation.sync_world_view(
+            [[bounds[0].x, bounds[0].y], [bounds[1].x, bounds[1].y]],
+            show_flow,
+        );
+        let delta = match result {
+            Ok(delta) => delta,
+            Err(error) => {
+                self.fail(error.clone());
+                return vdict! { "error" => error };
+            }
+        };
+        let added: Array<VarDictionary> = delta.added.iter().map(|chunk| {
+            let walls: Array<PackedVector2Array> = chunk.paint.walls.iter().map(|w| points(w)).collect();
+            vdict! { "id" => Vector2i::new(chunk.id.x, chunk.id.y),
+                "bounds" => &points(&chunk.core.bounds), "paint_bounds" => &points(&chunk.paint.bounds),
+                "floor" => &points(&chunk.paint.floor_vertices), "walls" => &walls }
+        }).collect();
+        let removed: Array<Vector2i> = delta
+            .removed
+            .iter()
+            .map(|id| Vector2i::new(id.x, id.y))
+            .collect();
+        let landmarks: Array<VarDictionary> = self.simulation.world_map().unwrap().landmarks.iter().map(|l| vdict! {
+            "name" => l.name.as_str(), "position" => Vector2::new(l.position[0], l.position[1]), "size" => Vector2::new(l.size[0], l.size[1])
+        }).collect();
+        vdict! { "reset" => delta.reset, "added" => &added, "removed" => &removed, "landmarks" => &landmarks }
+    }
+
+    #[func]
     fn snapshot(&self) -> VarDictionary {
         let state = self.simulation.snapshot();
         let validation = self.validation_snapshot(&state);
@@ -254,7 +301,12 @@ impl BloodLab {
                 }
             })
             .unwrap_or_default();
+        let streaming = state.streaming.as_ref().map(|s| vdict! {
+            "center" => Vector2i::new(s.center[0], s.center[1]), "loaded_chunks" => s.loaded_chunks as i64,
+            "wall_colliders" => s.wall_colliders as i64, "active_cells" => s.active_cells as i64, "dormant_cells" => s.dormant_cells as i64,
+        }).unwrap_or_default();
         vdict! {
+            "streaming" => &streaming,
             "population" => &population,
             "lbm" => &lbm,
             "validation" => &validation,
@@ -313,7 +365,15 @@ impl BloodLab {
             profile: Self::profile(profile)?,
             ..Default::default()
         };
-        self.simulation = Simulation::new_lbm_world(self.simulation.config.clone(), options)?;
+        self.simulation = if self.stream_world {
+            Simulation::new_streamed_lbm_world(
+                self.simulation.config.clone(),
+                options,
+                simulation::map::MapDefinition::small_world(),
+            )?
+        } else {
+            Simulation::new_lbm_world(self.simulation.config.clone(), options)?
+        };
         self.validation_initial_centers = None;
         Ok(())
     }
@@ -329,7 +389,11 @@ impl BloodLab {
         };
         let mut config = simulation::lbm_validation::config();
         config.cell_mode = self.simulation.config.cell_mode;
-        self.simulation = Simulation::new_lbm_validation(config, options)?;
+        self.simulation = if self.stream_world {
+            Simulation::new_streamed_lbm_validation(config, options)?
+        } else {
+            Simulation::new_lbm_validation(config, options)?
+        };
         self.validation_initial_centers = Some(simulation::lbm_validation::cell_centers(
             &self.simulation.snapshot(),
         ));

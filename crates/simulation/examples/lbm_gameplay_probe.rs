@@ -46,7 +46,8 @@ fn run() -> Result<(), String> {
     }
     let output = get("--output", "lbm-gameplay-results");
     create_dir_all(&output).map_err(|e| e.to_string())?;
-    let local_cells = args.iter().any(|s| s == "--local-cells");
+    let stream_world = args.iter().any(|s| s == "--stream-world");
+    let local_cells = stream_world || args.iter().any(|s| s == "--local-cells");
     let mut config = fixture::config();
     if local_cells {
         config.cell_mode = simulation::CellSimulationMode::Local(Default::default());
@@ -63,7 +64,11 @@ fn run() -> Result<(), String> {
         if case != "both" && case != name {
             continue;
         }
-        let mut sim = Simulation::new_lbm_validation(config.clone(), options.clone())?;
+        let mut sim = if stream_world {
+            Simulation::new_streamed_lbm_validation(config.clone(), options.clone())?
+        } else {
+            Simulation::new_lbm_validation(config.clone(), options.clone())?
+        };
         let initial = sim.snapshot();
         let initial_centers = fixture::cell_centers(&initial);
         let stats = sim.lbm_stats().unwrap();
@@ -218,6 +223,10 @@ fn run() -> Result<(), String> {
         out.flush().map_err(|e| e.to_string())?;
         writeln!(status,"{name} completed_steps={} min_x={min_x} max_x={max_x} region_switches={} result={result:?}",sim.snapshot().steps,last_region_switches).map_err(|e|e.to_string())?;
         status.flush().map_err(|e| e.to_string())?;
+        if stream_world {
+            writeln!(status, "streaming={:?}", sim.snapshot().streaming)
+                .map_err(|e| e.to_string())?;
+        }
         result?;
     }
     writeln!(status, "COMPLETE").map_err(|e| e.to_string())?;

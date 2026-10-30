@@ -36,14 +36,15 @@ pub struct StreamingWindow {
 }
 
 fn origin_for(position: [f32; 2]) -> Result<WindowOrigin, String> {
+    let block = crate::map::CHUNK_SIZE;
     if !position.iter().all(|v| {
-        v.is_finite() && *v >= (i32::MIN as f32 + 2.) * 16. && *v < (i32::MAX as f32 - 2.) * 16.
+        v.is_finite() && *v >= (i32::MIN as f32 + 2.) * block && *v < (i32::MAX as f32 - 2.) * block
     }) {
         return Err("invalid player position".into());
     }
     Ok(WindowOrigin {
-        block_x: (position[0] / 16.).floor() as i32 - 1,
-        block_y: (position[1] / 16.).floor() as i32 - 1,
+        block_x: (position[0] / block).floor() as i32 - 1,
+        block_y: (position[1] / block).floor() as i32 - 1,
     })
 }
 

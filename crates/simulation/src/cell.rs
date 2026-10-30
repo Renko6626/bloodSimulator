@@ -1,11 +1,53 @@
 use crate::Config;
 use rapier2d::prelude::*;
 
+/// How an entity should be represented after leaving detailed simulation.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum UnloadPolicy {
+    /// Return ordinary live cells to the population stock, discarding identity.
+    Aggregate,
+    /// Preserve individual state while its detailed body is unloaded.
+    Hibernate,
+}
+
+#[derive(Clone, Debug, PartialEq)]
+pub(crate) struct DormantBody {
+    pub positions: Vec<Vector>,
+    pub velocities: Vec<Vector>,
+}
+
+impl DormantBody {
+    pub fn at(center: Vector, radius: f32, config: &Config) -> Self {
+        Self {
+            positions: SoftBodyBuilder::disk(center, radius, config.cell_vertices)
+                .particle_positions()
+                .to_vec(),
+            velocities: vec![Vector::ZERO; config.cell_vertices],
+        }
+    }
+    pub fn center(&self) -> Vector {
+        self.positions.iter().copied().sum::<Vector>() / self.positions.len() as f32
+    }
+}
+
+#[derive(Clone, Debug, PartialEq)]
+pub(crate) enum CellBody {
+    Active(SoftBodyHandle),
+    Dormant(DormantBody),
+}
+
+impl From<SoftBodyHandle> for CellBody {
+    fn from(handle: SoftBodyHandle) -> Self {
+        Self::Active(handle)
+    }
+}
+
 /// Biological state is independent of the Rapier body and its current shape.
 #[derive(Clone, Debug, PartialEq)]
 pub(crate) struct Cell {
     pub id: u64,
-    pub body: SoftBodyHandle,
+    pub body: CellBody,
+    pub unload_policy: UnloadPolicy,
     pub health: f32,
     pub max_health: f32,
     pub dead_age: Option<f32>,
@@ -14,15 +56,61 @@ pub(crate) struct Cell {
 }
 
 impl Cell {
-    pub fn new(id: u64, body: SoftBodyHandle, health: f32) -> Self {
+    pub fn new(
+        id: u64,
+        body: impl Into<CellBody>,
+        health: f32,
+        unload_policy: UnloadPolicy,
+    ) -> Self {
         Self {
             id,
-            body,
+            body: body.into(),
+            unload_policy,
             health,
             max_health: health,
             dead_age: None,
             white: None,
         }
+    }
+
+    pub fn active_body(&self) -> Option<SoftBodyHandle> {
+        match self.body {
+            CellBody::Active(handle) => Some(handle),
+            CellBody::Dormant(_) => None,
+        }
+    }
+
+    pub fn hibernate(&mut self, physics: &mut PhysicsWorld) {
+        let Some(handle) = self.active_body() else {
+            return;
+        };
+        let body = &physics.soft_bodies[handle];
+        let state = DormantBody {
+            positions: body.particle_positions().collect(),
+            velocities: body.particle_velocities().collect(),
+        };
+        physics.remove_soft_body(handle);
+        self.body = CellBody::Dormant(state);
+    }
+
+    pub fn restore(&mut self, physics: &mut PhysicsWorld, config: &Config) {
+        let CellBody::Dormant(state) = &self.body else {
+            return;
+        };
+        let radius = if self.white.is_some() {
+            config.white_cells.radius
+        } else {
+            config.cell_radius
+        };
+        let handle = insert_with_radius(physics, state.center(), radius, config);
+        let body = &mut physics.soft_bodies[handle];
+        for (i, (&position, &velocity)) in state.positions.iter().zip(&state.velocities).enumerate()
+        {
+            body.set_particle_position(i, position);
+            body.set_particle_velocity(i, velocity);
+        }
+        self.apply_corpse_material(body, config);
+        self.body = CellBody::Active(handle);
     }
 
     pub fn damage(&mut self, amount: f32) {
@@ -36,7 +124,7 @@ impl Cell {
     }
 
     /// Only change constitutive parameters; Rapier resolves the shrinking area.
-    pub fn advance_corpse(&mut self, body: &mut SoftBody, config: &Config) -> bool {
+    pub fn advance_corpse(&mut self, physics: &mut PhysicsWorld, config: &Config) -> bool {
         let Some(age) = &mut self.dead_age else {
             return false;
         };
@@ -44,14 +132,21 @@ impl Cell {
         if *age >= config.corpse_lifetime {
             return true;
         }
-        let t = (*age / config.corpse_soften_time).min(1.0);
+        if let Some(handle) = self.active_body() {
+            self.apply_corpse_material(&mut physics.soft_bodies[handle], config);
+        }
+        false
+    }
+
+    fn apply_corpse_material(&self, body: &mut SoftBody, config: &Config) {
+        let Some(age) = self.dead_age else { return };
+        let t = (age / config.corpse_soften_time).min(1.0);
         let material = body.material_mut();
         material.edge_softness.natural_frequency =
             config.cell_frequency + (config.corpse_edge_frequency - config.cell_frequency) * t;
         material.bend_softness.natural_frequency =
             config.cell_frequency + (config.corpse_bend_frequency - config.cell_frequency) * t;
         body.set_volume_factor(1.0 + (config.corpse_area_factor - 1.0) * t);
-        false
     }
 
     pub fn opacity(&self, config: &Config) -> f32 {
@@ -127,6 +222,32 @@ pub(crate) fn advect(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn hibernate_restores_identity_health_and_deformed_body() {
+        let config = Config::default();
+        let mut physics = PhysicsWorld::new();
+        let body = insert(&mut physics, Vector::ZERO, &config);
+        let rest_area = physics.soft_bodies[body].volume();
+        for i in 0..config.cell_vertices {
+            let p = physics.soft_bodies[body].particle_position(i);
+            physics.soft_bodies[body].set_particle_position(i, Vector::new(p.x * 1.25, p.y * 0.8));
+            physics.soft_bodies[body].set_particle_velocity(i, Vector::X);
+        }
+        let shape: Vec<_> = physics.soft_bodies[body].particle_positions().collect();
+        let mut cell = Cell::new(17, body, 80., UnloadPolicy::Hibernate);
+        cell.damage(30.);
+        cell.hibernate(&mut physics);
+        assert!(physics.soft_bodies.get(body).is_none());
+        assert!(cell.active_body().is_none());
+        cell.restore(&mut physics, &config);
+        let restored = &physics.soft_bodies[cell.active_body().unwrap()];
+        assert_eq!(cell.id, 17);
+        assert_eq!(cell.health, 50.);
+        assert_eq!(restored.particle_positions().collect::<Vec<_>>(), shape);
+        assert!(restored.particle_velocities().all(|v| v == Vector::X));
+        assert!((restored.volume() - rest_area).abs() < 1e-4);
+    }
 
     fn measurements(body: &SoftBody) -> (f32, f32, f32) {
         let points: Vec<_> = body.particle_positions().collect();

@@ -1,6 +1,6 @@
 //! Plain world-space contract for a block-aligned LBM window.
 
-const BLOCK_SIZE: i64 = 16;
+const BLOCK_SIZE: i64 = blood_fluid::WORLD_CHUNK_SIZE as i64;
 const WINDOW_BLOCKS: u32 = 3;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]

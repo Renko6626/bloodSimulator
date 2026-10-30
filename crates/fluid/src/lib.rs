@@ -14,6 +14,9 @@ use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 pub type FluidResult<T> = Result<T, String>;
 
+/// Shared world grid used by local fluid windows and streamed scene chunks.
+pub const WORLD_CHUNK_SIZE: u32 = 16;
+
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct SolveOptions {
     pub tolerance: f64,

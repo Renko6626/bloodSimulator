@@ -24,7 +24,7 @@ var font := ThemeDB.fallback_font
 
 
 func _ready() -> void:
-	if OS.get_cmdline_user_args().has("--local-cells"):
+	if OS.get_cmdline_user_args().has("--local-cells") or OS.get_cmdline_user_args().has("--stream-world"):
 		push_error("--local-cells requires the world scene")
 		set_physics_process(false)
 		get_tree().quit(1)

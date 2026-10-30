@@ -16,6 +16,7 @@ mod threading;
 pub mod vessel;
 mod view;
 mod white_cell;
+mod world_streaming;
 
 #[cfg(feature = "lbm-gpu")]
 pub use blood_fluid_gpu::lbm::GridProfile;
@@ -32,3 +33,4 @@ pub use view::{
     ImmunitySnapshot, LbmSnapshot, Snapshot,
 };
 pub use white_cell::WhiteCellOptions;
+pub use world_streaming::{StreamingSnapshot, WorldChunkDelta};
