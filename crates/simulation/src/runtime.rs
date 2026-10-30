@@ -1091,6 +1091,7 @@ mod lbm_runtime_tests {
             })
             .collect();
         MapDefinition {
+            fluid: None,
             nodes,
             edges,
             pump_edge: 0,
@@ -1377,6 +1378,7 @@ mod population_tests {
             ..Default::default()
         };
         let map = MapDefinition {
+            fluid: None,
             nodes: vec![[-100., 0.], [100., 0.]],
             edges: vec![crate::map::VesselEdge {
                 from: 0,

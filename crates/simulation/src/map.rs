@@ -1,6 +1,8 @@
 //! A small, fixed vessel network and the shared geometry used by physics and drawing.
+pub mod fluid_policy;
 mod geometry;
 
+use fluid_policy::MapFluidDefinition;
 use rapier2d::prelude::Vector;
 use std::collections::BTreeSet;
 
@@ -71,6 +73,8 @@ pub struct Landmark {
 
 #[derive(Clone, Debug)]
 pub struct MapDefinition {
+    /// None preserves the legacy map flow behavior.
+    pub fluid: Option<MapFluidDefinition>,
     pub nodes: Vec<[f32; 2]>,
     pub edges: Vec<VesselEdge>,
     pub pump_edge: usize,
@@ -165,6 +169,7 @@ impl MapDefinition {
         add(9, 10, Some([-27.0, 25.0]), 3.5);
         add(10, 0, Some([-28.0, 3.0]), 3.5);
         Self {
+            fluid: None,
             nodes,
             edges,
             pump_edge: 11,
@@ -317,6 +322,7 @@ mod tests {
     #[test]
     fn fixed_chunks_share_geometry_without_sealing_the_channel() {
         let map = MapDefinition {
+            fluid: None,
             nodes: vec![[-40., 0.], [40., 0.]],
             edges: vec![VesselEdge {
                 from: 0,

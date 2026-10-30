@@ -43,6 +43,7 @@ mod probe {
             })
             .collect();
         MapDefinition {
+            fluid: None,
             nodes,
             edges,
             pump_edge: 0,

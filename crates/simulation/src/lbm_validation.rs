@@ -30,6 +30,7 @@ pub fn map() -> MapDefinition {
         })
         .collect();
     MapDefinition {
+        fluid: None,
         nodes,
         edges,
         pump_edge: 6,

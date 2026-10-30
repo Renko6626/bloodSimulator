@@ -21,6 +21,7 @@ fn main() {
             })
             .collect();
         let map = MapDefinition {
+            fluid: None,
             nodes,
             edges,
             pump_edge: 3,
