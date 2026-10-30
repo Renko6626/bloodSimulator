@@ -1,4 +1,4 @@
-//! Plain world-space contract for a block-aligned LBM window.
+//! Shared square LBM domain and block-aligned realtime window.
 
 const BLOCK_SIZE: i64 = blood_fluid::WORLD_CHUNK_SIZE as i64;
 const WINDOW_BLOCKS: u32 = 3;
@@ -45,6 +45,15 @@ pub struct WindowSpec {
 }
 
 impl WindowSpec {
+    /// Exact fixed-domain representation of the existing realtime window.
+    pub fn domain(self) -> DomainSpec {
+        DomainSpec {
+            origin: self.world_bounds()[0],
+            cells_per_side: self.profile.cells_per_side(),
+            spacing: self.profile.cell_spacing(),
+        }
+    }
+
     /// Lower-left and upper-right bounds in world units.
     pub fn world_bounds(self) -> [[f32; 2]; 2] {
         let x = self.origin.block_x as f32 * BLOCK_SIZE as f32;
@@ -103,7 +112,11 @@ pub struct FluidSample {
     pub status: LocalSampleStatus,
 }
 
+mod domain;
 mod gpu;
+mod window;
+pub use domain::DomainSpec;
+pub use window::LbmWindow;
 mod model;
 mod stencil;
 pub use gpu::*;

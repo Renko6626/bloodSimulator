@@ -1,4 +1,4 @@
-use super::{LocalSampleStatus, OpeningSpec, WindowOrigin, WindowSide, WindowSpec, model, stencil};
+use super::{DomainSpec, LocalSampleStatus, OpeningSpec, WindowSide, model, stencil};
 use bytemuck::{Pod, Zeroable};
 use std::{cell::Cell, sync::mpsc, time::Instant};
 use wgpu::util::DeviceExt;
@@ -86,9 +86,10 @@ pub struct MeanDensityControl {
     pub fluid_cells: usize,
 }
 
-pub struct LbmWindow {
+/// Single GPU solver shared by fixed domains and the realtime window wrapper.
+pub struct LbmDomain {
     work: Cell<LbmWorkStats>,
-    spec: WindowSpec,
+    spec: DomainSpec,
     config: WindowConfig,
     geometry: WindowGeometry,
     device: wgpu::Device,
@@ -114,9 +115,9 @@ pub struct LbmWindow {
     kicks: wgpu::Buffer,
     kick_pipeline: wgpu::ComputePipeline,
 }
-impl LbmWindow {
+impl LbmDomain {
     pub fn new(
-        spec: WindowSpec,
+        spec: DomainSpec,
         config: WindowConfig,
         initial: InitialField,
         geometry: WindowGeometry,
@@ -128,7 +129,19 @@ impl LbmWindow {
         {
             return Err("dt and viscosity must be finite and positive".into());
         }
-        let n = spec.profile.cells_per_side() as usize;
+        spec.validate()?;
+        let numerical = params(spec, config, [0.; 2]);
+        if !numerical.omega.is_finite()
+            || numerical.omega <= 0.
+            || numerical.omega >= 2.
+            || !numerical.scale.is_finite()
+            || numerical.scale <= 0.
+            || numerical.force.iter().any(|v| !v.is_finite())
+        {
+            return Err("domain spacing and timestep produce invalid lattice parameters".into());
+        }
+        validate_limits(spec, &wgpu::Limits::default(), None)?;
+        let n = spec.cells_per_side as usize;
         validate(n, &initial, &geometry)?;
         let boundary_data = boundary_profiles(spec, config, &geometry, None)?;
         let fit_data = stencil::build(n, &geometry.solid, &boundary_data)?;
@@ -147,6 +160,8 @@ impl LbmWindow {
         if software && !config.allow_software {
             return Err("software adapter is only allowed for functional diagnostics".into());
         }
+        validate_limits(spec, &adapter.limits(), Some(fit_data.len()))?;
+        validate_limits(spec, &wgpu::Limits::default(), Some(fit_data.len()))?;
         let (device, queue) = pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor {
             label: Some("lbm-window"),
             required_features: wgpu::Features::empty(),
@@ -154,7 +169,7 @@ impl LbmWindow {
             ..Default::default()
         }))
         .map_err(|e| e.to_string())?;
-        let data = initial_populations(spec, config, &initial, [0.; 2]);
+        let data = initial_populations(spec, config, &initial, [0.; 2])?;
         let make = |label, contents: &[u8], usage| {
             device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
                 label: Some(label),
@@ -335,7 +350,7 @@ impl LbmWindow {
         self.populations().unwrap()
     }
     fn populations(&self) -> LbmResult<Vec<f32>> {
-        let size = u64::from(self.spec.profile.cells_per_side().pow(2)) * 9 * 4;
+        let size = u64::from(self.spec.cells_per_side.pow(2)) * 9 * 4;
         let read = self.device.create_buffer(&wgpu::BufferDescriptor {
             label: None,
             size,
@@ -442,11 +457,7 @@ impl LbmWindow {
             });
             pass.set_pipeline(&self.density_pipeline);
             pass.set_bind_group(0, &self.groups[self.current], &[]);
-            pass.dispatch_workgroups(
-                self.spec.profile.cells_per_side().pow(2).div_ceil(128),
-                1,
-                1,
-            );
+            pass.dispatch_workgroups(self.spec.cells_per_side.pow(2).div_ceil(128), 1, 1);
         }
         self.record(|s| {
             s.dispatches += 1;
@@ -469,7 +480,7 @@ impl LbmWindow {
         self.geometry = geometry;
         Ok(())
     }
-    pub fn spec(&self) -> WindowSpec {
+    pub fn spec(&self) -> DomainSpec {
         self.spec
     }
     pub fn geometry(&self) -> &WindowGeometry {
@@ -477,7 +488,7 @@ impl LbmWindow {
     }
     /// Apply per-cell lattice momentum changes to current populations on the GPU.
     pub fn apply_kicks(&mut self, kicks: &[[f32; 2]]) -> LbmResult<()> {
-        let n = self.spec.profile.cells_per_side().pow(2) as usize;
+        let n = self.spec.cells_per_side.pow(2) as usize;
         if kicks.len() != n || kicks.iter().flatten().any(|v| !v.is_finite()) {
             return Err("invalid momentum kicks".into());
         }
@@ -516,6 +527,13 @@ impl LbmWindow {
         if !input.acceleration.iter().all(|v| v.is_finite()) {
             return Err("nonfinite acceleration".into());
         }
+        if params(self.spec, self.config, input.acceleration)
+            .force
+            .iter()
+            .any(|v| !v.is_finite())
+        {
+            return Err("acceleration produces nonfinite lattice force".into());
+        }
         self.force = input.acceleration;
         self.upload(
             &self.uniform,
@@ -535,11 +553,7 @@ impl LbmWindow {
                 });
                 pass.set_pipeline(&self.collide);
                 pass.set_bind_group(0, &self.groups[self.current], &[]);
-                pass.dispatch_workgroups(
-                    (self.spec.profile.cells_per_side().pow(2)).div_ceil(128),
-                    1,
-                    1,
-                );
+                pass.dispatch_workgroups((self.spec.cells_per_side.pow(2)).div_ceil(128), 1, 1);
             }
             self.current = 1 - self.current;
             {
@@ -549,11 +563,7 @@ impl LbmWindow {
                 });
                 pass.set_pipeline(&self.boundary_pipeline);
                 pass.set_bind_group(0, &self.groups[self.current], &[]);
-                pass.dispatch_workgroups(
-                    (self.spec.profile.cells_per_side().pow(2)).div_ceil(128),
-                    1,
-                    1,
-                );
+                pass.dispatch_workgroups((self.spec.cells_per_side.pow(2)).div_ceil(128), 1, 1);
             }
         }
         self.record(|s| {
@@ -566,7 +576,7 @@ impl LbmWindow {
     }
     /// Snapshot row-major [density, velocity_x, velocity_y, reserved] values.
     pub fn field(&self) -> LbmResult<Vec<[f32; 4]>> {
-        let n = self.spec.profile.cells_per_side().pow(2);
+        let n = self.spec.cells_per_side.pow(2);
         let encoding_started = Instant::now();
         let mut encoder = self
             .device
@@ -616,8 +626,8 @@ impl LbmWindow {
     }
     pub fn sample(&self, position: [f32; 2]) -> LbmResult<LocalSample> {
         let o = self.spec.world_bounds()[0];
-        let h = self.spec.profile.cell_spacing();
-        let n = self.spec.profile.cells_per_side() as usize;
+        let h = self.spec.spacing;
+        let n = self.spec.cells_per_side as usize;
         if !position.iter().all(|x| x.is_finite()) {
             return Err("nonfinite position".into());
         }
@@ -692,13 +702,9 @@ impl LbmWindow {
                     o.cells
                         .clone()
                         .map(|j| {
-                            let i = side_cell(
-                                o.side,
-                                j as usize,
-                                self.spec.profile.cells_per_side() as usize,
-                            );
-                            (f[i][1] * normal[0] + f[i][2] * normal[1])
-                                * self.spec.profile.cell_spacing()
+                            let i =
+                                side_cell(o.side, j as usize, self.spec.cells_per_side as usize);
+                            (f[i][1] * normal[0] + f[i][2] * normal[1]) * self.spec.spacing
                         })
                         .sum()
                 })
@@ -716,20 +722,22 @@ impl LbmWindow {
     }
     /// Copy overlapping populations exactly; initialize newly exposed cells from
     /// `initial` and replace the mask and opening metadata for the new window.
-    pub fn shift_to(
+    pub(super) fn shift_to(
         &mut self,
-        origin: WindowOrigin,
+        new: DomainSpec,
+        offset: [i64; 2],
         initial: InitialField,
         geometry: WindowGeometry,
     ) -> LbmResult<()> {
-        let new = WindowSpec {
-            origin,
-            ..self.spec
-        };
-        let n = self.spec.profile.cells_per_side() as usize;
+        new.validate()?;
+        if new.cells_per_side != self.spec.cells_per_side || new.spacing != self.spec.spacing {
+            return Err("domain translation must preserve cell count and spacing".into());
+        }
+        let n = self.spec.cells_per_side as usize;
         validate(n, &initial, &geometry)?;
         let boundary_data = boundary_profiles(new, self.config, &geometry, None)?;
         let fit_data = stencil::build(n, &geometry.solid, &boundary_data)?;
+        validate_limits(new, &self.device.limits(), Some(fit_data.len()))?;
         let fit = self
             .device
             .create_buffer_init(&wgpu::util::BufferInitDescriptor {
@@ -737,10 +745,10 @@ impl LbmWindow {
                 contents: bytemuck::cast_slice(&fit_data),
                 usage: wgpu::BufferUsages::STORAGE,
             });
-        let data = initial_populations(new, self.config, &initial, self.force);
+        let data = initial_populations(new, self.config, &initial, self.force)?;
         let target = 1 - self.current;
         self.upload(&self.populations[target], bytemuck::cast_slice(&data));
-        let [dx, dy] = new.origin_cell_offset_from(self.spec);
+        let [dx, dy] = offset;
         let encoding_started = Instant::now();
         let mut encoder = self
             .device
@@ -792,12 +800,38 @@ impl LbmWindow {
         Ok(())
     }
 }
-fn params(spec: WindowSpec, c: WindowConfig, a: [f32; 2]) -> Params {
-    let h = spec.profile.cell_spacing();
+/// Check every per-cell GPU buffer and the one-dimensional dispatch before allocation.
+fn validate_limits(
+    spec: DomainSpec,
+    limits: &wgpu::Limits,
+    fit_len: Option<usize>,
+) -> LbmResult<()> {
+    let cells = u64::from(spec.cells_per_side).pow(2);
+    let sizes = [
+        cells * 9 * 4,
+        cells * 16,
+        cells * 4,
+        cells * 8,
+        fit_len.map_or(cells * 16, |n| {
+            n as u64 * std::mem::size_of::<stencil::FitSample>() as u64
+        }),
+    ];
+    if sizes.iter().any(|&size| {
+        size > limits.max_buffer_size || size > u64::from(limits.max_storage_buffer_binding_size)
+    }) {
+        return Err("domain buffer exceeds device storage/allocation limits".into());
+    }
+    if cells.div_ceil(128) > u64::from(limits.max_compute_workgroups_per_dimension) {
+        return Err("domain dispatch exceeds device workgroup limit".into());
+    }
+    Ok(())
+}
+fn params(spec: DomainSpec, c: WindowConfig, a: [f32; 2]) -> Params {
+    let h = spec.spacing;
     let k = c.dt * c.dt / h;
     Params {
-        nx: spec.profile.cells_per_side(),
-        ny: spec.profile.cells_per_side(),
+        nx: spec.cells_per_side,
+        ny: spec.cells_per_side,
         unused: 0,
         omega: 1. / (0.5 + 3. * c.viscosity * c.dt / (h * h)),
         force: [a[0] * k, a[1] * k],
@@ -827,13 +861,13 @@ fn validate(n: usize, initial: &InitialField, geometry: &WindowGeometry) -> LbmR
     Ok(())
 }
 fn initial_populations(
-    spec: WindowSpec,
+    spec: DomainSpec,
     c: WindowConfig,
     initial: &InitialField,
     acceleration: [f32; 2],
-) -> Vec<f32> {
+) -> LbmResult<Vec<f32>> {
     let n = initial.density.len();
-    let k = c.dt / spec.profile.cell_spacing();
+    let k = c.dt / spec.spacing;
     let force = params(spec, c, acceleration).force;
     let mut result = vec![0.; n * 9];
     for i in 0..n {
@@ -843,7 +877,10 @@ fn initial_populations(
             result[q * n + i] = eq[q];
         }
     }
-    result
+    if result.iter().any(|v| !v.is_finite()) {
+        return Err("initial field produces nonfinite lattice populations".into());
+    }
+    Ok(result)
 }
 
 fn side_normal(side: WindowSide) -> [f32; 2] {
@@ -863,12 +900,12 @@ fn side_cell(side: WindowSide, j: usize, n: usize) -> usize {
     }
 }
 fn boundary_profiles(
-    spec: WindowSpec,
+    spec: DomainSpec,
     config: WindowConfig,
     geometry: &WindowGeometry,
     profiles: Option<&[Vec<f32>]>,
 ) -> LbmResult<Vec<[f32; 4]>> {
-    let n = spec.profile.cells_per_side() as usize;
+    let n = spec.cells_per_side as usize;
     if profiles.is_some_and(|p| p.len() != geometry.openings.len()) {
         return Err("opening profile count mismatch".into());
     }
@@ -897,12 +934,12 @@ fn boundary_profiles(
         let values = profiles.map(|p| p[k].clone()).unwrap_or_else(|| {
             default
                 .iter()
-                .map(|w| o.outward_flow * w / (sum * spec.profile.cell_spacing()))
+                .map(|w| o.outward_flow * w / (sum * spec.spacing))
                 .collect()
         });
         if values.len() != len
             || values.iter().any(|v| !v.is_finite())
-            || (values.iter().sum::<f32>() * spec.profile.cell_spacing() - o.outward_flow).abs()
+            || (values.iter().sum::<f32>() * spec.spacing - o.outward_flow).abs()
                 > 1e-4 * (1. + o.outward_flow.abs())
         {
             return Err("invalid opening profile or flux".into());
@@ -912,7 +949,7 @@ fn boundary_profiles(
             if geometry.solid[i] || data[i][0] != 0. {
                 return Err("opening overlaps solid or another opening".into());
             }
-            let scale = config.dt / spec.profile.cell_spacing();
+            let scale = config.dt / spec.spacing;
             let u = [
                 v * o.direction[0] / dot * scale,
                 v * o.direction[1] / dot * scale,

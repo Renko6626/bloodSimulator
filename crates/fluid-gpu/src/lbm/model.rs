@@ -1,5 +1,5 @@
 #[cfg(test)]
-use super::WindowSpec;
+use super::DomainSpec;
 pub(super) const C: [[f32; 2]; 9] = [
     [0., 0.],
     [1., 0.],
@@ -36,8 +36,8 @@ pub(super) fn initial(rho: f32, u: [f32; 2], force: [f32; 2]) -> [f32; 9] {
     populations
 }
 #[cfg(test)]
-pub(super) fn cell_position(spec: WindowSpec, x: u32, y: u32) -> [f32; 2] {
+pub(super) fn cell_position(spec: DomainSpec, x: u32, y: u32) -> [f32; 2] {
     let o = spec.world_bounds()[0];
-    let h = spec.profile.cell_spacing();
+    let h = spec.spacing;
     [o[0] + (x as f32 + 0.5) * h, o[1] + (y as f32 + 0.5) * h]
 }

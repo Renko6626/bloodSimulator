@@ -13,8 +13,8 @@ fn lbm_uniform_equilibrium_and_coordinates() {
         profile: GridProfile::Coarse,
         ..fine
     };
-    let a = model::cell_position(fine, 2, 2);
-    let b = model::cell_position(coarse, 1, 1);
+    let a = model::cell_position(fine.domain(), 2, 2);
+    let b = model::cell_position(coarse.domain(), 1, 1);
     assert!((a[0] - b[0]).abs() <= 0.125 && (a[1] - b[1]).abs() <= 0.125);
     let g = model::equilibrium(1.0, [0.0, 0.0]);
     assert!(g.iter().all(|x| x.abs() < 1e-7));
@@ -769,4 +769,103 @@ fn lbm_mean_density_control_preserves_guo_moments() {
         .sum::<f64>()
         / control.fluid_cells as f64;
     assert!((mean - 1.).abs() < 1e-7);
+}
+
+#[test]
+fn window_domain_mapping_preserves_bounds_and_resolution() {
+    for (profile, cells, spacing) in [
+        (GridProfile::Fine, 192, 0.25),
+        (GridProfile::Coarse, 96, 0.5),
+    ] {
+        let window = WindowSpec {
+            origin: WindowOrigin {
+                block_x: -2,
+                block_y: 3,
+            },
+            profile,
+        };
+        let domain = window.domain();
+        domain.validate().unwrap();
+        assert_eq!(domain.origin, [-32., 48.]);
+        assert_eq!(domain.cells_per_side, cells);
+        assert_eq!(domain.spacing, spacing);
+        assert_eq!(domain.world_bounds(), [[-32., 48.], [16., 96.]]);
+        assert_eq!(domain.world_bounds(), window.world_bounds());
+    }
+}
+
+#[test]
+fn fixed_domain_validates_sizes_and_world_range() {
+    // A square unrelated to the realtime profile/window size is valid.
+    let domain = DomainSpec {
+        origin: [-3., 7.],
+        cells_per_side: 37,
+        spacing: 0.5,
+    };
+    domain.validate().unwrap();
+    assert_eq!(domain.world_bounds(), [[-3., 7.], [15.5, 25.5]]);
+    assert_eq!(model::cell_position(domain, 0, 0), [-2.75, 7.25]);
+    for invalid in [
+        DomainSpec {
+            cells_per_side: 0,
+            ..domain
+        },
+        DomainSpec {
+            cells_per_side: u32::MAX,
+            ..domain
+        },
+        DomainSpec {
+            spacing: 0.,
+            ..domain
+        },
+        DomainSpec {
+            spacing: -1.,
+            ..domain
+        },
+        DomainSpec {
+            spacing: f32::NAN,
+            ..domain
+        },
+        DomainSpec {
+            spacing: f32::MAX,
+            ..domain
+        },
+        DomainSpec {
+            origin: [f32::INFINITY, 0.],
+            ..domain
+        },
+        DomainSpec {
+            origin: [f32::NAN, 0.],
+            ..domain
+        },
+        DomainSpec {
+            origin: [1e20, 0.],
+            ..domain
+        },
+    ] {
+        assert!(invalid.validate().is_err(), "accepted {invalid:?}");
+    }
+    // Valid index range, but population buffers exceed the requested device limits.
+    let oversized = DomainSpec {
+        cells_per_side: 4096,
+        ..domain
+    };
+    oversized.validate().unwrap();
+    let result = LbmDomain::new(
+        oversized,
+        WindowConfig {
+            dt: 0.01,
+            viscosity: 0.1,
+            allow_software: false,
+        },
+        InitialField {
+            density: vec![],
+            velocity: vec![],
+        },
+        WindowGeometry {
+            solid: vec![],
+            openings: vec![],
+        },
+    );
+    assert!(matches!(result, Err(message) if message.contains("buffer exceeds")));
 }
