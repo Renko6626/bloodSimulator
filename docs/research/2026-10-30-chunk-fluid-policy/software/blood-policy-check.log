@@ -1,0 +1,98 @@
+    Checking simulation v0.1.0 (/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator/crates/simulation)
+    Checking godot_bridge v0.1.0 (/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator/crates/godot_bridge)
+    Checking fluid-bench v0.1.0 (/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator/crates/fluid-bench)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.39s
+   Compiling simulation v0.1.0 (/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator/crates/simulation)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.51s
+     Running unittests src/lib.rs (/data/sunyunbo/www/bloodSimulator/target/debug/deps/simulation-a5a5aa16d7dad985)
+
+running 38 tests
+test cell_population::tests::births_prioritize_the_inflow_side_for_either_flow_direction ... ok
+test background::tests::background_bilinear_midpoint_and_common_pressure_scale ... ok
+test cell_population::tests::transfer_uses_old_stock_and_only_one_edge_per_update ... ok
+test cell_population::tests::stopped_flow_preserves_stock ... ok
+test cell_population::tests::separated_far_intervals_do_not_bypass_near_region ... ok
+test cell::tests::hibernate_restores_identity_health_and_deformed_body ... ok
+test circulation::graph::tests::velocity_is_static_without_head_and_smooth_near_junction ... ok
+test cell_population::tests::junction_distributes_outgoing_quantity_by_flow ... ok
+test circulation::graph::tests::series_parallel_loop_obeys_pressures_conservation_and_scaling ... ok
+test map::fluid_policy::tests::policy_lookup_uses_world_chunks_and_keeps_unconfigured_neighbors_closed ... ok
+test background::tests::background_shared_asset_is_continuous_at_chunk_boundary ... ok
+test background::tests::background_planar_pipe_preserves_cross_section_flux ... ok
+test background::tests::background_rejects_wrong_reference_flux_and_unprepared_drive ... ok
+test background::tests::background_rejects_missing_ports_bad_mask_and_unsafe_policy ... ok
+test map::tests::fixed_chunks_share_geometry_without_sealing_the_channel ... ok
+test runtime::gameplay::tests::a_dead_cell_leaving_the_window_never_returns_as_live_stock ... ok
+test runtime::population_tests::real_bodies_retire_and_spawn_without_losing_quantity ... ok
+test fluid::tests::equal_open_pressures_rest_and_closed_component_is_rejected ... ok
+test runtime::gameplay::tests::fixed_wall_blocks_melee_damage ... ok
+test runtime::gameplay::tests::melee_hits_the_cell_edge_once_per_pulse_and_respects_range ... ok
+test runtime::immunity_tests::a_pursuing_white_cell_really_moves_with_zero_background_flow ... ok
+test runtime::policy::tests::policy_rejects_drive_before_bodies_time_or_lifetimes_change ... ok
+test cell::tests::compressed_cell_preserves_area_and_recovers_after_release ... ok
+test runtime::immunity_tests::reinforcements_are_bounded_and_white_bodies_stay_out_of_red_stock ... ok
+test runtime::gameplay::tests::corpse_deflates_as_a_real_soft_body_and_is_eventually_removed ... ok
+test runtime::policy::tests::policy_valid_drive_advances_and_reset_preserves_map_and_streaming ... ok
+test runtime::immunity_tests::walls_hide_the_robot_and_pursuit_uses_only_the_last_known_position ... ok
+test fluid::tests::open_channel_matches_poiseuille_and_preserves_pressure_reference ... ok
+test runtime::immunity_tests::actual_player_damage_alerts_witnesses_and_quiet_time_reduces_alertness ... ok
+test runtime::gameplay::tests::pause_single_step_and_reset_control_attacks_and_corpses ... ok
+test map::tests::fork_has_open_shared_floor_and_boundary ... ok
+test runtime::immunity_tests::contact_requires_preparation_and_lethal_player_attack_cancels_the_return_hit ... ok
+test runtime::population_tests::pause_single_step_and_reset_keep_local_mode_and_initial_distribution ... ok
+test runtime::streaming::tests::dormant_ai_freezes_but_corpse_lifetime_still_expires ... ok
+test fluid::tests::real_fork_conserves_opening_flux_and_solves_true_stokes_residuals ... ok
+test runtime::region_tests::reset_preserves_explicit_solver_and_grid_options ... ok
+test runtime::streaming::tests::streamed_world_preserves_identity_and_releases_distant_resources ... ok
+test runtime::region_tests::region_handoff_reuses_bodies_and_preparation_applies_no_impulse ... ok
+
+test result: ok. 38 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.78s
+
+     Running tests/experiment.rs (/data/sunyunbo/www/bloodSimulator/target/debug/deps/experiment-ee2afbeaa9a6f2af)
+
+running 5 tests
+test closed_loop_uses_total_resistance_and_poiseuille_profile ... ok
+test robot_has_no_coasting_and_can_easily_move_against_flow ... ok
+test crowded_cells_advect_without_losing_area_or_crossing_walls ... ok
+test pause_single_step_and_reset_use_the_same_clock ... ok
+test world_cells_pass_both_branches_and_rejoin ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.45s
+
+   Doc-tests simulation
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+    Blocking waiting for file lock on build directory
+   Compiling godot_bridge v0.1.0 (/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator/crates/godot_bridge)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.52s
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+Initialize godot-rust (API v4.7.stable.official, runtime v4.7.1.stable.official, safeguards strict)
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Registering global classes... (7 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  12% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  37% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  62% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  75% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+scripts/check.sh: line 8: 2039457 Aborted                 (core dumped) "${GODOT_BIN:-godot}" --headless --path godot --editor --import --quit

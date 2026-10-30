@@ -1,0 +1,16 @@
+   Compiling simulation v0.1.0 (/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator/crates/simulation)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 7.52s
+     Running `/data/sunyunbo/www/bloodSimulator/target/debug/examples/lbm_gameplay_probe --fluid-policy --allow-software --functional --frames 600 --output /tmp/blood-chunk-fluid-policy`
+policy frame=0 robot=[14.00618, 24.0] active=false activation=0 marker=0
+policy frame=60 robot=[14.122406, 24.0] active=false activation=0 marker=0
+event frame=87 active=true robot=[16.090988, 24.0] actual_center=ChunkId { x: 1, y: 1 } frame_start=ChunkId { x: 1, y: 1 } activation=0.000067995265 adapter=Some(("llvmpipe (LLVM 15.0.7, 256 bits)", true))
+policy frame=120 robot=[18.498253, 24.002625] active=true activation=0.65678865 marker=0.07360906
+policy frame=180 robot=[22.833473, 24.026825] active=true activation=1 marker=0.20126118
+policy frame=240 robot=[23.971703, 24.005085] active=true activation=1 marker=0.20793808
+policy frame=300 robot=[20.221195, 24.047707] active=true activation=1 marker=0.29801735
+policy frame=360 robot=[16.71568, 24.03492] active=true activation=0.09687018 marker=0.059280846
+event frame=375 active=false robot=[15.8986435, 24.027971] actual_center=ChunkId { x: 0, y: 1 } frame_start=ChunkId { x: 0, y: 1 } activation=0 adapter=None
+policy frame=420 robot=[14.184562, 24.003038] active=false activation=0 marker=0
+event frame=447 active=true robot=[16.13861, 24.003983] actual_center=ChunkId { x: 1, y: 1 } frame_start=ChunkId { x: 1, y: 1 } activation=0.00081064645 adapter=Some(("llvmpipe (LLVM 15.0.7, 256 bits)", true))
+policy frame=480 robot=[18.56201, 24.005943] active=true activation=0.67966056 marker=0.10297821
+policy frame=540 robot=[22.898855, 24.021492] active=true activation=1 marker=0.093095176

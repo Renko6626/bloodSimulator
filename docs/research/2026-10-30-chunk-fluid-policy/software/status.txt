@@ -1,0 +1,11 @@
+functional=true
+config=Config { dt: 0.016666668, substeps: 2, cell_count: 72, cell_mode: Full, cell_radius: 0.7, cell_vertices: 12, cell_frequency: 12.0, cell_area_frequency: 30.0, cell_damping: 0.5, cell_drag: 20.0, cell_health: 100.0, white_cells: WhiteCellOptions { count: 4, radius: 1.0, health: 150.0, patrol_speed: 0.6, investigate_speed: 2.0, chase_speed: 3.0, turn_time: 0.3, contact_warmup: 0.3, attack_interval: 0.6, damage: 8.0, call_time: 1.0, call_interval: 8.0, max_bodies: 8 }, corpse_soften_time: 0.75, corpse_lifetime: 6.0, corpse_edge_frequency: 6.0, corpse_bend_frequency: 2.5, corpse_area_factor: 0.6, attack_radius: 1.9, attack_damage: 50.0, attack_interval: 0.35, robot_speed: 4.0, robot_health: 100.0, robot_flow: 0.08, pressure: 12.605889, viscosity: 0.05, pulse_hz: 1.2 }
+route=60 hold(14,24); 180 toward(24,24); 180 toward(14,24); 180 toward(24,24)
+white_cells=normal policy constructor; normal gameplay toggle unchanged
+mechanical guards=existing finite/area/wall guard; population=Aggregate ledger
+initial=Some(PolicyFluidStatus { center: ChunkId { x: 0, y: 1 }, background: Analytic, window_active: false, activation: 0.0, rejection: Some("entire 3x3 window requires analytic LBM permission") })
+event frame=87 active=true robot=[16.090988, 24.0] actual_center=ChunkId { x: 1, y: 1 } frame_start=ChunkId { x: 1, y: 1 } activation=0.000067995265 adapter=Some(("llvmpipe (LLVM 15.0.7, 256 bits)", true))
+event frame=375 active=false robot=[15.8986435, 24.027971] actual_center=ChunkId { x: 0, y: 1 } frame_start=ChunkId { x: 0, y: 1 } activation=0 adapter=None
+event frame=447 active=true robot=[16.13861, 24.003983] actual_center=ChunkId { x: 1, y: 1 } frame_start=ChunkId { x: 1, y: 1 } activation=0.00081064645 adapter=Some(("llvmpipe (LLVM 15.0.7, 256 bits)", true))
+steps=600 creates=2 releases=1 max_quantity_error=0.000000000000014210854715202004 final_robot=[24.016376, 24.002262] result=Ok(())
+COMPLETE functional lifecycle only; no hardware FPS or physical accuracy acceptance

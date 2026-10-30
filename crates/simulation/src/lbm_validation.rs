@@ -42,6 +42,44 @@ pub fn map() -> MapDefinition {
         }],
     }
 }
+/// Explicit policy lifecycle fixture; all other chunks keep the default prohibition.
+pub fn policy_map() -> MapDefinition {
+    use crate::map::{
+        ChunkId,
+        fluid_policy::{BackgroundSource, ChunkFluidPolicy, MapFluidDefinition},
+    };
+    let mut map = map();
+    map.spawn = [14., 24.];
+    map.fluid = Some(MapFluidDefinition {
+        geometry_revision: 1,
+        max_base_pressure: config().pressure,
+        chunks: (0..=2)
+            .flat_map(|x| {
+                (0..=2).map(move |y| {
+                    (
+                        ChunkId { x, y },
+                        ChunkFluidPolicy {
+                            background: BackgroundSource::Analytic,
+                            allow_lbm: true,
+                        },
+                    )
+                })
+            })
+            .collect(),
+        fields: vec![],
+    });
+    map
+}
+/// Normal drive feedback for the fixed 600-frame policy lifecycle replay.
+pub fn policy_movement(frame: usize, position: [f32; 2]) -> MoveInput {
+    let target = if frame < 60 || (240..420).contains(&frame) {
+        [14., 24.]
+    } else {
+        [24., 24.]
+    };
+    let u = ((Vector::from_array(target) - Vector::from_array(position)) * 2.).clamp_length_max(1.);
+    MoveInput { x: u.x, y: u.y }
+}
 /// Calibration is an explicit initialization choice. Reset reuses current config.
 pub fn config() -> Config {
     let mut config = Config::default();
@@ -127,10 +165,6 @@ pub fn quality(
     config: &Config,
     initial: &[[f32; 2]],
 ) -> Quality {
-    let rest = 0.5
-        * config.cell_vertices as f32
-        * config.cell_radius.powi(2)
-        * (std::f32::consts::TAU / config.cell_vertices as f32).sin();
     let robot = Vector::from_array(snapshot.robot);
     let mut result = Quality {
         cell_count: snapshot.cells.len(),
@@ -157,6 +191,15 @@ pub fn quality(
         if (center - robot).length() <= 8. {
             result.nearby_cells += 1;
         }
+        let radius = if snapshot.cell_status.get(index).is_some_and(|s| s.white) {
+            config.white_cells.radius
+        } else {
+            config.cell_radius
+        };
+        let rest = 0.5
+            * config.cell_vertices as f32
+            * radius.powi(2)
+            * (std::f32::consts::TAU / config.cell_vertices as f32).sin();
         let ratio = area.abs() * 0.5 / rest;
         result.area_ratio_min = result.area_ratio_min.min(ratio);
         result.area_ratio_max = result.area_ratio_max.max(ratio);
@@ -240,6 +283,32 @@ mod tests {
         assert!(restored.paused);
         assert_eq!(restored.cells.len(), 72);
         assert_eq!(sim.world_map().unwrap().pump_edge, 6);
+    }
+    #[cfg(feature = "lbm-gpu")]
+    #[test]
+    #[ignore = "explicit software-adapter policy lifecycle reset check"]
+    fn forbidden_policy_reset_retains_request_and_later_creates_window() {
+        let mut sim = crate::Simulation::try_new_policy_lbm_world(
+            config(),
+            crate::LbmOptions {
+                allow_software: true,
+                ..Default::default()
+            },
+            policy_map(),
+        )
+        .unwrap();
+        assert!(!sim.policy_fluid_status().unwrap().window_active);
+        sim.try_reset().unwrap();
+        assert!(!sim.policy_fluid_status().unwrap().window_active);
+        for frame in 0..240 {
+            let input = policy_movement(frame, sim.snapshot().robot);
+            sim.try_tick(input).unwrap();
+            if sim.policy_fluid_status().unwrap().window_active {
+                assert!(sim.snapshot().lbm.is_some());
+                return;
+            }
+        }
+        panic!("normal movement after forbidden reset never created the requested window");
     }
     #[test]
     fn graph_flow_and_local_seed_are_explicit() {

@@ -1,0 +1,24 @@
+{
+  "base_commit": "1b8626672a8b73a91aa434f5648c8c3f56ef1e06",
+  "source_state": "base commit plus Task 5 source changes committed with this report",
+  "source_diff_sha256": "e4497fa39e5eb034c1d8a66e53ba239e7fe8220f6d2bd1cb6bab146cf8771f9f",
+  "files": {
+    "blood-policy-all-targets.log": "a2c20a3db02dd99278abb09858d2f0cf23f30399bca7005cb9a5f29eef403e25",
+    "blood-policy-check.log": "20c03826f5adcfa746c3d1b5cde20d6d3ef3cde56c2e6e3f58afb7d9de050814",
+    "blood-policy-feature-test.log": "8d9319f5dad64d2b111036b88a3c165d10cb52483e88bb21bd7eaa1d31aa55f8",
+    "blood-policy-godot-cached-import.log": "637167323b96f214546a79ad1460446fb653adc70b5439932d4fbbf6012e96a5",
+    "blood-policy-godot-lab.log": "2020c6f6a90a0353c7a6a5eec77e0a2732e7c3a82d2ccaeb7d1d8314229f21f4",
+    "blood-policy-godot-world.log": "2020c6f6a90a0353c7a6a5eec77e0a2732e7c3a82d2ccaeb7d1d8314229f21f4",
+    "blood-policy-replay.log": "1462f4c3df84449a72012bbc7c44aa794d95996de13d19c0f0670c6804f76569",
+    "blood-policy-reset.log": "e9ec533f66ddf1f498d5faf072c0b62f889d8648f365a45d5e86ca13c175a70d",
+    "policy.csv": "b7801a55468db8aa32fe9159bc43636edbeb28ab786b11b34dd986c0fa129dd7",
+    "status.txt": "18ff08d39ade83028d4e6495bd64ca121a9634de641095f24343bcc73540c2e0"
+  },
+  "source_files_sha256": {
+    "crates/simulation/src/background.rs": "688244be71a392dc0581b17f4ca4114cd812332fd38274eab3ff0499d4f8a05a",
+    "crates/simulation/src/lbm_validation.rs": "92eb67b90b7f6f8c8c0ac9235ab4f5845aaf80a352c3dfbd922fe5730a78e0dd",
+    "crates/simulation/examples/lbm_gameplay_probe.rs": "1e2b511f2af54b046f2568e07afd3196e9c939ff1d1f13864fcaf744259afe9d",
+    "crates/simulation/examples/lbm_gameplay_probe/policy.rs": "450e50a5c7760454f84b94ee40b25af962f987ebcac52b1c4e615bce923ed62c"
+  },
+  "log_normalization": "Trailing blank lines removed from captured logs; output content otherwise retained."
+}

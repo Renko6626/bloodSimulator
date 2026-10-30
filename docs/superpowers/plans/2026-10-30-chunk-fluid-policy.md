@@ -56,9 +56,9 @@ Task 1→2→3→4→5顺序执行，共用接口较多，不建议多个实现�
 
 `PrecomputedField`包含`geometry_revision: u64, viscosity: f32, reference_pressure: f32, max_scale: f32, origin: [f32;2], spacing: f32, size: [usize;2], velocity: Vec<[f32;2]>, fluid: Vec<bool>, ports: Vec<FieldPort>`。origin为首个采样点的世界坐标，数据行优先；资产边缘需覆盖插值支持。`FieldPort { edge: usize, along: f32, outward_sign: f32, reference_flux: f32 }`的截面由血管在along处的位置/切线/半宽决定，outward_sign仅±1，reference_flux为有符号二维外向通量。
 
-- [ ] 新增源数据及`policy_at`；旧地图及旧字面量显式`fluid: None`，不改变几何或流量参数。源策略不依赖GPU或Godot。
-- [ ] 在`map/fluid_policy.rs`增加一个查表行为测试：世界点`[-0.1,16]`落在`ChunkId{-1,1}`；覆盖此块为预计算/禁止，未配置邻块仍解析/禁止。测试调用生产ChunkId与policy_at，不只断言常量。
-- [ ] 运行`cargo test --locked -p simulation map::`；预期旧几何与新查表通过。用`rg -n 'MapDefinition \{' crates`核对所有字面量已补字段，不能把测试字面量改成新策略而变更旧负载。
+- [x] 新增源数据及`policy_at`；旧地图及旧字面量显式`fluid: None`，不改变几何或流量参数。源策略不依赖GPU或Godot。
+- [x] 在`map/fluid_policy.rs`增加一个查表行为测试：世界点`[-0.1,16]`落在`ChunkId{-1,1}`；覆盖此块为预计算/禁止，未配置邻块仍解析/禁止。测试调用生产ChunkId与policy_at，不只断言常量。
+- [x] 运行`cargo test --locked -p simulation map::`；预期旧几何与新查表通过。用`rg -n 'MapDefinition \{' crates`核对所有字面量已补字段，不能把测试字面量改成新策略而变更旧负载。
 
 ### Task 2：背景采样、资产契约及驱动检查
 
@@ -66,11 +66,11 @@ Task 1→2→3→4→5顺序执行，共用接口较多，不建议多个实现�
 
 **Interfaces:** 内部`PreparedBackground::new(map: &MapDefinition, config: &Config, unit_flow: &GraphFlow) -> Result<Self,String>`，`validate_step(&self, config: &Config) -> Result<(),String>`，`sample(&self, map: &MapDefinition, flow: &GraphFlow, instantaneous_pressure: f32, p: Vector) -> Vector`；unit_flow来自同黏度`GraphNetwork::solve(1.)`。公开管流函数`graph::sample_planar_velocity(position: Vector, map: &MapDefinition, flow: &GraphFlow, depth: f32) -> Vector`，原`sample_velocity`行为保留。
 
-- [ ] 实现二维抛物线采样，复用现有投影与节点混合逻辑。直管不再叠加会改变截面通量的额外衰减；旧圆管采样保留原衰减。把`EQUIVALENT_DEPTH=1`移至无GPU依赖的background模块，lbm_geometry继续重导出原路径，避免默认feature引用可选crate。
-- [ ] 实现静态场双线性采样与固体零速度；同一资产用世界坐标采样，与显示块加载无关。采样选择源标签后调用对应背景；使用当前瞬时压差/reference_pressure缩放。
-- [ ] 在new中检查驱动上限、有限网格/数据尺寸、掩码和权威地图几何一致、geometry_revision/黏度/参考驱动/α范围、资产覆盖及插值支持。Precomputed块显式allow_lbm=true或未知FieldId报错。用unit_flow核对各端口reference_flux及方向，检查1.15×最大基础压差可共同缩放；预计算与解析只在声明直管端口连接，核对端口速度剖面与二维通量，其余外围为固体。数值容差依据采样分辨率选取并写在校验函数旁，不通过放宽容差掩盖明显错配。
-- [ ] 实现validate_step：基础压差有限且0≤pressure≤上限；黏度、dt、substeps与准备值相同。不在此层推进环境或求解，调用方必须在任何推进前执行。
-- [ ] 新增少量背景测试：R=2、Q=8、D=1直管中心3、偏移1处2.25、壁面0，数值积分通量约8；独立2×2向量表中点插值为[1,2]并按α缩放；共享资产跨x=16采样趋向同一值；坏端口参考通量与越界驱动拒绝。夹具调用真实生产采样/校验，不用源码匹配或mock。运行`cargo test --locked -p simulation background`及旧`circulation::graph::tests`，预期新契约通过、旧解析行为保持。
+- [x] 实现二维抛物线采样，复用现有投影与节点混合逻辑。直管不再叠加会改变截面通量的额外衰减；旧圆管采样保留原衰减。把`EQUIVALENT_DEPTH=1`移至无GPU依赖的background模块，lbm_geometry继续重导出原路径，避免默认feature引用可选crate。
+- [x] 实现静态场双线性采样与固体零速度；同一资产用世界坐标采样，与显示块加载无关。采样选择源标签后调用对应背景；使用当前瞬时压差/reference_pressure缩放。
+- [x] 在new中检查驱动上限、有限网格/数据尺寸、掩码和权威地图几何一致、geometry_revision/黏度/参考驱动/α范围、资产覆盖及插值支持。Precomputed块显式allow_lbm=true或未知FieldId报错。用unit_flow核对各端口reference_flux及方向，检查1.15×最大基础压差可共同缩放；预计算与解析只在声明直管端口连接，核对端口速度剖面与二维通量，其余外围为固体。数值容差依据采样分辨率选取并写在校验函数旁，不通过放宽容差掩盖明显错配。
+- [x] 实现validate_step：基础压差有限且0≤pressure≤上限；黏度、dt、substeps与准备值相同。不在此层推进环境或求解，调用方必须在任何推进前执行。
+- [x] 新增少量背景测试：R=2、Q=8、D=1直管中心3、偏移1处2.25、壁面0，数值积分通量约8；独立2×2向量表中点插值为[1,2]并按α缩放；共享资产跨x=16采样趋向同一值；坏端口参考通量与越界驱动拒绝。夹具调用真实生产采样/校验，不用源码匹配或mock。运行`cargo test --locked -p simulation background`及旧`circulation::graph::tests`，预期新契约通过、旧解析行为保持。
 
 ### Task 3：完整窗口检查及空间权重
 
@@ -78,10 +78,10 @@ Task 1→2→3→4→5顺序执行，共用接口较多，不建议多个实现�
 
 **Interfaces:** `PreparedLbmPolicy::new(map: &MapDefinition, peak_flow: &GraphFlow, options: &LbmOptions) -> Result<Self,String>`；`contains(&self, center: ChunkId) -> bool`；`activation(&self, player: Vector, band: f32) -> f32`；诊断`rejections(&self) -> &[LbmPolicyRejection]`，记录中心和原因。peak_flow来自1.15×地图最大基础压差。内部有效中心是BTreeSet，不缓存每个候选完整栅格。
 
-- [ ] 只从显式许可块枚举中心，要求整个3×3均为解析且许可；缺少许可不进行栅格化。复用真实profile的rasterize与opening_profiles，保留所有已有拒绝理由，逐个检查后释放临时数据。几何拒绝记录原因并排除中心；背景配置错误由Task 2提前报错。
-- [ ] 排除窗口闭合边界与等效泵段流体几何相交的候选，使用管段加半宽对AABB的保守相交判断，不能只看泵段端点。检查初场/开口峰值不超过velocity_bound；不据此宣称耦合运行稳定。
-- [ ] 从有效中心块并集构造外边界线段，消去两个有效块之间的共享边；activation使用到这些外边界（含孔洞）的内侧距离，按band归一化smoothstep。集合外返回0，内部块边不降权；不新增距离场或时间状态。
-- [ ] CPU侧feature测试复用现有LBM几何夹具：9块许可齐全才有有效中心；坏角点/泵段交叉保守拒绝；跨相邻有效块内部边界权重不降，外边界及负坐标位置正确。这些测试不创建GPU。运行`cargo test --locked -p simulation --features lbm-gpu lbm_policy`，预期通过。
+- [x] 只从显式许可块枚举中心，要求整个3×3均为解析且许可；缺少许可不进行栅格化。复用真实profile的rasterize与opening_profiles，保留所有已有拒绝理由，逐个检查后释放临时数据。几何拒绝记录原因并排除中心；背景配置错误由Task 2提前报错。
+- [x] 排除窗口闭合边界与等效泵段流体几何相交的候选，使用管段加半宽对AABB的保守相交判断，不能只看泵段端点。检查初场/开口峰值不超过velocity_bound；不据此宣称耦合运行稳定。
+- [x] 从有效中心块并集构造外边界线段，消去两个有效块之间的共享边；activation使用到这些外边界（含孔洞）的内侧距离，按band归一化smoothstep。集合外返回0，内部块边不降权；不新增距离场或时间状态。
+- [x] CPU侧feature测试复用现有LBM几何夹具：9块许可齐全才有有效中心；坏角点/泵段交叉保守拒绝；跨相邻有效块内部边界权重不降，外边界及负坐标位置正确。这些测试不创建GPU。运行`cargo test --locked -p simulation --features lbm-gpu lbm_policy`，预期通过。
 
 ### Task 4：单窗口生命周期与统一身体作用
 
@@ -93,12 +93,12 @@ Task 1→2→3→4→5顺序执行，共用接口较多，不建议多个实现�
 
 诊断接口`Simulation::policy_fluid_status() -> Option<PolicyFluidStatus>`，类型由lib重导出，字段为`center: ChunkId, background: BackgroundSource, window_active: bool, activation: f32, rejection: Option<String>`。无策略地图返回None；策略地图没有活动窗口也必须返回Some诊断。
 
-- [ ] 增加新构造入口，按Task 2/3先准备再构造身体，不因出生点无效创建窗口；用户请求仍存PolicyRuntime。复用已有build_seeded/streaming::local_config和墙体/种群初始化，让enable_streaming辅助函数可供无GPU入口使用，不重构全部工厂。旧接受自定义map的入口遇到Some(fluid)时明确指向新fallible入口，不能静默忽略策略；无需给Godot新增入口或旗标。
-- [ ] Environment::velocity_at对新地图调用PreparedBackground，旧地图仍调用原graph采样。将固定步开始的驱动检查放在environment.update、寿命/数量、AI及GPU之前；瞬时驱动使用已有flow.summary.pressure_drop供统一采样，不另存一份权威压差。既有旧入口不额外受新上限约束。
-- [ ] 帧开始选择中心，必要时创建/迁移/释放窗口；子步用prepare_at更新已锁定原点的开口驱动。上一帧finish完成后才允许更换窗口；原子步内按角色位置maybe_shift仅保留在旧入口。实际创建/推进错误直接传播，既有错误字符串可加上下文，不增加catch后回退。
-- [ ] 给LbmCoupling增加默认1的frame_activation；策略帧设置为Task 3计算的a，local返回a×原空间权重。exchange反向冲量、细胞背景拖曳1-w、机器人/免疫flow_velocity_at、snapshot箭头及sample_world统一使用该local结果；新增actor不重设权重，不重复施力。无窗口时sample_world对策略入口仍返回有效背景及零局部权重，旧入口无窗口时的None语义保留。
-- [ ] try_reset先按PolicyRuntime保存的请求重建，再处理现有white/paused状态；try_reset_lbm_profile也先识别策略请求，即使此刻没有窗口仍可更换profile并重建候选集合。不能凭当前lbm.is_some判断是否请求过LBM。保留原种群/地图/卸载策略。lbm_stats/work_stats无窗口时仍None；policy_fluid_status供探针读取，不扩大Godot snapshot协议。
-- [ ] 在runtime/policy.rs加真实CPU模拟测试：越界调压try_tick返回错误且机器人、模拟时间、细胞寿命不变；有效范围能推进且reset仍保留策略；跨帧选择只查询已批准中心。复用现有模拟断言，不新建mock运行框架。运行`cargo test --locked -p simulation`及`cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`，预期默认和feature均编译/通过。
+- [x] 增加新构造入口，按Task 2/3先准备再构造身体，不因出生点无效创建窗口；用户请求仍存PolicyRuntime。复用已有build_seeded/streaming::local_config和墙体/种群初始化，让enable_streaming辅助函数可供无GPU入口使用，不重构全部工厂。旧接受自定义map的入口遇到Some(fluid)时明确指向新fallible入口，不能静默忽略策略；无需给Godot新增入口或旗标。
+- [x] Environment::velocity_at对新地图调用PreparedBackground，旧地图仍调用原graph采样。将固定步开始的驱动检查放在environment.update、寿命/数量、AI及GPU之前；瞬时驱动使用已有flow.summary.pressure_drop供统一采样，不另存一份权威压差。既有旧入口不额外受新上限约束。
+- [x] 帧开始选择中心，必要时创建/迁移/释放窗口；子步用prepare_at更新已锁定原点的开口驱动。上一帧finish完成后才允许更换窗口；原子步内按角色位置maybe_shift仅保留在旧入口。实际创建/推进错误直接传播，既有错误字符串可加上下文，不增加catch后回退。
+- [x] 给LbmCoupling增加默认1的frame_activation；策略帧设置为Task 3计算的a，local返回a×原空间权重。exchange反向冲量、细胞背景拖曳1-w、机器人/免疫flow_velocity_at、snapshot箭头及sample_world统一使用该local结果；新增actor不重设权重，不重复施力。无窗口时sample_world对策略入口仍返回有效背景及零局部权重，旧入口无窗口时的None语义保留。
+- [x] try_reset先按PolicyRuntime保存的请求重建，再处理现有white/paused状态；try_reset_lbm_profile也先识别策略请求，即使此刻没有窗口仍可更换profile并重建候选集合。不能凭当前lbm.is_some判断是否请求过LBM。保留原种群/地图/卸载策略。lbm_stats/work_stats无窗口时仍None；policy_fluid_status供探针读取，不扩大Godot snapshot协议。
+- [x] 在runtime/policy.rs加真实CPU模拟测试：越界调压try_tick返回错误且机器人、模拟时间、细胞寿命不变；有效范围能推进且reset仍保留策略；跨帧选择只查询已批准中心。复用现有模拟断言，不新建mock运行框架。运行`cargo test --locked -p simulation`及`cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`，预期默认和feature均编译/通过。
 
 ### Task 5：实际启停回放与交付记录
 
@@ -106,11 +106,11 @@ Task 1→2→3→4→5顺序执行，共用接口较多，不建议多个实现�
 
 **Interfaces:** `lbm_validation::policy_map() -> MapDefinition`从原验证场复制后加标签：仅x=0..2、y=0..2这9块许可，唯一有效中心(1,1)，出生点改为[14,24]（禁区中心）。max_base_pressure取该验证场原config().pressure；旧map/config/centers和旧探针默认不改。新`--fluid-policy`旗标调用独立`policy::run(args: &[String]) -> Result<(),String>`分支，使用Task 4新构造入口与status，不要求每帧都有LBM snapshot。
 
-- [ ] 新回放复用现有quality/guard和MoveInput位置反馈：60帧禁区保持，随后每180帧依次向[24,24]、[14,24]、[24,24]移动，合计600帧。使用正常Rust模拟输入，无瞬移、无UI操作；记录实际中心/窗口创建消失、activation、marker力、速度差和数量账。若接触导致未完成实际进入/退出，明确失败，不能仅根据目标位置宣称交接完成。
-- [ ] 软件GPU功能回放采用现有72红细胞及流式Aggregate，正常白细胞开关与新普通地图入口一致；检查真实创建→释放→再创建、禁区无窗口/零marker作用、机械守卫和数量账。另用已有ignored功能测试的方式覆盖禁区reset仍保留请求并能进入；不把软件功能结果称为实卡性能或物理精度验收。不新增自动UI交互。
-- [ ] 执行一次集中验证：`bash scripts/check.sh`；`cargo test --locked -p simulation --features lbm-gpu`；`cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`。只在新改动或失败时重复受影响检查，不反复全量运行。
-- [ ] 执行`cargo run --locked -p simulation --features lbm-gpu --example lbm_gameplay_probe -- --fluid-policy --allow-software --functional --frames 600 --output /tmp/blood-chunk-fluid-policy`，预期退出0且日志含实际启停观察。若本机无软件适配器，报告这项未验证，不启动云实例。执行前确保实现的新分支遵守frames=600；不沿用旧720帧每腿逻辑。
-- [ ] 进行一次完整改动只读审阅，确认无重复推进、无隐藏回退、旧负载入口不变；按用户约定只修核心问题。保存必要日志、来源版本和限制，更新STATUS；列出实际命令和结果。心腔生成/大地图内容未实施，未测实卡FPS及长程混合稳定性。按任务本地提交；不自动推送、合并或改动部署。
+- [x] 新回放复用现有quality/guard和MoveInput位置反馈：60帧禁区保持，随后每180帧依次向[24,24]、[14,24]、[24,24]移动，合计600帧。使用正常Rust模拟输入，无瞬移、无UI操作；记录实际中心/窗口创建消失、activation、marker力、速度差和数量账。若接触导致未完成实际进入/退出，明确失败，不能仅根据目标位置宣称交接完成。
+- [x] 软件GPU功能回放采用现有72红细胞及流式Aggregate，正常白细胞开关与新普通地图入口一致；检查真实创建→释放→再创建、禁区无窗口/零marker作用、机械守卫和数量账。另用已有ignored功能测试的方式覆盖禁区reset仍保留请求并能进入；不把软件功能结果称为实卡性能或物理精度验收。不新增自动UI交互。
+- [x] 执行一次集中验证：`bash scripts/check.sh`；`cargo test --locked -p simulation --features lbm-gpu`；`cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`。只在新改动或失败时重复受影响检查，不反复全量运行。
+- [x] 执行`cargo run --locked -p simulation --features lbm-gpu --example lbm_gameplay_probe -- --fluid-policy --allow-software --functional --frames 600 --output /tmp/blood-chunk-fluid-policy`，预期退出0且日志含实际启停观察。若本机无软件适配器，报告这项未验证，不启动云实例。执行前确保实现的新分支遵守frames=600；不沿用旧720帧每腿逻辑。
+- [x] 进行一次完整改动只读审阅，确认无重复推进、无隐藏回退、旧负载入口不变；按用户约定只修核心问题。保存必要日志、来源版本和限制，更新STATUS；列出实际命令和结果。心腔生成/大地图内容未实施，未测实卡FPS及长程混合稳定性。按任务本地提交；不自动推送、合并或改动部署。
 
 ## 计划自检及交付边界
 
@@ -118,4 +118,4 @@ Task 1→2→3→4→5顺序执行，共用接口较多，不建议多个实现�
 
 本计划交付可使用的区块流体基础设施与显式Rust功能回放，不改变默认游戏地图，不完成心腔几何或离线场生成。后续器官地图待这些内容有独立设计后再接入，避免把接口实现扩展为另一轮流体研究。
 
-状态：计划已编写，尚未开始代码实施；等待用户审阅及选择执行方式。建议本会话由主agent顺序实施，末尾一次独立审阅，减少强关联接口的交接成本。
+状态：五项任务已实施，实际600帧软件回放观察创建→释放→再创建，禁区reset测试通过。集中验证已执行：Rust默认/feature测试及all-target编译通过；scripts/check.sh首次Godot导入退出134，缓存导入和world/lab补验退出0，首次导入根因未明。详细命令、证据、只读审阅和未验收范围见[功能交付记录](../../research/2026-10-30-chunk-fluid-policy/README.md)。本地提交交付后由主agent完成末尾独立审阅，不自动推送或合并。

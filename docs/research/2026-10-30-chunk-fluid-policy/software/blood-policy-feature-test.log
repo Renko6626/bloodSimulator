@@ -1,0 +1,83 @@
+   Compiling simulation v0.1.0 (/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator/crates/simulation)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.44s
+     Running unittests src/lib.rs (/data/sunyunbo/www/bloodSimulator/target/debug/deps/simulation-411ad0eda30f0d5b)
+
+running 59 tests
+test cell_population::tests::births_prioritize_the_inflow_side_for_either_flow_direction ... ok
+test cell::tests::hibernate_restores_identity_health_and_deformed_body ... ok
+test cell_population::tests::transfer_uses_old_stock_and_only_one_edge_per_update ... ok
+test cell_population::tests::junction_distributes_outgoing_quantity_by_flow ... ok
+test circulation::graph::tests::series_parallel_loop_obeys_pressures_conservation_and_scaling ... ok
+test cell_population::tests::stopped_flow_preserves_stock ... ok
+test fluid::lbm_geometry::tests::map_fork_profiles_drive_gpu ... ignored, explicit software-adapter functional diagnostic
+test cell_population::tests::separated_far_intervals_do_not_bypass_near_region ... ok
+test circulation::graph::tests::velocity_is_static_without_head_and_smooth_near_junction ... ok
+test background::tests::background_shared_asset_is_continuous_at_chunk_boundary ... ok
+test background::tests::background_planar_pipe_preserves_cross_section_flux ... ok
+test background::tests::background_bilinear_midpoint_and_common_pressure_scale ... ok
+test background::tests::background_rejects_missing_ports_bad_mask_and_unsafe_policy ... ok
+test background::tests::background_rejects_wrong_reference_flux_and_unprepared_drive ... ok
+test fluid::streaming_window::tests::batched_advance_matches_individual_steps ... ignored, explicit software-adapter functional diagnostic
+test fluid::streaming_window::tests::deferred_batch_requires_finish_and_refreshes_cache ... ignored, explicit software-adapter functional diagnostic
+test fluid::streaming_window::tests::invalid_gpu_macrostate_returns_error_from_batch ... ignored, explicit software-adapter functional diagnostic
+test fluid::streaming_window::tests::streaming_window_migration_reference ... ignored, explicit software-adapter functional diagnostic
+test fluid::streaming_window::tests::streaming_window_block_alignment ... ok
+test fluid::streaming_window::tests::supported_bilinear_weights_exclude_solids_and_outside ... ok
+test fluid::lbm_geometry::tests::rejects_isolated_and_curved_openings ... ok
+test fluid::lbm_policy::tests::lbm_policy_requires_all_nine_analytic_permissions_and_checks_options_when_empty ... ok
+test lbm_validation::tests::forbidden_policy_reset_retains_request_and_later_creates_window ... ignored, explicit software-adapter policy lifecycle reset check
+test lbm_validation::tests::validation_reset_preserves_seed_and_current_pressure ... ignored, explicit software-adapter validation-scene reset check
+test fluid::lbm_policy::tests::lbm_policy_activation_skips_shared_edges_and_handles_negative_coordinates_and_holes ... ok
+test fluid::lbm_geometry::tests::accepts_interior_bends_with_straight_opening_buffers ... ok
+test lbm_validation::tests::graph_flow_and_local_seed_are_explicit ... ok
+test map::fluid_policy::tests::policy_lookup_uses_world_chunks_and_keeps_unconfigured_neighbors_closed ... ok
+test fluid::lbm_policy::tests::lbm_policy_rejects_real_corner_pump_crossing_and_peak_speed ... ok
+test runtime::lbm_runtime_tests::default_map_lbm_boundary_is_explicit ... ignored, explicit software-adapter functional diagnostic
+test runtime::lbm_runtime_tests::lbm_exchange_conserves_momentum_and_weights_once ... ignored, explicit software-adapter functional diagnostic
+test runtime::lbm_runtime_tests::lbm_runtime_prepare_pause_and_time ... ignored, explicit software-adapter functional diagnostic
+test map::tests::fixed_chunks_share_geometry_without_sealing_the_channel ... ok
+test fluid::lbm_geometry::tests::straight_and_fork_flux_on_both_grids ... ok
+test runtime::gameplay::tests::a_dead_cell_leaving_the_window_never_returns_as_live_stock ... ok
+test runtime::gameplay::tests::fixed_wall_blocks_melee_damage ... ok
+test runtime::population_tests::real_bodies_retire_and_spawn_without_losing_quantity ... ok
+test fluid::tests::equal_open_pressures_rest_and_closed_component_is_rejected ... ok
+test runtime::gameplay::tests::melee_hits_the_cell_edge_once_per_pulse_and_respects_range ... ok
+test runtime::policy::tests::policy_rejects_drive_before_bodies_time_or_lifetimes_change ... ok
+test runtime::immunity_tests::a_pursuing_white_cell_really_moves_with_zero_background_flow ... ok
+test cell::tests::compressed_cell_preserves_area_and_recovers_after_release ... ok
+test runtime::immunity_tests::reinforcements_are_bounded_and_white_bodies_stay_out_of_red_stock ... ok
+test runtime::gameplay::tests::corpse_deflates_as_a_real_soft_body_and_is_eventually_removed ... ok
+test runtime::policy::tests::policy_valid_drive_advances_and_reset_preserves_map_and_streaming ... ok
+test runtime::immunity_tests::walls_hide_the_robot_and_pursuit_uses_only_the_last_known_position ... ok
+test fluid::tests::open_channel_matches_poiseuille_and_preserves_pressure_reference ... ok
+test runtime::immunity_tests::actual_player_damage_alerts_witnesses_and_quiet_time_reduces_alertness ... ok
+test runtime::policy::tests::policy_frame_selection_only_uses_prepared_centers_and_retains_inactive_request ... ok
+test lbm_validation::tests::empty_detailed_window_checks_robot_without_claiming_cell_quality ... ok
+test map::tests::fork_has_open_shared_floor_and_boundary ... ok
+test runtime::gameplay::tests::pause_single_step_and_reset_control_attacks_and_corpses ... ok
+test runtime::immunity_tests::contact_requires_preparation_and_lethal_player_attack_cancels_the_return_hit ... ok
+test runtime::population_tests::pause_single_step_and_reset_keep_local_mode_and_initial_distribution ... ok
+test runtime::streaming::tests::dormant_ai_freezes_but_corpse_lifetime_still_expires ... ok
+test fluid::tests::real_fork_conserves_opening_flux_and_solves_true_stokes_residuals ... ok
+test runtime::region_tests::reset_preserves_explicit_solver_and_grid_options ... ok
+test runtime::streaming::tests::streamed_world_preserves_identity_and_releases_distant_resources ... ok
+test runtime::region_tests::region_handoff_reuses_bodies_and_preparation_applies_no_impulse ... ok
+
+test result: ok. 49 passed; 0 failed; 10 ignored; 0 measured; 0 filtered out; finished in 5.60s
+
+     Running tests/experiment.rs (/data/sunyunbo/www/bloodSimulator/target/debug/deps/experiment-d558e127e5d76d3a)
+
+running 5 tests
+test closed_loop_uses_total_resistance_and_poiseuille_profile ... ok
+test robot_has_no_coasting_and_can_easily_move_against_flow ... ok
+test pause_single_step_and_reset_use_the_same_clock ... ok
+test crowded_cells_advect_without_losing_area_or_crossing_walls ... ok
+test world_cells_pass_both_branches_and_rejoin ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.25s
+
+   Doc-tests simulation
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

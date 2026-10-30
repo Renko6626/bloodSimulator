@@ -1,8 +1,8 @@
 //! Prepared world-space backgrounds. Preparation validates assets; sampling never loads chunks.
 use crate::{
-    circulation::graph::{self, GraphFlow},
-    map::{fluid_policy::*, ChunkId, MapDefinition},
     Config,
+    circulation::graph::{self, GraphFlow},
+    map::{ChunkId, MapDefinition, fluid_policy::*},
 };
 use rapier2d::prelude::Vector;
 
@@ -590,10 +590,12 @@ mod tests {
             assert!(prepared.validate_step(&changed).is_err());
         }
         map.fluid.as_mut().unwrap().fields[0].ports[1].reference_flux *= 1.5;
-        assert!(PreparedBackground::new(&map, &config, &flow)
-            .err()
-            .unwrap()
-            .contains("reference flux"));
+        assert!(
+            PreparedBackground::new(&map, &config, &flow)
+                .err()
+                .unwrap()
+                .contains("reference flux")
+        );
     }
 
     #[test]
@@ -604,30 +606,38 @@ mod tests {
         assert!(PreparedBackground::new(&broken, &config, &flow).is_err());
         let mut broken = map.clone();
         broken.fluid.as_mut().unwrap().fields[0].ports.clear();
-        assert!(PreparedBackground::new(&broken, &config, &flow)
-            .err()
-            .unwrap()
-            .contains("declared straight port"));
+        assert!(
+            PreparedBackground::new(&broken, &config, &flow)
+                .err()
+                .unwrap()
+                .contains("declared straight port")
+        );
         let mut broken = map.clone();
         for velocity in &mut broken.fluid.as_mut().unwrap().fields[0].velocity {
             velocity[0] *= 1.5;
         }
-        assert!(PreparedBackground::new(&broken, &config, &flow)
-            .err()
-            .unwrap()
-            .contains("velocity profile"));
+        assert!(
+            PreparedBackground::new(&broken, &config, &flow)
+                .err()
+                .unwrap()
+                .contains("velocity profile")
+        );
         let mut broken = map.clone();
         broken.fluid.as_mut().unwrap().fields[0].max_scale = 2.0;
-        assert!(PreparedBackground::new(&broken, &config, &flow)
-            .err()
-            .unwrap()
-            .contains("maximum pulsating drive"));
+        assert!(
+            PreparedBackground::new(&broken, &config, &flow)
+                .err()
+                .unwrap()
+                .contains("maximum pulsating drive")
+        );
         let mut broken = map.clone();
         broken.fluid.as_mut().unwrap().fields[0].fluid[0] = true;
-        assert!(PreparedBackground::new(&broken, &config, &flow)
-            .err()
-            .unwrap()
-            .contains("mask"));
+        assert!(
+            PreparedBackground::new(&broken, &config, &flow)
+                .err()
+                .unwrap()
+                .contains("mask")
+        );
         let mut broken = map.clone();
         broken
             .fluid
@@ -638,10 +648,12 @@ mod tests {
             .next()
             .unwrap()
             .allow_lbm = true;
-        assert!(PreparedBackground::new(&broken, &config, &flow)
-            .err()
-            .unwrap()
-            .contains("allow LBM"));
+        assert!(
+            PreparedBackground::new(&broken, &config, &flow)
+                .err()
+                .unwrap()
+                .contains("allow LBM")
+        );
         let mut broken = map.clone();
         broken
             .fluid
@@ -652,9 +664,11 @@ mod tests {
             .next()
             .unwrap()
             .background = BackgroundSource::Precomputed(FieldId(9));
-        assert!(PreparedBackground::new(&broken, &config, &flow)
-            .err()
-            .unwrap()
-            .contains("unknown"));
+        assert!(
+            PreparedBackground::new(&broken, &config, &flow)
+                .err()
+                .unwrap()
+                .contains("unknown")
+        );
     }
 }

@@ -1,3 +1,6 @@
+#[cfg(feature = "lbm-gpu")]
+#[path = "lbm_gameplay_probe/policy.rs"]
+mod policy;
 #[cfg(not(feature = "lbm-gpu"))]
 fn main() {
     eprintln!("requires --features lbm-gpu");
@@ -22,6 +25,9 @@ fn run() -> Result<(), String> {
         time::Instant,
     };
     let args: Vec<_> = std::env::args().collect();
+    if args.iter().any(|s| s == "--fluid-policy") {
+        return policy::run(&args);
+    }
     let get = |name: &str, default: &str| {
         args.iter()
             .position(|s| s == name)
