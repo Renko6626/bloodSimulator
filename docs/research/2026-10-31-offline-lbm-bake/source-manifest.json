@@ -1,0 +1,23 @@
+{
+  "source_base": "c1185eb217c0cf92dcf018c0ac6e8c5da9e5f691",
+  "source_note": "Task 3 final source hashes below, on top of this committed base; source hashes correspond to revised successful GPU job. The first failed job used the initial budget and direct conversion before resampling was added. Its uncommitted example source hash was not captured.",
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)",
+  "cargo": "cargo 1.98.1 (797e8a9bc 2026-08-05)",
+  "gpu_environment": {
+    "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/lvp_icd.x86_64.json",
+    "CARGO_TARGET_DIR": "/data/sunyunbo/www/bloodSimulator/target"
+  },
+  "sha256": {
+    "crates/simulation/src/background.rs": "9b0cc167d449036ee809bcd870489410a4eada83d3f65b143e467874aee90c30",
+    "crates/simulation/src/offline_lbm.rs": "a71328e6f1d00e5c38f75c12b2ce546888181f2ebdf64fd027879ac9b586dda6",
+    "crates/simulation/src/fluid/lbm_geometry.rs": "cf59b47da87dde35ce587d1a16c6b60a61082c61ebefecea6885460c136b0789",
+    "crates/simulation/examples/offline_lbm_bake.rs": "1af715073d232c19a3a01d231060c21eb5d85c778ee3a0556075f940ea7ebf2d",
+    "docs/research/2026-10-31-offline-lbm-bake/software-functional/port-diagnosis.txt": "da35613b090d11c0bf744a3e628cffa6bbe2b7c3033523753a20a5c73e606425",
+    "docs/research/2026-10-31-offline-lbm-bake/software-functional/report.txt": "84493832b23685fc7f7a9c31b816837ac23284472c6ffab91955c6a7921b6866",
+    "docs/research/2026-10-31-offline-lbm-bake/software-functional/straight-pipe.bfld": "0e3742cc31c3570c2ecf33a3e10d134ac9301845651d336f675d4ff5c5412641",
+    "docs/research/2026-10-31-offline-lbm-bake/software-revised/raw-cell-centered.bfld": "a0e3d1f9fecf0a07be5a8f01e006505d8b029ef4e35935a5dc52d14cef5f4e7f",
+    "docs/research/2026-10-31-offline-lbm-bake/software-revised/report.txt": "8baf5af8108b71653846972e4a2ba8b87cc82cebfc440f20a0617c0c5917154e",
+    "docs/research/2026-10-31-offline-lbm-bake/software-revised/straight-pipe.bfld": "f683455c2b1612dafc1e2aa5a0f5176c080af9f0e99b5da4e3cf8e6179b8f7b3",
+    "docs/research/2026-10-31-offline-lbm-bake/software-revised/export-metadata.json": "cbd0259e582a04861effef6056feea46ae3001bd3d84401cea0b1d76f6b08fb5"
+  }
+}

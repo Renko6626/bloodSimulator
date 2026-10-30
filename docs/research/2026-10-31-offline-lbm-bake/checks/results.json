@@ -1,0 +1,62 @@
+[
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "docs/research/2026-10-31-offline-lbm-bake/checks/1.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "simulation"
+    ],
+    "exit_code": 0,
+    "log": "docs/research/2026-10-31-offline-lbm-bake/checks/2.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "simulation",
+      "--features",
+      "lbm-gpu"
+    ],
+    "exit_code": 0,
+    "log": "docs/research/2026-10-31-offline-lbm-bake/checks/3.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "check",
+      "--locked",
+      "--workspace",
+      "--all-targets",
+      "--features",
+      "godot_bridge/lbm-gpu"
+    ],
+    "exit_code": 0,
+    "log": "docs/research/2026-10-31-offline-lbm-bake/checks/4.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "blood-fluid-gpu",
+      "lbm::",
+      "--lib"
+    ],
+    "exit_code": 0,
+    "log": "docs/research/2026-10-31-offline-lbm-bake/checks/5.log"
+  }
+]

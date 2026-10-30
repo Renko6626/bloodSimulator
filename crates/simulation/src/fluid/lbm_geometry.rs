@@ -1,6 +1,8 @@
 //! Map-derived geometry and planar background for LBM windows.
 use crate::{circulation::graph::GraphFlow, map::MapDefinition};
-use blood_fluid_gpu::lbm::{InitialField, OpeningSpec, WindowGeometry, WindowSide, WindowSpec};
+use blood_fluid_gpu::lbm::{
+    DomainSpec, InitialField, OpeningSpec, WindowGeometry, WindowSide, WindowSpec,
+};
 use rapier2d::prelude::Vector;
 use std::collections::VecDeque;
 
@@ -29,14 +31,24 @@ pub fn rasterize(
     flow: &GraphFlow,
     spec: WindowSpec,
 ) -> Result<MapWindowGeometry, String> {
+    rasterize_domain(map, flow, spec.domain())
+}
+
+/// Rasterize a fixed square domain using the same map and opening contract.
+pub fn rasterize_domain(
+    map: &MapDefinition,
+    flow: &GraphFlow,
+    spec: DomainSpec,
+) -> Result<MapWindowGeometry, String> {
+    spec.validate()?;
     if map.edges.is_empty()
         || flow.rates.len() != map.edges.len()
         || flow.rates.iter().any(|v| !v.is_finite())
     {
         return Err("invalid map or graph flow".into());
     }
-    let n = spec.profile.cells_per_side() as usize;
-    let h = spec.profile.cell_spacing();
+    let n = spec.cells_per_side as usize;
+    let h = spec.spacing;
     let origin = spec.world_bounds()[0];
     let point = |x: usize, y: usize| {
         Vector::new(

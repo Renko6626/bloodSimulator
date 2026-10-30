@@ -31,6 +31,63 @@ pub fn to_precomputed_field(
     Ok(field)
 }
 
+/// Resample actual field velocities onto a map-aligned export grid.
+/// All target samples must have source interpolation support, including solids.
+/// The map determines the new mask; wall/outside samples are exactly zero.
+pub fn resample_precomputed_field(
+    map: &crate::map::MapDefinition,
+    source: &PrecomputedField,
+    origin: [f32; 2],
+    spacing: f32,
+    size: [usize; 2],
+) -> Result<PrecomputedField, String> {
+    use crate::background::{grid_coordinates, sample_field};
+    use rapier2d::prelude::Vector;
+    validate_structure(source)?;
+    let count = size[0]
+        .checked_mul(size[1])
+        .ok_or("resampled size overflow")?;
+    if size.iter().any(|&n| n < 2)
+        || !spacing.is_finite()
+        || spacing <= 0.
+        || origin.iter().any(|v| !v.is_finite())
+    {
+        return Err("invalid resampled grid".into());
+    }
+    let end = Vector::from_array(origin)
+        + Vector::new((size[0] - 1) as f32, (size[1] - 1) as f32) * spacing;
+    if !end.is_finite()
+        || end.x <= origin[0]
+        || end.y <= origin[1]
+        || grid_coordinates(source, Vector::from_array(origin)).is_none()
+        || grid_coordinates(source, end).is_none()
+    {
+        return Err("resampled grid lacks source interpolation support".into());
+    }
+    let mut result = PrecomputedField {
+        origin,
+        spacing,
+        size,
+        velocity: Vec::with_capacity(count),
+        fluid: Vec::with_capacity(count),
+        ..source.clone()
+    };
+    for y in 0..size[1] {
+        for x in 0..size[0] {
+            let point = Vector::from_array(origin) + Vector::new(x as f32, y as f32) * spacing;
+            let fluid = map.signed_distance(point) < 0.;
+            result.fluid.push(fluid);
+            result.velocity.push(if fluid {
+                sample_field(source, point).to_array()
+            } else {
+                [0.; 2]
+            });
+        }
+    }
+    validate_structure(&result)?;
+    Ok(result)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -92,5 +149,75 @@ mod tests {
             ),
             (7, 2., 3.)
         );
+    }
+    #[test]
+    fn resampling_uses_bilinear_velocity_map_walls_and_checked_support() {
+        use crate::map::{MapDefinition, VesselEdge};
+        let map = MapDefinition {
+            fluid: None,
+            nodes: vec![[-10., 0.], [10., 0.]],
+            edges: vec![VesselEdge {
+                from: 0,
+                to: 1,
+                half_width: 1.,
+                centerline: vec![[-10., 0.], [10., 0.]],
+            }],
+            pump_edge: 0,
+            spawn: [0.; 2],
+            landmarks: vec![],
+        };
+        let source = PrecomputedField {
+            geometry_revision: 7,
+            viscosity: 0.05,
+            reference_pressure: 2.,
+            max_scale: 3.,
+            origin: [-1.5; 2],
+            spacing: 1.,
+            size: [4; 2],
+            ports: vec![],
+            fluid: (0..4)
+                .flat_map(|y| (0..4).map(move |_| y == 1 || y == 2))
+                .collect(),
+            velocity: (0..4)
+                .flat_map(|y| {
+                    (0..4).map(move |x| {
+                        if y == 1 || y == 2 {
+                            [x as f32 + 2. * y as f32, 0.]
+                        } else {
+                            [0.; 2]
+                        }
+                    })
+                })
+                .collect(),
+        };
+        let result = resample_precomputed_field(&map, &source, [-1.; 2], 1., [3; 2]).unwrap();
+        assert_eq!(
+            result.fluid,
+            [false, false, false, true, true, true, false, false, false]
+        );
+        assert_eq!(
+            result.velocity,
+            [
+                [0.; 2],
+                [0.; 2],
+                [0.; 2],
+                [3.5, 0.],
+                [4.5, 0.],
+                [5.5, 0.],
+                [0.; 2],
+                [0.; 2],
+                [0.; 2]
+            ]
+        );
+        assert_eq!(
+            (
+                result.geometry_revision,
+                result.viscosity,
+                result.reference_pressure,
+                result.max_scale
+            ),
+            (7, 0.05, 2., 3.)
+        );
+        assert!(resample_precomputed_field(&map, &source, [-2., -1.], 1., [3; 2]).is_err());
     }
 }

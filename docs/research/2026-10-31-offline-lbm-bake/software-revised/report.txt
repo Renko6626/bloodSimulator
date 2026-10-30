@@ -1,0 +1,55 @@
+fixed straight-pipe pipeline only; no convergence or physical accuracy claim
+functional=true
+domain=DomainSpec { origin: [-16.0, -16.0], cells_per_side: 160, spacing: 0.5 }
+solver=WindowConfig { dt: 0.01, viscosity: 0.05, allow_software: true }
+schedule=BakeSchedule { steps_per_frame: 4, warmup_frames: 300, sample_frames: 600, sample_stride: 10 }
+reference_pressure=5.432489
+graph_rates=[8.0, 8.0, 8.0, 8.0]
+peak_lattice_speed=0.04
+original_openings=[OpeningSpec { side: Left, cells: 74..86, direction: [1.0, 0.0], outward_flow: -8.0, background_speed: 2.0 }, OpeningSpec { side: Right, cells: 74..86, direction: [1.0, 0.0], outward_flow: 8.0, background_speed: 2.0 }]
+bake_report=BakeReport {
+    schedule: BakeSchedule {
+        steps_per_frame: 4,
+        warmup_frames: 300,
+        sample_frames: 600,
+        sample_stride: 10,
+    },
+    lattice_dt: 0.01,
+    samples: 60,
+    warmup_simulated_seconds: 11.999999731779099,
+    sample_simulated_seconds: 23.999999463558197,
+    wall_seconds: 7.235597581,
+    density_min: 0.99796957,
+    density_max: 1.0018934,
+    mean_opening_fluxes: [
+        -7.999999745686849,
+        7.999999745686849,
+    ],
+    half_mean_velocity_rms: 0.00042209149305160603,
+    half_mean_velocity_max: 0.0010745373724827558,
+    final_diagnostics: Diagnostics {
+        density_min: 0.9984259,
+        density_max: 1.0013926,
+        max_speed: 1.9839559,
+        mass: 1920.0001,
+        opening_fluxes: [
+            -7.999999,
+            8.0,
+        ],
+        software_adapter: true,
+        adapter_name: "llvmpipe (LLVM 15.0.7, 256 bits)",
+    },
+}
+raw_asset=docs/research/2026-10-31-offline-lbm-bake/software-revised/raw-cell-centered.bfld
+export=production bilinear resampling; same spacing; map mask; wall/solid zero; no normalization or analytic substitution
+asset=docs/research/2026-10-31-offline-lbm-bake/software-revised/straight-pipe.bfld
+loaded_origin=[-15.5, -15.5]
+loaded_size=[159, 159]
+roundtrip_velocity_mask=exact
+sample [-1.0, 24.0]=FluidSample { local_velocity: [0.0, 0.0], background_velocity: [2.0, 0.0], local_weight: 0.0, status: OutsideWindow }
+sample [0.0, 24.0]=FluidSample { local_velocity: [0.0, 0.0], background_velocity: [1.9827292, 1.31312845e-8], local_weight: 0.0, status: OutsideWindow }
+sample [8.0, 24.0]=FluidSample { local_velocity: [0.0, 0.0], background_velocity: [1.9840386, 9.407813e-9], local_weight: 0.0, status: OutsideWindow }
+sample [31.9, 24.0]=FluidSample { local_velocity: [0.0, 0.0], background_velocity: [1.9848297, -9.482542e-9], local_weight: 0.0, status: OutsideWindow }
+sample [32.0, 24.0]=FluidSample { local_velocity: [0.0, 0.0], background_velocity: [2.0, 0.0], local_weight: 0.0, status: OutsideWindow }
+sample [8.0, 21.0]=FluidSample { local_velocity: [0.0, 0.0], background_velocity: [0.0, 0.0], local_weight: 0.0, status: SolidOrInvalid }
+normal_policy_import=Ok(())

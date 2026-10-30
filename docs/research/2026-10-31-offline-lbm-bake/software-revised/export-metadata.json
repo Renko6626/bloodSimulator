@@ -1,0 +1,24 @@
+{
+  "raw-cell-centered.bfld": {
+    "origin": [
+      -15.75,
+      -15.75
+    ],
+    "spacing": 0.5,
+    "size": [
+      160,
+      160
+    ]
+  },
+  "straight-pipe.bfld": {
+    "origin": [
+      -15.5,
+      -15.5
+    ],
+    "spacing": 0.5,
+    "size": [
+      159,
+      159
+    ]
+  }
+}

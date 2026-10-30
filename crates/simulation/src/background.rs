@@ -112,7 +112,10 @@ impl PreparedBackground {
     }
 }
 
-fn grid_coordinates(field: &PrecomputedField, p: Vector) -> Option<(usize, usize, f32, f32)> {
+pub(crate) fn grid_coordinates(
+    field: &PrecomputedField,
+    p: Vector,
+) -> Option<(usize, usize, f32, f32)> {
     let q = (p - Vector::from_array(field.origin)) / field.spacing;
     let max_x = (field.size[0] - 1) as f32;
     let max_y = (field.size[1] - 1) as f32;
@@ -124,7 +127,7 @@ fn grid_coordinates(field: &PrecomputedField, p: Vector) -> Option<(usize, usize
     Some((x, y, q.x - x as f32, q.y - y as f32))
 }
 
-fn sample_field(field: &PrecomputedField, p: Vector) -> Vector {
+pub(crate) fn sample_field(field: &PrecomputedField, p: Vector) -> Vector {
     let Some((x, y, tx, ty)) = grid_coordinates(field, p) else {
         return Vector::ZERO;
     };

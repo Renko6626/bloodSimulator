@@ -1,0 +1,47 @@
+fixed straight-pipe pipeline only; no convergence or physical accuracy claim
+functional=true
+domain=DomainSpec { origin: [-16.0, -16.0], cells_per_side: 160, spacing: 0.5 }
+solver=WindowConfig { dt: 0.01, viscosity: 0.05, allow_software: true }
+schedule=BakeSchedule { steps_per_frame: 4, warmup_frames: 20, sample_frames: 20, sample_stride: 2 }
+reference_pressure=5.432489
+graph_rates=[8.0, 8.0, 8.0, 8.0]
+peak_lattice_speed=0.04
+original_openings=[OpeningSpec { side: Left, cells: 74..86, direction: [1.0, 0.0], outward_flow: -8.0, background_speed: 2.0 }, OpeningSpec { side: Right, cells: 74..86, direction: [1.0, 0.0], outward_flow: 8.0, background_speed: 2.0 }]
+bake_report=BakeReport {
+    schedule: BakeSchedule {
+        steps_per_frame: 4,
+        warmup_frames: 20,
+        sample_frames: 20,
+        sample_stride: 2,
+    },
+    lattice_dt: 0.01,
+    samples: 10,
+    warmup_simulated_seconds: 0.7999999821186066,
+    sample_simulated_seconds: 0.7999999821186066,
+    wall_seconds: 0.672586692,
+    density_min: 0.998318,
+    density_max: 1.0014656,
+    mean_opening_fluxes: [
+        -7.999999713897705,
+        7.999999761581421,
+    ],
+    half_mean_velocity_rms: 0.0008015573653812779,
+    half_mean_velocity_max: 0.003953070212085782,
+    final_diagnostics: Diagnostics {
+        density_min: 0.998318,
+        density_max: 1.0014656,
+        max_speed: 1.9798865,
+        mass: 1919.9999,
+        opening_fluxes: [
+            -8.0,
+            7.9999995,
+        ],
+        software_adapter: true,
+        adapter_name: "llvmpipe (LLVM 15.0.7, 256 bits)",
+    },
+}
+asset=docs/research/2026-10-31-offline-lbm-bake/software-functional/straight-pipe.bfld
+loaded_origin=[-15.75, -15.75]
+loaded_size=[160, 160]
+roundtrip_velocity_mask=exact
+normal_policy_import=Err("background field 0: static port velocity profile does not match planar analytic flow")

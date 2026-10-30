@@ -1,0 +1,20 @@
+$ cargo test --locked -p blood-fluid-gpu lbm:: --lib
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.12s
+     Running unittests src/lib.rs (/data/sunyunbo/www/bloodSimulator/target/debug/deps/blood_fluid_gpu-96a0d5c75b353ba4)
+
+running 13 tests
+test lbm::tests::lbm_kick_changes_gpu_momentum ... ignored, explicit software-adapter functional diagnostic
+test lbm::tests::lbm_mean_density_control_preserves_guo_moments ... ignored, explicit software-adapter functional diagnostic
+test lbm::tests::lbm_opening_flux_and_all_population_reconstruction ... ignored, explicit software-adapter functional diagnostic
+test lbm::tests::lbm_shift_xy_preserves_populations_and_initializes_changed_strip ... ignored, explicit software-adapter functional diagnostic
+test lbm::tests::lbm_software_window_smoke ... ignored, explicit software-adapter functional diagnostic
+test lbm::tests::lbm_straight_profile_evolves ... ignored, explicit software-adapter functional diagnostic
+test lbm::bake::tests::budgets_and_invalid_or_missing_samples_are_rejected ... ok
+test lbm::bake::tests::averaging_uses_actual_samples_and_separate_unequal_halves ... ok
+test lbm::tests::lbm_uniform_equilibrium_and_coordinates ... ok
+test lbm::tests::fixed_domain_validates_sizes_and_world_range ... ok
+test lbm::tests::window_domain_mapping_preserves_bounds_and_resolution ... ok
+test lbm::stencil::tests::rejects_rank_deficient_neighborhood ... ok
+test lbm::stencil::tests::quadratic_gradients_and_wall_visibility ... ok
+
+test result: ok. 7 passed; 0 failed; 6 ignored; 0 measured; 4 filtered out; finished in 0.01s
