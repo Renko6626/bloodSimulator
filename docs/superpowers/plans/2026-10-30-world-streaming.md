@@ -1,6 +1,6 @@
 # 固定区块加载与实体卸载实施计划
 
-> **For agentic workers:** 使用superpowers:executing-plans，主agent按顺序实施，末尾一次独立只读审阅。用户已授权实装，随后另行安排整理提交并合并到本地main；本轮不推送或启动云实例。
+> **For agentic workers:** 使用superpowers:executing-plans，主agent按顺序实施，末尾一次独立只读审阅。用户已授权实装，随后另行安排整理提交、合并并推送main及回收旧工作树；不启动云实例。
 
 **Goal:** 固定16单位区块；LBM 3×3，地图与实体5×5，支持真正的现场资源装卸与白细胞休眠。
 
