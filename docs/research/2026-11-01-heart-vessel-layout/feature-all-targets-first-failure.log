@@ -1,0 +1,11 @@
+    Checking simulation v0.1.0 (/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator/crates/simulation)
+    Checking godot_bridge v0.1.0 (/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator/crates/godot_bridge)
+    Checking fluid-bench v0.1.0 (/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator/crates/fluid-bench)
+error[E0689]: can't call method `max` on ambiguous numeric type `{float}`
+  --> crates/simulation/examples/heart_preview_probe.rs:88:162
+   |
+88 | ...ro runtime flow</text></svg>"##, x + w * 0.02, y + (h * 0.025).max(font * 1.3)).unwrap();
+   |                                                                   ^^^
+
+For more information about this error, try `rustc --explain E0689`.
+error: could not compile `simulation` (example "heart_preview_probe") due to 1 previous error

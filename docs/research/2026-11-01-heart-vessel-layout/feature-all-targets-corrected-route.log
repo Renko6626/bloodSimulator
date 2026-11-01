@@ -1,0 +1,4 @@
+    Checking simulation v0.1.0 (/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator/crates/simulation)
+    Checking fluid-bench v0.1.0 (/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator/crates/fluid-bench)
+    Checking godot_bridge v0.1.0 (/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator/crates/godot_bridge)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.90s

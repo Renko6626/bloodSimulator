@@ -1,0 +1,26 @@
+bash scripts/check.sh
+exit=0
+cargo test --locked -p simulation --features lbm-gpu
+exit=0
+cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu
+exit=101
+godot --headless --path godot --fixed-fps 60 --quit-after 180 -- --heart-preview
+exit=0
+cargo fmt --all --check
+exit=0
+cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu
+exit=0
+cargo run --release --locked -p simulation --example heart_preview_probe -- docs/research/2026-11-01-heart-vessel-layout --diagnostics-only
+exit=0
+cargo run --release --locked -p simulation --example heart_preview_probe -- docs/research/2026-11-01-heart-vessel-layout
+exit=101 (all210waypoints reached; final minimum clearance0.85198593 below1.0 at right_atrium_return)
+cargo fmt --all --check
+exit=0 (corrected route/fail-fast probe)
+cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu
+exit=0 (corrected route/fail-fast probe)
+bash scripts/build.sh
+exit=0 (corrected route/fail-fast probe)
+godot --headless --path godot --fixed-fps 60 --quit-after 180 -- --heart-preview
+exit=0 (corrected route/fail-fast probe)
+cargo run --release --locked -p simulation --example heart_preview_probe -- docs/research/2026-11-01-heart-vessel-layout
+exit=0 (corrected211point full replay;87771ticks;minimum_clearance1.273;peak25)
