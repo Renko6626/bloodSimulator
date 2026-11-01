@@ -39,4 +39,6 @@
 
 图标题布局调整曾触发E0689浮点类型不明确，保留[首次编译失败](feature-all-targets-first-failure.log)；补明确f32后只重跑fmt、受影响全目标编译和诊断导出。标题修正没有触发完整Rust套件或实际长回放重跑；移动/物理未改。真实路线失败修正后，只补跑fmt、全目标feature编译、bridge构建、heart-preview加载及完整实际回放，均退出0。默认/feature套件不重复；对应[fmt](fmt-corrected-route.log)、[编译](feature-all-targets-corrected-route.log)、[构建](build-corrected-route.log)、[加载](heart-load-corrected-route.log)日志保留。[命令退出记录](command-exits.log)、[默认检查](check.log)、[feature测试](feature-tests.log)、[全目标编译](feature-all-targets.log)、[heart-preview加载](heart-load.log)保留实际输出。
 
-诊断源和重现命令见[来源记录](provenance.md)。未改GDScript/HUD，Godot仅做headless加载，无自动按键或点击。只验收几何、生产图参考流量及本条零状态通路；不代表人工手感、任意路径、心腔场/物理精度、细胞负载、动态瓣膜/收缩、烘焙或实卡性能验收。没有启动云实例或性能实验。最终整分支独立审阅由主agent安排。
+诊断源和重现命令见[来源记录](provenance.md)。未改GDScript/HUD，Godot仅做headless加载，无自动按键或点击。只验收几何、生产图参考流量及本条零状态通路；不代表人工手感、任意路径、心腔场/物理精度、细胞负载、动态瓣膜/收缩、烘焙或实卡性能验收。没有启动云实例或性能实验。逐任务、修正复审及最终整分支独立审阅均通过，无待修复发现；见[最终审阅](review.md)、[逐任务审阅](task-reviews.md)及[执行决定与取舍](controller-notes.md)。
+
+当前本地分支为 `feat/heart-vessel-layout`，工作树 `/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator` 保留。在该目录运行 `bash scripts/run.sh -- --heart-preview` 可进入预览。本轮本地提交不包含推送或合并。

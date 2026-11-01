@@ -49,6 +49,6 @@
 - [x] 集中运行`bash scripts/check.sh`（含fmt/default tests/build/普通world+lab load，不另重复默认套件）、`cargo test --locked -p simulation --features lbm-gpu`、`cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`，以及headless --heart-preview加载。CARGO_TARGET_DIR复用主目录target。冷Godot导入如134只补验失败/未执行场景，不重跑Rust套件或扩展引擎研究。
 - [x] 无GDScript改动，无需重复UI截图/交互；只允许加载或静态截图，禁止自动按键点击。报告geometry+图参考流量验收，明确未接心脏流场/细胞/烘焙/实卡性能。
 - [x] 更新STATUS和报告、计划步骤，完成自审本地提交；保持工作树，不push/merge。
-- [ ] 主agent派fresh sol high整分支审阅，保存审阅与执行决定后完成。
+- [x] 主agent派fresh sol high整分支审阅，Spec/Quality PASS，无发现；[最终审阅](../../research/2026-11-01-heart-vessel-layout/review.md)与[执行决定](../../research/2026-11-01-heart-vessel-layout/controller-notes.md)已归档。
 
-执行结果：首次210点回放暴露最终右房返回路线遗漏(38,32)的真实折点，净空0.852失败。Task1在5ea9431补回并加入生产SDF段采样回归；修正后211点87771tick完整回放通过，最小实际净空1.273，峰值25，实际跨度右83.985/左89.943，逐帧零状态。默认47+5、feature60+5/10忽略及集中加载通过；路线修正后仅补受影响fmt/全目标编译/bridge构建/heart加载与完整回放。证据见[研究记录](../../research/2026-11-01-heart-vessel-layout/README.md)。主agent最终独立整分支审阅仍待完成。
+执行结果：首次210点回放暴露最终右房返回路线遗漏(38,32)的真实折点，净空0.852失败。Task1在5ea9431补回并加入生产SDF段采样回归；修正后211点87771tick完整回放通过，最小实际净空1.273，峰值25，实际跨度右83.985/左89.943，逐帧零状态。默认47+5、feature60+5/10忽略及集中加载通过；路线修正后仅补受影响fmt/全目标编译/bridge构建/heart加载与完整回放。证据见[研究记录](../../research/2026-11-01-heart-vessel-layout/README.md)。逐任务、修正复审及最终独立整分支审阅均通过，无待修复发现。
