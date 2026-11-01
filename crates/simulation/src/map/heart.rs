@@ -44,6 +44,7 @@ pub fn heart_preview_route() -> Vec<(&'static str, [f32; 2])> {
         ("aortic_interface", [150., -4.]),
     ]);
     route.extend(vascular::route(false));
+    route.push(("right_atrium_return_approach", [38., 32.]));
     route.push(("right_atrium_return", [45., 45.]));
     route
 }

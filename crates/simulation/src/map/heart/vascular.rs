@@ -361,6 +361,20 @@ mod tests {
                 "route point {p:?}"
             );
         }
+        let route = crate::map::heart_preview_route();
+        let mut previous = map.spawn;
+        for (name, target) in route {
+            let steps = ((target[0] - previous[0]).hypot(target[1] - previous[1])).ceil() as usize;
+            for i in 0..=steps {
+                let t = i as f32 / steps.max(1) as f32;
+                let p: Point = std::array::from_fn(|j| previous[j] + t * (target[j] - previous[j]));
+                assert!(
+                    map.signed_distance(Vector::new(p[0], p[1])) <= -1.4,
+                    "planned segment to {name} cuts a wall at {p:?}"
+                );
+            }
+            previous = target;
+        }
         eprintln!("minimum external capsule gap={minimum}");
     }
 }
