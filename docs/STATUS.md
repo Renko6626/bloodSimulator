@@ -1,6 +1,8 @@
 # 当前状态与待办
 
-更新：2026-11-01。归档主分支：`main`；本轮区块系统的实现来源为 `feat/world-streaming`。
+更新：2026-11-01。当前`main`已纳入离线LBM基础设施、四腔预览及完整分级血管布局，最新集成来源为`feat/heart-vessel-layout`的`4e39dd2`。
+
+本轮按用户要求将已推送的功能分支快进纳入主目录`main`，无冲突或产品代码调整；代码树与已审阅提交一致。合并后`cargo fmt --all --check`及`cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`通过，沿用下文已有默认/feature测试和211点完整回放，不重复长回放、Godot或GPU实验。功能分支和宿主管理工作树保留；当前心脏仍为零流、零细胞预览，没有新增烘焙或性能任务。
 
 此前生命值、近身攻击、尸体及白细胞免疫阶段已进入 `main`。区块系统实现、检查证据及64×64 LBM后续实验草案已由 `5d644d7` 合并，用户随后要求推送 `main` 并回收旧工作树；本轮未安排新实验。
 
