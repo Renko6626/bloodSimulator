@@ -1,3 +1,5 @@
+mod vascular;
+
 use super::{ChamberGeometry, Landmark, MapDefinition, VesselEdge};
 
 // Standard cubic sampling, independent of the legacy vessel Bezier helper.
@@ -17,9 +19,9 @@ fn outline(name: &str, start: [f32; 2], curves: &[[[f32; 2]; 3]]) -> ChamberGeom
     ChamberGeometry::new(name, points)
 }
 
-/// Ordered input-replay waypoints, including the external pulmonary return.
+/// Ordered input-replay waypoints, through both external graded loops.
 pub fn heart_preview_route() -> Vec<(&'static str, [f32; 2])> {
-    vec![
+    let mut route = vec![
         ("tricuspid_approach", [50., 62.]),
         ("right_atrium", [45., 45.]),
         ("tricuspid", [49., 78.]),
@@ -29,8 +31,9 @@ pub fn heart_preview_route() -> Vec<(&'static str, [f32; 2])> {
         ("pulmonary_valve", [69., 85.]),
         ("pulmonary_turn", [78., 65.]),
         ("pulmonary_outlet", [78., 55.]),
-        ("pulmonary_interface", [78., -12.]),
-        ("lung_return", [112., -12.]),
+    ];
+    route.extend(vascular::route(true));
+    route.extend([
         ("left_atrium", [112., 45.]),
         ("mitral", [106., 78.]),
         ("left_entry", [106., 86.]),
@@ -39,7 +42,10 @@ pub fn heart_preview_route() -> Vec<(&'static str, [f32; 2])> {
         ("aortic_valve", [132., 86.]),
         ("aortic_turn", [150., 65.]),
         ("aortic_interface", [150., -4.]),
-    ]
+    ]);
+    route.extend(vascular::route(false));
+    route.push(("right_atrium_return", [45., 45.]));
+    route
 }
 
 impl MapDefinition {
@@ -87,8 +93,8 @@ impl MapDefinition {
             ),
         ];
         // One connected circulation cycle. All intracardiac guides stay within
-        // their own chamber; only the pulmonary/body returns join the two sides.
-        let nodes = vec![
+        // their own chamber; the external graded returns join the two sides.
+        let mut nodes = vec![
             [38., -4.],
             [45., 45.],
             [49., 86.],
@@ -105,32 +111,27 @@ impl MapDefinition {
             vec![nodes[1], [50., 62.], [49., 78.], nodes[2]],
             vec![nodes[2], [49., 110.], [61., 170.], [62., 100.], nodes[3]],
             vec![nodes[3], [78., 65.], [78., 55.], nodes[4]],
-            vec![nodes[4], [78., -12.], [112., -12.], nodes[5]],
+            vec![nodes[4], [78., -64.]],
             vec![nodes[5], nodes[6]],
             vec![nodes[6], [108., 63.], [106., 78.], nodes[7]],
             vec![nodes[7], [106., 176.], [123., 106.], nodes[8]],
             vec![nodes[8], [150., 65.], nodes[9]],
-            vec![
-                nodes[9],
-                [166., -4.],
-                [166., 204.],
-                [-6., 204.],
-                [-6., -4.],
-                nodes[0],
-            ],
+            vec![nodes[9], [150., -64.]],
         ];
-        let edges = paths
+        let mut edges: Vec<_> = paths
             .into_iter()
             .enumerate()
             .map(|(i, centerline)| VesselEdge {
                 from: i,
                 to: (i + 1) % nodes.len(),
                 centerline,
-                half_width: if i == 3 { 4.5 } else { 5. },
+                half_width: if matches!(i, 3 | 4) { 4.5 } else { 5. },
             })
             .collect();
+        vascular::attach(&mut nodes, &mut edges);
         let landmarks = heart_preview_route()
             .into_iter()
+            .filter(|(name, _)| !name.starts_with("vessel_"))
             .map(|(name, position)| Landmark {
                 name: name.into(),
                 position,
