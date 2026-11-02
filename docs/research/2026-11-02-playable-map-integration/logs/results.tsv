@@ -1,0 +1,13 @@
+bash scripts/check.sh	exit=0
+godot --headless --path godot --fixed-fps 60 --quit-after 180 -- --organ-preview	exit=0
+godot --headless --path godot --fixed-fps 60 --quit-after 180 -- --heart-preview	exit=0
+godot --headless --path godot --quit-after 10 -- --heart-preview --organ-preview	exit=1 expected=1
+cargo test --locked -p simulation --features lbm-gpu	exit=0
+cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu	exit=0
+cargo check --locked -p simulation --example organ_preview_probe (contextual failure messages only)	exit=0
+cargo run --locked -p simulation --example organ_preview_probe -- docs/research/2026-11-02-playable-map-integration	exit=0
+cargo fmt --all -- --check	exit=0
+git diff --check	exit=0
+map_render --map organ --rect 100 60 960 1070 --grid 80 --output .../overview.svg	exit=0
+map_render --map organ --rect 370 60 370 800 --grid 40 --labels --output .../heart-lung.svg	exit=0
+/usr/bin/python3 GI Rsvg2/cairo PNG conversion (corrected intrinsic-size call)	exit=0

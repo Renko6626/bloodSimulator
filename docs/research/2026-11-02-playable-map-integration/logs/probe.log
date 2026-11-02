@@ -1,0 +1,51 @@
+   Compiling simulation v0.1.0 (/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator/crates/simulation)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.85s
+     Running `/data/sunyunbo/www/bloodSimulator/target/debug/examples/organ_preview_probe docs/research/2026-11-02-playable-map-integration`
+preflight case=spawn-right-ventricle-lung-central-upper-D3 segments=20 min_clearance=1.499935 sample_spacing<=0.1
+preflight case=body-A-junction segments=7 min_clearance=2.999914 sample_spacing<=0.1
+preflight case=body-B-D3 segments=5 min_clearance=1.499914 sample_spacing<=0.1
+preflight case=body-C-junction segments=5 min_clearance=2.999914 sample_spacing<=0.1
+unit_graph nodes=45 edges=69 pump_edge=7 viscosity=0.05 drive=1 pump_Q=3.393265724 max_node_residual=0.000000179
+lung_lower_north_Q=0.647272527 south_Q=0.825693905 combined_fraction=0.434085190
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=1 pose=[499.0, 735.91455]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=2 pose=[499.0, 759.9238]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=3 pose=[510.9829, 819.91455]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=4 pose=[511.99878, 750.09863]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=5 pose=[518.968, 735.06934]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=6 pose=[527.9641, 715.0791]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=7 pose=[527.99927, 705.0747]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=8 pose=[527.99927, 646.08936]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=9 pose=[527.99927, 626.07715]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=10 pose=[527.99927, 550.07715]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=11 pose=[480.0642, 500.06708]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=12 pose=[440.0359, 400.09003]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=13 pose=[449.99487, 220.09148]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=14 pose=[489.92163, 239.961]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=15 pose=[519.9236, 249.97467]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=16 pose=[554.907, 259.97348]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=17 pose=[589.9387, 230.05249]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=18 pose=[570.0237, 170.07068]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=19 pose=[555.0398, 140.07971]
+reached case=spawn-right-ventricle-lung-central-upper-D3 segment=20 pose=[564.9651, 115.08846]
+PASS case=spawn-right-ventricle-lung-central-upper-D3 ticks=7642 simulation_seconds=127.367 min_actual_clearance=1.433674 peak_chunks=25 zero_state=true
+reached case=body-A-junction segment=1 pose=[900.06934, 800.03467]
+reached case=body-A-junction segment=2 pose=[860.05664, 760.05664]
+reached case=body-A-junction segment=3 pose=[850.01807, 720.0718]
+reached case=body-A-junction segment=4 pose=[820.0664, 700.04443]
+reached case=body-A-junction segment=5 pose=[740.0747, 670.02783]
+reached case=body-A-junction segment=6 pose=[720.01953, 759.9126]
+reached case=body-A-junction segment=7 pose=[779.95654, 849.93506]
+PASS case=body-A-junction ticks=3500 simulation_seconds=58.333 min_actual_clearance=2.950570 peak_chunks=25 zero_state=true
+reached case=body-B-D3 segment=1 pose=[550.06396, 1000.03845]
+reached case=body-B-D3 segment=2 pose=[564.96094, 970.0785]
+reached case=body-B-D3 segment=3 pose=[599.9248, 984.96814]
+reached case=body-B-D3 segment=4 pose=[649.9346, 950.0458]
+reached case=body-B-D3 segment=5 pose=[600.06934, 910.05505]
+PASS case=body-B-D3 ticks=1923 simulation_seconds=32.050 min_actual_clearance=1.415537 peak_chunks=25 zero_state=true
+reached case=body-C-junction segment=1 pose=[319.96924, 499.9226]
+reached case=body-C-junction segment=2 pose=[319.99976, 549.9236]
+reached case=body-C-junction segment=3 pose=[329.98486, 599.92554]
+reached case=body-C-junction segment=4 pose=[280.04712, 669.93384]
+reached case=body-C-junction segment=5 pose=[339.91895, 699.9592]
+PASS case=body-C-junction ticks=2322 simulation_seconds=38.700 min_actual_clearance=2.919750 peak_chunks=25 zero_state=true
+PASS total_ticks=15387 total_bound=25000 robot_speed=8 dt=1/60 production_robot_radius=0.85
