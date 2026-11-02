@@ -1,5 +1,7 @@
 # 项目工作约定
 
+2026-11-02 地图区域示意图工具：已在`feat/map-region-render`实现独立`map_render`例子，直接按`--rect X Y WIDTH HEIGHT --output FILE.svg`读取地图定义导出，可选网格和标注。后续地图细节开发需要静态选区图时使用此工具，无需运行heart_preview_probe长回放或启动模拟/引擎。命令、坐标约定和PNG外部预览见[工具说明](docs/tools/map-render.md)；输出目录须已存在，编号只对应当前地图定义。本阶段未推送/合并。
+
 2026-11-01 阶段集成：用户已要求阶段性提交推送，随后要求合并回main。`feat/heart-vessel-layout`的`4e39dd2`已快进纳入主目录main，一并包含离线LBM基础设施、四腔预览与完整分级血管布局；合并代码树与已审阅分支一致，主目录fmt和feature全目标编译通过，沿用已有默认/feature测试及211点完整回放证据，不重复长回放。当前心脏仍为零流/零细胞预览，未烘焙心腔场；具体结果和边界见[STATUS](docs/STATUS.md)及[布局记录](docs/research/2026-11-01-heart-vessel-layout/README.md)。宿主管理的功能工作树保留，本次集成不安排新优化、烘焙或云实验。
 
 2026-10-30 区块流体策略归档：用户已确认并安排实装“背景流场（解析/预计算）＋LBM覆盖许可”，随后要求提交推送并合并main。实现与审阅归档至`feat/chunk-fluid-policy`的`e2d2591`，本轮已快进纳入主目录`main`；主分支复核fmt、默认38单元＋5集成及feature全目标编译通过。600帧软件GPU启停与禁区reset证据、首次Godot冷导入134（缓存导入及world/lab为0）和未验收范围见[功能记录](docs/research/2026-10-30-chunk-fluid-policy/README.md)。静态心腔几何、预计算场生成算法和器官地图尚未实施；不据此次归档自动开始性能研究、扩大窗口或云实验。宿主管理的功能工作树暂保留，主目录已包含全部实现。

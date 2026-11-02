@@ -12,7 +12,7 @@
 
 ## 坐标地图导出工具（2026-11-02）
 
-已在`feat/map-region-render`实现独立`map_render`例子：必填坐标矩形和输出路径，默认心脏，可选既有小地图、世界对齐网格及管径/心腔标注。直接构造MapDefinition并输出真实几何SVG，不启动模拟、求解流量或运行穿行。旧探针仅抽取共享绘图片段，CSV、Q提示、三个诊断视图及原移动守卫保留。使用方式见[工具说明](tools/map-render.md)，实际图和验证边界见[本阶段记录](research/2026-11-02-map-region-render/README.md)。本轮没有Godot、GPU、云或性能实验，不包含推送/合并。
+已在`feat/map-region-render`实现独立`map_render`例子：必填坐标矩形和输出路径，默认心脏，可选既有小地图、世界对齐网格及管径/心腔标注。直接构造MapDefinition并输出真实几何SVG，不启动模拟、求解流量或运行穿行。旧探针仅抽取共享绘图片段，CSV、Q提示、三个诊断视图及原移动守卫保留。使用方式见[工具说明](tools/map-render.md)，实际图和验证边界见[本阶段记录](research/2026-11-02-map-region-render/README.md)。3项例子测试、fmt及all-target feature编译通过，实际导出/静态查看和新旧诊断兼容检查通过；逐任务及[最终审阅](research/2026-11-02-map-region-render/review.md)通过。简单标签不避让、ImageMagick转换字形差异及极端数值选区边界已记录。本轮没有Godot、GPU、云或性能实验，不包含推送/合并。
 
 ## 血管尺寸与流速基准（2026-11-01）
 

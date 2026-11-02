@@ -44,6 +44,8 @@ PY
 - `cargo fmt --all --check`：最终退出0。
 - `cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`：最终退出0；仅编译，没有运行GPU后端。
 - `cargo run --locked -p simulation --example heart_preview_probe -- .superpowers/sdd/2026-11-02-map-region-render/legacy-diagnostics --diagnostics-only`：退出0。viscosity=0.05、unit_rate=1.5853244、reference_pressure=30.277714、reference_rate=48；CSV为224边＋表头，三个SVG均可XML解析、含224条管段及Q提示。未进入穿行。
-- 三个实际SVG均XML解析成功，静态查看librsvg PNG。另导出`--rect -1 -65 2 2 --labels`至忽略的SDD scratch，XML和PNG检查显示223号D24管道覆盖选区，标签锚点(0,-64)位于可见中心线，两端均在选区外；原始管宽未被裁切改写。
+- 三个实际SVG均XML解析成功，静态查看librsvg PNG。另导出`--rect -1 -65 2 2 --labels`，原始产物已归档为[crossing.svg](crossing.svg)及[crossing.png](crossing.png)，XML和PNG检查显示223号D24管道覆盖选区，标签锚点(0,-64)位于可见中心线，两端均在选区外；原始管宽未被裁切改写。
 
 静态观察：真实四腔轮廓和D24/12/6/3层级保留，小地图沿用自身D7/6.2；心脏左室标注与一条管段标注有重叠，部分边缘文字被裁切，符合简单标注、不做自动避让的范围。网格、标签可独立关闭。结果只表示地图几何展示，不表示流向、流速、运行画面、物理精度或性能验收。未执行默认模拟测试套件、长回放、Godot、GPU/云/性能实验、推送或合并。
+
+逐任务和最终整分支审阅均通过，无待修复发现。见[任务审阅](task-review.md)、[最终审阅](review.md)及[执行取舍](controller-notes.md)。本地工作树为 `/data/sunyunbo/.codex/worktrees/4aad/bloodSimulator`，分支 `feat/map-region-render`；本轮不推送或合并。

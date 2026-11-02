@@ -29,8 +29,10 @@
 
 **Ownership:** 新建`crates/simulation/examples/map_render.rs`、`examples/support/map_svg.rs`；修改`examples/heart_preview_probe.rs`仅抽取既有SVG几何写入；文档`docs/tools/map-render.md`、`docs/STATUS.md`及`docs/research/2026-11-02-map-region-render/`。无跨任务接口依赖；共享函数签名由本任务实施者按最小复用确定，不扩大为生产API。
 
-- [ ] 实现纯地图构造的CLI、坐标裁切、可选网格/标注和SVG输出。复用真实MapDefinition字段；常规输入检查/文件错误用简明返回，不添加恢复状态机或庞大CLI库。
-- [ ] 抽共享的几何写入片段并替换旧探针重复代码，保留其数据与行为；新命令不依赖流量求解。
-- [ ] 在map_render例子中补少量真实测试，覆盖上述关键行为；SVG输出字符串是可观察产物，可断言其属性/内容，禁止源码字符串检查或复制SDF算法。
-- [ ] 运行`cargo test --locked -p simulation --example map_render`、`cargo fmt --all --check`、`cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`；旧探针只跑diagnostics-only，新命令实际生成心脏/微管/小地图区域，XML解析并静态查看PNG。全体检查集中一次，局部修正只补验相关项；不跑全量模拟测试和长回放。
-- [ ] 保存示例图和简短命令/结果/源码来源，更新使用说明及STATUS；自审本地提交拥有文件，不force-add SDD scratch。Task审阅及最终整分支审阅由主agent安排，完成后保留工作树。
+- [x] 实现纯地图构造的CLI、坐标裁切、可选网格/标注和SVG输出。复用真实MapDefinition字段；常规输入检查/文件错误用简明返回，不添加恢复状态机或庞大CLI库。
+- [x] 抽共享的几何写入片段并替换旧探针重复代码，保留其数据与行为；新命令不依赖流量求解。
+- [x] 在map_render例子中补少量真实测试，覆盖上述关键行为；SVG输出字符串是可观察产物，可断言其属性/内容，禁止源码字符串检查或复制SDF算法。
+- [x] 运行`cargo test --locked -p simulation --example map_render`、`cargo fmt --all --check`、`cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`；旧探针只跑diagnostics-only，新命令实际生成心脏/微管/小地图区域，XML解析并静态查看PNG。全体检查集中一次，局部修正只补验相关项；不跑全量模拟测试和长回放。
+- [x] 保存示例图和简短命令/结果/源码来源，更新使用说明及STATUS；自审本地提交拥有文件，不force-add SDD scratch。Task审阅及最终整分支审阅由主agent安排，完成后保留工作树。
+
+最终结果：例子级3项测试、格式、workspace all-target feature编译、新旧诊断导出、XML解析及静态PNG查看通过。逐任务与最终整分支审阅Spec/Quality PASS，无待修复发现；[记录](../../research/2026-11-02-map-region-render/README.md)已归档。未进行模拟/引擎/长回放验证，也不改变游戏行为。
