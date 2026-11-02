@@ -1,6 +1,6 @@
 # 可玩路网实装计划
 
-> For agentic workers: superpowers:subagent-driven-development；用户已选sol medium实施、sol high审阅。**执行前置：接入方案中的新入口及本轮边界获得用户确认。当前只准备计划，不执行源代码任务。**
+> For agentic workers: superpowers:subagent-driven-development；用户已选sol medium实施、sol high审阅。2026-11-02用户以“开干”确认接入方案与本轮范围，开始执行。
 
 **Goal:** 候选A成为可实际走图、独立选择的新地图几何预览。
 **Architecture:** 复用MapDefinition/VesselEdge/ChamberGeometry、单Rapier和固定区块；新图与旧验证场分开，有限的双预览类型保证零状态和reset正确，不引入场景注册框架。
