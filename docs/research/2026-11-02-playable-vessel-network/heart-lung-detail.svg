@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1740" viewBox="350 -60 410 1060">
+<rect x="-200" y="-200" width="1800" height="1800" fill="#f5f2eb"/>
+<style>text{font-family:"Noto Sans CJK SC","DejaVu Sans",sans-serif}path,polyline{stroke-linejoin:round;stroke-linecap:round}</style>
+<text x="360" y="-21" font-size="25" fill="#26384b" text-anchor="start">心肺街区详图</text>
+<text x="360" y="9" font-size="13" fill="#26384b" text-anchor="start">设计草图，未实装｜真实管宽比例｜无跨层道路</text>
+<defs><clipPath id="plot"><rect x="350" y="40" width="410" height="830"/></clipPath></defs><g clip-path="url(#plot)">
+<rect x="375" y="65" width="355" height="475" rx="28" fill="#e6dce3" stroke="#bbb9af" stroke-dasharray="4 5"/>
+<text x="387" y="87" font-size="11" fill="#26384b" text-anchor="start">肺部：上台地 / 中部 / 下口</text>
+<polyline points="528,646 528,550" fill="none" stroke="#faf7f1" stroke-width="27"/>
+<polyline points="528,646 528,550" fill="none" stroke="#447cc0" stroke-width="24"><title>肺出接近段，直径24</title></polyline>
+<polyline points="528,550 480,500 440,400 450,220 490,140" fill="none" stroke="#faf7f1" stroke-width="15"/>
+<polyline points="528,550 480,500 440,400 450,220 490,140" fill="none" stroke="#447cc0" stroke-width="12"><title>肺供西廊，直径12</title></polyline>
+<polyline points="450,220 400,260 400,360 440,400" fill="none" stroke="#faf7f1" stroke-width="15"/>
+<polyline points="450,220 400,260 400,360 440,400" fill="none" stroke="#447cc0" stroke-width="12"><title>肺西外环，直径12</title></polyline>
+<polyline points="562,646 562,550" fill="none" stroke="#faf7f1" stroke-width="27"/>
+<polyline points="562,646 562,550" fill="none" stroke="#ce6573" stroke-width="24"><title>肺回接近段，直径24</title></polyline>
+<polyline points="562,550 620,500 660,400 650,220 610,140" fill="none" stroke="#faf7f1" stroke-width="15"/>
+<polyline points="562,550 620,500 660,400 650,220 610,140" fill="none" stroke="#ce6573" stroke-width="12"><title>肺回东廊，直径12</title></polyline>
+<polyline points="650,220 700,270 700,360 660,400" fill="none" stroke="#faf7f1" stroke-width="15"/>
+<polyline points="650,220 700,270 700,360 660,400" fill="none" stroke="#ce6573" stroke-width="12"><title>肺东外环，直径12</title></polyline>
+<polyline points="490,140 520,100 565,115 585,90 610,140" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="490,140 520,100 565,115 585,90 610,140" fill="none" stroke="#a66c92" stroke-width="6"><title>肺上台地北路，直径6</title></polyline>
+<polyline points="490,140 520,180 570,170 610,140" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="490,140 520,180 570,170 610,140" fill="none" stroke="#a66c92" stroke-width="6"><title>肺上台地南路，直径6</title></polyline>
+<polyline points="440,400 480,350 530,370 560,320 615,350 660,400" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="440,400 480,350 530,370 560,320 615,350 660,400" fill="none" stroke="#a66c92" stroke-width="6"><title>肺中部曲路，直径6</title></polyline>
+<polyline points="440,400 490,420 540,400 590,430 660,400" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="440,400 490,420 540,400 590,430 660,400" fill="none" stroke="#a66c92" stroke-width="6"><title>肺中部南路，直径6</title></polyline>
+<polyline points="480,500 490,460 530,450 580,470 620,500" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="480,500 490,460 530,450 580,470 620,500" fill="none" stroke="#a66c92" stroke-width="6"><title>肺下口北路，直径6</title></polyline>
+<polyline points="480,500 500,490 540,480 580,490 620,500" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="480,500 500,490 540,480 580,490 620,500" fill="none" stroke="#a66c92" stroke-width="6"><title>肺下口南路，直径6</title></polyline>
+<polyline points="570,170 590,230 555,260 560,320" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="570,170 590,230 555,260 560,320" fill="none" stroke="#a66c92" stroke-width="6"><title>肺中央纵街，直径6</title></polyline>
+<polyline points="450,220 490,240 520,250 555,260" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="450,220 490,240 520,250 555,260" fill="none" stroke="#a66c92" stroke-width="6"><title>中央汇口西入口，直径6</title></polyline>
+<polyline points="650,220 620,240 555,260" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="650,220 620,240 555,260" fill="none" stroke="#a66c92" stroke-width="6"><title>中央汇口东入口，直径6</title></polyline>
+<polyline points="565,115 555,140 570,170" fill="none" stroke="#faf7f1" stroke-width="6"/>
+<polyline points="565,115 555,140 570,170" fill="none" stroke="#a66c92" stroke-width="3"><title>上台地窄联络，直径3</title></polyline>
+<polyline points="600,646 700,600 850,650 940,820 880,980 600,1030 320,970 180,800 210,600 300,450" fill="none" stroke="#faf7f1" stroke-width="27"/>
+<polyline points="600,646 700,600 850,650 940,820 880,980 600,1030 320,970 180,800 210,600 300,450" fill="none" stroke="#cf715a" stroke-width="24"><title>体供外围大道，直径24</title></polyline>
+<polyline points="850,650 1000,680 1030,810 940,820" fill="none" stroke="#faf7f1" stroke-width="15"/>
+<polyline points="850,650 1000,680 1030,810 940,820" fill="none" stroke="#cf715a" stroke-width="12"><title>东侧供血支环，直径12</title></polyline>
+<polyline points="600,1030 470,1100 310,1060 320,970" fill="none" stroke="#faf7f1" stroke-width="15"/>
+<polyline points="600,1030 470,1100 310,1060 320,970" fill="none" stroke="#cf715a" stroke-width="12"><title>南侧供血支环，直径12</title></polyline>
+<polyline points="210,600 130,540 180,420 300,450" fill="none" stroke="#faf7f1" stroke-width="15"/>
+<polyline points="210,600 130,540 180,420 300,450" fill="none" stroke="#cf715a" stroke-width="12"><title>西北供血支环，直径12</title></polyline>
+<polyline points="488,646 400,600 340,700 380,850 600,910 780,850 820,700" fill="none" stroke="#faf7f1" stroke-width="27"/>
+<polyline points="488,646 400,600 340,700 380,850 600,910 780,850 820,700" fill="none" stroke="#586f9c" stroke-width="24"><title>体回内侧大道，直径24</title></polyline>
+<polyline points="380,850 400,910 450,940 500,950 560,940 600,910" fill="none" stroke="#faf7f1" stroke-width="15"/>
+<polyline points="380,850 400,910 450,940 500,950 560,940 600,910" fill="none" stroke="#586f9c" stroke-width="12"><title>南内回流支环，直径12</title></polyline>
+<polyline points="780,850 720,760 740,670 820,700" fill="none" stroke="#faf7f1" stroke-width="15"/>
+<polyline points="780,850 720,760 740,670 820,700" fill="none" stroke="#586f9c" stroke-width="12"><title>东内回流支环，直径12</title></polyline>
+<polyline points="940,820 900,800 860,760 850,720 820,700" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="940,820 900,800 860,760 850,720 820,700" fill="none" stroke="#8a7685" stroke-width="6"><title>A上折路，直径6</title></polyline>
+<polyline points="940,820 900,870 850,850 820,870 780,850" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="940,820 900,870 850,850 820,870 780,850" fill="none" stroke="#8a7685" stroke-width="6"><title>A下折路，直径6</title></polyline>
+<polyline points="880,980 850,930 800,920 760,900 780,850" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="880,980 850,930 800,920 760,900 780,850" fill="none" stroke="#8a7685" stroke-width="6"><title>A南接近，直径6</title></polyline>
+<polyline points="600,1030 550,1000 565,970 600,910" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="600,1030 550,1000 565,970 600,910" fill="none" stroke="#8a7685" stroke-width="6"><title>B西弯路，直径6</title></polyline>
+<polyline points="600,1030 640,1000 650,950 600,910" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="600,1030 640,1000 650,950 600,910" fill="none" stroke="#8a7685" stroke-width="6"><title>B东弯路，直径6</title></polyline>
+<polyline points="565,970 600,985 650,950" fill="none" stroke="#faf7f1" stroke-width="6"/>
+<polyline points="565,970 600,985 650,950" fill="none" stroke="#8a7685" stroke-width="3"><title>B窄联络，直径3</title></polyline>
+<polyline points="300,450 320,500 320,550 360,570 400,600" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="300,450 320,500 320,550 360,570 400,600" fill="none" stroke="#8a7685" stroke-width="6"><title>C北弯路，直径6</title></polyline>
+<polyline points="210,600 230,650 280,670 340,700" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="210,600 230,650 280,670 340,700" fill="none" stroke="#8a7685" stroke-width="6"><title>C南弯路，直径6</title></polyline>
+<polyline points="320,550 330,600 280,670" fill="none" stroke="#faf7f1" stroke-width="9"/>
+<polyline points="320,550 330,600 280,670" fill="none" stroke="#8a7685" stroke-width="6"><title>C中街，直径6</title></polyline>
+<path d="M 474.0,681.0 C 487.0,670.0 510.0,673.0 519.0,684.0 C 527.0,697.0 520.0,712.0 509.0,717.0 C 495.0,722.0 476.0,715.0 470.0,705.0 C 465.0,696.0 467.0,688.0 474.0,681.0  Z" fill="#b8cee2" stroke="#675e65" stroke-width="1.5"/>
+<path d="M 544.0,678.0 C 558.0,671.0 578.0,676.0 585.0,687.0 C 592.0,700.0 582.0,712.0 569.0,717.0 C 556.0,721.0 541.0,711.0 537.0,699.0 C 533.0,690.0 536.0,682.0 544.0,678.0  Z" fill="#ecc4bd" stroke="#675e65" stroke-width="1.5"/>
+<path d="M 493.0,728.0 C 507.0,722.0 522.0,730.0 526.0,748.0 C 531.0,775.0 523.0,808.0 514.0,831.0 C 493.0,814.0 476.0,783.0 472.0,758.0 C 468.0,741.0 478.0,732.0 493.0,728.0  Z" fill="#b8cee2" stroke="#675e65" stroke-width="1.5"/>
+<path d="M 546.0,727.0 C 561.0,720.0 581.0,729.0 587.0,746.0 C 594.0,776.0 572.0,816.0 555.0,839.0 C 542.0,820.0 534.0,787.0 536.0,761.0 C 536.0,744.0 537.0,733.0 546.0,727.0  Z" fill="#ecc4bd" stroke="#675e65" stroke-width="1.5"/>
+<polyline points="488,646 488,682 495,695" fill="none" stroke="#ad8589" stroke-width="10"/>
+<polyline points="495,695 500,712 499,728 499,736" fill="none" stroke="#ad8589" stroke-width="10"/>
+<polyline points="499,736 499,760 511,820 512,750 519,735" fill="none" stroke="#ad8589" stroke-width="10"/>
+<polyline points="519,735 528,715 528,705 528,646" fill="none" stroke="#ad8589" stroke-width="9"/>
+<polyline points="562,646 562,695" fill="none" stroke="#ad8589" stroke-width="10"/>
+<polyline points="562,695 558,713 556,728 556,736" fill="none" stroke="#ad8589" stroke-width="10"/>
+<polyline points="556,736 556,826 573,756 582,736" fill="none" stroke="#ad8589" stroke-width="10"/>
+<polyline points="582,736 600,715 600,646" fill="none" stroke="#ad8589" stroke-width="10"/>
+<text x="495" y="699" font-size="10" fill="#26384b" text-anchor="middle">右房</text>
+<text x="562" y="699" font-size="10" fill="#26384b" text-anchor="middle">左房</text>
+<text x="497" y="780" font-size="10" fill="#26384b" text-anchor="middle">右室</text>
+<text x="561" y="780" font-size="10" fill="#26384b" text-anchor="middle">左室</text>
+<circle cx="650" cy="950" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="300" cy="450" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="570" cy="170" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="320" cy="550" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="565" cy="970" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="620" cy="500" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="490" cy="140" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="450" cy="220" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="650" cy="220" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="555" cy="260" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="400" cy="600" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="320" cy="970" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="565" cy="115" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="560" cy="320" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="600" cy="1030" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="380" cy="850" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="850" cy="650" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="880" cy="980" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="210" cy="600" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="820" cy="700" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="780" cy="850" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="440" cy="400" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="610" cy="140" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="480" cy="500" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="340" cy="700" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="600" cy="910" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="660" cy="400" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="280" cy="670" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<circle cx="940" cy="820" r="2.5" fill="#f9f7f1" stroke="#564c55" stroke-width=".8"/>
+<text x="383" y="245" font-size="10" fill="#26384b" text-anchor="start">西外环</text>
+<text x="670" y="245" font-size="10" fill="#26384b" text-anchor="start">东外环</text>
+<text x="473" y="204" font-size="10" fill="#26384b" text-anchor="start">上台地双路</text>
+<text x="543" y="286" font-size="10" fill="#26384b" text-anchor="start">中央汇口</text>
+<text x="470" y="335" font-size="10" fill="#26384b" text-anchor="start">中部曲路</text>
+<text x="490" y="440" font-size="10" fill="#26384b" text-anchor="start">下口双路</text>
+<text x="507" y="595" font-size="10" fill="#26384b" text-anchor="start">肺出</text>
+<text x="570" y="595" font-size="10" fill="#26384b" text-anchor="start">肺回</text>
+<text x="455" y="638" font-size="10" fill="#26384b" text-anchor="start">体回</text>
+<text x="605" y="638" font-size="10" fill="#26384b" text-anchor="start">体出</text>
+<rect x="610" y="740" width="80" height="80" fill="none" stroke="#8b9294" stroke-dasharray="3 3"/>
+<rect x="624" y="757" width="26.6667" height="16.6667" fill="#ffffff" fill-opacity=".4" stroke="#54636b" stroke-width=".8"/>
+<text x="610" y="833" font-size="8" fill="#26384b" text-anchor="start">80×80 地图/实体窗口</text>
+<text x="610" y="846" font-size="8" fill="#26384b" text-anchor="start">5×5 个16单位区块</text>
+<text x="610" y="859" font-size="8" fill="#26384b" text-anchor="start">小框：zoom2 一屏约26.7×16.7</text>
+</g>
+<path d="M 362,895 h 100 m -100,-4 v 8 m 100,-8 v 8" stroke="#334153" stroke-width="1.5"/>
+<text x="362" y="913" font-size="10" fill="#26384b" text-anchor="start">100 世界单位；主动速度4时约25秒</text>
+<text x="362" y="935" font-size="10" fill="#26384b" text-anchor="start">24 主干　12 周边环路　6 局部街路　3 少量窄联络</text>
+<text x="362" y="954" font-size="9" fill="#26384b" text-anchor="start">蓝/玫红：肺供/肺回；橙/靛蓝：体供/体回；紫：明确供回连接区</text>
+<text x="362" y="972" font-size="9" fill="#26384b" text-anchor="start">空心点为真实路口；阴影仅表示区域预留，不是流体腔室。</text>
+<text x="362" y="990" font-size="9" fill="#26384b" text-anchor="start">血流方向/速度待统一求解；绘图未完成 SDF 净空及可玩性验收。</text>
+</svg>

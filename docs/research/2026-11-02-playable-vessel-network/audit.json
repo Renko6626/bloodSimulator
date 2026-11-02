@@ -1,0 +1,52 @@
+{
+  "single_attachment_portless_pockets": [],
+  "self_intersections": [],
+  "independent_cycles": 24,
+  "external_roads": 32,
+  "external_vertices": 89,
+  "external_segments": 111,
+  "shared_junctions": 29,
+  "unshared_centerline_intersections": [],
+  "nonincident_segment_gap_below_2": [],
+  "pulmonary_external_connected": true,
+  "body_external_connected": true,
+  "pulmonary_and_body_external_disjoint": true,
+  "pulmonary_no_trunk_shunt": true,
+  "body_no_trunk_shunt": true,
+  "unintended_external_narrow_guide_overlap": [],
+  "external_tube_chamber_overlap": [],
+  "minimum_external_tube_chamber_gap": 16.431,
+  "narrow_guide_unrelated_chamber_overlap": [],
+  "centerline_walk_estimates": [
+    {
+      "route": "肺出→下口西入口",
+      "distance": 165.3,
+      "seconds_at_4": 41.3
+    },
+    {
+      "route": "肺出→中央汇口",
+      "distance": 509.4,
+      "seconds_at_4": 127.4
+    },
+    {
+      "route": "肺出→上台地西入口",
+      "distance": 542.7,
+      "seconds_at_4": 135.7
+    },
+    {
+      "route": "体出→A外围中入口",
+      "distance": 460.5,
+      "seconds_at_4": 115.1
+    },
+    {
+      "route": "体出→B外围入口",
+      "distance": 915.8,
+      "seconds_at_4": 229.0
+    },
+    {
+      "route": "体回→C外围入口",
+      "distance": 390.7,
+      "seconds_at_4": 97.7
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # 项目工作约定
 
+2026-11-02 可玩地图方向：用户明确指出现有大量重复微血管缺少游戏性，确认器官特色与跨器官任务方向，并要求城市式平面路网。保留24/12/6/3及统一流量求解，旧1→4→16→64、等长均流仅作验证场，不再约束新可玩图。`design/playable-vessel-network`已准备[候选A草图](docs/research/2026-11-02-playable-vessel-network/README.md)及[设计说明](docs/superpowers/specs/2026-11-02-playable-vessel-network-design.md)，独立设计审阅完成；具体布局/节奏尚待确认，未实装或替换生产地图。设备、任务系统及新烘焙/性能实验仍暂缓，不能据草图自动实施新模型。
+
 2026-11-02 地图区域示意图工具：用户已要求合并到主工作树main并推送，`feat/map-region-render`的`68ec5de`已快进纳入main，主目录可直接使用独立`map_render`例子。合并后格式、3项例子测试、feature全目标编译及主目录实际SVG导出通过。该工具直接按`--rect X Y WIDTH HEIGHT --output FILE.svg`读取地图定义导出，可选网格和标注。后续地图细节开发需要静态选区图时使用此工具，无需运行heart_preview_probe长回放或启动模拟/引擎。命令、坐标约定和PNG外部预览见[工具说明](docs/tools/map-render.md)；输出目录须已存在，编号只对应当前地图定义。功能分支与宿主管理工作树保留；本次集成不运行模拟、引擎或长回放。
 
 2026-11-01 阶段集成：用户已要求阶段性提交推送，随后要求合并回main。`feat/heart-vessel-layout`的`4e39dd2`已快进纳入主目录main，一并包含离线LBM基础设施、四腔预览与完整分级血管布局；合并代码树与已审阅分支一致，主目录fmt和feature全目标编译通过，沿用已有默认/feature测试及211点完整回放证据，不重复长回放。当前心脏仍为零流/零细胞预览，未烘焙心腔场；具体结果和边界见[STATUS](docs/STATUS.md)及[布局记录](docs/research/2026-11-01-heart-vessel-layout/README.md)。宿主管理的功能工作树保留，本次集成不安排新优化、烘焙或云实验。
