@@ -18,6 +18,8 @@
 
 用户随后“开干”确认[接入方案](superpowers/specs/2026-11-02-playable-map-integration-design.md)与[三步实施计划](superpowers/plans/2026-11-02-playable-map-integration.md)，已在`feat/organ-map-preview`实装，尚未合入main。新`--organ-preview`保留候选A全部32条逻辑外路与原尺寸四腔，实际45节点/69边；旧`--heart-preview`独立保留，两者固定零流/零细胞。四个心口采用20单位原窄径接续，其他道路点位/整体尺度不变。正常出生短路线覆盖右室、肺中央路口及上D3，另3个明确起点的A/B/C局部场景共15387步通过，逐帧最小中心净空1.415537、25块及零态守卫通过；局部案例不代表普通出生全图可达。生产单位图Q3.393265724，肺下口两近路合计43.408519%，低/反向流如实保留，未确定最终驱动、启用流场/细胞或烘焙。集中默认50单元+5集成、feature63单元+5集成（10忽略）、全目标feature编译及Godot import/world/lab/两预览加载通过；双flag拒绝符合预期。完整结果、实际SVG/PNG及检查见[接入记录](research/2026-11-02-playable-map-integration/README.md)。
 
+三个任务及[最终整分支审阅](research/2026-11-02-playable-map-integration/review.md)均通过，无待修复发现；审阅结论限定于几何预览及单位图诊断。本轮仅本地提交，功能工作树保留，未推送或合并main；后续运行流场、内容与性能工作不据本次归档自动启动。
+
 ## 坐标地图导出工具（2026-11-02）
 
 已在`feat/map-region-render`实现独立`map_render`例子：必填坐标矩形和输出路径，默认心脏，可选既有小地图、世界对齐网格及管径/心腔标注。直接构造MapDefinition并输出真实几何SVG，不启动模拟、求解流量或运行穿行。旧探针仅抽取共享绘图片段，CSV、Q提示、三个诊断视图及原移动守卫保留。使用方式见[工具说明](tools/map-render.md)，实际图和验证边界见[本阶段记录](research/2026-11-02-map-region-render/README.md)。3项例子测试、fmt及all-target feature编译通过，实际导出/静态查看和新旧诊断兼容检查通过；逐任务及[最终审阅](research/2026-11-02-map-region-render/review.md)通过。简单标签不避让、ImageMagick转换字形差异及极端数值选区边界已记录。本轮没有Godot、GPU、云或性能实验；用户随后要求合并到主工作树main并推送，已完成主目录快进集成与相关检查。

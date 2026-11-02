@@ -41,6 +41,6 @@
 - 显式诊断例子承担这些回放，不把长路线放入默认测试套件。不要求重跑旧211点全图，也不为本轮新图另做数十分钟完整巡游。
 - 末尾集中跑默认项目检查、feature测试和all-target feature编译；Godot只加载和静态截图，不自动交互。局部修正只补受影响项。
 
-## 确认点
+## 执行状态
 
-推荐按上述独立`--organ-preview`、旧验证场保留、本轮零流/零细胞的范围实施。确认后再执行[实施计划](../plans/2026-11-02-playable-map-integration.md)，沿用用户已选sol medium实施、sol high审阅，不再重复询问既定管径、路网方向或赶路尺度。
+上述独立`--organ-preview`、旧验证场保留、本轮零流/零细胞的范围已获用户确认，并按[实施计划](../plans/2026-11-02-playable-map-integration.md)完成，沿用sol medium实施、sol high审阅。实际通行、图诊断、集中检查及终审见[阶段记录](../../research/2026-11-02-playable-map-integration/README.md)。本轮保留功能工作树，不推送或合并main。

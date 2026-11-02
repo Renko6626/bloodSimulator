@@ -1,6 +1,6 @@
-# Task 1/2 聚焦检查与独立审阅
+# 分任务检查与独立审阅
 
-详细实施/审阅原件保留于工作树 `.superpowers/sdd/2026-11-02-playable-map-integration/`。本页归档结论，不重抄逐边流量表。
+本页归档三个任务的检查与独立审阅结论。完整集中输出见[logs](logs/)，逐边数据见[unit-graph.csv](unit-graph.csv)，运行范围见[阶段记录](README.md)。
 
 |任务|实现提交|聚焦验证|独立审阅|
 |---|---|---|---|
@@ -9,4 +9,10 @@
 
 Task2首次聚焦编译失败因新测试字段层级与子模块构造可见性错误，修正后上述聚焦检查通过；未将失败计为产品运行验收。两个任务都未执行UI自动交互、长探针、云实验、烘焙或性能任务。
 
-Task3及最终整分支独立审阅由主agent追加。
+## Task3 有限通行与集中交付
+
+实现提交`b155e4c`，sol high独立审阅结论为Spec compliant、Task quality Approved，无Critical/Important/Minor问题。四个显式案例先检查37个连续路段，再通过真实MoveInput完成15387步；正常出生与局部独立初始化分开，守卫/步数边界及日志叙述一致。生产dt、机器人半径与控制方式经聚焦代码核对，与旧探针一致。
+
+默认50单元+5集成、feature63单元+5集成（10忽略）、全目标feature编译与新旧Godot预览加载通过。审阅者读取既有日志，没有重复suite、回放或Godot检查。两幅实际地图PNG由主agent静态查看；局部标签重叠沿用工具显示限制。
+
+最终整分支审阅已归档至[review.md](review.md)：`502ff54..b155e4c`获Ready to merge: Yes，无Critical/Important/新增Minor问题；该结论不代表已执行合并或推送。

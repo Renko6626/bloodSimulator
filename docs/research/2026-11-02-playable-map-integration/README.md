@@ -40,6 +40,8 @@ A/B/C只在独立场景构造前更改spawn；运行中没有瞬移。路线全�
 
 `bash scripts/check.sh`退出0，默认50单元+5集成通过，构建及首次Godot import/world/lab均通过。`cargo test --locked -p simulation --features lbm-gpu`退出0，63单元+5集成通过、10忽略；全workspace/all-targets feature编译退出0。新旧预览各headless加载180帧退出0，双flag同时传入明确报互斥错误并退出1（预期拒绝）。
 
-集中命令及退出码见[results.tsv](logs/results.tsv)，完整输出见[logs](logs/)，来源与复现见[provenance](provenance.md)，前两任务聚焦检查与独立审阅见[task-reviews](task-reviews.md)。
+集中命令及退出码见[results.tsv](logs/results.tsv)，完整输出见[logs](logs/)，来源与复现见[provenance](provenance.md)，分任务检查与独立审阅见[task-reviews](task-reviews.md)。
+
+三个任务及[最终整分支审阅](review.md)均通过，无待修复发现；最后仅补充审阅归档文档，差异空白检查通过，没有重复运行模拟套件。
 
 本轮没有启用心腔实际流场、红白细胞、收缩/动态瓣膜或离线烘焙；未验收任意路线、细胞通过性、物理精度、手感、实卡FPS或性能，没有新云实验、自动UI交互、旧211点回放、推送或合并。工作树保留。
