@@ -43,4 +43,4 @@
 
 ## 执行状态
 
-上述独立`--organ-preview`、旧验证场保留、本轮零流/零细胞的范围已获用户确认，并按[实施计划](../plans/2026-11-02-playable-map-integration.md)完成，沿用sol medium实施、sol high审阅。实际通行、图诊断、集中检查及终审见[阶段记录](../../research/2026-11-02-playable-map-integration/README.md)。本轮保留功能工作树，不推送或合并main。
+上述独立`--organ-preview`、旧验证场保留、本轮零流/零细胞的范围已获用户确认，并按[实施计划](../plans/2026-11-02-playable-map-integration.md)完成，沿用sol medium实施、sol high审阅。实际通行、图诊断、集中检查及终审见[阶段记录](../../research/2026-11-02-playable-map-integration/README.md)。实装阶段保留功能工作树，用户随后要求阶段性合并，已将`6c3b24a`快进纳入主目录main；尚未推送。

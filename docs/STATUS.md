@@ -1,6 +1,8 @@
 # 当前状态与待办
 
-更新：2026-11-02。当前`main`已纳入离线LBM基础设施、四腔预览、完整分级血管布局及坐标地图导出工具，最新集成来源为`feat/map-region-render`的`68ec5de`。
+更新：2026-11-02。当前`main`已纳入离线LBM基础设施、四腔预览、完整分级血管布局、坐标地图导出工具及候选A可玩路网预览，最新集成来源为`feat/organ-map-preview`的`6c3b24a`。
+
+2026-11-02按用户要求将可玩路网阶段快进合入主工作树`main`，无冲突或产品代码调整。主目录`cargo fmt --all --check`及`cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`通过，合并代码树与已审阅分支一致；沿用下文默认/feature测试、四案例15387步及引擎加载证据，不重复回放或整套验证。功能分支与宿主管理工作树保留，本次未推送；新地图仍为零流/零细胞预览，未开始新内容、流场烘焙、性能或云实验。
 
 2026-11-02按用户要求将坐标地图导出工具快进合入主工作树`main`，没有产品代码调整。主目录`cargo fmt --all --check`、`cargo test --locked -p simulation --example map_render`（3项）、`cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`及实际心脏区域SVG导出通过；未运行全量模拟套件、引擎、GPU或长回放。功能分支及工作树保留，主目录已可直接调用工具。
 
@@ -16,9 +18,9 @@
 
 用户指出现有对称验证图微血管过多、重复且缺少游戏性，提出器官各有特色、跨器官任务和类似城市路网的复杂度；支援设备和任务实现暂缓。已确认保留24/12/6/3管径与统一流量求解，放开固定分支数、等长对称和固定均流模板，按可玩路网重新校准流速。已在`design/playable-vessel-network`完成[候选A设计](superpowers/specs/2026-11-02-playable-vessel-network-design.md)、[全图与心肺详图](research/2026-11-02-playable-vessel-network/README.md)：外管范围约924×1025单位，保留真实四腔比例，外围/内侧道路、中央纵街与区域联络提供跨区走法，只安排两条3单位窄联络。绘图重建、平面连接自查与独立设计审阅完成；用户随后确认赶路本身有趣，接受当前跨区尺度及远处约2～4分钟理想步行估算；坐标、肺下口近路及A/B/C预留位置随后按候选A确认落地；实际接入与有限检查见下段，细胞和手感仍未验收。旧地图继续保留为验证场，本轮不替换生产场景、不新增游戏系统或开始烘焙/性能实验。
 
-用户随后“开干”确认[接入方案](superpowers/specs/2026-11-02-playable-map-integration-design.md)与[三步实施计划](superpowers/plans/2026-11-02-playable-map-integration.md)，已在`feat/organ-map-preview`实装，尚未合入main。新`--organ-preview`保留候选A全部32条逻辑外路与原尺寸四腔，实际45节点/69边；旧`--heart-preview`独立保留，两者固定零流/零细胞。四个心口采用20单位原窄径接续，其他道路点位/整体尺度不变。正常出生短路线覆盖右室、肺中央路口及上D3，另3个明确起点的A/B/C局部场景共15387步通过，逐帧最小中心净空1.415537、25块及零态守卫通过；局部案例不代表普通出生全图可达。生产单位图Q3.393265724，肺下口两近路合计43.408519%，低/反向流如实保留，未确定最终驱动、启用流场/细胞或烘焙。集中默认50单元+5集成、feature63单元+5集成（10忽略）、全目标feature编译及Godot import/world/lab/两预览加载通过；双flag拒绝符合预期。完整结果、实际SVG/PNG及检查见[接入记录](research/2026-11-02-playable-map-integration/README.md)。
+用户随后“开干”确认[接入方案](superpowers/specs/2026-11-02-playable-map-integration-design.md)与[三步实施计划](superpowers/plans/2026-11-02-playable-map-integration.md)，已在`feat/organ-map-preview`实装，并按后续阶段合并要求将`6c3b24a`纳入main。新`--organ-preview`保留候选A全部32条逻辑外路与原尺寸四腔，实际45节点/69边；旧`--heart-preview`独立保留，两者固定零流/零细胞。四个心口采用20单位原窄径接续，其他道路点位/整体尺度不变。正常出生短路线覆盖右室、肺中央路口及上D3，另3个明确起点的A/B/C局部场景共15387步通过，逐帧最小中心净空1.415537、25块及零态守卫通过；局部案例不代表普通出生全图可达。生产单位图Q3.393265724，肺下口两近路合计43.408519%，低/反向流如实保留，未确定最终驱动、启用流场/细胞或烘焙。集中默认50单元+5集成、feature63单元+5集成（10忽略）、全目标feature编译及Godot import/world/lab/两预览加载通过；双flag拒绝符合预期。完整结果、实际SVG/PNG及检查见[接入记录](research/2026-11-02-playable-map-integration/README.md)。
 
-三个任务及[最终整分支审阅](research/2026-11-02-playable-map-integration/review.md)均通过，无待修复发现；审阅结论限定于几何预览及单位图诊断。本轮仅本地提交，功能工作树保留，未推送或合并main；后续运行流场、内容与性能工作不据本次归档自动启动。
+三个任务及[最终整分支审阅](research/2026-11-02-playable-map-integration/review.md)均通过，无待修复发现；审阅结论限定于几何预览及单位图诊断。实装阶段仅作本地提交，用户随后要求阶段性合并，已快进纳入主目录main；功能工作树保留，尚未推送。后续运行流场、内容与性能工作不据本次归档自动启动。
 
 ## 坐标地图导出工具（2026-11-02）
 
