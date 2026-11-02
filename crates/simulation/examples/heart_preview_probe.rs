@@ -7,6 +7,9 @@ use simulation::{
 };
 use std::{fmt::Write, path::Path};
 
+#[path = "support/map_svg.rs"]
+mod map_svg;
+
 // These source-backed drawings are diagnostics, never velocity fields or game screenshots.
 fn export_diagnostics(map: &MapDefinition, directory: &Path) {
     std::fs::create_dir_all(directory).unwrap();
@@ -47,31 +50,13 @@ fn export_diagnostics(map: &MapDefinition, directory: &Path) {
         let mut svg = format!(
             r##"<svg xmlns="http://www.w3.org/2000/svg" viewBox="{x} {y} {w} {h}"><title>Actual heart map diagnostic: {name}; zero runtime flow, not a game screenshot</title><rect x="{x}" y="{y}" width="{w}" height="{h}" fill="#172333"/>"##
         );
-        for chamber in &map.chambers {
-            let points = chamber
-                .boundary
-                .iter()
-                .map(|p| format!("{},{}", p[0], p[1]))
-                .collect::<Vec<_>>()
-                .join(" ");
-            write!(svg, r##"<polygon points="{points}" fill="#b65567"/>"##).unwrap();
-        }
-        for (i, edge) in map.edges.iter().enumerate() {
-            let color = match edge.half_width as u32 {
-                12 => "#f4ac75",
-                6 => "#70c4b0",
-                3 => "#78aef1",
-                1 => "#d9cdf2",
-                _ => "#b65567",
-            };
-            let points = edge
-                .centerline
-                .iter()
-                .map(|p| format!("{},{}", p[0], p[1]))
-                .collect::<Vec<_>>()
-                .join(" ");
-            write!(svg, r##"<polyline points="{points}" fill="none" stroke="{color}" stroke-width="{}" stroke-linejoin="round" stroke-linecap="round"><title>edge {i}, D{}, Q{}</title></polyline>"##, edge.half_width * 2., edge.half_width * 2., flow.rates[i]).unwrap();
-        }
+        map_svg::write_geometry(&mut svg, map, |i| {
+            format!(
+                "edge {i}, D{}, Q{}",
+                map.edges[i].half_width * 2.,
+                flow.rates[i]
+            )
+        });
         if name == "heart-ports" {
             // Dashed square marks the proposed baking boundary only, not flowing geometry.
             svg.push_str(r##"<rect x="-32" y="-32" width="256" height="256" fill="none" stroke="#ffffff" stroke-width="0.8" stroke-dasharray="4 3"/>"##);

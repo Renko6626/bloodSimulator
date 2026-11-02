@@ -1,6 +1,6 @@
 # 当前状态与待办
 
-更新：2026-11-01。当前`main`已纳入离线LBM基础设施、四腔预览及完整分级血管布局，最新集成来源为`feat/heart-vessel-layout`的`4e39dd2`。
+更新：2026-11-02。当前`main`已纳入离线LBM基础设施、四腔预览及完整分级血管布局，最新集成来源为`feat/heart-vessel-layout`的`4e39dd2`。
 
 本轮按用户要求将已推送的功能分支快进纳入主目录`main`，无冲突或产品代码调整；代码树与已审阅提交一致。合并后`cargo fmt --all --check`及`cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`通过，沿用下文已有默认/feature测试和211点完整回放，不重复长回放、Godot或GPU实验。功能分支和宿主管理工作树保留；当前心脏仍为零流、零细胞预览，没有新增烘焙或性能任务。
 
@@ -9,6 +9,10 @@
 旧 `feat/lbm-gameplay-validation` 工作树已在确认无未提交内容后移除，仅保留当前主目录。其10项忽略产物（包括实验程序、几何数据和构建缓存）已移回主目录 `.worktrees/returned-8d56-20261030/` 留存，未清理功能分支名。
 
 **进入内容开发，性能细化继续暂停。** 用户确认当前性能可接受，安排加入实体生命值、自机近身攻击及红细胞死亡行为。已将LBM/Rapier优化空间判断、新版外层3.37ms未细分及后续候选写入[交接记录](research/2026-10-30-performance-checkpoint.md#暂停前的判断与后续候选)；这些不构成自动profiling、GPU归约实施或云实验授权。
+
+## 坐标地图导出工具（2026-11-02）
+
+已在`feat/map-region-render`实现独立`map_render`例子：必填坐标矩形和输出路径，默认心脏，可选既有小地图、世界对齐网格及管径/心腔标注。直接构造MapDefinition并输出真实几何SVG，不启动模拟、求解流量或运行穿行。旧探针仅抽取共享绘图片段，CSV、Q提示、三个诊断视图及原移动守卫保留。使用方式见[工具说明](tools/map-render.md)，实际图和验证边界见[本阶段记录](research/2026-11-02-map-region-render/README.md)。本轮没有Godot、GPU、云或性能实验，不包含推送/合并。
 
 ## 血管尺寸与流速基准（2026-11-01）
 
