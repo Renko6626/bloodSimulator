@@ -1,8 +1,10 @@
 # 当前状态与待办
 
-更新：2026-11-02。当前`main`已纳入离线LBM基础设施、四腔预览及完整分级血管布局，最新集成来源为`feat/heart-vessel-layout`的`4e39dd2`。
+更新：2026-11-02。当前`main`已纳入离线LBM基础设施、四腔预览、完整分级血管布局及坐标地图导出工具，最新集成来源为`feat/map-region-render`的`68ec5de`。
 
-本轮按用户要求将已推送的功能分支快进纳入主目录`main`，无冲突或产品代码调整；代码树与已审阅提交一致。合并后`cargo fmt --all --check`及`cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`通过，沿用下文已有默认/feature测试和211点完整回放，不重复长回放、Godot或GPU实验。功能分支和宿主管理工作树保留；当前心脏仍为零流、零细胞预览，没有新增烘焙或性能任务。
+2026-11-02按用户要求将坐标地图导出工具快进合入主工作树`main`，没有产品代码调整。主目录`cargo fmt --all --check`、`cargo test --locked -p simulation --example map_render`（3项）、`cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`及实际心脏区域SVG导出通过；未运行全量模拟套件、引擎、GPU或长回放。功能分支及工作树保留，主目录已可直接调用工具。
+
+2026-11-01按用户要求将心脏布局分支快进纳入主目录`main`，无冲突或产品代码调整；代码树与已审阅提交一致。合并后`cargo fmt --all --check`及`cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`通过，沿用下文已有默认/feature测试和211点完整回放，不重复长回放、Godot或GPU实验。功能分支和宿主管理工作树保留；当前心脏仍为零流、零细胞预览，没有新增烘焙或性能任务。
 
 此前生命值、近身攻击、尸体及白细胞免疫阶段已进入 `main`。区块系统实现、检查证据及64×64 LBM后续实验草案已由 `5d644d7` 合并，用户随后要求推送 `main` 并回收旧工作树；本轮未安排新实验。
 
@@ -12,7 +14,7 @@
 
 ## 坐标地图导出工具（2026-11-02）
 
-已在`feat/map-region-render`实现独立`map_render`例子：必填坐标矩形和输出路径，默认心脏，可选既有小地图、世界对齐网格及管径/心腔标注。直接构造MapDefinition并输出真实几何SVG，不启动模拟、求解流量或运行穿行。旧探针仅抽取共享绘图片段，CSV、Q提示、三个诊断视图及原移动守卫保留。使用方式见[工具说明](tools/map-render.md)，实际图和验证边界见[本阶段记录](research/2026-11-02-map-region-render/README.md)。3项例子测试、fmt及all-target feature编译通过，实际导出/静态查看和新旧诊断兼容检查通过；逐任务及[最终审阅](research/2026-11-02-map-region-render/review.md)通过。简单标签不避让、ImageMagick转换字形差异及极端数值选区边界已记录。本轮没有Godot、GPU、云或性能实验，不包含推送/合并。
+已在`feat/map-region-render`实现独立`map_render`例子：必填坐标矩形和输出路径，默认心脏，可选既有小地图、世界对齐网格及管径/心腔标注。直接构造MapDefinition并输出真实几何SVG，不启动模拟、求解流量或运行穿行。旧探针仅抽取共享绘图片段，CSV、Q提示、三个诊断视图及原移动守卫保留。使用方式见[工具说明](tools/map-render.md)，实际图和验证边界见[本阶段记录](research/2026-11-02-map-region-render/README.md)。3项例子测试、fmt及all-target feature编译通过，实际导出/静态查看和新旧诊断兼容检查通过；逐任务及[最终审阅](research/2026-11-02-map-region-render/review.md)通过。简单标签不避让、ImageMagick转换字形差异及极端数值选区边界已记录。本轮没有Godot、GPU、云或性能实验；用户随后要求合并到主工作树main并推送，已完成主目录快进集成与相关检查。
 
 ## 血管尺寸与流速基准（2026-11-01）
 
