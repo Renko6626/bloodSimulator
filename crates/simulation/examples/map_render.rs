@@ -6,7 +6,7 @@ use std::{fmt::Write, path::PathBuf};
 mod map_svg;
 
 const HELP: &str = "Export map geometry as SVG (world units, Y points down).\n\
-Usage: map_render --rect X Y WIDTH HEIGHT --output FILE.svg [--map heart|small-world] [--grid STEP] [--labels]\n\
+Usage: map_render --rect X Y WIDTH HEIGHT --output FILE.svg [--map heart|organ|small-world] [--grid STEP] [--labels]\n\
 Default map: heart. Width, height and grid step must be positive and finite.\n\
 Example: map_render --rect -48 -150 288 390 --grid 16 --labels --output heart.svg";
 
@@ -74,9 +74,11 @@ fn parse(args: impl IntoIterator<Item = String>) -> Result<Option<Options>, Stri
                 ));
             }
             "--map" => {
-                map = args.next().ok_or("--map: expected heart or small-world")?;
-                if map != "heart" && map != "small-world" {
-                    return Err("--map: expected heart or small-world".into());
+                map = args
+                    .next()
+                    .ok_or("--map: expected heart, organ or small-world")?;
+                if !matches!(map.as_str(), "heart" | "organ" | "small-world") {
+                    return Err("--map: expected heart, organ or small-world".into());
                 }
             }
             "--grid" => {
@@ -235,6 +237,7 @@ fn run() -> Result<(), String> {
     };
     let map = match options.map.as_str() {
         "small-world" => MapDefinition::small_world(),
+        "organ" => MapDefinition::organ_world(),
         _ => MapDefinition::heart_preview(),
     };
     std::fs::write(&options.output, render(&map, &options))
@@ -284,6 +287,13 @@ mod tests {
             assert!(options(args).is_err(), "{args}");
         }
         assert!(options("--help").unwrap().is_none());
+        assert_eq!(
+            options("--rect 450 650 100 100 --map organ --output a.svg")
+                .unwrap()
+                .unwrap()
+                .map,
+            "organ"
+        );
     }
 
     #[test]

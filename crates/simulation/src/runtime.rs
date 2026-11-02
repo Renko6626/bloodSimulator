@@ -14,7 +14,8 @@ use rapier2d::prelude::*;
 use std::time::Instant;
 
 mod gameplay;
-mod heart_preview;
+mod geometry_preview;
+use geometry_preview::GeometryPreview;
 mod immunity;
 #[cfg(test)]
 mod immunity_tests;
@@ -123,7 +124,7 @@ pub struct Simulation {
     attack: crate::combat::Attack,
     population: Option<CellPopulation>,
     streaming: Option<crate::world_streaming::WorldStreaming>,
-    heart_preview: bool,
+    geometry_preview: Option<GeometryPreview>,
     walls: Vec<Vec<[f32; 2]>>,
     steps: u64,
     elapsed_time: f32,
@@ -425,7 +426,7 @@ impl Simulation {
             attack: crate::combat::Attack::default(),
             population,
             streaming: None,
-            heart_preview: false,
+            geometry_preview: None,
             walls,
             steps: 0,
             elapsed_time: 0.,
@@ -496,9 +497,9 @@ impl Simulation {
         self.try_reset().expect("reset simulation");
     }
     pub fn try_reset(&mut self) -> Result<(), String> {
-        if self.heart_preview {
+        if let Some(preview) = self.geometry_preview {
             let paused = self.paused;
-            *self = Self::new_heart_preview(self.config.clone());
+            *self = Self::new_geometry_preview(self.config.clone(), preview);
             self.paused = paused;
             return Ok(());
         }
@@ -559,8 +560,8 @@ impl Simulation {
         Ok(())
     }
     fn step(&mut self, input: MoveInput) -> Result<(), String> {
-        if self.heart_preview {
-            self.enforce_heart_preview();
+        if self.is_geometry_preview() {
+            self.enforce_geometry_preview();
         }
         if let Environment::World {
             background: Some(background),

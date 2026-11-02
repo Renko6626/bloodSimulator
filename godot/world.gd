@@ -28,6 +28,8 @@ var cell_meshes: Array[CellMesh] = []
 var screenshot_path := ""
 var screenshot_started := false
 var heart_preview := false
+var organ_preview := false
+var geometry_preview := false
 var stream_world := false
 var previous_centers: Array[Vector2] = []
 
@@ -37,12 +39,17 @@ func _ready() -> void:
 	hud = $HUDLayer/HUD
 	var args := OS.get_cmdline_user_args()
 	heart_preview = args.has("--heart-preview")
-	if heart_preview:
+	organ_preview = args.has("--organ-preview")
+	if heart_preview and organ_preview:
+		_startup_error("Choose either --heart-preview or --organ-preview")
+		return
+	geometry_preview = heart_preview or organ_preview
+	if geometry_preview:
 		for arg in args:
 			if arg in ["--local-lbm", "--local-stokes", "--lbm-validation"] or arg.begins_with("--lbm-profile") or arg.begins_with("--lbm-benchmark") or arg.begins_with("--lbm-screenshot"):
-				_startup_error("--heart-preview cannot be combined with LBM, Stokes, profiles or benchmarks")
+				_startup_error("Geometry previews cannot be combined with LBM, Stokes, profiles or benchmarks")
 				return
-	stream_world = heart_preview or args.has("--stream-world")
+	stream_world = geometry_preview or args.has("--stream-world")
 	if stream_world:
 		camera.zoom = Vector2(2.0, 2.0)
 	var use_lbm := args.has("--local-lbm")
@@ -93,6 +100,10 @@ func _ready() -> void:
 		simulation.use_heart_preview()
 		DisplayServer.window_set_title("Blood Simulator - Heart Preview")
 		hud.set_heart_preview()
+	elif organ_preview:
+		simulation.use_organ_preview()
+		DisplayServer.window_set_title("Blood Simulator - Organ Map Preview")
+		hud.set_organ_preview()
 	elif use_lbm:
 		var created: bool = simulation.use_lbm_validation(profile) if validation else simulation.use_lbm_world(profile)
 		if not created:
@@ -216,7 +227,7 @@ func _parameters_changed(pressure: float, speed: float, drag: float) -> void:
 
 
 func _flow_changed(value: bool) -> void:
-	show_flow = value and not heart_preview
+	show_flow = value and not geometry_preview
 	if stream_world:
 		_refresh()
 		state = simulation.snapshot()

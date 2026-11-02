@@ -14,7 +14,7 @@ const STATS_INTERVAL_USEC := 100_000
 
 var last_stats_update_usec := -STATS_INTERVAL_USEC
 
-var heart_preview := false
+var geometry_preview := false
 var subtitle: Label
 var map_title: Label
 var map_description: Label
@@ -128,7 +128,7 @@ func update_state(state: Dictionary) -> void:
 	var streaming: Dictionary = state.get("streaming", {})
 	if not streaming.is_empty():
 		stats.text += "\nActive / dormant       %d / %d\nLoaded chunks          %d" % [streaming.active_cells, streaming.dormant_cells, streaming.loaded_chunks]
-	if heart_preview:
+	if geometry_preview:
 		stats.text = "Cells                  %d\nWhite cells            %d\nTime                   %.1f s\nSolve / step           %.2f ms\n\nPressure drop          %.2f\nPump flow              %.2f\nMean speed             %.2f\nLoaded chunks          %d" % [state.cells.size(), immunity.white_bodies, state.time, state.solve_ms, state.pressure_drop, state.flow_rate, state.mean_speed, streaming.get("loaded_chunks", 0)]
 	var lines := PackedStringArray()
 	for i in state.branch_flows.size():
@@ -137,7 +137,7 @@ func update_state(state: Dictionary) -> void:
 
 
 func toggle_flow() -> void:
-	if heart_preview:
+	if geometry_preview:
 		return
 	flow_toggle.button_pressed = not flow_toggle.button_pressed
 
@@ -147,7 +147,7 @@ func toggle_collision() -> void:
 
 
 func _parameters_changed(_value: float) -> void:
-	parameters_changed.emit(0.0 if heart_preview else pressure.value, speed.value, drag.value)
+	parameters_changed.emit(0.0 if geometry_preview else pressure.value, speed.value, drag.value)
 
 
 func _add_label(parent: Node, value: String, size: int, color: Color) -> Label:
@@ -190,10 +190,18 @@ func set_pressure_display(value: float) -> void:
 
 
 func set_heart_preview() -> void:
-	heart_preview = true
-	subtitle.text = "Heart geometry preview"
-	map_title.text = "HEART PREVIEW"
-	map_description.text = "Static chambers\nNo flow or cells"
+	_set_geometry_preview("Heart geometry preview", "HEART PREVIEW", "Static chambers")
+
+
+func set_organ_preview() -> void:
+	_set_geometry_preview("Organ map geometry preview", "ORGAN MAP PREVIEW", "Chambers and vessel network")
+
+
+func _set_geometry_preview(title: String, heading: String, description: String) -> void:
+	geometry_preview = true
+	subtitle.text = title
+	map_title.text = heading
+	map_description.text = description + "\nNo flow or cells"
 	help.text = "WASD: move    Space: pause    N: step    R: reset    C: collision"
 	set_pressure_display(0.0)
 	pressure.editable = false
