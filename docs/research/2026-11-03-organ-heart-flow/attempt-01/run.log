@@ -1,0 +1,2 @@
+CPU preflight passed; pressure=14.145665169; see /tmp/sunyunbo/organ-heart-flow-bake
+bounded bake: 512², 48000 steps, 60s warmup + 60s sampling, 60 samples; 1200s external limit

@@ -1,0 +1,63 @@
+{
+  "base_commit": "ff4b9aa",
+  "first_bake_exit_code": 143,
+  "first_bake_binary_sha256": "fa8cabdf6a5aa0f30ce6c45ad8de9773af1058b4341d18a765f8336ede58680d",
+  "artifacts": {
+    "preflight-revised/preflight.txt": {
+      "bytes": 7571,
+      "sha256": "89493c606d6e45570405e4aa625ac8163a9f9e07e16307238c77f0fabcd99635"
+    },
+    "attempt-01/report.txt": {
+      "bytes": 7556,
+      "sha256": "28627e26ac3029a30e0de5cf1f814ce6cb56bcd2fad2e8059eed79b35fb28db7"
+    },
+    "attempt-01/region.png": {
+      "bytes": 150815,
+      "sha256": "416d6f44552ce35cfe6a5e37a4ee4e1c2983b31dd8e489f00bc30fef52715d69"
+    },
+    "attempt-01/lbm-geometry-source.rs": {
+      "bytes": 17068,
+      "sha256": "789647cf9fda9d8a3fd69021b6e437d636f88e3764fe32ddcb89af7929212f94"
+    },
+    "attempt-01/job-source.rs": {
+      "bytes": 10582,
+      "sha256": "b97eee1c8524c257350fa1d608829cd1944defb38c12ed81bc7e588faffd82e4"
+    },
+    "attempt-01/run.log": {
+      "bytes": 179,
+      "sha256": "2aeeadb69e6865ecfce5b8cd110827bad1a66a4c6a55db14bfbdc6616c3adfde"
+    },
+    "attempt-01/region.svg": {
+      "bytes": 28879,
+      "sha256": "ce2bd806ba982a7475b2d322ef77daf4f3c0788bdc7290b0487173fef7e564c3"
+    },
+    "preflight-initial/preflight.txt": {
+      "bytes": 992,
+      "sha256": "5341a760075e87af55100a02e8fa2c6239aa9fb6f3f5a9027503335d91557879"
+    },
+    "preflight-boundaries/preflight.txt": {
+      "bytes": 7672,
+      "sha256": "0406144e27bb7d61be587e09a47e8da614031f8be682bb779d06527331246783"
+    },
+    "preflight-located/preflight.txt": {
+      "bytes": 1107,
+      "sha256": "59e104c62f735b4cfe2b1ee95b6160792f5dce42274634a4a96764d38c6c3512"
+    },
+    "checks/all-targets-after-logging.log": {
+      "bytes": 494,
+      "sha256": "529ab2dea563b62ca9427a0c5ffbca9c62ff94df042a8ec5843f5a7ced4396ea"
+    },
+    "checks/feature-tests.log": {
+      "bytes": 421,
+      "sha256": "31d50db0118aaa6520a7190374a2f69d90ce94c00797c71dc24089be622ac85c"
+    },
+    "checks/all-targets.log": {
+      "bytes": 593,
+      "sha256": "b6b6c57ea0effdf6a57c3c9699fe73c2d2f721b05a72548465c21975bd30993d"
+    },
+    "checks/lbm-tests.log": {
+      "bytes": 127,
+      "sha256": "1d375ab9092270af98310012c433e114d4334b3b3d63b4cb4bd4c1f206c17ca0"
+    }
+  }
+}

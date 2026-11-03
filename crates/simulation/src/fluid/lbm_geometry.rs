@@ -151,13 +151,17 @@ pub fn rasterize_domain(
                 let delta = Vector::from(pair[1]) - Vector::from(pair[0]);
                 let length = delta.length();
                 if length < 1e-6 {
-                    return Err("unsupported curved opening".into());
+                    return Err(format!(
+                        "unsupported curved opening: side={side:?} edge={edge} center={center:?} buffer={buffer_start}..{buffer_end} segment={pair:?}"
+                    ));
                 }
                 if along < buffer_end
                     && along + length > buffer_start
                     && delta.normalize().dot(tangent) < 0.9999
                 {
-                    return Err("unsupported curved opening".into());
+                    return Err(format!(
+                        "unsupported curved opening: side={side:?} edge={edge} center={center:?} buffer={buffer_start}..{buffer_end} segment={pair:?}"
+                    ));
                 }
                 along += length;
             }

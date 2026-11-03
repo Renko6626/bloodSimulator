@@ -65,13 +65,21 @@ pub fn bake_mean(
 ) -> LbmResult<BakedFlow> {
     let samples = schedule.sample_count()?;
     let started = Instant::now();
+    eprintln!(
+        "offline LBM: preparing {}² domain, h={}, dt={}",
+        domain.cells_per_side, domain.spacing, config.dt
+    );
     let mut solver = LbmDomain::new(domain, config, initial, geometry)?;
+    eprintln!(
+        "offline LBM: solver ready after {:.3}s",
+        started.elapsed().as_secs_f64()
+    );
     let fluid: Vec<bool> = solver.geometry().solid.iter().map(|s| !s).collect();
     let mut mean = MeanAccumulator::new(&fluid, samples);
     let mut density_min = f32::INFINITY;
     let mut density_max = f32::NEG_INFINITY;
     let mut flux_sum = vec![0_f64; solver.geometry().openings.len()];
-    for _ in 0..schedule.warmup_frames {
+    for frame in 0..schedule.warmup_frames {
         solver.advance_batch(
             StepInput {
                 acceleration: [0.; 2],
@@ -79,6 +87,16 @@ pub fn bake_mean(
             schedule.steps_per_frame,
         )?;
         solver.control_mean_density()?;
+        if (frame + 1) % (schedule.warmup_frames / 10).max(1) == 0
+            || frame + 1 == schedule.warmup_frames
+        {
+            eprintln!(
+                "offline LBM: warmup {}/{}; elapsed {:.3}s",
+                frame + 1,
+                schedule.warmup_frames,
+                started.elapsed().as_secs_f64()
+            );
+        }
     }
     for frame in 0..schedule.sample_frames {
         solver.advance_batch(
@@ -88,6 +106,16 @@ pub fn bake_mean(
             schedule.steps_per_frame,
         )?;
         solver.control_mean_density()?;
+        if (frame + 1) % (schedule.sample_frames / 10).max(1) == 0
+            || frame + 1 == schedule.sample_frames
+        {
+            eprintln!(
+                "offline LBM: sampling {}/{}; elapsed {:.3}s",
+                frame + 1,
+                schedule.sample_frames,
+                started.elapsed().as_secs_f64()
+            );
+        }
         if (frame + 1) % schedule.sample_stride != 0 {
             continue;
         }

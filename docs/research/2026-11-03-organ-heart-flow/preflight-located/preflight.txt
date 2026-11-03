@@ -1,0 +1,35 @@
+map=production organ_world; no geometry changes
+reference_Q=48
+reference_pressure=14.145665169
+domain=DomainSpec { origin: [416.0, 576.0], cells_per_side: 640, spacing: 0.5 }
+config=WindowConfig { dt: 0.0025, viscosity: 0.05, allow_software: false }
+schedule=BakeSchedule { steps_per_frame: 16, warmup_frames: 1500, sample_frames: 1500, sample_stride: 25 }
+wall_clock_limit_seconds=1200 (external timeout)
+labels=[432,592]..[656,848]
+ports=[
+    FieldPort {
+        edge: 9,
+        along: 34.0,
+        outward_sign: 1.0,
+        reference_flux: 48.000004,
+    },
+    FieldPort {
+        edge: 16,
+        along: 34.0,
+        outward_sign: 1.0,
+        reference_flux: -48.000004,
+    },
+    FieldPort {
+        edge: 48,
+        along: 43.189323,
+        outward_sign: 1.0,
+        reference_flux: -48.000004,
+    },
+    FieldPort {
+        edge: 37,
+        along: 41.640736,
+        outward_sign: 1.0,
+        reference_flux: 48.000004,
+    },
+]
+result=Err("unsupported curved opening: side=Right edge=55 center=Vec2(736.0, 691.5) buffer=153.35751..200.86198 segment=[[740.0, 670.0], [820.0, 700.0]]")
