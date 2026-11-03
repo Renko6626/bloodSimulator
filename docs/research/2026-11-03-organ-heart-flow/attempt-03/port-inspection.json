@@ -1,0 +1,160 @@
+{
+  "source": "organ-heart.bfld",
+  "boundary_trace_is_prescribed": true,
+  "interior_is_solver_sampled": true,
+  "geometry_revision": 1,
+  "viscosity": 0.05000000074505806,
+  "reference_pressure": 14.145665168762207,
+  "max_scale": 1.149999976158142,
+  "origin": [
+    463.5,
+    655.5
+  ],
+  "spacing": 0.5,
+  "size": [
+    387,
+    387
+  ],
+  "ports": [
+    {
+      "name": "systemic_in",
+      "edge": 0,
+      "center": [
+        488.0,
+        656.0
+      ],
+      "expected_outward_flux": -48.000003814697266,
+      "integrated_outward_flux": -47.88000440597534,
+      "max_vector_error": 0.017999792098998935,
+      "vector_tolerance": 0.07272100000000001,
+      "max_transverse_velocity": 0.0,
+      "wall_speeds": [
+        0.0,
+        0.0
+      ],
+      "interior_center_velocities": {
+        "0.5": [
+          0.0025090891867876053,
+          7.17996072769165
+        ],
+        "1.0": [
+          0.0073444535955786705,
+          7.193155288696289
+        ],
+        "2.0": [
+          0.01630186103284359,
+          7.218808174133301
+        ],
+        "4.0": [
+          0.03383314609527588,
+          7.270949363708496
+        ]
+      }
+    },
+    {
+      "name": "pulmonary_out",
+      "edge": 3,
+      "center": [
+        528.0,
+        656.0
+      ],
+      "expected_outward_flux": 48.000003814697266,
+      "integrated_outward_flux": 47.85185742378235,
+      "max_vector_error": 0.024691262362916078,
+      "vector_tolerance": 0.09956643209876542,
+      "max_transverse_velocity": 0.0,
+      "wall_speeds": [
+        0.0,
+        0.0
+      ],
+      "interior_center_velocities": {
+        "0.5": [
+          0.02542426809668541,
+          -7.989846229553223
+        ],
+        "1.0": [
+          0.050665490329265594,
+          -8.06393814086914
+        ],
+        "2.0": [
+          0.05894617736339569,
+          -8.161762237548828
+        ],
+        "4.0": [
+          0.06965373456478119,
+          -8.20438289642334
+        ]
+      }
+    },
+    {
+      "name": "pulmonary_in",
+      "edge": 4,
+      "center": [
+        562.0,
+        656.0
+      ],
+      "expected_outward_flux": -48.000003814697266,
+      "integrated_outward_flux": -47.88000440597534,
+      "max_vector_error": 0.017999792098998935,
+      "vector_tolerance": 0.07272100000000001,
+      "max_transverse_velocity": 0.0,
+      "wall_speeds": [
+        0.0,
+        0.0
+      ],
+      "interior_center_velocities": {
+        "0.5": [
+          -0.0005876453360542655,
+          7.177785396575928
+        ],
+        "1.0": [
+          -0.001672079088166356,
+          7.186830520629883
+        ],
+        "2.0": [
+          -0.0035005633253604174,
+          7.204967498779297
+        ],
+        "4.0": [
+          -0.006725966464728117,
+          7.240887641906738
+        ]
+      }
+    },
+    {
+      "name": "systemic_out",
+      "edge": 7,
+      "center": [
+        600.0,
+        656.0
+      ],
+      "expected_outward_flux": 48.000003814697266,
+      "integrated_outward_flux": 47.88000440597534,
+      "max_vector_error": 0.017999792098998935,
+      "vector_tolerance": 0.07272100000000001,
+      "max_transverse_velocity": 0.0,
+      "wall_speeds": [
+        0.0,
+        0.0
+      ],
+      "interior_center_velocities": {
+        "0.5": [
+          0.024422502145171165,
+          -7.198501110076904
+        ],
+        "1.0": [
+          0.0534917414188385,
+          -7.270223140716553
+        ],
+        "2.0": [
+          0.05248604342341423,
+          -7.3906779289245605
+        ],
+        "4.0": [
+          0.03213421255350113,
+          -7.494709014892578
+        ]
+      }
+    }
+  ]
+}

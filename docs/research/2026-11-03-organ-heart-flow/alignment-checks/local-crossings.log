@@ -1,0 +1,8 @@
+   Compiling blood-fluid v0.1.0 (/data/sunyunbo/.codex/worktrees/7c02/bloodSimulator/crates/fluid)
+   Compiling simulation v0.1.0 (/data/sunyunbo/.codex/worktrees/7c02/bloodSimulator/crates/simulation)
+    Finished `release` profile [optimized] target(s) in 5.38s
+     Running `/data/sunyunbo/www/bloodSimulator/target/release/examples/organ_background_probe`
+case=systemic_in local_start=[488,660] targets_y=[652,660] steps=242 source_switches=2 min_center_clearance=5.000000 zero_cells=true lbm=false
+case=pulmonary_out local_start=[528,660] targets_y=[652,660] steps=245 source_switches=2 min_center_clearance=4.500000 zero_cells=true lbm=false
+case=pulmonary_in local_start=[562,660] targets_y=[652,660] steps=242 source_switches=2 min_center_clearance=5.000000 zero_cells=true lbm=false
+case=systemic_out local_start=[600,660] targets_y=[652,660] steps=243 source_switches=2 min_center_clearance=5.000000 zero_cells=true lbm=false

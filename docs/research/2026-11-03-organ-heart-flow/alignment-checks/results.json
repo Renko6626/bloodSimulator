@@ -1,0 +1,36 @@
+[
+  {
+    "name": "project-check",
+    "command": [
+      "bash",
+      "scripts/check.sh"
+    ],
+    "returncode": 134
+  },
+  {
+    "name": "simulation-feature",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "simulation",
+      "--features",
+      "lbm-gpu"
+    ],
+    "returncode": 0
+  },
+  {
+    "name": "feature-all-targets",
+    "command": [
+      "cargo",
+      "check",
+      "--locked",
+      "--workspace",
+      "--all-targets",
+      "--features",
+      "godot_bridge/lbm-gpu"
+    ],
+    "returncode": 0
+  }
+]

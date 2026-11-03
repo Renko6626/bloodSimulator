@@ -1,0 +1,15 @@
+{
+  "command": [
+    "godot",
+    "--path",
+    "godot",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "/tmp/sunyunbo/capture-organ-background.gd",
+    "--",
+    "--organ-world"
+  ],
+  "returncode": 0,
+  "keyboard_or_mouse_injected": false
+}

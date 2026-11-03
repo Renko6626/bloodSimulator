@@ -1,0 +1,134 @@
+[
+  {
+    "name": "import-cached",
+    "command": [
+      "godot",
+      "--headless",
+      "--path",
+      "godot",
+      "--editor",
+      "--import",
+      "--quit"
+    ],
+    "returncode": 0,
+    "expected": 0
+  },
+  {
+    "name": "world",
+    "command": [
+      "godot",
+      "--headless",
+      "--path",
+      "godot",
+      "--fixed-fps",
+      "60",
+      "--quit-after",
+      "180"
+    ],
+    "returncode": 0,
+    "expected": 0
+  },
+  {
+    "name": "lab",
+    "command": [
+      "godot",
+      "--headless",
+      "--path",
+      "godot",
+      "--fixed-fps",
+      "60",
+      "--quit-after",
+      "180",
+      "res://lab.tscn"
+    ],
+    "returncode": 0,
+    "expected": 0
+  },
+  {
+    "name": "organ-preview",
+    "command": [
+      "godot",
+      "--headless",
+      "--path",
+      "godot",
+      "--fixed-fps",
+      "60",
+      "--quit-after",
+      "180",
+      "--",
+      "--organ-preview"
+    ],
+    "returncode": 0,
+    "expected": 0
+  },
+  {
+    "name": "heart-preview",
+    "command": [
+      "godot",
+      "--headless",
+      "--path",
+      "godot",
+      "--fixed-fps",
+      "60",
+      "--quit-after",
+      "180",
+      "--",
+      "--heart-preview"
+    ],
+    "returncode": 0,
+    "expected": 0
+  },
+  {
+    "name": "organ-world",
+    "command": [
+      "godot",
+      "--headless",
+      "--path",
+      "godot",
+      "--fixed-fps",
+      "60",
+      "--quit-after",
+      "180",
+      "--",
+      "--organ-world"
+    ],
+    "returncode": 0,
+    "expected": 0
+  },
+  {
+    "name": "organ-world-conflict-preview",
+    "command": [
+      "godot",
+      "--headless",
+      "--path",
+      "godot",
+      "--fixed-fps",
+      "60",
+      "--quit-after",
+      "180",
+      "--",
+      "--organ-world",
+      "--organ-preview"
+    ],
+    "returncode": 1,
+    "expected": 1
+  },
+  {
+    "name": "organ-world-conflict-lbm",
+    "command": [
+      "godot",
+      "--headless",
+      "--path",
+      "godot",
+      "--fixed-fps",
+      "60",
+      "--quit-after",
+      "180",
+      "--",
+      "--organ-world",
+      "--local-lbm"
+    ],
+    "returncode": 1,
+    "expected": 1
+  }
+]

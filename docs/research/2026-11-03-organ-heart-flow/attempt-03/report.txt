@@ -1,0 +1,242 @@
+map=production organ_world; no geometry changes
+reference_Q=48
+reference_pressure=14.145665169
+domain=DomainSpec { origin: [464.0, 656.0], cells_per_side: 384, spacing: 0.5 }
+config=WindowConfig { dt: 0.0025, viscosity: 0.05, allow_software: true }
+schedule=BakeSchedule { steps_per_frame: 16, warmup_frames: 1500, sample_frames: 1500, sample_stride: 25 }
+wall_clock_limit_seconds=1200 (external timeout)
+labels=[464,656]..[608,848]
+ports=[
+    FieldPort {
+        edge: 0,
+        along: 10.0,
+        outward_sign: -1.0,
+        reference_flux: -48.000004,
+    },
+    FieldPort {
+        edge: 3,
+        along: 80.93172,
+        outward_sign: 1.0,
+        reference_flux: 48.000004,
+    },
+    FieldPort {
+        edge: 4,
+        along: 10.0,
+        outward_sign: -1.0,
+        reference_flux: -48.000004,
+    },
+    FieldPort {
+        edge: 7,
+        along: 86.65863,
+        outward_sign: 1.0,
+        reference_flux: 48.000004,
+    },
+]
+source_boundary_cpu_samples={0: 40, 3: 35, 4: 39, 7: 39}; step<=0.25; all chamber bounds inside
+openings=[
+    OpeningGeometry {
+        segment: 0,
+        endpoints: [
+            [
+                483.0,
+                656.0,
+            ],
+            [
+                493.0,
+                656.0,
+            ],
+        ],
+        normal: [
+            0.0,
+            -1.0,
+        ],
+        normal_velocity: [
+            -0.70112383,
+            -1.9955056,
+            -3.1460676,
+            -4.1528096,
+            -5.015731,
+            -5.734832,
+            -6.3101125,
+            -6.7415733,
+            -7.0292144,
+            -7.173034,
+            -7.173034,
+            -7.0292144,
+            -6.7415733,
+            -6.3101125,
+            -5.734832,
+            -5.015731,
+            -4.1528096,
+            -3.1460676,
+            -1.9955056,
+            -0.70112383,
+        ],
+    },
+    OpeningGeometry {
+        segment: 3,
+        endpoints: [
+            [
+                523.5,
+                656.0,
+            ],
+            [
+                532.5,
+                656.0,
+            ],
+        ],
+        normal: [
+            0.0,
+            -1.0,
+        ],
+        normal_velocity: [
+            0.8628662,
+            2.4406784,
+            3.8212643,
+            5.004623,
+            5.9907556,
+            6.7796617,
+            7.371341,
+            7.765794,
+            7.9630203,
+            7.9630203,
+            7.765794,
+            7.371341,
+            6.7796617,
+            5.9907556,
+            5.004623,
+            3.8212643,
+            2.4406784,
+            0.8628662,
+        ],
+    },
+    OpeningGeometry {
+        segment: 4,
+        endpoints: [
+            [
+                557.0,
+                656.0,
+            ],
+            [
+                567.0,
+                656.0,
+            ],
+        ],
+        normal: [
+            0.0,
+            -1.0,
+        ],
+        normal_velocity: [
+            -0.70112383,
+            -1.9955056,
+            -3.1460676,
+            -4.1528096,
+            -5.015731,
+            -5.734832,
+            -6.3101125,
+            -6.7415733,
+            -7.0292144,
+            -7.173034,
+            -7.173034,
+            -7.0292144,
+            -6.7415733,
+            -6.3101125,
+            -5.734832,
+            -5.015731,
+            -4.1528096,
+            -3.1460676,
+            -1.9955056,
+            -0.70112383,
+        ],
+    },
+    OpeningGeometry {
+        segment: 7,
+        endpoints: [
+            [
+                595.0,
+                656.0,
+            ],
+            [
+                605.0,
+                656.0,
+            ],
+        ],
+        normal: [
+            0.0,
+            -1.0,
+        ],
+        normal_velocity: [
+            0.70112383,
+            1.9955056,
+            3.1460676,
+            4.1528096,
+            5.015731,
+            5.734832,
+            6.3101125,
+            6.7415733,
+            7.0292144,
+            7.173034,
+            7.173034,
+            7.0292144,
+            6.7415733,
+            6.3101125,
+            5.734832,
+            5.015731,
+            4.1528096,
+            3.1460676,
+            1.9955056,
+            0.70112383,
+        ],
+    },
+]
+initial_max_world_speed=7.9999495
+initial_max_lattice_speed=0.039999746
+warmup_seconds=60
+sample_seconds=60
+samples=60
+opening_component opening=0 component=0 flux=-48.000004
+opening_component opening=1 component=0 flux=48.000004
+opening_component opening=2 component=1 flux=-48.000004
+opening_component opening=3 component=1 flux=48.000004
+component=0 fluid_cells=28041 signed_outward_flux=0 absolute_flux=96.00000762939453
+component=1 fluid_cells=28693 signed_outward_flux=0 absolute_flux=96.00000762939453
+prescribed_opening_profiles=[[-0.70112383, -1.9955056, -3.1460676, -4.1528096, -5.015731, -5.734832, -6.3101125, -6.7415733, -7.0292144, -7.173034, -7.173034, -7.0292144, -6.7415733, -6.3101125, -5.734832, -5.015731, -4.1528096, -3.1460676, -1.9955056, -0.70112383], [0.8628662, 2.4406784, 3.8212643, 5.004623, 5.9907556, 6.7796617, 7.371341, 7.765794, 7.9630203, 7.9630203, 7.765794, 7.371341, 6.7796617, 5.9907556, 5.004623, 3.8212643, 2.4406784, 0.8628662], [-0.70112383, -1.9955056, -3.1460676, -4.1528096, -5.015731, -5.734832, -6.3101125, -6.7415733, -7.0292144, -7.173034, -7.173034, -7.0292144, -6.7415733, -6.3101125, -5.734832, -5.015731, -4.1528096, -3.1460676, -1.9955056, -0.70112383], [0.70112383, 1.9955056, 3.1460676, 4.1528096, 5.015731, 5.734832, 6.3101125, 6.7415733, 7.0292144, 7.173034, 7.173034, 7.0292144, 6.7415733, 6.3101125, 5.734832, 5.015731, 4.1528096, 3.1460676, 1.9955056, 0.70112383]]
+bake_report=BakeReport {
+    schedule: BakeSchedule {
+        steps_per_frame: 16,
+        warmup_frames: 1500,
+        sample_frames: 1500,
+        sample_stride: 25,
+    },
+    lattice_dt: 0.0025,
+    samples: 60,
+    warmup_simulated_seconds: 59.99999865889549,
+    sample_simulated_seconds: 59.99999865889549,
+    wall_seconds: 225.516589558,
+    density_min: 0.8928303,
+    density_max: 1.1026058,
+    mean_opening_fluxes: [
+        -48.000002988179524,
+        48.000006103515624,
+        -48.0000031153361,
+        48.0000026067098,
+    ],
+    half_mean_velocity_rms: 0.9026146655431686,
+    half_mean_velocity_max: 4.270441187858294,
+    final_diagnostics: Diagnostics {
+        density_min: 0.8928303,
+        density_max: 1.0400851,
+        max_speed: 16.57087,
+        mass: 56732.254,
+        opening_fluxes: [
+            -48.000004,
+            48.000004,
+            -48.000004,
+            48.000004,
+        ],
+        software_adapter: true,
+        adapter_name: "llvmpipe (LLVM 15.0.7, 256 bits)",
+    },
+}
+normal_policy_import=Ok(())
+result=Ok(())

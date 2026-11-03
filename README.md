@@ -40,6 +40,8 @@
 
 新增显式`--stream-world`：固定16单位世界网格，LBM保持3×3，地图与实体按5×5现场装卸；红细胞远场数量输运、白细胞保存身份和形态后休眠。新入口摄像机zoom2，画面约26.7×16.7世界单位。运行`bash scripts/run.sh -- --stream-world`，支持与已验证LBM分叉场组合；默认入口不变。实现、证据与未验收项见[区块装卸记录](docs/research/2026-10-30-world-streaming/README.md)。
 
+新增器官背景入口`bash scripts/run.sh -- --organ-world`：心脏四口与离线求解边界重合，区域内采样烘焙背景，外侧使用解析管流；默认CPU构建即可运行。本阶段无红白细胞，保留WASD、暂停、单步、重置、流向和碰撞显示。旧`--organ-preview`/`--heart-preview`仍是零流几何预览。此入口目前保存在功能分支，验收及物理限制见[背景接入记录](docs/research/2026-11-03-organ-heart-flow/boundary-alignment.md)。
+
 ## 游戏方向
 
 - 2D 抽象血管网络，保留心脏与核心器官的循环关系，空间尺度按玩法压缩。

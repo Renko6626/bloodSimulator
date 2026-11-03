@@ -122,6 +122,162 @@
     "attempt-02/source.json": {
       "bytes": 655,
       "sha256": "e0e46b889551b9b32020bb7bfd0668e6bb1f6d90623a6053ac2c919bd9a15621"
+    },
+    "alignment-checks/build-default.log": {
+      "bytes": 179,
+      "sha256": "a38e6227132abc134bea1674ab3c59de272d0a64e86b8435ff6610f23ad30b98"
+    },
+    "alignment-checks/capture.gd": {
+      "bytes": 477,
+      "sha256": "7d55f8cc34d6247369812cf5d63ef9f6a2b02efc326802b6fa6b3737132a54e7"
+    },
+    "alignment-checks/feature-all-targets.log": {
+      "bytes": 494,
+      "sha256": "312a47bbd38050fde64d3ad64d55673638f2e7b8bb23dd556097a11f299ae2cc"
+    },
+    "alignment-checks/godot-results.json": {
+      "bytes": 2114,
+      "sha256": "d4ec9211933cac29a919a1383f821a897860153b9d1d15bcda41dc7685acbb24"
+    },
+    "alignment-checks/heart-preview.log": {
+      "bytes": 173,
+      "sha256": "8ad6b113566484bcbd637b113209de8792953ddc98dab696fda7c5e996f82e93"
+    },
+    "alignment-checks/import-cached.log": {
+      "bytes": 1117,
+      "sha256": "637167323b96f214546a79ad1460446fb653adc70b5439932d4fbbf6012e96a5"
+    },
+    "alignment-checks/lab.log": {
+      "bytes": 173,
+      "sha256": "8ad6b113566484bcbd637b113209de8792953ddc98dab696fda7c5e996f82e93"
+    },
+    "alignment-checks/local-crossings.log": {
+      "bytes": 936,
+      "sha256": "668a2767f2ebc6dea2acdca95f918cf447dd374fb3cf6f6ad94e1889c9756553"
+    },
+    "alignment-checks/organ-preview.log": {
+      "bytes": 173,
+      "sha256": "8ad6b113566484bcbd637b113209de8792953ddc98dab696fda7c5e996f82e93"
+    },
+    "alignment-checks/organ-world-conflict-lbm.log": {
+      "bytes": 464,
+      "sha256": "9e899dce67a344328c0d20cbf390ab92129e8a883a906bdf1afcc47a6773003e"
+    },
+    "alignment-checks/organ-world-conflict-preview.log": {
+      "bytes": 432,
+      "sha256": "32eac8575a78fa74371622776cf2cefe1c00d515559aa9818eedaad5c94fb89a"
+    },
+    "alignment-checks/organ-world.log": {
+      "bytes": 173,
+      "sha256": "8ad6b113566484bcbd637b113209de8792953ddc98dab696fda7c5e996f82e93"
+    },
+    "alignment-checks/organ-world.png": {
+      "bytes": 116792,
+      "sha256": "e4875e674c0f6e32856833575c2649af5af83ceb797c6bcd1389ed79bd256d69"
+    },
+    "alignment-checks/project-check.log": {
+      "bytes": 8154,
+      "sha256": "98148d47a81142a86d389cc0d4020f2f45cec6b8a1049d1a3811caa59cb221f1"
+    },
+    "alignment-checks/results.json": {
+      "bytes": 557,
+      "sha256": "d690f87701ecac11fe917fc357a081c18ce22670d8e8d498cef09c9ac306097f"
+    },
+    "alignment-checks/screenshot-result.json": {
+      "bytes": 251,
+      "sha256": "19b3387b7c27ae264dd8de4d737d4c79e69eb82de743536313cf234bda838852"
+    },
+    "alignment-checks/screenshot.log": {
+      "bytes": 517,
+      "sha256": "f189273b8d677166af2743def62e3813db033f3081e9851cd3160aeeb1a89d93"
+    },
+    "alignment-checks/simulation-feature.log": {
+      "bytes": 8606,
+      "sha256": "a214856ab616c9305b136bc98ac70ea3eeaf6ed03445a427ea31922eeddce711"
+    },
+    "alignment-checks/world.log": {
+      "bytes": 173,
+      "sha256": "8ad6b113566484bcbd637b113209de8792953ddc98dab696fda7c5e996f82e93"
+    },
+    "alignment-checks/xvfb.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "alignment-preflight/preflight.txt": {
+      "bytes": 4728,
+      "sha256": "ee12b324ef72ae54be3a9e0a7efe0e84f702a674a110c72dd86324fec6fa317e"
+    },
+    "attempt-03/crates__fluid-gpu__src__lbm__bake.rs": {
+      "bytes": 10949,
+      "sha256": "ddd71be03f3946457ce86d18dc6c661fcf345a967552ec788a6f57548e3a9970"
+    },
+    "attempt-03/crates__simulation__examples__organ_heart_bake.rs": {
+      "bytes": 12227,
+      "sha256": "2ea33d7f6b5c9588d2f16890bfb1f5b7d51edfb9bc1e9d548e7d045ab6f917c3"
+    },
+    "attempt-03/crates__simulation__src__fluid__lbm_geometry.rs": {
+      "bytes": 17068,
+      "sha256": "789647cf9fda9d8a3fd69021b6e437d636f88e3764fe32ddcb89af7929212f94"
+    },
+    "attempt-03/crates__simulation__src__map__organ_flow.rs": {
+      "bytes": 2021,
+      "sha256": "0b0d842af6c9a5ed08a5c6a0f2b4bec67f4bdb309872ace1e142b3024abff38f"
+    },
+    "attempt-03/crates__simulation__src__offline_lbm.rs": {
+      "bytes": 13354,
+      "sha256": "f7639d365da3a35337840895ed41be6e2d31a03d4f8d0ba1fdc794a9d88844a4"
+    },
+    "attempt-03/inspect_field.py": {
+      "bytes": 4642,
+      "sha256": "d3b0a2fe727489cd9a0b1351ba4c0583907a1570d3ea047930c14aff3f4bc0df"
+    },
+    "attempt-03/lifecycle.log": {
+      "bytes": 107,
+      "sha256": "89ec7168429a50ec3e62a959a2d28d1f9006ef3362a2542516a9b56291e58ab0"
+    },
+    "attempt-03/mean-speed.png": {
+      "bytes": 393578,
+      "sha256": "9b193c2abf2778ddc28d4cd24374470b0c6f1dabdd0d330ea105144ea97e8e7f"
+    },
+    "attempt-03/organ-heart.bfld": {
+      "bytes": 1348037,
+      "sha256": "b1760e82730802d5006843bd205a49267c32df5cdcd081355367347e41f697d9"
+    },
+    "attempt-03/port-inspection.json": {
+      "bytes": 3595,
+      "sha256": "4f47f48384d7e23b586abe3b7c7e9fa98001b85dfe7b98b23775eac7ba3d5f6c"
+    },
+    "attempt-03/port-profiles.png": {
+      "bytes": 156139,
+      "sha256": "700117f4b88eda65b2967d11ab32ea191ef863e7647ca8c97ff0d7c28bc0b117"
+    },
+    "attempt-03/raw-cell-centered.bfld": {
+      "bytes": 1327220,
+      "sha256": "f6bdfc2439c4ed0a2f0f8b57f39f93a39e56a766b63a0715e05cced0c82f58b7"
+    },
+    "attempt-03/report.txt": {
+      "bytes": 6699,
+      "sha256": "b87333c340280170f008bff3fc152b23335e11dfeafedd6783d7d7f6994fb39c"
+    },
+    "attempt-03/run.log": {
+      "bytes": 1351,
+      "sha256": "60a6d46daf385e95d0af3a611d6d8bc36d417d740564a7908000ea036212511b"
+    },
+    "attempt-03/run.sh": {
+      "bytes": 961,
+      "sha256": "169955a2f3fb0cd2fa24e40eb4430e4d868bc04cc2a2914c3f8cf616275e04ed"
+    },
+    "attempt-03/source.json": {
+      "bytes": 1034,
+      "sha256": "8fc38b984b5cb64494e05555d4343d34544077dcdf69530ee36e8d65b846f2e5"
+    },
+    "boundary-alignment-notes.md": {
+      "bytes": 3780,
+      "sha256": "df23f763bd2764358227c8e35e49da32fc0060441f548d65c3a827d50346f3e8"
+    },
+    "boundary-alignment.md": {
+      "bytes": 5905,
+      "sha256": "6035e03088f50a133fe50d713a5503dfa1aa701fb91721be5886d4965a08c41d"
     }
   },
   "attempt_02": {
@@ -131,5 +287,27 @@
     "steps": 48000,
     "samples": 60,
     "import": "rejected original static port profile validation"
+  },
+  "attempt_03": {
+    "source_commit": "08f3946",
+    "command_exit_code": 0,
+    "bake_wall_seconds": 225.516589558,
+    "steps": 48000,
+    "samples": 60,
+    "grid": [
+      384,
+      384
+    ],
+    "export_grid": [
+      387,
+      387
+    ],
+    "import": "original policy validation passed"
+  },
+  "default_runtime": {
+    "source_commit": "289901f8a837585d56faed8d8c2e8f8e457179d6",
+    "asset_sha256": "b1760e82730802d5006843bd205a49267c32df5cdcd081355367347e41f697d9",
+    "asset_bytes": 1348037,
+    "default_extension_sha256": "f6b1588f5da31ec88d820f5cd535e8a756c5264670f504d7a399bf496924c0c2"
   }
 }

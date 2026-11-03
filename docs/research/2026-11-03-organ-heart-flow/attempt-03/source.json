@@ -1,0 +1,22 @@
+{
+  "source_commit": "08f39461fb903c0d921924f0ccd4568e29df1fce",
+  "binary_sha256": "48a790afc2fe58e80b6ac32d872466b4c860324d792395dfb09490c1a059913e",
+  "source_sha256": {
+    "crates__simulation__examples__organ_heart_bake.rs": "2ea33d7f6b5c9588d2f16890bfb1f5b7d51edfb9bc1e9d548e7d045ab6f917c3",
+    "crates__fluid-gpu__src__lbm__bake.rs": "ddd71be03f3946457ce86d18dc6c661fcf345a967552ec788a6f57548e3a9970",
+    "crates__simulation__src__fluid__lbm_geometry.rs": "789647cf9fda9d8a3fd69021b6e437d636f88e3764fe32ddcb89af7929212f94",
+    "crates__simulation__src__offline_lbm.rs": "f7639d365da3a35337840895ed41be6e2d31a03d4f8d0ba1fdc794a9d88844a4",
+    "crates__simulation__src__map__organ_flow.rs": "0b0d842af6c9a5ed08a5c6a0f2b4bec67f4bdb309872ace1e142b3024abff38f"
+  },
+  "authorization": "用户确认心口烘焙边界与实际交接同面，按已记录方案执行一次有界作业",
+  "budget": {
+    "grid": [
+      384,
+      384
+    ],
+    "dt": 0.0025,
+    "steps": 48000,
+    "samples": 60,
+    "wall_seconds": 1200
+  }
+}

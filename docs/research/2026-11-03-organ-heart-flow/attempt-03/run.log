@@ -1,0 +1,25 @@
+CPU preflight passed; pressure=14.145665169; see /data/sunyunbo/.codex/worktrees/7c02/bloodSimulator/docs/research/2026-11-03-organ-heart-flow/attempt-03
+bounded bake: 512², 48000 steps, 60s warmup + 60s sampling, 60 samples; 1200s external limit
+offline LBM: preparing 384² domain, h=0.5, dt=0.0025
+offline LBM: solver ready after 0.173s
+offline LBM: warmup 150/1500; elapsed 11.401s
+offline LBM: warmup 300/1500; elapsed 22.386s
+offline LBM: warmup 450/1500; elapsed 33.445s
+offline LBM: warmup 600/1500; elapsed 44.279s
+offline LBM: warmup 750/1500; elapsed 55.425s
+offline LBM: warmup 900/1500; elapsed 66.857s
+offline LBM: warmup 1050/1500; elapsed 78.420s
+offline LBM: warmup 1200/1500; elapsed 89.831s
+offline LBM: warmup 1350/1500; elapsed 101.181s
+offline LBM: warmup 1500/1500; elapsed 112.524s
+offline LBM: sampling 150/1500; elapsed 123.711s
+offline LBM: sampling 300/1500; elapsed 135.195s
+offline LBM: sampling 450/1500; elapsed 146.503s
+offline LBM: sampling 600/1500; elapsed 158.341s
+offline LBM: sampling 750/1500; elapsed 169.562s
+offline LBM: sampling 900/1500; elapsed 180.765s
+offline LBM: sampling 1050/1500; elapsed 191.752s
+offline LBM: sampling 1200/1500; elapsed 202.982s
+offline LBM: sampling 1350/1500; elapsed 214.592s
+offline LBM: sampling 1500/1500; elapsed 225.496s
+asset roundtrip and original policy import passed
