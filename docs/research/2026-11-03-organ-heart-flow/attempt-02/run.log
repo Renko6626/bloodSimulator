@@ -1,0 +1,25 @@
+CPU preflight passed; pressure=14.145665169; see /data/sunyunbo/.codex/worktrees/7c02/bloodSimulator/docs/research/2026-11-03-organ-heart-flow/attempt-02
+bounded bake: 512², 48000 steps, 60s warmup + 60s sampling, 60 samples; 1200s external limit
+offline LBM: preparing 512² domain, h=0.5, dt=0.0025
+offline LBM: solver ready after 0.206s
+offline LBM: warmup 150/1500; elapsed 14.358s
+offline LBM: warmup 300/1500; elapsed 28.911s
+offline LBM: warmup 450/1500; elapsed 42.994s
+offline LBM: warmup 600/1500; elapsed 57.195s
+offline LBM: warmup 750/1500; elapsed 71.467s
+offline LBM: warmup 900/1500; elapsed 85.122s
+offline LBM: warmup 1050/1500; elapsed 98.870s
+offline LBM: warmup 1200/1500; elapsed 113.480s
+offline LBM: warmup 1350/1500; elapsed 127.354s
+offline LBM: warmup 1500/1500; elapsed 141.536s
+offline LBM: sampling 150/1500; elapsed 156.258s
+offline LBM: sampling 300/1500; elapsed 170.486s
+offline LBM: sampling 450/1500; elapsed 184.924s
+offline LBM: sampling 600/1500; elapsed 199.107s
+offline LBM: sampling 750/1500; elapsed 213.410s
+offline LBM: sampling 900/1500; elapsed 226.777s
+offline LBM: sampling 1050/1500; elapsed 241.681s
+offline LBM: sampling 1200/1500; elapsed 255.308s
+offline LBM: sampling 1350/1500; elapsed 270.106s
+offline LBM: sampling 1500/1500; elapsed 284.633s
+heart background: background field 0: static port velocity profile does not match planar analytic flow

@@ -1,0 +1,86 @@
+{
+  "source": "organ-heart.bfld",
+  "geometry_revision": 1,
+  "viscosity": 0.05000000074505806,
+  "reference_pressure": 14.145665168762207,
+  "max_scale": 1.149999976158142,
+  "origin": [
+    416.5,
+    584.5
+  ],
+  "spacing": 0.5,
+  "size": [
+    511,
+    511
+  ],
+  "ports": [
+    {
+      "name": "pulmonary_out",
+      "edge": 9,
+      "center": [
+        528.0,
+        592.0
+      ],
+      "signed_expected_flux": 48.0,
+      "integrated_flux": 48.422928957268596,
+      "max_vector_error": 2.204386016780698,
+      "vector_tolerance": 0.005509333333333333,
+      "max_transverse_velocity": 0.4873974323272705,
+      "wall_speeds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "pulmonary_in",
+      "edge": 16,
+      "center": [
+        562.0,
+        592.0
+      ],
+      "signed_expected_flux": -48.0,
+      "integrated_flux": -47.9443678855896,
+      "max_vector_error": 0.003647011259425832,
+      "vector_tolerance": 0.005509333333333333,
+      "max_transverse_velocity": 6.654483877355233e-05,
+      "wall_speeds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "systemic_in",
+      "edge": 48,
+      "center": [
+        432.0,
+        616.727272727
+      ],
+      "signed_expected_flux": -48.0,
+      "integrated_flux": -47.97537471233576,
+      "max_vector_error": 0.16990372336136236,
+      "vector_tolerance": 0.005509333333333333,
+      "max_transverse_velocity": 0.008549005290223982,
+      "wall_speeds": [
+        0.01952378305575856,
+        0.013917174997229251
+      ]
+    },
+    {
+      "name": "systemic_out",
+      "edge": 37,
+      "center": [
+        656.0,
+        620.24
+      ],
+      "signed_expected_flux": 48.0,
+      "integrated_flux": 47.992862817844575,
+      "max_vector_error": 1.957537993501757,
+      "vector_tolerance": 0.005509333333333333,
+      "max_transverse_velocity": 1.8298935113748929,
+      "wall_speeds": [
+        0.10113762462331967,
+        0.05008577852097509
+      ]
+    }
+  ]
+}

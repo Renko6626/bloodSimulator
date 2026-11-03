@@ -58,6 +58,78 @@
     "checks/lbm-tests.log": {
       "bytes": 127,
       "sha256": "1d375ab9092270af98310012c433e114d4334b3b3d63b4cb4bd4c1f206c17ca0"
+    },
+    "attempt-02/inspect_field.py": {
+      "bytes": 4357,
+      "sha256": "90ecee9cd757177815cc8b729203c62e58ceae0ec6d3d08238f84c35e25c6540"
+    },
+    "attempt-02/job-source.rs": {
+      "bytes": 13153,
+      "sha256": "64b642993111f6f1375853290ff190d32e0412fbb7ef1a59d19884e0ff7e7618"
+    },
+    "attempt-02/lbm-bake-source.rs": {
+      "bytes": 10211,
+      "sha256": "d90128efd9c7e1e0ba94e727af94fee5516a6e2cde8ca60be1bf15632ce0297f"
+    },
+    "attempt-02/lbm-geometry-source.rs": {
+      "bytes": 17068,
+      "sha256": "789647cf9fda9d8a3fd69021b6e437d636f88e3764fe32ddcb89af7929212f94"
+    },
+    "attempt-02/lifecycle.log": {
+      "bytes": 107,
+      "sha256": "09bc7ae2834702a7ffd9e83e34886f136d4329e40df9ef518c64e6ab98b2fd01"
+    },
+    "attempt-02/mean-speed.png": {
+      "bytes": 452053,
+      "sha256": "c69ce47754d072bfba359fbded9d56b176bac0f5843633df1b56d6b560e63587"
+    },
+    "attempt-02/narrow-port-probe.json": {
+      "bytes": 1202,
+      "sha256": "802e59a2fc07d441f360be120caffa76c8bce71a8d35a69883240c3600a13b8f"
+    },
+    "attempt-02/organ-heart.bfld": {
+      "bytes": 2350205,
+      "sha256": "982dcec420cc18a21f8e34c97f48ba29ea124de9f6678c9b3b4323a68fddcc53"
+    },
+    "attempt-02/port-inspection.json": {
+      "bytes": 1968,
+      "sha256": "8c3119aaec9770b9df7a476a1cb267b8cc1a4ed0fd2fa086316eceefed6f6d04"
+    },
+    "attempt-02/port-inspection.stdout.json": {
+      "bytes": 1968,
+      "sha256": "8c3119aaec9770b9df7a476a1cb267b8cc1a4ed0fd2fa086316eceefed6f6d04"
+    },
+    "attempt-02/port-profiles.png": {
+      "bytes": 240755,
+      "sha256": "a51dd7732c0b2d56d526cd1057b225f3de675d595fc081fb1075b3da42f6d619"
+    },
+    "attempt-02/raw-cell-centered.bfld": {
+      "bytes": 2359412,
+      "sha256": "70b1b2d353ae95155740eae394771f2f4f825d8d81effd1e3b6bb6281ba0f5b8"
+    },
+    "attempt-02/report.txt": {
+      "bytes": 8892,
+      "sha256": "09e3241cc927b5d607de5c0e8f0a82f21fe789b120eb01e92b24cb602818171e"
+    },
+    "attempt-02/run.log": {
+      "bytes": 1405,
+      "sha256": "8c3af6934d0cd30e35c07145f7a1add7b63a02b3ed37aef4a7e4718a7534079c"
+    },
+    "attempt-02/run.sh": {
+      "bytes": 961,
+      "sha256": "3187b7aed27288a7eae76d37a3a70669cb193aaade9d49b72a77169941272f86"
+    },
+    "attempt-02/source.json": {
+      "bytes": 655,
+      "sha256": "e0e46b889551b9b32020bb7bfd0668e6bb1f6d90623a6053ac2c919bd9a15621"
     }
+  },
+  "attempt_02": {
+    "source_commit": "ea3e812",
+    "command_exit_code": 1,
+    "bake_wall_seconds": 284.648615679,
+    "steps": 48000,
+    "samples": 60,
+    "import": "rejected original static port profile validation"
   }
 }

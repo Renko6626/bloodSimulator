@@ -1,0 +1,49 @@
+{
+  "purpose": "Read-only alternative cut positions in the same existing velocity asset; no rebake or field modification",
+  "ports": [
+    {
+      "name": "systemic_in",
+      "center": [
+        488.0,
+        672.0
+      ],
+      "diameter": 10.0,
+      "max_vector_error": 2.268022964759051,
+      "vector_tolerance": 0.07272100000000001,
+      "max_transverse_speed": 0.602360725402832
+    },
+    {
+      "name": "pulmonary_out",
+      "center": [
+        528.0,
+        672.0
+      ],
+      "diameter": 9.0,
+      "max_vector_error": 0.23288936803606425,
+      "vector_tolerance": 0.09956643209876542,
+      "max_transverse_speed": 0.031217046082019806
+    },
+    {
+      "name": "pulmonary_in",
+      "center": [
+        562.0,
+        672.0
+      ],
+      "diameter": 10.0,
+      "max_vector_error": 1.0929146758098658,
+      "vector_tolerance": 0.07272100000000001,
+      "max_transverse_speed": 0.06689782440662384
+    },
+    {
+      "name": "systemic_out",
+      "center": [
+        600.0,
+        672.0
+      ],
+      "diameter": 10.0,
+      "max_vector_error": 0.6552974987304356,
+      "vector_tolerance": 0.07272100000000001,
+      "max_transverse_speed": 0.1668698787689209
+    }
+  ]
+}

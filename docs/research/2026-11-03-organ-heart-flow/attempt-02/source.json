@@ -1,0 +1,17 @@
+{
+  "source_commit": "ea3e8127f9bce7ab8e07bb610c3a87749d9137d7",
+  "binary_sha256": "f73d9a4c22d7b3ebaa5208e14889a0ec2d6e6b6fa6721ec34dd2a05c4e882bb0",
+  "source_sha256": {
+    "job-source.rs": "64b642993111f6f1375853290ff190d32e0412fbb7ef1a59d19884e0ff7e7618",
+    "lbm-bake-source.rs": "d90128efd9c7e1e0ba94e727af94fee5516a6e2cde8ca60be1bf15632ce0297f",
+    "lbm-geometry-source.rs": "789647cf9fda9d8a3fd69021b6e437d636f88e3764fe32ddcb89af7929212f94"
+  },
+  "authorized_retry": "2026-11-03 user: ok 跑一次吧。",
+  "budget": {
+    "steps": 48000,
+    "warmup_seconds": 60,
+    "sample_seconds": 60,
+    "samples": 60,
+    "wall_seconds": 1200
+  }
+}
