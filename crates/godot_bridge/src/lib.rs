@@ -83,6 +83,17 @@ impl BloodLab {
     }
 
     #[func]
+    fn use_organ_world(&mut self) -> bool {
+        let result =
+            Simulation::try_new_organ_world(self.simulation.config.clone()).map(|simulation| {
+                self.simulation = simulation;
+                self.stream_world = true;
+                self.validation_initial_centers = None;
+            });
+        self.record_result(result)
+    }
+
+    #[func]
     fn use_local_world(&mut self) {
         self.simulation = Simulation::new_local_world(self.simulation.config.clone());
         self.validation_initial_centers = None;
@@ -156,7 +167,7 @@ impl BloodLab {
             self.simulation.config.white_cells.count = 0;
             0.0
         } else {
-            pressure.clamp(0.0, 30.0)
+            pressure.clamp(0.0, self.pressure_limit())
         };
         self.simulation.config.robot_speed = robot_speed.clamp(1.0, 8.0);
         self.simulation.config.cell_drag = cell_drag.clamp(0.0, 40.0);
@@ -342,6 +353,7 @@ impl BloodLab {
             "steps" => state.steps as i64, "time" => state.time,
             "paused" => state.paused, "solve_ms" => state.solve_ms,
             "pressure_drop" => state.flow.pressure_drop,
+            "pressure_max" => self.pressure_limit(),
             "flow_rate" => state.flow.rate,
             "mean_speed" => state.flow.mean_speed,
             "resistance" => state.flow.resistance,
@@ -352,6 +364,13 @@ impl BloodLab {
 }
 
 impl BloodLab {
+    fn pressure_limit(&self) -> f32 {
+        self.simulation
+            .world_map()
+            .and_then(|map| map.fluid.as_ref())
+            .map_or(30., |definition| definition.max_base_pressure)
+    }
+
     fn fail(&mut self, error: String) {
         godot_error!("Simulation error: {}", error);
         self.simulation.set_paused(true);

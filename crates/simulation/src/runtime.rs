@@ -77,7 +77,16 @@ impl Environment {
     fn summary(&self) -> Flow {
         match self {
             Self::Loop { flow, .. } => *flow,
-            Self::World { flow, .. } => flow.summary,
+            Self::World { map, flow, .. } => {
+                let mut summary = flow.summary;
+                if map.fluid.is_some() {
+                    summary.mean_speed = flow.rates[map.pump_edge]
+                        / (2.
+                            * map.edges[map.pump_edge].half_width
+                            * crate::background::EQUIVALENT_DEPTH);
+                }
+                summary
+            }
         }
     }
 

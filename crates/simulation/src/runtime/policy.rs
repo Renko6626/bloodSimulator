@@ -52,6 +52,21 @@ fn origin(center: ChunkId) -> blood_fluid_gpu::lbm::WindowOrigin {
 }
 
 impl Simulation {
+    pub fn try_new_organ_world(mut config: Config) -> Result<Self, String> {
+        let field = crate::map::fluid_asset::read_field(
+            &include_bytes!(concat!(
+                env!("CARGO_MANIFEST_DIR"),
+                "/../../assets/flow/organ-heart.bfld"
+            ))[..],
+        )?;
+        config.pressure = field.reference_pressure;
+        config.cell_count = 0;
+        config.white_cells.count = 0;
+        let mut map = MapDefinition::organ_world();
+        map.fluid = Some(crate::map::organ_flow::definition(field));
+        Self::try_new_policy_world(config, map)
+    }
+
     pub fn try_new_policy_world(config: Config, map: MapDefinition) -> Result<Self, String> {
         Self::new_policy_world(
             config,
@@ -420,5 +435,38 @@ mod tests {
         );
         assert!(sim.lbm_stats().is_none());
         assert!(!sim.policy_fluid_status().unwrap().window_active);
+    }
+    #[test]
+    fn organ_background_entry_loads_without_gpu_and_resets_same_world() {
+        let mut sim = Simulation::try_new_organ_world(Config::default()).unwrap();
+        assert!(!sim.is_geometry_preview());
+        let before = sim.snapshot();
+        assert!(before.cells.is_empty());
+        assert_eq!(before.immunity.white_bodies, 0);
+        assert!((before.flow.rate - 48.).abs() < 1e-3);
+        assert!((before.flow.mean_speed - 4.8).abs() < 1e-4);
+        assert_eq!(sim.world_map().unwrap().chambers.len(), 4);
+        assert!(!sim.policy_fluid_status().unwrap().window_active);
+        // The actual declared seam samples agree across precomputed/analytic sources.
+        let upper = sim.environment.velocity_at(Vector::new(488., 655.999));
+        let lower = sim.environment.velocity_at(Vector::new(488., 656.001));
+        assert!(
+            (upper - lower).length() < 0.02,
+            "seam {upper:?} -> {lower:?}"
+        );
+        sim.set_paused(true);
+        sim.config.pressure *= 0.5;
+        let pressure = sim.config.pressure;
+        sim.try_single_step(MoveInput::default()).unwrap();
+        assert!(sim.snapshot().time > 0.);
+        sim.try_reset().unwrap();
+        let reset = sim.snapshot();
+        assert!(reset.paused);
+        assert_eq!(reset.time, 0.);
+        assert_eq!(sim.config.pressure, pressure);
+        assert!(reset.cells.is_empty());
+        assert_eq!(reset.immunity.white_bodies, 0);
+        assert_eq!(sim.world_map().unwrap().edges.len(), 69);
+        assert!((reset.flow.rate - 24.).abs() < 1e-3);
     }
 }

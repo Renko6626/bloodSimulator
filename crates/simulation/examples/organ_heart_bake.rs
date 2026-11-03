@@ -122,7 +122,8 @@ mod job {
             return Ok(());
         }
         println!(
-            "bounded bake: 512², 48000 steps, 60s warmup + 60s sampling, 60 samples; 1200s external limit"
+            "bounded bake: {}², 48000 steps, 60s warmup + 60s sampling, 60 samples; 1200s external limit",
+            domain.cells_per_side
         );
         let profiles: Vec<_> = raster
             .openings

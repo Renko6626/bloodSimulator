@@ -15,6 +15,7 @@ const STATS_INTERVAL_USEC := 100_000
 var last_stats_update_usec := -STATS_INTERVAL_USEC
 
 var geometry_preview := false
+var background_only := false
 var subtitle: Label
 var map_title: Label
 var map_description: Label
@@ -128,7 +129,7 @@ func update_state(state: Dictionary) -> void:
 	var streaming: Dictionary = state.get("streaming", {})
 	if not streaming.is_empty():
 		stats.text += "\nActive / dormant       %d / %d\nLoaded chunks          %d" % [streaming.active_cells, streaming.dormant_cells, streaming.loaded_chunks]
-	if geometry_preview:
+	if geometry_preview or background_only:
 		stats.text = "Cells                  %d\nWhite cells            %d\nTime                   %.1f s\nSolve / step           %.2f ms\n\nPressure drop          %.2f\nPump flow              %.2f\nMean speed             %.2f\nLoaded chunks          %d" % [state.cells.size(), immunity.white_bodies, state.time, state.solve_ms, state.pressure_drop, state.flow_rate, state.mean_speed, streaming.get("loaded_chunks", 0)]
 	var lines := PackedStringArray()
 	for i in state.branch_flows.size():
@@ -208,3 +209,15 @@ func _set_geometry_preview(title: String, heading: String, description: String) 
 	drag.editable = false
 	flow_toggle.set_pressed_no_signal(false)
 	flow_toggle.disabled = true
+
+
+func set_organ_world(initial_pressure: float, maximum: float) -> void:
+	background_only = true
+	subtitle.text = "Organ background flow"
+	map_title.text = "ORGAN MAP"
+	map_description.text = "Heart and vessel flow\nNo cells"
+	help.text = "WASD: move    Space: pause    N: step    R: reset    F: flow    C: collision"
+	pressure.max_value = maximum
+	pressure.step = 0.01
+	set_pressure_display(initial_pressure)
+	drag.editable = false
