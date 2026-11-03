@@ -63,6 +63,19 @@ pub fn bake_mean(
     geometry: WindowGeometry,
     schedule: BakeSchedule,
 ) -> LbmResult<BakedFlow> {
+    bake_mean_with_profiles(domain, config, initial, geometry, None, schedule)
+}
+
+/// The supplied profiles are outward normal velocities at each opening cell.
+/// They use the same discrete-flux contract as LbmDomain::set_opening_profiles.
+pub fn bake_mean_with_profiles(
+    domain: DomainSpec,
+    config: WindowConfig,
+    initial: InitialField,
+    geometry: WindowGeometry,
+    profiles: Option<&[Vec<f32>]>,
+    schedule: BakeSchedule,
+) -> LbmResult<BakedFlow> {
     let samples = schedule.sample_count()?;
     let started = Instant::now();
     eprintln!(
@@ -70,6 +83,15 @@ pub fn bake_mean(
         domain.cells_per_side, domain.spacing, config.dt
     );
     let mut solver = LbmDomain::new(domain, config, initial, geometry)?;
+    if let Some(profiles) = profiles {
+        let targets: Vec<_> = solver
+            .geometry()
+            .openings
+            .iter()
+            .map(|o| o.outward_flow)
+            .collect();
+        solver.set_opening_profiles(&targets, profiles)?;
+    }
     eprintln!(
         "offline LBM: solver ready after {:.3}s",
         started.elapsed().as_secs_f64()

@@ -869,3 +869,65 @@ fn fixed_domain_validates_sizes_and_world_range() {
     );
     assert!(matches!(result, Err(message) if message.contains("buffer exceeds")));
 }
+
+#[test]
+#[ignore = "explicit software-adapter functional diagnostic"]
+fn bake_applies_supplied_profile_before_advancing() {
+    use super::bake::{BakeSchedule, bake_mean_with_profiles};
+    let n = 16;
+    let solid: Vec<_> = (0..n)
+        .flat_map(|y| (0..n).map(move |_| !(4..12).contains(&y)))
+        .collect();
+    let initial = InitialField {
+        density: vec![1.; n * n],
+        velocity: solid
+            .iter()
+            .map(|&s| if s { [0.; 2] } else { [0.1, 0.] })
+            .collect(),
+    };
+    let opening = |side, flow| OpeningSpec {
+        side,
+        cells: 4..12,
+        direction: [1., 0.],
+        outward_flow: flow,
+        background_speed: 0.1,
+    };
+    let geometry = WindowGeometry {
+        solid,
+        openings: vec![
+            opening(WindowSide::Left, -0.4),
+            opening(WindowSide::Right, 0.4),
+        ],
+    };
+    let profiles = vec![vec![-0.1; 8], vec![0.1; 8]];
+    let result = bake_mean_with_profiles(
+        DomainSpec {
+            origin: [0.; 2],
+            cells_per_side: n as u32,
+            spacing: 0.5,
+        },
+        WindowConfig {
+            dt: 0.05,
+            viscosity: 0.05,
+            allow_software: true,
+        },
+        initial,
+        geometry,
+        Some(&profiles),
+        BakeSchedule {
+            steps_per_frame: 2,
+            warmup_frames: 2,
+            sample_frames: 4,
+            sample_stride: 1,
+        },
+    )
+    .unwrap();
+    for x in [0, n - 1] {
+        let velocity = result.velocity[7 * n + x];
+        assert!(
+            (velocity[0] - 0.1).abs() < 1e-4,
+            "actual supplied boundary velocity: {velocity:?}"
+        );
+        assert!(velocity[1].abs() < 1e-4);
+    }
+}

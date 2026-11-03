@@ -2,6 +2,7 @@
 mod chamber;
 mod heart;
 mod organ;
+pub mod organ_flow;
 pub use chamber::ChamberGeometry;
 pub use heart::heart_preview_route;
 

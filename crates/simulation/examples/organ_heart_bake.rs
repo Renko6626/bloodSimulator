@@ -17,7 +17,7 @@ fn main() {
 mod job {
     use blood_fluid_gpu::lbm::{
         DomainSpec, WindowConfig, WindowGeometry, WindowSide,
-        bake::{BakeSchedule, bake_mean},
+        bake::{BakeSchedule, bake_mean_with_profiles},
     };
     use rapier2d::prelude::Vector;
     use simulation::{
@@ -25,13 +25,12 @@ mod job {
         circulation::graph::GraphNetwork,
         lbm_geometry::rasterize_domain,
         map::{
-            ChunkId, MapDefinition,
+            MapDefinition,
             fluid_asset::{read_field, write_field},
-            fluid_policy::{
-                BackgroundSource, ChunkFluidPolicy, FieldId, FieldPort, MapFluidDefinition,
-            },
+            fluid_policy::FieldPort,
+            organ_flow,
         },
-        offline_lbm::{resample_precomputed_field, to_precomputed_field},
+        offline_lbm::{to_boundary_aligned_field, to_precomputed_field},
     };
     use std::{
         collections::{BTreeMap, VecDeque},
@@ -80,32 +79,13 @@ mod job {
     ) -> Result<(), String> {
         let mut map = MapDefinition::organ_world();
         let network = GraphNetwork::new(&map, 0.05);
-        let pressure = 48. / network.solve(1.).rates[map.pump_edge];
+        let pressure = organ_flow::REFERENCE_RATE / network.solve(1.).rates[map.pump_edge];
         let flow = network.solve(pressure);
-        let ports: Vec<_> = [
-            ([528., 592.], [0., -1.]),
-            ([562., 592.], [0., -1.]),
-            ([432., 616.7273], [-1., 0.]),
-            ([656., 620.24], [1., 0.]),
-        ]
-        .into_iter()
-        .map(|(point, outward)| {
-            let point = Vector::from_array(point);
-            let edge = map.nearest_edge(point);
-            let projection = map.project_edge(edge, point);
-            let sign = projection.tangent.dot(Vector::from_array(outward)).signum();
-            FieldPort {
-                edge,
-                along: projection.along,
-                outward_sign: sign,
-                reference_flux: flow.rates[edge] * sign,
-            }
-        })
-        .collect();
+        let ports = organ_flow::ports(&map, &flow.rates)?;
         let domain = DomainSpec {
-            origin: [416., 584.],
-            cells_per_side: 512,
-            spacing: 0.5,
+            origin: organ_flow::DOMAIN_ORIGIN,
+            cells_per_side: organ_flow::DOMAIN_CELLS,
+            spacing: organ_flow::SPACING,
         };
         let config = WindowConfig {
             dt: 0.0025,
@@ -118,7 +98,7 @@ mod job {
             sample_frames: 1500,
             sample_stride: 25,
         };
-        writeln!(report, "map=production organ_world; no geometry changes\nreference_Q=48\nreference_pressure={pressure:.9}\ndomain={domain:?}\nconfig={config:?}\nschedule={schedule:?}\nwall_clock_limit_seconds=1200 (external timeout)\nlabels=[432,592]..[656,848]\nports={ports:#?}").map_err(|e| e.to_string())?;
+        writeln!(report, "map=production organ_world; no geometry changes\nreference_Q=48\nreference_pressure={pressure:.9}\ndomain={domain:?}\nconfig={config:?}\nschedule={schedule:?}\nwall_clock_limit_seconds=1200 (external timeout)\nlabels=[464,656]..[608,848]\nports={ports:#?}").map_err(|e| e.to_string())?;
         report.flush().map_err(|e| e.to_string())?;
         source_boundary(report, &map, &ports)?;
         let raster = rasterize_domain(&map, &flow, domain)?;
@@ -144,46 +124,35 @@ mod job {
         println!(
             "bounded bake: 512², 48000 steps, 60s warmup + 60s sampling, 60 samples; 1200s external limit"
         );
-        let baked = bake_mean(domain, config, raster.initial, raster.geometry, schedule)?;
+        let profiles: Vec<_> = raster
+            .openings
+            .iter()
+            .map(|o| o.normal_velocity.clone())
+            .collect();
+        writeln!(report, "prescribed_opening_profiles={profiles:?}").map_err(|e| e.to_string())?;
+        let baked = bake_mean_with_profiles(
+            domain,
+            config,
+            raster.initial,
+            raster.geometry,
+            Some(&profiles),
+            schedule,
+        )?;
         writeln!(report, "bake_report={:#?}", baked.report).map_err(|e| e.to_string())?;
         report.flush().map_err(|e| e.to_string())?;
-        let raw = to_precomputed_field(&baked, 1, pressure, 1.15, ports)?;
+        let raw = to_precomputed_field(&baked, 1, pressure, 1.15, ports.clone())?;
         write_field(
             File::create(output.join("raw-cell-centered.bfld")).map_err(|e| e.to_string())?,
             &raw,
         )?;
-        let field = resample_precomputed_field(
-            &map,
-            &raw,
-            raw.origin.map(|x| x + domain.spacing * 0.5),
-            domain.spacing,
-            [domain.cells_per_side as usize - 1; 2],
-        )?;
+        let field = to_boundary_aligned_field(&map, &flow, &baked, 1, pressure, 1.15, ports)?;
         let asset = output.join("organ-heart.bfld");
         write_field(File::create(&asset).map_err(|e| e.to_string())?, &field)?;
         let loaded = read_field(File::open(asset).map_err(|e| e.to_string())?)?;
         if loaded.velocity != field.velocity || loaded.fluid != field.fluid {
             return Err("asset roundtrip changed velocity or mask".into());
         }
-        let chunks = (37..53)
-            .flat_map(|y| {
-                (27..41).map(move |x| {
-                    (
-                        ChunkId { x, y },
-                        ChunkFluidPolicy {
-                            background: BackgroundSource::Precomputed(FieldId(0)),
-                            allow_lbm: false,
-                        },
-                    )
-                })
-            })
-            .collect::<BTreeMap<_, _>>();
-        map.fluid = Some(MapFluidDefinition {
-            geometry_revision: 1,
-            max_base_pressure: pressure,
-            chunks,
-            fields: vec![loaded],
-        });
+        map.fluid = Some(organ_flow::definition(loaded));
         let mut sim_config = Config {
             pressure,
             pulse_hz: 0.,
@@ -208,9 +177,10 @@ mod job {
         map: &MapDefinition,
         ports: &[FieldPort],
     ) -> Result<(), String> {
+        let [lo, hi] = [organ_flow::SOURCE_MIN, organ_flow::SOURCE_MAX];
         for chamber in &map.chambers {
             let [min, max] = chamber.bounds();
-            if min[0] < 432. || max[0] > 656. || min[1] < 592. || max[1] > 848. {
+            if min[0] < lo[0] || max[0] > hi[0] || min[1] < lo[1] || max[1] > hi[1] {
                 return Err(format!(
                     "background rectangle cuts chamber {}",
                     chamber.name
@@ -225,10 +195,10 @@ mod job {
         }
         let mut hits = BTreeMap::new();
         for (a, b, outward) in [
-            ([432., 592.], [432., 848.], [-1., 0.]),
-            ([656., 592.], [656., 848.], [1., 0.]),
-            ([432., 592.], [656., 592.], [0., -1.]),
-            ([432., 848.], [656., 848.], [0., 1.]),
+            ([lo[0], lo[1]], [lo[0], hi[1]], [-1., 0.]),
+            ([hi[0], lo[1]], [hi[0], hi[1]], [1., 0.]),
+            ([lo[0], lo[1]], [hi[0], lo[1]], [0., -1.]),
+            ([lo[0], hi[1]], [hi[0], hi[1]], [0., 1.]),
         ] {
             let a = Vector::from_array(a);
             let b = Vector::from_array(b);
