@@ -45,16 +45,24 @@ impl From<SoftBodyHandle> for CellBody {
 /// Biological state is independent of the Rapier body and its current shape.
 #[derive(Clone, Debug, PartialEq)]
 pub(crate) struct Cell {
-    pub id: u64,
+    pub core: crate::entity::EntityCore,
     pub body: CellBody,
     pub unload_policy: UnloadPolicy,
-    pub health: f32,
-    pub max_health: f32,
-    pub dead_age: Option<f32>,
-    /// Only white cells carry active behavior. Ordinary red cells remain passive.
-    pub white: Option<crate::white_cell::WhiteCell>,
+    pub species: crate::Species,
+    pub behavior: crate::pathogen::Behavior,
 }
 
+impl std::ops::Deref for Cell {
+    type Target = crate::entity::EntityCore;
+    fn deref(&self) -> &Self::Target {
+        &self.core
+    }
+}
+impl std::ops::DerefMut for Cell {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.core
+    }
+}
 impl Cell {
     pub fn new(
         id: u64,
@@ -63,13 +71,11 @@ impl Cell {
         unload_policy: UnloadPolicy,
     ) -> Self {
         Self {
-            id,
+            core: crate::entity::EntityCore::new(id, health),
             body: body.into(),
             unload_policy,
-            health,
-            max_health: health,
-            dead_age: None,
-            white: None,
+            species: crate::Species::RedCell,
+            behavior: crate::pathogen::Behavior::Passive,
         }
     }
 
@@ -97,11 +103,7 @@ impl Cell {
         let CellBody::Dormant(state) = &self.body else {
             return;
         };
-        let radius = if self.white.is_some() {
-            config.white_cells.radius
-        } else {
-            config.cell_radius
-        };
+        let radius = self.species.radius(config);
         let handle = insert_with_radius(physics, state.center(), radius, config);
         let body = &mut physics.soft_bodies[handle];
         for (i, (&position, &velocity)) in state.positions.iter().zip(&state.velocities).enumerate()
@@ -111,15 +113,8 @@ impl Cell {
         }
         self.apply_corpse_material(body, config);
         self.body = CellBody::Active(handle);
-    }
-
-    pub fn damage(&mut self, amount: f32) {
-        if self.dead_age.is_some() {
-            return;
-        }
-        self.health = (self.health - amount).max(0.0);
-        if self.health == 0.0 {
-            self.dead_age = Some(0.0);
+        if let Some(brain) = self.behavior.as_mut() {
+            brain.contact_time = 0.0;
         }
     }
 

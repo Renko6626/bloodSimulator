@@ -36,8 +36,9 @@ pub struct Snapshot {
 #[derive(Clone, Debug, PartialEq)]
 pub struct CellStatus {
     pub id: u64,
-    pub white: bool,
-    pub pursuing: bool,
+    pub species: crate::Species,
+    pub target_position: Option<[f32; 2]>,
+    pub targets_robot: bool,
     pub contact_progress: f32,
     pub call_progress: f32,
     pub health: f32,
@@ -51,7 +52,8 @@ pub struct ImmunitySnapshot {
     pub alertness: f32,
     pub robot_health: f32,
     pub robot_max_health: f32,
-    pub white_bodies: usize,
+    pub immune_bodies: usize,
+    pub pathogen_bodies: usize,
     pub arrival: Option<ArrivalSnapshot>,
 }
 

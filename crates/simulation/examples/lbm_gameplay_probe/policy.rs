@@ -80,7 +80,7 @@ pub fn run(args: &[String]) -> Result<(), String> {
                         l.origin_blocks[1].to_string(),
                     )
                 });
-            writeln!(csv,"{frame},{},{},{},{},{},{},{},{},{},{},{ox},{oy},{},{marker},{speed},{},{velocity_delta},{},{},{},{},{quantity_error},{},{},{},{},{}",snapshot.time,input.x,input.y,snapshot.robot[0],snapshot.robot[1],start.x,start.y,policy.center.x,policy.center.y,policy.window_active,policy.activation,speed-speed_previous,sample.local_weight,p.total_count,p.detailed_count,p.abstract_count,snapshot.cell_status.iter().filter(|s|s.white).count(),q.area_ratio_min,q.area_ratio_max,q.node_wall_max,q.robot_wall).map_err(|e|e.to_string())?;
+            writeln!(csv,"{frame},{},{},{},{},{},{},{},{},{},{},{ox},{oy},{},{marker},{speed},{},{velocity_delta},{},{},{},{},{quantity_error},{},{},{},{},{}",snapshot.time,input.x,input.y,snapshot.robot[0],snapshot.robot[1],start.x,start.y,policy.center.x,policy.center.y,policy.window_active,policy.activation,speed-speed_previous,sample.local_weight,p.total_count,p.detailed_count,p.abstract_count,snapshot.cell_status.iter().filter(|s|s.species.is_immune()).count(),q.area_ratio_min,q.area_ratio_max,q.node_wall_max,q.robot_wall).map_err(|e|e.to_string())?;
             fixture::guard(q).map_err(|e| format!("frame {frame}: {e}"))?;
             if quantity_error > 1e-6 {
                 return Err(format!("frame {frame}: quantity ledger mismatch {p:?}"));

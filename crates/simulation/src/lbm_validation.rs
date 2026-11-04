@@ -192,11 +192,10 @@ pub fn quality(
         if (center - robot).length() <= 8. {
             result.nearby_cells += 1;
         }
-        let radius = if snapshot.cell_status.get(index).is_some_and(|s| s.white) {
-            config.white_cells.radius
-        } else {
-            config.cell_radius
-        };
+        let radius = snapshot
+            .cell_status
+            .get(index)
+            .map_or(config.cell_radius, |s| s.species.radius(config));
         let rest = 0.5
             * config.cell_vertices as f32
             * radius.powi(2)

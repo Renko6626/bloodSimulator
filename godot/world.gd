@@ -30,6 +30,7 @@ var screenshot_started := false
 var heart_preview := false
 var organ_preview := false
 var organ_world := false
+var combat_preview := false
 var geometry_preview := false
 var stream_world := false
 var previous_centers: Array[Vector2] = []
@@ -39,6 +40,12 @@ var previous_centers: Array[Vector2] = []
 func _ready() -> void:
 	hud = $HUDLayer/HUD
 	var args := OS.get_cmdline_user_args()
+	combat_preview = args.has("--combat-preview")
+	if combat_preview:
+		for arg in args:
+			if arg in ["--organ-world", "--organ-preview", "--heart-preview", "--local-lbm", "--local-stokes", "--lbm-validation", "--local-cells", "--stream-world"] or arg.begins_with("--lbm-"):
+				_startup_error("--combat-preview uses the full small world and analytic flow; choose one world mode")
+				return
 	heart_preview = args.has("--heart-preview")
 	organ_preview = args.has("--organ-preview")
 	organ_world = args.has("--organ-world")
@@ -101,7 +108,10 @@ func _ready() -> void:
 		return
 	simulation.configure_local_cells(local_cells)
 	simulation.configure_stream_world(stream_world)
-	if heart_preview:
+	if combat_preview:
+		simulation.use_combat_preview()
+		DisplayServer.window_set_title("Blood Simulator - Combat Preview")
+	elif heart_preview:
 		simulation.use_heart_preview()
 		DisplayServer.window_set_title("Blood Simulator - Heart Preview")
 		hud.set_heart_preview()
@@ -323,19 +333,44 @@ func _draw() -> void:
 		var status: Dictionary = state.cell_status[i]
 		var color := Color("746879") if status.dead else (Color("bc754e") if status.id == 0 else Color("ae4c5b"))
 		var inner_color := Color("4a4650") if status.dead else CellMesh.INNER_COLOR
-		if status.white and not status.dead:
-			color = Color("e2b68e") if status.pursuing else Color("c8d1bd")
-			inner_color = Color("7b8778")
+		var immune: bool = status.species in ["neutrophil", "macrophage"]
+		var pathogen: bool = status.species in ["motile_bacterium", "encapsulated_bacterium"]
+		var center := cell_bounds.get_center() * SCALE
+		if not status.dead:
+			if immune:
+				color = Color("e2b68e") if status.targets_robot else Color("c8d1bd")
+				inner_color = Color("7b8778") if status.species == "neutrophil" else Color("655772")
+			elif pathogen:
+				color = Color("a4bf65") if status.species == "motile_bacterium" else Color("76b9b1")
+				inner_color = Color("435b45")
 		if not drawing.update(cell, SCALE, color, inner_color):
 			continue
 		draw_mesh(drawing.mesh, null, Transform2D.IDENTITY, Color(1.0, 1.0, 1.0, status.opacity))
 		var outline := Color("9b899e") if status.dead else Color("d28189")
-		if status.white and not status.dead:
+		if immune and not status.dead:
 			outline = Color("e3e6d9").lerp(Color("ed795d"), status.contact_progress)
+		elif pathogen and not status.dead:
+			outline = Color("d2e4ab")
 		outline.a = status.opacity
 		draw_polyline(drawing.closed_contour, outline, 1.0, true)
-		if status.white and not status.dead and status.call_progress > 0.0:
-			var center := cell_bounds.get_center() * SCALE
+		if status.species == "encapsulated_bacterium":
+			var capsule := PackedVector2Array()
+			for point in drawing.closed_contour:
+				capsule.append(point + (point - center).normalized() * 3.0)
+			draw_polyline(capsule, Color(0.6, 0.91, 0.85, status.opacity * 0.7), 1.5, true)
+		if immune and not status.dead:
+			if status.species == "macrophage":
+				draw_arc(center, 8.0, -2.2, 2.2, 16, Color("c4a8d7"), 4.0, true)
+			else:
+				for offset in [Vector2(-5, 0), Vector2(0, -3), Vector2(5, 0)]:
+					draw_circle(center + offset, 3.0, Color("8f7198"))
+		if not status.dead and status.contact_progress > 0.0 and status.target_position != null:
+			var direction: Vector2 = status.target_position * SCALE - center
+			var angle := direction.angle()
+			var radius := maxf(cell_bounds.size.x, cell_bounds.size.y) * SCALE * 0.5 + 3.0
+			var prepare_color := Color("ef765e") if status.targets_robot else Color("f0d783")
+			draw_arc(center, radius, angle - PI * 0.4, angle - PI * 0.4 + PI * 0.8 * status.contact_progress, 24, prepare_color, 3.0, true)
+		if immune and not status.dead and status.call_progress > 0.0:
 			var radius := maxf(cell_bounds.size.x, cell_bounds.size.y) * SCALE * 0.5 + 5.0
 			draw_arc(center, radius, -PI * 0.5, -PI * 0.5 + TAU * status.call_progress, 32, Color("f0cf78"), 2.0, true)
 		if not status.dead and status.health < status.max_health:

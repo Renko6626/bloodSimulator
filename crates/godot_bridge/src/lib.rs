@@ -67,6 +67,14 @@ impl BloodLab {
     }
 
     #[func]
+    fn use_combat_preview(&mut self) {
+        self.stream_world = false;
+        self.simulation = Simulation::new_combat_preview(self.simulation.config.clone());
+        self.validation_initial_centers = None;
+        self.error = None;
+    }
+
+    #[func]
     fn use_heart_preview(&mut self) {
         self.stream_world = true;
         self.simulation = Simulation::new_heart_preview(self.simulation.config.clone());
@@ -254,8 +262,15 @@ impl BloodLab {
             .map(|cell| {
                 vdict! {
                     "id" => cell.id as i64,
-                    "white" => cell.white,
-                    "pursuing" => cell.pursuing,
+                    "species" => match cell.species {
+                        simulation::Species::RedCell => "red_cell",
+                        simulation::Species::Neutrophil => "neutrophil",
+                        simulation::Species::Macrophage => "macrophage",
+                        simulation::Species::MotileBacterium => "motile_bacterium",
+                        simulation::Species::EncapsulatedBacterium => "encapsulated_bacterium",
+                    },
+                    "target_position" => &cell.target_position.map_or(Variant::nil(), |p|Vector2::new(p[0],p[1]).to_variant()),
+                    "targets_robot" => cell.targets_robot,
                     "contact_progress" => cell.contact_progress,
                     "call_progress" => cell.call_progress,
                     "health" => cell.health,
@@ -292,7 +307,8 @@ impl BloodLab {
             "alertness" => state.immunity.alertness,
             "robot_health" => state.immunity.robot_health,
             "robot_max_health" => state.immunity.robot_max_health,
-            "white_bodies" => state.immunity.white_bodies as i64,
+            "immune_bodies" => state.immunity.immune_bodies as i64,
+            "pathogen_bodies" => state.immunity.pathogen_bodies as i64,
             "arrival" => &arrival,
         };
         let arrows: Array<PackedVector2Array> = state

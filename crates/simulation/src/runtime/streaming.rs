@@ -358,7 +358,7 @@ mod tests {
         sim.update_streaming();
         assert!(sim.physics.soft_bodies.get(handle).is_none());
         assert_eq!(sim.streaming_snapshot().unwrap().dormant_cells, 1);
-        assert_eq!(sim.snapshot().immunity.white_bodies, 1);
+        assert_eq!(sim.snapshot().immunity.immune_bodies, 0);
         assert!(sim.snapshot().cells.is_empty());
         sim.physics.bodies[sim.robot].set_translation(Vector::new(-20., 0.), true);
         sim.update_cell_population();
@@ -400,13 +400,13 @@ mod tests {
         };
         let mut sim = Simulation::new_streamed_world(config, MapDefinition::small_world());
         let index = sim.insert_white_cell(Vector::new(0., -12.));
-        sim.cells[index].white.as_mut().unwrap().memory = 3.;
+        sim.cells[index].behavior.as_mut().unwrap().memory = 3.;
         sim.physics.bodies[sim.robot].set_translation(Vector::new(80., 0.), true);
         sim.tick(MoveInput::default());
         for _ in 0..5 {
             sim.tick(MoveInput::default());
         }
-        assert_eq!(sim.cells[index].white.as_ref().unwrap().memory, 3.);
+        assert_eq!(sim.cells[index].behavior.as_ref().unwrap().memory, 3.);
         sim.cells[index].damage(1000.);
         sim.set_paused(true);
         sim.tick(MoveInput::default());
@@ -417,7 +417,7 @@ mod tests {
         for _ in 0..365 {
             sim.tick(MoveInput::default());
         }
-        assert_eq!(sim.snapshot().immunity.white_bodies, 0);
+        assert_eq!(sim.snapshot().immunity.immune_bodies, 0);
         assert!(sim.physics.soft_bodies.is_empty());
     }
 }

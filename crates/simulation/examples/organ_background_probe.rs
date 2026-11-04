@@ -32,7 +32,7 @@ fn main() -> Result<(), String> {
                 let state = sim.snapshot();
                 assert!(state.robot.iter().all(|p| p.is_finite()));
                 assert!(state.cells.is_empty());
-                assert_eq!(state.immunity.white_bodies, 0);
+                assert_eq!(state.immunity.immune_bodies, 0);
                 assert!(!sim.policy_fluid_status().unwrap().window_active);
                 let c = -sim
                     .world_map()

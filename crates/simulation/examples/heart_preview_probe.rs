@@ -127,7 +127,7 @@ fn main() {
                 state.robot
             );
             assert!(state.cells.is_empty());
-            assert_eq!(state.immunity.white_bodies, 0);
+            assert_eq!(state.immunity.immune_bodies, 0);
             assert!(state.branch_flows.iter().all(|v| *v == 0.));
             assert_eq!(state.flow.rate, 0.);
             assert_eq!(state.flow.pressure_drop, 0.);

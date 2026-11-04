@@ -6,6 +6,9 @@ mod cell;
 mod cell_population;
 pub mod circulation;
 mod combat;
+mod entity;
+mod pathogen;
+pub use entity::Species;
 mod config;
 mod fluid;
 #[cfg(feature = "lbm-gpu")]

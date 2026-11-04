@@ -99,6 +99,10 @@ godot --path godot -- --local-stokes
 # 近场真实软体、远场数量；默认不启用，不与local-stokes组合
 godot --path godot -- --local-cells
 
+# 免疫与病原体战斗预览：解析流、完整红细胞种群
+# 不与 organ/heart/LBM、local-cells、stream-world 入口组合
+godot --path godot -- --combat-preview
+
 # 单独启动原单回路实验场
 godot --path godot res://lab.tscn
 

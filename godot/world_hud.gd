@@ -124,13 +124,13 @@ func update_state(state: Dictionary) -> void:
 		if cell.dead:
 			corpses += 1
 	cell_text += "\nCorpses                %d" % corpses
-	cell_text += "\nWhite cells            %d\nRobot HP               %.0f / %.0f\nImmune alertness       %.0f / 100" % [immunity.white_bodies, immunity.robot_health, immunity.robot_max_health, immunity.alertness]
+	cell_text += "\nImmune bodies          %d\nPathogen bodies        %d\nRobot HP               %.0f / %.0f\nImmune wanted       %.0f / 100" % [immunity.immune_bodies, immunity.pathogen_bodies, immunity.robot_health, immunity.robot_max_health, immunity.alertness]
 	stats.text = cell_text + "\nTime                   %.1f s\nSolve / step           %.2f ms\nSoft contacts          %d\n\nPressure drop          %.2f\nPump flow              %.2f\nMean speed             %.2f" % [state.time, state.solve_ms, state.soft_contacts, state.pressure_drop, state.flow_rate, state.mean_speed]
 	var streaming: Dictionary = state.get("streaming", {})
 	if not streaming.is_empty():
 		stats.text += "\nActive / dormant       %d / %d\nLoaded chunks          %d" % [streaming.active_cells, streaming.dormant_cells, streaming.loaded_chunks]
 	if geometry_preview or background_only:
-		stats.text = "Cells                  %d\nWhite cells            %d\nTime                   %.1f s\nSolve / step           %.2f ms\n\nPressure drop          %.2f\nPump flow              %.2f\nMean speed             %.2f\nLoaded chunks          %d" % [state.cells.size(), immunity.white_bodies, state.time, state.solve_ms, state.pressure_drop, state.flow_rate, state.mean_speed, streaming.get("loaded_chunks", 0)]
+		stats.text = "Cells                  %d\nImmune bodies            %d\nTime                   %.1f s\nSolve / step           %.2f ms\n\nPressure drop          %.2f\nPump flow              %.2f\nMean speed             %.2f\nLoaded chunks          %d" % [state.cells.size(), immunity.immune_bodies, state.time, state.solve_ms, state.pressure_drop, state.flow_rate, state.mean_speed, streaming.get("loaded_chunks", 0)]
 	var lines := PackedStringArray()
 	for i in state.branch_flows.size():
 		lines.append("Vessel %02d             %7.2f" % [i + 1, state.branch_flows[i]])

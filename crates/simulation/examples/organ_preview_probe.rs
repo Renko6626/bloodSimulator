@@ -227,7 +227,7 @@ fn main() {
                 );
                 assert!(
                     s.cells.is_empty()
-                        && s.immunity.white_bodies == 0
+                        && s.immunity.immune_bodies == 0
                         && s.branch_flows.iter().all(|q| *q == 0.)
                         && s.flow.rate == 0.
                         && s.flow.pressure_drop == 0.

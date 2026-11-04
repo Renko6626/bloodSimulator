@@ -442,7 +442,7 @@ mod tests {
         assert!(!sim.is_geometry_preview());
         let before = sim.snapshot();
         assert!(before.cells.is_empty());
-        assert_eq!(before.immunity.white_bodies, 0);
+        assert_eq!(before.immunity.immune_bodies, 0);
         assert!((before.flow.rate - 48.).abs() < 1e-3);
         assert!((before.flow.mean_speed - 4.8).abs() < 1e-4);
         assert_eq!(sim.world_map().unwrap().chambers.len(), 4);
@@ -465,7 +465,7 @@ mod tests {
         assert_eq!(reset.time, 0.);
         assert_eq!(sim.config.pressure, pressure);
         assert!(reset.cells.is_empty());
-        assert_eq!(reset.immunity.white_bodies, 0);
+        assert_eq!(reset.immunity.immune_bodies, 0);
         assert_eq!(sim.world_map().unwrap().edges.len(), 69);
         assert!((reset.flow.rate - 24.).abs() < 1e-3);
     }

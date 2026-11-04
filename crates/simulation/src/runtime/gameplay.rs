@@ -23,7 +23,7 @@ impl Simulation {
                 self.physics.remove_soft_body(handle);
             }
             if let Some(population) = &mut self.population
-                && cell.white.is_none()
+                && cell.species == crate::Species::RedCell
             {
                 population.total_count -= 1;
             }
@@ -68,12 +68,14 @@ impl Simulation {
             hits.push(crate::combat::Hit {
                 id: cell.id,
                 position: fluid::center(body),
-                white: cell.white.is_some(),
+                species: cell.species,
+                source: crate::entity::TargetRef::Robot,
+                source_position: origin,
                 damage: health - cell.health,
                 killed: cell.dead_age.is_some(),
             });
         }
-        self.react_to_hits(&hits, origin);
+        self.react_to_hits(&hits);
     }
 }
 

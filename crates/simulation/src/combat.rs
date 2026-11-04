@@ -6,7 +6,9 @@ pub(crate) const ATTACK_FLASH_TIME: f32 = 0.12;
 pub(crate) struct Hit {
     pub id: u64,
     pub position: Vector,
-    pub white: bool,
+    pub species: crate::Species,
+    pub source: crate::entity::TargetRef,
+    pub source_position: Vector,
     pub damage: f32,
     pub killed: bool,
 }
@@ -59,4 +61,28 @@ pub(crate) fn contact_point(body: &SoftBody, origin: Vector, radius: f32) -> Opt
                 .total_cmp(&b.distance_squared(origin))
         })?;
     (closest.distance_squared(origin) <= radius * radius).then_some(closest)
+}
+
+/// Contact between the two actual filled, potentially concave soft contours.
+pub(crate) fn contours_touch(a: &SoftBody, b: &SoftBody) -> bool {
+    use rapier2d::parry::{query::intersection_test, shape::Segment};
+    let aa: Vec<_> = a.particle_positions().collect();
+    let bb: Vec<_> = b.particle_positions().collect();
+    if aa.iter().any(|&p| contact_point(b, p, 0.2).is_some())
+        || bb.iter().any(|&p| contact_point(a, p, 0.2).is_some())
+    {
+        return true;
+    }
+    for i in 0..aa.len() {
+        let sa = Segment::new(aa[i], aa[(i + 1) % aa.len()]);
+        for j in 0..bb.len() {
+            let sb = Segment::new(bb[j], bb[(j + 1) % bb.len()]);
+            if intersection_test(&Pose::IDENTITY, &sa, &Pose::IDENTITY, &sb)
+                .is_ok_and(|hit| hit.intersecting)
+            {
+                return true;
+            }
+        }
+    }
+    false
 }

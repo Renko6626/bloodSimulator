@@ -50,6 +50,8 @@ pub(crate) enum Goal {
 #[derive(Clone, Debug, PartialEq)]
 pub(crate) struct WhiteCell {
     pub goal: Option<Goal>,
+    pub target: Option<crate::entity::TargetRef>,
+    pub attacker: Option<crate::entity::TargetRef>,
     pub heading: Vector,
     pub movement: Vector,
     pub memory: f32,
@@ -65,6 +67,8 @@ impl WhiteCell {
         let angle = id as f32 * 2.399_963_1;
         Self {
             goal: None,
+            target: None,
+            attacker: None,
             heading: Vector::new(angle.cos(), angle.sin()),
             movement: Vector::ZERO,
             memory: 0.0,
@@ -77,29 +81,47 @@ impl WhiteCell {
     }
 
     pub fn pursue(&mut self, position: Vector, alertness: f32) {
+        self.set_target(Some(crate::entity::TargetRef::Robot));
         self.goal = Some(Goal::Pursue(position));
         self.memory = 2.0 + 3.0 * alertness / 100.0;
     }
 
-    /// Only receives the robot position when the coordinator can actually sense it.
+    pub fn set_target(&mut self, target: Option<crate::entity::TargetRef>) {
+        if self.target != target {
+            self.contact_time = 0.0;
+        }
+        // Direct-attack evidence belongs to the target being pursued. Once
+        // another target is chosen (or pursuit ends), its memory cannot keep
+        // an abandoned source eligible for later retaliation.
+        if self.attacker != target {
+            self.attacker = None;
+        }
+        self.target = target;
+    }
+
     pub fn think(
         &mut self,
         center: Vector,
-        visible_robot: Option<Vector>,
+        visible: Option<(crate::entity::TargetRef, Vector)>,
         alertness: f32,
         dt: f32,
         options: &WhiteCellOptions,
     ) {
         self.attack_cooldown = (self.attack_cooldown - dt).max(0.0);
         self.arrival_time = (self.arrival_time - dt).max(0.0);
-        let can_track = self.is_pursuing() || alertness >= WANTED_THRESHOLD;
-        if let Some(robot) = visible_robot.filter(|_| can_track) {
-            self.pursue(robot, alertness);
-        } else if let Some(goal) = self.goal {
-            self.memory -= dt;
-            let (Goal::Investigate(point) | Goal::Pursue(point)) = goal;
-            if self.memory <= 0.0 || center.distance(point) < 0.6 {
-                self.goal = None;
+        if let Some((target, point)) = visible {
+            self.set_target(Some(target));
+            self.goal = Some(Goal::Pursue(point));
+            self.memory = 2.0 + 3.0 * alertness / 100.0;
+        } else {
+            self.contact_time = 0.0;
+            if let Some(Goal::Investigate(point) | Goal::Pursue(point)) = self.goal {
+                self.memory -= dt;
+                if self.memory <= 0.0 || center.distance(point) < 0.6 {
+                    self.goal = None;
+                    self.attacker = None;
+                    self.set_target(None);
+                }
             }
         }
         let (desired, speed) = match self.goal {
@@ -135,7 +157,7 @@ impl WhiteCell {
     }
 }
 
-fn rotate(v: Vector, angle: f32) -> Vector {
+pub(crate) fn rotate(v: Vector, angle: f32) -> Vector {
     let (s, c) = angle.sin_cos();
     Vector::new(c * v.x - s * v.y, s * v.x + c * v.y)
 }

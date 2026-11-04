@@ -52,7 +52,7 @@ mod tests {
         assert_eq!(sim.config.white_cells.count, 0);
         assert!(sim.cells.is_empty());
         let snapshot = sim.snapshot();
-        assert_eq!(snapshot.immunity.white_bodies, 0);
+        assert_eq!(snapshot.immunity.immune_bodies, 0);
         assert_eq!(snapshot.flow.pressure_drop, 0.);
         assert_eq!(snapshot.flow.rate, 0.);
         assert_eq!(snapshot.flow.mean_speed, 0.);

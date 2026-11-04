@@ -125,7 +125,8 @@ pub struct Simulation {
     physics: PhysicsWorld,
     environment: Environment,
     robot: RigidBodyHandle,
-    robot_health: f32,
+    robot_core: crate::entity::EntityCore,
+    combat_preview: bool,
     immunity: crate::white_cell::Immunity,
     white_cells_enabled: bool,
     cells: Vec<cell::Cell>,
@@ -427,7 +428,8 @@ impl Simulation {
             physics,
             environment,
             robot,
-            robot_health,
+            robot_core: crate::entity::EntityCore::new(u64::MAX, robot_health),
+            combat_preview: false,
             immunity: crate::white_cell::Immunity::default(),
             white_cells_enabled: false,
             cells,
@@ -479,7 +481,7 @@ impl Simulation {
     }
 
     pub fn set_paused(&mut self, paused: bool) {
-        if paused || self.robot_health > 0.0 {
+        if paused || self.robot_core.health > 0.0 {
             self.paused = paused;
         }
     }
@@ -491,13 +493,13 @@ impl Simulation {
         self.try_single_step(input).expect("simulation step");
     }
     pub fn try_tick(&mut self, input: MoveInput) -> Result<(), String> {
-        if !self.paused && self.robot_health > 0.0 {
+        if !self.paused && self.robot_core.health > 0.0 {
             self.step(input)?;
         }
         Ok(())
     }
     pub fn try_single_step(&mut self, input: MoveInput) -> Result<(), String> {
-        if self.paused && self.robot_health > 0.0 {
+        if self.paused && self.robot_core.health > 0.0 {
             self.step(input)?;
         }
         Ok(())
@@ -506,6 +508,12 @@ impl Simulation {
         self.try_reset().expect("reset simulation");
     }
     pub fn try_reset(&mut self) -> Result<(), String> {
+        if self.combat_preview {
+            let paused = self.paused;
+            *self = Self::new_combat_preview(self.config.clone());
+            self.paused = paused;
+            return Ok(());
+        }
         if let Some(preview) = self.geometry_preview {
             let paused = self.paused;
             *self = Self::new_geometry_preview(self.config.clone(), preview);
@@ -941,13 +949,21 @@ impl Simulation {
                 .filter(|cell| cell.active_body().is_some())
                 .map(|cell| crate::CellStatus {
                     id: cell.id,
-                    white: cell.white.is_some(),
-                    pursuing: cell.dead_age.is_none()
-                        && cell.white.as_ref().is_some_and(|w| w.is_pursuing()),
-                    contact_progress: cell.white.as_ref().map_or(0.0, |w| {
-                        (w.contact_time / self.config.white_cells.contact_warmup).min(1.0)
+                    species: cell.species,
+                    target_position: cell.behavior.as_ref().and_then(|b| b.goal).map(|g| {
+                        let (crate::white_cell::Goal::Investigate(p)
+                        | crate::white_cell::Goal::Pursue(p)) = g;
+                        p.to_array()
                     }),
-                    call_progress: cell.white.as_ref().map_or(0.0, |w| {
+                    targets_robot: cell
+                        .behavior
+                        .as_ref()
+                        .is_some_and(|b| b.target == Some(crate::entity::TargetRef::Robot)),
+                    contact_progress: cell.behavior.as_ref().map_or(0.0, |w| {
+                        (w.contact_time / cell.species.options(&self.config).contact_warmup)
+                            .min(1.0)
+                    }),
+                    call_progress: cell.behavior.as_ref().map_or(0.0, |w| {
                         (w.call_time / self.config.white_cells.call_time).min(1.0)
                     }),
                     health: cell.health,
@@ -955,7 +971,7 @@ impl Simulation {
                     dead: cell.dead_age.is_some(),
                     opacity: cell.opacity(&self.config)
                         * if cell.dead_age.is_none() {
-                            cell.white.as_ref().map_or(1.0, |w| {
+                            cell.behavior.as_ref().map_or(1.0, |w| {
                                 (1.0 - w.arrival_time / crate::white_cell::ARRIVAL_TIME)
                                     .clamp(0.0, 1.0)
                             })
@@ -971,12 +987,17 @@ impl Simulation {
             }),
             immunity: crate::ImmunitySnapshot {
                 alertness: self.immunity.alertness,
-                robot_health: self.robot_health,
+                robot_health: self.robot_core.health,
                 robot_max_health: self.config.robot_health,
-                white_bodies: self
+                immune_bodies: self
                     .cells
                     .iter()
-                    .filter(|cell| cell.white.is_some())
+                    .filter(|cell| cell.species.is_immune() && cell.active_body().is_some())
+                    .count(),
+                pathogen_bodies: self
+                    .cells
+                    .iter()
+                    .filter(|c| c.species.is_pathogen() && c.active_body().is_some())
                     .count(),
                 arrival: self
                     .immunity
@@ -996,7 +1017,7 @@ impl Simulation {
                     detailed_count: self
                         .cells
                         .iter()
-                        .filter(|cell| cell.white.is_none())
+                        .filter(|cell| cell.species == crate::Species::RedCell)
                         .count(),
                     abstract_count: p.abstract_count(),
                     spawned_this_frame: p.spawned,
