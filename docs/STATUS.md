@@ -1,5 +1,7 @@
 # 当前状态与待办
 
+2026-11-04 阶段集成：`6a83f9f` 已快进纳入主工作树 `main`，无冲突、无额外产品代码调整；本次按用户要求推送 main。收尾格式、差异检查及 feature 全目标编译通过；沿用本阶段模拟、引擎加载与独立审阅证据，不重复整套验证。功能分支保留。
+
 2026-11-04 `feat/immune-pathogen-combat` 已接入首批免疫与病原体战斗，独立 Sol 审阅及修正复查通过。`--combat-preview` 使用已有 small_world、解析流和 Full 模式：72 红细胞、3 中性粒、1 巨噬、4 游动细菌及2荚膜细菌；普通世界仍只投放原四只中性粒。共用实体生命、显式物种与稳定目标，真实软体轮廓接触、玩家先手及生物同批互杀；病原体战斗不增加玩家通缉，荚膜仅减半免疫接触伤害。高通缉重型增援只在预览启用，休眠及尸体占用限额。显示包含物种内部图形、荚膜外轮廓、朝向目标的准备进度与 Immune wanted。
 
 本轮 `cargo fmt --all --check`、`cargo test --locked -p simulation`（57 单元＋5 集成）、`cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu`、`bash scripts/build.sh` 通过；末尾局部转向及休眠尸体断言调整后，受影响免疫11项复测通过。Godot cached import 和 world/lab/combat-preview 各180帧 headless 加载退出0，无脚本错误；冲突入口明确报错并退出1。随后发现已有 X 显示服务 :2，使用软件 OpenGL 完成战斗预览初始全局及上方血管近景截图（见 research/2026-11-04-combat-preview/）；未做键鼠交互、人工手感或战斗负载FPS验收。未运行流场烘焙、GPU长回放或云实验。用户随后要求阶段性提交、合并 main 并推送，归档见[本阶段记录](research/2026-11-04-combat-preview/README.md)。设计与实现步骤见[战斗计划](superpowers/plans/2026-11-04-immune-pathogen-combat.md)。 独立审阅发现旧直接攻击者在换目标后残留，已在现有目标切换处清理；新增真实12秒离场回归及细菌无目标清理断言，受影响免疫12项、fmt及diff检查通过，修正后桥重新构建通过，本地试玩产物已同步，该修正已由独立 Sol 定点复查，规格与代码质量均通过。

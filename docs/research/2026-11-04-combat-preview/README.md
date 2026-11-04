@@ -16,3 +16,7 @@
 ![上方血管中的免疫细胞与病原体](immune-pathogens.png)
 
 独立审阅发现的旧攻击者标记问题已修复并复查通过：目标切换或放弃后清理旧来源，无新增计时系统。全套模拟57单元＋5集成通过后，最后修正相关12项通过，新增永久场景共7项；feature全目标检查、桥构建与三个场景180帧加载通过。
+
+## 集成记录
+
+实现提交 `6a83f9f` 已从功能分支快进纳入主工作树 main，无冲突或产品代码调整。收尾 `cargo fmt --all --check`、`git diff --check` 及 `cargo check --locked --workspace --all-targets --features godot_bridge/lbm-gpu` 通过。沿用已有模拟/加载/审阅结果，未重复全套测试。用户授权本次推送 main；功能分支保留。
