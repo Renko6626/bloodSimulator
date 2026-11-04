@@ -1,5 +1,6 @@
 extends Node2D
-## One map-sized GPU texture. Dynamic redraws never update its source viewport.
+## Cached vessel layers over a world-aligned tissue backdrop.
+## Backdrop redraws never update the source viewports.
 
 const Painter = preload("res://world_background_painter.gd")
 const PADDING := Vector2(8, 8)
@@ -8,6 +9,22 @@ const MAX_SIZE := 4096
 var bake_viewport: SubViewport
 var sprite: Sprite2D
 var chunks: Dictionary = {}
+
+
+func _ready() -> void:
+	texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+	if DisplayServer.get_name() == "headless" or not RenderingServer.is_render_loop_enabled():
+		set_process(false)
+
+
+func _process(_delta: float) -> void:
+	# One quad covers empty space; empty map chunks still allocate no cache.
+	queue_redraw()
+
+
+func _draw() -> void:
+	var visible := get_global_transform_with_canvas().affine_inverse() * get_viewport_rect()
+	Painter.draw_tissue(self, visible.grow(8.0))
 
 
 func clear_chunks() -> void:

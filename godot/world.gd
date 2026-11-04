@@ -4,7 +4,7 @@ extends Node2D
 const SCALE := 24.0
 const Background = preload("res://world_background.gd")
 const CellMesh = preload("res://world_cell_mesh.gd")
-const RED_CELL_TEXTURE := preload("res://assets/cells/erythrocyte.png")
+const RED_CELL_TEXTURE := preload("res://assets/cells/erythrocyte-v2.png")
 const NEUTROPHIL_TEXTURE := preload("res://assets/cells/neutrophil-cytoplasm-v3.png")
 const NEUTROPHIL_NUCLEI := [
 	preload("res://assets/cells/neutrophil-nucleus.png"),

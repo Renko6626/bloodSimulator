@@ -1,6 +1,6 @@
 # 项目工作约定
 
-用户已确认细胞显微美术并要求纳入游戏，`feat/cell-microscopy-textures` 的 `2b27b14` 已快进进入主目录main，未推送。包含红细胞纹理、中性粒胞质/核分层与固定外观变体、World平滑轮廓、两种白细胞非圆物理参考形状；巨噬内部材质仍占位。主目录桥构建、import、default/combat各180帧及fmt/diff通过，沿用59+5与独立审阅证据。详情见 [集成记录](docs/art/microscopy/integration.md)。用户已另行安排血管与组织背景，首版在 `feat/microscopy-background` 准备；不据此启动云实验或性能研究。
+用户要求将显微美术阶段整理、合并main并提交推送。范围包括已纳入main的细胞实现 `2b27b14`，以及 `feat/microscopy-background` 的内皮管壁、浅暖红管腔、外围组织与红细胞第二版。统一入口见 [美术阶段记录](docs/art/microscopy-background/README.md) 和 [集成记录](docs/art/microscopy-background/integration.md)。沿用59单元+5集成、桥构建、场景加载和截图证据；功能工作树保留。巨噬内部、细菌及机器人仍有占位，FPS、全图手感与像素级无缝未验收；保存工作不授权自动启动性能、烘焙或云实验。
 
 2026-11-04 免疫与病原体战斗阶段集成：用户要求提交、合并并推送 main，`feat/immune-pathogen-combat` 的 `6a83f9f` 已快进纳入主工作树 main，无冲突或产品代码调整。包含共用实体基础、中性粒/巨噬及两种细菌、局部感知和战斗预览 `--combat-preview`；普通世界仍四只中性粒。独立 Sol 审阅及旧攻击者标记修正复查通过，收尾 fmt、diff、feature 全目标编译通过；沿用此前57单元＋5集成、修正后12项、桥构建、三场景180帧加载及两张真实截图，不重复整套验证。人工手感与新战斗负载FPS未验收；器官地图种群、感染/繁殖、烘焙与性能/云实验不据此启动。功能分支保留，交付入口见 [STATUS](docs/STATUS.md) 及[阶段记录](docs/research/2026-11-04-combat-preview/README.md)。
 

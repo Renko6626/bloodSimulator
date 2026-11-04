@@ -35,13 +35,13 @@ var robot_status: Label
 
 func _ready() -> void:
 	_build_panel()
-	var title := _add_label(self, "BLOOD SIMULATOR", 15, MUTED)
+	var title := _add_label(self, "BLOOD SIMULATOR", 15, Color("70666a"))
 	title.position = Vector2(24, 20)
-	subtitle = _add_label(self, "World circulation", 27, INK)
+	subtitle = _add_label(self, "World circulation", 27, Color("51484d"))
 	subtitle.position = Vector2(24, 46)
-	robot_status = _add_label(self, "", 18, Color("ed9f83"))
+	robot_status = _add_label(self, "", 18, Color("9b483e"))
 	robot_status.position = Vector2(24, 84)
-	help = _add_label(self, "WASD: move    J: attack    Space: pause    N: step    R: reset    F: flow    C: collision", 14, INK)
+	help = _add_label(self, "WASD: move    J: attack    Space: pause    N: step    R: reset    F: flow    C: collision", 14, Color("51484d"))
 	help.anchor_top = 1.0
 	help.anchor_bottom = 1.0
 	help.offset_left = 24.0
