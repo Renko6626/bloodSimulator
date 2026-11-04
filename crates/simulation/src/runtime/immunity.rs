@@ -487,25 +487,22 @@ impl Simulation {
             self.white_cells_enabled = true;
         }
         let options = species.options(&self.config);
+        let id = self.next_cell_id;
         let body = if self.streaming.as_ref().is_some_and(|s| {
             !s.center
                 .neighborhood(crate::map::SCENE_RADIUS)
                 .contains(&crate::map::ChunkId::at(position.to_array()))
         }) {
-            cell::CellBody::Dormant(cell::DormantBody::at(
-                position,
-                options.radius,
-                &self.config,
-            ))
+            cell::CellBody::Dormant(cell::DormantBody::at(position, species, id, &self.config))
         } else {
-            cell::CellBody::Active(cell::insert_with_radius(
+            cell::CellBody::Active(cell::insert_species(
                 &mut self.physics,
                 position,
-                options.radius,
+                species,
+                id,
                 &self.config,
             ))
         };
-        let id = self.next_cell_id;
         self.next_cell_id += 1;
         let mut cell = cell::Cell::new(id, body, options.health, cell::UnloadPolicy::Hibernate);
         cell.species = species;

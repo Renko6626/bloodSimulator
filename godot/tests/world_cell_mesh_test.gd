@@ -28,6 +28,9 @@ func _run() -> void:
 	_check_fill(drawing.mesh, square, 4.0)
 	assert(not drawing.update(PackedVector2Array(), 1.0, Color.RED))
 	assert(drawing.closed_contour.is_empty())
+	_check_textured_deformation()
+	_check_nucleus_display()
+	_check_stable_appearance()
 	print("CELL_MESH_TEST PASS: concavity, GPU vertex/index updates, node count and empty input")
 	quit()
 
@@ -53,3 +56,77 @@ func _check_fill(mesh: ArrayMesh, polygon: PackedVector2Array, area: float) -> v
 	assert(absf(inner_area - area * 0.48 * 0.48) < 0.00001)
 	for i in polygon.size():
 		assert(points[i].is_equal_approx(polygon[i]))
+
+
+func _check_textured_deformation() -> void:
+	var drawing = CellMesh.new()
+	var cell := PackedVector2Array()
+	for i in 12:
+		cell.append(Vector2.from_angle(TAU * i / 12) * 20.0)
+	var original := cell.duplicate()
+	assert(drawing.update(cell, 1.0, Color.WHITE, Color.WHITE, true, true))
+	assert(cell == original)
+	assert(drawing.closed_contour.size() > cell.size() + 1)
+	assert(drawing.closed_contour[0] == drawing.closed_contour[-1])
+	var arrays: Array = drawing.mesh.surface_get_arrays(0)
+	var uv: PackedVector2Array = arrays[Mesh.ARRAY_TEX_UV]
+	var initial: PackedVector2Array = arrays[Mesh.ARRAY_VERTEX]
+	assert(uv.size() == initial.size())
+	for point in uv:
+		assert(Rect2(0, 0, 1, 1).has_point(point))
+	var deformation := Transform2D(Vector2(0, 0.45), Vector2(-1.5, 0), Vector2(90, 60))
+	var squeezed: PackedVector2Array = deformation * cell
+	assert(drawing.update(squeezed, 1.0, Color.WHITE, Color.WHITE, true, true))
+	arrays = drawing.mesh.surface_get_arrays(0)
+	assert(arrays[Mesh.ARRAY_TEX_UV] == uv)
+	var moved: PackedVector2Array = arrays[Mesh.ARRAY_VERTEX]
+	for i in initial.size():
+		assert(moved[i].distance_to(deformation * initial[i]) < 0.0001)
+	# Slot reuse may switch from textured cells back to ordinary two-layer cells.
+	var square := PackedVector2Array([Vector2.ZERO, Vector2(2, 0), Vector2(2, 2), Vector2(0, 2)])
+	assert(drawing.update(square, 1.0, Color.RED))
+	_check_fill(drawing.mesh, square, 4.0)
+
+
+func _check_nucleus_display() -> void:
+	var drawing = CellMesh.new()
+	var rest := PackedVector2Array()
+	for i in 12:
+		rest.append(Vector2.from_angle(TAU * i / 12) * 20.0)
+	for squeeze in [1.0, 0.8, 0.35]:
+		var shape := Transform2D(Vector2(1.2, 0), Vector2(0, squeeze), Vector2(70, 80)) * rest
+		assert(drawing.update(shape, 1.0, Color.WHITE, Color.WHITE, true, true, 20.0))
+		var pose: Transform2D = drawing.nucleus_transform(13.0)
+		assert(absf(pose.x.length() - pose.y.length()) < 0.00001)
+		if squeeze >= 0.8:
+			assert(absf(pose.x.length() - 1.0) < 0.00001)
+		else:
+			assert(pose.x.length() < 0.6)
+		# The same amount of cytoplasm texture always covers the same world length.
+		var arrays: Array = drawing.mesh.surface_get_arrays(0)
+		var uv: PackedVector2Array = arrays[Mesh.ARRAY_TEX_UV]
+		var points: PackedVector2Array = arrays[Mesh.ARRAY_VERTEX]
+		assert(absf(uv[0].distance_to(uv[10]) * 40.0 - points[0].distance_to(points[10])) < 0.0001)
+
+
+func _check_stable_appearance() -> void:
+	var drawing = CellMesh.new()
+	var cell := PackedVector2Array()
+	for i in 12:
+		cell.append(Vector2.from_angle(TAU * i / 12) * 20.0)
+	assert(drawing.update(cell, 1.0, Color.WHITE, Color.WHITE, true, true, 20.0))
+	drawing.configure_appearance(82, 3)
+	var original_pose: Transform2D = drawing.nucleus_transform(13.0)
+	var original_variant: int = drawing.nucleus_variant
+	drawing.configure_appearance(82, 3)
+	assert(drawing.nucleus_transform(13.0).is_equal_approx(original_pose))
+	drawing.configure_appearance(83, 3)
+	assert(not drawing.nucleus_transform(13.0).is_equal_approx(original_pose))
+	# Recreated display slots and returning IDs must recover the same appearance.
+	drawing.configure_appearance(82, 3)
+	assert(drawing.nucleus_transform(13.0).is_equal_approx(original_pose))
+	var recreated = CellMesh.new()
+	assert(recreated.update(cell, 1.0, Color.WHITE, Color.WHITE, true, true, 20.0))
+	recreated.configure_appearance(82, 3)
+	assert(recreated.nucleus_variant == original_variant)
+	assert(recreated.nucleus_transform(13.0).is_equal_approx(original_pose))

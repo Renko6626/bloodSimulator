@@ -17,9 +17,9 @@ pub(crate) struct DormantBody {
 }
 
 impl DormantBody {
-    pub fn at(center: Vector, radius: f32, config: &Config) -> Self {
+    pub fn at(center: Vector, species: crate::Species, id: u64, config: &Config) -> Self {
         Self {
-            positions: SoftBodyBuilder::disk(center, radius, config.cell_vertices)
+            positions: species_builder(center, species, id, config)
                 .particle_positions()
                 .to_vec(),
             velocities: vec![Vector::ZERO; config.cell_vertices],
@@ -103,8 +103,7 @@ impl Cell {
         let CellBody::Dormant(state) = &self.body else {
             return;
         };
-        let radius = self.species.radius(config);
-        let handle = insert_with_radius(physics, state.center(), radius, config);
+        let handle = insert_species(physics, state.center(), self.species, self.id, config);
         let body = &mut physics.soft_bodies[handle];
         for (i, (&position, &velocity)) in state.positions.iter().zip(&state.velocities).enumerate()
         {
@@ -161,8 +160,71 @@ pub(crate) fn insert_with_radius(
     radius: f32,
     config: &Config,
 ) -> SoftBodyHandle {
+    insert_builder(
+        world,
+        SoftBodyBuilder::disk(center, radius, config.cell_vertices),
+        config,
+    )
+}
+
+pub(crate) fn insert_species(
+    world: &mut PhysicsWorld,
+    center: Vector,
+    species: crate::Species,
+    id: u64,
+    config: &Config,
+) -> SoftBodyHandle {
+    insert_builder(world, species_builder(center, species, id, config), config)
+}
+
+fn species_builder(
+    center: Vector,
+    species: crate::Species,
+    id: u64,
+    config: &Config,
+) -> SoftBodyBuilder {
+    let radius = species.radius(config);
+    let disk = SoftBodyBuilder::disk(center, radius, config.cell_vertices);
+    if !species.is_immune() {
+        return disk;
+    }
+    // Broad, low-amplitude lobes rather than independent noisy vertices.
+    // Build constraints FROM these points: moving disk particles later would
+    // leave circular rest lengths in place. Identity also reproduces this on wake.
+    let phase = (id % 4096) as f32 * 2.399_963_1;
+    let n = disk.particle_positions().len();
+    let mut points: Vec<_> = (0..n)
+        .map(|i| {
+            let angle = std::f32::consts::TAU * i as f32 / n as f32;
+            let radial = 1.0
+                + 0.07 * (2.0 * angle + phase).cos()
+                + 0.03 * (3.0 * angle - phase * 0.73).cos();
+            Vector::new(angle.cos(), angle.sin()) * radial
+        })
+        .collect();
+    let mean = points.iter().copied().sum::<Vector>() / n as f32;
+    for p in &mut points {
+        *p -= mean;
+    }
+    let area = (0..n)
+        .map(|i| points[i].perp_dot(points[(i + 1) % n]))
+        .sum::<f32>()
+        * 0.5;
+    let disk_area = 0.5 * n as f32 * radius * radius * (std::f32::consts::TAU / n as f32).sin();
+    let scale = (disk_area / area).sqrt();
+    for p in &mut points {
+        *p = center + *p * scale;
+    }
+    SoftBodyBuilder::polygon(points)
+}
+
+fn insert_builder(
+    world: &mut PhysicsWorld,
+    builder: SoftBodyBuilder,
+    config: &Config,
+) -> SoftBodyHandle {
     world.insert_soft_body(
-        SoftBodyBuilder::disk(center, radius, config.cell_vertices)
+        builder
             .mass(1.0)
             .material(SoftBodyMaterial {
                 volume_softness: SpringCoefficients::new(config.cell_area_frequency, 1.0),
@@ -242,6 +304,66 @@ mod tests {
         assert_eq!(restored.particle_positions().collect::<Vec<_>>(), shape);
         assert!(restored.particle_velocities().all(|v| v == Vector::X));
         assert!((restored.volume() - rest_area).abs() < 1e-4);
+    }
+
+    #[test]
+    fn immune_cells_keep_individual_rest_shapes_after_deformation_and_wake() {
+        let config = Config::default();
+        for species in [crate::Species::Neutrophil, crate::Species::Macrophage] {
+            let mut world = PhysicsWorld::new();
+            world.gravity = Vector::ZERO;
+            world.integration_parameters.dt = config.dt / config.substeps as f32;
+            let center = Vector::new(3.0, -2.0);
+            let handle = insert_species(&mut world, center, species, 82, &config);
+            let initial: Vec<_> = world.soft_bodies[handle].particle_positions().collect();
+            let radius = species.radius(&config);
+            let radial: Vec<_> = initial.iter().map(|p| p.distance(center)).collect();
+            let min = radial.iter().copied().fold(f32::INFINITY, f32::min);
+            let max = radial.iter().copied().fold(0.0_f32, f32::max);
+            assert!(max - min > 0.1 * radius);
+            assert!(max < 1.12 * radius);
+            let dormant = DormantBody::at(center, species, 82, &config);
+            assert_eq!(dormant.positions, initial);
+            assert_ne!(
+                DormantBody::at(center, species, 83, &config).positions,
+                initial
+            );
+            let area = measurements(&world.soft_bodies[handle]).0;
+            let regular_area = 0.5
+                * config.cell_vertices as f32
+                * radius.powi(2)
+                * (std::f32::consts::TAU / config.cell_vertices as f32).sin();
+            assert!((area / regular_area - 1.0).abs() < 1e-5);
+            for _ in 0..120 {
+                world.step();
+            }
+            for (i, p) in initial.iter().enumerate() {
+                assert!(world.soft_bodies[handle].particle_position(i).distance(*p) < 0.01);
+                let delta = *p - center;
+                world.soft_bodies[handle]
+                    .set_particle_position(i, center + Vector::new(delta.x * 1.2, delta.y / 1.2));
+            }
+            let mut cell = Cell::new(82, handle, 100.0, UnloadPolicy::Hibernate);
+            cell.species = species;
+            cell.hibernate(&mut world);
+            cell.restore(&mut world, &config);
+            for _ in 0..480 {
+                world.step();
+            }
+            let body = &world.soft_bodies[cell.active_body().unwrap()];
+            // Pairwise distances ignore any harmless rigid translation/rotation.
+            for i in 0..initial.len() {
+                for j in i + 1..initial.len() {
+                    let recovered = body
+                        .particle_position(i)
+                        .distance(body.particle_position(j));
+                    assert!(
+                        (recovered - initial[i].distance(initial[j])).abs() < 0.025 * radius,
+                        "{species:?}: pair {i}/{j} did not recover"
+                    );
+                }
+            }
+        }
     }
 
     fn measurements(body: &SoftBody) -> (f32, f32, f32) {

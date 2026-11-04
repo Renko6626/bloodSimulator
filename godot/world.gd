@@ -4,6 +4,16 @@ extends Node2D
 const SCALE := 24.0
 const Background = preload("res://world_background.gd")
 const CellMesh = preload("res://world_cell_mesh.gd")
+const RED_CELL_TEXTURE := preload("res://assets/cells/erythrocyte.png")
+const NEUTROPHIL_TEXTURE := preload("res://assets/cells/neutrophil-cytoplasm-v3.png")
+const NEUTROPHIL_NUCLEI := [
+	preload("res://assets/cells/neutrophil-nucleus.png"),
+	preload("res://assets/cells/neutrophil-nucleus-b.png"),
+	preload("res://assets/cells/neutrophil-nucleus-c.png"),
+]
+# Art dimensions in world units; independent from momentary membrane stretch.
+const NEUTROPHIL_ART_RADIUS := 1.0
+
 const FLOW := Color(0.4, 0.8, 0.77, 0.5)
 
 @onready var background: Background = $StaticBackground
@@ -38,6 +48,7 @@ var previous_centers: Array[Vector2] = []
 
 
 func _ready() -> void:
+	texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	hud = $HUDLayer/HUD
 	var args := OS.get_cmdline_user_args()
 	combat_preview = args.has("--combat-preview")
@@ -343,10 +354,30 @@ func _draw() -> void:
 			elif pathogen:
 				color = Color("a4bf65") if status.species == "motile_bacterium" else Color("76b9b1")
 				inner_color = Color("435b45")
-		if not drawing.update(cell, SCALE, color, inner_color):
+		var cell_texture: Texture2D = null
+		if status.species == "red_cell":
+			cell_texture = RED_CELL_TEXTURE
+		elif status.species == "neutrophil":
+			cell_texture = NEUTROPHIL_TEXTURE
+		if cell_texture != null:
+			color = Color("88808d") if status.dead else Color.WHITE
+			if not status.dead and immune and status.targets_robot:
+				color = Color("ffd5b8")
+			elif not status.dead and status.id == 0:
+				color = Color("ffe2bd")
+		var cytoplasm_radius := NEUTROPHIL_ART_RADIUS * SCALE if status.species == "neutrophil" else 0.0
+		if not drawing.update(cell, SCALE, color, inner_color, true, cell_texture != null, cytoplasm_radius):
 			continue
-		draw_mesh(drawing.mesh, null, Transform2D.IDENTITY, Color(1.0, 1.0, 1.0, status.opacity))
-		var outline := Color("9b899e") if status.dead else Color("d28189")
+		draw_mesh(drawing.mesh, cell_texture, Transform2D.IDENTITY, Color(1.0, 1.0, 1.0, status.opacity))
+		if status.species == "neutrophil":
+			drawing.configure_appearance(status.id, NEUTROPHIL_NUCLEI.size())
+			var nucleus_radius := cytoplasm_radius * 0.88
+			draw_set_transform_matrix(drawing.nucleus_transform(nucleus_radius))
+			var nucleus_color := color
+			nucleus_color.a = status.opacity
+			draw_texture_rect(NEUTROPHIL_NUCLEI[drawing.nucleus_variant], Rect2(Vector2.ONE * -nucleus_radius, Vector2.ONE * nucleus_radius * 2.0), false, nucleus_color)
+			draw_set_transform_matrix(Transform2D.IDENTITY)
+		var outline := Color("9b899e") if status.dead else Color("cb9186")
 		if immune and not status.dead:
 			outline = Color("e3e6d9").lerp(Color("ed795d"), status.contact_progress)
 		elif pathogen and not status.dead:
@@ -358,7 +389,7 @@ func _draw() -> void:
 			for point in drawing.closed_contour:
 				capsule.append(point + (point - center).normalized() * 3.0)
 			draw_polyline(capsule, Color(0.6, 0.91, 0.85, status.opacity * 0.7), 1.5, true)
-		if immune and not status.dead:
+		if immune and not status.dead and cell_texture == null:
 			if status.species == "macrophage":
 				draw_arc(center, 8.0, -2.2, 2.2, 16, Color("c4a8d7"), 4.0, true)
 			else:
@@ -378,7 +409,10 @@ func _draw() -> void:
 			draw_line(bar_start, bar_start + Vector2(20.0, 0), Color("362b31"), 3.0)
 			draw_line(bar_start, bar_start + Vector2(20.0 * status.health / status.max_health, 0), Color("efb57d"), 3.0)
 		if show_collision:
-			draw_polyline(drawing.closed_contour, Color("f3d59b"), 0.14 * SCALE, true)
+			var collision_contour: PackedVector2Array = cell.duplicate()
+			collision_contour.append(cell[0])
+			collision_contour = Transform2D(Vector2(SCALE, 0), Vector2(0, SCALE), Vector2.ZERO) * collision_contour
+			draw_polyline(collision_contour, Color("f3d59b"), 0.14 * SCALE, true)
 	var robot: Vector2 = state.robot * SCALE
 	draw_circle(robot, 0.85 * SCALE, Color("aaaaae") if state.immunity.robot_health > 0.0 else Color("6b5757"))
 	draw_arc(robot, 0.85 * SCALE, 0.0, TAU, 32, Color("e0e0e2"), 1.5, true)
