@@ -1,5 +1,7 @@
 # 项目工作约定
 
+用户已确认细胞显微美术并要求纳入游戏，`feat/cell-microscopy-textures` 的 `2b27b14` 已快进进入主目录main，未推送。包含红细胞纹理、中性粒胞质/核分层与固定外观变体、World平滑轮廓、两种白细胞非圆物理参考形状；巨噬内部材质仍占位。主目录桥构建、import、default/combat各180帧及fmt/diff通过，沿用59+5与独立审阅证据。详情见 [集成记录](docs/art/microscopy/integration.md)。用户已另行安排血管与组织背景，首版在 `feat/microscopy-background` 准备；不据此启动云实验或性能研究。
+
 2026-11-04 免疫与病原体战斗阶段集成：用户要求提交、合并并推送 main，`feat/immune-pathogen-combat` 的 `6a83f9f` 已快进纳入主工作树 main，无冲突或产品代码调整。包含共用实体基础、中性粒/巨噬及两种细菌、局部感知和战斗预览 `--combat-preview`；普通世界仍四只中性粒。独立 Sol 审阅及旧攻击者标记修正复查通过，收尾 fmt、diff、feature 全目标编译通过；沿用此前57单元＋5集成、修正后12项、桥构建、三场景180帧加载及两张真实截图，不重复整套验证。人工手感与新战斗负载FPS未验收；器官地图种群、感染/繁殖、烘焙与性能/云实验不据此启动。功能分支保留，交付入口见 [STATUS](docs/STATUS.md) 及[阶段记录](docs/research/2026-11-04-combat-preview/README.md)。
 
 2026-11-02 可玩器官路网阶段集成：用户要求阶段性合并进入main，`feat/organ-map-preview`的`6c3b24a`已快进纳入主工作树main，无冲突或产品代码调整。主目录fmt、feature全目标编译通过，代码与已审阅分支一致；沿用默认50单元+5集成、feature63单元+5集成（10忽略）、四案例15387步及Godot加载证据，不重复回放或整套验证。新地图通过`--organ-preview`进入，旧`--heart-preview`保留；当前仍为零流/零细胞几何预览，单位图诊断不代表心腔流场或最终驱动验收。记录见[STATUS](docs/STATUS.md)及[阶段记录](docs/research/2026-11-02-playable-map-integration/README.md)。功能分支和宿主管理工作树保留，本次未推送，不据合并自动启动内容、烘焙、性能或云实验。

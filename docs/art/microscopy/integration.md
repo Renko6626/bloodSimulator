@@ -14,3 +14,14 @@
 59单元+5集成、workspace检查、独立桥构建、战斗/stream短加载、真实截图与最终整合审阅通过；不重复整套检查。人工视觉方向已获用户认可，不外推为FPS或全地图手感验收。
 
 功能分支 `feat/cell-microscopy-textures` 保留。主目录集成使用快进，提交后另记录实际结果；不推送远端。
+
+
+## 集成结果
+
+实现提交 `2b27b14` 已快进纳入主工作树main，无冲突。先前主目录两份未跟踪美术笔记已核对并备份到 `/tmp/sunyunbo/cell-texture/main-art-before-integration`，然后采用功能分支的完整记录。
+
+主目录 `bash scripts/build.sh`、Godot headless editor import、默认入口与 `--combat-preview` 各180帧加载、fmt与diff检查通过，运行桥库包含非圆参考形状。沿用功能分支59+5和审阅证据，没有重复全套测试。未推送。
+
+主目录启动：`bash scripts/run.sh`；战斗预览：`bash scripts/run.sh -- --combat-preview`。
+
+后续背景首版在独立分支 `feat/microscopy-background` 中准备，已确认细胞功能分支保留。
