@@ -2,12 +2,8 @@ use super::*;
 use crate::white_cell::{ARRIVAL_TIME, Arrival, Goal, WANTED_THRESHOLD, WhiteCell};
 use crate::{Species, entity::TargetRef};
 
-#[derive(Clone, Copy)]
-struct Seen {
-    target: TargetRef,
-    species: Option<Species>,
-    position: Vector,
-}
+use crate::behavior::{Behavior, Seen, target_id};
+use crate::pathogen::Bacterium;
 
 impl Simulation {
     fn active_facts(&self) -> Vec<Seen> {
@@ -83,19 +79,22 @@ impl Simulation {
         self.immunity.advance(self.config.dt);
         let facts = self.active_facts();
         for cell in &mut self.cells {
+            if matches!(cell.behavior, Behavior::Passive) {
+                continue;
+            }
             let Some(handle) = cell.active_body() else {
                 continue;
             };
             let species = cell.species;
             let id = cell.id;
-            let dead = cell.dead_age.is_some();
-            let Some(brain) = cell.behavior.as_mut() else {
-                continue;
-            };
-            if dead {
-                brain.movement = Vector::ZERO;
-                brain.contact_time = 0.;
-                brain.call_time = 0.;
+            if cell.dead_age.is_some() {
+                if let Some(active) = cell.behavior.active_mut() {
+                    active.movement = Vector::ZERO;
+                    active.contact_time = 0.;
+                }
+                if let Some(immune) = cell.behavior.immune_mut() {
+                    immune.call_time = 0.;
+                }
                 continue;
             }
             let center = fluid::center(&self.physics.soft_bodies[handle]);
@@ -106,73 +105,74 @@ impl Simulation {
             };
             let visible: Vec<_> = facts
                 .iter()
+                .copied()
                 .filter(|f| {
                     f.target != TargetRef::Cell(id)
                         && center.distance(f.position) <= radius
                         && crate::combat::clear_path(&self.physics, center, f.position)
                 })
                 .collect();
-            let legal = |f: &&Seen| {
-                if species.is_immune() {
-                    f.species.is_some_and(Species::is_pathogen)
-                        || (f.target == TargetRef::Robot
-                            && (self.immunity.alertness >= WANTED_THRESHOLD
-                                || brain.target == Some(TargetRef::Robot)
-                                || brain.attacker == Some(TargetRef::Robot)))
-                } else {
-                    f.species == Some(Species::RedCell)
-                        || (Some(f.target) == brain.attacker
-                            && f.species.is_some_and(Species::is_immune))
-                }
-            };
-            let chosen = visible
-                .iter()
-                .copied()
-                .filter(legal)
-                .find(|f| Some(f.target) == brain.attacker)
-                .or_else(|| {
-                    visible
-                        .iter()
-                        .copied()
-                        .filter(legal)
-                        .find(|f| Some(f.target) == brain.target)
-                })
-                .or_else(|| {
-                    visible.iter().copied().filter(legal).min_by(|a, b| {
-                        center
-                            .distance_squared(a.position)
-                            .total_cmp(&center.distance_squared(b.position))
-                            .then_with(|| target_id(a.target).cmp(&target_id(b.target)))
-                    })
-                });
-            if !species.is_immune() && chosen.is_none() {
-                brain.goal = None;
-                brain.set_target(None);
-            }
-            // A removed/dead target cannot retain an actionable identity.
-            if brain
-                .target
-                .is_some_and(|t| !facts.iter().any(|f| f.target == t))
-            {
-                brain.set_target(None);
-            }
             let options = species.options(&self.config);
-            brain.think(
-                center,
-                chosen.map(|f| (f.target, f.position)),
-                self.immunity.alertness,
-                self.config.dt,
-                &options,
-            );
-            let mut desired = brain.movement;
-            if species == Species::Macrophage && brain.contact_time > 0. {
+            match &mut cell.behavior {
+                Behavior::Passive => continue,
+                Behavior::Bacterium(brain) => brain.think(
+                    center,
+                    &visible,
+                    self.config.dt,
+                    &options,
+                    self.config.bacteria.for_species(species),
+                ),
+                Behavior::Immune(brain) => {
+                    let legal = |f: &&Seen| {
+                        f.species.is_some_and(Species::is_pathogen)
+                            || (f.target == TargetRef::Robot
+                                && (self.immunity.alertness >= WANTED_THRESHOLD
+                                    || brain.target == Some(TargetRef::Robot)
+                                    || brain.attacker == Some(TargetRef::Robot)))
+                    };
+                    let chosen = visible
+                        .iter()
+                        .filter(legal)
+                        .find(|f| Some(f.target) == brain.attacker)
+                        .or_else(|| {
+                            visible
+                                .iter()
+                                .filter(legal)
+                                .find(|f| Some(f.target) == brain.target)
+                        })
+                        .or_else(|| {
+                            visible.iter().filter(legal).min_by(|a, b| {
+                                center
+                                    .distance_squared(a.position)
+                                    .total_cmp(&center.distance_squared(b.position))
+                                    .then_with(|| target_id(a.target).cmp(&target_id(b.target)))
+                            })
+                        });
+                    if brain
+                        .target
+                        .is_some_and(|t| !facts.iter().any(|f| f.target == t))
+                    {
+                        brain.set_target(None);
+                    }
+                    brain.think(
+                        center,
+                        chosen.map(|f| (f.target, f.position)),
+                        self.immunity.alertness,
+                        self.config.dt,
+                        &options,
+                    );
+                }
+            }
+            let active = cell.behavior.active_mut().unwrap();
+            let mut desired = active.movement;
+            if species == Species::Macrophage && active.contact_time > 0. {
                 desired *= 0.5;
             }
-            brain.movement = local_steering(&self.physics, center, desired, options.radius, id);
-            if desired != Vector::ZERO && brain.movement == Vector::ZERO {
+            active.movement = local_steering(&self.physics, center, desired, options.radius, id);
+            if desired != Vector::ZERO && active.movement == Vector::ZERO {
                 let side = if id % 2 == 0 { 1.0 } else { -1.0 };
-                brain.heading = crate::white_cell::rotate(
-                    brain.heading,
+                active.heading = crate::behavior::rotate(
+                    active.heading,
                     side * 2.0 * std::f32::consts::PI * self.config.dt / options.turn_time,
                 );
             }
@@ -207,9 +207,6 @@ impl Simulation {
             }
             let id = cell.id;
             let species = cell.species;
-            let Some(brain) = cell.behavior.as_mut() else {
-                continue;
-            };
             let center = fluid::center(&self.physics.soft_bodies[handle]);
             let radius = if species.is_immune() {
                 self.immunity.sense_radius()
@@ -220,23 +217,44 @@ impl Simulation {
                 center.distance(point) <= radius
                     && crate::combat::clear_path(&self.physics, center, point)
             };
+            if let Behavior::Bacterium(brain) = &mut cell.behavior {
+                let direct = hits
+                    .iter()
+                    .filter(|h| {
+                        h.id == id
+                            && h.damage > 0.
+                            && facts.iter().any(|f| {
+                                f.target == h.source
+                                    && (f.target == TargetRef::Robot
+                                        || f.species.is_some_and(Species::is_immune))
+                            })
+                    })
+                    .max_by(|a, b| {
+                        a.damage
+                            .total_cmp(&b.damage)
+                            .then_with(|| target_id(b.source).cmp(&target_id(a.source)))
+                    });
+                if let Some(hit) = direct {
+                    brain.react_to_hit(
+                        hit.source,
+                        hit.source_position,
+                        center,
+                        sees(hit.source_position),
+                        self.config.bacteria.for_species(species),
+                    );
+                }
+                continue;
+            }
+            let Some(brain) = cell.behavior.immune_mut() else {
+                continue;
+            };
             let relevant = |h: &&crate::combat::Hit| {
-                if !facts.iter().any(|f| f.target == h.source) {
-                    return false;
-                }
-                if species.is_immune() {
-                    // Clearing pathogens never identifies the robot as an offender.
-                    !h.species.is_pathogen()
-                        && (h.source == TargetRef::Robot
-                            || facts.iter().any(|f| {
-                                f.target == h.source && f.species.is_some_and(Species::is_pathogen)
-                            }))
-                } else {
-                    h.id == id
-                        && facts.iter().any(|f| {
-                            f.target == h.source && f.species.is_some_and(Species::is_immune)
-                        })
-                }
+                facts.iter().any(|f| f.target == h.source)
+                    && !h.species.is_pathogen()
+                    && (h.source == TargetRef::Robot
+                        || facts.iter().any(|f| {
+                            f.target == h.source && f.species.is_some_and(Species::is_pathogen)
+                        }))
             };
             let direct = hits
                 .iter()
@@ -282,7 +300,7 @@ impl Simulation {
     pub(super) fn drive_white_cells(&mut self, dt: f32) {
         for index in 0..self.cells.len() {
             let cell = &self.cells[index];
-            let Some(brain) = cell.behavior.as_ref() else {
+            let Some(brain) = cell.behavior.active() else {
                 continue;
             };
             if cell.dead_age.is_some() {
@@ -321,7 +339,7 @@ impl Simulation {
             };
             let species = cell.species;
             let id = cell.id;
-            let Some(brain) = cell.behavior.as_mut() else {
+            let Some(brain) = cell.behavior.active_mut() else {
                 continue;
             };
             let body = &self.physics.soft_bodies[handle];
@@ -370,17 +388,20 @@ impl Simulation {
             } else {
                 brain.contact_time = 0.;
             }
-            if species.is_immune()
-                && visible.is_some_and(|f| f.target == TargetRef::Robot)
-                && self.immunity.alertness >= WANTED_THRESHOLD
-                && self.immunity.call_cooldown <= 1e-6
-            {
-                brain.call_time += self.config.dt;
-                if brain.call_time + 1e-6 >= self.config.white_cells.call_time && call.is_none() {
-                    call = Some((center, visible.unwrap().position));
+            if let Some(immune) = cell.behavior.immune_mut() {
+                if visible.is_some_and(|f| f.target == TargetRef::Robot)
+                    && self.immunity.alertness >= WANTED_THRESHOLD
+                    && self.immunity.call_cooldown <= 1e-6
+                {
+                    immune.call_time += self.config.dt;
+                    if immune.call_time + 1e-6 >= self.config.white_cells.call_time
+                        && call.is_none()
+                    {
+                        call = Some((center, visible.unwrap().position));
+                    }
+                } else {
+                    immune.call_time = 0.;
                 }
-            } else {
-                brain.call_time = 0.;
             }
         }
         // All actions above came from alive bodies. Apply the batch before reactions,
@@ -447,7 +468,7 @@ impl Simulation {
     pub(super) fn try_reinforcement(&mut self, caller: Vector, last_seen: Vector) {
         self.immunity.call_cooldown = self.config.white_cells.call_interval;
         for cell in &mut self.cells {
-            if let Some(b) = cell.behavior.as_mut() {
+            if let Some(b) = cell.behavior.immune_mut() {
                 b.call_time = 0.;
             }
         }
@@ -466,7 +487,7 @@ impl Simulation {
         };
         if let Some((position, wall)) = self.reinforcement_position(caller, species) {
             let index = self.insert_species(position, species);
-            let b = self.cells[index].behavior.as_mut().unwrap();
+            let b = self.cells[index].behavior.immune_mut().unwrap();
             b.goal = Some(Goal::Investigate(last_seen));
             b.memory = 3.;
             b.arrival_time = ARRIVAL_TIME;
@@ -507,9 +528,9 @@ impl Simulation {
         let mut cell = cell::Cell::new(id, body, options.health, cell::UnloadPolicy::Hibernate);
         cell.species = species;
         cell.behavior = if species.is_immune() {
-            crate::pathogen::Behavior::Immune(WhiteCell::new(id))
+            Behavior::Immune(WhiteCell::new(id))
         } else {
-            crate::pathogen::Behavior::Bacterium(WhiteCell::new(id))
+            Behavior::Bacterium(Bacterium::new(id))
         };
         self.cells.push(cell);
         self.reset_local_cell_history();
@@ -631,13 +652,6 @@ impl Simulation {
     }
 }
 
-fn target_id(target: TargetRef) -> u64 {
-    match target {
-        TargetRef::Robot => u64::MAX,
-        TargetRef::Cell(id) => id,
-    }
-}
-
 fn local_steering(
     physics: &PhysicsWorld,
     center: Vector,
@@ -657,7 +671,7 @@ fn local_steering(
         side * std::f32::consts::FRAC_PI_4,
         -side * std::f32::consts::FRAC_PI_4,
     ] {
-        let d = crate::white_cell::rotate(direction, angle);
+        let d = crate::behavior::rotate(direction, angle);
         // Shape cast covers only the immediate 0.6-unit step; the ball represents body radius.
         if query
             .cast_shape(

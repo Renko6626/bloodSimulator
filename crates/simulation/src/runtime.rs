@@ -950,20 +950,16 @@ impl Simulation {
                 .map(|cell| crate::CellStatus {
                     id: cell.id,
                     species: cell.species,
-                    target_position: cell.behavior.as_ref().and_then(|b| b.goal).map(|g| {
-                        let (crate::white_cell::Goal::Investigate(p)
-                        | crate::white_cell::Goal::Pursue(p)) = g;
-                        p.to_array()
-                    }),
+                    target_position: cell.behavior.target_position().map(|p| p.to_array()),
                     targets_robot: cell
                         .behavior
-                        .as_ref()
+                        .active()
                         .is_some_and(|b| b.target == Some(crate::entity::TargetRef::Robot)),
-                    contact_progress: cell.behavior.as_ref().map_or(0.0, |w| {
+                    contact_progress: cell.behavior.active().map_or(0.0, |w| {
                         (w.contact_time / cell.species.options(&self.config).contact_warmup)
                             .min(1.0)
                     }),
-                    call_progress: cell.behavior.as_ref().map_or(0.0, |w| {
+                    call_progress: cell.behavior.immune().map_or(0.0, |w| {
                         (w.call_time / self.config.white_cells.call_time).min(1.0)
                     }),
                     health: cell.health,
@@ -971,7 +967,7 @@ impl Simulation {
                     dead: cell.dead_age.is_some(),
                     opacity: cell.opacity(&self.config)
                         * if cell.dead_age.is_none() {
-                            cell.behavior.as_ref().map_or(1.0, |w| {
+                            cell.behavior.immune().map_or(1.0, |w| {
                                 (1.0 - w.arrival_time / crate::white_cell::ARRIVAL_TIME)
                                     .clamp(0.0, 1.0)
                             })

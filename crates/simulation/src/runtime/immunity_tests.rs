@@ -23,7 +23,7 @@ fn actual_player_damage_alerts_witnesses_and_quiet_time_reduces_alertness() {
     sim.set_attacking(true);
     frames(&mut sim, 1);
     assert_eq!(sim.immunity.alertness, 2.0);
-    assert!(sim.cells[white].behavior.as_ref().unwrap().is_pursuing());
+    assert!(sim.cells[white].behavior.immune().unwrap().is_pursuing());
     frames(&mut sim, 23);
     assert_eq!(sim.immunity.alertness, 8.0);
     sim.set_attacking(false);
@@ -47,11 +47,11 @@ fn walls_hide_the_robot_and_pursuit_uses_only_the_last_known_position() {
     sim.physics.bodies[sim.robot].set_translation(Vector::new(1.0, 0.0), true);
     frames(&mut sim, 1);
     assert_eq!(
-        sim.cells[white].behavior.as_ref().unwrap().goal,
+        sim.cells[white].behavior.immune().unwrap().goal,
         Some(Goal::Pursue(known))
     );
     frames(&mut sim, 305);
-    assert_eq!(sim.cells[white].behavior.as_ref().unwrap().goal, None);
+    assert_eq!(sim.cells[white].behavior.immune().unwrap().goal, None);
 }
 
 #[test]
@@ -69,12 +69,12 @@ fn contact_requires_preparation_and_lethal_player_attack_cancels_the_return_hit(
     sim.physics.bodies[sim.robot].set_translation(Vector::ZERO, true);
     frames(&mut sim, 1);
     assert_eq!(
-        sim.cells[white].behavior.as_ref().unwrap().contact_time,
+        sim.cells[white].behavior.immune().unwrap().contact_time,
         0.0
     );
     sim.physics.bodies[sim.robot].set_translation(Vector::new(-3.0, 0.0), true);
     sim.cells[white].health = 50.0;
-    let brain = sim.cells[white].behavior.as_mut().unwrap();
+    let brain = sim.cells[white].behavior.immune_mut().unwrap();
     brain.contact_time = 0.3;
     brain.attack_cooldown = 0.0;
     sim.attack.cooldown = 0.0;
@@ -88,7 +88,7 @@ fn contact_requires_preparation_and_lethal_player_attack_cancels_the_return_hit(
     let other = sim.insert_white_cell(Vector::new(-1.0, 0.0));
     sim.cells[other]
         .behavior
-        .as_mut()
+        .immune_mut()
         .unwrap()
         .pursue(Vector::new(-3.0, 0.0), 0.0);
     sim.config.white_cells.damage = 100.0;
@@ -137,7 +137,7 @@ fn reinforcements_are_bounded_and_white_bodies_stay_out_of_red_stock() {
         sim.insert_white_cell(Vector::new(x, 0.0));
     }
     sim.immunity.call_cooldown = 0.0;
-    sim.cells[first].behavior.as_mut().unwrap().call_time = 1.0;
+    sim.cells[first].behavior.immune_mut().unwrap().call_time = 1.0;
     frames(&mut sim, 1);
     assert_eq!(
         sim.cells.iter().filter(|c| c.species.is_immune()).count(),
@@ -183,7 +183,7 @@ fn combat_pair(species: crate::Species) -> (Simulation, usize, usize) {
 fn neutral_robot_can_watch_real_immune_bacteria_combat_without_becoming_wanted() {
     let (mut sim, immune, pathogen) = combat_pair(crate::Species::MotileBacterium);
     sim.config.white_cells.chase_speed = 3.0;
-    sim.cells[pathogen].behavior.as_mut().unwrap().heading = -Vector::X;
+    sim.cells[pathogen].behavior.active_mut().unwrap().heading = -Vector::X;
     frames(&mut sim, 150);
     assert!(sim.cells[pathogen].health < 50.0);
     assert!(sim.cells[immune].health < 150.0);
@@ -192,7 +192,7 @@ fn neutral_robot_can_watch_real_immune_bacteria_combat_without_becoming_wanted()
     assert!(
         !sim.cells[immune]
             .behavior
-            .as_ref()
+            .active()
             .unwrap()
             .target
             .is_some_and(|t| t == crate::entity::TargetRef::Robot)
@@ -209,7 +209,7 @@ fn capsule_halves_immune_contact_damage_but_player_damage_has_no_wanted_score() 
     let target = crate::entity::TargetRef::Cell(sim.cells[pathogen].id);
     sim.cells[immune]
         .behavior
-        .as_mut()
+        .active_mut()
         .unwrap()
         .set_target(Some(target));
     for _ in 0..18 {
@@ -235,13 +235,13 @@ fn lost_target_and_switching_contact_require_fresh_preparation() {
     for _ in 0..12 {
         sim.finish_white_actions();
     }
-    assert!(sim.cells[immune].behavior.as_ref().unwrap().contact_time > 0.19);
+    assert!(sim.cells[immune].behavior.immune().unwrap().contact_time > 0.19);
     let old_position =
         fluid::center(&sim.physics.soft_bodies[sim.cells[pathogen].active_body().unwrap()]);
     sim.cells[pathogen].hibernate(&mut sim.physics);
     sim.update_white_intents();
     sim.finish_white_actions();
-    let brain = sim.cells[immune].behavior.as_ref().unwrap();
+    let brain = sim.cells[immune].behavior.immune().unwrap();
     assert_eq!(brain.contact_time, 0.0);
     assert_eq!(brain.goal, Some(Goal::Pursue(old_position)));
     let replacement = sim.insert_species(
@@ -254,7 +254,7 @@ fn lost_target_and_switching_contact_require_fresh_preparation() {
     }
     assert_eq!(sim.cells[replacement].health, 100.0);
     assert_eq!(
-        sim.cells[immune].behavior.as_ref().unwrap().target,
+        sim.cells[immune].behavior.immune().unwrap().target,
         Some(crate::entity::TargetRef::Cell(sim.cells[replacement].id))
     );
     for _ in 0..6 {
@@ -271,7 +271,7 @@ fn simultaneous_biological_kills_and_player_first_cancellation_use_real_contacts
     let immune_id = sim.cells[immune].id;
     let pathogen_id = sim.cells[pathogen].id;
     for (index, target) in [(immune, pathogen_id), (pathogen, immune_id)] {
-        let brain = sim.cells[index].behavior.as_mut().unwrap();
+        let brain = sim.cells[index].behavior.active_mut().unwrap();
         brain.set_target(Some(crate::entity::TargetRef::Cell(target)));
         brain.contact_time = 1.0;
     }
@@ -282,7 +282,7 @@ fn simultaneous_biological_kills_and_player_first_cancellation_use_real_contacts
 
     let (mut sim, immune, pathogen) = combat_pair(crate::Species::MotileBacterium);
     let target = crate::entity::TargetRef::Cell(sim.cells[immune].id);
-    let brain = sim.cells[pathogen].behavior.as_mut().unwrap();
+    let brain = sim.cells[pathogen].behavior.active_mut().unwrap();
     brain.set_target(Some(target));
     brain.contact_time = 1.0;
     sim.physics.bodies[sim.robot].set_translation(Vector::new(-4.0, 0.0), true);
@@ -316,7 +316,7 @@ fn new_species_hibernate_with_identity_and_never_enter_red_inventory() {
     for (i, species) in species.into_iter().enumerate() {
         let index = sim.insert_species(Vector::new(i as f32 * 4.0, -12.0), species);
         sim.cells[index].damage(10.0);
-        sim.cells[index].behavior.as_mut().unwrap().contact_time = 0.2;
+        sim.cells[index].behavior.active_mut().unwrap().contact_time = 0.2;
     }
     let before: Vec<_> = sim
         .cells
@@ -338,7 +338,7 @@ fn new_species_hibernate_with_identity_and_never_enter_red_inventory() {
         before
     );
     for cell in &sim.cells {
-        assert_eq!(cell.behavior.as_ref().unwrap().contact_time, 0.0);
+        assert_eq!(cell.behavior.active().unwrap().contact_time, 0.0);
         let body = &sim.physics.soft_bodies[cell.active_body().unwrap()];
         let area = body.volume();
         let radius = cell.species.radius(&sim.config);
@@ -360,7 +360,10 @@ fn new_species_hibernate_with_identity_and_never_enter_red_inventory() {
 
 #[test]
 fn preview_reset_and_heavy_reinforcements_keep_scene_and_body_limits() {
-    let mut sim = Simulation::new_combat_preview(Config::default());
+    let mut config = Config::default();
+    config.bacteria.motile.response = crate::ThreatResponse::Flee;
+    config.bacteria.motile.flee_duration = 1.2;
+    let mut sim = Simulation::new_combat_preview(config);
     let initial = sim.snapshot();
     assert_eq!(initial.immunity.immune_bodies, 4);
     assert_eq!(initial.immunity.pathogen_bodies, 6);
@@ -377,6 +380,15 @@ fn preview_reset_and_heavy_reinforcements_keep_scene_and_body_limits() {
     sim.reset();
     assert_eq!(sim.snapshot().cells, initial.cells);
     assert_eq!(sim.snapshot().cell_status, initial.cell_status);
+    assert_eq!(
+        sim.config.bacteria.motile.response,
+        crate::ThreatResponse::Flee
+    );
+    assert_eq!(sim.config.bacteria.motile.flee_duration, 1.2);
+    assert_eq!(
+        sim.config.bacteria.encapsulated.response,
+        crate::ThreatResponse::Retaliate
+    );
     sim.immunity.alertness = 100.0;
     let heavy = sim
         .cells
@@ -434,7 +446,7 @@ fn abandoned_attackers_do_not_override_current_or_neutral_targets() {
     sim.set_attacking(false);
     assert_eq!(sim.cells[immune].health, 100.0);
     assert_eq!(
-        sim.cells[immune].behavior.as_ref().unwrap().attacker,
+        sim.cells[immune].behavior.immune().unwrap().attacker,
         Some(crate::entity::TargetRef::Robot)
     );
 
@@ -449,17 +461,17 @@ fn abandoned_attackers_do_not_override_current_or_neutral_targets() {
     frames(&mut sim, 720);
     assert_eq!(sim.immunity.alertness, 0.0);
     assert_eq!(
-        sim.cells[immune].behavior.as_ref().unwrap().target,
+        sim.cells[immune].behavior.immune().unwrap().target,
         Some(target)
     );
     assert!(sim.cells[pathogen].health > 0.0);
     sim.physics.bodies[sim.robot].set_translation(Vector::new(-3.0, 0.0), true);
     frames(&mut sim, 1);
     assert_eq!(
-        sim.cells[immune].behavior.as_ref().unwrap().target,
+        sim.cells[immune].behavior.immune().unwrap().target,
         Some(target)
     );
-    assert_eq!(sim.cells[immune].behavior.as_ref().unwrap().attacker, None);
+    assert_eq!(sim.cells[immune].behavior.immune().unwrap().attacker, None);
 
     // A bacterium also forgets an immune attacker once no legal target remains.
     let (mut sim, immune, pathogen) = combat_pair(crate::Species::EncapsulatedBacterium);
@@ -469,17 +481,198 @@ fn abandoned_attackers_do_not_override_current_or_neutral_targets() {
     }
     assert_eq!(sim.cells[pathogen].health, 96.0);
     assert_eq!(
-        sim.cells[pathogen].behavior.as_ref().unwrap().attacker,
+        match &sim.cells[pathogen].behavior {
+            crate::behavior::Behavior::Bacterium(b) => b.threat,
+            _ => unreachable!(),
+        },
         Some(crate::entity::TargetRef::Cell(sim.cells[immune].id))
     );
     sim.cells[immune].hibernate(&mut sim.physics);
     sim.update_white_intents();
-    assert_eq!(sim.cells[pathogen].behavior.as_ref().unwrap().target, None);
+    assert_eq!(sim.cells[pathogen].behavior.active().unwrap().target, None);
     assert_eq!(
-        sim.cells[pathogen].behavior.as_ref().unwrap().attacker,
+        match &sim.cells[pathogen].behavior {
+            crate::behavior::Behavior::Bacterium(b) => b.threat,
+            _ => unreachable!(),
+        },
         None
     );
     sim.cells[immune].restore(&mut sim.physics, &sim.config);
     sim.update_white_intents();
-    assert_eq!(sim.cells[pathogen].behavior.as_ref().unwrap().target, None);
+    assert_eq!(sim.cells[pathogen].behavior.active().unwrap().target, None);
+}
+
+#[test]
+fn bacteria_retaliate_against_robot_damage_but_forget_a_lost_attacker() {
+    let mut sim = scene();
+    sim.config.attack_damage = 1.0;
+    let pathogen = sim.insert_species(
+        Vector::new(-5.0, 0.0),
+        crate::Species::EncapsulatedBacterium,
+    );
+    sim.physics.bodies[sim.robot].set_translation(Vector::new(-3.5, 0.0), true);
+    // Keep actual contours in contact while exercising decisions and damage.
+    for _ in 0..48 {
+        sim.update_white_intents();
+        sim.finish_white_actions();
+    }
+    assert_eq!(sim.robot_core.health, 100.0);
+    sim.set_attacking(true);
+    sim.advance_attack();
+    sim.set_attacking(false);
+    assert_eq!(sim.cells[pathogen].health, 99.0);
+    for _ in 0..48 {
+        sim.update_white_intents();
+        sim.finish_white_actions();
+    }
+    assert_eq!(sim.robot_core.health, 92.0);
+    assert_eq!(sim.immunity.alertness, 0.0);
+    sim.physics.bodies[sim.robot].set_translation(Vector::new(30.0, 0.0), true);
+    sim.update_white_intents();
+    sim.physics.bodies[sim.robot].set_translation(Vector::new(-3.5, 0.0), true);
+    for _ in 0..120 {
+        sim.update_white_intents();
+        sim.finish_white_actions();
+    }
+    assert_eq!(sim.robot_core.health, 92.0);
+    assert!(
+        !sim.snapshot()
+            .cell_status
+            .iter()
+            .find(|s| s.id == sim.cells[pathogen].id)
+            .unwrap()
+            .targets_robot
+    );
+}
+
+#[test]
+fn fleeing_bacteria_move_away_from_robot_damage_without_retaliating() {
+    for species in [
+        crate::Species::MotileBacterium,
+        crate::Species::EncapsulatedBacterium,
+    ] {
+        let mut sim = scene();
+        sim.config.attack_damage = 1.0;
+        sim.config.bacteria.motile.response = crate::ThreatResponse::Flee;
+        sim.config.bacteria.encapsulated.response = crate::ThreatResponse::Flee;
+        let index = sim.insert_species(Vector::new(-5.0, 0.0), species);
+        sim.cells[index].behavior.active_mut().unwrap().heading = -Vector::X;
+        sim.physics.bodies[sim.robot].set_translation(Vector::new(-3.5, 0.0), true);
+        sim.set_attacking(true);
+        sim.advance_attack();
+        sim.set_attacking(false);
+        let body = sim.cells[index].active_body().unwrap();
+        let start = fluid::center(&sim.physics.soft_bodies[body]);
+        frames(&mut sim, 45);
+        assert!(
+            fluid::center(&sim.physics.soft_bodies[body]).x < start.x - 0.05,
+            "{species:?}"
+        );
+        assert_eq!(sim.robot_core.health, 100.0);
+        let state = sim.snapshot();
+        let status = state
+            .cell_status
+            .iter()
+            .find(|s| s.id == sim.cells[index].id)
+            .unwrap();
+        assert_eq!(status.target_position, None);
+        assert!(!status.targets_robot);
+        assert_eq!(status.contact_progress, 0.0);
+    }
+}
+
+#[test]
+fn escape_ignores_hidden_threat_motion_then_resumes_hunting_with_existing_cooldown() {
+    let mut sim = scene();
+    sim.config.attack_damage = 1.0;
+    sim.config.bacteria.encapsulated.response = crate::ThreatResponse::Flee;
+    let index = sim.insert_species(Vector::new(4.0, 0.0), crate::Species::EncapsulatedBacterium);
+    sim.cells[index].behavior.active_mut().unwrap().heading = Vector::X;
+    sim.physics.bodies[sim.robot].set_translation(Vector::new(2.3, 0.0), true);
+    // Real contour contact with the seeded red cell at x=5.
+    for _ in 0..44 {
+        sim.update_white_intents();
+        sim.finish_white_actions();
+    }
+    assert_eq!(sim.cells[0].health, 92.0);
+    let cooldown = sim.cells[index].behavior.active().unwrap().attack_cooldown;
+    assert!(cooldown > 0.9);
+    sim.set_attacking(true);
+    sim.advance_attack();
+    sim.set_attacking(false);
+    assert_eq!(sim.cells[index].health, 99.0);
+    let active = sim.cells[index].behavior.active().unwrap();
+    assert_eq!(active.contact_time, 0.0);
+    assert_eq!(active.attack_cooldown, cooldown);
+    sim.update_white_intents();
+    sim.physics.insert_collider(
+        ColliderBuilder::cuboid(0.05, 2.5).translation(Vector::new(3.0, 0.0)),
+        None,
+    );
+    sim.physics.step();
+    sim.physics.bodies[sim.robot].set_translation(Vector::new(2.3, 1.7), true);
+    for _ in 0..20 {
+        sim.update_white_intents();
+        sim.finish_white_actions();
+        let active = sim.cells[index].behavior.active().unwrap();
+        assert!(active.movement.x > 0.0);
+        assert!(active.movement.y.abs() < 1e-5);
+        assert_eq!(active.target, None);
+    }
+    assert_eq!(sim.cells[0].health, 92.0);
+    assert!(sim.cells[index].behavior.active().unwrap().attack_cooldown < cooldown - 0.3);
+    for _ in 0..32 {
+        sim.update_white_intents();
+        sim.finish_white_actions();
+    }
+    assert_eq!(
+        sim.cells[index].behavior.active().unwrap().target,
+        Some(crate::entity::TargetRef::Cell(sim.cells[0].id))
+    );
+    // Reacquiring prey needs fresh contact preparation even though cooldown expires.
+    assert_eq!(sim.cells[0].health, 92.0);
+    for _ in 0..44 {
+        sim.update_white_intents();
+        sim.finish_white_actions();
+    }
+    assert_eq!(sim.cells[0].health, 84.0);
+    assert_eq!(sim.robot_core.health, 100.0);
+}
+
+#[test]
+fn hibernating_bacteria_freeze_escape_and_revalidate_the_threat_on_return() {
+    let mut sim = scene();
+    sim.config.attack_damage = 1.0;
+    sim.config.bacteria.encapsulated.response = crate::ThreatResponse::Flee;
+    let index = sim.insert_species(
+        Vector::new(-5.0, 0.0),
+        crate::Species::EncapsulatedBacterium,
+    );
+    sim.cells[index].behavior.active_mut().unwrap().heading = -Vector::X;
+    sim.physics.bodies[sim.robot].set_translation(Vector::new(-3.5, 0.0), true);
+    sim.set_attacking(true);
+    sim.advance_attack();
+    sim.set_attacking(false);
+    sim.update_white_intents();
+    let behavior = sim.cells[index].behavior.clone();
+    sim.cells[index].hibernate(&mut sim.physics);
+    sim.physics.bodies[sim.robot].set_translation(Vector::new(30.0, 0.0), true);
+    for _ in 0..120 {
+        sim.update_white_intents();
+    }
+    assert_eq!(sim.cells[index].behavior, behavior);
+    sim.cells[index].restore(&mut sim.physics, &sim.config);
+    sim.update_white_intents();
+    assert_eq!(sim.cells[index].behavior.active().unwrap().target, None);
+    assert!(sim.cells[index].behavior.active().unwrap().movement.x < -0.3);
+    for _ in 0..55 {
+        sim.update_white_intents();
+    }
+    sim.physics.bodies[sim.robot].set_translation(Vector::new(-3.5, 0.0), true);
+    for _ in 0..90 {
+        sim.update_white_intents();
+        sim.finish_white_actions();
+    }
+    assert_eq!(sim.robot_core.health, 100.0);
+    assert_eq!(sim.cells[index].behavior.active().unwrap().target, None);
 }

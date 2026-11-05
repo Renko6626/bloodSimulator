@@ -400,13 +400,13 @@ mod tests {
         };
         let mut sim = Simulation::new_streamed_world(config, MapDefinition::small_world());
         let index = sim.insert_white_cell(Vector::new(0., -12.));
-        sim.cells[index].behavior.as_mut().unwrap().memory = 3.;
+        sim.cells[index].behavior.immune_mut().unwrap().memory = 3.;
         sim.physics.bodies[sim.robot].set_translation(Vector::new(80., 0.), true);
         sim.tick(MoveInput::default());
         for _ in 0..5 {
             sim.tick(MoveInput::default());
         }
-        assert_eq!(sim.cells[index].behavior.as_ref().unwrap().memory, 3.);
+        assert_eq!(sim.cells[index].behavior.immune().unwrap().memory, 3.);
         sim.cells[index].damage(1000.);
         sim.set_paused(true);
         sim.tick(MoveInput::default());

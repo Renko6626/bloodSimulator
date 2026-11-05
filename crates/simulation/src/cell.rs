@@ -52,7 +52,7 @@ pub(crate) struct Cell {
     pub body: CellBody,
     pub unload_policy: UnloadPolicy,
     pub species: crate::Species,
-    pub behavior: crate::pathogen::Behavior,
+    pub behavior: crate::behavior::Behavior,
 }
 
 impl std::ops::Deref for Cell {
@@ -78,7 +78,7 @@ impl Cell {
             body: body.into(),
             unload_policy,
             species: crate::Species::RedCell,
-            behavior: crate::pathogen::Behavior::Passive,
+            behavior: crate::behavior::Behavior::Passive,
         }
     }
 
@@ -115,7 +115,7 @@ impl Cell {
         }
         self.apply_corpse_material(body, config);
         self.body = CellBody::Active(handle);
-        if let Some(brain) = self.behavior.as_mut() {
+        if let Some(brain) = self.behavior.active_mut() {
             brain.contact_time = 0.0;
         }
     }

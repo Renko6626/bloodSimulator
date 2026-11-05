@@ -1,3 +1,4 @@
+use crate::behavior::ActiveBehavior;
 use rapier2d::prelude::Vector;
 
 /// Early-game tuning, in the same units and simulation clock as Config.
@@ -50,31 +51,20 @@ pub(crate) enum Goal {
 #[derive(Clone, Debug, PartialEq)]
 pub(crate) struct WhiteCell {
     pub goal: Option<Goal>,
-    pub target: Option<crate::entity::TargetRef>,
+    pub active: ActiveBehavior,
     pub attacker: Option<crate::entity::TargetRef>,
-    pub heading: Vector,
-    pub movement: Vector,
     pub memory: f32,
-    pub patrol_time: f32,
-    pub contact_time: f32,
-    pub attack_cooldown: f32,
     pub call_time: f32,
     pub arrival_time: f32,
 }
 
 impl WhiteCell {
     pub fn new(id: u64) -> Self {
-        let angle = id as f32 * 2.399_963_1;
         Self {
             goal: None,
-            target: None,
+            active: ActiveBehavior::new(id),
             attacker: None,
-            heading: Vector::new(angle.cos(), angle.sin()),
-            movement: Vector::ZERO,
             memory: 0.0,
-            patrol_time: 2.0,
-            contact_time: 0.0,
-            attack_cooldown: 0.0,
             call_time: 0.0,
             arrival_time: 0.0,
         }
@@ -87,16 +77,13 @@ impl WhiteCell {
     }
 
     pub fn set_target(&mut self, target: Option<crate::entity::TargetRef>) {
-        if self.target != target {
-            self.contact_time = 0.0;
-        }
         // Direct-attack evidence belongs to the target being pursued. Once
         // another target is chosen (or pursuit ends), its memory cannot keep
         // an abandoned source eligible for later retaliation.
         if self.attacker != target {
             self.attacker = None;
         }
-        self.target = target;
+        self.active.set_target(target);
     }
 
     pub fn think(
@@ -132,24 +119,9 @@ impl WhiteCell {
                 (point - center).normalize_or_zero(),
                 options.investigate_speed,
             ),
-            None => {
-                self.patrol_time -= dt;
-                if self.patrol_time <= 0.0 {
-                    self.patrol_time = 2.0;
-                    self.heading = rotate(self.heading, 0.55);
-                }
-                (self.heading, options.patrol_speed)
-            }
+            None => (self.active.patrol(dt), options.patrol_speed),
         };
-        if desired != Vector::ZERO {
-            let angle = self
-                .heading
-                .perp_dot(desired)
-                .atan2(self.heading.dot(desired));
-            let max_turn = std::f32::consts::PI * dt / options.turn_time;
-            self.heading = rotate(self.heading, angle.clamp(-max_turn, max_turn));
-        }
-        self.movement = self.heading * speed;
+        self.active.steer(desired, speed, dt, options.turn_time);
     }
 
     pub fn is_pursuing(&self) -> bool {
@@ -157,9 +129,16 @@ impl WhiteCell {
     }
 }
 
-pub(crate) fn rotate(v: Vector, angle: f32) -> Vector {
-    let (s, c) = angle.sin_cos();
-    Vector::new(c * v.x - s * v.y, s * v.x + c * v.y)
+impl std::ops::Deref for WhiteCell {
+    type Target = ActiveBehavior;
+    fn deref(&self) -> &Self::Target {
+        &self.active
+    }
+}
+impl std::ops::DerefMut for WhiteCell {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.active
+    }
 }
 
 #[derive(Default)]

@@ -2,6 +2,7 @@
 //! time is seconds, with +Y pointing down to match the experiment view.
 
 mod background;
+mod behavior;
 mod cell;
 mod cell_population;
 pub mod circulation;
@@ -33,6 +34,7 @@ pub use fluid::lbm_coupling::{LbmOptions, LbmStats};
 pub use fluid::{FluidStats, LocalFluidOptions};
 #[cfg(feature = "lbm-gpu")]
 pub use fluid::{lbm_geometry, streaming_window};
+pub use pathogen::{BacteriaOptions, BacteriumOptions, ThreatResponse};
 pub use runtime::{MoveInput, PolicyFluidStatus, Simulation};
 pub use view::{
     ArrivalSnapshot, AttackSnapshot, CellPopulationSnapshot, CellStatus, FlowArrow,
