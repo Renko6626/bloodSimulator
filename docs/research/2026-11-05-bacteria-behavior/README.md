@@ -1,6 +1,6 @@
 # 基础细菌行为模板
 
-2026-11-05。实现分支 `feat/bacteria-behavior`，基于 `main` 的 `0bd496a`。用户已确认设计并要求开工；本阶段不自动合并或推送。
+2026-11-05。实现分支 `feat/bacteria-behavior`，基于 `main` 的 `0bd496a`。用户随后要求合并并推送，`f662c45` 已快进纳入主工作树 `main`；主目录复核及保存信息见[集成记录](integration.md)。
 
 ## 行为与配置
 
@@ -49,7 +49,7 @@ reset 保留配置并重新初始化行为。休眠期间保存身份、生命�
 
 ## 试玩入口与边界
 
-在本分支工作树运行：
+在主目录或功能分支工作树运行：
 
 ```bash
 bash scripts/run.sh -- --combat-preview

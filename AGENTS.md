@@ -1,5 +1,7 @@
 # 项目工作约定
 
+2026-11-05 基础细菌行为模板集成：按用户要求合并、提交推送，`feat/bacteria-behavior` 的 `f662c45` 已快进纳入主目录 main，无冲突或集成时产品改动。细菌独立决策，按种类配置反击/逃离，机器人攻击可触发自卫；默认两种细菌仍为反击。主目录 fmt、feature 全目标编译、桥构建及10帧战斗启动通过，沿用64单元＋5集成与独立审阅证据。入口仍为 `bash scripts/run.sh -- --combat-preview`，配置及边界见[阶段记录](docs/research/2026-11-05-bacteria-behavior/README.md)和[集成记录](docs/research/2026-11-05-bacteria-behavior/integration.md)。功能分支与宿主管理工作树保留；人工手感、FPS未验收，不据保存启动新性能或云实验。
+
 2026-11-05 细菌美术阶段集成：按用户要求提交推送并合并main，`feat/bacteria-art` 的 `d2a756f` 已快进纳入主目录，无冲突或集成时产品改动。包含两种菌体纹理、2.6∶1等面积圆端杆形、装饰鞭毛及厚薄略不均的半透明荚膜。主目录桥构建、素材导入、10帧战斗启动、fmt／diff与素材校验通过；沿用60单元＋5集成、杆形增量4＋12、GL网格及实际截图／只读审阅证据，不重复整套检查。入口为 `bash scripts/run.sh -- --combat-preview`；普通世界不新增细菌种群。功能分支和工作树保留，机器人暂缓，FPS、人工手感和极端形变未验收，不据保存启动性能或云实验。见[阶段记录](docs/art/bacteria/README.md)及[集成记录](docs/art/bacteria/integration.md)。
 
 显微美术阶段已按用户要求整理并快进纳入main，本次提交推送。范围包括细胞实现 `2b27b14`，以及背景实现 `dcb2a60` 的内皮管壁、浅暖红管腔、外围组织与红细胞第二版。主目录素材导入、10帧战斗启动、fmt/diff及13项素材校验通过，代码与审阅分支一致。统一入口见 [美术阶段记录](docs/art/microscopy-background/README.md) 和 [集成记录](docs/art/microscopy-background/integration.md)。沿用59单元+5集成、桥构建、场景加载和截图证据；功能工作树保留。巨噬内部、细菌及机器人仍有占位，FPS、全图手感与像素级无缝未验收；保存工作不授权自动启动性能、烘焙或云实验。

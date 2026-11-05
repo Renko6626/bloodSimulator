@@ -1,0 +1,10 @@
+    Checking blood-fluid-gpu v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/fluid-gpu)
+    Checking simulation v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/simulation)
+    Checking fluid-bench v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/fluid-bench)
+    Checking godot_bridge v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/godot_bridge)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 6.99s
+   Compiling simulation v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/simulation)
+   Compiling godot_bridge v0.1.0 (/data/sunyunbo/www/bloodSimulator/crates/godot_bridge)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 17.21s
+Initialize godot-rust (API v4.7.stable.official, runtime v4.7.1.stable.official, safeguards strict)
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
