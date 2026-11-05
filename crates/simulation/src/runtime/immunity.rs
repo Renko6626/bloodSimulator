@@ -583,7 +583,12 @@ impl Simulation {
         species: Species,
     ) -> Option<(Vector, Vector)> {
         let map = self.world_map()?;
-        let radius = species.radius(&self.config);
+        // Use the actual normalized rod extent rather than its area radius.
+        let radius = if species == Species::MotileBacterium {
+            cell::motile_spawn_radius(&self.config)
+        } else {
+            species.radius(&self.config)
+        };
         let half_width = map.edges[edge].half_width;
         if half_width <= radius + 0.25 {
             return None;

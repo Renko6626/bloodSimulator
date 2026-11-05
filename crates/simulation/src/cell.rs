@@ -1,6 +1,9 @@
 use crate::Config;
 use rapier2d::prelude::*;
 
+/// Rounded rod, with straight sides between the two end caps.
+const MOTILE_ASPECT_RATIO: f32 = 2.6;
+
 /// How an entity should be represented after leaving detailed simulation.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub(crate) enum UnloadPolicy {
@@ -177,6 +180,14 @@ pub(crate) fn insert_species(
     insert_builder(world, species_builder(center, species, id, config), config)
 }
 
+pub(crate) fn motile_spawn_radius(config: &Config) -> f32 {
+    species_builder(Vector::ZERO, crate::Species::MotileBacterium, 0, config)
+        .particle_positions()
+        .iter()
+        .map(|p| p.length())
+        .fold(0.0, f32::max)
+}
+
 fn species_builder(
     center: Vector,
     species: crate::Species,
@@ -185,17 +196,38 @@ fn species_builder(
 ) -> SoftBodyBuilder {
     let radius = species.radius(config);
     let disk = SoftBodyBuilder::disk(center, radius, config.cell_vertices);
-    if !species.is_immune() {
+    if !species.is_immune() && species != crate::Species::MotileBacterium {
         return disk;
     }
-    // Broad, low-amplitude lobes rather than independent noisy vertices.
-    // Build constraints FROM these points: moving disk particles later would
-    // leave circular rest lengths in place. Identity also reproduces this on wake.
+    // Build constraints FROM the reference outline, not displaced disk nodes.
+    // The same construction reproduces the rod/lobes when waking a body.
     let phase = (id % 4096) as f32 * 2.399_963_1;
     let n = disk.particle_positions().len();
     let mut points: Vec<_> = (0..n)
         .map(|i| {
             let angle = std::f32::consts::TAU * i as f32 / n as f32;
+            if species == crate::Species::MotileBacterium {
+                // Reserve samples for both round caps rather than distributing
+                // rays from the center (which makes a long rod's tips pointed).
+                // Node zero remains the tip used by decorative flagella.
+                let a = MOTILE_ASPECT_RATIO - 1.0;
+                let t = 6.0 * i as f32 / n as f32;
+                return if (1.0..2.0).contains(&t) {
+                    Vector::new(a * (3.0 - 2.0 * t), 1.0)
+                } else if (4.0..5.0).contains(&t) {
+                    Vector::new(a * (2.0 * t - 9.0), -1.0)
+                } else {
+                    let (cap_center, phase) = if t < 1.0 {
+                        (a, t)
+                    } else if t < 4.0 {
+                        (-a, t - 1.0)
+                    } else {
+                        (a, t - 2.0)
+                    };
+                    let (sin, cos) = (phase * std::f32::consts::FRAC_PI_2).sin_cos();
+                    Vector::new(cap_center + cos, sin)
+                };
+            }
             let radial = 1.0
                 + 0.07 * (2.0 * angle + phase).cos()
                 + 0.03 * (3.0 * angle - phase * 0.73).cos();
@@ -304,6 +336,64 @@ mod tests {
         assert_eq!(restored.particle_positions().collect::<Vec<_>>(), shape);
         assert!(restored.particle_velocities().all(|v| v == Vector::X));
         assert!((restored.volume() - rest_area).abs() < 1e-4);
+    }
+
+    #[test]
+    fn motile_bacterium_preserves_area_and_recovers_rod_after_wake() {
+        let config = Config::default();
+        let mut world = PhysicsWorld::new();
+        world.gravity = Vector::ZERO;
+        world.integration_parameters.dt = config.dt / config.substeps as f32;
+        let handle = insert_species(
+            &mut world,
+            Vector::ZERO,
+            crate::Species::MotileBacterium,
+            82,
+            &config,
+        );
+        let (area, width, height) = measurements(&world.soft_bodies[handle]);
+        // The original 12-node bacterium disk (radius 0.35) has area 0.3675.
+        assert!((area - 0.3675).abs() < 1e-5);
+        assert!(
+            width > 2.0 * height,
+            "motile bacterium should start as a short rod"
+        );
+        let initial: Vec<_> = world.soft_bodies[handle].particle_positions().collect();
+        assert!(
+            initial
+                .iter()
+                .all(|p| p.length() <= motile_spawn_radius(&config) + 1e-6)
+        );
+        for (i, p) in initial.iter().enumerate() {
+            world.soft_bodies[handle].set_particle_position(i, Vector::new(p.x * 0.8, p.y * 1.25));
+        }
+        let deformed: Vec<_> = world.soft_bodies[handle].particle_positions().collect();
+        let mut cell = Cell::new(82, handle, 50.0, UnloadPolicy::Hibernate);
+        cell.species = crate::Species::MotileBacterium;
+        cell.hibernate(&mut world);
+        cell.restore(&mut world, &config);
+        let restored = cell.active_body().unwrap();
+        assert_eq!(
+            world.soft_bodies[restored]
+                .particle_positions()
+                .collect::<Vec<_>>(),
+            deformed
+        );
+        for _ in 0..480 {
+            world.step();
+        }
+        let body = &world.soft_bodies[restored];
+        for (i, j) in [(0, 6), (3, 9)] {
+            assert!(
+                (body
+                    .particle_position(i)
+                    .distance(body.particle_position(j))
+                    - initial[i].distance(initial[j]))
+                .abs()
+                    < 0.01
+            );
+        }
+        assert!((measurements(body).0 - area).abs() < 0.01 * area);
     }
 
     #[test]

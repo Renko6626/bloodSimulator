@@ -6,6 +6,10 @@ const Background = preload("res://world_background.gd")
 const CellMesh = preload("res://world_cell_mesh.gd")
 const RED_CELL_TEXTURE := preload("res://assets/cells/erythrocyte-v2.png")
 const NEUTROPHIL_TEXTURE := preload("res://assets/cells/neutrophil-cytoplasm-v3.png")
+const MOTILE_TEXTURE := preload("res://assets/cells/motile-cytoplasm-v1.png")
+const ENCAPSULATED_TEXTURE := preload("res://assets/cells/encapsulated-cytoplasm-v1.png")
+# Covers the longest decorative tail (0.8 units) and its sideways wave.
+const BACTERIUM_ART_MARGIN := 1.0
 const NEUTROPHIL_NUCLEI := [
 	preload("res://assets/cells/neutrophil-nucleus.png"),
 	preload("res://assets/cells/neutrophil-nucleus-b.png"),
@@ -327,7 +331,7 @@ func _draw() -> void:
 		draw_line(wall, position, Color(0.8, 0.88, 0.75, fade), 5.0 * fade + 1.0, true)
 		draw_arc(wall, 8.0 + 14.0 * arrival.progress, 0.0, TAU, 32, Color(0.8, 0.88, 0.75, fade), 2.0, true)
 	var local_view: Rect2 = get_global_transform_with_canvas().affine_inverse() * get_viewport_rect()
-	var visible_cells := Rect2(local_view.position / SCALE, local_view.size / SCALE).grow(8.0 / SCALE)
+	var visible_cells := Rect2(local_view.position / SCALE, local_view.size / SCALE)
 	cell_meshes.resize(state.cells.size())
 	for i in state.cells.size():
 		var cell: PackedVector2Array = state.cells[i]
@@ -336,12 +340,13 @@ func _draw() -> void:
 		var cell_bounds := Rect2(cell[0], Vector2.ZERO)
 		for point in cell:
 			cell_bounds = cell_bounds.expand(point)
-		if not visible_cells.intersects(cell_bounds, true):
+		var status: Dictionary = state.cell_status[i]
+		var margin := BACTERIUM_ART_MARGIN if status.species == "motile_bacterium" else 8.0 / SCALE
+		if not visible_cells.grow(margin).intersects(cell_bounds, true):
 			continue
 		if cell_meshes[i] == null:
 			cell_meshes[i] = CellMesh.new()
 		var drawing := cell_meshes[i]
-		var status: Dictionary = state.cell_status[i]
 		var color := Color("746879") if status.dead else (Color("bc754e") if status.id == 0 else Color("ae4c5b"))
 		var inner_color := Color("4a4650") if status.dead else CellMesh.INNER_COLOR
 		var immune: bool = status.species in ["neutrophil", "macrophage"]
@@ -359,6 +364,10 @@ func _draw() -> void:
 			cell_texture = RED_CELL_TEXTURE
 		elif status.species == "neutrophil":
 			cell_texture = NEUTROPHIL_TEXTURE
+		elif status.species == "motile_bacterium":
+			cell_texture = MOTILE_TEXTURE
+		elif status.species == "encapsulated_bacterium":
+			cell_texture = ENCAPSULATED_TEXTURE
 		if cell_texture != null:
 			color = Color("88808d") if status.dead else Color.WHITE
 			if not status.dead and immune and status.targets_robot:
@@ -368,6 +377,10 @@ func _draw() -> void:
 		var cytoplasm_radius := NEUTROPHIL_ART_RADIUS * SCALE if status.species == "neutrophil" else 0.0
 		if not drawing.update(cell, SCALE, color, inner_color, true, cell_texture != null, cytoplasm_radius):
 			continue
+		if status.species == "encapsulated_bacterium":
+			_draw_bacterial_capsule(drawing.closed_contour, status.id, status.opacity, status.dead)
+		elif status.species == "motile_bacterium" and not status.dead:
+			_draw_bacterial_flagella(cell, drawing.closed_contour, status.id, state.time, status.opacity)
 		draw_mesh(drawing.mesh, cell_texture, Transform2D.IDENTITY, Color(1.0, 1.0, 1.0, status.opacity))
 		if status.species == "neutrophil":
 			drawing.configure_appearance(status.id, NEUTROPHIL_NUCLEI.size())
@@ -381,14 +394,9 @@ func _draw() -> void:
 		if immune and not status.dead:
 			outline = Color("e3e6d9").lerp(Color("ed795d"), status.contact_progress)
 		elif pathogen and not status.dead:
-			outline = Color("d2e4ab")
-		outline.a = status.opacity
-		draw_polyline(drawing.closed_contour, outline, 1.0, true)
-		if status.species == "encapsulated_bacterium":
-			var capsule := PackedVector2Array()
-			for point in drawing.closed_contour:
-				capsule.append(point + (point - center).normalized() * 3.0)
-			draw_polyline(capsule, Color(0.6, 0.91, 0.85, status.opacity * 0.7), 1.5, true)
+			outline = Color("8c965c") if status.species == "motile_bacterium" else Color("779990")
+		outline.a = status.opacity * (0.75 if pathogen else 1.0)
+		draw_polyline(drawing.closed_contour, outline, 0.5 if pathogen else 1.0, true)
 		if immune and not status.dead and cell_texture == null:
 			if status.species == "macrophage":
 				draw_arc(center, 8.0, -2.2, 2.2, 16, Color("c4a8d7"), 4.0, true)
@@ -426,6 +434,90 @@ func _cell_centers() -> Array[Vector2]:
 			center += p
 		centers.append(center / cell.size())
 	return centers
+
+
+func _draw_bacterial_capsule(contour: PackedVector2Array, entity_id: int, opacity: float, dead: bool) -> void:
+	# A translucent coat outside the actual body, not another solid cell disk.
+	# Material-index variation rotates/deforms with the membrane; no animation state.
+	var count := contour.size() - 1
+	var center := Vector2.ZERO
+	for i in count:
+		center += contour[i]
+	center /= count
+	var mean_radius := 0.0
+	for i in count:
+		mean_radius += contour[i].distance_to(center)
+	mean_radius /= count
+	# Even the widest coat plus its rim stays inside the existing 8px cull margin.
+	var thickness := minf(mean_radius * 0.34, 4.5)
+	var phase := float(entity_id % 4096) * 2.39996323
+	var offsets := PackedVector2Array()
+	var uv := PackedVector2Array()
+	for i in count:
+		var angle := TAU * float(i) / count
+		var tangent: Vector2 = contour[(i + 1) % count] - contour[(i - 1 + count) % count]
+		var outward := Vector2(tangent.y, -tangent.x).normalized()
+		var variation := 1.0 + 0.18 * sin(angle + phase) + 0.10 * sin(3.0 * angle - phase)
+		offsets.append(outward * thickness * variation)
+		uv.append(Vector2(0.5, 0.5) + Vector2.from_angle(angle) * 0.48)
+	var outer := PackedVector2Array()
+	for layer in 3:
+		var points := PackedVector2Array()
+		var fraction := 1.0 - float(layer) * 0.24
+		for i in count:
+			points.append(contour[i] + offsets[i] * fraction)
+		var color := Color("bccbd0") if not dead else Color("b4aebd")
+		color.a = opacity * 0.18
+		if layer == 1:
+			color = Color("f3f0dd") if not dead else Color("d0c7d1")
+			color.a = opacity * 0.32
+		elif layer == 2:
+			color = Color("d9e1d6") if not dead else Color("c2b9c6")
+			color.a = opacity * 0.24
+		draw_colored_polygon(points, color)
+		if layer == 0:
+			outer = points
+	# Put mottling above the pale gel layers so they do not wash it away.
+	# The opaque living body is drawn afterwards, leaving texture only on the coat.
+	var texture_color := Color(0.95, 1.0, 1.0, opacity * 0.28)
+	draw_polygon(outer, PackedColorArray([texture_color]), uv, ENCAPSULATED_TEXTURE)
+	outer.append(outer[0])
+	var rim := Color("91aaa9") if not dead else Color("aaa1b1")
+	rim.a = opacity * 0.22
+	draw_polyline(outer, rim, 0.45, true)
+
+
+func _draw_bacterial_flagella(cell: PackedVector2Array, contour: PackedVector2Array, entity_id: int, time: float, opacity: float) -> void:
+	var center := Vector2.ZERO
+	for point in cell:
+		center += point * SCALE
+	center /= cell.size()
+	# Node zero remains the same material tip as the soft body rotates/deforms.
+	var tip: Vector2 = cell[0] * SCALE
+	var axis := (tip - center).normalized()
+	if axis.length_squared() < 0.5:
+		return
+	var root := contour[0]
+	for i in contour.size() - 1:
+		var candidate := Geometry2D.get_closest_point_to_segment(tip, contour[i], contour[i + 1])
+		if candidate.distance_squared_to(tip) < root.distance_squared_to(tip):
+			root = candidate
+	var side := axis.orthogonal()
+	var phase := float(entity_id % 4096) * 2.39996323
+	for tail in 2:
+		var length := (0.65 + tail * 0.15) * SCALE
+		var amplitude := (0.06 + tail * 0.02) * SCALE
+		var frequency := 2.0 + tail * 0.3
+		var points := PackedVector2Array([root])
+		for segment in range(1, 17):
+			var u := float(segment) / 16.0
+			var wave := sin(TAU * (u * 1.2 - time * frequency) + phase + tail * 2.1)
+			var spread := (1.0 if tail == 0 else -1.0) * 0.055 * SCALE * u
+			var point := root + axis * (length * u) + side * (amplitude * u * wave + spread)
+			points.append(point)
+		var color := Color("88945e")
+		color.a = opacity * 0.7
+		draw_polyline(points, color, 0.55, true)
 
 
 func _begin_benchmark() -> void:
